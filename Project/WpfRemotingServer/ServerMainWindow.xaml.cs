@@ -61,8 +61,10 @@ namespace WpfRemotingServer
                     _serverChannel = new HttpServerChannel("DesktopSharing", 8089);
                     ChannelServices.RegisterChannel(_serverChannel, false);
                     RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), "DesktopSharing", WellKnownObjectMode.Singleton);
+                    //_server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
+                    //    "http://localhost:8089/SingletonServer");
                     _server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                        "http://localhost:8089/SingletonServer");
+                        "http://5.40.195.103:8089/SingletonServer");
                     _isListening = true;
                     lblStatus.Content = "Status: started";
                     btnConnect.Content = "Stop listening";
