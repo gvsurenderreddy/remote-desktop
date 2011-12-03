@@ -12,21 +12,26 @@ namespace Common
 
         private int _id;
         bool _connected;
+        System.Timers.Timer _timer;
 
         #endregion
 
         #region c-tor
 
-        public Client(int id)
+        public Client(int id, int timerInterval)
         {
             _id = id;
             _connected = false;
+            _timer = new System.Timers.Timer();
+            _timer.Interval = timerInterval;
         }
 
-        public Client()
+        public Client(int timerInterval)
         {
             _connected = false;
             _id = -1;
+            _timer = new System.Timers.Timer();
+            _timer.Interval = timerInterval;
         }
 
         #endregion

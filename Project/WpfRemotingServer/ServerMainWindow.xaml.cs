@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Runtime.Remoting.Channels.Http;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting;
+using System.Configuration;
 
 namespace WpfRemotingServer
 {
@@ -28,6 +29,9 @@ namespace WpfRemotingServer
         SingletonServer _server;
         HttpServerChannel _serverChannel;
         bool _isListening = false;
+        string _channelName;
+        int _port;
+        string _host;
 
         #endregion
 
@@ -41,6 +45,9 @@ namespace WpfRemotingServer
                 log4net.Config.BasicConfigurator.Configure();
                 App.Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
                 lblStatus.Content = "Status: stopped";
+                _channelName = ConfigurationManager.AppSettings["channelName"];
+                _port = int.Parse(ConfigurationManager.AppSettings["port"]);
+                _host = ConfigurationManager.AppSettings["host"];
             }
             catch (Exception ex)
             {
@@ -58,13 +65,11 @@ namespace WpfRemotingServer
             {
                 if (_isListening == false)
                 {
-                    _serverChannel = new HttpServerChannel("DesktopSharing", 8089);
+                    _serverChannel = new HttpServerChannel(_channelName, _port);
                     ChannelServices.RegisterChannel(_serverChannel, false);
-                    RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), "DesktopSharing", WellKnownObjectMode.Singleton);
-                    //_server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                    //    "http://localhost:8089/SingletonServer");
+                    RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), _channelName, WellKnownObjectMode.Singleton);
                     _server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                        "http://5.40.195.103:8089/SingletonServer");
+                        _host + _port.ToString() + "/SingletonServer");
                     _isListening = true;
                     lblStatus.Content = "Status: started";
                     btnConnect.Content = "Stop listening";

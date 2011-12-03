@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Common;
 using System.Reflection;
 using log4net;
+using System.Configuration;
 
 namespace WpfRemotingClient
 {
@@ -27,6 +28,7 @@ namespace WpfRemotingClient
         Server _singletonServer;
         Client _client;
         ILog _logger;
+        int _timerInterval;
 
         #endregion
 
@@ -39,8 +41,9 @@ namespace WpfRemotingClient
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
-                _client = new Client();
-                _singletonServer = (Server)Activator.GetObject(typeof(Server), "http://5.40.195.103:8089/DesktopSharing");
+                _timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
+                _client = new Client(_timerInterval);
+                _singletonServer = (Server)Activator.GetObject(typeof(Server), ConfigurationManager.AppSettings["server"]);
             }
             catch (Exception ex)
             {
