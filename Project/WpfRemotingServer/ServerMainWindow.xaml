@@ -1,0 +1,12 @@
+﻿<Window x:Class="WpfRemotingServer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Label Content="Remoting Server" Height="28" HorizontalAlignment="Left" Margin="5,5,0,0" Name="lblTitle" VerticalAlignment="Top" />
+        <Label Content="Status: " Height="28" HorizontalAlignment="Left" Margin="110,5,0,0" Name="lblStatus" VerticalAlignment="Top" />
+        <Label Content="Connected Clients" Height="28" HorizontalAlignment="Left" Margin="390,5,0,0" Name="lblClients" VerticalAlignment="Top" />
+        <ListView Name="lvClients" Height="270" Width="110" HorizontalAlignment="Left"  Margin="390,35,0,0" VerticalAlignment="Top"/>
+        <Button Content="Start listening" Height="23" HorizontalAlignment="Left" Margin="5,280,0,0" Name="btnConnect" VerticalAlignment="Top" Width="100" Click="btnStart_Click" />
+    </Grid>
+</Window>

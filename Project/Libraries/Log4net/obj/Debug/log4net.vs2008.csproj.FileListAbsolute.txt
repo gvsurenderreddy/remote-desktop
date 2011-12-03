@@ -1,0 +1,6 @@
+F:\facultate\master\dizertatie\RemotingTestApp\build\bin\net\2.0\debug\log4net.dll
+F:\facultate\master\dizertatie\RemotingTestApp\build\bin\net\2.0\debug\log4net.pdb
+F:\facultate\master\dizertatie\RemotingTestApp\build\bin\net\2.0\debug\log4net.xml
+F:\facultate\master\dizertatie\RemotingTestApp\src\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\RemotingTestApp\src\obj\Debug\log4net.dll
+F:\facultate\master\dizertatie\RemotingTestApp\src\obj\Debug\log4net.pdb
