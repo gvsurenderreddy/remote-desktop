@@ -95,7 +95,7 @@ namespace Common
                     _id = _singletonServer.AddClient(_ip, _hostname);
                     if (_id != -1)
                     {
-                        _timer.Start();
+                        //_timer.Start();
                     }
                     else
                     {

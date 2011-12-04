@@ -49,7 +49,7 @@ namespace WpfRemotingClient
                 _clientModel = new RemotingClient(timerInterval, configurationFile, serverHost, TimerTick);
                 _clientControl = new ClientControl(_clientModel, this);
                 WireUp(_clientControl, _clientModel);
-
+                Update(_clientModel);
                 //RemotingConfiguration.Configure("WpfRemotingClient.exe.config", false);
                 //_singletonServer = (SingletonServer)Activator.GetObject(typeof(SingletonServer), ConfigurationManager.AppSettings["server"]);
                 //_client = new Client(timerInterval, configurationFile, serverHost, TimerTick);
@@ -68,8 +68,6 @@ namespace WpfRemotingClient
         {
             try
             {
-                //_singletonServer.AddClient(_client.Ip, _client.Hostname);
-
                 if (!_clientModel.Connected)
                 {
                     Connect();
@@ -118,7 +116,11 @@ namespace WpfRemotingClient
         private void UpdateInterface(IClientModel clientModel)
         {
             // todo: update desktop sharing and mouse cursor
-            if (_clientModel.Connected)
+            lblHostname.Content = "Hostname: " + _clientModel.Hostname;
+            lblId.Content = "ID: " + _clientModel.Id.ToString();
+            lblIP.Content = "IP: " + _clientModel.Ip;
+            
+            if (!_clientModel.Connected)
             {
                 btnConnect.Content = "Connect";
                 lblStatus.Content = "Status: Disconnected";

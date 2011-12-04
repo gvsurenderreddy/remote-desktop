@@ -5,15 +5,19 @@ using System.Text;
 using Common;
 using System.Collections;
 using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels.Http;
+using System.Runtime.Remoting.Channels;
+using System.Configuration;
 
 namespace Common
 {
-    public  class SingletonServer : MarshalByRefObject, IServerModel
+    public class SingletonServer : MarshalByRefObject, IServerModel
     {
         #region members
 
-        Dictionary<int, ConnectedClient> _connectedClients = new Dictionary<int,ConnectedClient>();
-        ArrayList _observers = new ArrayList();
+        Dictionary<int, ConnectedClient> _connectedClients;
+        ArrayList _observers;
+        HttpServerChannel _httpChannel;
         bool _isListening = false;
         string _channelName;
         int _port;
@@ -28,6 +32,18 @@ namespace Common
 
         public SingletonServer()
         {
+            if (_observers == null)
+            {
+                _observers = new ArrayList();
+            }
+            if (_connectedClients == null)
+            {
+                _connectedClients = new Dictionary<int, ConnectedClient>();
+            }
+            _channelName = ConfigurationManager.AppSettings["channelName"];
+            _port = int.Parse(ConfigurationManager.AppSettings["port"]);
+            _host = ConfigurationManager.AppSettings["host"];
+            _configurationFile = "WpfRemotingServer.exe.config";
         }
 
         public SingletonServer(string channelName, string host, int port, string configurationFile)
@@ -39,6 +55,7 @@ namespace Common
                 _host = host;
                 _configurationFile = configurationFile;
                 _connectedClients = new Dictionary<int, ConnectedClient>();
+                _observers = new ArrayList();
                 //Logger.Info("Remoting Server Initialized");
             }
             catch (Exception ex)
@@ -93,16 +110,19 @@ namespace Common
 
         public void StartServer()
         {
-            RemotingConfiguration.Configure(_configurationFile, false);
+            _httpChannel = new HttpServerChannel(_channelName, _port);
+            //RemotingConfiguration.Configure(httpChannel, false);
+            ChannelServices.RegisterChannel(_httpChannel, false);
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), _channelName, WellKnownObjectMode.Singleton);
             _server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                _host + ":" + _port.ToString() + "/IServer");
+                _host + ":" + _port.ToString() + "/SingletonServer");
             _isListening = true;
         }
 
         public void StopServer()
         {
             RemoveAllClients();
+            ChannelServices.UnregisterChannel(_httpChannel);
             _server = null;
             _isListening = false;
         }
@@ -110,13 +130,13 @@ namespace Common
         public void UpdateDesktop()
         {
             // todo: implement update desktop
-            throw new NotImplementedException();
+            
         }
 
         public void UpdateMouseCursor()
         {
             // todo: implement update mouse cursor
-            throw new NotImplementedException();
+            
         }
 
         #endregion
