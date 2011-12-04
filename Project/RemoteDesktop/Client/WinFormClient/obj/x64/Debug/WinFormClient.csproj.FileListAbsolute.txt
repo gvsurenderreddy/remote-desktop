@@ -1,0 +1,7 @@
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\bin\x64\Debug\WinFormClient.exe.config
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\obj\x64\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\obj\x64\Debug\WinFormClient.Logging.resources
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\obj\x64\Debug\RLC.RemoteDesktop.RemoteDesktopViewer.resources
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\obj\x64\Debug\WinFormClient.Properties.Resources.resources
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\obj\x64\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Client\WinFormClient\obj\x64\Debug\GenerateResource.write.1.tlog

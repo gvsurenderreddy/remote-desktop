@@ -1,0 +1,25 @@
+C:\Users\Bob Cravens\Desktop\WCF_Tunnel\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Bob Cravens\Desktop\WCF_Tunnel\Server\RemoteDesktop\bin\Debug\RemoteDesktop.dll
+C:\Users\Bob Cravens\Desktop\WCF_Tunnel\Server\RemoteDesktop\bin\Debug\RemoteDesktop.pdb
+C:\Users\Bob Cravens\Desktop\WCF_Tunnel\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
+C:\Users\Bob Cravens\Desktop\WCF_Tunnel\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb
+C:\Code\DOTNET\RemoteDesktop\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\Code\DOTNET\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
+C:\Code\DOTNET\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.dll
+C:\Code\DOTNET\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.pdb
+C:\Code\DOTNET\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb
+C:\Users\Bob Cravens\Desktop\rdp_test\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.dll
+C:\Users\Bob Cravens\Desktop\rdp_test\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.pdb
+C:\Users\Bob Cravens\Desktop\rdp_test\RemoteDesktop\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Bob Cravens\Desktop\rdp_test\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
+C:\Users\Bob Cravens\Desktop\rdp_test\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb
+C:\Users\Mihai\Favorites\Desktop\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.dll
+C:\Users\Mihai\Favorites\Desktop\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.pdb
+C:\Users\Mihai\Favorites\Desktop\RemoteDesktop\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Mihai\Favorites\Desktop\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
+C:\Users\Mihai\Favorites\Desktop\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.dll
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.pdb
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
-namespace Common
+namespace WpfRemotingClient
 {
-    public interface Server
+    [Serializable]
+    public class ClientWindow : Window
     {
-        void ShareDesktop(ref Client client);
-
     }
 }

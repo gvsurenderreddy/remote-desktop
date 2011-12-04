@@ -1,0 +1,2 @@
+C:\Code\DOTNET\RemoteDesktop\Server\RemoteDesktopHost\obj\Release\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktopHost\bin\Release\RemoteDesktopServer.exe.config

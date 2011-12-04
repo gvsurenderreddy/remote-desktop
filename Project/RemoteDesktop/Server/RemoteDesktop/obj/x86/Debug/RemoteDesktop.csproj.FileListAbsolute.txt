@@ -1,0 +1,5 @@
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\bin\x86\Debug\RemoteDesktop.dll
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\bin\x86\Debug\RemoteDesktop.pdb
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\x86\Debug\RemoteDesktop.dll
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\x86\Debug\RemoteDesktop.pdb

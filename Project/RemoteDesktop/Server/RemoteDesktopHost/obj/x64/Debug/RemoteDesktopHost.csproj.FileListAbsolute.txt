@@ -1,0 +1,2 @@
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktopHost\bin\x64\Debug\RemoteDesktopServer.exe.config
+F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktopHost\obj\x64\Debug\ResolveAssemblyReference.cache

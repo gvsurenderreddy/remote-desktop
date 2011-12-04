@@ -41,9 +41,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="ConnectedClient.cs" />
+    <Compile Include="Controller\IClientControl.cs" />
+    <Compile Include="Model\IClientModel.cs" />
+    <Compile Include="Model\IServerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server.cs" />
+    <Compile Include="Controller\IServerControl.cs" />
+    <Compile Include="SingletonServer.cs" />
+    <Compile Include="View\IClientView.cs" />
+    <Compile Include="View\IServerView.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

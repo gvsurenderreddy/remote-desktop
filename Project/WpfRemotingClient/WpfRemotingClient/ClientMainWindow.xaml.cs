@@ -16,36 +16,43 @@ using System.Reflection;
 using log4net;
 using System.Configuration;
 using System.Runtime.Remoting;
+using System.Timers;
 
 namespace WpfRemotingClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    //[Serializable]
+    public partial class ClientMainWindow : Window, IClientView
     {
         #region members
 
-        Server _singletonServer;
-        Client _client;
+        IClientModel _clientModel;
+        IClientControl _clientControl;
         ILog _logger;
-        int _timerInterval;
 
         #endregion
 
         #region c-tor
 
-        public MainWindow()
+        public ClientMainWindow()
         {
             try
             {
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
-                _timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
-                _client = new Client(_timerInterval);
-                RemotingConfiguration.Configure("WpfRemotingClient.exe.config", false);
-                _singletonServer = (Server)Activator.GetObject(typeof(Server), ConfigurationManager.AppSettings["server"]);
+                int timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
+                string configurationFile = "WpfRemotingClient.exe.config";
+                string serverHost = ConfigurationManager.AppSettings["server"];
+                _clientModel = new RemotingClient(timerInterval, configurationFile, serverHost, TimerTick);
+                _clientControl = new ClientControl(_clientModel, this);
+                WireUp(_clientControl, _clientModel);
+
+                //RemotingConfiguration.Configure("WpfRemotingClient.exe.config", false);
+                //_singletonServer = (SingletonServer)Activator.GetObject(typeof(SingletonServer), ConfigurationManager.AppSettings["server"]);
+                //_client = new Client(timerInterval, configurationFile, serverHost, TimerTick);
             }
             catch (Exception ex)
             {
@@ -61,23 +68,79 @@ namespace WpfRemotingClient
         {
             try
             {
-                if (_client.Connected)
-                {
+                //_singletonServer.AddClient(_client.Ip, _client.Hostname);
 
-                    btnConnect.Content = "Connect";
-                    lblStatus.Content = "Status: Disconnected";
+                if (!_clientModel.Connected)
+                {
+                    Connect();
                 }
                 else
                 {
-                    _singletonServer.ShareDesktop(ref _client);
-                    lblStatus.Content = "Status: Connected";
-                    btnConnect.Content = "Disconnect";
+                    Disconnect();
                 }
             }
             catch (Exception ex)
             {
                 _logger.Error(ex.Message, ex);
             }
+        }
+
+        #endregion
+
+        #region IClientView Members
+
+        public void Connect()
+        {
+            _clientControl.RequestConnect();
+        }
+
+        public void Disconnect()
+        {
+            _clientControl.RequestDisconnect();
+        }
+
+        public void Update(IClientModel clientModel)
+        {
+            this.UpdateInterface(clientModel);
+        }
+
+        #endregion
+
+        #region methods
+
+        void TimerTick(object sender, ElapsedEventArgs e)
+        {
+            _clientControl.RequestUpdateDesktop();
+            _clientControl.RequestUpdateMouseCursor();
+            UpdateInterface(_clientModel);
+        }
+
+        private void UpdateInterface(IClientModel clientModel)
+        {
+            // todo: update desktop sharing and mouse cursor
+            if (_clientModel.Connected)
+            {
+                btnConnect.Content = "Connect";
+                lblStatus.Content = "Status: Disconnected";
+            }
+            else
+            {
+                lblStatus.Content = "Status: Connected";
+                btnConnect.Content = "Disconnect";
+            }
+        }
+
+        private void WireUp(IClientControl clientControl, IClientModel clientModel)
+        {
+            if (_clientModel != null)
+            {
+                _clientModel.RemoveObserver(this);
+            }
+            _clientModel = clientModel;
+            _clientControl = clientControl;
+            _clientControl.SetModel(_clientModel);
+            _clientControl.SetView(this);
+            _clientModel.AddObserver(this);
         }
 
         #endregion

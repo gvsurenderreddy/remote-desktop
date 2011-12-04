@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="WCF_RemoteDesktop">
+</Property><Property Name="Solution File" Value="C:\Users\Mihai\Favorites\Desktop\RemoteDesktop\WCF_RemoteDesktop.sln">
+</Property><Property Name="Date" Value="Wednesday, November 30, 2011">
+</Property><Property Name="Time" Value="22:25 PM">
+</Property></Properties><Event ErrorLevel="0" Project="RemoteDesktop" Source="Server\RemoteDesktop\RemoteDesktop.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="RemoteDesktop" Source="Server\RemoteDesktop\RemoteDesktop.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="RemoteDesktopHost" Source="Server\RemoteDesktopHost\RemoteDesktopHost.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="RemoteDesktopHost" Source="Server\RemoteDesktopHost\RemoteDesktopHost.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="RemoteDesktopService" Source="Server\RemoteDesktopService\RemoteDesktopService.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="RemoteDesktopService" Source="Server\RemoteDesktopService\RemoteDesktopService.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="WinFormClient" Source="Client\WinFormClient\WinFormClient.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="WinFormClient" Source="Client\WinFormClient\WinFormClient.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="WCF_RemoteDesktop.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="WCF_RemoteDesktop.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="RemoteDesktop" Source="Server\RemoteDesktop\RemoteDesktop.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="RemoteDesktopHost" Source="Server\RemoteDesktopHost\RemoteDesktopHost.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="RemoteDesktopService" Source="Server\RemoteDesktopService\RemoteDesktopService.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="WinFormClient" Source="Client\WinFormClient\WinFormClient.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

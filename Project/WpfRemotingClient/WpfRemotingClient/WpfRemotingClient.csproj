@@ -65,6 +65,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientWindow.cs" />
+    <Compile Include="RemotingClient.cs" />
     <Page Include="ClientMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +75,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ClientControl.cs" />
     <Compile Include="ClientMainWindow.xaml.cs">
       <DependentUpon>ClientMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
