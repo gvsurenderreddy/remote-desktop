@@ -15,6 +15,7 @@ using Common;
 using System.Reflection;
 using log4net;
 using System.Configuration;
+using System.Runtime.Remoting;
 
 namespace WpfRemotingClient
 {
@@ -43,6 +44,7 @@ namespace WpfRemotingClient
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
                 _timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
                 _client = new Client(_timerInterval);
+                RemotingConfiguration.Configure("WpfRemotingClient.exe.config", false);
                 _singletonServer = (Server)Activator.GetObject(typeof(Server), ConfigurationManager.AppSettings["server"]);
             }
             catch (Exception ex)

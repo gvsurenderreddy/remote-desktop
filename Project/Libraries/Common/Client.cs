@@ -18,6 +18,12 @@ namespace Common
 
         #region c-tor
 
+        public Client()
+        {
+            _connected = false;
+            _id = -1;
+        }
+
         public Client(int id, int timerInterval)
         {
             _id = id;

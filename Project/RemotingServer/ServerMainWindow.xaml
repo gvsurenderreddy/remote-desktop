@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfRemotingServer.MainWindow"
+﻿<Window x:Class="WpfRemotingServer.ServerMainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="RemotingServer" Height="350" Width="525">

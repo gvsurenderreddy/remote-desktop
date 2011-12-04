@@ -22,28 +22,27 @@ namespace WpfRemotingServer
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ServerMainWindow : Window
     {
         #region members
 
         SingletonServer _server;
-        HttpServerChannel _serverChannel;
         bool _isListening = false;
         string _channelName;
         int _port;
         string _host;
-
+        log4net.ILog Logger;
         #endregion
 
         #region c-tor
 
-        public MainWindow()
+        public ServerMainWindow()
         {
             try
             {
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
-                App.Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
+                Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
                 lblStatus.Content = "Status: stopped";
                 _channelName = ConfigurationManager.AppSettings["channelName"];
                 _port = int.Parse(ConfigurationManager.AppSettings["port"]);
@@ -51,7 +50,7 @@ namespace WpfRemotingServer
             }
             catch (Exception ex)
             {
-                App.Logger.Error(ex.Message, ex);
+                Logger.Error(ex.Message, ex);
             }
         }
 
@@ -65,18 +64,18 @@ namespace WpfRemotingServer
             {
                 if (_isListening == false)
                 {
-                    _serverChannel = new HttpServerChannel(_channelName, _port);
-                    ChannelServices.RegisterChannel(_serverChannel, false);
+                    RemotingConfiguration.Configure("RemotingServer.exe.config", false);
                     RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), _channelName, WellKnownObjectMode.Singleton);
                     _server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                        _host + _port.ToString() + "/SingletonServer");
+                        _host + ":" + _port.ToString() + "/SingletonServer");
+
                     _isListening = true;
                     lblStatus.Content = "Status: started";
                     btnConnect.Content = "Stop listening";
                 }
                 else
                 {
-                    ChannelServices.UnregisterChannel(_serverChannel);
+                    //ChannelServices.UnregisterChannel(_serverChannel);
                     _server = null;
                     _isListening = false;
                     lblStatus.Content = "Status: stopped";
@@ -85,7 +84,7 @@ namespace WpfRemotingServer
             }
             catch(Exception ex)
             {
-                App.Logger.Error(ex.Message, ex);
+                Logger.Error(ex.Message, ex);
             }
         }
 

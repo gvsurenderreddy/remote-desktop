@@ -11,7 +11,7 @@ namespace WpfRemotingServer
         #region members
 
         Dictionary<int, Client> _connectedClients;
-
+        //log4net.ILog Logger;
         #endregion
 
         #region c-tor
@@ -21,11 +21,11 @@ namespace WpfRemotingServer
             try
             {
                 _connectedClients = new Dictionary<int, Client>();
-                App.Logger.Info("Remoting Server Initialized");
+                //Logger.Info("Remoting Server Initialized");
             }
             catch (Exception ex)
             {
-                App.Logger.Error("Server C-tor exception - " + ex.Message, ex);
+                throw new Exception("Server C-tor exception - " + ex.Message, ex);
             }
         }
 
