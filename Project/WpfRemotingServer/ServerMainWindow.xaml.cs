@@ -16,22 +16,18 @@ using System.Runtime.Remoting.Channels.Http;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting;
 using System.Configuration;
+using Common;
+using System.Collections;
 
 namespace WpfRemotingServer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class ServerMainWindow : Window
+    public partial class ServerMainWindow : Window, IServerView
     {
         #region members
 
-        SingletonServer _server;
-        bool _isListening = false;
-        string _channelName;
-        int _port;
-        string _host;
-        log4net.ILog Logger;
         #endregion
 
         #region c-tor
@@ -42,49 +38,136 @@ namespace WpfRemotingServer
             {
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
-                Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
+                ServerStaticMembers.Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
                 lblStatus.Content = "Status: stopped";
-                _channelName = ConfigurationManager.AppSettings["channelName"];
-                _port = int.Parse(ConfigurationManager.AppSettings["port"]);
-                _host = ConfigurationManager.AppSettings["host"];
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message, ex);
+                ServerStaticMembers.Logger.Error(ex.Message, ex);
             }
+        }
+
+        #endregion
+
+        #region methods
+
+        public void WireUp(IServerControl serverControl, IServerModel serverModel)
+        {
+            if (ServerStaticMembers.ServerModel != null)
+            {
+                ServerStaticMembers.ServerModel.RemoveObserver(this);
+            }
+            ServerStaticMembers.ServerModel = serverModel;
+            ServerStaticMembers.ServerControl = serverControl;
+            ServerStaticMembers.ServerControl.SetModel(ServerStaticMembers.ServerModel);
+            ServerStaticMembers.ServerControl.SetView(this);
+            ServerStaticMembers.ServerModel.AddObserver(this);
+        }
+
+        public void UpdateInterface(IServerModel serverModel)
+        {
+            if (serverModel.IsListening)
+            {
+                lblStatus.Content = "Status: started";
+                btnConnect.Content = "Stop listening";
+            }
+            else
+            {
+                lblStatus.Content = "Status: stopped";
+                btnConnect.Content = "Start listening";
+            }
+            lvClients.Items.Clear();
+            if (serverModel != null)
+            {
+                DisplayClients(serverModel.Clients);
+                lblTotal.Content = "Total: " + serverModel.ConnectedClients.ToString();
+            }
+        }
+
+        public void DisplayClients(IList<ConnectedClient> clients)
+        {
+            if (clients != null)
+            {
+                foreach (ConnectedClient client in clients)
+                {
+                    lvClients.Items.Add(client);
+                }
+            }
+        }
+
+        #endregion
+
+        #region IServerView methods
+
+        public int AddClient(string ip, string hostname)
+        {
+            return ServerStaticMembers.ServerControl.AddClient(ip, hostname);
+        }
+
+        public void RemoveClient(int id)
+        {
+            ServerStaticMembers.ServerControl.RemoveClient(id);
+        }
+
+        public void Update(IServerModel serverModel)
+        {
+            this.UpdateInterface(serverModel);
         }
 
         #endregion
 
         #region callbacks
 
-        private void btnStart_Click(object sender, RoutedEventArgs e)
+        public void btnStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (_isListening == false)
-                {
-                    RemotingConfiguration.Configure("WpfRemotingServer.exe.config", false);
-                    RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), _channelName, WellKnownObjectMode.Singleton);
-                    _server = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                        _host + ":" + _port.ToString() + "/SingletonServer");
+                ServerStaticMembers.HttpChannel = new HttpServerChannel(ServerStaticMembers.ChannelName, ServerStaticMembers.Port);
+                //RemotingConfiguration.Configure(httpChannel, false);
+                ChannelServices.RegisterChannel(ServerStaticMembers.HttpChannel, false);
+                RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), ServerStaticMembers.ChannelName, WellKnownObjectMode.Singleton);
+                ServerStaticMembers.ServerModel = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
+                    ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
+                lblStatus.Content = "Status: started";
+                btnConnect.Content = "Stop listening";
+                //if (ServerStaticMembers.ServerModel.IsListening == false)
+                //{
+                //    ServerStaticMembers.ServerControl.RequestStartServer();
+                //}
+                //else
+                //{
+                //    ServerStaticMembers.ServerControl.RequestStopServer();
+                //}
+                //UpdateInterface(ServerStaticMembers.ServerModel);
 
-                    _isListening = true;
-                    lblStatus.Content = "Status: started";
-                    btnConnect.Content = "Stop listening";
-                }
-                else
-                {
-                    //ChannelServices.UnregisterChannel(_serverChannel);
-                    _server = null;
-                    _isListening = false;
-                    lblStatus.Content = "Status: stopped";
-                    btnConnect.Content = "Start listening";
-                }
             }
             catch(Exception ex)
             {
-                Logger.Error(ex.Message, ex);
+                ServerStaticMembers.Logger.Error(ex.Message, ex);
+            }
+        }
+
+        private void btnCloseConnection_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                IList<int> toRemove = new List<int>();
+                foreach (ListViewItem client in lvClients.SelectedItems)
+                {
+                    if (((ConnectedClient)client.Content).Connected == true)
+                    {
+                        toRemove.Add(((ConnectedClient)client.Content).Id);
+                        ((ConnectedClient)client.Content).Connected = false;
+                    }
+                }
+                foreach (int id in toRemove)
+                {
+                    ServerStaticMembers.ServerControl.RemoveClient(id);
+                }
+            }
+            catch (Exception ex)
+            {
+                ServerStaticMembers.Logger.Error(ex.Message, ex);
             }
         }
 
