@@ -7,8 +7,8 @@
         <Label Content="Status: " Height="28" HorizontalAlignment="Left" Margin="110,5,0,0" Name="lblStatus" VerticalAlignment="Top" />
         <Label Content="Connected Clients" Height="28" HorizontalAlignment="Left" Margin="390,5,0,0" Name="lblClients" VerticalAlignment="Top" />
         <ListView Name="lvClients" Height="239" Width="137" HorizontalAlignment="Left"  Margin="363,35,0,0" VerticalAlignment="Top" SelectionMode="Multiple" />
-        <Label Content="Total: " Height="28" HorizontalAlignment="Left" Margin="390,275,0,0" Name="lblTotal" VerticalAlignment="Top" />
-        <Button Content="Start listening" Height="23" HorizontalAlignment="Left" Margin="5,280,0,0" Name="btnConnect" VerticalAlignment="Top" Width="100" Click="btnStart_Click" />
+        <Label Content="Total: " Height="28" HorizontalAlignment="Left" Margin="390,275,0,0" Name="lblTotal" VerticalAlignment="Top" FontFamily="{Binding}" DataContext="{Binding ElementName=lblTotal}" />
+        <Button Content="Start listening" Height="23" HorizontalAlignment="Left" Margin="5,280,0,0" Name="btnStartServer" VerticalAlignment="Top" Width="100" Click="btnStart_Click" />
         <Button Content="Close connection" Height="23" HorizontalAlignment="Left" Margin="125,280,0,0" Name="btnCloseConnection" VerticalAlignment="Top" Width="100" Click="btnCloseConnection_Click" />
     </Grid>
 </Window>

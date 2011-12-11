@@ -9,6 +9,9 @@ using System.Runtime.Remoting.Channels.Http;
 using System.Runtime.Remoting.Channels;
 using System.Configuration;
 using System.Windows;
+using System.ComponentModel;
+using System.Windows.Threading;
+using System.Threading;
 
 namespace WpfRemotingServer
 {
@@ -16,16 +19,10 @@ namespace WpfRemotingServer
     {
         #region members
 
-        //Dictionary<int, ConnectedClient> _connectedClients;
-        //ArrayList _observers;
-        //HttpServerChannel _httpChannel;
         bool _isListening = false;
-        //string _channelName;
-        //int _port;
-        //string _host;
-        //string _configurationFile;
-        //SingletonServer _server;
-        //log4net.ILog Logger;
+        BackgroundWorker _worker;
+        Dispatcher _dispatcher;
+        static ServerMainWindow _smw;
 
         #endregion
 
@@ -33,20 +30,37 @@ namespace WpfRemotingServer
 
         public SingletonServer()
         {
-            if (ServerStaticMembers.Observers == null)
+            try
             {
-                ServerStaticMembers.Observers = new ArrayList();
+                if (ServerStaticMembers.Observers == null)
+                {
+                    ServerStaticMembers.Observers = new ArrayList();
+                }
+                if (ServerStaticMembers.ConnectedClients == null)
+                {
+                    ServerStaticMembers.ConnectedClients = new Dictionary<int, ConnectedClient>();
+                }
+                Thread t = new Thread(ThreadProc);
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
+                Thread.Sleep(5000);
+                _dispatcher = _smw.Dispatcher;
+                _worker = new BackgroundWorker();
+                _worker.WorkerSupportsCancellation = true;
+                ServerStaticMembers.ServerModel = this;
+                ServerStaticMembers.ServerView = _smw;
+                ServerStaticMembers.ServerControl = new ServerControl(ServerStaticMembers.ServerModel, ServerStaticMembers.ServerView);
+                ServerStaticMembers.ServerView.WireUp(ServerStaticMembers.ServerControl, ServerStaticMembers.ServerModel);
+                ServerStaticMembers.Logger.Info("Remoting Server Initialized");
+                _isListening = true;
+          
             }
-            if (ServerStaticMembers.ConnectedClients == null)
+            catch (Exception ex)
             {
-                ServerStaticMembers.ConnectedClients = new Dictionary<int, ConnectedClient>();
+                _isListening = false;
+                ServerStaticMembers.Logger.Error("Remoting Server Initialization failed - " + ex.Message, ex);
             }
-            ServerStaticMembers.ServerModel = this;
-            ServerStaticMembers.ServerControl = new ServerControl(ServerStaticMembers.ServerModel, ServerStaticMembers.ServerView);
-            ServerStaticMembers.ServerView.WireUp(ServerStaticMembers.ServerControl, ServerStaticMembers.ServerModel);
-            _isListening = true;
-            ServerStaticMembers.Logger.Info("Remoting Server Initialized");
-        }
+        }  
 
         #endregion
 
@@ -81,13 +95,46 @@ namespace WpfRemotingServer
             }
         }
 
+        void ThreadProc()
+        {
+            _smw = new ServerMainWindow();
+            _smw.ShowDialog();
+        }
+
+        [STAThread]
         public int AddClient(string ip, string hostname)
         {
             int newID = ServerStaticMembers.ConnectedClients.Count + 1;
             ServerStaticMembers.ConnectedClients.Add(newID, new ConnectedClient(ip, hostname, newID));
-            this.NotifyObservers();
+            _worker.DoWork += delegate(object s, DoWorkEventArgs args)
+            {
+                if (_worker.CancellationPending)
+                {
+                    args.Cancel = true;
+                    return;
+                }
+                System.Threading.Thread.Sleep(10);
+
+                //UpdatePBvalueDelegate update = new UpdatePBvalueDelegate(UpdateProgressText);
+                //_dispatcher.BeginInvoke(update, 5);
+
+                //UpdateClientsDelegate update2 = new UpdateClientsDelegate(SetText);
+                //_dispatcher.BeginInvoke(update2, ServerStaticMembers.ConnectedClients.Count.ToString());
+
+                NotifyObserversDelegate update3 = new NotifyObserversDelegate(NotifyObservers);
+                _dispatcher.BeginInvoke(update3);
+           
+            };
+            _worker.RunWorkerAsync();
+            //App.smw.ShowDialog();
             return newID;
         }
+
+        public delegate void NotifyObserversDelegate();
+
+        public delegate void UpdatePBvalueDelegate(int newVal);
+
+        public delegate void UpdateClientsDelegate(string newText);
 
         public void RemoveClient(int id)
         {
@@ -113,7 +160,7 @@ namespace WpfRemotingServer
         {
             RemoveAllClients();
             ChannelServices.UnregisterChannel(ServerStaticMembers.HttpChannel);
-            ServerStaticMembers.ServerModel = null;
+            //ServerStaticMembers.ServerModel = null;
             _isListening = false;
         }
 

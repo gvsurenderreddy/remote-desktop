@@ -24,7 +24,7 @@ namespace Common
         System.Timers.Timer _timer;
         string _serverHost;
         ArrayList _observers = new ArrayList();
-        SingletonServer _singletonServer;
+        IServerModel _singletonServer;
 
         #endregion
 
@@ -82,6 +82,7 @@ namespace Common
             }
         }
 
+        [STAThread]
         public void Connect()
         {
             if (_timer != null)
@@ -90,7 +91,7 @@ namespace Common
                 {
                     // todo: add SERVER_CONFIGURED flag
                     RemotingConfiguration.Configure(_configurationFile, false);
-                    _singletonServer = (SingletonServer)Activator.GetObject(typeof(SingletonServer), _serverHost);
+                    _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
                     // todo: notify server
                     _id = _singletonServer.AddClient(_ip, _hostname);
                     if (_id != -1)

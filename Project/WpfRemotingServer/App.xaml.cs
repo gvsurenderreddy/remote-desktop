@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Threading;
+using System.Reflection;
 
 namespace WpfRemotingServer
 {
@@ -14,7 +15,7 @@ namespace WpfRemotingServer
     public partial class App : Application
     {
         Mutex mutex = new Mutex(true, "RemotingServer");
-        public static ServerMainWindow smw;
+   
 
         public App():base()
         {
@@ -23,9 +24,8 @@ namespace WpfRemotingServer
             if (mutex.WaitOne(TimeSpan.Zero, true)) 
             {
                 // if creation of mutex is successful
-                smw = new ServerMainWindow();
-                ServerStaticMembers.ServerView = smw;
-                //Application.LoadComponent(smw, new Uri("ServerMainWindow.xaml"));
+                log4net.Config.BasicConfigurator.Configure();
+                ServerStaticMembers.Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
             }
             else
             {

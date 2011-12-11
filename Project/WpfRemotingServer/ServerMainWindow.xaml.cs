@@ -18,6 +18,9 @@ using System.Runtime.Remoting;
 using System.Configuration;
 using Common;
 using System.Collections;
+using System.Windows.Threading;
+using Microsoft.JScript;
+using System.Threading;
 
 namespace WpfRemotingServer
 {
@@ -28,6 +31,8 @@ namespace WpfRemotingServer
     {
         #region members
 
+        Action EmptyDelegate = delegate() { };
+
         #endregion
 
         #region c-tor
@@ -37,9 +42,9 @@ namespace WpfRemotingServer
             try
             {
                 InitializeComponent();
-                log4net.Config.BasicConfigurator.Configure();
-                ServerStaticMembers.Logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
-                lblStatus.Content = "Status: stopped";
+                
+                lblStatus.Content = "Status: started";
+                btnStartServer.Content = "Stop listening";
             }
             catch (Exception ex)
             {
@@ -66,21 +71,21 @@ namespace WpfRemotingServer
 
         public void UpdateInterface(IServerModel serverModel)
         {
-            if (serverModel.IsListening)
-            {
-                lblStatus.Content = "Status: started";
-                btnConnect.Content = "Stop listening";
-            }
-            else
-            {
-                lblStatus.Content = "Status: stopped";
-                btnConnect.Content = "Start listening";
-            }
-            lvClients.Items.Clear();
             if (serverModel != null)
             {
+                if (serverModel.IsListening)
+                {
+                    UpdateControlContent(lblStatus, "Status: started");
+                    UpdateControlContent(btnStartServer, "Stop listening");
+                }
+                else
+                {
+                    UpdateControlContent(lblStatus, "Status: stopped");
+                    UpdateControlContent(btnStartServer, "Start listening");
+                }
+                ClearItems();
                 DisplayClients(serverModel.Clients);
-                lblTotal.Content = "Total: " + serverModel.ConnectedClients.ToString();
+                UpdateControlContent(lblTotal, "Total: " + serverModel.ConnectedClients.ToString());
             }
         }
 
@@ -90,7 +95,7 @@ namespace WpfRemotingServer
             {
                 foreach (ConnectedClient client in clients)
                 {
-                    lvClients.Items.Add(client);
+                    AddItem(client);
                 }
             }
         }
@@ -122,24 +127,14 @@ namespace WpfRemotingServer
         {
             try
             {
-                ServerStaticMembers.HttpChannel = new HttpServerChannel(ServerStaticMembers.ChannelName, ServerStaticMembers.Port);
-                //RemotingConfiguration.Configure(httpChannel, false);
-                ChannelServices.RegisterChannel(ServerStaticMembers.HttpChannel, false);
-                RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), ServerStaticMembers.ChannelName, WellKnownObjectMode.Singleton);
-                ServerStaticMembers.ServerModel = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                    ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
-                lblStatus.Content = "Status: started";
-                btnConnect.Content = "Stop listening";
-                //if (ServerStaticMembers.ServerModel.IsListening == false)
-                //{
-                //    ServerStaticMembers.ServerControl.RequestStartServer();
-                //}
-                //else
-                //{
-                //    ServerStaticMembers.ServerControl.RequestStopServer();
-                //}
-                //UpdateInterface(ServerStaticMembers.ServerModel);
-
+                if (ServerStaticMembers.ServerModel.IsListening)
+                {
+                    ServerStaticMembers.ServerControl.RequestStopServer();
+                }
+                else
+                {
+                    ServerStaticMembers.ServerControl.RequestStartServer();
+                }
             }
             catch(Exception ex)
             {
@@ -169,6 +164,39 @@ namespace WpfRemotingServer
             {
                 ServerStaticMembers.Logger.Error(ex.Message, ex);
             }
+        }
+
+        #endregion
+
+        #region thread safe methods
+
+        void SetValue(ContentControl control, string newContent)
+        {
+            control.Content = newContent;
+        }
+
+        void UpdateControlContent(ContentControl control, string newContent)
+        {
+            System.Threading.ThreadPool.QueueUserWorkItem(state =>
+            {
+                Dispatcher.Invoke((Action<ContentControl, string>)SetValue, control, newContent);
+            });
+        }
+
+        void ClearItems()
+        {
+            lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                lvClients.Items.Clear();
+            }));
+        }
+
+        void AddItem(ConnectedClient client)
+        {
+            lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+            {
+                lvClients.Items.Add(client);
+            }));
         }
 
         #endregion

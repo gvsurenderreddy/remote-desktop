@@ -80,6 +80,7 @@ namespace WpfRemotingServer
         {
             if (_serverModel != null)
             {
+                _serverModel.StopServer();
                 _serverModel.RemoveAllClients();
                 if (_serverView != null)
                 {

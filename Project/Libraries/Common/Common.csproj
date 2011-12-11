@@ -49,7 +49,6 @@
     <Compile Include="Model\IServerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controller\IServerControl.cs" />
-    <Compile Include="SingletonServer.cs" />
     <Compile Include="View\IClientView.cs" />
     <Compile Include="View\IServerView.cs" />
   </ItemGroup>

@@ -12,6 +12,7 @@ namespace Common
         int AddClient(string ip, string hostname);
         void RemoveClient(int id);
         void Update(IServerModel serverModel);
+        void WireUp(IServerControl serverControl, IServerModel serverModel);
 
         #endregion
     }

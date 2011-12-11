@@ -1,0 +1,1 @@
+﻿http://elegantcode.com/2009/07/03/wpf-multithreading-using-the-backgroundworker-and-reporting-the-progress-to-the-ui/  - background worker to update interface controls from other threads

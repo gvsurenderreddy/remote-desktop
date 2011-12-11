@@ -18,8 +18,6 @@ F:\facultate\master\dizertatie\Project\RemotingServer\obj\Debug\GenerateResource
 F:\facultate\master\dizertatie\Project\RemotingServer\obj\Debug\WpfRemotingServer.exe
 F:\facultate\master\dizertatie\Project\RemotingServer\obj\Debug\WpfRemotingServer.pdb
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\bin\Debug\WpfRemotingServer.exe.config
-F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\WpfRemotingServer.exe
-F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\WpfRemotingServer.pdb
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\bin\Debug\WpfRemotingServer.exe
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\bin\Debug\WpfRemotingServer.pdb
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\bin\Debug\Common.dll
@@ -36,3 +34,7 @@ F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\WpfRemotingSe
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\WpfRemotingServer.Properties.Resources.resources
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\GenerateResource.read.1.tlog
 F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\WpfRemotingServer.exe
+F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\WpfRemotingServer.pdb
+F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\ServerStartUpWindow.baml
+F:\facultate\master\dizertatie\Project\WpfRemotingServer\obj\Debug\ServerStartUpWindow.g.cs
