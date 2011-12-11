@@ -96,10 +96,12 @@ namespace Common
                     _id = _singletonServer.AddClient(_ip, _hostname);
                     if (_id != -1)
                     {
+                        _connected = true;
                         //_timer.Start();
                     }
                     else
                     {
+                        _connected = false;
                         // todo: show connection failed message
                     }
                 }
