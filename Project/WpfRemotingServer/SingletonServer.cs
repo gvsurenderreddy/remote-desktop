@@ -12,6 +12,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Windows.Threading;
 using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace WpfRemotingServer
 {
@@ -38,7 +39,7 @@ namespace WpfRemotingServer
                 }
                 if (ServerStaticMembers.ConnectedClients == null)
                 {
-                    ServerStaticMembers.ConnectedClients = new Dictionary<int, ConnectedClient>();
+                    ServerStaticMembers.ConnectedClients = new ObservableCollection<ConnectedClient>();
                 }
                 Thread t = new Thread(ThreadProc);
                 t.SetApartmentState(ApartmentState.STA);
@@ -105,7 +106,7 @@ namespace WpfRemotingServer
         public int AddClient(string ip, string hostname)
         {
             int newID = ServerStaticMembers.ConnectedClients.Count + 1;
-            ServerStaticMembers.ConnectedClients.Add(newID, new ConnectedClient(ip, hostname, newID));
+            ServerStaticMembers.ConnectedClients.Add(new ConnectedClient(ip, hostname, newID));
             _worker.DoWork += delegate(object s, DoWorkEventArgs args)
             {
                 if (_worker.CancellationPending)
@@ -138,9 +139,10 @@ namespace WpfRemotingServer
 
         public void RemoveClient(int id)
         {
-            if (ServerStaticMembers.ConnectedClients.ContainsKey(id))
+            // todo: test remove client
+            if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id) != null)
             {
-                ServerStaticMembers.ConnectedClients.Remove(id);
+                ServerStaticMembers.ConnectedClients = (ObservableCollection<ConnectedClient>)ServerStaticMembers.ConnectedClients.Where(x => x.Id != id);
                 this.NotifyObservers();
             }
         }
@@ -206,14 +208,14 @@ namespace WpfRemotingServer
             get { return ServerStaticMembers.ConnectedClients.Count; }
         }
 
-        public IList<ConnectedClient> Clients
+        public ObservableCollection<ConnectedClient> Clients
         {
             get
             {
-                var connectedClients = from client in ServerStaticMembers.ConnectedClients
-                           where client.Value.Connected == true
-                           select client.Value;
-            return connectedClients.ToList<ConnectedClient>();
+                //var connectedClients = from client in ServerStaticMembers.ConnectedClients
+                //           where client.Value.Connected == true
+                //           select client.Value;
+                return ServerStaticMembers.ConnectedClients;
             }
         }
 

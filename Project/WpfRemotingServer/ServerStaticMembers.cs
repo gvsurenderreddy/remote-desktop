@@ -6,12 +6,13 @@ using System.Collections;
 using System.Runtime.Remoting.Channels.Http;
 using Common;
 using System.Configuration;
+using System.Collections.ObjectModel;
 
 namespace WpfRemotingServer
 {
     public static class ServerStaticMembers
     {
-        public static Dictionary<int, ConnectedClient> ConnectedClients;
+        public static ObservableCollection<ConnectedClient> ConnectedClients = new ObservableCollection<ConnectedClient>();
         public static ArrayList Observers;
         public static HttpServerChannel HttpChannel;
         public static string ChannelName = ConfigurationManager.AppSettings["channelName"];

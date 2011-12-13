@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Common
 {
@@ -14,7 +15,7 @@ namespace Common
         int Port { get; }
         string Host { get; }
         int ConnectedClients { get; }
-        IList<ConnectedClient> Clients {get;}
+        ObservableCollection<ConnectedClient> Clients { get; }
 
         #endregion
 

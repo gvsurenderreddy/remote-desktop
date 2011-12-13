@@ -21,6 +21,7 @@ using System.Collections;
 using System.Windows.Threading;
 using Microsoft.JScript;
 using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace WpfRemotingServer
 {
@@ -89,14 +90,14 @@ namespace WpfRemotingServer
             }
         }
 
-        public void DisplayClients(IList<ConnectedClient> clients)
+        public void DisplayClients(ObservableCollection<ConnectedClient> clients)
         {
             if (clients != null)
             {
-                foreach (ConnectedClient client in clients)
+                lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
                 {
-                    AddItem(client);
-                }
+                    lvClients.ItemsSource = clients;
+                }));
             }
         }
 
@@ -191,13 +192,13 @@ namespace WpfRemotingServer
             }));
         }
 
-        void AddItem(ConnectedClient client)
-        {
-            lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
-            {
-                lvClients.Items.Add(client);
-            }));
-        }
+        //void AddItem(ConnectedClient client)
+        //{
+        //    lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+        //    {
+        //        lvClients.Items.Add(client);
+        //    }));
+        //}
 
         #endregion
     }
