@@ -84,7 +84,7 @@ namespace WpfRemotingServer
                     UpdateControlContent(lblStatus, "Status: stopped");
                     UpdateControlContent(btnStartServer, "Start listening");
                 }
-                ClearItems();
+                //ClearItems();
                 DisplayClients(serverModel.Clients);
                 UpdateControlContent(lblTotal, "Total: " + serverModel.ConnectedClients.ToString());
             }

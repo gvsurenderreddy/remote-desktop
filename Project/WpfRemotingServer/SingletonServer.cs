@@ -142,7 +142,8 @@ namespace WpfRemotingServer
             // todo: test remove client
             if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id) != null)
             {
-                ServerStaticMembers.ConnectedClients = (ObservableCollection<ConnectedClient>)ServerStaticMembers.ConnectedClients.Where(x => x.Id != id);
+                _dispatcher.Invoke((Action)delegate { ServerStaticMembers.ConnectedClients.RemoveAt(id - 1); });
+                
                 this.NotifyObservers();
             }
         }

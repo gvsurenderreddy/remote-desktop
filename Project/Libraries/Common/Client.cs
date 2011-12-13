@@ -125,6 +125,8 @@ namespace Common
                 {
                     _timer.Stop();
                 }
+                _singletonServer.RemoveClient(_id);
+                _connected = false;
                 // todo: notify server
             }
             else
