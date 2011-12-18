@@ -43,7 +43,6 @@ namespace WpfRemotingServer
             try
             {
                 InitializeComponent();
-                
                 lblStatus.Content = "Status: started";
                 btnStartServer.Content = "Stop listening";
             }
@@ -184,13 +183,13 @@ namespace WpfRemotingServer
             });
         }
 
-        void ClearItems()
-        {
-            lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
-            {
-                lvClients.Items.Clear();
-            }));
-        }
+        //void ClearItems()
+        //{
+        //    lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
+        //    {
+        //        ServerStaticMembers.ConnectedClients.Clear();
+        //    }));
+        //}
 
         //void AddItem(ConnectedClient client)
         //{

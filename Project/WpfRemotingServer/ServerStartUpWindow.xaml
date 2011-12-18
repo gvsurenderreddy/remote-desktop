@@ -4,5 +4,6 @@
         Title="ServerStartUpWindow" Height="300" Width="300">
     <Grid>
         <TextBlock Name="tbStartup" Text="Server startup. Waiting for clients" Margin="5,5,0,0"/>
+        <Label Content="IP: " Height="28" HorizontalAlignment="Left" Margin="5,35,0,0" Name="lblIP" VerticalAlignment="Top" />
     </Grid>
 </Window>

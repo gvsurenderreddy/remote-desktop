@@ -116,18 +116,12 @@ namespace WpfRemotingServer
                 }
                 System.Threading.Thread.Sleep(10);
 
-                //UpdatePBvalueDelegate update = new UpdatePBvalueDelegate(UpdateProgressText);
-                //_dispatcher.BeginInvoke(update, 5);
-
-                //UpdateClientsDelegate update2 = new UpdateClientsDelegate(SetText);
-                //_dispatcher.BeginInvoke(update2, ServerStaticMembers.ConnectedClients.Count.ToString());
-
                 NotifyObserversDelegate update3 = new NotifyObserversDelegate(NotifyObservers);
                 _dispatcher.BeginInvoke(update3);
            
             };
             _worker.RunWorkerAsync();
-            //App.smw.ShowDialog();
+
             return newID;
         }
 
@@ -155,7 +149,7 @@ namespace WpfRemotingServer
             ChannelServices.RegisterChannel(ServerStaticMembers.HttpChannel, false);
             RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), ServerStaticMembers.ChannelName, WellKnownObjectMode.Singleton);
             ServerStaticMembers.ServerModel = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
+              "http://" + ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
             _isListening = true;
         }
 

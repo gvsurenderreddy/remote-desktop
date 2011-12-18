@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels.Http;
+using Common;
 
 namespace WpfRemotingServer
 {
@@ -24,7 +25,6 @@ namespace WpfRemotingServer
         public ServerStartUpWindow()
         {
             InitializeComponent();
-
             try
             {
                 ServerStaticMembers.HttpChannel = new HttpServerChannel(ServerStaticMembers.ChannelName, ServerStaticMembers.Port);
@@ -32,7 +32,8 @@ namespace WpfRemotingServer
                 ChannelServices.RegisterChannel(ServerStaticMembers.HttpChannel, false);
                 RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), ServerStaticMembers.ChannelName, WellKnownObjectMode.Singleton);
                 ServerStaticMembers.ServerModel = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-                    ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
+                   "http://" + ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
+                lblIP.Content = "IP: " +  ServerStaticMembers.Host;
             }
             catch (Exception ex)
             {
