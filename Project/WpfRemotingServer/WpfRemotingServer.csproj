@@ -122,13 +122,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Libraries\Common\Common.csproj">
+    <ProjectReference Include="..\Libraries\Common\RemotingCommon.csproj">
       <Project>{01E25BC0-1E34-4371-BAB8-BF5CCA3E2A62}</Project>
-      <Name>Common</Name>
+      <Name>RemotingCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\DesktopSharing\DesktopSharing\DesktopSharing.csproj">
+    <ProjectReference Include="..\Libraries\DesktopSharingCommon\DesktopSharingCommon\DesktopSharingCommon.csproj">
+      <Project>{38C91ED6-4DCD-4427-BC47-8425C07BF66D}</Project>
+      <Name>DesktopSharingCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\DesktopSharing\DesktopSharing\DesktopSharingHost.csproj">
       <Project>{4A68A730-8D2C-485D-B9C9-91EA2CEC5A3A}</Project>
-      <Name>DesktopSharing</Name>
+      <Name>DesktopSharingHost</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\Log4net\log4net.vs2010.csproj">
       <Project>{181FE707-E161-4722-9F38-6AAAB6FAA106}</Project>

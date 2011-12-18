@@ -66,6 +66,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="RemotingClient.cs" />
+    <Compile Include="DesktopViewer.cs" />
     <Page Include="ClientMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,9 +107,13 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\Common\Common.csproj">
+    <ProjectReference Include="..\..\Libraries\Common\RemotingCommon.csproj">
       <Project>{01E25BC0-1E34-4371-BAB8-BF5CCA3E2A62}</Project>
-      <Name>Common</Name>
+      <Name>RemotingCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\DesktopSharingCommon\DesktopSharingCommon\DesktopSharingCommon.csproj">
+      <Project>{38C91ED6-4DCD-4427-BC47-8425C07BF66D}</Project>
+      <Name>DesktopSharingCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\DesktopSharingViewer\DesktopSharingViewer\DesktopSharingViewer.csproj">
       <Project>{041771EE-6E65-4A37-87AA-3E94D07E12C7}</Project>

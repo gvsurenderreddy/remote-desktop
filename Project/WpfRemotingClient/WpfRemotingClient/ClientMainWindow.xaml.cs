@@ -17,6 +17,7 @@ using log4net;
 using System.Configuration;
 using System.Runtime.Remoting;
 using System.Timers;
+using System.Threading;
 
 namespace WpfRemotingClient
 {
@@ -32,6 +33,11 @@ namespace WpfRemotingClient
         IClientControl _clientControl;
         ILog _logger;
 
+        private Thread _threadScreen;
+        private Thread _threadCursor;
+        private bool _stopping;
+        private int _numByteFullScreen;
+
         #endregion
 
         #region c-tor
@@ -43,6 +49,8 @@ namespace WpfRemotingClient
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
+                _stopping = false;
+                _numByteFullScreen = 1;
                 int timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
                 string serverHost = txtServer.Content.ToString();
                 string localIP = ConfigurationManager.AppSettings["localIP"];
@@ -50,6 +58,12 @@ namespace WpfRemotingClient
                 _clientControl = new ClientControl(_clientModel, this);
                 WireUp(_clientControl, _clientModel);
                 Update(_clientModel);
+
+                _threadScreen = new Thread(new ThreadStart(DesktopThread));
+                _threadScreen.Start();
+
+                _threadCursor = new Thread(new ThreadStart(MouseThread));
+                _threadCursor.Start();
             }
             catch (Exception ex)
             {
@@ -100,6 +114,9 @@ namespace WpfRemotingClient
         {
             try
             {
+                _stopping = true;
+                _threadCursor.Join();
+                _threadScreen.Join();
                 _clientControl.RequestDisconnect();
             }
             catch (Exception ex)
@@ -116,6 +133,16 @@ namespace WpfRemotingClient
         #endregion
 
         #region methods
+
+        private void DesktopThread()
+        {
+
+        }
+
+        private void MouseThread()
+        {
+
+        }
 
         void ShowError(string errorMessage)
         {
