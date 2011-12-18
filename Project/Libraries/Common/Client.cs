@@ -20,7 +20,6 @@ namespace Common
         string _ip;
         string _hostname;
         bool _connected;
-        string _configurationFile;
         System.Timers.Timer _timer;
         string _serverHost;
         ArrayList _observers = new ArrayList();
@@ -34,11 +33,10 @@ namespace Common
         {
         }
 
-        public Client(int timerInterval, string configurationFile, string serverHost, ElapsedEventHandler timerTick)
+        public Client(int timerInterval, string serverHost, ElapsedEventHandler timerTick)
         {
             _connected = false;
             _id = -1;
-            _configurationFile = configurationFile;
             _timer = new System.Timers.Timer();
             _timer.Interval = timerInterval;
             _serverHost = serverHost;
@@ -90,7 +88,6 @@ namespace Common
                 if (_timer.Enabled == false)
                 {
                     // todo: add SERVER_CONFIGURED flag
-                    RemotingConfiguration.Configure(_configurationFile, false);
                     _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
                     // todo: notify server
                     _id = _singletonServer.AddClient(_ip, _hostname);

@@ -44,15 +44,11 @@ namespace WpfRemotingClient
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
                 int timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
-                string configurationFile = "WpfRemotingClient.exe.config";
-                string serverHost = ConfigurationManager.AppSettings["server"];
-                _clientModel = new RemotingClient(timerInterval, configurationFile, serverHost, TimerTick);
+                string serverHost = txtServer.Text;
+                _clientModel = new RemotingClient(timerInterval, serverHost, TimerTick);
                 _clientControl = new ClientControl(_clientModel, this);
                 WireUp(_clientControl, _clientModel);
                 Update(_clientModel);
-                //RemotingConfiguration.Configure("WpfRemotingClient.exe.config", false);
-                //_singletonServer = (SingletonServer)Activator.GetObject(typeof(SingletonServer), ConfigurationManager.AppSettings["server"]);
-                //_client = new Client(timerInterval, configurationFile, serverHost, TimerTick);
             }
             catch (Exception ex)
             {
