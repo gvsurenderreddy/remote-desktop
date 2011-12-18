@@ -75,17 +75,16 @@ namespace WpfRemotingServer
             {
                 if (serverModel.IsListening)
                 {
-                    UpdateControlContent(lblStatus, "Status: started");
-                    UpdateControlContent(btnStartServer, "Stop listening");
+                    Utils.UpdateControlContent(Dispatcher, lblStatus, "Status: started", Utils.ValueType.String);
+                    Utils.UpdateControlContent(Dispatcher, btnStartServer, "Stop listening", Utils.ValueType.String);
                 }
                 else
                 {
-                    UpdateControlContent(lblStatus, "Status: stopped");
-                    UpdateControlContent(btnStartServer, "Start listening");
+                    Utils.UpdateControlContent(Dispatcher, lblStatus, "Status: stopped", Utils.ValueType.String);
+                    Utils.UpdateControlContent(Dispatcher, btnStartServer, "Start listening", Utils.ValueType.String);
                 }
-                //ClearItems();
                 DisplayClients(serverModel.Clients);
-                UpdateControlContent(lblTotal, "Total: " + serverModel.ConnectedClients.ToString());
+                Utils.UpdateControlContent(Dispatcher, lblTotal, "Total: " + serverModel.ConnectedClients.ToString(), Utils.ValueType.String);
             }
         }
 
@@ -109,9 +108,9 @@ namespace WpfRemotingServer
             return ServerStaticMembers.ServerControl.AddClient(ip, hostname);
         }
 
-        public void RemoveClient(int id)
+        public void RemoveClient(int id, bool checkStatus)
         {
-            ServerStaticMembers.ServerControl.RemoveClient(id);
+            ServerStaticMembers.ServerControl.RemoveClient(id, checkStatus);
         }
 
         public void Update(IServerModel serverModel)
@@ -146,18 +145,12 @@ namespace WpfRemotingServer
         {
             try
             {
-                IList<int> toRemove = new List<int>();
-                foreach (ListViewItem client in lvClients.SelectedItems)
+                foreach (ConnectedClient client in lvClients.SelectedItems)
                 {
-                    if (((ConnectedClient)client.Content).Connected == true)
+                    if (client.Connected == true)
                     {
-                        toRemove.Add(((ConnectedClient)client.Content).Id);
-                        ((ConnectedClient)client.Content).Connected = false;
+                        client.Connected = false;
                     }
-                }
-                foreach (int id in toRemove)
-                {
-                    ServerStaticMembers.ServerControl.RemoveClient(id);
                 }
             }
             catch (Exception ex)
@@ -165,39 +158,6 @@ namespace WpfRemotingServer
                 ServerStaticMembers.Logger.Error(ex.Message, ex);
             }
         }
-
-        #endregion
-
-        #region thread safe methods
-
-        void SetValue(ContentControl control, string newContent)
-        {
-            control.Content = newContent;
-        }
-
-        void UpdateControlContent(ContentControl control, string newContent)
-        {
-            System.Threading.ThreadPool.QueueUserWorkItem(state =>
-            {
-                Dispatcher.Invoke((Action<ContentControl, string>)SetValue, control, newContent);
-            });
-        }
-
-        //void ClearItems()
-        //{
-        //    lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
-        //    {
-        //        ServerStaticMembers.ConnectedClients.Clear();
-        //    }));
-        //}
-
-        //void AddItem(ConnectedClient client)
-        //{
-        //    lvClients.Dispatcher.Invoke(DispatcherPriority.Normal, (Action)(() =>
-        //    {
-        //        lvClients.Items.Add(client);
-        //    }));
-        //}
 
         #endregion
     }

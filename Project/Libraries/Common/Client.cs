@@ -33,17 +33,17 @@ namespace Common
         {
         }
 
-        public Client(int timerInterval, string serverHost, ElapsedEventHandler timerTick)
+        public Client(int timerInterval, string localIP, string serverHost, ElapsedEventHandler timerTick)
         {
             _connected = false;
             _id = -1;
             _timer = new System.Timers.Timer();
             _timer.Interval = timerInterval;
             _serverHost = serverHost;
-            // todo: get local ip
-            _ip = "my ip";
+            _ip = localIP;
             _hostname = Dns.GetHostName();
             _timer.Elapsed += timerTick;
+            _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
         }
 
         #endregion
@@ -52,10 +52,17 @@ namespace Common
 
         public void UpdateDesktop()
         {
-            // todo: implement UpdateDesktop
-            _singletonServer.UpdateDesktop();
-            _singletonServer.UpdateMouseCursor();
-            NotifyObservers();
+            if (_singletonServer.CheckClientStatus(_id))
+            {
+                // todo: implement UpdateDesktop
+                _singletonServer.UpdateDesktop();
+                _singletonServer.UpdateMouseCursor();
+                NotifyObservers();
+            }
+            else
+            {
+                Disconnect(true);
+            }
         }
 
         public void UpdateMouseCursor()
@@ -108,17 +115,16 @@ namespace Common
                             if (_id != -1)
                             {
                                 _connected = true;
-                                //_timer.Start();
+                                _timer.Start();
                             }
                             else
                             {
                                 _connected = false;
-                                // todo: show connection failed message
                             }
                         }
                         else
                         {
-                            // todo: show server configuration failed message
+                            throw new Exception("Server configuration failed");
                         }
                     }
                     else
@@ -129,7 +135,7 @@ namespace Common
                 }
                 else
                 {
-                    throw new Exception("Timer not initialized");
+                    throw new Exception("Connect failed - Timer not initialized");
                 }
             }
             catch (Exception ex)
@@ -139,7 +145,7 @@ namespace Common
             }
         }
 
-        public void Disconnect()
+        public void Disconnect(bool checkStatus)
         {
             try
             {
@@ -149,12 +155,12 @@ namespace Common
                     {
                         _timer.Stop();
                     }
-                    _singletonServer.RemoveClient(_id);
+                    _singletonServer.RemoveClient(_id, checkStatus);
                     _connected = false;
                 }
                 else
                 {
-                    throw new Exception("Timer not initialized");
+                    throw new Exception("Disconnect failed - Timer not initialized");
                 }
             }
             catch (Exception ex)
@@ -164,9 +170,38 @@ namespace Common
             }
         }
 
+        public void StartTimer()
+        {
+            if(_timer != null)
+            {
+                _timer.Start();
+            }
+            else
+            {
+                throw new Exception("StartTimer failed - Timer not initialized");
+            }
+        }
+
+        public void StopTimer()
+        {
+            if (_timer != null)
+            {
+                _timer.Stop();
+            }
+            else
+            {
+                throw new Exception("StopTimer failed - Timer not initialized");
+            }
+        }
+
         #endregion
 
         #region proprieties
+
+        public bool IsServerConfigured
+        {
+            get { return _singletonServer != null; }
+        }
 
         public string Hostname
         {

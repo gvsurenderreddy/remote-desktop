@@ -24,7 +24,8 @@ namespace WpfRemotingServer
         BackgroundWorker _worker;
         Dispatcher _dispatcher;
         static ServerMainWindow _smw;
-        public delegate void NotifyObserversDelegate();
+        delegate void NotifyObserversDelegate();
+        readonly object _syncConnectedClients = new object();
 
         #endregion
 
@@ -92,7 +93,10 @@ namespace WpfRemotingServer
 
         public void RemoveAllClients()
         {
-            ServerStaticMembers.ConnectedClients.Clear();
+            lock (_syncConnectedClients)
+            {
+                ServerStaticMembers.ConnectedClients.Clear();
+            }
         }
 
         public void NotifyObservers()
@@ -122,49 +126,69 @@ namespace WpfRemotingServer
         [STAThread]
         public int AddClient(string ip, string hostname)
         {
-            int newID = ServerStaticMembers.ConnectedClients.Count + 1;
-            try
+            lock (_syncConnectedClients)
             {
-                _dispatcher.Invoke((Action)delegate { ServerStaticMembers.ConnectedClients.Add(new ConnectedClient(ip, hostname, newID)); });
-                _worker.DoWork += delegate(object s, DoWorkEventArgs args)
+                int newID = ServerStaticMembers.ConnectedClients.Count + 1;
+                try
                 {
-                    try
+                    _dispatcher.Invoke((Action)delegate { ServerStaticMembers.ConnectedClients.Add(new ConnectedClient(ip, hostname, newID)); });
+                    _worker.DoWork += delegate(object s, DoWorkEventArgs args)
                     {
-                        if (_worker.CancellationPending)
+                        try
                         {
-                            args.Cancel = true;
-                            return;
+                            if (_worker.CancellationPending)
+                            {
+                                args.Cancel = true;
+                                return;
+                            }
+                            System.Threading.Thread.Sleep(10);
+                            NotifyObserversDelegate update3 = new NotifyObserversDelegate(NotifyObservers);
+                            _dispatcher.BeginInvoke(update3);
                         }
-                        System.Threading.Thread.Sleep(10);
-                        NotifyObserversDelegate update3 = new NotifyObserversDelegate(NotifyObservers);
-                        _dispatcher.BeginInvoke(update3);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception(ex.Message, ex);
-                    }
-                };
-                _worker.RunWorkerAsync();
+                        catch (Exception ex)
+                        {
+                            throw new Exception(ex.Message, ex);
+                        }
+                    };
+                    _worker.RunWorkerAsync();
+                }
+                catch (Exception ex)
+                {
+                    newID = -1;
+                    throw new Exception(ex.Message, ex);
+                }
+                return newID;
             }
-            catch (Exception ex)
-            {
-                newID = -1;
-                throw new Exception(ex.Message, ex);
-            }
-            return newID;
         }
 
-        public void RemoveClient(int id)
+        public void RemoveClient(int id, bool checkStatus)
         {
-            if (ServerStaticMembers.ConnectedClients != null)
+            lock (_syncConnectedClients)
             {
-                if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id) != null)
+                if (ServerStaticMembers.ConnectedClients != null)
                 {
-                    _dispatcher.Invoke((Action)delegate
+                    if (checkStatus)
                     {
-                        ServerStaticMembers.ConnectedClients.RemoveAt(id - 1);
-                    });
-                    this.NotifyObservers();
+                        if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id && x.Connected == false).Count() > 0)
+                        {
+                            _dispatcher.Invoke((Action)delegate
+                            {
+                                ServerStaticMembers.ConnectedClients.RemoveAt(id - 1);
+                            });
+                            this.NotifyObservers();
+                        }
+                    }
+                    else
+                    {
+                        if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id).Count() > 0)
+                        {
+                            _dispatcher.Invoke((Action)delegate
+                            {
+                                ServerStaticMembers.ConnectedClients.RemoveAt(id - 1);
+                            });
+                            this.NotifyObservers();
+                        }
+                    }
                 }
             }
         }
@@ -210,6 +234,20 @@ namespace WpfRemotingServer
         {
             // todo: implement update mouse cursor
             
+        }
+
+        public bool CheckClientStatus(int id)
+        {
+            lock (_syncConnectedClients)
+            {
+                bool retVal = false;
+                int count = ServerStaticMembers.ConnectedClients.Where(x => x.Id == id).Count();
+                if (count > 0)
+                {
+                    retVal = ServerStaticMembers.ConnectedClients[id - 1].Connected;
+                }
+                return retVal;
+            }
         }
 
         #endregion

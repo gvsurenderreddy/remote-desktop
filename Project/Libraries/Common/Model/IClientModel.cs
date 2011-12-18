@@ -30,17 +30,25 @@ namespace Common
             get;
         }
 
+        bool IsServerConfigured
+        {
+            get;
+        }
+
+
         #endregion
 
         #region methods
 
         void Connect();
-        void Disconnect();
+        void Disconnect(bool checkStatus);
         void AddObserver(IClientView clientView);
         void RemoveObserver(IClientView clientView);
         void NotifyObservers();
         void UpdateDesktop();
         void UpdateMouseCursor();
+        void StartTimer();
+        void StopTimer();
 
         #endregion
     }

@@ -52,11 +52,11 @@ namespace WpfRemotingServer
             return newID;
         }
 
-        public void RemoveClient(int id)
+        public void RemoveClient(int id, bool checkStatus)
         {
             if (_serverModel != null)
             {
-                _serverModel.RemoveClient(id);
+                _serverModel.RemoveClient(id, checkStatus);
                 if (_serverView != null)
                 {
                     SetView();

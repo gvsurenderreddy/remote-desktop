@@ -44,8 +44,9 @@ namespace WpfRemotingClient
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
                 int timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
-                string serverHost = txtServer.Text;
-                _clientModel = new RemotingClient(timerInterval, serverHost, TimerTick);
+                string serverHost = txtServer.Content.ToString();
+                string localIP = ConfigurationManager.AppSettings["localIP"];
+                _clientModel = new RemotingClient(timerInterval, localIP, serverHost, TimerTick);
                 _clientControl = new ClientControl(_clientModel, this);
                 WireUp(_clientControl, _clientModel);
                 Update(_clientModel);
@@ -85,12 +86,26 @@ namespace WpfRemotingClient
 
         public void Connect()
         {
-            _clientControl.RequestConnect();
+            try
+            {
+                _clientControl.RequestConnect();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message, ex);
+            }
         }
 
         public void Disconnect()
         {
-            _clientControl.RequestDisconnect();
+            try
+            {
+                _clientControl.RequestDisconnect();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message, ex);
+            }
         }
 
         public void Update(IClientModel clientModel)
@@ -102,43 +117,86 @@ namespace WpfRemotingClient
 
         #region methods
 
+        void ShowError(string errorMessage)
+        {
+            Utils.UpdateControlContent(Dispatcher,  lblError, errorMessage, Utils.ValueType.String);
+        }
+
         void TimerTick(object sender, ElapsedEventArgs e)
         {
-            _clientControl.RequestUpdateDesktop();
-            _clientControl.RequestUpdateMouseCursor();
-            UpdateInterface(_clientModel);
+            try
+            {
+                _clientModel.StopTimer();
+                _clientControl.RequestUpdateDesktop();
+                _clientControl.RequestUpdateMouseCursor();
+                UpdateInterface(_clientModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message, ex);
+            }
+            finally
+            {
+                try
+                {
+                    if (_clientModel != null && _clientModel.Connected)
+                    {
+                        _clientModel.StartTimer();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex.Message, ex);
+                }
+            }
         }
 
         private void UpdateInterface(IClientModel clientModel)
         {
-            // todo: update desktop sharing and mouse cursor
-            lblHostname.Content = "Hostname: " + _clientModel.Hostname;
-            lblId.Content = "ID: " + _clientModel.Id.ToString();
-            lblIP.Content = "IP: " + _clientModel.Ip;
-            
-            if (!_clientModel.Connected)
+            try
             {
-                btnConnect.Content = "Connect";
-                lblStatus.Content = "Status: Disconnected";
+                // todo: update desktop sharing and mouse cursor
+                Utils.UpdateControlContent(Dispatcher, lblHostname, "Hostname: " + _clientModel.Hostname, Utils.ValueType.String);
+                Utils.UpdateControlContent(Dispatcher, lblId, "ID: " + _clientModel.Id.ToString(), Utils.ValueType.String);
+                Utils.UpdateControlContent(Dispatcher, lblIP, "IP: " + _clientModel.Ip, Utils.ValueType.String);
+                ShowError(_clientModel.IsServerConfigured ? string.Empty : "Error: Server configuration failed");
+                if (!_clientModel.Connected)
+                {
+                    Utils.UpdateControlContent(Dispatcher, btnConnect, "Connect", Utils.ValueType.String);
+                    Utils.UpdateControlContent(Dispatcher, lblStatus, "Status: Disconnected", Utils.ValueType.String);
+                    Utils.UpdateControlContent(Dispatcher, txtServer, true, Utils.ValueType.Boolean);                   
+                }
+                else
+                {
+                    Utils.UpdateControlContent(Dispatcher, lblStatus, "Status: Connected", Utils.ValueType.String);
+                    Utils.UpdateControlContent(Dispatcher, btnConnect, "Disconnect", Utils.ValueType.String);
+                    Utils.UpdateControlContent(Dispatcher, txtServer, false, Utils.ValueType.Boolean);  
+                }
             }
-            else
+            catch (Exception ex)
             {
-                lblStatus.Content = "Status: Connected";
-                btnConnect.Content = "Disconnect";
+                _logger.Error(ex.Message, ex);
             }
         }
 
         private void WireUp(IClientControl clientControl, IClientModel clientModel)
         {
-            if (_clientModel != null)
+            try
             {
-                _clientModel.RemoveObserver(this);
+                if (_clientModel != null)
+                {
+                    _clientModel.RemoveObserver(this);
+                }
+                _clientModel = clientModel;
+                _clientControl = clientControl;
+                _clientControl.SetModel(_clientModel);
+                _clientControl.SetView(this);
+                _clientModel.AddObserver(this);
             }
-            _clientModel = clientModel;
-            _clientControl = clientControl;
-            _clientControl.SetModel(_clientModel);
-            _clientControl.SetView(this);
-            _clientModel.AddObserver(this);
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message, ex);
+            }
         }
 
         #endregion

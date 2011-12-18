@@ -77,7 +77,7 @@ namespace WpfRemotingClient
         {
             if (_clientModel != null)
             {
-                _clientModel.Disconnect();
+                _clientModel.Disconnect(false);
                 if (_clientView != null)
                 {
                     SetView();

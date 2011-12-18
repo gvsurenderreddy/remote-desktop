@@ -22,7 +22,7 @@ namespace Common
         #region methods
 
         int AddClient(string ip, string hostname);
-        void RemoveClient(int id);
+        void RemoveClient(int id, bool checkStatus);
         void RemoveAllClients();
         void StartServer();
         void StopServer();
@@ -31,6 +31,7 @@ namespace Common
         void AddObserver(IServerView serverView);
         void RemoveObserver(IServerView serverView);
         void NotifyObservers();
+        bool CheckClientStatus(int id);
 
         #endregion
     }

@@ -10,7 +10,7 @@ namespace Common
         #region methods
 
         int AddClient(string ip, string hostname);
-        void RemoveClient(int id);
+        void RemoveClient(int id, bool checkStatus);
         void Update(IServerModel serverModel);
         void WireUp(IServerControl serverControl, IServerModel serverModel);
 
