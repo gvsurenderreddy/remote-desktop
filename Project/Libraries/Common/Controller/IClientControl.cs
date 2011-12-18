@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using DesktopSharing;
 
 namespace Common
 {
@@ -11,10 +13,11 @@ namespace Common
 
         void RequestConnect();
         void RequestDisconnect();
-        void RequestUpdateDesktop();
-        void RequestUpdateMouseCursor();
+        Bitmap RequestUpdateDesktop(ref Rectangle rect);
+        Bitmap RequestUpdateMouseCursor(ref int x, ref int y);
         void SetModel(IClientModel clientModel);
         void SetView(IClientView clientView);
+        void RequestAddCommand(CommandInfo command);
 
         #endregion
     }

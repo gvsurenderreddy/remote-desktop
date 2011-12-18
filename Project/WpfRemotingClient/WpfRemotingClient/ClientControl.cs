@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Common;
+using System.Drawing;
 
 namespace WpfRemotingClient
 {
@@ -27,11 +28,11 @@ namespace WpfRemotingClient
 
         #region methods
 
-        public void RequestUpdateDesktop()
+        public void RequestAddCommand(DesktopSharing.CommandInfo command)
         {
             if (_clientModel != null)
             {
-                _clientModel.UpdateDesktop();
+                _clientModel.AddCommand(command);
                 if (_clientView != null)
                 {
                     SetView();
@@ -39,16 +40,32 @@ namespace WpfRemotingClient
             }
         }
 
-        public void RequestUpdateMouseCursor()
+        public Bitmap RequestUpdateDesktop(ref Rectangle rect)
         {
+            Bitmap desktopCapture = null;
             if (_clientModel != null)
             {
-                _clientModel.UpdateMouseCursor();
+                desktopCapture = _clientModel.UpdateDesktop(rect);
                 if (_clientView != null)
                 {
                     SetView();
                 }
             }
+            return desktopCapture;
+        }
+
+        public Bitmap RequestUpdateMouseCursor(ref int x, ref int y)
+        {
+            Bitmap mouseCapture = null;
+            if (_clientModel != null)
+            {
+                mouseCapture = _clientModel.UpdateMouseCursor(ref x, ref y);
+                if (_clientView != null)
+                {
+                    SetView();
+                }
+            }
+            return mouseCapture;
         }
 
         public void SetModel(IClientModel clientModel)

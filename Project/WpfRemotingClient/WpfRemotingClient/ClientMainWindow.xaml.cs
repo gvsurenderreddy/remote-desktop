@@ -18,6 +18,9 @@ using System.Configuration;
 using System.Runtime.Remoting;
 using System.Timers;
 using System.Threading;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using DesktopSharing;
 
 namespace WpfRemotingClient
 {
@@ -33,10 +36,10 @@ namespace WpfRemotingClient
         IClientControl _clientControl;
         ILog _logger;
 
-        private Thread _threadScreen;
-        private Thread _threadCursor;
-        private bool _stopping;
-        private int _numByteFullScreen;
+        //private Thread _threadScreen;
+        //private Thread _threadCursor;
+        //private bool _stopping;
+        //private int _numByteFullScreen;
 
         #endregion
 
@@ -49,21 +52,19 @@ namespace WpfRemotingClient
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
-                _stopping = false;
-                _numByteFullScreen = 1;
+                //_stopping = false;
+                //_numByteFullScreen = 1;
                 int timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
                 string serverHost = txtServer.Content.ToString();
                 string localIP = ConfigurationManager.AppSettings["localIP"];
-                _clientModel = new RemotingClient(timerInterval, localIP, serverHost, TimerTick);
+                _clientModel = new RemotingClient(timerInterval, localIP, serverHost);
                 _clientControl = new ClientControl(_clientModel, this);
                 WireUp(_clientControl, _clientModel);
                 Update(_clientModel);
 
-                _threadScreen = new Thread(new ThreadStart(DesktopThread));
-                _threadScreen.Start();
-
-                _threadCursor = new Thread(new ThreadStart(MouseThread));
-                _threadCursor.Start();
+                //_threadScreen = new Thread(new ThreadStart(DesktopThread));
+                //_threadCursor = new Thread(new ThreadStart(MouseThread));
+          
             }
             catch (Exception ex)
             {
@@ -81,7 +82,7 @@ namespace WpfRemotingClient
             {
                 if (!_clientModel.Connected)
                 {
-                    Connect();
+                    Connect();      
                 }
                 else
                 {
@@ -103,6 +104,12 @@ namespace WpfRemotingClient
             try
             {
                 _clientControl.RequestConnect();
+                if (_clientModel.Connected)
+                {
+                    //_stopping = false;
+                    //_threadCursor.Start();
+                    //_threadScreen.Start();
+                }
             }
             catch (Exception ex)
             {
@@ -114,9 +121,9 @@ namespace WpfRemotingClient
         {
             try
             {
-                _stopping = true;
-                _threadCursor.Join();
-                _threadScreen.Join();
+                //_stopping = true;
+                //_threadCursor.Join();
+                //_threadScreen.Join();
                 _clientControl.RequestDisconnect();
             }
             catch (Exception ex)
@@ -130,53 +137,151 @@ namespace WpfRemotingClient
             this.UpdateInterface(clientModel);
         }
 
+        private void imgDesktop_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                // todo: check if imgDesktop has background image
+                //Visual v = new
+                IInputElement i = (IInputElement)sender;
+                System.Windows.Point p = e.GetPosition(i);
+                double x = p.X;
+                double y = p.Y;
+                string data = x + "," + y;
+                CommandInfo command = new CommandInfo(CommandUtils.CommandType.Mouse, data);
+                _clientControl.RequestAddCommand(command);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex.Message, ex);
+            }
+        }
+
         #endregion
 
         #region methods
 
-        private void DesktopThread()
+        public System.Windows.Point CorrectGetPosition(Visual relativeTo)
+        {
+            Win32Point w32Mouse = new Win32Point();
+            GetCursorPos(ref w32Mouse);
+            return relativeTo.PointFromScreen(new System.Windows.Point(w32Mouse.X, w32Mouse.Y));
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Win32Point
+        {
+            public Int32 X;
+            public Int32 Y;
+        };
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetCursorPos(ref Win32Point pt);
+
+
+        System.Windows.Controls.Image ConvertDrawingImageToWPFImage(System.Drawing.Image gdiImg)
+        {
+            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+
+            //convert System.Drawing.Image to WPF image
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(gdiImg);
+            IntPtr hBitmap = bmp.GetHbitmap();
+            System.Windows.Media.ImageSource WpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+
+            img.Source = WpfBitmap;
+            img.Width = 500;
+            img.Height = 600;
+            img.Stretch = System.Windows.Media.Stretch.Fill;
+            return img;
+        }
+
+        void SetBackgroundValue(System.Drawing.Image desktop)
+        {
+            imgDesktop = ConvertDrawingImageToWPFImage(desktop);
+        }
+
+        void OnDesktopChanged(System.Drawing.Image desktop)
+        {
+            if (desktop != null)
+            {
+                lock (desktop)
+                {
+                    System.Threading.ThreadPool.QueueUserWorkItem(state =>
+                    {
+                        Dispatcher.Invoke((Action<System.Drawing.Image>)SetBackgroundValue, desktop);
+                    });
+                }
+            }
+        }
+
+        private delegate void UpdateDisplayDelegate(System.Drawing.Image display);
+        private void UpdateDisplay(System.Drawing.Image display)
         {
 
         }
 
-        private void MouseThread()
-        {
+        //private void DesktopThread()
+        //{
+        //    try
+        //    {
+        //        System.Drawing.Rectangle rect = System.Drawing.Rectangle.Empty;
+        //        while (!_stopping)
+        //        {
+        //            Bitmap desktopImage = _clientControl.RequestUpdateDesktop(ref rect);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.Error(ex.Message, ex);
+        //    }
+        //}
 
-        }
+        //private void MouseThread()
+        //{
+        //    try
+        //    {
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.Error(ex.Message, ex);
+        //    }
+        //}
 
         void ShowError(string errorMessage)
         {
             Utils.UpdateControlContent(Dispatcher,  lblError, errorMessage, Utils.ValueType.String);
         }
 
-        void TimerTick(object sender, ElapsedEventArgs e)
-        {
-            try
-            {
-                _clientModel.StopTimer();
-                _clientControl.RequestUpdateDesktop();
-                _clientControl.RequestUpdateMouseCursor();
-                UpdateInterface(_clientModel);
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex.Message, ex);
-            }
-            finally
-            {
-                try
-                {
-                    if (_clientModel != null && _clientModel.Connected)
-                    {
-                        _clientModel.StartTimer();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.Error(ex.Message, ex);
-                }
-            }
-        }
+        //void TimerTick(object sender, ElapsedEventArgs e)
+        //{
+        //    try
+        //    {
+        //        _clientModel.StopTimer();
+        //        _clientControl.RequestUpdateDesktop();
+        //        _clientControl.RequestUpdateMouseCursor();
+        //        UpdateInterface(_clientModel);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.Error(ex.Message, ex);
+        //    }
+        //    finally
+        //    {
+        //        try
+        //        {
+        //            if (_clientModel != null && _clientModel.Connected)
+        //            {
+        //                _clientModel.StartTimer();
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            _logger.Error(ex.Message, ex);
+        //        }
+        //    }
+        //}
 
         private void UpdateInterface(IClientModel clientModel)
         {

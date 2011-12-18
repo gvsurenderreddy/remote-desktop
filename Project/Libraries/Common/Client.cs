@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using System.Runtime.Remoting;
 using System.Timers;
 using System.IO;
+using System.Drawing;
+using DesktopSharing;
 
 namespace Common
 {
@@ -20,9 +22,10 @@ namespace Common
         string _ip;
         string _hostname;
         bool _connected;
-        System.Timers.Timer _timer;
+        //System.Timers.Timer _timer;
         string _serverHost;
         ArrayList _observers = new ArrayList();
+        CommandQueue _commands;
         IServerModel _singletonServer;
 
         #endregion
@@ -33,16 +36,17 @@ namespace Common
         {
         }
 
-        public Client(int timerInterval, string localIP, string serverHost, ElapsedEventHandler timerTick)
+        public Client(int timerInterval, string localIP, string serverHost)
         {
             _connected = false;
             _id = -1;
-            _timer = new System.Timers.Timer();
-            _timer.Interval = timerInterval;
+            //_timer = new System.Timers.Timer();
+            //_timer.Interval = timerInterval;
             _serverHost = serverHost;
             _ip = localIP;
             _hostname = Dns.GetHostName();
-            _timer.Elapsed += timerTick;
+            //_timer.Elapsed += timerTick;
+            _commands = new CommandQueue();
             _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
         }
 
@@ -50,25 +54,27 @@ namespace Common
 
         #region IClientModel Members
 
-        public void UpdateDesktop()
+        public Bitmap UpdateDesktop(Rectangle rect)
         {
             if (_singletonServer.CheckClientStatus(_id))
             {
                 // todo: implement UpdateDesktop
                 _singletonServer.UpdateDesktop();
-                _singletonServer.UpdateMouseCursor();
                 NotifyObservers();
             }
             else
             {
                 Disconnect(true);
             }
+            return null;
         }
 
-        public void UpdateMouseCursor()
+        public Bitmap UpdateMouseCursor(ref int x, ref int y)
         {
             // todo: implement UpdateMouseCursor
+            _singletonServer.UpdateMouseCursor();
             NotifyObservers();
+            return null;
         }
 
         public void AddObserver(IClientView clientView)
@@ -94,9 +100,9 @@ namespace Common
         {
             try
             {
-                if (_timer != null)
+                //if (_timer != null)
                 {
-                    if (_timer.Enabled == false)
+                    //if (_timer.Enabled == false)
                     {
                         try
                         {
@@ -115,7 +121,7 @@ namespace Common
                             if (_id != -1)
                             {
                                 _connected = true;
-                                _timer.Start();
+                                //_timer.Start();
                             }
                             else
                             {
@@ -127,16 +133,16 @@ namespace Common
                             throw new Exception("Server configuration failed");
                         }
                     }
-                    else
-                    {
-                        _timer.Stop();
-                        _timer.Start();
-                    }
+                    //else
+                    //{
+                    //    _timer.Stop();
+                    //    _timer.Start();
+                    //}
                 }
-                else
-                {
-                    throw new Exception("Connect failed - Timer not initialized");
-                }
+                //else
+                //{
+                //    throw new Exception("Connect failed - Timer not initialized");
+                //}
             }
             catch (Exception ex)
             {
@@ -149,18 +155,18 @@ namespace Common
         {
             try
             {
-                if (_timer != null)
+                //if (_timer != null)
                 {
-                    if (_timer.Enabled == true)
+                    //if (_timer.Enabled == true)
                     {
-                        _timer.Stop();
+                        //_timer.Stop();
                     }
                     _singletonServer.RemoveClient(_id, checkStatus);
                     _connected = false;
                 }
-                else
+                //else
                 {
-                    throw new Exception("Disconnect failed - Timer not initialized");
+                //    throw new Exception("Disconnect failed - Timer not initialized");
                 }
             }
             catch (Exception ex)
@@ -170,29 +176,36 @@ namespace Common
             }
         }
 
-        public void StartTimer()
+
+        public void AddCommand(DesktopSharing.CommandInfo command)
         {
-            if(_timer != null)
-            {
-                _timer.Start();
-            }
-            else
-            {
-                throw new Exception("StartTimer failed - Timer not initialized");
-            }
+            _commands.AddCommand(command);
         }
 
-        public void StopTimer()
-        {
-            if (_timer != null)
-            {
-                _timer.Stop();
-            }
-            else
-            {
-                throw new Exception("StopTimer failed - Timer not initialized");
-            }
-        }
+
+        //public void StartTimer()
+        //{
+        //    if(_timer != null)
+        //    {
+        //        _timer.Start();
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("StartTimer failed - Timer not initialized");
+        //    }
+        //}
+
+        //public void StopTimer()
+        //{
+        //    if (_timer != null)
+        //    {
+        //        _timer.Stop();
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("StopTimer failed - Timer not initialized");
+        //    }
+        //}
 
         #endregion
 

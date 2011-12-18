@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using DesktopSharing;
 
 namespace Common
 {
@@ -45,10 +47,11 @@ namespace Common
         void AddObserver(IClientView clientView);
         void RemoveObserver(IClientView clientView);
         void NotifyObservers();
-        void UpdateDesktop();
-        void UpdateMouseCursor();
-        void StartTimer();
-        void StopTimer();
+        Bitmap UpdateDesktop(Rectangle rect);
+        Bitmap UpdateMouseCursor(ref int x, ref int y);
+        void AddCommand(CommandInfo command);
+        //void StartTimer();
+        //void StopTimer();
 
         #endregion
     }

@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xaml" />
@@ -58,7 +59,12 @@
     <Compile Include="View\IClientView.cs" />
     <Compile Include="View\IServerView.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DesktopSharingCommon\DesktopSharingCommon\DesktopSharingCommon.csproj">
+      <Project>{38C91ED6-4DCD-4427-BC47-8425C07BF66D}</Project>
+      <Name>DesktopSharingCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

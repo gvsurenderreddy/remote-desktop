@@ -9,7 +9,7 @@
         <Label Content="ID: " Height="28" HorizontalAlignment="Left" Margin="5,65,0,0" Name="lblId" VerticalAlignment="Top" />
         <Label Content="Status: Disconnected" Height="28" HorizontalAlignment="Left" Margin="5,85,0,0" Name="lblStatus" VerticalAlignment="Top" />
         <Label Content="" Foreground="Red" Height="28" HorizontalAlignment="Left" Margin="5,110,0,0" Name="lblError" VerticalAlignment="Top" />
-        <Image Name="imgDesktop" Height="230" HorizontalAlignment="Left" Margin="5,35,0,0" VerticalAlignment="Top"></Image>
+        <Image Name="imgDesktop" Height="230" HorizontalAlignment="Left" Margin="130,10,0,0" VerticalAlignment="Top" MouseMove="imgDesktop_MouseMove"></Image>
         <Label Content="Server address: " Height="28" HorizontalAlignment="Left" Margin="5,250,0,0" Name="lblServer" VerticalAlignment="Top" />
         <Label Content="http://10.19.0.125:8089/DesktopSharing" Width="400" Height="28" HorizontalAlignment="Left" Margin="100,250,0,0" Name="txtServer" VerticalAlignment="Top" />
         <Button Content="Connect" Height="23" HorizontalAlignment="Left" Margin="5,280,0,0" Name="btnConnect" VerticalAlignment="Top" Width="75" Click="btnConnect_Click" />
