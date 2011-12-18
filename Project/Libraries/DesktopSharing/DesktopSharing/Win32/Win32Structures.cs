@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 
-namespace DesktopSharing.Win32
+namespace DesktopSharing
 {
     public class Win32Structures
     {

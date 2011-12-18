@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Windows.Threading;
 using System.Threading;
 using System.Collections.ObjectModel;
+using DesktopSharing;
 
 namespace WpfRemotingServer
 {
@@ -26,6 +27,7 @@ namespace WpfRemotingServer
         static ServerMainWindow _smw;
         delegate void NotifyObserversDelegate();
         readonly object _syncConnectedClients = new object();
+        IRemoteService _remoteService;
 
         #endregion
 
@@ -43,6 +45,7 @@ namespace WpfRemotingServer
                 {
                     ServerStaticMembers.ConnectedClients = new ObservableCollection<ConnectedClient>();
                 }
+                _remoteService = new RemoteService();
                 Thread t = new Thread(ThreadProc);
                 t.SetApartmentState(ApartmentState.STA);
                 t.Start();
@@ -56,7 +59,6 @@ namespace WpfRemotingServer
                 ServerStaticMembers.ServerView.WireUp(ServerStaticMembers.ServerControl, ServerStaticMembers.ServerModel);
                 ServerStaticMembers.Logger.Info("Remoting Server Initialized");
                 _isListening = true;
-          
             }
             catch (Exception ex)
             {

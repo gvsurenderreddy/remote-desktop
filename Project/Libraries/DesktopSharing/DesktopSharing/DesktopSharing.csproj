@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,10 +46,14 @@
     <Compile Include="Commands\CommandInfo.cs" />
     <Compile Include="Commands\CommandProcessor.cs" />
     <Compile Include="Commands\CommandQueue.cs" />
-    <Compile Include="Commands\Utils.cs" />
+    <Compile Include="Commands\CommandUtils.cs" />
+    <Compile Include="GraphicDeviceInterface\GraphicDeviceInterfaceImports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoteDesktopService\IRemoteService.cs" />
+    <Compile Include="RemoteDesktopService\RemoteServiceUtils.cs" />
     <Compile Include="ScreenCapture\ScreenCapture.cs" />
-    <Compile Include="ScreenCapture\ScreenSize.cs" />
+    <Compile Include="ScreenCapture\ScreenCaptureBase.cs" />
+    <Compile Include="ScreenCapture\ScreenSizeStructures.cs" />
     <Compile Include="Win32\Win32Imports.cs" />
     <Compile Include="Win32\Win32Structures.cs" />
   </ItemGroup>

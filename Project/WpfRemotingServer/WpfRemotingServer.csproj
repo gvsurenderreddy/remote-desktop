@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -72,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="RemoteService.cs" />
     <Compile Include="ServerControl.cs" />
     <Compile Include="ServerMainWindow.xaml.cs">
       <DependentUpon>ServerMainWindow.xaml</DependentUpon>
