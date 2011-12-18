@@ -226,16 +226,14 @@ namespace WpfRemotingServer
             }
         }
 
-        public void UpdateDesktop()
+        public byte[] UpdateDesktop()
         {
-            // todo: implement update desktop
-            
+            return _remoteService.CaptureDekstopImage();
         }
 
-        public void UpdateMouseCursor()
+        public byte[] UpdateMouseCursor()
         {
-            // todo: implement update mouse cursor
-            
+            return _remoteService.CaptureMouseImage();
         }
 
         public bool CheckClientStatus(int id)

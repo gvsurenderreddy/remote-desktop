@@ -26,8 +26,8 @@ namespace Common
         void RemoveAllClients();
         void StartServer();
         void StopServer();
-        void UpdateDesktop();
-        void UpdateMouseCursor();
+        byte[] UpdateDesktop();
+        byte[] UpdateMouseCursor();
         void AddObserver(IServerView serverView);
         void RemoveObserver(IServerView serverView);
         void NotifyObservers();
