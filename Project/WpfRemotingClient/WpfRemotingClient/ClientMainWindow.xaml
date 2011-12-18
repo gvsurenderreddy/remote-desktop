@@ -4,10 +4,11 @@
         Title="RemotingClient" Height="350" Width="525">
     <Grid>
         <Label Content="Remoting Client" Height="28" HorizontalAlignment="Left" Margin="5,5,0,0" Name="lblTitle" VerticalAlignment="Top" />
-        <Label Content="Status: Disconnected" Height="28" HorizontalAlignment="Left" Margin="5,85,0,0" Name="lblStatus" VerticalAlignment="Top" />
         <Label Content="IP: " Height="28" HorizontalAlignment="Left" Margin="5,25,0,0" Name="lblIP" VerticalAlignment="Top" />
         <Label Content="Hostname: " Height="28" HorizontalAlignment="Left" Margin="5,45,0,0" Name="lblHostname" VerticalAlignment="Top" />
         <Label Content="ID: " Height="28" HorizontalAlignment="Left" Margin="5,65,0,0" Name="lblId" VerticalAlignment="Top" />
+        <Label Content="Status: Disconnected" Height="28" HorizontalAlignment="Left" Margin="5,85,0,0" Name="lblStatus" VerticalAlignment="Top" />
+        <Label Content="Error: " Visibility="Hidden" Foreground="Red" Height="28" HorizontalAlignment="Left" Margin="5,110,0,0" Name="lblError" VerticalAlignment="Top" />
         <Image Name="imgDesktop" Height="230" HorizontalAlignment="Left" Margin="5,35,0,0" VerticalAlignment="Top"></Image>
         <Label Content="Server address: " Height="28" HorizontalAlignment="Left" Margin="5,250,0,0" Name="lblServer" VerticalAlignment="Top" />
         <TextBox Text="http://10.19.0.125:8089/DesktopSharing" Width="400" Height="28" HorizontalAlignment="Left" Margin="100,250,0,0" Name="txtServer" VerticalAlignment="Top" />

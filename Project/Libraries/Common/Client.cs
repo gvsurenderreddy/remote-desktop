@@ -40,7 +40,8 @@ namespace Common
             _timer = new System.Timers.Timer();
             _timer.Interval = timerInterval;
             _serverHost = serverHost;
-            _ip = GetLocalIP();
+            // todo: get local ip
+            _ip = "my ip";
             _hostname = Dns.GetHostName();
             _timer.Elapsed += timerTick;
         }
@@ -51,6 +52,7 @@ namespace Common
 
         public void UpdateDesktop()
         {
+            // todo: implement UpdateDesktop
             _singletonServer.UpdateDesktop();
             _singletonServer.UpdateMouseCursor();
             NotifyObservers();
@@ -58,7 +60,7 @@ namespace Common
 
         public void UpdateMouseCursor()
         {
-
+            // todo: implement UpdateMouseCursor
             NotifyObservers();
         }
 
@@ -83,95 +85,83 @@ namespace Common
         [STAThread]
         public void Connect()
         {
-            if (_timer != null)
+            try
             {
-                if (_timer.Enabled == false)
+                if (_timer != null)
                 {
-                    // todo: add SERVER_CONFIGURED flag
-                    _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
-                    // todo: notify server
-                    _id = _singletonServer.AddClient(_ip, _hostname);
-                    if (_id != -1)
+                    if (_timer.Enabled == false)
                     {
-                        _connected = true;
-                        //_timer.Start();
+                        try
+                        {
+                            if (_singletonServer == null)
+                            {
+                                _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("Server configuration failed - " + ex.Message, ex);
+                        }
+                        if (_singletonServer != null)
+                        {
+                            _id = _singletonServer.AddClient(_ip, _hostname);
+                            if (_id != -1)
+                            {
+                                _connected = true;
+                                //_timer.Start();
+                            }
+                            else
+                            {
+                                _connected = false;
+                                // todo: show connection failed message
+                            }
+                        }
+                        else
+                        {
+                            // todo: show server configuration failed message
+                        }
                     }
                     else
                     {
-                        _connected = false;
-                        // todo: show connection failed message
+                        _timer.Stop();
+                        _timer.Start();
                     }
                 }
                 else
                 {
-                    _timer.Stop();
-                    _timer.Start();
+                    throw new Exception("Timer not initialized");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Timer not initialized");
+                _connected = false;
+                throw new Exception(ex.Message, ex);
             }
         }
 
         public void Disconnect()
         {
-            if (_timer != null)
+            try
             {
-                if (_timer.Enabled == true)
+                if (_timer != null)
                 {
-                    _timer.Stop();
+                    if (_timer.Enabled == true)
+                    {
+                        _timer.Stop();
+                    }
+                    _singletonServer.RemoveClient(_id);
+                    _connected = false;
                 }
-                _singletonServer.RemoveClient(_id);
-                _connected = false;
-                // todo: notify server
+                else
+                {
+                    throw new Exception("Timer not initialized");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception("Timer not initialized");
+                _connected = false;
+                throw new Exception(ex.Message, ex);
             }
-        }
-
-        #endregion
-
-        #region generic methods
-
-        public string GetLocalIP()
-        {
-            //string direction;
-            //WebRequest request = WebRequest.Create("http://checkip.dyndns.org/");
-            //WebResponse response = request.GetResponse();
-            //StreamReader stream = new StreamReader(response.GetResponseStream());
-            //direction = stream.ReadToEnd();
-            //stream.Close();
-            //response.Close();
-
-            ////Search for the ip in the html
-            //int first = direction.IndexOf("Address: ") + 9;
-            //int last = direction.LastIndexOf("</body>");
-            //direction = direction.Substring(first, last - first);
-
-            WebClient webClient = new WebClient();
-            return webClient.DownloadString("http://myip.ozymo.com/");
-
-            //string host = Dns.GetHostName();
-            //IPHostEntry ip = Dns.GetHostEntry(host);
-            //Console.WriteLine(ip.AddressList[0].ToString());
-
-            //return direction;
-
-            //IPHostEntry ihe = Dns.GetHostEntry(Dns.GetHostName());
-            //string ipAddr = string.Empty;
-            //foreach (IPAddress ip in ihe.AddressList)
-            //{
-            //    if (ip.AddressFamily == AddressFamily.InterNetwork && !ip.IsIPv6LinkLocal && !ip.IsIPv6Multicast 
-            //        && !ip.IsIPv6SiteLocal && !ip.IsIPv6Teredo && !(ip.AddressFamily == AddressFamily.InterNetworkV6))
-            //    {
-            //        ipAddr = ip.ToString();
-            //        break;
-            //    }
-            //}
-            //return ipAddr;
         }
 
         #endregion

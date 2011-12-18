@@ -24,6 +24,7 @@ namespace WpfRemotingServer
         BackgroundWorker _worker;
         Dispatcher _dispatcher;
         static ServerMainWindow _smw;
+        public delegate void NotifyObserversDelegate();
 
         #endregion
 
@@ -69,17 +70,23 @@ namespace WpfRemotingServer
 
         public void AddObserver(IServerView serverView)
         {
-            if (ServerStaticMembers.Observers.Contains(serverView) == false)
+            if (ServerStaticMembers.Observers != null)
             {
-                ServerStaticMembers.Observers.Add(serverView);
+                if (ServerStaticMembers.Observers.Contains(serverView) == false)
+                {
+                    ServerStaticMembers.Observers.Add(serverView);
+                }
             }
         }
 
         public void RemoveObserver(IServerView serverView)
         {
-            if (ServerStaticMembers.Observers.Contains(serverView))
+            if (ServerStaticMembers.Observers != null)
             {
-                ServerStaticMembers.Observers.Remove(serverView);
+                if (ServerStaticMembers.Observers.Contains(serverView))
+                {
+                    ServerStaticMembers.Observers.Remove(serverView);
+                }
             }
         }
 
@@ -90,75 +97,107 @@ namespace WpfRemotingServer
 
         public void NotifyObservers()
         {
-            foreach (IServerView view in ServerStaticMembers.Observers)
+            if (ServerStaticMembers.Observers != null)
             {
-                view.Update(this);
+                foreach (IServerView view in ServerStaticMembers.Observers)
+                {
+                    view.Update(this);
+                }
             }
         }
 
         void ThreadProc()
         {
-            _smw = new ServerMainWindow();
-            _smw.ShowDialog();
+            try
+            {
+                _smw = new ServerMainWindow();
+                _smw.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         [STAThread]
         public int AddClient(string ip, string hostname)
         {
             int newID = ServerStaticMembers.ConnectedClients.Count + 1;
-            ServerStaticMembers.ConnectedClients.Add(new ConnectedClient(ip, hostname, newID));
-            _worker.DoWork += delegate(object s, DoWorkEventArgs args)
+            try
             {
-                if (_worker.CancellationPending)
+                _dispatcher.Invoke((Action)delegate { ServerStaticMembers.ConnectedClients.Add(new ConnectedClient(ip, hostname, newID)); });
+                _worker.DoWork += delegate(object s, DoWorkEventArgs args)
                 {
-                    args.Cancel = true;
-                    return;
-                }
-                System.Threading.Thread.Sleep(10);
-
-                NotifyObserversDelegate update3 = new NotifyObserversDelegate(NotifyObservers);
-                _dispatcher.BeginInvoke(update3);
-           
-            };
-            _worker.RunWorkerAsync();
-
+                    try
+                    {
+                        if (_worker.CancellationPending)
+                        {
+                            args.Cancel = true;
+                            return;
+                        }
+                        System.Threading.Thread.Sleep(10);
+                        NotifyObserversDelegate update3 = new NotifyObserversDelegate(NotifyObservers);
+                        _dispatcher.BeginInvoke(update3);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message, ex);
+                    }
+                };
+                _worker.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            {
+                newID = -1;
+                throw new Exception(ex.Message, ex);
+            }
             return newID;
         }
 
-        public delegate void NotifyObserversDelegate();
-
-        public delegate void UpdatePBvalueDelegate(int newVal);
-
-        public delegate void UpdateClientsDelegate(string newText);
-
         public void RemoveClient(int id)
         {
-            // todo: test remove client
-            if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id) != null)
+            if (ServerStaticMembers.ConnectedClients != null)
             {
-                _dispatcher.Invoke((Action)delegate { ServerStaticMembers.ConnectedClients.RemoveAt(id - 1); });
-                
-                this.NotifyObservers();
+                if (ServerStaticMembers.ConnectedClients.Where(x => x.Id == id) != null)
+                {
+                    _dispatcher.Invoke((Action)delegate
+                    {
+                        ServerStaticMembers.ConnectedClients.RemoveAt(id - 1);
+                    });
+                    this.NotifyObservers();
+                }
             }
         }
 
         public void StartServer()
         {
-            ServerStaticMembers.HttpChannel = new HttpServerChannel(ServerStaticMembers.ChannelName, ServerStaticMembers.Port);
-            //RemotingConfiguration.Configure(httpChannel, false);
-            ChannelServices.RegisterChannel(ServerStaticMembers.HttpChannel, false);
-            RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), ServerStaticMembers.ChannelName, WellKnownObjectMode.Singleton);
-            ServerStaticMembers.ServerModel = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
-              "http://" + ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
-            _isListening = true;
+            try
+            {
+                ServerStaticMembers.HttpChannel = new HttpServerChannel(ServerStaticMembers.ChannelName, ServerStaticMembers.Port);
+                ChannelServices.RegisterChannel(ServerStaticMembers.HttpChannel, false);
+                RemotingConfiguration.RegisterWellKnownServiceType(typeof(SingletonServer), ServerStaticMembers.ChannelName, WellKnownObjectMode.Singleton);
+                ServerStaticMembers.ServerModel = (SingletonServer)Activator.GetObject(typeof(SingletonServer),
+                  "http://" + ServerStaticMembers.Host + ":" + ServerStaticMembers.Port.ToString() + "/SingletonServer");
+                _isListening = true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public void StopServer()
         {
-            RemoveAllClients();
-            ChannelServices.UnregisterChannel(ServerStaticMembers.HttpChannel);
-            //ServerStaticMembers.ServerModel = null;
-            _isListening = false;
+            try
+            {
+                RemoveAllClients();
+                ChannelServices.UnregisterChannel(ServerStaticMembers.HttpChannel);
+                _isListening = false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public void UpdateDesktop()
@@ -207,9 +246,6 @@ namespace WpfRemotingServer
         {
             get
             {
-                //var connectedClients = from client in ServerStaticMembers.ConnectedClients
-                //           where client.Value.Connected == true
-                //           select client.Value;
                 return ServerStaticMembers.ConnectedClients;
             }
         }

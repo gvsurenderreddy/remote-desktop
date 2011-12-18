@@ -51,7 +51,6 @@ namespace WpfRemotingClient
             }
         }
 
-
         public void SetModel(IClientModel clientModel)
         {
             this._clientModel = clientModel;
