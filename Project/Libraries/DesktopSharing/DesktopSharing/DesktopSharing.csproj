@@ -49,6 +49,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenCapture\ScreenCapture.cs" />
     <Compile Include="ScreenCapture\ScreenSize.cs" />
+    <Compile Include="Win32\Win32Imports.cs" />
+    <Compile Include="Win32\Win32Structures.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Commands\Associations.txt" />
