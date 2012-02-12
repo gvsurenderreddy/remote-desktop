@@ -48,7 +48,7 @@ namespace WpfRemotingServer
             }
             catch (Exception ex)
             {
-                ServerStaticMembers.Logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -122,22 +122,54 @@ namespace WpfRemotingServer
 
         #region callbacks
 
+        System.Windows.Controls.Image ConvertDrawingImageToWPFImage(System.Drawing.Image gdiImg, ref System.Windows.Controls.Image img)
+        {
+            //System.Windows.Controls.Image img = new System.Windows.Controls.Image();
+
+            //convert System.Drawing.Image to WPF image
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(gdiImg);
+            IntPtr hBitmap = bmp.GetHbitmap();
+            System.Windows.Media.ImageSource wpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+
+            img.Source = wpfBitmap;
+            img.Width = 500;
+            img.Height = 600;
+            img.Stretch = System.Windows.Media.Stretch.Fill;
+            return img;
+        }
+
         public void btnStart_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (ServerStaticMembers.ServerModel.IsListening)
-                {
-                    ServerStaticMembers.ServerControl.RequestStopServer();
-                }
-                else
-                {
-                    ServerStaticMembers.ServerControl.RequestStartServer();
-                }
+                //DesktopSharing.ScreenCapture _capture = new DesktopSharing.ScreenCapture();
+                //System.Drawing.Rectangle rect = new System.Drawing.Rectangle();
+                //System.Drawing.Bitmap screenCapture = _capture.CaptureScreen(ref rect);
+
+                //byte[] serialized = DesktopSharing.RemoteServiceUtils.SerializeCapture(screenCapture, rect);
+
+                //System.Drawing.Image partialDesktop;
+                //System.Drawing.Rectangle rect2;
+                //Guid id;
+                //DesktopSharingViewer.DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+
+                //ConvertDrawingImageToWPFImage(partialDesktop, ref imgDesktop);
+
+
+
+
+                //if (ServerStaticMembers.ServerModel.IsListening)
+                //{
+                //    ServerStaticMembers.ServerControl.RequestStopServer();
+                //}
+                //else
+                //{
+                //    ServerStaticMembers.ServerControl.RequestStartServer();
+                //}
             }
             catch(Exception ex)
             {
-                ServerStaticMembers.Logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -155,7 +187,7 @@ namespace WpfRemotingServer
             }
             catch (Exception ex)
             {
-                ServerStaticMembers.Logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 

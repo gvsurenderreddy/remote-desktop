@@ -40,32 +40,28 @@ namespace WpfRemotingClient
             }
         }
 
-        public Bitmap RequestUpdateDesktop(ref Rectangle rect)
+        public void RequestUpdateDesktop(ref Rectangle rect)
         {
-            Bitmap desktopCapture = null;
             if (_clientModel != null)
             {
-                desktopCapture = _clientModel.UpdateDesktop(rect);
-                if (_clientView != null)
-                {
-                    SetView();
-                }
+                _clientModel.UpdateDesktop(rect);
+                //if (_clientView != null)
+                //{
+                //    SetView();
+                //}
             }
-            return desktopCapture;
         }
 
-        public Bitmap RequestUpdateMouseCursor(ref int x, ref int y)
+        public void RequestUpdateMouseCursor(ref int x, ref int y)
         {
-            Bitmap mouseCapture = null;
             if (_clientModel != null)
             {
-                mouseCapture = _clientModel.UpdateMouseCursor(ref x, ref y);
+                _clientModel.UpdateMouseCursor(ref x, ref y);
                 if (_clientView != null)
                 {
                     SetView();
                 }
             }
-            return mouseCapture;
         }
 
         public void SetModel(IClientModel clientModel)

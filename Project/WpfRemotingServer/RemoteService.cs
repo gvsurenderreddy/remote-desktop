@@ -26,6 +26,8 @@ namespace WpfRemotingServer
 
         #region methods
 
+        int testNo = 1;
+
         /// <summary>
         /// method used to capture and serialize the desktop image
         /// </summary>
@@ -35,10 +37,20 @@ namespace WpfRemotingServer
             byte[] serialized = null;
             Rectangle rect = new Rectangle();
             Bitmap screenCapture = _capture.CaptureScreen(ref rect);
+
             if (screenCapture != null)
             {
                 // something has changed on the screen
                 serialized = RemoteServiceUtils.SerializeCapture(screenCapture, rect);
+
+                System.Drawing.Image partialDesktop;
+                System.Drawing.Rectangle rect2;
+                Guid id;
+                DesktopSharingViewer.DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+
+                partialDesktop.Save("c:/test" + testNo.ToString() + "Sent.bmp");
+                testNo++;
+
 
                 // todo: display the trafic
 

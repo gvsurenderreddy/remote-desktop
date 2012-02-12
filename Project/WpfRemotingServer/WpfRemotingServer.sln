@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopSharingHost", "..\Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopSharingCommon", "..\Libraries\DesktopSharingCommon\DesktopSharingCommon\DesktopSharingCommon.csproj", "{38C91ED6-4DCD-4427-BC47-8425C07BF66D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopSharingViewer", "..\Libraries\DesktopSharingViewer\DesktopSharingViewer\DesktopSharingViewer.csproj", "{041771EE-6E65-4A37-87AA-3E94D07E12C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,12 @@ Global
 		{38C91ED6-4DCD-4427-BC47-8425C07BF66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38C91ED6-4DCD-4427-BC47-8425C07BF66D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38C91ED6-4DCD-4427-BC47-8425C07BF66D}.Release|x86.ActiveCfg = Release|Any CPU
+		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

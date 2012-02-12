@@ -37,7 +37,7 @@ namespace WpfRemotingServer
             }
             catch (Exception ex)
             {
-                ServerStaticMembers.Logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
     }

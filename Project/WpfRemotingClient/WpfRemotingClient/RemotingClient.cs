@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using Common;
 using System.Timers;
+using DesktopSharingViewer;
 
 namespace WpfRemotingClient
 {
     [Serializable]
-    public class RemotingClient : Client
+    public class RemotingClient : ClientModel
     {
-        public RemotingClient(int timerInterval, string localIP, string serverHost) 
-            : base(timerInterval, localIP, serverHost) { }
+        public RemotingClient(string localIP, string serverHost, DesktopViewer.DesktopChangedEventHandler onDesktopChanged) 
+            : base(localIP, serverHost, onDesktopChanged) { }
     }
 }

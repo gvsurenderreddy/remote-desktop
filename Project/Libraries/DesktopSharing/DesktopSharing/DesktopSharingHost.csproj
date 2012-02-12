@@ -43,10 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandInfo.cs" />
-    <Compile Include="Commands\CommandProcessor.cs" />
-    <Compile Include="Commands\CommandQueue.cs" />
-    <Compile Include="Commands\CommandUtils.cs" />
     <Compile Include="GraphicDeviceInterface\GraphicDeviceInterfaceImports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteDesktopService\IRemoteService.cs" />
@@ -56,9 +52,6 @@
     <Compile Include="ScreenCapture\ScreenSizeStructures.cs" />
     <Compile Include="Win32\Win32Imports.cs" />
     <Compile Include="Win32\Win32Structures.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Commands\Associations.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

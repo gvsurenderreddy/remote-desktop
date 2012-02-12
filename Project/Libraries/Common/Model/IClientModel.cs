@@ -47,8 +47,8 @@ namespace Common
         void AddObserver(IClientView clientView);
         void RemoveObserver(IClientView clientView);
         void NotifyObservers();
-        Bitmap UpdateDesktop(Rectangle rect);
-        Bitmap UpdateMouseCursor(ref int x, ref int y);
+        void UpdateDesktop(Rectangle rect);
+        void UpdateMouseCursor(ref int x, ref int y);
         void AddCommand(CommandInfo command);
         //void StartTimer();
         //void StopTimer();

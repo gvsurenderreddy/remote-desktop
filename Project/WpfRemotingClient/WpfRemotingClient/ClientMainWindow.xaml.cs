@@ -21,6 +21,7 @@ using System.Threading;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using DesktopSharing;
+using DesktopSharingViewer;
 
 namespace WpfRemotingClient
 {
@@ -36,10 +37,11 @@ namespace WpfRemotingClient
         IClientControl _clientControl;
         ILog _logger;
 
-        //private Thread _threadScreen;
-        //private Thread _threadCursor;
-        //private bool _stopping;
-        //private int _numByteFullScreen;
+        Dictionary<string, System.Drawing.Image> _views = new Dictionary<string, System.Drawing.Image>();
+
+        Thread _threadMouse;
+        Thread _threadDesktop;
+        bool _stopping;
 
         #endregion
 
@@ -52,23 +54,21 @@ namespace WpfRemotingClient
                 InitializeComponent();
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
-                //_stopping = false;
-                //_numByteFullScreen = 1;
-                int timerInterval = int.Parse(ConfigurationManager.AppSettings["timerInterval"]);
+
                 string serverHost = txtServer.Content.ToString();
                 string localIP = ConfigurationManager.AppSettings["localIP"];
-                _clientModel = new RemotingClient(timerInterval, localIP, serverHost);
+
+                _threadMouse = new Thread(delegate() { MouseThread(); });
+                _threadDesktop = new Thread(delegate() { DesktopThread(); });
+
+                _clientModel = new RemotingClient(localIP, serverHost, OnDesktopChanged);
                 _clientControl = new ClientControl(_clientModel, this);
                 WireUp(_clientControl, _clientModel);
                 Update(_clientModel);
-
-                //_threadScreen = new Thread(new ThreadStart(DesktopThread));
-                //_threadCursor = new Thread(new ThreadStart(MouseThread));
-          
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -91,7 +91,7 @@ namespace WpfRemotingClient
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -106,14 +106,16 @@ namespace WpfRemotingClient
                 _clientControl.RequestConnect();
                 if (_clientModel.Connected)
                 {
-                    //_stopping = false;
-                    //_threadCursor.Start();
-                    //_threadScreen.Start();
+                    _stopping = false;
+                    // todo: start receiving screenshots from the server
+                    //_threadMouse.Start();
+                    _threadDesktop.Start();
+
                 }
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -121,14 +123,14 @@ namespace WpfRemotingClient
         {
             try
             {
-                //_stopping = true;
-                //_threadCursor.Join();
-                //_threadScreen.Join();
+                _stopping = true;
+                _threadMouse.Abort();
+                _threadDesktop.Abort();
                 _clientControl.RequestDisconnect();
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -141,19 +143,20 @@ namespace WpfRemotingClient
         {
             try
             {
-                // todo: check if imgDesktop has background image
-                //Visual v = new
-                IInputElement i = (IInputElement)sender;
-                System.Windows.Point p = e.GetPosition(i);
-                double x = p.X;
-                double y = p.Y;
-                string data = x + "," + y;
-                CommandInfo command = new CommandInfo(CommandUtils.CommandType.Mouse, data);
-                _clientControl.RequestAddCommand(command);
+                if (imgDesktop.Source != null)
+                {
+                    IInputElement i = (IInputElement)sender;
+                    System.Windows.Point p = e.GetPosition(i);
+                    double x = p.X;
+                    double y = p.Y;
+                    string data = x + "," + y;
+                    CommandInfo command = new CommandInfo(CommandUtils.CommandType.Mouse, data);
+                    _clientControl.RequestAddCommand(command);
+                }
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -161,133 +164,156 @@ namespace WpfRemotingClient
 
         #region methods
 
-        public System.Windows.Point CorrectGetPosition(Visual relativeTo)
+        private void UpdateTabs(System.Drawing.Image display, string remoteIpAddress)
         {
-            Win32Point w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-            return relativeTo.PointFromScreen(new System.Windows.Point(w32Mouse.X, w32Mouse.Y));
+            //System.Threading.ThreadPool.QueueUserWorkItem(state =>
+            //{
+                if (!_views.ContainsKey(remoteIpAddress))
+                {
+                    // add a new tab
+                    TabItem tabPage = null;
+                    Thread t = new Thread(delegate()
+                    {
+                        tabPage = new TabItem();
+                            // todo: keep the remoteIPaddr in the ViewerContext
+                        //page.Name = remoteIpAddress;
+                    });
+                    t.SetApartmentState(ApartmentState.STA);
+                    t.Start();
+                    t.Join();
+                        
+                    // todo: use the Dispatcher to add the tab to the UI
+                    //if (tabPage != null)
+                    //{
+                    //    AddTabPage(tabPage);
+                    //} 
+                }
+
+                // add the new desktop to the dictionary
+                _views[remoteIpAddress] = display;
+
+                // update the viewer interface
+                Dispatcher.Invoke((Action<System.Drawing.Image>)SetBackgroundValue, display);
+            //});
         }
 
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point
-        {
-            public Int32 X;
-            public Int32 Y;
-        };
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
-
-
-        System.Windows.Controls.Image ConvertDrawingImageToWPFImage(System.Drawing.Image gdiImg)
-        {
-            System.Windows.Controls.Image img = new System.Windows.Controls.Image();
-
-            //convert System.Drawing.Image to WPF image
-            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(gdiImg);
-            IntPtr hBitmap = bmp.GetHbitmap();
-            System.Windows.Media.ImageSource WpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-
-            img.Source = WpfBitmap;
-            img.Width = 500;
-            img.Height = 600;
-            img.Stretch = System.Windows.Media.Stretch.Fill;
-            return img;
-        }
-
-        void SetBackgroundValue(System.Drawing.Image desktop)
-        {
-            imgDesktop = ConvertDrawingImageToWPFImage(desktop);
-        }
-
-        void OnDesktopChanged(System.Drawing.Image desktop)
+        void OnDesktopChanged(System.Drawing.Image desktop, string remoteIp)
         {
             if (desktop != null)
             {
                 lock (desktop)
                 {
-                    System.Threading.ThreadPool.QueueUserWorkItem(state =>
-                    {
-                        Dispatcher.Invoke((Action<System.Drawing.Image>)SetBackgroundValue, desktop);
-                    });
+                    UpdateTabs(desktop, remoteIp);
                 }
             }
         }
 
-        private delegate void UpdateDisplayDelegate(System.Drawing.Image display);
-        private void UpdateDisplay(System.Drawing.Image display)
-        {
+        int testNo = 1;
 
+        void SetBackgroundValue(System.Drawing.Image desktop)
+        {
+            // todo: test with local saved bitmap 
+            //System.Drawing.Image img = new Bitmap("C://Untitled.bmp");
+
+            desktop.Save("c:/test" + testNo.ToString() + "Received.bmp");
+            testNo++;
+
+            Utils.ConvertDrawingImageToWPFImage(desktop, ref imgDesktop);
         }
 
-        //private void DesktopThread()
-        //{
-        //    try
-        //    {
-        //        System.Drawing.Rectangle rect = System.Drawing.Rectangle.Empty;
-        //        while (!_stopping)
-        //        {
-        //            Bitmap desktopImage = _clientControl.RequestUpdateDesktop(ref rect);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.Error(ex.Message, ex);
-        //    }
-        //}
+        void AddTabPage(TabItem tabPage)
+        {
+            //tcViews.Dispatcher.Invoke(System.Windows.Threading.DispatcherPriority.Normal,
+            //new Action(
+            //  delegate()
+            //  {
+            //      tcViews.Items.Add(tabPage);
+            //  }));
+        }
 
-        //private void MouseThread()
-        //{
-        //    try
-        //    {
+        private void DesktopThread()
+        {
+            try
+            {
+                Thread.Sleep(5000);
+                while (!_stopping)
+                {
+                    System.Drawing.Rectangle rect = System.Drawing.Rectangle.Empty;
+                    _clientControl.RequestUpdateDesktop(ref rect);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.Error(ex.Message, ex);
-        //    }
-        //}
+                }
+            }
+            catch (Exception ex)
+            {
+                  MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void MouseThread()
+        {
+            try
+            {
+                // Run until we are asked to stop.
+                //
+                while (!_stopping)
+                {
+                    // Get an update for the cursor.
+                    //
+                    //int cursorX = 0;
+                    //int cursorY = 0;
+                    //Bitmap image = capture.Cursor(ref cursorX, ref cursorY);
+                    //if (image != null)
+                    //{
+                    //    // We have valid data...pack and push it.
+                    //    //
+                    //    byte[] data = Utils.PackCursorCaptureData(image, cursorX, cursorY);
+                    //    if (data != null)
+                    //    {
+                    //        try
+                    //        {
+                    //            // Push the data.
+                    //            //
+                    //            string commandStack = viewerProxy.PushCursorUpdate(data);
+
+                    //            // Show performance metrics.
+                    //            //
+                    //            double perc1 = 100.0 * 4.0 * image.Width * image.Height / _numByteFullScreen;
+                    //            double perc2 = 100.0 * data.Length / _numByteFullScreen;
+                    //            Console.WriteLine(DateTime.Now.ToString() + ": Cursor - {0:0.0} percent, {1:0.0} percent with compression", perc1, perc2);
+
+                    //            // Process command stack
+                    //            //
+                    //            ProcessCommands(commandStack);
+                    //        }
+                    //        catch (Exception ex)
+                    //        {
+                    //            // Push exception...log it.
+                    //            //
+                    //            Thread.Sleep(1000);
+                    //        }
+                    //    }
+                    //}
+
+                    // Throttle this thread a bit.
+                    //
+                    Thread.Sleep(10);
+                }
+            }
+            catch (Exception ex)
+            {
+                  MessageBox.Show(ex.ToString());
+            }
+        }
 
         void ShowError(string errorMessage)
         {
             Utils.UpdateControlContent(Dispatcher,  lblError, errorMessage, Utils.ValueType.String);
         }
 
-        //void TimerTick(object sender, ElapsedEventArgs e)
-        //{
-        //    try
-        //    {
-        //        _clientModel.StopTimer();
-        //        _clientControl.RequestUpdateDesktop();
-        //        _clientControl.RequestUpdateMouseCursor();
-        //        UpdateInterface(_clientModel);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.Error(ex.Message, ex);
-        //    }
-        //    finally
-        //    {
-        //        try
-        //        {
-        //            if (_clientModel != null && _clientModel.Connected)
-        //            {
-        //                _clientModel.StartTimer();
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            _logger.Error(ex.Message, ex);
-        //        }
-        //    }
-        //}
-
         private void UpdateInterface(IClientModel clientModel)
         {
             try
             {
-                // todo: update desktop sharing and mouse cursor
                 Utils.UpdateControlContent(Dispatcher, lblHostname, "Hostname: " + _clientModel.Hostname, Utils.ValueType.String);
                 Utils.UpdateControlContent(Dispatcher, lblId, "ID: " + _clientModel.Id.ToString(), Utils.ValueType.String);
                 Utils.UpdateControlContent(Dispatcher, lblIP, "IP: " + _clientModel.Ip, Utils.ValueType.String);
@@ -304,10 +330,13 @@ namespace WpfRemotingClient
                     Utils.UpdateControlContent(Dispatcher, btnConnect, "Disconnect", Utils.ValueType.String);
                     Utils.UpdateControlContent(Dispatcher, txtServer, false, Utils.ValueType.Boolean);  
                 }
+
+                // todo: use the _views member to update the interface
+
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 
@@ -327,7 +356,7 @@ namespace WpfRemotingClient
             }
             catch (Exception ex)
             {
-                _logger.Error(ex.Message, ex);
+                  MessageBox.Show(ex.ToString());
             }
         }
 

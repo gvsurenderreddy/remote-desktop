@@ -48,7 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
+    <Compile Include="ClientModel.cs" />
     <Compile Include="ConnectedClient.cs" />
     <Compile Include="Controller\IClientControl.cs" />
     <Compile Include="Model\IClientModel.cs" />
@@ -63,6 +63,10 @@
     <ProjectReference Include="..\DesktopSharingCommon\DesktopSharingCommon\DesktopSharingCommon.csproj">
       <Project>{38C91ED6-4DCD-4427-BC47-8425C07BF66D}</Project>
       <Name>DesktopSharingCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DesktopSharingViewer\DesktopSharingViewer\DesktopSharingViewer.csproj">
+      <Project>{041771EE-6E65-4A37-87AA-3E94D07E12C7}</Project>
+      <Name>DesktopSharingViewer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

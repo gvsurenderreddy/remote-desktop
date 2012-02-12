@@ -13,8 +13,8 @@ namespace Common
 
         void RequestConnect();
         void RequestDisconnect();
-        Bitmap RequestUpdateDesktop(ref Rectangle rect);
-        Bitmap RequestUpdateMouseCursor(ref int x, ref int y);
+        void RequestUpdateDesktop(ref Rectangle rect);
+        void RequestUpdateMouseCursor(ref int x, ref int y);
         void SetModel(IClientModel clientModel);
         void SetView(IClientView clientView);
         void RequestAddCommand(CommandInfo command);

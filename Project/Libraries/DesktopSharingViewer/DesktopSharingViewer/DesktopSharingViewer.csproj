@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesktopViewer.cs" />
+    <Compile Include="DesktopViewerUtils.cs" />
     <Compile Include="IDesktopViewer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewerContext.cs" />
