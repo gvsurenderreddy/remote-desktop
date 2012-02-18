@@ -33,9 +33,10 @@ namespace DesktopSharingViewer
                     g.Flush();
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 // Do something with this info.
+                throw new Exception(ex.Message, ex);
             }
             finally
             {
@@ -117,49 +118,57 @@ namespace DesktopSharingViewer
 
         public static void Deserialize(byte[] data, out Image image, out Rectangle bounds, out Guid id)
         {
-            // Unpack the data that is transferred over the wire.
-            //
+            //if (data != null)
+            {
+                // Unpack the data that is transferred over the wire.
+                //
 
-            // Create byte arrays to hold the unpacked parts.
-            //
-            const int numBytesInInt = sizeof(int);
-            int idLength = Guid.NewGuid().ToByteArray().Length;
-            int imgLength = data.Length - 4 * numBytesInInt - idLength;
-            byte[] topPosData = new byte[numBytesInInt];
-            byte[] botPosData = new byte[numBytesInInt];
-            byte[] leftPosData = new byte[numBytesInInt];
-            byte[] rightPosData = new byte[numBytesInInt];
-            byte[] imgData = new byte[imgLength];
-            byte[] idData = new byte[idLength];
+                // Create byte arrays to hold the unpacked parts.
+                //
+                const int numBytesInInt = sizeof(int);
+                int idLength = Guid.NewGuid().ToByteArray().Length;
+                int imgLength = data.Length - 4 * numBytesInInt - idLength;
+                byte[] topPosData = new byte[numBytesInInt];
+                byte[] botPosData = new byte[numBytesInInt];
+                byte[] leftPosData = new byte[numBytesInInt];
+                byte[] rightPosData = new byte[numBytesInInt];
+                byte[] imgData = new byte[imgLength];
+                byte[] idData = new byte[idLength];
 
-            // Fill the byte arrays.
-            //
-            Array.Copy(data, 0, topPosData, 0, numBytesInInt);
-            Array.Copy(data, numBytesInInt, botPosData, 0, numBytesInInt);
-            Array.Copy(data, 2 * numBytesInInt, leftPosData, 0, numBytesInInt);
-            Array.Copy(data, 3 * numBytesInInt, rightPosData, 0, numBytesInInt);
-            Array.Copy(data, 4 * numBytesInInt, imgData, 0, imgLength);
-            Array.Copy(data, 4 * numBytesInInt + imgLength, idData, 0, idLength);
+                // Fill the byte arrays.
+                //
+                Array.Copy(data, 0, topPosData, 0, numBytesInInt);
+                Array.Copy(data, numBytesInInt, botPosData, 0, numBytesInInt);
+                Array.Copy(data, 2 * numBytesInInt, leftPosData, 0, numBytesInInt);
+                Array.Copy(data, 3 * numBytesInInt, rightPosData, 0, numBytesInInt);
+                Array.Copy(data, 4 * numBytesInInt, imgData, 0, imgLength);
+                Array.Copy(data, 4 * numBytesInInt + imgLength, idData, 0, idLength);
 
-            // Create the bitmap from the byte array.
-            //
-            MemoryStream memoryStream = new MemoryStream(imgData, 0, imgData.Length);
-            memoryStream.Write(imgData, 0, imgData.Length);
-            image = Image.FromStream(memoryStream, true);
+                // Create the bitmap from the byte array.
+                //
+                MemoryStream memoryStream = new MemoryStream(imgData, 0, imgData.Length);
+                memoryStream.Write(imgData, 0, imgData.Length);
+                image = Image.FromStream(memoryStream, true);
 
-            // Create the bound rectangle.
-            //
-            int top = BitConverter.ToInt32(topPosData, 0);
-            int bot = BitConverter.ToInt32(botPosData, 0);
-            int left = BitConverter.ToInt32(leftPosData, 0);
-            int right = BitConverter.ToInt32(rightPosData, 0);
-            int width = right - left + 1;
-            int height = bot - top + 1;
-            bounds = new Rectangle(left, top, width, height);
+                // Create the bound rectangle.
+                //
+                int top = BitConverter.ToInt32(topPosData, 0);
+                int bot = BitConverter.ToInt32(botPosData, 0);
+                int left = BitConverter.ToInt32(leftPosData, 0);
+                int right = BitConverter.ToInt32(rightPosData, 0);
+                int width = right - left + 1;
+                int height = bot - top + 1;
+                bounds = new Rectangle(left, top, width, height);
 
-            // Create a Guid
-            //
-            id = new Guid(idData);
+                // Create a Guid
+                //
+                id = new Guid(idData);
+            }
+            //else
+            //{
+            //    image = null;
+            //    id = new Guid(new byte[0]);
+            //}
         }
 
         #endregion

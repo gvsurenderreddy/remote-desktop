@@ -23,3 +23,8 @@ F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\
 F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
 F:\facultate\master\dizertatie\.NET remoting\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb
+F:\facultate\master\dizertatie\Project\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.dll
+F:\facultate\master\dizertatie\Project\RemoteDesktop\Server\RemoteDesktop\bin\Debug\RemoteDesktop.pdb
+F:\facultate\master\dizertatie\Project\RemoteDesktop\Server\RemoteDesktop\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\Project\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.dll
+F:\facultate\master\dizertatie\Project\RemoteDesktop\Server\RemoteDesktop\obj\Debug\RemoteDesktop.pdb

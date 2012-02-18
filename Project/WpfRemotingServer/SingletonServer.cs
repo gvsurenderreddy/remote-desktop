@@ -59,6 +59,9 @@ namespace WpfRemotingServer
                 ServerStaticMembers.ServerView.WireUp(ServerStaticMembers.ServerControl, ServerStaticMembers.ServerModel);
                 ServerStaticMembers.Logger.Info("Remoting Server Initialized");
                 _isListening = true;
+
+
+                // todo: use some encryption algorithm to encrypt the server address and decrypt in the client logic
             }
             catch (Exception ex)
             {

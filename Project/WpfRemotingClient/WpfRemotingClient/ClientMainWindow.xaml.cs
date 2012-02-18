@@ -55,7 +55,7 @@ namespace WpfRemotingClient
                 log4net.Config.BasicConfigurator.Configure();
                 _logger = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().ToString());
 
-                string serverHost = txtServer.Content.ToString();
+                string serverHost = txtServer.Text.ToString();
                 string localIP = ConfigurationManager.AppSettings["localIP"];
 
                 _threadMouse = new Thread(delegate() { MouseThread(); });
@@ -208,15 +208,12 @@ namespace WpfRemotingClient
             }
         }
 
-        int testNo = 1;
-
         void SetBackgroundValue(System.Drawing.Image desktop)
         {
             // todo: test with local saved bitmap 
             //System.Drawing.Image img = new Bitmap("C://Untitled.bmp");
 
-            desktop.Save("c:/test" + testNo.ToString() + "Received.bmp");
-            testNo++;
+          
 
             Utils.ConvertDrawingImageToWPFImage(desktop, ref imgDesktop);
         }
@@ -235,7 +232,7 @@ namespace WpfRemotingClient
         {
             try
             {
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
                 while (!_stopping)
                 {
                     System.Drawing.Rectangle rect = System.Drawing.Rectangle.Empty;
@@ -322,13 +319,13 @@ namespace WpfRemotingClient
                 {
                     Utils.UpdateControlContent(Dispatcher, btnConnect, "Connect", Utils.ValueType.String);
                     Utils.UpdateControlContent(Dispatcher, lblStatus, "Status: Disconnected", Utils.ValueType.String);
-                    Utils.UpdateControlContent(Dispatcher, txtServer, true, Utils.ValueType.Boolean);                   
+                    //Utils.UpdateControlContent(Dispatcher, txtServer, true, Utils.ValueType.Boolean);                   
                 }
                 else
                 {
                     Utils.UpdateControlContent(Dispatcher, lblStatus, "Status: Connected", Utils.ValueType.String);
                     Utils.UpdateControlContent(Dispatcher, btnConnect, "Disconnect", Utils.ValueType.String);
-                    Utils.UpdateControlContent(Dispatcher, txtServer, false, Utils.ValueType.Boolean);  
+                    //Utils.UpdateControlContent(Dispatcher, txtServer, false, Utils.ValueType.Boolean);  
                 }
 
                 // todo: use the _views member to update the interface

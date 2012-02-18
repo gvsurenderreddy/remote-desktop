@@ -104,8 +104,6 @@ namespace DesktopSharingViewer
                 viewContext = new ViewerContext(id);
                 System.Drawing.Image img = null;
 
-                //partialDesktop.Save("c://test.bmp");
-
                 DesktopViewerUtils.UpdateScreen(ref img, partialDesktop, rect);
                 viewContext.Display = img;
                 _contexts[id] = viewContext;

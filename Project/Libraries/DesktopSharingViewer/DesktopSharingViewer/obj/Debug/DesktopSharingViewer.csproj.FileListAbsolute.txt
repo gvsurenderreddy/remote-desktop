@@ -1,5 +1,7 @@
 F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\bin\Debug\DesktopSharingViewer.dll
 F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\bin\Debug\DesktopSharingViewer.pdb
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\bin\Debug\DesktopSharingCommon.pdb
 F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\obj\Debug\ResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\obj\Debug\DesktopSharingViewer.dll
 F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingViewer\DesktopSharingViewer\obj\Debug\DesktopSharingViewer.pdb

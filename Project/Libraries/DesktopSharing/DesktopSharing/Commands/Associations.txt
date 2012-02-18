@@ -1,5 +1,0 @@
-﻿WCF							    My Project
-	
-static class Command			static class CommandProcessor
-class CommandInfo				class CommandInfo
-class CommandInfoCollection     class CommandQueue

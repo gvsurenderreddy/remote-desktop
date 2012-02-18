@@ -48,9 +48,8 @@ namespace WpfRemotingServer
                 Guid id;
                 DesktopSharingViewer.DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
 
-                partialDesktop.Save("c:/test" + testNo.ToString() + "Sent.bmp");
-                testNo++;
-
+                //partialDesktop.Save("c:/test/test" + testNo.ToString() + "Sent.bmp");
+                //testNo++;
 
                 // todo: display the trafic
 
