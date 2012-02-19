@@ -59,7 +59,7 @@ namespace Common
 
         #region IClientModel Members
 
-        int testNo = 1;
+        //int testNo = 1;
 
         public void UpdateDesktop(Rectangle rect)
         {
@@ -67,15 +67,15 @@ namespace Common
             {
                 byte[] packed = _singletonServer.UpdateDesktop();
 
-                System.Drawing.Image partialDesktop;
-                System.Drawing.Rectangle rect2;
-                Guid id;
+                //System.Drawing.Image partialDesktop;
+                //System.Drawing.Rectangle rect2;
+                //Guid id;
                 if (packed != null)
                 {
-                    DesktopSharingViewer.DesktopViewerUtils.Deserialize(packed, out partialDesktop, out rect2, out id);
+                    //DesktopSharingViewer.DesktopViewerUtils.Deserialize(packed, out partialDesktop, out rect2, out id);
 
-                    partialDesktop.Save("c:/test/test" + testNo.ToString() + "Received.bmp");
-                    testNo++;
+                    //partialDesktop.Save("c:/test/test" + testNo.ToString() + "Received.bmp");
+                    //testNo++;
 
                     _viewer.UpdateDesktop(packed);
                     NotifyObservers();
@@ -89,9 +89,19 @@ namespace Common
 
         public void UpdateMouseCursor(ref int x, ref int y)
         {
-            // todo: implement UpdateMouseCursor
-            _singletonServer.UpdateMouseCursor();
-            NotifyObservers();
+            if (_singletonServer.CheckClientStatus(_id))
+            {
+                byte[] packed = _singletonServer.UpdateMouseCursor();
+                if (packed != null)
+                {
+                    _viewer.UpdateMouse(packed);
+                    NotifyObservers();
+                }
+            }
+            else
+            {
+                Disconnect(true);
+            }
         }
 
         public void AddObserver(IClientView clientView)

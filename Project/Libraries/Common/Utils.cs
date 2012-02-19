@@ -35,7 +35,7 @@ namespace Common
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool GetCursorPos(ref Win32Point pt);
 
-        static int testNo = 1;
+        //static int testNo = 1;
 
         public static System.Windows.Controls.Image ConvertDrawingImageToWPFImage(System.Drawing.Image gdiImg, ref System.Windows.Controls.Image img)
         {
@@ -53,8 +53,8 @@ namespace Common
             img.Height = 700;
             img.Stretch = System.Windows.Media.Stretch.Fill;
 
-            bmp.Save("c://test/test" + testNo.ToString() + "bmp.bmp");
-            testNo++;
+            //bmp.Save("c://test/test" + testNo.ToString() + "bmp.bmp");
+            //testNo++;
 
             return img;
         }

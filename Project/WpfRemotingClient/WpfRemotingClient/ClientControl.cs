@@ -45,10 +45,6 @@ namespace WpfRemotingClient
             if (_clientModel != null)
             {
                 _clientModel.UpdateDesktop(rect);
-                //if (_clientView != null)
-                //{
-                //    SetView();
-                //}
             }
         }
 
@@ -57,10 +53,6 @@ namespace WpfRemotingClient
             if (_clientModel != null)
             {
                 _clientModel.UpdateMouseCursor(ref x, ref y);
-                if (_clientView != null)
-                {
-                    SetView();
-                }
             }
         }
 

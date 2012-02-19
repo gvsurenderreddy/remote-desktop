@@ -107,10 +107,9 @@ namespace WpfRemotingClient
                 if (_clientModel.Connected)
                 {
                     _stopping = false;
-                    // todo: start receiving screenshots from the server
-                    //_threadMouse.Start();
+                    // start receiving screenshots from the server
                     _threadDesktop.Start();
-
+                    _threadMouse.Start();
                 }
             }
             catch (Exception ex)
@@ -143,16 +142,16 @@ namespace WpfRemotingClient
         {
             try
             {
-                if (imgDesktop.Source != null)
-                {
-                    IInputElement i = (IInputElement)sender;
-                    System.Windows.Point p = e.GetPosition(i);
-                    double x = p.X;
-                    double y = p.Y;
-                    string data = x + "," + y;
-                    CommandInfo command = new CommandInfo(CommandUtils.CommandType.Mouse, data);
-                    _clientControl.RequestAddCommand(command);
-                }
+                //if (imgDesktop.Source != null)
+                //{
+                //    IInputElement i = (IInputElement)sender;
+                //    System.Windows.Point p = e.GetPosition(i);
+                //    double x = p.X;
+                //    double y = p.Y;
+                //    string data = x + "," + y;
+                //    CommandInfo command = new CommandInfo(CommandUtils.CommandType.Mouse, data);
+                //    _clientControl.RequestAddCommand(command);
+                //}
             }
             catch (Exception ex)
             {
@@ -210,11 +209,6 @@ namespace WpfRemotingClient
 
         void SetBackgroundValue(System.Drawing.Image desktop)
         {
-            // todo: test with local saved bitmap 
-            //System.Drawing.Image img = new Bitmap("C://Untitled.bmp");
-
-          
-
             Utils.ConvertDrawingImageToWPFImage(desktop, ref imgDesktop);
         }
 
@@ -237,7 +231,6 @@ namespace WpfRemotingClient
                 {
                     System.Drawing.Rectangle rect = System.Drawing.Rectangle.Empty;
                     _clientControl.RequestUpdateDesktop(ref rect);
-
                 }
             }
             catch (Exception ex)
@@ -250,50 +243,11 @@ namespace WpfRemotingClient
         {
             try
             {
-                // Run until we are asked to stop.
-                //
+                Thread.Sleep(2000);
                 while (!_stopping)
                 {
-                    // Get an update for the cursor.
-                    //
-                    //int cursorX = 0;
-                    //int cursorY = 0;
-                    //Bitmap image = capture.Cursor(ref cursorX, ref cursorY);
-                    //if (image != null)
-                    //{
-                    //    // We have valid data...pack and push it.
-                    //    //
-                    //    byte[] data = Utils.PackCursorCaptureData(image, cursorX, cursorY);
-                    //    if (data != null)
-                    //    {
-                    //        try
-                    //        {
-                    //            // Push the data.
-                    //            //
-                    //            string commandStack = viewerProxy.PushCursorUpdate(data);
-
-                    //            // Show performance metrics.
-                    //            //
-                    //            double perc1 = 100.0 * 4.0 * image.Width * image.Height / _numByteFullScreen;
-                    //            double perc2 = 100.0 * data.Length / _numByteFullScreen;
-                    //            Console.WriteLine(DateTime.Now.ToString() + ": Cursor - {0:0.0} percent, {1:0.0} percent with compression", perc1, perc2);
-
-                    //            // Process command stack
-                    //            //
-                    //            ProcessCommands(commandStack);
-                    //        }
-                    //        catch (Exception ex)
-                    //        {
-                    //            // Push exception...log it.
-                    //            //
-                    //            Thread.Sleep(1000);
-                    //        }
-                    //    }
-                    //}
-
-                    // Throttle this thread a bit.
-                    //
-                    Thread.Sleep(10);
+                    int x = 0, y = 0;
+                    _clientControl.RequestUpdateMouseCursor(ref x, ref y);
                 }
             }
             catch (Exception ex)

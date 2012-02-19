@@ -4,3 +4,9 @@ F:\facultate\master\dizertatie\Project\Libraries\build\bin\net\2.0\debug\log4net
 F:\facultate\master\dizertatie\Project\Libraries\Log4net\obj\Debug\ResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\Project\Libraries\Log4net\obj\Debug\log4net.dll
 F:\facultate\master\dizertatie\Project\Libraries\Log4net\obj\Debug\log4net.pdb
+F:\facultate\master\dizertatie\backupProject\Libraries\build\bin\net\2.0\debug\log4net.dll
+F:\facultate\master\dizertatie\backupProject\Libraries\build\bin\net\2.0\debug\log4net.pdb
+F:\facultate\master\dizertatie\backupProject\Libraries\build\bin\net\2.0\debug\log4net.xml
+F:\facultate\master\dizertatie\backupProject\Libraries\Log4net\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\Libraries\Log4net\obj\Debug\log4net.dll
+F:\facultate\master\dizertatie\backupProject\Libraries\Log4net\obj\Debug\log4net.pdb
