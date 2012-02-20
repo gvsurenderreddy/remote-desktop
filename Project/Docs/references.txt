@@ -1,0 +1,2 @@
+http://www.teamviewer.com/download/version_6x/teamviewer_manual.pdf
+http://www.codeproject.com/Articles/19485/A-Voice-Chat-Application-in-C
