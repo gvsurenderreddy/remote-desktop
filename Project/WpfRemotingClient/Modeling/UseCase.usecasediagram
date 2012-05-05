@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="3a681e07-fb67-411a-9017-0dd68836dbbb" name="UseCase" linkedPackageId="e4fdf0f5-a05e-4ce6-a74e-fece95016c99" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <ownedCommentsInternal>
+    <comment Id="a8048a91-4e38-48a4-b599-0f6b797af434">
+      <elementDefinition Id="3e7a6132-c582-493a-b94d-a0ba2ac271e4" />
+      <body>Installed on
+Primary User 
+PC</body>
+      <annotatedElements>
+        <subsystemMoniker Id="29985dae-56b2-43ca-994f-e3ab6f467992" LastKnownName="MViewer" />
+      </annotatedElements>
+    </comment>
+    <comment Id="945df3a5-5fcf-441c-978f-afb6ac39ad3c">
+      <elementDefinition Id="221e7645-4f3a-4cb5-aebc-6b7df949c38d" />
+      <body>Installed on
+Secondary User 
+PC</body>
+      <annotatedElements>
+        <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+        <subsystemMoniker Id="b083277e-a67f-4bdc-bab8-34a64d846c35" LastKnownName="Voice and Video Modules" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="a5a44d27-65ca-46ab-92c9-67cb78ec1207">
+      <profileInstance Id="69387ae3-48d5-44f3-9524-12f49f65b004" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="1476b728-f909-4a84-85bb-1f7943089755">
+      <profileInstance Id="82262577-8da5-4cd5-8302-2e0fe888f0e8" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="29985dae-56b2-43ca-994f-e3ab6f467992" name="MViewer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="802e19ea-91ee-4344-a8c6-c64e4fa36984" />
+        <suppliersInternal>
+          <dependency Id="74743663-fa5a-40d7-a740-c067d3425749">
+            <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+            <elementDefinition Id="e1ea7e9f-4550-44d7-8640-d3639821534c" />
+          </dependency>
+        </suppliersInternal>
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="9c3b7431-ea69-4a1a-adb3-f7b424a30461" name="Primary User" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="8c549e7d-6530-4edb-8191-feaca92f5612" />
+        <targetEnds>
+          <association Id="40d2fa97-ac8f-436a-91d2-e5aafed4a375" isDerived="false" sourceEndRoleName="User1" targetEndRoleName="Login" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="ad1966aa-fa82-4a66-8f1e-92151bb35c02" LastKnownName="Login" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="f58c859f-baf7-4b12-a8f4-014ad377dc58" name="User1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="67b6b1ad-7c4e-45ae-b14a-3e96564dc999" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a51ed4ae-b97b-44db-9828-cc6674f1ffee" name="Login" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="aeb94996-eb4e-4aa2-9a28-c84192176ef7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3d2899f8-9b50-4f4f-a0e0-c21df9767aea" />
+          </association>
+          <association Id="55f60a08-1b48-4381-b2bb-82f1b5848c06" isDerived="false" sourceEndRoleName="User1" targetEndRoleName="View Desktop" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="58df2d98-2eb0-4517-b46e-f2a51150b9a4" LastKnownName="View Desktop" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8f97decd-8eac-4a42-93f9-cdb47410638d" name="User1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a0941871-bbbb-44ff-950f-0c47d0ce8fa0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a98eed5a-4c98-42f9-9603-858b32d3de35" name="View Desktop" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="55bde389-fa7e-43e3-bd89-3ed1fac716ab" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="78490dd2-71e3-44d3-9850-7dd3a40cd846" />
+          </association>
+          <association Id="04c2aafc-dd73-434c-80df-4dff59f1d63f" isDerived="false" sourceEndRoleName="User1" targetEndRoleName="Remote Control" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="1c95150b-93b1-437d-b54d-2db7ccd88fea" LastKnownName="Remote Control" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="224f532d-76f8-49e1-b296-57c0e6c8532e" name="User1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4953c123-1409-42d9-a9b3-4ef89c4b8a0b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8441f25c-160b-4d82-af4f-5340f0808ba7" name="Remote Control" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d87594ce-c33b-404f-8a9e-1e16e97277f9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="fc5cf2bc-bd57-4c1c-89ec-15920aaa0a1c" />
+          </association>
+          <association Id="002173f7-ea18-4201-9404-6796bf453830" isDerived="false" sourceEndRoleName="User1" targetEndRoleName="Voice Chat" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="1c5e5f45-89ae-429a-9e80-08c00ab601f5" LastKnownName="Voice Chat" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="303ccb92-4d7a-406d-ae9f-1b90071967db" name="User1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d7403479-e806-464e-950a-cc9195f00660" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="16b82413-2f27-4f12-8e98-1127b31405d5" name="Voice Chat" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="859506c7-f526-4b55-a1d2-782d5d5e5226" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d68a677b-e38b-4e35-b82d-9b26b100fcbd" />
+          </association>
+          <association Id="3a81d19e-f6ce-46eb-9637-66dc2e3c534c" isDerived="false" sourceEndRoleName="User1" targetEndRoleName="Video Chat" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="603eb5ba-ffc4-436e-a9fb-cdfdfde3e8bc" LastKnownName="Video Chat" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c3bf0127-2ef6-4f71-b6e2-64fda949b0db" name="User1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="6427a74a-4b02-43ee-8219-e24438ef6ae4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="272a8e80-8d79-43a9-8f7a-1717369a6d98" name="Video Chat" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d217d36a-e700-4a29-8836-397ec3862078" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="11982889-540f-460b-8958-0dd5b21b9aca" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="ad1966aa-fa82-4a66-8f1e-92151bb35c02" name="Login" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="89ed2ead-e8c3-4113-9e6c-7454b93ee191" />
+        <additions>
+          <include Id="2bdba649-746a-42bc-829d-b19d7bf2204f">
+            <useCaseMoniker Id="b0726822-2ff8-4b97-8d19-34c3917246c4" LastKnownName="Give User Role" />
+            <elementDefinition Id="4752216a-6b28-4c51-bedd-b4c1e5e6157e" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="29985dae-56b2-43ca-994f-e3ab6f467992" LastKnownName="MViewer" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="58df2d98-2eb0-4517-b46e-f2a51150b9a4" name="View Desktop" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1c07b409-1ce5-4151-a97e-817f793c7aa7" />
+        <additions>
+          <include Id="360eebb5-4abd-4a10-a7ad-1bdf3298c405">
+            <useCaseMoniker Id="b9852713-1fb9-4db6-be76-b14ed29e2bf2" LastKnownName="Send Images" />
+            <elementDefinition Id="45c34230-cb62-4a8b-bfae-f26b744cfc4d" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="29985dae-56b2-43ca-994f-e3ab6f467992" LastKnownName="MViewer" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="1c95150b-93b1-437d-b54d-2db7ccd88fea" name="Remote Control" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2f9866ba-9fc7-4eae-9c95-424f3109c34e" />
+        <additions>
+          <include Id="de82dcef-076e-45ce-b7b1-e8e648cf699b">
+            <useCaseMoniker Id="cb288c71-b914-4d24-aa73-4a25c2ff7b8d" LastKnownName="Execute commands" />
+            <elementDefinition Id="cf68ae1c-476a-49d1-8532-fef683e839cb" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="29985dae-56b2-43ca-994f-e3ab6f467992" LastKnownName="MViewer" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="1c5e5f45-89ae-429a-9e80-08c00ab601f5" name="Voice Chat" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6721c4e3-fdb6-4ff1-aff9-b374187c4ca6" />
+        <additions>
+          <include Id="38e0ccda-0596-4d1b-a44d-90c2de17b098">
+            <useCaseMoniker Id="6ab42c26-ef5a-41a5-a984-fe5eb3e7a730" LastKnownName="Start Voice Module" />
+            <elementDefinition Id="9283b8a5-5ac4-4e6d-bc77-b9f3564952ec" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="29985dae-56b2-43ca-994f-e3ab6f467992" LastKnownName="MViewer" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="603eb5ba-ffc4-436e-a9fb-cdfdfde3e8bc" name="Video Chat" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a8984b44-65f8-4f83-a3fa-a378f5b6890b" />
+        <additions>
+          <include Id="1e0236da-2a88-45ac-9de4-424c6710a2c6">
+            <useCaseMoniker Id="a4635e18-cb39-48f6-8960-b9aceeee01b2" LastKnownName="Start Video Module" />
+            <elementDefinition Id="ebfb4c51-1d3b-457b-a3d7-a16f455acf26" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="29985dae-56b2-43ca-994f-e3ab6f467992" LastKnownName="MViewer" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" name="Server" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="850b74bd-712d-4a52-8237-2979393f691b" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="b0726822-2ff8-4b97-8d19-34c3917246c4" name="Give User Role" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="77e38a49-0fc3-435f-8854-acf2603d774e" />
+        <subjects>
+          <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="a4635e18-cb39-48f6-8960-b9aceeee01b2" name="Start Video Module" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="82ce1a7d-ad67-443c-9f68-0d433afab941" />
+        <subjects>
+          <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="6ab42c26-ef5a-41a5-a984-fe5eb3e7a730" name="Start Voice Module" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="af0119b4-0042-45e1-b4e3-3b242ad7ce93" />
+        <subjects>
+          <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="cb288c71-b914-4d24-aa73-4a25c2ff7b8d" name="Execute commands" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="997f0117-7d88-459b-8170-15d06d5dc836" />
+        <subjects>
+          <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="b9852713-1fb9-4db6-be76-b14ed29e2bf2" name="Send Images" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6c59cba2-f5d6-4fd1-8e03-94d5c941d77c" />
+        <subjects>
+          <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <actor Id="62560ecf-bfef-4411-87ec-b9ba219ccafb" name="Secondary User" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="078152b7-5d82-4145-b4bf-aea1de2b6f46" />
+        <targetEnds>
+          <association Id="4fedec2a-5112-4e60-a817-193fc4c86156" isDerived="false" sourceEndRoleName="Secondary User" targetEndRoleName="Do presentation" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="053a013b-6414-415f-9aac-995519c99236" LastKnownName="Do presentation" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="25a0fa78-20bf-4e46-9ad9-7a3da76e84eb" name="Secondary User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="84d80a98-436d-4d3d-9989-a6f67f55ebe7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4bd2d3ed-b77d-485b-b378-1c227742ebaa" name="Do presentation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="06e31f2c-bc91-431d-828c-742b2dc89bbb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="087563a8-1871-4bc6-bc33-44a1a77e7299" />
+          </association>
+          <association Id="e3c52eba-b5e4-4aa9-85f1-c9d3753727b6" isDerived="false" sourceEndRoleName="Secondary User" targetEndRoleName="Speak" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="c3b1f80a-3461-49f0-af79-5d878642c4de" LastKnownName="Speak" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="72f90b65-250a-40ef-a648-1a817716cc69" name="Secondary User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5465e7e3-eb87-4232-8dad-5f4b23a6ba95" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8f1fd88b-2552-4981-b907-7fc10251f9b0" name="Speak" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d179e32d-9316-4500-bbe8-16119727e3ed" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="402b6f09-90c9-497a-bdd6-dd8f5efe9466" />
+          </association>
+          <association Id="d6064639-f053-402b-b8b9-3a87b6cb17bd" isDerived="false" sourceEndRoleName="Secondary User" targetEndRoleName="Dance" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7591a0c9-6555-4797-b38a-06ae9154a533" LastKnownName="Dance" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="57518b1e-a400-4b24-9319-e3474c81ba23" name="Secondary User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="06ec2d15-e68e-4c23-a8ff-6dc4aa495097" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2c7224d6-ef65-4dde-abe0-d7eaaad3a19d" name="Dance" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ac7ca12f-04ed-489e-a95c-1e030c75cdef" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="127bc2ae-08f8-4b64-9b63-145f9347c788" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <useCase Id="053a013b-6414-415f-9aac-995519c99236" name="Do presentation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ed0df5e2-f7a1-451a-a24d-618f527708a3" />
+        <extendedCases>
+          <extend Id="5358d0aa-8d63-4dc7-86b5-b3faaf365766">
+            <useCaseMoniker Id="b9852713-1fb9-4db6-be76-b14ed29e2bf2" LastKnownName="Send Images" />
+            <elementDefinition Id="2d5fdac0-37b0-4fc4-a997-b92d90da0a05" />
+          </extend>
+        </extendedCases>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="b083277e-a67f-4bdc-bab8-34a64d846c35" name="Voice and Video Modules" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0f345892-b307-4c39-bf40-70758a49fbcc" />
+        <suppliersInternal>
+          <dependency Id="b3520bb9-f4d3-45e7-8edd-0686120e043a">
+            <subsystemMoniker Id="81dc187a-9e7a-4eab-8c67-b5ceda0bfc1d" LastKnownName="Server" />
+            <elementDefinition Id="90f132c7-7b87-43ac-8502-c0e7557238d4" />
+          </dependency>
+        </suppliersInternal>
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="c3b1f80a-3461-49f0-af79-5d878642c4de" name="Speak" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="eb8a57f3-b307-48d3-b920-6cb2d7a01d34" />
+        <extendedCases>
+          <extend Id="1384006f-f3eb-44e7-83c6-b19998f2a91c">
+            <useCaseMoniker Id="6ab42c26-ef5a-41a5-a984-fe5eb3e7a730" LastKnownName="Start Voice Module" />
+            <elementDefinition Id="8f06cf7d-5c11-4195-8143-4c5b51c4f477" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="b083277e-a67f-4bdc-bab8-34a64d846c35" LastKnownName="Voice and Video Modules" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="7591a0c9-6555-4797-b38a-06ae9154a533" name="Dance" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="74494657-cbc0-4d82-ad73-df69d774e41a" />
+        <extendedCases>
+          <extend Id="564e429f-73ac-4e9f-aa6e-29fe16d5b8fc">
+            <useCaseMoniker Id="a4635e18-cb39-48f6-8960-b9aceeee01b2" LastKnownName="Start Video Module" />
+            <elementDefinition Id="bea2e9b1-d35e-4dba-a182-fe2353e9f723" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="b083277e-a67f-4bdc-bab8-34a64d846c35" LastKnownName="Voice and Video Modules" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="e4fdf0f5-a05e-4ce6-a74e-fece95016c99" name="Modeling">
+    <elementDefinition Id="650c444f-dd7e-4052-b092-ce5e7fe57b99" />
+  </package>
+</useCaseModelRoot>

@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="2c3ce0b6-09dd-4676-862e-94994f486b08" name="ActivityDiagram" linkedPackageId="5adad0f9-1764-4bee-8f92-4e8e2a9a5afa" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="c0ee0f08-0ce3-40cc-bb34-51d4fe24a801">
+      <elementDefinition Id="99d26e64-06ac-42a8-a1e7-993c1762ad7c" />
+      <body>First user end</body>
+    </comment>
+    <comment Id="167eecc5-d6ef-490b-b022-90016b9dba6c">
+      <elementDefinition Id="c0cbffea-856f-4496-86b7-ffcb16a32812" />
+      <body>Second user end</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="469d21b7-a1cd-4f5e-a163-fa52675dd5bd">
+      <profileInstance Id="d0ed0551-5e0f-4848-8837-814e2fa86fa3" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="fcebec55-78a0-4e89-adec-c80327e12484">
+      <profileInstance Id="025cfc71-6ced-4dc5-b3f5-ae0d863a0df5" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="828b0885-58bd-4030-9da2-a58964e30427" name="ActivityDiagram" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="25abab5a-7379-4b16-b3cb-ee76d5c14faf" />
+        <nodes>
+          <initialNode Id="81566d5a-59c6-46a7-8739-96a9884a79b1" name="Initial1" isLeaf="false">
+            <elementDefinition Id="10a3ff31-4323-4ee7-b9a9-5c55e69c0e70" />
+            <flowNodeTargets>
+              <controlFlow Id="663f2bf4-af46-4663-a8bd-bb53f3602dbe" isLeaf="false">
+                <opaqueActionMoniker Id="b6dff3e5-e733-4c3f-8edc-5576e7f531ce" LastKnownName="Login" />
+                <elementDefinition Id="8ee0bafa-f3fe-4135-a80f-b41de9f3db2e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <activityFinalNode Id="8e87f199-2274-44bc-87c7-8013f28e0eba" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="5c2a3955-eafb-46d0-ad14-ae5ebde1a773" />
+          </activityFinalNode>
+          <opaqueAction Id="b6dff3e5-e733-4c3f-8edc-5576e7f531ce" name="Login" isLeaf="false">
+            <elementDefinition Id="8d4e43b3-ca22-48ad-9d1d-af302edaf3f4" />
+            <flowNodeTargets>
+              <controlFlow Id="3e29b082-5ce8-41de-a088-555cab336a82" isLeaf="false">
+                <sendSignalActionMoniker Id="4db56a70-33e8-48fe-a5ea-347a8a97b9d3" LastKnownName="Send Login signal" />
+                <elementDefinition Id="07a10195-8f69-4c26-b1cd-b2a4d4a1fd35" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="7df5d825-c054-4f0f-8f00-bdc9db73b869" name="Can use Voice Module" isLeaf="false">
+            <description>Can use Voice Module</description>
+            <elementDefinition Id="0648e420-347f-4608-a8ab-9f32968bc5a9" />
+            <flowNodeTargets>
+              <controlFlow Id="7954ca4e-01f7-4293-a82a-0dfab331f7d4" guard="Has rights to use the Voice module" isLeaf="false">
+                <opaqueActionMoniker Id="c1cd82d0-df7d-4ea5-8923-bbc27fb163f8" LastKnownName="Start Voice Chat" />
+                <elementDefinition Id="14657f82-a985-4b62-a8e1-fd32320680f8" />
+              </controlFlow>
+              <controlFlow Id="8e818c78-abcb-4f72-9cfd-379d60134bc6" guard="Has rights to use the Video Module" isLeaf="false">
+                <opaqueActionMoniker Id="2b543cf0-c89d-44b8-b11e-871be096f165" LastKnownName="Start Video Chat" />
+                <elementDefinition Id="5fb5bda8-db4c-4369-a299-73f09b9c7489" />
+              </controlFlow>
+              <controlFlow Id="9ac551e5-a608-497f-bf65-b3c1d186e17f" guard="Has rights to use the Remoting module" isLeaf="false">
+                <opaqueActionMoniker Id="6f914612-c336-4086-a073-fb8e634e6ddc" LastKnownName="Start Desktop Share and Remote Control" />
+                <elementDefinition Id="46ab0340-7a8f-4a5f-b841-f2123f78e0ea" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="c1cd82d0-df7d-4ea5-8923-bbc27fb163f8" name="Start Voice Chat" isLeaf="false">
+            <elementDefinition Id="c87889e8-b957-4ffb-b970-f79d7c12b353" />
+            <flowNodeTargets>
+              <controlFlow Id="4f6a51b6-beec-40ad-8b6c-3cba741612e8" isLeaf="false">
+                <sendSignalActionMoniker Id="722629ef-39a4-4e13-88d7-5efadecedec1" LastKnownName="Send Voice Signal" />
+                <elementDefinition Id="77ee3291-3bb4-4642-96a9-d24133c305eb" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="2b543cf0-c89d-44b8-b11e-871be096f165" name="Start Video Chat" isLeaf="false">
+            <elementDefinition Id="9c18e842-9965-49bc-b532-d49e9f4b4a29" />
+            <flowNodeTargets>
+              <controlFlow Id="c409aeca-62a0-4fcb-ad0d-b1cb10496f54" isLeaf="false">
+                <sendSignalActionMoniker Id="cea15ec4-2513-45f9-9366-de8a982fa11b" LastKnownName="Send Video Signal" />
+                <elementDefinition Id="39575bed-adc9-4c37-a51c-062ac0804193" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="6f914612-c336-4086-a073-fb8e634e6ddc" name="Start Desktop Share and Remote Control" isLeaf="false">
+            <elementDefinition Id="c8a8ae05-b361-494e-80c9-ec078009089b" />
+            <flowNodeTargets>
+              <controlFlow Id="898bcea1-753d-46ee-b59d-a8b1b84d301d" isLeaf="false">
+                <sendSignalActionMoniker Id="a532ee34-6aaa-4847-b6c7-297de7a964a5" LastKnownName="Send Remote signal" />
+                <elementDefinition Id="56e63b83-9ae2-48aa-85c0-75bdfcebc5e1" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <joinNode Id="0cd2236c-b94a-4bfd-a1ca-a177f263dcbb" name="Join1" isLeaf="false">
+            <elementDefinition Id="8b4cd12f-7aca-412d-90b7-bdd58eaa781e" />
+            <flowNodeTargets>
+              <controlFlow Id="64ccaba7-7f35-43f6-bdf8-72ecec649ca9" isLeaf="false">
+                <activityFinalNodeMoniker Id="8e87f199-2274-44bc-87c7-8013f28e0eba" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="19f0f2f8-e4f4-40ec-bd5f-42e99c040192" />
+              </controlFlow>
+            </flowNodeTargets>
+          </joinNode>
+          <sendSignalAction Id="4db56a70-33e8-48fe-a5ea-347a8a97b9d3" name="Send Login signal" isLeaf="false">
+            <elementDefinition Id="b7de8c8a-f7cc-4f88-87f1-a58680282ec2" />
+            <flowNodeTargets>
+              <controlFlow Id="42f346ed-af33-4f24-a4df-c95f5aae3f6f" isLeaf="false">
+                <acceptEventActionMoniker Id="bd401061-334f-4097-acbb-6c8d8e9061ec" LastKnownName="Receive Role Signal" />
+                <elementDefinition Id="1a753d6b-303b-47aa-816c-d965e36e52fc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <acceptEventAction Id="bd401061-334f-4097-acbb-6c8d8e9061ec" name="Receive Role Signal" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="ae384485-d74f-4843-9652-4938ad28093f" />
+            <flowNodeTargets>
+              <controlFlow Id="8ce8912a-7274-412a-ae95-e1ebea863143" guard="Check rights" isLeaf="false">
+                <decisionNodeMoniker Id="7df5d825-c054-4f0f-8f00-bdc9db73b869" LastKnownName="Can use Voice Module" />
+                <elementDefinition Id="1a600ccf-8e26-45fb-b378-b3f24ca77d1f" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <sendSignalAction Id="a532ee34-6aaa-4847-b6c7-297de7a964a5" name="Send Remote signal" isLeaf="false">
+            <elementDefinition Id="8f593852-747a-4a02-94e2-e06fe0dcdbca" />
+            <flowNodeTargets>
+              <controlFlow Id="7d7dfe28-7430-4e7a-81c5-34166200e1bc" isLeaf="false">
+                <acceptEventActionMoniker Id="ace4b940-6501-4c73-8a1b-958a99a2317a" LastKnownName="Receive Remote Command" />
+                <elementDefinition Id="933b317d-636b-475a-915a-d08c401d46dc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <acceptEventAction Id="ace4b940-6501-4c73-8a1b-958a99a2317a" name="Receive Remote Command" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="800818a1-16a4-4dc9-80e4-e74d799439a5" />
+            <flowNodeTargets>
+              <controlFlow Id="934499b5-7c19-48e6-9db3-e6f087f824ae" isLeaf="false">
+                <opaqueActionMoniker Id="31cc384b-194b-42ab-96ac-0259e1ab3a84" LastKnownName="Execute command" />
+                <elementDefinition Id="b439fae8-1056-42bb-ba20-27870a748814" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <opaqueAction Id="31cc384b-194b-42ab-96ac-0259e1ab3a84" name="Execute command" isLeaf="false">
+            <elementDefinition Id="1213373b-db46-47b0-b46b-7458ac1eea24" />
+            <flowNodeTargets>
+              <controlFlow Id="736bf317-cd3d-43db-b2a7-0c818533380d" isLeaf="false">
+                <joinNodeMoniker Id="0cd2236c-b94a-4bfd-a1ca-a177f263dcbb" LastKnownName="Join1" />
+                <elementDefinition Id="106b6bb3-2951-4e4d-8635-c6c5baffa658" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <sendSignalAction Id="722629ef-39a4-4e13-88d7-5efadecedec1" name="Send Voice Signal" isLeaf="false">
+            <elementDefinition Id="0d76c1c8-f859-46b9-9e74-ad97a721c1dc" />
+            <flowNodeTargets>
+              <controlFlow Id="a9fffa49-2a07-4d46-a629-600ce8441985" isLeaf="false">
+                <acceptEventActionMoniker Id="138a0592-9d93-4efc-8174-13bbf0257757" LastKnownName="Receive Voice Signal" />
+                <elementDefinition Id="b9cfe541-6047-4549-8a05-d2b20272e4fc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+          <acceptEventAction Id="138a0592-9d93-4efc-8174-13bbf0257757" name="Receive Voice Signal" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="6125dd98-51ec-44d2-beca-cedb9dc7232f" />
+            <flowNodeTargets>
+              <controlFlow Id="a8067e56-c517-436b-b1db-a101c1e7d8f6" isLeaf="false">
+                <opaqueActionMoniker Id="8d22dbef-140d-418b-9b03-5ba54671d5d3" LastKnownName="Play Voice" />
+                <elementDefinition Id="99a7a74e-b229-4510-812f-d94446f1a300" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <opaqueAction Id="8d22dbef-140d-418b-9b03-5ba54671d5d3" name="Play Voice" isLeaf="false">
+            <elementDefinition Id="d3a05486-45e1-4a7a-a1aa-b75369a3b9cf" />
+            <flowNodeTargets>
+              <controlFlow Id="dcdbf5ae-aa17-4ac3-bd50-876d06ab9be9" isLeaf="false">
+                <joinNodeMoniker Id="0cd2236c-b94a-4bfd-a1ca-a177f263dcbb" LastKnownName="Join1" />
+                <elementDefinition Id="965bbcea-fe5f-434e-b370-8b474e065ad3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="314cce02-9644-40eb-b192-e20fd52c34c2" name="Show video" isLeaf="false">
+            <elementDefinition Id="fe3197bb-4140-449f-bd11-31cf0bc7fc25" />
+            <flowNodeTargets>
+              <controlFlow Id="af6e3634-e89e-415b-b71e-250a35d28c0c" isLeaf="false">
+                <joinNodeMoniker Id="0cd2236c-b94a-4bfd-a1ca-a177f263dcbb" LastKnownName="Join1" />
+                <elementDefinition Id="8a41da73-210e-4927-9266-d2a87288d4a5" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <acceptEventAction Id="a4ea6b7f-15de-49ef-a50f-7cd6bca27a48" name="Receive Video Signal" isLeaf="false" isUnmarshall="false">
+            <elementDefinition Id="f9afe366-0e15-4290-9c11-3b16b577a1c3" />
+            <flowNodeTargets>
+              <controlFlow Id="43154edd-fde2-44b9-aeb7-8d833379f84d" isLeaf="false">
+                <opaqueActionMoniker Id="314cce02-9644-40eb-b192-e20fd52c34c2" LastKnownName="Show video" />
+                <elementDefinition Id="1fc3a523-917f-4fce-8f62-73a6007ae7ee" />
+              </controlFlow>
+            </flowNodeTargets>
+          </acceptEventAction>
+          <sendSignalAction Id="cea15ec4-2513-45f9-9366-de8a982fa11b" name="Send Video Signal" isLeaf="false">
+            <elementDefinition Id="dc4a0155-a29d-4378-819c-3f75ad6866b4" />
+            <flowNodeTargets>
+              <controlFlow Id="12ad83ba-4448-4f79-8cf6-09aa41b89fb5" isLeaf="false">
+                <acceptEventActionMoniker Id="a4ea6b7f-15de-49ef-a50f-7cd6bca27a48" LastKnownName="Receive Video Signal" />
+                <elementDefinition Id="bf7b1fd4-4d04-4807-b1eb-0ed6083b04d7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </sendSignalAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="5adad0f9-1764-4bee-8f92-4e8e2a9a5afa" name="Modeling">
+    <elementDefinition Id="650c444f-dd7e-4052-b092-ce5e7fe57b99" />
+  </package>
+</activityRootModel>
