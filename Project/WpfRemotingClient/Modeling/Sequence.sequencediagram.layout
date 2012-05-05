@@ -215,5 +215,16 @@
         <umlExecutionSpecificationShapeMoniker Id="6356c311-52bb-4489-8d4a-1d40ba870b6c" />
       </nodes>
     </returnMessageConnector>
+    <commentShape Id="08332763-c05f-4d51-badc-04cce0e4dd46" absoluteBounds="6.75, 2, 1.5, 0.375" customColor="251, 247, 200">
+      <commentMoniker Id="2bae1e6f-01e3-4db1-8efe-edefbd545116" />
+      <relativeChildShapes />
+    </commentShape>
+    <commentConnector edgePoints="[(6.75 : 2.1875); (6.59115798141514 : 1.35950067589374)]" fixedFrom="NotFixed" fixedTo="Caller" TargetRelationshipDomainClassId="217d6bd0-42ed-4e7f-ad2b-af3ef5142428" customColor="Black">
+      <relativeChildShapes />
+      <nodes>
+        <commentShapeMoniker Id="08332763-c05f-4d51-badc-04cce0e4dd46" />
+        <lifelineShapeMoniker Id="a60b8ed4-7d97-42b7-8d36-c1738c57af65" />
+      </nodes>
+    </commentConnector>
   </nestedChildShapes>
 </sequenceDesignerDiagram>
