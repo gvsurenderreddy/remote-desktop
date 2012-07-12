@@ -1,0 +1,24 @@
+F:\facultate\master\dizertatie\WebcamCapture\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\WebcamCapture\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\WebcamCapture\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\WebcamCapture\obj\Debug\WebCam_Capture.WebCamCapture.resources
+F:\facultate\master\dizertatie\WebcamCapture\obj\Debug\GenerateResource-ResGen.read.1.tlog
+F:\facultate\master\dizertatie\WebcamCapture\obj\Debug\GenerateResource-ResGen.write.1.tlog
+F:\facultate\master\dizertatie\WebcamCapture\obj\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\WebcamCapture\obj\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\obj\Debug\WebCam_Capture.WebCamCapture.resources
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\obj\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\obj\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\obj\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\obj\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\obj\Debug\WebCam_Capture.WebCamCapture.resources
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\obj\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\obj\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\obj\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\obj\Debug\WebCam_Capture.pdb

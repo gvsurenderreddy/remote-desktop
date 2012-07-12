@@ -1,0 +1,42 @@
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\WebcaptureServer.exe.config
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\WebcaptureServer.exe
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\WebcaptureServer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\DesktopSharing.dll
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\DesktopSharingViewer.dll
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\RemotingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\RemotingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\DesktopSharingViewer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\DesktopSharing.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\WebcaptureServer.Form1.resources
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\WebcaptureServer.Properties.Resources.resources
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\WebcaptureServer.exe
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\obj\x86\Debug\WebcaptureServer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\ImageCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcaptureServer\bin\Debug\ImageCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\WebcaptureServer.exe.config
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\WebcaptureServer.exe
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\WebcaptureServer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\WebcaptureServer.Form1.resources
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\WebcaptureServer.Properties.Resources.resources
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\WebcaptureServer.exe
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\WebcaptureServer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\ImageCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\RemotingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\DesktopSharingViewer.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\RemotingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\ImageCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcaptureServer\bin\Debug\DesktopSharingViewer.pdb

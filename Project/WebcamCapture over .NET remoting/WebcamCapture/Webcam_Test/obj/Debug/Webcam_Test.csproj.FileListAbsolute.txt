@@ -1,0 +1,52 @@
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.exe
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.pdb
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.Form1.resources
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\obj\Debug\GenerateResource-ResGen.read.1.tlog
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\obj\Debug\GenerateResource-ResGen.write.1.tlog
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.exe
+F:\facultate\master\dizertatie\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.exe.config
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.exe
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharing.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingViewer.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\RemotingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\RemotingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingViewer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharing.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\WebCam_Capture.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.Form1.resources
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\obj\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\obj\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.exe
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\ImageCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture\Webcam_Test\bin\Debug\ImageCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.Form1.resources
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\obj\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\obj\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.exe
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\obj\Debug\Webcam_Test.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.exe.config
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.exe
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\Webcam_Test.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharing.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingViewer.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\ImageCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\RemotingCommon.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\WebCam_Capture.dll
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\RemotingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharingViewer.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\DesktopSharing.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\ImageCommon.pdb
+F:\facultate\master\dizertatie\backupProject\WebcamCapture over .NET remoting\WebcamCapture\Webcam_Test\bin\Debug\WebCam_Capture.pdb
