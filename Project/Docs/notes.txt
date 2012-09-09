@@ -1,0 +1,39 @@
+The system will contain 3 modules:
+
+Remoting:
+- MViewer app hosts wcf service and also has the WCF proxy
+- remoting is initiated by app1
+- app2 gives the OK signal for app1, remoting process can start
+- app1 uses wcf proxy to send screen capture to app2 wcf service
+- app2 receives screen capture through wcf service and responds with his screen capture to app1 wcf proxy
+- app1 uses wcf proxy to send mouse capture to app2 wcf service
+- app2 receives mouse capture through wcf service and responds with his mouse capture and remote commands stack to the app1
+- app1 executes the received commands stack
+- app1 sends his commands stack to app2 wcf service along with the next mouse captures
+
+Video:
+- video chat app hosts wcf service and uses wcf proxy also
+- app1 calls app2 using wcf proxy
+- app1 uses wcf proxy to send video capture to app2 wcf service
+- app2 wcf service receives video capture from app1, displays it and responds with his video capture
+- app1 receives the video capture as response from app2 wcf service and displays it
+
+- audio and video modules are incorporated into the Video chat app
+- the audio module must be started along with the video module as described below, when a video chat is initiated by a wcf proxy:
+
+Audio:
+- audio chat app contains both wcf proxy and wcf service
+- app1 calls app2 using wcf proxy
+- app1 uses wcf proxy to send audio capture to app2 wcf service
+- app2 wcf service receives audio capture from app1, plays it and responds with his audio capture
+- app1 receives the audio capture as response from app2 wcf service and plays it
+
+The system will store an xml serialized list of persons who've been called by the actual user so that he can easily restart chatting with them.
+When a contact starts his MViewer the app must notify other started MViewer users, using the contacts xml.
+
+diagrams:
+all:
+https://drive.google.com/#home
+activity diagrams:
+https://docs.google.com/drawings/d/1XgUjr3uSCMDUV4N1zkAp7WA6_RYbOO7ZZv1lmJ7OOmY/edit
+sequence diagram:
