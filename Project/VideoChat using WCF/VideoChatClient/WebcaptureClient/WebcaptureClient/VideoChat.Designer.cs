@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnStart = new System.Windows.Forms.Button();
+            this.btnStartVideo = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.nudTimespan = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
@@ -36,18 +36,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbServers = new System.Windows.Forms.ListBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.btnStopAudio = new System.Windows.Forms.Button();
+            this.btnStartAudio = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudTimespan)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnStart
+            // btnStartVideo
             // 
-            this.btnStart.Location = new System.Drawing.Point(12, 231);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(78, 23);
-            this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStartVideo.Location = new System.Drawing.Point(12, 231);
+            this.btnStartVideo.Name = "btnStartVideo";
+            this.btnStartVideo.Size = new System.Drawing.Size(78, 23);
+            this.btnStartVideo.TabIndex = 0;
+            this.btnStartVideo.Text = "Start Video";
+            this.btnStartVideo.UseVisualStyleBackColor = true;
+            this.btnStartVideo.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnStop
             // 
@@ -55,13 +57,13 @@
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(78, 23);
             this.btnStop.TabIndex = 1;
-            this.btnStop.Text = "Stop";
+            this.btnStop.Text = "Stop Video";
             this.btnStop.UseVisualStyleBackColor = true;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // nudTimespan
             // 
-            this.nudTimespan.Location = new System.Drawing.Point(99, 260);
+            this.nudTimespan.Location = new System.Drawing.Point(299, 260);
             this.nudTimespan.Name = "nudTimespan";
             this.nudTimespan.Size = new System.Drawing.Size(52, 20);
             this.nudTimespan.TabIndex = 3;
@@ -75,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(96, 236);
+            this.label1.Location = new System.Drawing.Point(296, 236);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(141, 13);
             this.label1.TabIndex = 4;
@@ -108,18 +110,38 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(159, 260);
+            this.btnClose.Location = new System.Drawing.Point(359, 260);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(78, 23);
             this.btnClose.TabIndex = 8;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
+            // btnStopAudio
+            // 
+            this.btnStopAudio.Location = new System.Drawing.Point(96, 259);
+            this.btnStopAudio.Name = "btnStopAudio";
+            this.btnStopAudio.Size = new System.Drawing.Size(78, 23);
+            this.btnStopAudio.TabIndex = 10;
+            this.btnStopAudio.Text = "Stop Audio";
+            this.btnStopAudio.UseVisualStyleBackColor = true;
+            // 
+            // btnStartAudio
+            // 
+            this.btnStartAudio.Location = new System.Drawing.Point(96, 230);
+            this.btnStartAudio.Name = "btnStartAudio";
+            this.btnStartAudio.Size = new System.Drawing.Size(78, 23);
+            this.btnStartAudio.TabIndex = 9;
+            this.btnStartAudio.Text = "Start Audio";
+            this.btnStartAudio.UseVisualStyleBackColor = true;
+            // 
             // FrmVideoChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 293);
+            this.ClientSize = new System.Drawing.Size(449, 293);
+            this.Controls.Add(this.btnStopAudio);
+            this.Controls.Add(this.btnStartAudio);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lbServers);
             this.Controls.Add(this.label2);
@@ -127,7 +149,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nudTimespan);
             this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.btnStartVideo);
             this.Name = "FrmVideoChat";
             this.Text = "Video Chat";
             ((System.ComponentModel.ISupportInitialize)(this.nudTimespan)).EndInit();
@@ -138,7 +160,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnStartVideo;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.NumericUpDown nudTimespan;
         private System.Windows.Forms.Label label1;
@@ -146,6 +168,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lbServers;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnStopAudio;
+        private System.Windows.Forms.Button btnStartAudio;
     }
 }
 

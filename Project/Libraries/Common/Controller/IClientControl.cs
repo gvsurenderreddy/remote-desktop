@@ -11,6 +11,7 @@ namespace Common
     {
         #region methods
 
+        void SendWebcamCapture(byte[] capture);
         void RequestConnect();
         void RequestDisconnect();
         void RequestUpdateDesktop(ref Rectangle rect);

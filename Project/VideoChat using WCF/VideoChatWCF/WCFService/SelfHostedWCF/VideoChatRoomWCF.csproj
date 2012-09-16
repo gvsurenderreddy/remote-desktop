@@ -59,11 +59,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomCertificateValidator.cs" />
-    <Compile Include="FrmVideoChatRoom.cs">
+    <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmVideoChatRoom.Designer.cs">
-      <DependentUpon>FrmVideoChatRoom.cs</DependentUpon>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmPrivateRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmPrivateRoom.Designer.cs">
+      <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
     </Compile>
     <Compile Include="IVideoChatRoom.cs" />
     <Compile Include="Program.cs">
@@ -82,8 +88,11 @@
     <Content Include="System.ServiceModel.Web.dll" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrmVideoChatRoom.resx">
-      <DependentUpon>FrmVideoChatRoom.cs</DependentUpon>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmPrivateRoom.resx">
+      <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

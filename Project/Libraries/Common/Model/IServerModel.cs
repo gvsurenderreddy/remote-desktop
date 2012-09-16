@@ -21,6 +21,10 @@ namespace Common
 
         #region methods
 
+        //void StartCapturing();
+        //void StopCapturing();
+        void SendWebcamCapture(byte[] capture);
+
         int AddClient(string ip, string hostname);
         void RemoveClient(int id, bool checkStatus);
         void RemoveAllClients();

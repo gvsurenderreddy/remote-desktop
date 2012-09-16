@@ -76,7 +76,7 @@ namespace VideoChatClient
             _webcamCapture.StartCapturing();
 
             // Start Audio Streaming
-            //_audioCapture.StartAudioStreaming();
+            _audioCapture.StartAudioStreaming();
         }
 
         void StopVideoChat()

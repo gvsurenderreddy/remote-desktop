@@ -17,7 +17,7 @@
             </ListView.View>
         </ListView>
         <Label Content="Total: " Height="28" HorizontalAlignment="Left" Margin="390,275,0,0" Name="lblTotal" VerticalAlignment="Top" FontFamily="{Binding}" DataContext="{Binding ElementName=lblTotal}" />
-        <Button Content="Start listening" Height="23" HorizontalAlignment="Left" Margin="5,280,0,0" Name="btnStartServer" VerticalAlignment="Top" Width="100" Click="btnStart_Click" />
+        <Button Visibility="Hidden" Content="Start listening" Height="23" HorizontalAlignment="Left" Margin="5,280,0,0" Name="btnStartServer" VerticalAlignment="Top" Width="100" Click="btnStart_Click" />
         <Button Content="Close connection" Height="23" HorizontalAlignment="Left" Margin="125,280,0,0" Name="btnCloseConnection" VerticalAlignment="Top" Width="100" Click="btnCloseConnection_Click" />
     </Grid>
 </Window>

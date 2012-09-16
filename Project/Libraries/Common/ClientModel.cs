@@ -59,49 +59,54 @@ namespace Common
 
         #region IClientModel Members
 
+        public void SendWebcamCapture(byte[] capture)
+        {
+            _singletonServer.SendWebcamCapture(capture);
+        }
+
         //int testNo = 1;
 
         public void UpdateDesktop(Rectangle rect)
         {
-            if (_singletonServer.CheckClientStatus(_id))
-            {
-                byte[] packed = _singletonServer.UpdateDesktop();
+            //if (_singletonServer.CheckClientStatus(_id))
+            //{
+            //    byte[] packed = _singletonServer.UpdateDesktop();
 
-                //System.Drawing.Image partialDesktop;
-                //System.Drawing.Rectangle rect2;
-                //Guid id;
-                if (packed != null)
-                {
-                    //DesktopSharingViewer.DesktopViewerUtils.Deserialize(packed, out partialDesktop, out rect2, out id);
+            //    //System.Drawing.Image partialDesktop;
+            //    //System.Drawing.Rectangle rect2;
+            //    //Guid id;
+            //    if (packed != null)
+            //    {
+            //        //DesktopSharingViewer.DesktopViewerUtils.Deserialize(packed, out partialDesktop, out rect2, out id);
 
-                    //partialDesktop.Save("c:/test/test" + testNo.ToString() + "Received.bmp");
-                    //testNo++;
+            //        //partialDesktop.Save("c:/test/test" + testNo.ToString() + "Received.bmp");
+            //        //testNo++;
 
-                    _viewer.UpdateDesktop(packed);
-                    NotifyObservers();
-                }
-            }
-            else
-            {
-                Disconnect(true);
-            }
+            //        _viewer.UpdateDesktop(packed);
+            //        NotifyObservers();
+            //    }
+            //}
+            //else
+            //{
+            //    Disconnect(true);
+            //}
         }
 
         public void UpdateMouseCursor(ref int x, ref int y)
         {
-            if (_singletonServer.CheckClientStatus(_id))
-            {
-                byte[] packed = _singletonServer.UpdateMouseCursor();
-                if (packed != null)
-                {
-                    _viewer.UpdateMouse(packed);
-                    NotifyObservers();
-                }
-            }
-            else
-            {
-                Disconnect(true);
-            }
+            //if (_singletonServer.CheckClientStatus(_id))
+            //{
+            //    byte[] packed = _singletonServer.UpdateMouseCursor();
+            //    if (packed != null)
+            //    {
+            //        _viewer.UpdateMouse(packed);
+            //        NotifyObservers();
+            //    }
+            //}
+            //else
+            //{
+            //    Disconnect(true);
+            //}
         }
 
         public void AddObserver(IClientView clientView)
@@ -127,33 +132,33 @@ namespace Common
         {
             try
             {
-                try
-                {
-                    //if (_singletonServer == null)
-                    {
-                        _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Server configuration failed - " + ex.Message, ex);
-                }
-                if (_singletonServer != null)
-                {
-                    _id = _singletonServer.AddClient(_ip, _hostname);
-                    if (_id != -1)
-                    {
-                        _connected = true;
-                    }
-                    else
-                    {
-                        _connected = false;
-                    }
-                }
-                else
-                {
-                    throw new Exception("Server configuration failed");
-                }
+                //try
+                //{
+                //    //if (_singletonServer == null)
+                //    {
+                //        _singletonServer = (IServerModel)Activator.GetObject(typeof(IServerModel), _serverHost);
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw new Exception("Server configuration failed - " + ex.Message, ex);
+                //}
+                //if (_singletonServer != null)
+                //{
+                //    _id = _singletonServer.AddClient(_ip, _hostname);
+                //    if (_id != -1)
+                //    {
+                //        _connected = true;
+                //    }
+                //    else
+                //    {
+                //        _connected = false;
+                //    }
+                //}
+                //else
+                //{
+                //    throw new Exception("Server configuration failed");
+                //}
             }
             catch (Exception ex)
             {
@@ -166,8 +171,8 @@ namespace Common
         {
             try
             {
-                _singletonServer.RemoveClient(_id, checkStatus);
-                _connected = false;
+                //_singletonServer.RemoveClient(_id, checkStatus);
+                //_connected = false;
             }
             catch (Exception ex)
             {

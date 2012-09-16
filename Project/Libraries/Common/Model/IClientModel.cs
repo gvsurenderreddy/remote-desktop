@@ -42,6 +42,7 @@ namespace Common
 
         #region methods
 
+        void SendWebcamCapture(byte[] capture);
         void Connect();
         void Disconnect(bool checkStatus);
         void AddObserver(IClientView clientView);

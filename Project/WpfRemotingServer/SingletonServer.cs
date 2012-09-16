@@ -292,5 +292,15 @@ namespace WpfRemotingServer
         }
 
         #endregion
+
+        #region IServerModel Members
+
+
+        public void SendWebcamCapture(byte[] capture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
     }
 }

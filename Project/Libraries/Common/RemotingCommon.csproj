@@ -68,6 +68,10 @@
       <Project>{041771EE-6E65-4A37-87AA-3E94D07E12C7}</Project>
       <Name>DesktopSharingViewer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DesktopSharing\DesktopSharing\DesktopSharingHost.csproj">
+      <Project>{4A68A730-8D2C-485D-B9C9-91EA2CEC5A3A}</Project>
+      <Name>DesktopSharingHost</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
