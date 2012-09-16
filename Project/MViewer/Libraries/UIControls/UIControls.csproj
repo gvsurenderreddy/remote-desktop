@@ -54,12 +54,17 @@
     <Compile Include="Controls\AudioControl.Designer.cs">
       <DependentUpon>AudioControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ButtonStatuses.cs" />
     <Compile Include="Controls\ContactsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\ContactsControl.Designer.cs">
       <DependentUpon>ContactsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormContact.Designer.cs">
+      <DependentUpon>FormContact.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\IdentityControl.cs">
       <SubType>UserControl</SubType>
@@ -94,6 +99,9 @@
     <EmbeddedResource Include="Controls\ContactsControl.resx">
       <DependentUpon>ContactsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContact.resx">
+      <DependentUpon>FormContact.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\IdentityControl.resx">
       <DependentUpon>IdentityControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,6 +111,16 @@
     <EmbeddedResource Include="Controls\VideoControl.resx">
       <DependentUpon>VideoControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GenericData\GenericData.csproj">
+      <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
+      <Name>GenericData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

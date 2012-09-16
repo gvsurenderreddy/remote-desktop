@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using GenericData;
 using UIControls;
+using DataAccess;
 
 namespace MViewer
 {
-    public class Model
+    public class Model : ContactsRepository
     {
         #region private members
 
@@ -32,6 +33,7 @@ namespace MViewer
         public Model()
         {
             ReloadSystemConfiguration();
+            _xmlFilePath = _systemConfiguration.DataBasePath;
             //IdentityUpdatedEvent += new EventHandlers.IdentityEventHandler(IdentityUpdated);
             _identity = new Identity(_systemConfiguration.FriendlyName);
             _identity.GenerateIdentity(_systemConfiguration.MyIP, _systemConfiguration.Port);

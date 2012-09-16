@@ -3,3 +3,6 @@ http://www.codeproject.com/Articles/19485/A-Voice-Chat-Application-in-C
 
 cryptography
 http://www.codeproject.com/Articles/14151/Encrypt-and-Decrypt-Data-with-C
+
+XML Data access
+http://www.codeproject.com/KB/database/XMLData/XMLData_src.zip

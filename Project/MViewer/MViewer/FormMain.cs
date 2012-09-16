@@ -36,6 +36,7 @@ namespace MViewer
 
             IdentityObserver = new EventHandlers.IdentityEventHandler(UpdateIdentity);
             _identityObserver2 = modelUpdater;
+
         }
 
         #endregion
@@ -86,6 +87,11 @@ namespace MViewer
         public void NotifyIdentityObserver(object sender, IdentityEventArgs e)
         {
             IdentityObserver.Invoke(sender, e);
+        }
+
+        public void InitializeRepository(IContactsRepository repository)
+        {
+            contactsControl.InitializeRepository(repository);
         }
 
         #endregion

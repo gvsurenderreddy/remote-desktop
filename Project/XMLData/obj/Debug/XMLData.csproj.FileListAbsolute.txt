@@ -1,0 +1,9 @@
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\XMLData.exe
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\XMLData.pdb
+F:\facultate\master\dizertatie\backupProject\XMLData\bin\Debug\XMLData.exe
+F:\facultate\master\dizertatie\backupProject\XMLData\bin\Debug\XMLData.pdb
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\XMLData.Form1.resources
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\XMLData.Properties.Resources.resources
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\GenerateResource-ResGen.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\XMLData\obj\Debug\GenerateResource-ResGen.write.1.tlog

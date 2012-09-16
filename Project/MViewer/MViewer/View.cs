@@ -34,7 +34,7 @@ namespace MViewer
         {
             _model = model;
             _formMain = new FormMain(_model.IdentityUpdated);
-            
+            _formMain.InitializeRepository(model);
         }
 
         #endregion

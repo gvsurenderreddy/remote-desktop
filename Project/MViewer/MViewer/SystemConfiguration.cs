@@ -10,7 +10,7 @@ namespace MViewer
     {
         public readonly string MyIP = ConfigurationManager.AppSettings["MyIP"];
         public readonly int Port = int.Parse(ConfigurationManager.AppSettings["port"]);
-
+        public readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
         public readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
     }
 }

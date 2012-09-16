@@ -1,0 +1,16 @@
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\XMLData.Properties.Resources.resources
+obj\Debug\XMLData.csproj.GenerateResource.Cache
+bin\Debug\XMLData.exe
+bin\Debug\XMLData.pdb
+obj\Debug\XMLData.exe
+obj\Debug\XMLData.pdb
+obj\Debug\XMLData.Form1.resources
+bin\Release\XMLData.exe
+bin\Release\XMLData.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\XMLData.Form1.resources
+obj\Release\XMLData.Properties.Resources.resources
+obj\Release\XMLData.csproj.GenerateResource.Cache
+obj\Release\XMLData.exe
+obj\Release\XMLData.pdb

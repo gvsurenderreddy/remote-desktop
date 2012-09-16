@@ -93,6 +93,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\DataAccess\DataAccess.csproj">
+      <Project>{B0788A7C-1297-4B64-BE84-10799BD6BE66}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\GenericData\GenericData.csproj">
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
       <Name>GenericData</Name>

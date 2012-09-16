@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using GenericData;
 
 namespace UIControls
 {
@@ -14,6 +15,7 @@ namespace UIControls
         #region private members
 
         EventHandler _closePressed;
+        IContactsRepository _repository;
 
         #endregion
 
@@ -28,6 +30,15 @@ namespace UIControls
         {
             InitializeComponent();
             _closePressed = closePressed;
+        }
+
+        #endregion
+
+        #region public methods
+
+        public void InitializeRepository(IContactsRepository repository)
+        {
+            _repository = repository;
         }
 
         #endregion
@@ -55,17 +66,29 @@ namespace UIControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // todo: implement btnAdd_Click
+            FormContact formContact = new FormContact(Utils.FormModes.FormMode.Add, _repository);
+            formContact.ShowDialog(this);
+            // todo: reload contacts
+
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
             // todo: implement btnRemove_Click
+            Contact contact = (Contact)lbContacts.SelectedItem;
+            _repository.RemoveContact(contact.Identity);
+            // todo: reload contacts
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             // todo: implement btnUpdate_Click
+            Contact contact = (Contact)lbContacts.SelectedItem;
+            FormContact formContact = new FormContact(Utils.FormModes.FormMode.Update, _repository, contact);
+            formContact.ShowDialog(this);
+            // todo: reload contacts
+
         }
 
         #endregion

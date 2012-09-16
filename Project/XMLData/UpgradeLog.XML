@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="XMLData">
+</Property><Property Name="Solution File" Value="F:\facultate\master\dizertatie\backupProject\XMLData\XMLData.sln">
+</Property><Property Name="Date" Value="Sunday, September 16, 2012">
+</Property><Property Name="Time" Value="18:25:17 PM">
+</Property></Properties><Event ErrorLevel="0" Project="XMLData" Source="XMLData.csproj" Description="Project file successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\XMLData.csproj">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Bussines\Category.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Bussines\Category.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="DAL\XMLCategory.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\DAL\XMLCategory.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Form1.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Form1.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Form1.Designer.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Program.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Program.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Properties\AssemblyInfo.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Properties\Resources.Designer.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Properties\Settings.Designer.cs" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Properties\Settings.settings" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Form1.resx" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Form1.resx">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="Properties\Resources.resx" Description="File successfully backed up as F:\facultate\master\dizertatie\backupProject\XMLData\Backup\Properties\Resources.resx">
+</Event><Event ErrorLevel="1" Project="XMLData" Source="XMLData.csproj" Description="Your project is targeting .NET Framework 2.0 or 3.0. If your project uses assemblies requiring a newer .NET Framework, your project will fail to build. You can change the .NET Framework version by clicking Properties on the project menu and then selecting a new version in the '.NET Framework' dropdown box. (In Visual Basic, this is located on the Compile tab by clicking the 'Advanced Compiler Options...' button.)">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="XMLData.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="XMLData" Source="XMLData.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="XMLData" Source="XMLData.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

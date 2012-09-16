@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace UIControls
+namespace Utils
 {
     public static class ButtonStatuses
     {
