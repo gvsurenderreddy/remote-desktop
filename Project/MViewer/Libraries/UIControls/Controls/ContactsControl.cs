@@ -19,6 +19,11 @@ namespace UIControls
 
         #region c-tor
 
+        public ContactsControl()
+        {
+            InitializeComponent();
+        }
+
         public ContactsControl(EventHandler closePressed)
         {
             InitializeComponent();
@@ -46,6 +51,21 @@ namespace UIControls
         {
             // this form should not be closed while the app is running
             e.Cancel = true;
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            // todo: implement btnAdd_Click
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            // todo: implement btnRemove_Click
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            // todo: implement btnUpdate_Click
         }
 
         #endregion

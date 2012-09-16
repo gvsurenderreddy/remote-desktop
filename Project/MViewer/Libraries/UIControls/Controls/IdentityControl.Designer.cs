@@ -56,16 +56,16 @@
             // 
             this.txtFriendlyName.Location = new System.Drawing.Point(86, 4);
             this.txtFriendlyName.Name = "txtFriendlyName";
-            this.txtFriendlyName.Size = new System.Drawing.Size(136, 20);
+            this.txtFriendlyName.Size = new System.Drawing.Size(193, 20);
             this.txtFriendlyName.TabIndex = 2;
+            this.txtFriendlyName.Leave += new System.EventHandler(this.txtFriendlyName_Leave);
             // 
             // txtMyID
             // 
             this.txtMyID.Location = new System.Drawing.Point(86, 27);
             this.txtMyID.Name = "txtMyID";
-            this.txtMyID.Size = new System.Drawing.Size(136, 20);
+            this.txtMyID.Size = new System.Drawing.Size(193, 20);
             this.txtMyID.TabIndex = 3;
-            this.txtMyID.Text = "XX";
             this.txtMyID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMyID_KeyDown);
             // 
             // IdentityControl
@@ -77,7 +77,7 @@
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.lblFriendlyName);
             this.Name = "IdentityControl";
-            this.Size = new System.Drawing.Size(230, 51);
+            this.Size = new System.Drawing.Size(282, 51);
             this.ResumeLayout(false);
             this.PerformLayout();
 

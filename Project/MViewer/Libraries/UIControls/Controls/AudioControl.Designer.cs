@@ -45,7 +45,7 @@
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(112, 20);
             this.txtStatus.TabIndex = 0;
-            this.txtStatus.Text = "Mute";
+            this.txtStatus.Text = "Muted";
             this.txtStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtPartner
@@ -70,7 +70,7 @@
             // 
             this.lblAudioStatus.AutoSize = true;
             this.lblAudioStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAudioStatus.Location = new System.Drawing.Point(4, 3);
+            this.lblAudioStatus.Location = new System.Drawing.Point(10, 5);
             this.lblAudioStatus.Name = "lblAudioStatus";
             this.lblAudioStatus.Size = new System.Drawing.Size(59, 16);
             this.lblAudioStatus.TabIndex = 9;

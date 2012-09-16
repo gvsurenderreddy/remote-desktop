@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using GenericData;
+using UIControls;
 
 namespace MViewer
 {
@@ -14,22 +16,45 @@ namespace MViewer
     { 
         #region private members
 
-        FormActions _formActions;
+        
+
+        #endregion
+
+        #region observers
+
+        public readonly EventHandlers.IdentityEventHandler IdentityObserver;
+        readonly EventHandlers.IdentityEventHandler _identityObserver2;
+
 
         #endregion
 
         #region c-tor
 
-        public FormMain()
+        public FormMain(EventHandlers.IdentityEventHandler modelUpdater)
         {
             InitializeComponent();
 
-            ThreadPool.QueueUserWorkItem(OpenActionsForm);
+            IdentityObserver = new EventHandlers.IdentityEventHandler(UpdateIdentity);
+            _identityObserver2 = modelUpdater;
         }
 
         #endregion
 
         #region event callbacks
+
+        private void UpdateIdentity(object sender, EventArgs e)
+        {
+            IdentityEventArgs args = (IdentityEventArgs)e;
+            identityControl.UpdateMyID(args.MyIdentity);
+            identityControl.UpdateFriendlyName(args.FriendlyName);
+        }
+
+        private void IdentityUpdated(object sender, EventArgs e)
+        {
+            IdentityEventArgs args = (IdentityEventArgs)e;
+            // update the identity in the Model
+            _identityObserver2.Invoke(this, args);
+        }
 
         private void ContactsControl_Load(object sender, EventArgs e)
         {
@@ -43,18 +68,24 @@ namespace MViewer
             Environment.Exit(0);
         }
 
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ContactsControl_ClosePressed(sender, e);
+        }
+
         #endregion
 
         #region private methods
 
-        void OpenActionsForm(Object threadContext)
+        
+
+        #endregion
+
+        #region public methods
+
+        public void NotifyIdentityObserver(object sender, IdentityEventArgs e)
         {
-            // todo: open the Actions form
-            _formActions = new FormActions();
-            _formActions.StartPosition = FormStartPosition.Manual;
-            // todo: position the Actions form at the bottom of the screen
-            _formActions.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - _formActions.Width, Screen.PrimaryScreen.WorkingArea.Height - _formActions.Height);
-            _formActions.ShowDialog();            
+            IdentityObserver.Invoke(sender, e);
         }
 
         #endregion

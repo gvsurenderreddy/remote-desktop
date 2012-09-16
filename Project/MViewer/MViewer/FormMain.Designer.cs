@@ -29,24 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.identityControl1 = new UIControls.IdentityControl();
-            this.contactsControl = new UIControls.ContactsControl(this.ContactsControl_ClosePressed);
+            this.identityControl = new UIControls.IdentityControl();
+            this.identityControl = new UIControls.IdentityControl(IdentityUpdated);
+            this.contactsControl = new UIControls.ContactsControl();
+            this.contactsControl = new UIControls.ContactsControl(ContactsControl_ClosePressed);
             this.SuspendLayout();
             // 
             // identityControl1
             // 
-            this.identityControl1.Location = new System.Drawing.Point(3, 0);
-            this.identityControl1.Name = "identityControl1";
-            this.identityControl1.Size = new System.Drawing.Size(282, 51);
-            this.identityControl1.TabIndex = 1;
+            this.identityControl.Location = new System.Drawing.Point(3, 9);
+            this.identityControl.Name = "identityControl";
+            this.identityControl.Size = new System.Drawing.Size(282, 51);
+            this.identityControl.TabIndex = 0;
             // 
-            // contactsControl
+            // contactsControl1
             // 
             this.contactsControl.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.contactsControl.Location = new System.Drawing.Point(288, 0);
+            this.contactsControl.Location = new System.Drawing.Point(291, 0);
             this.contactsControl.Name = "contactsControl";
             this.contactsControl.Size = new System.Drawing.Size(223, 305);
-            this.contactsControl.TabIndex = 0;
+            this.contactsControl.TabIndex = 1;
             // 
             // FormMain
             // 
@@ -55,8 +57,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(510, 305);
-            this.Controls.Add(this.identityControl1);
             this.Controls.Add(this.contactsControl);
+            this.Controls.Add(this.identityControl);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -64,16 +66,15 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MViewer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private UIControls.IdentityControl identityControl;
         private UIControls.ContactsControl contactsControl;
-        private UIControls.IdentityControl identityControl1;
-
-
 
     }
 }
