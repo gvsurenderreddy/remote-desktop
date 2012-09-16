@@ -1,46 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace UIControls
+namespace MViewer
 {
-    public partial class ContactsControl : UserControl
+    public partial class FormActions : Form
     {
         #region private members
-
-        EventHandler _closePressed;
 
         #endregion
 
         #region c-tor
 
-        public ContactsControl(EventHandler closePressed)
+        public FormActions()
         {
             InitializeComponent();
-            _closePressed = closePressed;
         }
 
         #endregion
 
         #region event callbacks
-
-        private void ContactsControl_ClosePressed(object sender, EventArgs e)
-        {
-            if (_closePressed != null)
-            {
-                _closePressed.Invoke(sender, e);
-            }
-        }
-
-        private void ContactsControl_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void FormActions_FormClosing(object sender, FormClosingEventArgs e)
         {

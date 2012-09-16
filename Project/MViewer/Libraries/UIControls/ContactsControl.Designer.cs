@@ -34,6 +34,7 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.pnlContacts = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
             this.pnlContacts.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -42,7 +43,7 @@
             this.lbContacts.FormattingEnabled = true;
             this.lbContacts.Location = new System.Drawing.Point(8, 8);
             this.lbContacts.Name = "lbContacts";
-            this.lbContacts.Size = new System.Drawing.Size(177, 225);
+            this.lbContacts.Size = new System.Drawing.Size(177, 199);
             this.lbContacts.TabIndex = 0;
             // 
             // label1
@@ -57,7 +58,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(8, 239);
+            this.btnAdd.Location = new System.Drawing.Point(8, 213);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(55, 23);
             this.btnAdd.TabIndex = 2;
@@ -66,7 +67,7 @@
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(69, 239);
+            this.btnRemove.Location = new System.Drawing.Point(69, 213);
             this.btnRemove.Name = "btnRemove";
             this.btnRemove.Size = new System.Drawing.Size(55, 23);
             this.btnRemove.TabIndex = 3;
@@ -75,7 +76,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(130, 239);
+            this.btnUpdate.Location = new System.Drawing.Point(130, 213);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(55, 23);
             this.btnUpdate.TabIndex = 9;
@@ -91,18 +92,30 @@
             this.pnlContacts.Controls.Add(this.btnRemove);
             this.pnlContacts.Location = new System.Drawing.Point(15, 28);
             this.pnlContacts.Name = "pnlContacts";
-            this.pnlContacts.Size = new System.Drawing.Size(192, 269);
+            this.pnlContacts.Size = new System.Drawing.Size(192, 243);
             this.pnlContacts.TabIndex = 10;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Red;
+            this.btnClose.Location = new System.Drawing.Point(141, 277);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(66, 23);
+            this.btnClose.TabIndex = 13;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.ContactsControl_ClosePressed);
             // 
             // ContactsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.pnlContacts);
             this.Controls.Add(this.label1);
             this.Name = "ContactsControl";
-            this.Size = new System.Drawing.Size(223, 313);
+            this.Size = new System.Drawing.Size(223, 305);
             this.Load += new System.EventHandler(this.ContactsControl_Load);
             this.pnlContacts.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -118,6 +131,7 @@
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Panel pnlContacts;
+        private System.Windows.Forms.Button btnClose;
 
     }
 }

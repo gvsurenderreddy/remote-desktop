@@ -39,7 +39,6 @@
             this.btnPauseRemote = new System.Windows.Forms.Button();
             this.btnSend = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.pnlControls = new System.Windows.Forms.Panel();
             this.pnlControls.SuspendLayout();
             this.SuspendLayout();
@@ -143,21 +142,10 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Transfer";
             // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.Red;
-            this.btnClose.Location = new System.Drawing.Point(227, 50);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(66, 23);
-            this.btnClose.TabIndex = 11;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            // 
             // pnlControls
             // 
             this.pnlControls.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pnlControls.Controls.Add(this.label1);
-            this.pnlControls.Controls.Add(this.btnClose);
             this.pnlControls.Controls.Add(this.btnVideo);
             this.pnlControls.Controls.Add(this.label4);
             this.pnlControls.Controls.Add(this.btnAudio);
@@ -200,7 +188,6 @@
         private System.Windows.Forms.Button btnPauseRemote;
         private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel pnlControls;
     }
 }
