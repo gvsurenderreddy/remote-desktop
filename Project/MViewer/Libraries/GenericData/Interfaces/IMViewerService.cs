@@ -18,5 +18,9 @@ namespace GenericDataLayer
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/InitializeForm", ReplyAction = "http://tempuri.org/IVideoChatRoom/InitializeFormResponse")]
         void InitializeForm();
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/Ping", ReplyAction = "http://tempuri.org/IVideoChatRoom/PingResponse")]
+        bool Ping();
+
     }
 }

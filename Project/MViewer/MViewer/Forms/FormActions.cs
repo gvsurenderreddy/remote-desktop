@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using UIControls;
 using Utils;
+using GenericDataLayer;
 
 namespace MViewer
 {
@@ -16,22 +17,21 @@ namespace MViewer
         #region private members
 
         public readonly EventHandlers.ActionsEventHandler ActionsObserver;
- 
+        EventHandler _actionButtonPressed;
+
         #endregion
 
         #region c-tor
 
-        //public FormActions()
-        //{
-        //    InitializeComponent();
-        //}
-
-        public FormActions(
-            //EventHandlers.ActionsEventHandler actionsEventHandler
-            )
+        public FormActions()
         {
             InitializeComponent();
+        }
 
+        public FormActions(EventHandler actionsEventHandler)
+        {
+            InitializeComponent();
+            _actionButtonPressed = actionsEventHandler;
             ActionsObserver = new EventHandlers.ActionsEventHandler(ActionTriggered);
         }
 
@@ -47,9 +47,8 @@ namespace MViewer
 
         private void ActionTriggered(object sender, EventArgs e)
         {
-            //ActionsObserver.Invoke(sender, (ActionsEventArgs)e);
-            // todo: use the Controller and take specific action when event has been triggered using the Actions control
-
+            // use the Controller and take specific action when event has been triggered using the Actions control
+            _actionButtonPressed.Invoke(sender, e);
         }
 
         #endregion

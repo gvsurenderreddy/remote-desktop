@@ -47,6 +47,11 @@ namespace GenericDataLayer
             }
         }
 
+        public bool Ping()
+        {
+            return true;
+        }
+
         //public void SendWebcamCapture2(Stream stream)
         //{
         //    try

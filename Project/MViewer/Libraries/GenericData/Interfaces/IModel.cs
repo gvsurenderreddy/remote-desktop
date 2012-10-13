@@ -10,6 +10,12 @@ namespace GenericDataLayer
     public interface IModel
     {
         Contact PerformContactOperation(ContactsEventArgs e);
+        void PingContacts();
+
+        IPresenterManager PresenterManager
+        {
+            get;
+        }
 
         Identity Identity
         {
@@ -22,6 +28,16 @@ namespace GenericDataLayer
         }
 
         DataView Contacts
+        {
+            get;
+        }
+
+        IClientController ClientController
+        {
+            get;
+        }
+
+        IServerController ServerController
         {
             get;
         }

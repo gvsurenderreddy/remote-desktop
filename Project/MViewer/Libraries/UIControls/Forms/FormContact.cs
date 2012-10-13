@@ -48,7 +48,7 @@ namespace UIControls
                     UpdatedContact = contact
                 };
             contactsUpdated.Invoke(this, eventArgs);
-            // todo: retrieve contact info
+            // retrieve contact info
             txtFriendlyName.Text = eventArgs.UpdatedContact.FriendlyName;
             txtIdentity.Text = eventArgs.UpdatedContact.Identity;
 
@@ -88,8 +88,6 @@ namespace UIControls
                 return;
             }
             
-            // todo: use the contacts repository only in the Model class
-
             switch (_formMode)
             {
                 case GenericEnums.FormMode.Add:

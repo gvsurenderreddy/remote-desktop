@@ -5,6 +5,10 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Threading;
 using GenericDataLayer;
+using System.ServiceModel.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace MViewer
 {
@@ -27,9 +31,9 @@ namespace MViewer
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            _controller = new Controller(); 
+            _controller = new Controller();
             _controller.StartApplication();
-
+          
             // todo: use manual reset event instead of thread.sleep(0)
             Thread.Sleep(Timeout.Infinite);
 

@@ -59,4 +59,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     {
         base.Channel.InitializeForm();
     }
+
+    public bool Ping()
+    {
+        return base.Channel.Ping();
+    }
 }

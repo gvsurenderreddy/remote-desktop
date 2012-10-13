@@ -38,7 +38,9 @@ namespace DataAccessLayer
                 dtContacts.Columns.Add(new DataColumn("ContactNo", typeof(string)));
                 dtContacts.Columns.Add(new DataColumn("Identity", typeof(string)));
                 dtContacts.Columns.Add(new DataColumn("FriendlyName", typeof(string)));
-
+                dtContacts.Columns.Add(new DataColumn("Status", typeof(string)));
+                dtContacts.Columns.Add(new DataColumn("ConnectedPeers", typeof(string)));
+                
                 _contactsDataSet.Tables.Add(dtContacts);
                 _contactsDataView = _contactsDataSet.Tables[0].DefaultView;
             }

@@ -39,7 +39,7 @@ namespace GenericDataLayer
 
         public string GenerateIdentity(string newAddress, int newPort, string newPath)
         {
-            string toEncrypt = "https://" + newAddress + ":" + newPort.ToString() + "/" + newPath;
+            string toEncrypt = "http://" + newAddress + ":" + (newPort - 1).ToString() + "/" + newPath;
             string encrypted = Utils.Cryptography.TrippleDESEncrypt(toEncrypt, true);
             _myIdentity = encrypted;
             return MyIdentity;

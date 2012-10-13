@@ -47,12 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessObjects\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Contact.cs" />
     <Compile Include="BusinessObjects\ContactEndpoint.cs" />
     <Compile Include="BusinessObjects\CustomCertificateValidator.cs" />
     <Compile Include="BusinessObjects\Identity.cs" />
     <Compile Include="BusinessObjects\MViewerClient.cs" />
-    <Compile Include="EventArgs\FrontEndActionsEventArgs.cs" />
+    <Compile Include="BusinessObjects\Presenter.cs" />
+    <Compile Include="BusinessObjects\PresenterManager.cs" />
+    <Compile Include="BusinessObjects\RoomManager.cs" />
+    <Compile Include="BusinessObjects\WebCamCapture\WebcamCapture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BusinessObjects\WebCamCapture\Win32APIConstants.cs" />
+    <Compile Include="BusinessObjects\WebCamCapture\Win32APIMethods.cs" />
+    <Compile Include="EventArgs\CaptureEventArgs.cs" />
+    <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
     <Compile Include="EventArgs\IdentityEventArgs.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
@@ -60,7 +70,12 @@
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\IMViewerChannel.cs" />
     <Compile Include="Interfaces\IMViewerService.cs" />
+    <Compile Include="Interfaces\IPresenter.cs" />
+    <Compile Include="Interfaces\IPresenterManager.cs" />
+    <Compile Include="Interfaces\IRoom.cs" />
+    <Compile Include="Interfaces\IRoomManager.cs" />
     <Compile Include="Interfaces\IServerController.cs" />
+    <Compile Include="Interfaces\IVideoRoom.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="BusinessObjects\MViewerServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +85,9 @@
       <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BusinessObjects\WebCamCapture\CAMERA.ICO" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

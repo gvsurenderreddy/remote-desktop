@@ -11,7 +11,8 @@
     <RootNamespace>MViewer</RootNamespace>
     <AssemblyName>MViewer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -37,6 +38,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormVideoRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormVideoRoom.Designer.cs">
+      <DependentUpon>FormVideoRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMyWebcam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMyWebcam.Designer.cs">
+      <DependentUpon>FormMyWebcam.cs</DependentUpon>
+    </Compile>
     <Compile Include="MVC\Controller.cs" />
     <Compile Include="Forms\FormActions.cs">
       <SubType>Form</SubType>
@@ -61,6 +77,8 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC\Model.cs" />
+    <Compile Include="NotificationListener\ConnectedClient.cs" />
+    <Compile Include="NotificationListener\TcpServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Global\SystemConfiguration.cs" />
@@ -72,6 +90,12 @@
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMyWebcam.resx">
+      <DependentUpon>FormMyWebcam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormVideoRoom.resx">
+      <DependentUpon>FormVideoRoom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -80,6 +104,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">

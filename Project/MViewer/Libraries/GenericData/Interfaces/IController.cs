@@ -12,10 +12,10 @@ namespace GenericDataLayer
         void StartApplication();
         void StopApplication();
         void NotifyContactsObserver();
-        //void InitializeWCFClient();
-        //void InitializeWCFServer();
+        void NotificationReceived();
         void IdentityUpdated(object sender, IdentityEventArgs e);
-        void ActionTriggered(object sender, FrontEndActionsEventArgs e);
+        void PerformRoomAction(object sender, RoomActionEventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs e);
+        void StartVideoChat(WebcamCapture webcamControl, RoomActionEventArgs e);
     }
 }

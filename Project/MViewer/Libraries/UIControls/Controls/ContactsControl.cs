@@ -55,8 +55,14 @@ namespace UIControls
                 ControlCrossThreading.SetValue(dgvContacts, dvContacts, "Datasource");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Identity", false, "Visible");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "ContactNo", false, "Visible");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "ConnectedPeers", false, "Visible");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width - 2, "Width");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width / 2 - 1, "Width");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Status", dgvContacts.Width / 2 - 1, "Width");
+
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", DataGridViewTriState.False, "Resizable");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Status", DataGridViewTriState.False, "Resizable");
+                
             }
             else
             {
@@ -93,7 +99,7 @@ namespace UIControls
         {
             DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
             Contact contact = new Contact(int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), string.Empty, string.Empty);
-            // todo: pass the removed contact no as argument
+            // pass the removed contact no as argument
             _contactsUpdated.Invoke(this, new ContactsEventArgs()
                 {
                     UpdatedContact = contact,
@@ -107,8 +113,6 @@ namespace UIControls
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // todo: use the contacts repository only in the Model class
-            
             DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
             
             FormContact formContact = new FormContact(GenericEnums.FormMode.Update, int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), _contactsUpdated);
@@ -154,6 +158,18 @@ namespace UIControls
             );
         }
 
+        #endregion
+
+        #region public methods
+
+        public KeyValuePair<string, string> GetSelectedContact()
+        {
+            DataGridViewSelectedRowCollection selectedRows = dgvContacts.SelectedRows;
+            string identity = selectedRows[0].Cells["Identity"].Value.ToString();
+            string friendlyName = selectedRows[0].Cells["FriendlyName"].Value.ToString();
+            KeyValuePair<string, string> contact = new KeyValuePair<string, string>(identity, friendlyName);
+            return contact;
+        }
 
         #endregion
     }

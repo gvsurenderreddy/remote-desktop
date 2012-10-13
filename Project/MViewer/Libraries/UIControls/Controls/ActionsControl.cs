@@ -68,20 +68,20 @@ namespace UIControls
             {
                 signalType = GenericEnums.SignalType.Pause;
             }
-            GenericEnums.FrontEndActionType actionType = GenericEnums.FrontEndActionType.Undefined;
+            GenericEnums.RoomActionType actionType = GenericEnums.RoomActionType.Undefined;
             if (sender == btnAudio || sender == btnMuteAudio)
             {
-                actionType = GenericEnums.FrontEndActionType.Audio;
+                actionType = GenericEnums.RoomActionType.Audio;
             }
             else
             {
                 if (sender == btnVideo || sender == btnPauseVideo)
                 {
-                    actionType = GenericEnums.FrontEndActionType.Video;
+                    actionType = GenericEnums.RoomActionType.Video;
                 }
                 else
                 {
-                    actionType = GenericEnums.FrontEndActionType.Remote;
+                    actionType = GenericEnums.RoomActionType.Remote;
                 }
             }
 
@@ -89,8 +89,8 @@ namespace UIControls
             ToggleStatusUpdate(signalType, (Button)sender);
 
             // trigger the event so that the Controller does specific action
-            // todo: provide the action type as event arg
-            FrontEndActionsEventArgs args = new FrontEndActionsEventArgs()
+            // provide the action type as event arg
+            RoomActionEventArgs args = new RoomActionEventArgs()
             {
                 ActionType = actionType,
                 SignalType = signalType

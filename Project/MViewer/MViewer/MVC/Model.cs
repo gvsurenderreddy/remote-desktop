@@ -7,6 +7,7 @@ using UIControls;
 using DataAccessLayer;
 using Utils;
 using System.Data;
+using BusinessLogicLayer;
 
 namespace MViewer
 {
@@ -17,25 +18,47 @@ namespace MViewer
         Identity _identity;
         DataView _dvContacts;
 
+        IClientController _clientController;
+        IServerController _serverController;
+
+        IPresenterManager _presenterManager;
+       
         #endregion
 
         #region c-tor
 
         public Model()
         {
-            //IdentityUpdatedEvent += new EventHandlers.IdentityEventHandler(IdentityUpdated);
             _identity = new Identity(SystemConfiguration.FriendlyName);
             SystemConfiguration.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.MyAddress, SystemConfiguration.Port, SystemConfiguration.ServicePath);
             _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+            _clientController = new ClientController();
+
+            ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
+            _serverController = new ServerController(myEndpoint);
+            _presenterManager = new PresenterManager();
         }
 
         #endregion
 
         #region public methods
 
-        public void ContactsUpdated()
+        public void PingContacts()
         {
-            // todo: implement ContactsUpdated
+            // todo: ping all contacts to get their status
+            foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
+            {
+                string identity = contact["Identity"].ToString();
+                try
+                {
+                    bool isOnline = _clientController.IsContactOnline(identity);
+                    contact["Status"] = GenericEnums.ContactStatus.Online;
+                }
+                catch (Exception ex)
+                {
+                    contact["Status"] = GenericEnums.ContactStatus.Offline;
+                }
+            }
         }
 
         public Contact PerformContactOperation(ContactsEventArgs e)
@@ -63,6 +86,7 @@ namespace MViewer
                     break;
                 case GenericEnums.ContactsOperation.Load:
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+                    
                     break;
             } 
 
@@ -72,6 +96,11 @@ namespace MViewer
         #endregion
 
         #region proprieties
+
+        public IPresenterManager PresenterManager
+        {
+            get { return _presenterManager; }
+        }
 
         public string FriendlyName
         {
@@ -86,6 +115,16 @@ namespace MViewer
         public DataView Contacts
         {
             get { return _dvContacts; }
+        }
+
+        public IClientController ClientController
+        {
+            get { return _clientController; }
+        }
+
+        public IServerController ServerController
+        {
+            get { return _serverController; }
         }
 
         #endregion

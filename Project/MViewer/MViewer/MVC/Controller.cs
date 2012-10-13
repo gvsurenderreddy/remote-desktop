@@ -18,9 +18,6 @@ namespace MViewer
         IView _view;
         IModel _model;
 
-        IClientController _clientController;
-        IServerController _serverController;
-
         #endregion
 
         #region c-tor
@@ -32,25 +29,94 @@ namespace MViewer
             // initalize the view
             _view = new View(_model);
 
-            _clientController = new ClientController();
-            ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(_model.Identity.MyIdentity);
-            _serverController = new ServerController(myEndpoint);
+
         }
 
         #endregion
 
         #region public event handlers
 
+        private void WebCamImageCaptured(object source, EventArgs e)
+        {
+            try
+            {
+                CaptureEventArgs args = (CaptureEventArgs)e;
+                // display the captured picture
+                _view.UpdateWebcapture(args.CapturedImage);
+
+                byte[] bytes = ImageConverter.imageToByteArray(args.CapturedImage);
+
+                //while (!_audioCapture.AudioCaptureReady)
+                //{
+                //    Thread.Sleep(200);
+                //}
+
+                // todo: send to server
+                // loop on all connected contacts and send them the captures
+                //_model.ClientController.GetClient(((CaptureEventArgs)e).
+                //_webcamClient.SendWebcamCapture(bytes);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                //_webcamCapture.StopCapturing();
+            }
+        }
+
+        public void NotificationReceived()
+        {
+            _model.PingContacts();
+        }
+
         public void IdentityUpdated(object sender, IdentityEventArgs e)
         {
-            // todo: implement IdentityUpdated
             _model.Identity.UpdateFriendlyName(e.FriendlyName);
         }
 
-        public void ActionTriggered(object sender, FrontEndActionsEventArgs e)
+        public void StartVideoChat(WebcamCapture webcamControl , RoomActionEventArgs e)
+        {
+            // create Presenter and start the presentation
+            int timerInterval = 20;
+            int height = 354, width = 311;
+
+            IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
+            _model.PresenterManager.AddPresenter(e.Identity, presenter);
+            _model.PresenterManager.StartPresentation(e.Identity);
+        }
+
+        public void PerformRoomAction(object sender, RoomActionEventArgs e)
         {
             // todo: perform specific actions when action has been triggered
-            
+            switch (e.ActionType)
+            {
+                case GenericEnums.RoomActionType.Audio:
+
+                    break;
+                case GenericEnums.RoomActionType.Remote:
+
+                    break;
+                case GenericEnums.RoomActionType.Send:
+
+                    break;
+                case GenericEnums.RoomActionType.Video:
+                    switch (e.SignalType)
+                    {
+                        case GenericEnums.SignalType.Start:
+                            // start the video chat
+                            Thread t = new Thread(delegate()
+                            {
+                                StartVideoChat(sender, e);
+                            });
+                            t.SetApartmentState(ApartmentState.STA);
+                            t.Start();
+                            break;
+                        case GenericEnums.SignalType.Pause:
+
+                            break;
+                    }
+                    break;
+            }
         }
 
         public Contact PerformContactsOperation(object sender, ContactsEventArgs e)
@@ -71,16 +137,6 @@ namespace MViewer
 
         #region public methods
 
-        //public void InitializeWCFClient()
-        //{
-
-        //}
-
-        //public void InitializeWCFServer()
-        //{
-
-        //}
-
         public void StartApplication()
         {
             // bind the observers
@@ -90,15 +146,17 @@ namespace MViewer
             _view.ShowMainForm(false);
             NotifyContactsObserver();
 
-            // todo: ping every single contact in the list and update it's status
-
             // todo: use manual reset event instead of thread.sleep(0)
             Thread.Sleep(2000);
 
             _view.NotifyIdentityObserver();
 
-            _serverController.StartServer();
+            _model.ServerController.StartServer();
 
+            Thread.Sleep(5000);
+
+            // ping every single contact in the list and update it's status
+            NotificationReceived();
         }
 
         public void StopApplication()
@@ -106,7 +164,7 @@ namespace MViewer
             // unbind the observers
             _view.BindObservers(false);
 
-            _serverController.StopServer();
+            _model.ServerController.StopServer();
 
             // exit the environment
             Environment.Exit(0);
@@ -132,7 +190,27 @@ namespace MViewer
 
         #endregion
 
+        #region private methods
+
+        void StartVideoChat(object sender, RoomActionEventArgs e)
+        {
+            _model.ClientController.AddClient(e.Identity);
+            //_model.ClientController.StartClient(e.Identity);
+            _view.ShowMyWebcamForm(e);
+
+            //int timerInterval = 20;
+            //int height = 354, width = 311;
+            //WebcamCapture webcamControl = _view.GetWebcaptureControl;
+
+            //IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
+            //_model.PresenterManager.AddPresenter(e.Identity, presenter);
+            //_model.PresenterManager.StartPresentation(e.Identity);
+        }
+
+        #endregion
+
         #region proprieties
+
 
 
         #endregion

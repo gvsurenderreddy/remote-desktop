@@ -68,7 +68,7 @@ namespace MViewer
         private void IdentityUpdated(object sender, EventArgs e)
         {
             IdentityEventArgs args = (IdentityEventArgs)e;
-            // todo: update the identity in the Model by using the Controller
+            // update the identity in the Model by using the Controller
             Program.Controller.IdentityUpdated(sender, args);
         }
 
@@ -91,16 +91,11 @@ namespace MViewer
         #endregion
 
         #region public methods
-        
-        //public void NotifyContactsObserver(DataView dvContacts)
-        //{
-        //    contactsControl.SetContacts(dvContacts);
-        //}
 
-        //public void NotifyIdentityObserver(object sender, IdentityEventArgs e)
-        //{
-        //    IdentityObserver.Invoke(sender, e);
-        //}
+        public KeyValuePair<string, string> GetSelectedContact()
+        {
+            return contactsControl.GetSelectedContact();
+        }
 
         #endregion
     }

@@ -9,6 +9,7 @@ using System.Drawing;
 using UIControls;
 using Utils;
 using System.Data;
+using MViewer;
 
 namespace MViewer
 {
@@ -16,11 +17,14 @@ namespace MViewer
     {
         #region private members
 
-        FormMain _formMain; 
-        FormActions _formActions;
+        FormMain _formMain;
+        FormActions _formActions; 
+        FormMyWebcam _formWebCapture;
 
         Dictionary<Type, object> _observers;
         bool _observersActive;
+
+        IRoomManager _roomManager = new RoomManager();
 
         IModel _model;
 
@@ -38,7 +42,7 @@ namespace MViewer
         {
             _model = model;
             _formMain = new FormMain();
-            _formActions = new FormActions();
+            _formActions = new FormActions(new EventHandler(this.PerformRoomAction));
         }
 
         #endregion
@@ -61,13 +65,43 @@ namespace MViewer
             _observersActive = bind;
         }
 
+        public void ShowMyWebcamForm(RoomActionEventArgs e)
+        {
+            _formWebCapture = new FormMyWebcam(e);
+            _formWebCapture.ShowDialog();
+        }
+
+        public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
+        {
+            // todo: implement ShowVideoChatForm
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            IRoom room = null;
+            IntPtr handle = IntPtr.Zero;
+            switch(args.ActionType)
+            {
+                case GenericEnums.RoomActionType.Audio:
+
+                    break;
+                case GenericEnums.RoomActionType.Remote:
+
+                    break;
+                case GenericEnums.RoomActionType.Video:
+                    room = new FormVideoRoom(ref handle);
+                    room.SetPartnerName(args.FriendlyName);
+                    OpenRoomForm(room);
+                    break;
+            }
+            _roomManager.AddRoom(args.Identity, room);
+            return handle;
+        }
+        
         public void NotifyContactsObserver()
         {
             EventHandlers.ContactsEventHandler contactsEventHandler = 
                 (EventHandlers.ContactsEventHandler)_observers[typeof(EventHandlers.ContactsEventHandler)];
             contactsEventHandler.Invoke(this, new ContactsEventArgs() 
             { 
-                ContactsDV = _model.Contacts ,
+                ContactsDV = _model.Contacts,
                 Operation = GenericEnums.ContactsOperation.Load
             });
         }
@@ -84,7 +118,6 @@ namespace MViewer
 
         public void NotifyActionsObserver()
         {
-            // todo: use NotifyActionsObserver
             EventHandlers.ActionsEventHandler actionsObserver = (EventHandlers.ActionsEventHandler)_observers[typeof(EventHandlers.ActionsEventHandler)];
             actionsObserver.Invoke(this, null);
         }
@@ -105,9 +138,34 @@ namespace MViewer
             }
         }
 
+        public void PerformRoomAction(object sender, EventArgs e)
+        {
+            string activeRoom = _roomManager.ActiveRoom;
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            if (string.IsNullOrEmpty(activeRoom))
+            {
+                // this is the first opened room
+                // retrieve the selected contact from the Contacts list
+                KeyValuePair<string, string> contact = _formMain.GetSelectedContact();
+                args.Identity = contact.Key;
+                args.FriendlyName = contact.Value;
+            }
+            Program.Controller.PerformRoomAction(sender, args);
+        }
+
+        public void UpdateWebcapture(Image image)
+        {
+            _formWebCapture.SetPicture(image);
+        }
+
         #endregion
 
         #region private methods
+
+        void OpenRoomForm(Object threadContext)
+        {
+            ((Form)threadContext).Show();
+        }
 
         void OpenMainForm(object identity)
         {
@@ -127,6 +185,18 @@ namespace MViewer
 
         #region proprieties
 
+        public WebcamCapture GetWebcaptureControl
+        {
+            get
+            {
+                return _formWebCapture.CaptureControl;
+            }
+        }
+
+        public IRoomManager RoomManager
+        {
+            get { return _roomManager; }
+        }
 
         #endregion
     }

@@ -1,9 +1,3 @@
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\ResolveAssemblyReference.cache
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.FormActions.resources
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.FormMain.resources
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.Properties.Resources.resources
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\GenerateResource.read.1.tlog
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\GenerateResource.write.1.tlog
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Images\actions.ico
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Images\chatBackg.jpg
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Images\chatRoomIcon.ico
@@ -20,5 +14,13 @@ F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DataAcces
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\GenericDataLayer.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\UIControls.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Utils.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.FormActions.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.FormMain.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.FormMyWebcam.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.FormVideoRoom.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.Properties.Resources.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\GenerateResource.write.1.tlog
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.exe
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.pdb

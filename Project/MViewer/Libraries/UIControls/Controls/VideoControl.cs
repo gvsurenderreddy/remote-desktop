@@ -15,5 +15,19 @@ namespace UIControls
         {
             InitializeComponent();
         }
+
+        #region public methods
+
+        public void SetPartnerName(string friendlyName)
+        {
+            txtPartner.Text = friendlyName;
+        }
+
+        public void SetPicture(Image picture)
+        {
+            pbVideo.Image = picture;
+        }
+
+        #endregion
     }
 }

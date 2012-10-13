@@ -11,6 +11,19 @@ namespace UIControls.CrossThreadOperations
     {
         #region public static methods
 
+        public static void GetValue(Control control, string propertyName, ref object value)
+        {
+            if (control.InvokeRequired)
+            {
+                GetProperty(control, propertyName, ref value);
+            }
+            else
+            {
+                GetProperty(control, propertyName, ref value);
+            }
+        }
+
+
         public static void SetValue(Control control, object value, string propertyName)
         {
             if (control.InvokeRequired)
@@ -38,6 +51,28 @@ namespace UIControls.CrossThreadOperations
         #endregion
 
         #region private static methods
+
+        static void GetProperty(Control control, string propertyName, ref object value)
+        {
+            object value2 = null;
+            foreach (PropertyInfo property in control.GetType().GetProperties())
+            {
+                if (property.Name.ToLower() == propertyName.ToLower())
+                {
+                    control.Invoke
+                    (
+                        new MethodInvoker
+                        (
+                            delegate
+                            {
+                                value2 = property.GetValue(control, null);
+                            }
+                        )
+                    );
+                }
+            }
+            value = value2;
+        }
 
         static void SetProperty(Control control, string propertyName, object value)
         {

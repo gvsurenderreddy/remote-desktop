@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GenericDataLayer;
 using System.ServiceModel;
+using System.Threading;
 
 namespace BusinessLogicLayer
 {
@@ -20,7 +21,14 @@ namespace BusinessLogicLayer
 
         public ServerController(ContactEndpoint endpoint)
         {
-            _address = "https://" + endpoint.Address + ":" + endpoint.Port.ToString() + endpoint.Path;
+            if (endpoint.Port != 0)
+            {
+                _address = "https://" + endpoint.Address + ":" + (endpoint.Port + 1).ToString() + endpoint.Path;
+            }
+            else
+            {
+                _address = "https://" + endpoint.Address + endpoint.Path;
+            }
             _server = ServerBuilder.BuildWCFServer(_address);
         }
 
@@ -37,8 +45,17 @@ namespace BusinessLogicLayer
 
         public void StartServer()
         {
-            _server.Open();
+            Thread t = new Thread(delegate()
+            {
+                _server.Open();
+                string addr = _server.Description.Endpoints[0].ListenUri.AbsoluteUri;
+                Console.WriteLine("Listening at: ");
+                Console.WriteLine(addr); 
+                
+                Thread.Sleep(Timeout.Infinite);
 
+            });
+            t.Start();
         }
 
         public void StopServer()

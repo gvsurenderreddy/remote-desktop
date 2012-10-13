@@ -10,7 +10,7 @@ namespace UIControls
     {
         public delegate void IdentityEventHandler(object o, IdentityEventArgs e);
         public delegate void ContactsEventHandler(object o, ContactsEventArgs e);
-        public delegate void ActionsEventHandler(object o, FrontEndActionsEventArgs e);
+        public delegate void ActionsEventHandler(object o, RoomActionEventArgs e);
 
     }
 }

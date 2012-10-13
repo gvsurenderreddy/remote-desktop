@@ -6,15 +6,27 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public class FrontEndActionsEventArgs : EventArgs
+    public class RoomActionEventArgs : EventArgs
     {
-        public GenericEnums.FrontEndActionType ActionType
+        public GenericEnums.RoomActionType ActionType
         {
             get;
             set;
         }
 
         public GenericEnums.SignalType SignalType
+        {
+            get;
+            set;
+        }
+
+        public string FriendlyName
+        {
+            get;
+            set;
+        }
+
+        public string Identity
         {
             get;
             set;

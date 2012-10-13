@@ -16,23 +16,22 @@ namespace BusinessLogicLayer
 
         public static MViewerClient BuildWCFClient(ContactEndpoint contactEndpoint)
         {
-            X509Certificate2 certificate = null; // todo: initialize the client certificate
+            X509Certificate2 certificate = new X509Certificate2("c:\\Client.pfx");
 
             MViewerClient client;
 
             WSHttpBinding binding = CreateServerBinding();
-            string address = "https://" + contactEndpoint.Address + ":" + contactEndpoint.Port.ToString() + "/" + contactEndpoint.Path;
+            string address = "http://" + contactEndpoint.Address + ":" + contactEndpoint.Port.ToString() + "/" + contactEndpoint.Path;
             EndpointAddress endpoint = CreateServerEndpoint(address);
 
             client = new MViewerClient(binding, endpoint);
+            client.ClientCredentials.ClientCertificate.Certificate = certificate;
 
             ContractDescription contract = ContractDescription.GetContract(typeof(IMViewerService), typeof(MViewerClient));
             client.Endpoint.Contract = contract;
             client.Endpoint.Binding = CreateServerBinding();
             client.Endpoint.Binding.Name = "binding1_IVideoChatRoom";
-
-            client.ClientCredentials.ClientCertificate.Certificate = certificate;
-
+            
             return client;
         }
 
