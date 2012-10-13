@@ -104,6 +104,16 @@ namespace BusinessLogicLayer
             return client.Ping();
         }
 
+        public Dictionary<string, byte[]> SendCapture(byte[] capture)
+        {
+            Dictionary<string, byte[]> receivedCaptures = new Dictionary<string, byte[]>();
+            foreach (MViewerClient client in _clients.Values)
+            {
+                client.SendWebcamCapture(capture);
+            }
+            return receivedCaptures;
+        }
+
         #endregion
     }
 }

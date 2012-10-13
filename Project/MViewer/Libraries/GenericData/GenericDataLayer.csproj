@@ -51,6 +51,12 @@
     <Compile Include="BusinessObjects\Contact.cs" />
     <Compile Include="BusinessObjects\ContactEndpoint.cs" />
     <Compile Include="BusinessObjects\CustomCertificateValidator.cs" />
+    <Compile Include="BusinessObjects\FrmPrivateRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessObjects\FrmPrivateRoom.Designer.cs">
+      <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
+    </Compile>
     <Compile Include="BusinessObjects\Identity.cs" />
     <Compile Include="BusinessObjects\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Presenter.cs" />
@@ -88,6 +94,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BusinessObjects\WebCamCapture\CAMERA.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BusinessObjects\FrmPrivateRoom.resx">
+      <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

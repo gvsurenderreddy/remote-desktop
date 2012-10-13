@@ -8,10 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace GenericData
+namespace GenericDataLayer
 {
     public partial class FrmVideoChatRoom : Form
     {
+        // todo: remove FrmVideoChatRoom
+
         public FrmVideoChatRoom()
         {
             InitializeComponent();

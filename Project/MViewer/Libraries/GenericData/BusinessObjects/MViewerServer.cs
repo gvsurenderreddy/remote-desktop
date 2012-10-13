@@ -17,23 +17,35 @@ namespace GenericDataLayer
     //   )]
     public class MViewerServer : IMViewerService
     {
+        #region private members
+
+        FrmVideoChatRoom form;
+        //Computer computer = new Computer();
+
+        #endregion
+
         public MViewerServer()
         {
-            InitializeForm();
+            
         }
 
         public void InitializeForm()
         {
             Thread t = new Thread(delegate()
             {
-                //form.ShowDialog();
+                form = new FrmVideoChatRoom();
+                form.ShowDialog();
             });
             t.Start();
         }
 
         public void SendWebcamCapture(byte[] capture)
         {
-            //form.DisplayCapture(capture);
+            if (form == null)
+            { 
+                InitializeForm(); 
+            }
+            form.DisplayCapture(capture);
             GC.Collect();
         }
 

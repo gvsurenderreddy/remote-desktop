@@ -53,8 +53,7 @@ namespace MViewer
 
                 // todo: send to server
                 // loop on all connected contacts and send them the captures
-                //_model.ClientController.GetClient(((CaptureEventArgs)e).
-                //_webcamClient.SendWebcamCapture(bytes);
+                Dictionary<string, byte[]> receivedCaptures = _model.ClientController.SendCapture(bytes);
 
             }
             catch (Exception ex)
@@ -153,7 +152,7 @@ namespace MViewer
 
             _model.ServerController.StartServer();
 
-            Thread.Sleep(5000);
+            Thread.Sleep(2000);
 
             // ping every single contact in the list and update it's status
             NotificationReceived();
@@ -164,6 +163,7 @@ namespace MViewer
             // unbind the observers
             _view.BindObservers(false);
 
+            // todo: update the StopApplication method
             _model.ServerController.StopServer();
 
             // exit the environment

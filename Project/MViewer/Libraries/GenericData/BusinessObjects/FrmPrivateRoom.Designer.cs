@@ -1,4 +1,4 @@
-﻿namespace GenericData
+﻿namespace GenericDataLayer
 {
     partial class FrmVideoChatRoom
     {

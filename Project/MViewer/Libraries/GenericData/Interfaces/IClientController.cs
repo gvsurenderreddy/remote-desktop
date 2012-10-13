@@ -12,5 +12,6 @@ namespace GenericDataLayer
         void AddClient(string identity);
         MViewerClient GetClient(string identity);
         bool IsContactOnline(string identity);
+        Dictionary<string, byte[]> SendCapture(byte[] capture);
     }
 }
