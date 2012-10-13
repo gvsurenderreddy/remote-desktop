@@ -77,8 +77,6 @@
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="MVC\Model.cs" />
-    <Compile Include="NotificationListener\ConnectedClient.cs" />
-    <Compile Include="NotificationListener\TcpServer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Global\SystemConfiguration.cs" />
