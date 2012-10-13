@@ -48,6 +48,7 @@
             // 
             this.lblUser.AutoSize = true;
             this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.lblUser.Location = new System.Drawing.Point(12, 13);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(66, 16);

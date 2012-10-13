@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormActions));
-            this.actionsControl1 = new UIControls.ActionsControl();
+            this.actionsControl1 = new UIControls.ActionsControl(this.ActionTriggered);
             this.SuspendLayout();
             // 
             // actionsControl1

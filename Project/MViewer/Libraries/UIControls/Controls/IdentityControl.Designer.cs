@@ -58,6 +58,7 @@
             this.txtFriendlyName.Name = "txtFriendlyName";
             this.txtFriendlyName.Size = new System.Drawing.Size(193, 20);
             this.txtFriendlyName.TabIndex = 2;
+            this.txtFriendlyName.TextChanged += new System.EventHandler(this.txtFriendlyName_TextChanged);
             this.txtFriendlyName.Leave += new System.EventHandler(this.txtFriendlyName_Leave);
             // 
             // txtMyID

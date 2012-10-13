@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Utils;
+using GenericDataLayer;
 
 namespace UIControls
 {
@@ -14,6 +15,7 @@ namespace UIControls
     {
         #region private members
 
+        EventHandler _actionTriggered;
 
         #endregion
 
@@ -22,6 +24,14 @@ namespace UIControls
         public ActionsControl()
         {
             InitializeComponent();
+
+        }
+
+        public ActionsControl(EventHandler actionTriggered)
+        {
+            InitializeComponent();
+
+            _actionTriggered = actionTriggered;
         }
 
         #endregion
@@ -48,34 +58,55 @@ namespace UIControls
 
         private void BtnAction_Click(object sender, EventArgs e)
         {
-            ButtonStatuses.ButtonType buttonType = ButtonStatuses.ButtonType.Undefined;
-            // todo: do specific action , check what button was clicked by looking at the sender
+            GenericEnums.SignalType signalType = GenericEnums.SignalType.Undefined;
+            // do specific action , check what button was clicked by looking at the sender
             if (sender == btnAudio || sender == btnVideo || sender == btnRemote)
             {
-                // todo: perform specific action when the start button was pressed
-
-                buttonType = ButtonStatuses.ButtonType.Start;
+                signalType = GenericEnums.SignalType.Start;
             }
             else
             {
-                // todo: perform specific action when the pause button was pressed
-
-                buttonType = ButtonStatuses.ButtonType.Pause;
+                signalType = GenericEnums.SignalType.Pause;
+            }
+            GenericEnums.FrontEndActionType actionType = GenericEnums.FrontEndActionType.Undefined;
+            if (sender == btnAudio || sender == btnMuteAudio)
+            {
+                actionType = GenericEnums.FrontEndActionType.Audio;
+            }
+            else
+            {
+                if (sender == btnVideo || sender == btnPauseVideo)
+                {
+                    actionType = GenericEnums.FrontEndActionType.Video;
+                }
+                else
+                {
+                    actionType = GenericEnums.FrontEndActionType.Remote;
+                }
             }
 
             // finally, update the button text
-            ToggleStatusUpdate(buttonType, (Button)sender);
+            ToggleStatusUpdate(signalType, (Button)sender);
+
+            // trigger the event so that the Controller does specific action
+            // todo: provide the action type as event arg
+            FrontEndActionsEventArgs args = new FrontEndActionsEventArgs()
+            {
+                ActionType = actionType,
+                SignalType = signalType
+            };
+            _actionTriggered.Invoke(this, args);
         }
 
         #endregion
 
         #region private methods
 
-        void ToggleStatusUpdate(ButtonStatuses.ButtonType buttonType, Button button)
+        void ToggleStatusUpdate(GenericEnums.SignalType buttonType, Button button)
         {
             switch (buttonType)
             {
-                case ButtonStatuses.ButtonType.Start:
+                case GenericEnums.SignalType.Start:
                     if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
                     {
                         button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
@@ -85,7 +116,7 @@ namespace UIControls
                         button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
                     }
                     break;
-                case ButtonStatuses.ButtonType.Pause:
+                case GenericEnums.SignalType.Pause:
                     if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
                     {
                         button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();

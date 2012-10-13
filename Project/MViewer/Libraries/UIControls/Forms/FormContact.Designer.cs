@@ -101,6 +101,9 @@
             this.Controls.Add(this.txtIdentity);
             this.Controls.Add(this.label1);
             this.Name = "FormContact";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contact";
             this.ResumeLayout(false);
             this.PerformLayout();

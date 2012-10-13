@@ -28,28 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbContacts = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.pnlContacts = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
+            this.dgvContacts = new System.Windows.Forms.DataGridView();
             this.pnlContacts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lbContacts
-            // 
-            this.lbContacts.FormattingEnabled = true;
-            this.lbContacts.Location = new System.Drawing.Point(8, 8);
-            this.lbContacts.Name = "lbContacts";
-            this.lbContacts.Size = new System.Drawing.Size(177, 199);
-            this.lbContacts.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Location = new System.Drawing.Point(75, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(68, 16);
@@ -92,7 +86,7 @@
             // pnlContacts
             // 
             this.pnlContacts.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.pnlContacts.Controls.Add(this.lbContacts);
+            this.pnlContacts.Controls.Add(this.dgvContacts);
             this.pnlContacts.Controls.Add(this.btnUpdate);
             this.pnlContacts.Controls.Add(this.btnAdd);
             this.pnlContacts.Controls.Add(this.btnRemove);
@@ -113,6 +107,21 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.ContactsControl_ClosePressed);
             // 
+            // dgvContacts
+            // 
+            this.dgvContacts.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgvContacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvContacts.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvContacts.Location = new System.Drawing.Point(0, 0);
+            this.dgvContacts.MultiSelect = false;
+            this.dgvContacts.Name = "dgvContacts";
+            this.dgvContacts.ReadOnly = true;
+            this.dgvContacts.RowHeadersVisible = false;
+            this.dgvContacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvContacts.ShowEditingIcon = false;
+            this.dgvContacts.Size = new System.Drawing.Size(192, 207);
+            this.dgvContacts.TabIndex = 10;
+            // 
             // ContactsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -123,8 +132,8 @@
             this.Controls.Add(this.label1);
             this.Name = "ContactsControl";
             this.Size = new System.Drawing.Size(223, 305);
-            this.Load += new System.EventHandler(this.ContactsControl_Load);
             this.pnlContacts.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,13 +141,13 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbContacts;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Panel pnlContacts;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.DataGridView dgvContacts;
 
     }
 }

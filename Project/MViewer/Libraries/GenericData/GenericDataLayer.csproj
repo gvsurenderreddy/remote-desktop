@@ -8,8 +8,8 @@
     <ProjectGuid>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GenericData</RootNamespace>
-    <AssemblyName>GenericData</AssemblyName>
+    <RootNamespace>GenericDataLayer</RootNamespace>
+    <AssemblyName>GenericDataLayer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Selectors" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,8 +48,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\Contact.cs" />
-    <Compile Include="Interfaces\IContactsRepository.cs" />
+    <Compile Include="BusinessObjects\ContactEndpoint.cs" />
+    <Compile Include="BusinessObjects\CustomCertificateValidator.cs" />
     <Compile Include="BusinessObjects\Identity.cs" />
+    <Compile Include="BusinessObjects\MViewerClient.cs" />
+    <Compile Include="EventArgs\FrontEndActionsEventArgs.cs" />
+    <Compile Include="EventArgs\ContactsEventArgs.cs" />
+    <Compile Include="EventArgs\IdentityEventArgs.cs" />
+    <Compile Include="Interfaces\IClientController.cs" />
+    <Compile Include="Interfaces\IController.cs" />
+    <Compile Include="Interfaces\IModel.cs" />
+    <Compile Include="Interfaces\IMViewerChannel.cs" />
+    <Compile Include="Interfaces\IMViewerService.cs" />
+    <Compile Include="Interfaces\IServerController.cs" />
+    <Compile Include="Interfaces\IView.cs" />
+    <Compile Include="BusinessObjects\MViewerServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -52,7 +71,6 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

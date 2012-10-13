@@ -7,9 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIControls", "Libraries\UIC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Libraries\Utils\Utils.csproj", "{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericData", "Libraries\GenericData\GenericData.csproj", "{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericDataLayer", "Libraries\GenericData\GenericDataLayer.csproj", "{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "Libraries\DataAccess\DataAccess.csproj", "{B0788A7C-1297-4B64-BE84-10799BD6BE66}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "Libraries\DataAccess\DataAccessLayer.csproj", "{B0788A7C-1297-4B64-BE84-10799BD6BE66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "Libraries\BusinessLogic\BusinessLogicLayer.csproj", "{249C2004-757F-44B9-BE01-B280727B98DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,16 @@ Global
 		{B0788A7C-1297-4B64-BE84-10799BD6BE66}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B0788A7C-1297-4B64-BE84-10799BD6BE66}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B0788A7C-1297-4B64-BE84-10799BD6BE66}.Release|x86.ActiveCfg = Release|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{249C2004-757F-44B9-BE01-B280727B98DC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

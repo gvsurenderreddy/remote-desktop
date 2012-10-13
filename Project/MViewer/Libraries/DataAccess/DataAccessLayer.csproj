@@ -8,8 +8,8 @@
     <ProjectGuid>{B0788A7C-1297-4B64-BE84-10799BD6BE66}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataAccess</RootNamespace>
-    <AssemblyName>DataAccess</AssemblyName>
+    <RootNamespace>DataAccessLayer</RootNamespace>
+    <AssemblyName>DataAccessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,9 +44,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GenericData\GenericData.csproj">
+    <ProjectReference Include="..\GenericData\GenericDataLayer.csproj">
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
-      <Name>GenericData</Name>
+      <Name>GenericDataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

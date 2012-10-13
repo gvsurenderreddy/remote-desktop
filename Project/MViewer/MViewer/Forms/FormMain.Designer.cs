@@ -29,20 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.identityControl = new UIControls.IdentityControl();
-            this.identityControl = new UIControls.IdentityControl(IdentityUpdated);
-            this.contactsControl = new UIControls.ContactsControl();
-            this.contactsControl = new UIControls.ContactsControl(ContactsControl_ClosePressed);
+            this.identityControl = new UIControls.IdentityControl(this.IdentityUpdated);
+            this.contactsControl = new UIControls.ContactsControl(this.ContactsControl_ClosePressed, this.ContactsUpdated);
             this.SuspendLayout();
             // 
-            // identityControl1
+            // identityControl
             // 
             this.identityControl.Location = new System.Drawing.Point(3, 9);
             this.identityControl.Name = "identityControl";
             this.identityControl.Size = new System.Drawing.Size(282, 51);
             this.identityControl.TabIndex = 0;
             // 
-            // contactsControl1
+            // contactsControl
             // 
             this.contactsControl.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.contactsControl.Location = new System.Drawing.Point(291, 0);
@@ -66,7 +64,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MViewer";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
             this.ResumeLayout(false);
 
         }

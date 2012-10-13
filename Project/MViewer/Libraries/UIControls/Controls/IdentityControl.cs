@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using UIControls.CrossThreadOperations;
+using Utils;
+using GenericDataLayer;
 
 namespace UIControls
 {
@@ -15,6 +17,7 @@ namespace UIControls
         #region private members
 
         EventHandler _identityUpdated;
+        bool _textChanged;
 
         #endregion
 
@@ -45,19 +48,29 @@ namespace UIControls
             if (lengthAfterUpdate > lengthBeforeUpdate)
             {
                 txtMyID.Text = stringBefore;
-            }
+            } 
+            _textChanged = false;
         }
 
         private void txtFriendlyName_Leave(object sender, EventArgs e)
         {
-            // update the friendly name
-            string newFriendlyName = txtFriendlyName.Text;
-            _identityUpdated.Invoke(this, new IdentityEventArgs()
+            if (_textChanged)
             {
-                FriendlyName = newFriendlyName
-            });
-            // todo: notify online contacts of updated friendly name
-            MessageBox.Show("Must restart the app for others to be notified!", "Restart needed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // update the friendly name
+                string newFriendlyName = txtFriendlyName.Text;
+                _identityUpdated.Invoke(this, new IdentityEventArgs()
+                {
+                    FriendlyName = newFriendlyName
+                });
+                // todo: notify online contacts of updated friendly name
+                MessageBox.Show("Must restart the app for others to be notified!", "Restart needed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            _textChanged = false;
+        }
+
+        private void txtFriendlyName_TextChanged(object sender, EventArgs e)
+        {
+            _textChanged = true;
         }
 
         #endregion
@@ -73,6 +86,7 @@ namespace UIControls
         public void UpdateFriendlyName(string newFriendlyName)
         {
             ControlCrossThreading.SetValue(txtFriendlyName, newFriendlyName, "Text");
+            _textChanged = false;
         }
 
         public void UpdateMyID(string newID)

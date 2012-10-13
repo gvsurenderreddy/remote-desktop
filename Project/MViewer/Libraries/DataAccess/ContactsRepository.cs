@@ -2,72 +2,82 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GenericData;
+using GenericDataLayer;
 using System.Data;
+using System.IO;
 
-namespace DataAccess
+namespace DataAccessLayer
 {
-    public class ContactsRepository
+    public static class ContactsRepository
     {
-        #region private members
+        #region private static members
 
-        protected string _xmlFilePath;
-        DataSet _contactsDataSet;
-        DataView _contactsDataView;
-
-        #endregion
-
-        #region c-tor
-
-        public ContactsRepository()
-        {
-             _contactsDataSet = new DataSet();
-             _contactsDataView = new DataView();
-        }
+        static string _xmlFilePath;
+        static DataSet _contactsDataSet = new DataSet();
+        static DataView _contactsDataView = new DataView();
 
         #endregion
 
-        #region public methods
+        #region public static methods
 
-        protected DataView LoadContacts()
+        public static DataView LoadContacts(string xmlFilePath)
         {
+            _xmlFilePath = xmlFilePath;
             _contactsDataSet = new DataSet();
             _contactsDataView = new DataView();
 
             _contactsDataSet.Clear();
-            _contactsDataSet.ReadXml(_xmlFilePath, XmlReadMode.ReadSchema);
-            _contactsDataView = _contactsDataSet.Tables[0].DefaultView;
+            if (File.Exists(_xmlFilePath))
+            {
+                _contactsDataSet.ReadXml(_xmlFilePath, XmlReadMode.ReadSchema);
+                _contactsDataView = _contactsDataSet.Tables[0].DefaultView;
+            }
+            else
+            {
+                DataTable dtContacts = new DataTable("Contacts");
+                dtContacts.Columns.Add(new DataColumn("ContactNo", typeof(string)));
+                dtContacts.Columns.Add(new DataColumn("Identity", typeof(string)));
+                dtContacts.Columns.Add(new DataColumn("FriendlyName", typeof(string)));
+
+                _contactsDataSet.Tables.Add(dtContacts);
+                _contactsDataView = _contactsDataSet.Tables[0].DefaultView;
+            }
             return _contactsDataView;
         }
 
-        protected void AddContact(Contact contact)
+        public static int AddContact(Contact contact)
         {
             DataRow dr = _contactsDataView.Table.NewRow();
-            dr[0] = contact.FriendlyName;
-            dr[1] = contact.Identity;
+            dr["ContactNo"] = dr.Table.Rows.Count;
+            dr["FriendlyName"] = contact.FriendlyName;
+            dr["Identity"] = contact.Identity;
             _contactsDataView.Table.Rows.Add(dr);
             SaveContacts();
+            LoadContacts(_xmlFilePath);
+            return int.Parse(dr["ContactNo"].ToString());
         }
 
-        protected void RemoveContact(string identity)
+        public static void RemoveContact(int contactNo)
         {
-            _contactsDataView.RowFilter = "identity='" + identity + "'";
-            _contactsDataView.Sort = "identity";
+            _contactsDataView.RowFilter = "ContactNo='" + contactNo + "'";
+            _contactsDataView.Sort = "ContactNo";
             _contactsDataView.Delete(0);
             _contactsDataView.RowFilter = "";
             SaveContacts();
+            LoadContacts(_xmlFilePath);
         }
 
-        protected void UpdateContact(Contact contact)
+        public static void UpdateContact(Contact contact)
         {
-            Contact dr = GetContact(contact.Identity);
-            dr.FriendlyName = contact.FriendlyName;
-            SaveContacts();
+            DataRow dr = GetContact2(contact.ContactNo);
+            dr.SetField("FriendlyName", contact.FriendlyName);
+            SaveContacts(); 
+            LoadContacts(_xmlFilePath);
         }
 
-        protected Contact GetContact(string identity)
+        public static Contact GetContact(int contactNo)
         {
-            _contactsDataView.RowFilter = "identity='" + identity + "'";
+            _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
             _contactsDataView.Sort = "identity";
             DataRow dr = null;
             if (_contactsDataView.Count > 0)
@@ -75,16 +85,34 @@ namespace DataAccess
                 dr = _contactsDataView[0].Row;
             }
             _contactsDataView.RowFilter = "";
-            Contact contact = new Contact(dr[0].ToString(), dr[1].ToString());
+
+            Contact contact = new Contact(int.Parse(dr["ContactNo"].ToString()), dr["FriendlyName"].ToString(), dr["Identity"].ToString());
             return contact;
         }
 
-        protected void SaveContacts()
+        public static void SaveContacts()
         {
             _contactsDataSet.WriteXml(_xmlFilePath, XmlWriteMode.WriteSchema);
         }
 
         #endregion
 
+        #region private static methods
+
+        static DataRow GetContact2(int contactNo)
+        {
+            _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
+            _contactsDataView.Sort = "identity";
+            DataRow dr = null;
+            if (_contactsDataView.Count > 0)
+            {
+                dr = _contactsDataView[0].Row;
+            }
+            _contactsDataView.RowFilter = "";
+
+            return dr;
+        }
+
+        #endregion
     }
 }

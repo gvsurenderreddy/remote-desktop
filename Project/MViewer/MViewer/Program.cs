@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Threading;
+using GenericDataLayer;
 
 namespace MViewer
 {
@@ -11,9 +12,11 @@ namespace MViewer
     {
         #region private static members
 
-        static Controller _controller;
+        static IController _controller;
 
         #endregion
+
+        #region main
 
         /// <summary>
         /// The main entry point for the application.
@@ -29,7 +32,18 @@ namespace MViewer
 
             // todo: use manual reset event instead of thread.sleep(0)
             Thread.Sleep(Timeout.Infinite);
-        
+
         }
+
+        #endregion
+
+        #region proprieties
+
+        public static IController Controller
+        {
+            get { return Program._controller; }
+        }
+
+        #endregion
     }
 }

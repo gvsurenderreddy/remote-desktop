@@ -5,7 +5,7 @@ using System.Text;
 using System.Configuration;
 using System.Reflection;
 
-namespace GenericData
+namespace GenericDataLayer
 {
     public class Identity
     {
@@ -37,9 +37,9 @@ namespace GenericData
             config.Save();
         }
 
-        public string GenerateIdentity(string newIP, int newPort)
+        public string GenerateIdentity(string newAddress, int newPort, string newPath)
         {
-            string toEncrypt = newIP + newPort.ToString();
+            string toEncrypt = "https://" + newAddress + ":" + newPort.ToString() + "/" + newPath;
             string encrypted = Utils.Cryptography.TrippleDESEncrypt(toEncrypt, true);
             _myIdentity = encrypted;
             return MyIdentity;

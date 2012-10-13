@@ -6,7 +6,11 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GenericData;
+using GenericDataLayer;
+using System.Collections;
+using UIControls.CrossThreadOperations;
+using System.Threading;
+using Utils;
 
 namespace UIControls
 {
@@ -15,7 +19,8 @@ namespace UIControls
         #region private members
 
         EventHandler _closePressed;
-        IContactsRepository _repository;
+        EventHandler _contactsUpdated;
+        Label _notification;
 
         #endregion
 
@@ -24,21 +29,40 @@ namespace UIControls
         public ContactsControl()
         {
             InitializeComponent();
+
+            InitializeNotificationLabel();
         }
 
-        public ContactsControl(EventHandler closePressed)
+        public ContactsControl(EventHandler closePressed, EventHandler contactsUpdated)
         {
             InitializeComponent();
+            InitializeNotificationLabel();
             _closePressed = closePressed;
+            _contactsUpdated = contactsUpdated;
         }
 
         #endregion
 
         #region public methods
 
-        public void InitializeRepository(IContactsRepository repository)
+        public void SetContacts(DataView dvContacts)
         {
-            _repository = repository;
+            Thread.Sleep(1000);
+            if (dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count > 0)
+            {
+                ControlCrossThreading.SetValue(dgvContacts, true, "Visible");
+                ShowNotification(false);
+                ControlCrossThreading.SetValue(dgvContacts, dvContacts, "Datasource");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Identity", false, "Visible");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "ContactNo", false, "Visible");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
+                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width - 2, "Width");
+            }
+            else
+            {
+                ControlCrossThreading.SetValue(dgvContacts, false, "Visible");
+                ShowNotification(true);
+            }
         }
 
         #endregion
@@ -53,11 +77,6 @@ namespace UIControls
             }
         }
 
-        private void ContactsControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void FormActions_FormClosing(object sender, FormClosingEventArgs e)
         {
             // this form should not be closed while the app is running
@@ -66,34 +85,75 @@ namespace UIControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormContact formContact = new FormContact(Utils.FormModes.FormMode.Add, _repository);
+            FormContact formContact = new FormContact(GenericEnums.FormMode.Add, _contactsUpdated);
             formContact.ShowDialog(this);
-            // todo: reload contacts
-
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            // todo: implement btnRemove_Click
-            Contact contact = (Contact)lbContacts.SelectedItem;
-            _repository.RemoveContact(contact.Identity);
-            // todo: reload contacts
-
+            DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
+            Contact contact = new Contact(int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), string.Empty, string.Empty);
+            // todo: pass the removed contact no as argument
+            _contactsUpdated.Invoke(this, new ContactsEventArgs()
+                {
+                    UpdatedContact = contact,
+                    Operation = GenericEnums.ContactsOperation.Remove
+                });
+            _contactsUpdated.Invoke(this, new ContactsEventArgs()
+            {
+                Operation = GenericEnums.ContactsOperation.Load
+            });
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            // todo: implement btnUpdate_Click
-            Contact contact = (Contact)lbContacts.SelectedItem;
-            FormContact formContact = new FormContact(Utils.FormModes.FormMode.Update, _repository, contact);
+            // todo: use the contacts repository only in the Model class
+            
+            DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
+            
+            FormContact formContact = new FormContact(GenericEnums.FormMode.Update, int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), _contactsUpdated);
             formContact.ShowDialog(this);
-            // todo: reload contacts
-
         }
 
         #endregion
 
         #region private methods
+
+        void InitializeNotificationLabel()
+        {
+            _notification = new Label();
+            _notification.Text = "Nobody online";
+            _notification.Visible = false;
+            pnlContacts.Controls.Add(_notification);
+
+        }
+
+        void ShowNotification(bool show)
+        {
+            if (_notification.InvokeRequired)
+            {
+                SetProperty(show);
+            }
+            else
+            {
+                SetProperty(show);
+            }
+        }
+
+        void SetProperty(bool show)
+        {
+            _notification.Invoke
+            (
+                new MethodInvoker
+                (
+                    delegate
+                    {
+                        _notification.Visible = show;
+                    }
+                )
+            );
+        }
+
 
         #endregion
     }

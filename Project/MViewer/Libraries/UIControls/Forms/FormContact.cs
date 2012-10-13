@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Utils;
-using GenericData;
+using GenericDataLayer;
 
 namespace UIControls
 {
@@ -15,33 +15,42 @@ namespace UIControls
     {
         #region private members
 
-        FormModes.FormMode _formMode;
-        IContactsRepository _repository;
+        GenericEnums.FormMode _formMode;
+        EventHandler _contactsUpdated;
+        int _contactNo;
 
         #endregion
 
         #region c-tor
 
-        public FormContact(FormModes.FormMode formMode, IContactsRepository repository)
+        public FormContact(GenericEnums.FormMode formMode, EventHandler contactsUpdated)
         {
             _formMode = formMode;
-
-            _repository = repository;
+            _contactsUpdated = contactsUpdated;
 
             InitializeComponent();
 
+           
             SetFormMode();
         }
 
-        public FormContact(FormModes.FormMode formMode, IContactsRepository repository, Contact contact)
+        public FormContact(GenericEnums.FormMode formMode, int contactNo, EventHandler contactsUpdated)
         {
             _formMode = formMode;
-            _repository = repository;
-
-            txtFriendlyName.Text = contact.FriendlyName;
-            txtIdentity.Text = contact.Identity;
+            _contactsUpdated = contactsUpdated;
+            _contactNo = contactNo;
 
             InitializeComponent();
+            Contact contact = new Contact(contactNo, string.Empty, string.Empty);
+            ContactsEventArgs eventArgs = new ContactsEventArgs()
+                {
+                    Operation = GenericEnums.ContactsOperation.Get,
+                    UpdatedContact = contact
+                };
+            contactsUpdated.Invoke(this, eventArgs);
+            // todo: retrieve contact info
+            txtFriendlyName.Text = eventArgs.UpdatedContact.FriendlyName;
+            txtIdentity.Text = eventArgs.UpdatedContact.Identity;
 
             SetFormMode();
         }
@@ -54,11 +63,11 @@ namespace UIControls
         {
             switch (_formMode)
             {
-                case FormModes.FormMode.Add:
+                case GenericEnums.FormMode.Add:
                     btnAdd.Text = "Add";
                     txtIdentity.Enabled = true;
                     break;
-                case FormModes.FormMode.Update:
+                case GenericEnums.FormMode.Update:
                     btnAdd.Text = "Update";
                     txtIdentity.Enabled = false;
                     break;
@@ -71,24 +80,47 @@ namespace UIControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // todo: validate input data
+            // validate input data
+
+            if(string.IsNullOrEmpty(txtFriendlyName.Text.Trim()) || string.IsNullOrEmpty(txtIdentity.Text.Trim()))
+            {
+                MessageBox.Show("Cannot insert empty text");
+                return;
+            }
+            
+            // todo: use the contacts repository only in the Model class
 
             switch (_formMode)
             {
-                case FormModes.FormMode.Add:
-                    Contact contact = new Contact(txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
-                    _repository.AddContact(contact);
+                case GenericEnums.FormMode.Add:
+                    Contact contact = new Contact(0, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
+                    _contactsUpdated.Invoke(sender, new ContactsEventArgs
+                    {
+                        UpdatedContact = contact,
+                        Operation = GenericEnums.ContactsOperation.Add
+                    });
+
                     break;
-                case FormModes.FormMode.Update:
-                    Contact contact2 = new Contact(txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
-                    _repository.UpdateContact(contact2);
+                case GenericEnums.FormMode.Update:
+                    Contact contact2 = new Contact(_contactNo, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
+                    _contactsUpdated.Invoke(sender, new ContactsEventArgs
+                    {
+                        UpdatedContact = contact2,
+                        Operation = GenericEnums.ContactsOperation.Update
+                    });
+
                     break;
             }
+            _contactsUpdated.Invoke(this, new ContactsEventArgs()
+                {
+                    Operation = GenericEnums.ContactsOperation.Load
+                });
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            // todo: implement btnCancel_Click
+            this.Close();
         }
 
         #endregion
