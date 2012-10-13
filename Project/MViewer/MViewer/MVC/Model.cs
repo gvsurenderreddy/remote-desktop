@@ -52,7 +52,7 @@ namespace MViewer
                 try
                 {
                     bool isOnline = _clientController.IsContactOnline(identity);
-                    contact["Status"] = GenericEnums.ContactStatus.Online;
+                    contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online : GenericEnums.ContactStatus.Offline;
                 }
                 catch (Exception ex)
                 {
@@ -71,6 +71,7 @@ namespace MViewer
                     int contactNo = ContactsRepository.AddContact(e.UpdatedContact);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
                     contact = ContactsRepository.GetContact(contactNo);
+                    PingContacts();
                     break;
                 case GenericEnums.ContactsOperation.Update:
                     ContactsRepository.UpdateContact(e.UpdatedContact);

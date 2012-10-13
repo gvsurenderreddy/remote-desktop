@@ -28,7 +28,9 @@ namespace BusinessLogicLayer
             behavior.AutomaticSessionShutdown = true;
             behavior.ConcurrencyMode = ConcurrencyMode.Multiple;
             behavior.Name = "MetadataExchangeHttpsBinding_IVideoChatRoom";
-             
+
+            behavior.AddressFilterMode = AddressFilterMode.Any;
+
             // Check to see if the service host already has a ServiceMetadataBehavior
             ServiceMetadataBehavior smb = svcHost.Description.Behaviors.Find<ServiceMetadataBehavior>();
             // If not, add one
