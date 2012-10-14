@@ -24,7 +24,8 @@ namespace MViewer
 
         public void SetPicture(Image image)
         {
-            pbWebcam.Image = image;
+            Image resized = ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
+            pbWebcam.Image = resized;
         }
 
         #region prorieties
@@ -35,6 +36,21 @@ namespace MViewer
             {
                 return _webcamCapture;
             }
+        }
+
+        #endregion
+
+        #region callbacks
+
+        private void FormMyWebcam_Resize(object sender, EventArgs e)
+        {
+            pnlMain.Width = this.Width - 42 - 3;
+            pnlMain.Height = this.Height - 61 - 5;
+
+            pbWebcam.Width = pnlMain.Width - 22;
+            pbWebcam.Height = pnlMain.Height - 22;
+
+            pbWebcam.Image = ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
         }
 
         #endregion

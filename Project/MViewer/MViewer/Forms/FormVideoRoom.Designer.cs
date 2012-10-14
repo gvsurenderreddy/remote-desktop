@@ -49,14 +49,15 @@
             this.videoControl.Size = new System.Drawing.Size(388, 384);
             this.videoControl.TabIndex = 1;
             // 
-            // FormVideoChat
+            // FormVideoRoom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 408);
             this.Controls.Add(this.pnlMain);
-            this.Name = "FormVideoChat";
+            this.Name = "FormVideoRoom";
             this.Text = "Video Chat";
+            this.Resize += new System.EventHandler(this.FormVideoRoom_Resize);
             this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);
 

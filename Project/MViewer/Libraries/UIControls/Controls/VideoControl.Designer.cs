@@ -83,6 +83,7 @@
             this.Controls.Add(this.lblUser);
             this.Name = "VideoControl";
             this.Size = new System.Drawing.Size(388, 384);
+            this.Resize += new System.EventHandler(this.VideoControl_Resize);
             this.pnlVideo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
             this.ResumeLayout(false);

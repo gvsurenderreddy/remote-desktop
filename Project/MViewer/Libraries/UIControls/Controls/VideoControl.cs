@@ -25,7 +25,23 @@ namespace UIControls
 
         public void SetPicture(Image picture)
         {
-            pbVideo.Image = picture;
+            Image resized = ImageConverter.ResizeImage(picture, pbVideo.Width, pbVideo.Height);
+            pbVideo.Image = resized;
+        }
+
+        #endregion
+
+        #region callbacks
+
+        private void VideoControl_Resize(object sender, EventArgs e)
+        {
+            pnlVideo.Width = this.Width - 3 - 5;
+            pnlVideo.Height = this.Height - 3 - 5;
+
+            pbVideo.Width = pnlVideo.Width - 15 - 5;
+            pbVideo.Height = pnlVideo.Height - 47 - 5;
+
+            pbVideo.Image = ImageConverter.ResizeImage(pbVideo.Image, pbVideo.Width, pbVideo.Height);
         }
 
         #endregion

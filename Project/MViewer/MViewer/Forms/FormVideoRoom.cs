@@ -31,7 +31,16 @@ namespace MViewer
 
         #endregion
 
-        #region private methods
+        #region callbacks
+
+        private void FormVideoRoom_Resize(object sender, EventArgs e)
+        {
+            pnlMain.Width = this.Width - 20 - 1;
+            pnlMain.Height = this.Height - 20 - 1;
+
+            videoControl.Width = pnlMain.Width - 15 - 5;
+            videoControl.Height = pnlMain.Height - 38 - 5;
+        }
 
         #endregion
 
@@ -82,5 +91,7 @@ namespace MViewer
         }
 
         #endregion
+
+      
     }
 }
