@@ -22,7 +22,8 @@ namespace MViewer
         IServerController _serverController;
 
         IPresenterManager _presenterManager;
-       
+        ISessionManager _sessionManager;
+        
         #endregion
 
         #region c-tor
@@ -97,6 +98,11 @@ namespace MViewer
         #endregion
 
         #region proprieties
+
+        public ISessionManager SessionManager
+        {
+            get { return _sessionManager; }
+        }
 
         public IPresenterManager PresenterManager
         {

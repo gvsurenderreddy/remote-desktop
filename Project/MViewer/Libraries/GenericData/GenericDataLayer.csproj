@@ -49,7 +49,6 @@
   <ItemGroup>
     <Compile Include="Abstract\Session.cs" />
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
-    <Compile Include="BusinessObjects\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
     <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />
@@ -68,6 +67,7 @@
     </Compile>
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIConstants.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
+    <Compile Include="BusinessObjects\Structs\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Structs\ConnectedView.cs" />
     <Compile Include="EventArgs\CaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />

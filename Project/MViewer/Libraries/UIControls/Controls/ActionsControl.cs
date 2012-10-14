@@ -81,7 +81,7 @@ namespace UIControls
                 }
                 else
                 {
-                    actionType = GenericEnums.RoomActionType.Remoteing;
+                    actionType = GenericEnums.RoomActionType.Remoting;
                 }
             }
 

@@ -55,7 +55,7 @@ namespace MViewer.Forms
 
         public GenericEnums.RoomActionType RoomType
         {
-            get { return GenericEnums.RoomActionType.Remoteing; }
+            get { return GenericEnums.RoomActionType.Remoting; }
         }
 
         #endregion

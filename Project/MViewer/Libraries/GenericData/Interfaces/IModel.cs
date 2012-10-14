@@ -17,6 +17,11 @@ namespace GenericDataLayer
             get;
         }
 
+        ISessionManager SessionManager
+        {
+            get;
+        }
+
         Identity Identity
         {
             get;

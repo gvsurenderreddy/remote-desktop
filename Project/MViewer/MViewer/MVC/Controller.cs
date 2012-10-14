@@ -86,13 +86,13 @@ namespace MViewer
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)
         {
-            // todo: perform specific actions when action has been triggered
+            // todo: perform specific action when action event has been triggered
             switch (e.ActionType)
             {
                 case GenericEnums.RoomActionType.Audio:
 
                     break;
-                case GenericEnums.RoomActionType.Remoteing:
+                case GenericEnums.RoomActionType.Remoting:
 
                     break;
                 case GenericEnums.RoomActionType.Send:
