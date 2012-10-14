@@ -48,26 +48,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\Session.cs" />
-    <Compile Include="BusinessObjects\ClientSession.cs" />
+    <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\ConnectedPeers.cs" />
-    <Compile Include="BusinessObjects\Contact.cs" />
-    <Compile Include="BusinessObjects\ContactEndpoint.cs" />
-    <Compile Include="BusinessObjects\CustomCertificateValidator.cs" />
-    <Compile Include="BusinessObjects\FrmPrivateRoom.cs">
+    <Compile Include="BusinessObjects\Classes\Contact.cs" />
+    <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
+    <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />
+    <Compile Include="BusinessObjects\Classes\FrmPrivateRoom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessObjects\FrmPrivateRoom.Designer.cs">
+    <Compile Include="BusinessObjects\Classes\FrmPrivateRoom.Designer.cs">
       <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessObjects\Identity.cs" />
-    <Compile Include="BusinessObjects\MViewerClient.cs" />
-    <Compile Include="BusinessObjects\Presenter.cs" />
-    <Compile Include="BusinessObjects\ServerSession.cs" />
-    <Compile Include="BusinessObjects\WebCamCapture\WebcamCapture.cs">
+    <Compile Include="BusinessObjects\Classes\Identity.cs" />
+    <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
+    <Compile Include="BusinessObjects\Classes\Presenter.cs" />
+    <Compile Include="BusinessObjects\Classes\ServerSession.cs" />
+    <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BusinessObjects\WebCamCapture\Win32APIConstants.cs" />
-    <Compile Include="BusinessObjects\WebCamCapture\Win32APIMethods.cs" />
+    <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIConstants.cs" />
+    <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
+    <Compile Include="BusinessObjects\Structs\ConnectedView.cs" />
     <Compile Include="EventArgs\CaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
@@ -80,13 +81,14 @@
     <Compile Include="Interfaces\IMViewerService.cs" />
     <Compile Include="Interfaces\IPresenter.cs" />
     <Compile Include="Interfaces\IPresenterManager.cs" />
+    <Compile Include="Interfaces\IRemotingRoom.cs" />
     <Compile Include="Interfaces\IRoom.cs" />
     <Compile Include="Interfaces\IRoomManager.cs" />
     <Compile Include="Interfaces\IServerController.cs" />
     <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\IVideoRoom.cs" />
     <Compile Include="Interfaces\IView.cs" />
-    <Compile Include="BusinessObjects\MViewerServer.cs" />
+    <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -96,10 +98,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BusinessObjects\WebCamCapture\CAMERA.ICO" />
+    <Content Include="BusinessObjects\Classes\WebCamCapture\CAMERA.ICO" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BusinessObjects\FrmPrivateRoom.resx">
+    <EmbeddedResource Include="BusinessObjects\Classes\FrmPrivateRoom.resx">
       <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

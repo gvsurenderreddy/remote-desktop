@@ -13,28 +13,22 @@ namespace GenericDataLayer
 
         protected string _identity;
         protected ConnectedPeers _peers;
+        protected ConnectedView _view;
         protected GenericEnums.SessionType _sessionType;
 
         #endregion
 
         #region proprieties
 
-        IRoom AudioChatView
+        public ConnectedView View
         {
-            get;
-            set;
-        }
-        
-        IRoom VideoChatView
-        {
-            get;
-            set;
-        }
-
-        IRoom RemoteView
-        {
-            get;
-            set;
+            get { return _view; }
+            set
+            {
+                _view.AudioChatView = value.AudioChatView;
+                _view.VideoChatView = value.VideoChatView;
+                _view.RemotingView = value.RemotingView;
+            }
         }
 
         public string Identity

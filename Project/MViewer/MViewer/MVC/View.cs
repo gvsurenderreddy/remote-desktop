@@ -83,7 +83,7 @@ namespace MViewer
                 case GenericEnums.RoomActionType.Audio:
 
                     break;
-                case GenericEnums.RoomActionType.Remote:
+                case GenericEnums.RoomActionType.Remoteing:
 
                     break;
                 case GenericEnums.RoomActionType.Video:
