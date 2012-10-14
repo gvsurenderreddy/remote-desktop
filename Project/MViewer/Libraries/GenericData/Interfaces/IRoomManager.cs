@@ -14,6 +14,7 @@ namespace GenericDataLayer
         void CloseRoom(string identity);
 
         void ShowPicture(string identity, Image picture);
+        void SetPartnerName(string identity, string friendlyName);
 
         string ActiveRoom
         {

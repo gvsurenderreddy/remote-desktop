@@ -11,6 +11,7 @@ namespace GenericDataLayer
     {
         Contact PerformContactOperation(ContactsEventArgs e);
         void PingContacts();
+        Contact GetContact(string identity);
 
         IPresenterManager PresenterManager
         {

@@ -91,6 +91,21 @@ namespace DataAccessLayer
             return contact;
         }
 
+        public static Contact GetContact(string identity)
+        {
+            _contactsDataView.RowFilter = "identity='" + identity + "'";
+            _contactsDataView.Sort = "identity";
+            DataRow dr = null;
+            if (_contactsDataView.Count > 0)
+            {
+                dr = _contactsDataView[0].Row;
+            }
+            _contactsDataView.RowFilter = "";
+
+            Contact contact = new Contact(int.Parse(dr["ContactNo"].ToString()), dr["FriendlyName"].ToString(), dr["Identity"].ToString());
+            return contact;
+        }
+
         public static void SaveContacts()
         {
             _contactsDataSet.WriteXml(_xmlFilePath, XmlWriteMode.WriteSchema);

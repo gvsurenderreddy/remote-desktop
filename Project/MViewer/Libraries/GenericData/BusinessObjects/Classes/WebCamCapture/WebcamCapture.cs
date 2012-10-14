@@ -33,14 +33,14 @@ namespace GenericDataLayer
         int _height;
         int _captureWindowHandler;
         int _windowHandle;
-        CaptureEventArgs _eventArgs = new CaptureEventArgs();
+        VideoCaptureEventArgs _eventArgs;
 
         #endregion
 
         #region public members
 
         // event delegate fired when a new image is captured by the webcam device
-        public delegate void WebCamEventHandler(object source, CaptureEventArgs e);
+        public delegate void WebCamEventHandler(object source, VideoCaptureEventArgs e);
         public event WebCamEventHandler ImageCaptured;
 
         #endregion
@@ -154,6 +154,7 @@ namespace GenericDataLayer
                     if (tempObject.GetDataPresent(DataFormats.Bitmap))
                     {
                         Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
+                        _eventArgs = new VideoCaptureEventArgs();
                         _eventArgs.CapturedImage = tempImage.GetThumbnailImage(_width, _height, null, IntPtr.Zero);
                     }
                     else

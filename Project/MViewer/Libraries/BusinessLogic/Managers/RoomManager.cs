@@ -29,10 +29,19 @@ namespace BusinessLogicLayer
 
         public void ShowPicture(string identity, Image picture)
         {
-            if (_rooms.ContainsKey(identity))
+            if (_rooms != null && _rooms.ContainsKey(identity))
             {
                 IVideoRoom room = (IVideoRoom)_rooms[identity];
                 room.SetPicture(picture);
+            }
+        }
+
+        public void SetPartnerName(string identity, string friendlyName)
+        {
+            if (_rooms != null && _rooms.ContainsKey(identity))
+            {
+                IRoom room = _rooms[identity];
+                room.SetPartnerName(friendlyName);
             }
         }
 

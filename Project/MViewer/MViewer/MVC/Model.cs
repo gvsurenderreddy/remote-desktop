@@ -28,7 +28,7 @@ namespace MViewer
 
         #region c-tor
 
-        public Model(EventHandler handler)
+        public Model(ControllerEventHandlers handlers)
         {
             _identity = new Identity(SystemConfiguration.FriendlyName);
             SystemConfiguration.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.MyAddress, SystemConfiguration.Port, SystemConfiguration.ServicePath);
@@ -36,7 +36,7 @@ namespace MViewer
             _clientController = new ClientController();
 
             ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
-            _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handler);
+            _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handlers);
             _presenterManager = new PresenterManager();
             _sessionManager = new SessionManager();
         }
@@ -44,6 +44,11 @@ namespace MViewer
         #endregion
 
         #region public methods
+
+        public Contact GetContact(string identity)
+        {
+            return ContactsRepository.GetContact(identity);
+        }
 
         public void PingContacts()
         {

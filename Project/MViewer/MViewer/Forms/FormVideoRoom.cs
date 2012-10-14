@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GenericDataLayer;
 using Utils;
 using UIControls.CrossThreadOperations;
+using System.Threading;
 
 namespace MViewer
 {
@@ -49,11 +50,13 @@ namespace MViewer
         public void CloseRoom()
         {
             // todo: implement CloseRoom
+            this.Close();
         }
 
         public void ShowRoom()
         {
             // todo: implement ShowRoom
+            this.ShowDialog();
         }
 
         #endregion

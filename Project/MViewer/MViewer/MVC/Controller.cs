@@ -25,7 +25,14 @@ namespace MViewer
         public Controller()
         {
             // initialize the model
-            _model = new Model(new EventHandler(this.ClientConnected));
+
+            ControllerEventHandlers handlers = new ControllerEventHandlers()
+            {
+                ClientConnectedHandler = this.ClientConnected,
+                VideoCaptureHandler = this.ShowVideoCapture
+            };
+
+            _model = new Model(handlers);
             // initalize the view
             _view = new View(_model);
 
@@ -34,13 +41,13 @@ namespace MViewer
 
         #endregion
 
-        #region public event handlers
+        #region event handlers
 
         private void WebCamImageCaptured(object source, EventArgs e)
         {
             try
             {
-                CaptureEventArgs args = (CaptureEventArgs)e;
+                VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
                 // display the captured picture
                 _view.UpdateWebcapture(args.CapturedImage);
 
@@ -63,6 +70,10 @@ namespace MViewer
             }
         }
 
+        #endregion
+
+        #region public methods
+
         public void GetContactsStatus()
         {
             _model.PingContacts();
@@ -73,7 +84,7 @@ namespace MViewer
             _model.Identity.UpdateFriendlyName(e.FriendlyName);
         }
 
-        public void StartVideoChat(WebcamCapture webcamControl , RoomActionEventArgs e)
+        public void StartVideoChat(WebcamCapture webcamControl, RoomActionEventArgs e)
         {
             // create Presenter and start the presentation
             int timerInterval = 20;
@@ -117,6 +128,27 @@ namespace MViewer
             clientSession.SessionState = GenericEnums.SessionState.Opened;
             _model.SessionManager.AddSession(clientSession);
             _model.SessionManager.UpdateSession(identity, new ConnectedPeers() { Video = true }, clientSession.SessionState);
+            Thread t = new Thread(delegate()
+            {
+                IntPtr handle = IntPtr.Zero;
+                FormVideoRoom videoRoom = new FormVideoRoom(ref handle);
+                _view.RoomManager.AddRoom(identity, videoRoom);
+                Contact contact = _model.GetContact(identity);
+                // get friendly name from contacts list
+                _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                _view.RoomManager.ShowRoom(identity);
+            }
+            );
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            // todo: initialize new video chat form
+
+            //Thread t = new Thread(delegate()
+            //{
+            //    form = new FrmVideoChatRoom();
+            //    form.ShowDialog();
+            //});
+            //t.Start();
         }
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)
@@ -167,9 +199,11 @@ namespace MViewer
             return contact;
         }
 
-        #endregion
-
-        #region public methods
+        public void ShowVideoCapture(object sender, EventArgs e)
+        {
+            VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
+            _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
+        }
 
         public void StartApplication()
         {

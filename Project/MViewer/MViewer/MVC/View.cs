@@ -77,29 +77,29 @@ namespace MViewer
             t.Start();
         }
 
-        public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
-        {
-            // todo: implement ShowVideoChatForm
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            IRoom room = null;
-            IntPtr handle = IntPtr.Zero;
-            switch(args.ActionType)
-            {
-                case GenericEnums.RoomActionType.Audio:
+        //public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
+        //{
+        //    // todo: implement ShowRoomForm
+        //    RoomActionEventArgs args = (RoomActionEventArgs)e;
+        //    IRoom room = null;
+        //    IntPtr handle = IntPtr.Zero;
+        //    switch(args.ActionType)
+        //    {
+        //        case GenericEnums.RoomActionType.Audio:
 
-                    break;
-                case GenericEnums.RoomActionType.Remoting:
+        //            break;
+        //        case GenericEnums.RoomActionType.Remoting:
 
-                    break;
-                case GenericEnums.RoomActionType.Video:
-                    room = new FormVideoRoom(ref handle);
-                    room.SetPartnerName(args.FriendlyName);
-                    OpenRoomForm(room);
-                    break;
-            }
-            _roomManager.AddRoom(args.Identity, room);
-            return handle;
-        }
+        //            break;
+        //        case GenericEnums.RoomActionType.Video:
+        //            room = new FormVideoRoom(ref handle);
+        //            room.SetPartnerName(args.FriendlyName);
+        //            OpenRoomForm(room);
+        //            break;
+        //    }
+        //    _roomManager.AddRoom(args.Identity, room);
+        //    return handle;
+        //}
         
         public void NotifyContactsObserver()
         {
@@ -168,10 +168,10 @@ namespace MViewer
 
         #region private methods
 
-        void OpenRoomForm(Object threadContext)
-        {
-            ((Form)threadContext).Show();
-        }
+        //void OpenRoomForm(Object threadContext)
+        //{
+        //    ((Form)threadContext).Show();
+        //}
 
         void OpenMainForm(object identity)
         {

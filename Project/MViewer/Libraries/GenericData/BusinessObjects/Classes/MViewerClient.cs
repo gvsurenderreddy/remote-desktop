@@ -56,11 +56,6 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     {
         base.Channel.SendMicrophoneCapture(capture);
     }
-    
-    public void InitializeForm()
-    {
-        base.Channel.InitializeForm();
-    }
 
     public bool Ping()
     {

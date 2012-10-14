@@ -6,20 +6,21 @@ using System.Drawing;
 
 namespace GenericDataLayer
 {
-    public class CaptureEventArgs : EventArgs
+    public class VideoCaptureEventArgs : EventArgs
     {
         #region private members
 
         private Image _capturedImage;
-        private ulong _frameNumber;
+        //private ulong _frameNumber;
+        string _identity;
 
         #endregion
 
         #region c-tor
 
-        public CaptureEventArgs()
+        public VideoCaptureEventArgs()
         {
-            _frameNumber = 0;
+            //_frameNumber = 0;
         }
 
         #endregion
@@ -41,19 +42,25 @@ namespace GenericDataLayer
             }
         }
 
-        /// <summary>
-        /// the sequence number of the frame capture
-        /// </summary>
-        public ulong FrameNumber
+        ///// <summary>
+        ///// the sequence number of the frame capture
+        ///// </summary>
+        //public ulong FrameNumber
+        //{
+        //    get
+        //    {
+        //        return _frameNumber; 
+        //    }
+        //    set
+        //    {
+        //        _frameNumber = value; 
+        //    }
+        //}
+
+        public string Identity
         {
-            get
-            {
-                return _frameNumber; 
-            }
-            set
-            {
-                _frameNumber = value; 
-            }
+            get { return _identity; }
+            set { _identity = value; }
         }
 
         #endregion

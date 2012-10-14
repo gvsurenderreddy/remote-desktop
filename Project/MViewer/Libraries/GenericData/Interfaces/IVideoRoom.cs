@@ -10,6 +10,7 @@ namespace GenericDataLayer
     {
         void SetPicture(Image picture);
 
+
         IntPtr FormHandle
         {
             get;

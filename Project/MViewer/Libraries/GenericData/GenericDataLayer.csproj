@@ -52,12 +52,6 @@
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
     <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />
-    <Compile Include="BusinessObjects\Classes\FrmPrivateRoom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="BusinessObjects\Classes\FrmPrivateRoom.Designer.cs">
-      <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
-    </Compile>
     <Compile Include="BusinessObjects\Classes\Identity.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
@@ -70,6 +64,7 @@
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
     <Compile Include="BusinessObjects\Structs\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Structs\ConnectedView.cs" />
+    <Compile Include="BusinessObjects\Structs\RoomEventHandlers.cs" />
     <Compile Include="EventArgs\CaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
@@ -99,11 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BusinessObjects\Classes\WebCamCapture\CAMERA.ICO" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="BusinessObjects\Classes\FrmPrivateRoom.resx">
-      <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

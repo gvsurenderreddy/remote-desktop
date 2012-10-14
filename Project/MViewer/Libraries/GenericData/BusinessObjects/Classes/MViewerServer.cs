@@ -9,6 +9,7 @@ using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
 using Utils;
+using System.Drawing;
 
 namespace GenericDataLayer
 {
@@ -16,23 +17,22 @@ namespace GenericDataLayer
     {
         #region private members
 
-        FrmVideoChatRoom form;
         //Computer computer = new Computer();
-        EventHandler _clientConnected;
+        ControllerEventHandlers _controllerHandlers;
         string _identity;
 
         #endregion
 
-        public MViewerServer(EventHandler clientConnected, string identity)
+        public MViewerServer(ControllerEventHandlers controllerHandlers, string identity)
         {
             _identity = identity;
-            _clientConnected = clientConnected;
+            _controllerHandlers = controllerHandlers;
         }
 
         public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
         {
             // todo: implement InitializeRoom
-            _clientConnected.Invoke(this, new RoomActionEventArgs()
+            _controllerHandlers.ClientConnectedHandler.Invoke(this, new RoomActionEventArgs()
             {
                 ActionType = GenericEnums.RoomActionType.Video,
                 SignalType = GenericEnums.SignalType.Start,
@@ -40,24 +40,18 @@ namespace GenericDataLayer
             });
         }
 
-        public void InitializeForm()
-        {
-            Thread t = new Thread(delegate()
-            {
-                form = new FrmVideoChatRoom();
-                form.ShowDialog();
-            });
-            t.Start();
-        }
-
         public void SendWebcamCapture(byte[] capture)
         {
-            if (form == null)
-            { 
-                InitializeForm(); 
-            }
             Thread.Sleep(2000);
-            form.DisplayCapture(capture);
+
+            Image image = ImageConverter.byteArrayToImage(capture);
+            _controllerHandlers.VideoCaptureHandler.Invoke(this,
+                new VideoCaptureEventArgs()
+                {
+                    Identity = _identity,
+                    CapturedImage = image
+                });
+
             GC.Collect();
         }
 
