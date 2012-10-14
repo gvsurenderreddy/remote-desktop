@@ -42,7 +42,10 @@ namespace MViewer
         private void FormActions_FormClosing(object sender, FormClosingEventArgs e)
         {
             // this form should not be closed while the app is running
-            e.Cancel = true;
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void ActionTriggered(object sender, EventArgs e)

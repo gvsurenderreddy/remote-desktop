@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GenericDataLayer;
+using System.Drawing;
 
 namespace BusinessLogicLayer
 {
@@ -107,7 +108,7 @@ namespace BusinessLogicLayer
             return client.Ping();
         }
 
-        public IDictionary<string, byte[]> SendCapture(byte[] capture)
+        public IDictionary<string, byte[]> SendCapture(byte[]capture)
         {
             IDictionary<string, byte[]> receivedCaptures = new Dictionary<string, byte[]>();
             foreach (MViewerClient client in _clients.Values)

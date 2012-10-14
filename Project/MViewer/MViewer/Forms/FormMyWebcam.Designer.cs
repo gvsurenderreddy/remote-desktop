@@ -36,7 +36,7 @@
             // 
             this.pbWebcam.Location = new System.Drawing.Point(1, 2);
             this.pbWebcam.Name = "pbWebcam";
-            this.pbWebcam.Size = new System.Drawing.Size(354, 311);
+            this.pbWebcam.Size = new System.Drawing.Size(360, 323);
             this.pbWebcam.TabIndex = 0;
             this.pbWebcam.TabStop = false;
             // 
@@ -44,7 +44,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 315);
+            this.ClientSize = new System.Drawing.Size(363, 327);
             this.Controls.Add(this.pbWebcam);
             this.Name = "FormMyWebcam";
             this.Text = "My Webcam";

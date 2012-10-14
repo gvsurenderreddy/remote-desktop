@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
 using Utils;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace GenericDataLayer
 {
@@ -43,13 +44,15 @@ namespace GenericDataLayer
         public void SendWebcamCapture(byte[] capture)
         {
             Thread.Sleep(2000);
+            MemoryStream ms = new MemoryStream(capture);
+            //read the Bitmap back
+            Image bmp = (Bitmap)Bitmap.FromStream(ms);
 
-            Image image = ImageConverter.byteArrayToImage(capture);
             _controllerHandlers.VideoCaptureHandler.Invoke(this,
                 new VideoCaptureEventArgs()
                 {
                     Identity = _identity,
-                    CapturedImage = image
+                    CapturedImage = bmp
                 });
 
             GC.Collect();

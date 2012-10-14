@@ -10,6 +10,8 @@ using System.ComponentModel;
 using System.Threading;
 using System.Runtime.InteropServices;
 using GenericDataLayer;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace GenericDataLayer
 {
@@ -61,6 +63,25 @@ namespace GenericDataLayer
         ~WebcamCapture()
         {
             StopCapturing();
+        }
+
+        #endregion
+
+        #region private methods
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
         }
 
         #endregion
@@ -155,7 +176,7 @@ namespace GenericDataLayer
                     {
                         Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
                         _eventArgs = new VideoCaptureEventArgs();
-                        _eventArgs.CapturedImage = tempImage.GetThumbnailImage(_width, _height, null, IntPtr.Zero);
+                        _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
                     }
                     else
                     {
@@ -175,7 +196,7 @@ namespace GenericDataLayer
                 error = true;
                 _timerRunning = true;
                 MessageBox.Show("An error ocurred while capturing the video image. The video capture will now be terminated.\r\n\n" + excep.Message);
-                StopCapturing(); // stop the capturing process
+                //StopCapturing(); // stop the capturing process
             }
             finally
             {

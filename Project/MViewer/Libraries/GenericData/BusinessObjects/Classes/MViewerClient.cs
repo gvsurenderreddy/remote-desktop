@@ -15,6 +15,7 @@ using System.ServiceModel.Channels;
 using GenericDataLayer;
 using Utils;
 using System;
+using System.Drawing;
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -46,7 +47,7 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     {
 
     }
-    
+
     public void SendWebcamCapture(byte[] capture)
     {
         base.Channel.SendWebcamCapture(capture);

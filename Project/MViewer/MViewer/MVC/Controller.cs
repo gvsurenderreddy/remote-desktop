@@ -8,6 +8,9 @@ using UIControls;
 using Utils;
 using GenericDataLayer;
 using BusinessLogicLayer;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
 
 namespace MViewer
 {
@@ -51,16 +54,22 @@ namespace MViewer
                 // display the captured picture
                 _view.UpdateWebcapture(args.CapturedImage);
 
-                byte[] bytes = ImageConverter.imageToByteArray(args.CapturedImage);
-
                 //while (!_audioCapture.AudioCaptureReady)
                 //{
                 //    Thread.Sleep(200);
                 //}
 
+                //we want to get a byte[] representation ... a MemoryStreams buffer will do
+                MemoryStream ms = new MemoryStream();
+                //save image to stream ... the stream will write it into the buffer
+                args.CapturedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+                //get the buffer 
+                byte[] bitmapBytes = ms.GetBuffer();
+
                 // todo: send to server
                 // loop on all connected contacts and send them the captures
-                IDictionary<string, byte[]> receivedCaptures = _model.ClientController.SendCapture(bytes);
+                IDictionary<string, byte[]> receivedCaptures = _model.ClientController.SendCapture(bitmapBytes);
 
             }
             catch (Exception ex)
@@ -88,7 +97,7 @@ namespace MViewer
         {
             // create Presenter and start the presentation
             int timerInterval = 20;
-            int height = 354, width = 311;
+            int height = 354, width = 360;
 
             IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
             _model.PresenterManager.AddPresenter(e.Identity, presenter);
@@ -127,7 +136,12 @@ namespace MViewer
             Session clientSession = new ClientSession(identity);
             clientSession.SessionState = GenericEnums.SessionState.Opened;
             _model.SessionManager.AddSession(clientSession);
-            _model.SessionManager.UpdateSession(identity, new ConnectedPeers() { Video = true }, clientSession.SessionState);
+            _model.SessionManager.UpdateSession(identity, 
+                new ConnectedPeers() 
+                { 
+                    Video = true 
+                }, 
+                clientSession.SessionState);
             Thread t = new Thread(delegate()
             {
                 IntPtr handle = IntPtr.Zero;
@@ -141,14 +155,7 @@ namespace MViewer
             );
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
-            // todo: initialize new video chat form
-
-            //Thread t = new Thread(delegate()
-            //{
-            //    form = new FrmVideoChatRoom();
-            //    form.ShowDialog();
-            //});
-            //t.Start();
+            // initialize new video chat form
         }
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)
