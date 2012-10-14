@@ -6,3 +6,10 @@ http://www.codeproject.com/Articles/14151/Encrypt-and-Decrypt-Data-with-C
 
 XML Data access
 http://www.codeproject.com/KB/database/XMLData/XMLData_src.zip
+
+passing parameters to SVC c-tor
+http://msdn.microsoft.com/en-us/library/aa702697(v=vs.100).aspx
+
+image scaling
+http://stackoverflow.com/questions/249587/high-quality-image-scaling-c-sharp
+

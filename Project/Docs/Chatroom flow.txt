@@ -1,0 +1,25 @@
+1) Audio/Video Chatting
+- user A starts chating with user B
+- user A or B can add people to the chatting session
+
+- user A adds user C to the conversation
+- user A flushes audio streaming to both user B & C
+- user B is notified by user A through WCF proxy that user C is joining the chat
+- user B initiates audio flushing with user C
+- user C flushes audio streaming to both user A & B
+
+- same scenario is applied when user B adds user C to the conversation
+	
+- the user IDs are being stored in a chatting session list	
+
+2) Remoting
+- user A starts remoting with user B
+- user B is the viewer, he can send remote commands for user A screen
+- user A or B can add other people to the remoting session
+- user B is notified by user A that user C has joined the remoting session
+- user B can notify user A that user C wants to join the remoting session through user A WCF service
+- user A uses his WCF service to receive notifications from user B
+- when user A is notified of join request, he pulls the join requests from user B, parses the list and initiates remoting session with user C
+
+- the user IDs are being stored in a remoting session list
+- the list also keeps the presenter's ID in a dedicated property
