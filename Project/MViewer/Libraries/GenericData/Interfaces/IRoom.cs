@@ -16,10 +16,5 @@ namespace GenericDataLayer
         {
             get;
         }
-
-        IntPtr FormHandle
-        {
-            get;
-        }
     }
 }

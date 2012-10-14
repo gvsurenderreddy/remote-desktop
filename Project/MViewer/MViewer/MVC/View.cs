@@ -10,6 +10,7 @@ using UIControls;
 using Utils;
 using System.Data;
 using MViewer;
+using BusinessLogicLayer;
 
 namespace MViewer
 {
@@ -21,7 +22,7 @@ namespace MViewer
         FormActions _formActions; 
         FormMyWebcam _formWebCapture;
 
-        Dictionary<Type, object> _observers;
+        IDictionary<Type, object> _observers;
         bool _observersActive;
 
         IRoomManager _roomManager = new RoomManager();

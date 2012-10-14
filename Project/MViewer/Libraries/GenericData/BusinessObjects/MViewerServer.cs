@@ -8,6 +8,7 @@ using System.Threading;
 using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.Devices;
+using Utils;
 
 namespace GenericDataLayer
 {
@@ -27,6 +28,11 @@ namespace GenericDataLayer
         public MViewerServer()
         {
             
+        }
+
+        public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
+        {
+            // todo: implement InitializeRoom
         }
 
         public void InitializeForm()

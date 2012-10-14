@@ -12,7 +12,7 @@ namespace GenericDataLayer
         void StartApplication();
         void StopApplication();
         void NotifyContactsObserver();
-        void NotificationReceived();
+        void GetContactsStatus();
         void IdentityUpdated(object sender, IdentityEventArgs e);
         void PerformRoomAction(object sender, RoomActionEventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs e);

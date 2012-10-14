@@ -14,7 +14,6 @@ namespace GenericDataLayer
         string _friendlyName;
         string _identity;
         GenericEnums.ContactStatus _status;
-        ConnectedPeers _connectedPeers = new ConnectedPeers();
 
         #endregion
 
@@ -36,12 +35,6 @@ namespace GenericDataLayer
         #endregion
 
         #region proprieties
-
-        public ConnectedPeers ConnectedPeers
-        {
-            get { return _connectedPeers; }
-            set { _connectedPeers = value; }
-        }
 
         public int ContactNo
         {

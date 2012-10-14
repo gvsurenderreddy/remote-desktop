@@ -13,6 +13,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using GenericDataLayer;
+using Utils;
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -63,5 +64,10 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     public bool Ping()
     {
         return base.Channel.Ping();
+    }
+
+    public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
+    {
+        base.Channel.InitializeRoom(identity, roomType);
     }
 }

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GenericDataLayer;
 
-namespace GenericDataLayer
+namespace BusinessLogicLayer
 {
     public class PresenterManager : IPresenterManager
     {
         #region private members
 
-        Dictionary<string, IPresenter> _presenters;
+        IDictionary<string, IPresenter> _presenters;
 
         #endregion
 

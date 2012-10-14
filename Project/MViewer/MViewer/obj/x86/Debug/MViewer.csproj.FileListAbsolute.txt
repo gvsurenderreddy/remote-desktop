@@ -24,3 +24,5 @@ F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\Gener
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\GenerateResource.write.1.tlog
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.exe
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.Forms.FormAudioRoom.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\x86\Debug\MViewer.Forms.FormRemotingRoom.resources

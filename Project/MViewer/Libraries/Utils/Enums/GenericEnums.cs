@@ -12,5 +12,6 @@ namespace Utils
         public enum SignalType { Undefined = 0, Start = 1, Pause = 2 };
         public enum RoomActionType { Undefined = 0, Audio = 1, Video = 2, Remote = 3, Send = 4 };
         public enum ContactsOperation { Undefined = 0, Add = 1, Update = 2, Remove = 3, Get = 4, Load = 5 };
+        public enum SessionType { Undefined = 0, ClientSession = 1, ServerSession };
     }
 }

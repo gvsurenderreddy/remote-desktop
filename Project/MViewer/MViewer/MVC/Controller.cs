@@ -53,7 +53,7 @@ namespace MViewer
 
                 // todo: send to server
                 // loop on all connected contacts and send them the captures
-                Dictionary<string, byte[]> receivedCaptures = _model.ClientController.SendCapture(bytes);
+                IDictionary<string, byte[]> receivedCaptures = _model.ClientController.SendCapture(bytes);
 
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace MViewer
             }
         }
 
-        public void NotificationReceived()
+        public void GetContactsStatus()
         {
             _model.PingContacts();
         }
@@ -155,7 +155,7 @@ namespace MViewer
             Thread.Sleep(2000);
 
             // ping every single contact in the list and update it's status
-            NotificationReceived();
+            GetContactsStatus();
         }
 
         public void StopApplication()
@@ -195,16 +195,9 @@ namespace MViewer
         void StartVideoChat(object sender, RoomActionEventArgs e)
         {
             _model.ClientController.AddClient(e.Identity);
-            //_model.ClientController.StartClient(e.Identity);
+            _model.ClientController.StartClient(e.Identity);
             _view.ShowMyWebcamForm(e);
 
-            //int timerInterval = 20;
-            //int height = 354, width = 311;
-            //WebcamCapture webcamControl = _view.GetWebcaptureControl;
-
-            //IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
-            //_model.PresenterManager.AddPresenter(e.Identity, presenter);
-            //_model.PresenterManager.StartPresentation(e.Identity);
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace BusinessLogicLayer
     {
         #region private members
 
-        Dictionary<string, MViewerClient> _clients;
+        IDictionary<string, MViewerClient> _clients;
         readonly object _syncClients = new object();
 
         #endregion
@@ -88,12 +88,16 @@ namespace BusinessLogicLayer
         {
             lock (_syncClients)
             {
-                //if (!_clients.ContainsKey(identity))
-                //{
-                //    AddClient(identity);
-                //} 
+                if (!_clients.ContainsKey(identity))
+                {
+                    AddClient(identity);
+                }
                 MViewerClient mviewerClient = _clients[identity];
-                mviewerClient.Open();
+                if (mviewerClient.State != System.ServiceModel.CommunicationState.Opening && mviewerClient.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    mviewerClient.Close();
+                    mviewerClient.Open();
+                }
             }
         }
 
@@ -104,9 +108,9 @@ namespace BusinessLogicLayer
             return client.Ping();
         }
 
-        public Dictionary<string, byte[]> SendCapture(byte[] capture)
+        public IDictionary<string, byte[]> SendCapture(byte[] capture)
         {
-            Dictionary<string, byte[]> receivedCaptures = new Dictionary<string, byte[]>();
+            IDictionary<string, byte[]> receivedCaptures = new Dictionary<string, byte[]>();
             foreach (MViewerClient client in _clients.Values)
             {
                 client.SendWebcamCapture(capture);

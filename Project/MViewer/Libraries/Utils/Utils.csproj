@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Cryptography.cs" />
     <Compile Include="Enums\ButtonStatuses.cs" />
-    <Compile Include="Enums\GeneralEnums.cs" />
+    <Compile Include="Enums\GenericEnums.cs" />
     <Compile Include="ImageConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

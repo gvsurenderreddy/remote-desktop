@@ -9,6 +9,10 @@ namespace GenericDataLayer
     public interface IVideoRoom
     {
         void SetPicture(Image picture);
-       
+
+        IntPtr FormHandle
+        {
+            get;
+        }
     }
 }

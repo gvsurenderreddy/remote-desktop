@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using GenericDataLayer;
 
-namespace GenericDataLayer
+namespace BusinessLogicLayer
 {
     public class RoomManager : IRoomManager
     {
         #region private members
 
-        Dictionary<string, IRoom> _rooms;
+        IDictionary<string, IRoom> _rooms;
         string _activeRoom;
 
         #endregion

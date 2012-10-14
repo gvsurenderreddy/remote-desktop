@@ -55,7 +55,6 @@ namespace UIControls
                 ControlCrossThreading.SetValue(dgvContacts, dvContacts, "Datasource");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Identity", false, "Visible");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "ContactNo", false, "Visible");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "ConnectedPeers", false, "Visible");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width / 2 - 1, "Width");
                 ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Status", dgvContacts.Width / 2 - 1, "Width");

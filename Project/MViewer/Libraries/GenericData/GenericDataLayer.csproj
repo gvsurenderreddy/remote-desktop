@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\Session.cs" />
+    <Compile Include="BusinessObjects\ClientSession.cs" />
     <Compile Include="BusinessObjects\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Contact.cs" />
     <Compile Include="BusinessObjects\ContactEndpoint.cs" />
@@ -60,8 +62,7 @@
     <Compile Include="BusinessObjects\Identity.cs" />
     <Compile Include="BusinessObjects\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Presenter.cs" />
-    <Compile Include="BusinessObjects\PresenterManager.cs" />
-    <Compile Include="BusinessObjects\RoomManager.cs" />
+    <Compile Include="BusinessObjects\ServerSession.cs" />
     <Compile Include="BusinessObjects\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -71,6 +72,7 @@
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
     <Compile Include="EventArgs\IdentityEventArgs.cs" />
+    <Compile Include="Interfaces\IAudioRoom.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
     <Compile Include="Interfaces\IController.cs" />
     <Compile Include="Interfaces\IModel.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Interfaces\IRoom.cs" />
     <Compile Include="Interfaces\IRoomManager.cs" />
     <Compile Include="Interfaces\IServerController.cs" />
+    <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\IVideoRoom.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="BusinessObjects\MViewerServer.cs" />
@@ -100,6 +103,7 @@
       <DependentUpon>FrmPrivateRoom.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
