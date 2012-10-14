@@ -15,6 +15,7 @@ namespace GenericDataLayer
         protected ConnectedPeers _peers;
         protected ConnectedView _view;
         protected GenericEnums.SessionType _sessionType;
+        private GenericEnums.SessionState _sessionState;
 
         #endregion
 
@@ -50,6 +51,12 @@ namespace GenericDataLayer
         public GenericEnums.SessionType SessionType
         {
             get { return _sessionType; }
+        }
+
+        public GenericEnums.SessionState SessionState
+        {
+            get { return _sessionState; }
+            set { _sessionState = value; }
         }
 
         #endregion

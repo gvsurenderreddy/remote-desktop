@@ -14,6 +14,7 @@ namespace MViewer
     {
         WebcamCapture _webcamCapture;
 
+
         public FormMyWebcam(RoomActionEventArgs e)
         {
             InitializeComponent();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using GenericDataLayer;
+using Utils;
 
 namespace BusinessLogicLayer
 {
@@ -10,39 +11,56 @@ namespace BusinessLogicLayer
     {
         #region private members
 
-        IDictionary<string, Session> _sessions;
+        IDictionary<string, Session> _clientSessions;
+        IDictionary<string, Session> _serverSessions;
 
         #endregion
 
         #region public methods
 
-        public void AddSession(string identity, Session session)
+        public void AddSession(Session session)
         {
-            if (_sessions == null)
+            switch (session.SessionType)
             {
-                _sessions = new Dictionary<string, Session>();
-            }
-            if (_sessions.ContainsKey(identity) == false)
-            {
-                _sessions.Add(identity, session);
+                case GenericEnums.SessionType.ClientSession:
+                    if (_clientSessions == null)
+                    {
+                        _clientSessions = new Dictionary<string, Session>();
+                    }
+                    if (_clientSessions.ContainsKey(session.Identity) == false)
+                    {
+                        _clientSessions.Add(session.Identity, session);
+                    }
+                    break;
+                case GenericEnums.SessionType.ServerSession:
+                    if (_serverSessions == null)
+                    {
+                        _serverSessions = new Dictionary<string, Session>();
+                    }
+                    if (_serverSessions.ContainsKey(session.Identity) == false)
+                    {
+                        _serverSessions.Add(session.Identity, session);
+                    }
+                    break;
             }
         }
 
         public void RemoveSession(string identity)
         {
-            if (_sessions != null && _sessions.ContainsKey(identity))
+            if (_clientSessions != null && _clientSessions.ContainsKey(identity))
             {
-                _sessions.Remove(identity);
+                _clientSessions.Remove(identity);
             }
 
         }
 
-        public void UpdateSession(string identity, ConnectedPeers peers)
+        public void UpdateSession(string identity, ConnectedPeers peers, GenericEnums.SessionState sessionState)
         {
-            if (_sessions != null && _sessions.ContainsKey(identity))
+            if (_clientSessions != null && _clientSessions.ContainsKey(identity))
             {
-                Session session = _sessions[identity];
+                Session session = _clientSessions[identity];
                 session.Peers = peers;
+                session.SessionState = sessionState;
             }
         }
 

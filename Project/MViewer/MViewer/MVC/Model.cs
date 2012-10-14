@@ -28,7 +28,7 @@ namespace MViewer
 
         #region c-tor
 
-        public Model()
+        public Model(EventHandler handler)
         {
             _identity = new Identity(SystemConfiguration.FriendlyName);
             SystemConfiguration.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.MyAddress, SystemConfiguration.Port, SystemConfiguration.ServicePath);
@@ -36,8 +36,9 @@ namespace MViewer
             _clientController = new ClientController();
 
             ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
-            _serverController = new ServerController(myEndpoint);
+            _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handler);
             _presenterManager = new PresenterManager();
+            _sessionManager = new SessionManager();
         }
 
         #endregion

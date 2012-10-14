@@ -68,8 +68,13 @@ namespace MViewer
 
         public void ShowMyWebcamForm(RoomActionEventArgs e)
         {
-            _formWebCapture = new FormMyWebcam(e);
-            _formWebCapture.ShowDialog();
+            Thread t = new Thread(delegate()
+            {
+                _formWebCapture = new FormMyWebcam(e);
+                _formWebCapture.ShowDialog();
+                //Thread.Sleep(Timeout.Infinite);
+            });
+            t.Start();
         }
 
         public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)

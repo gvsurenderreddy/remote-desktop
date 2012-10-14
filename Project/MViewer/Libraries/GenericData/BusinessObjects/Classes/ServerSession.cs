@@ -10,9 +10,9 @@ namespace GenericDataLayer
     {
         #region c-tor
 
-        public ServerSession(string identity, GenericEnums.SessionType sessionType)
+        public ServerSession(string identity)
         {
-            _sessionType = sessionType;
+            _sessionType = GenericEnums.SessionType.ServerSession;
             _identity = identity;
             _peers.Audio = false;
             _peers.Video = false;

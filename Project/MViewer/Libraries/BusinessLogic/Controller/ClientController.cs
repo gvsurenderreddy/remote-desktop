@@ -93,9 +93,8 @@ namespace BusinessLogicLayer
                     AddClient(identity);
                 }
                 MViewerClient mviewerClient = _clients[identity];
-                if (mviewerClient.State != System.ServiceModel.CommunicationState.Opening && mviewerClient.State != System.ServiceModel.CommunicationState.Opened)
+                if (mviewerClient.State != System.ServiceModel.CommunicationState.Closed && mviewerClient.State != System.ServiceModel.CommunicationState.Opening && mviewerClient.State != System.ServiceModel.CommunicationState.Opened)
                 {
-                    mviewerClient.Close();
                     mviewerClient.Open();
                 }
             }

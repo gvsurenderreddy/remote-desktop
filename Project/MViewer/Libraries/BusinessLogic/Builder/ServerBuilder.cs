@@ -14,13 +14,15 @@ namespace BusinessLogicLayer
     {
         #region public static methods
 
-        public static ServiceHost BuildWCFServer(string httpsAddress)
+        public static ServiceHost BuildWCFServer(string httpsAddress, EventHandler handler, string identity)
         {
             Uri httpURI = new Uri(httpsAddress.Replace("https", "http"), UriKind.Absolute);
             int httpPort = httpURI.Port - 1;
             string httpAddress = httpURI.ToString().Replace(httpURI.Port.ToString(), httpPort.ToString());
             httpURI = new Uri(httpAddress, UriKind.Absolute);
-            ServiceHost svcHost = new ServiceHost(typeof(MViewerServer), httpURI);
+
+            MViewerServer server = new MViewerServer(handler, identity);
+            ServiceHost svcHost = new ServiceHost(server, httpURI);
 
             var behavior = svcHost.Description.Behaviors.Find<ServiceBehaviorAttribute>();
             behavior.InstanceContextMode = InstanceContextMode.Single;

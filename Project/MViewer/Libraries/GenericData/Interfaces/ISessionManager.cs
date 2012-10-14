@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace GenericDataLayer
 {
     public interface ISessionManager
     {
-        void AddSession(string identity, Session session);
+        void AddSession(Session session);
         void RemoveSession(string identity);
-        void UpdateSession(string identity, ConnectedPeers peers);
+        void UpdateSession(string identity, ConnectedPeers peers, GenericEnums.SessionState sessionState);
     }
 }

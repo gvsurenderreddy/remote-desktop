@@ -12,27 +12,32 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    //[ServiceBehaviorAttribute(ConcurrencyMode = ConcurrencyMode.Multiple,
-    //   InstanceContextMode = InstanceContextMode.Single
-    //    //, IncludeExceptionDetailInFaults=true
-    //   )]
     public class MViewerServer : IMViewerService
     {
         #region private members
 
         FrmVideoChatRoom form;
         //Computer computer = new Computer();
+        EventHandler _clientConnected;
+        string _identity;
 
         #endregion
 
-        public MViewerServer()
+        public MViewerServer(EventHandler clientConnected, string identity)
         {
-            
+            _identity = identity;
+            _clientConnected = clientConnected;
         }
 
         public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
         {
             // todo: implement InitializeRoom
+            _clientConnected.Invoke(this, new RoomActionEventArgs()
+            {
+                ActionType = GenericEnums.RoomActionType.Video,
+                SignalType = GenericEnums.SignalType.Start,
+                Identity = _identity
+            });
         }
 
         public void InitializeForm()
@@ -51,6 +56,7 @@ namespace GenericDataLayer
             { 
                 InitializeForm(); 
             }
+            Thread.Sleep(2000);
             form.DisplayCapture(capture);
             GC.Collect();
         }

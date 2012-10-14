@@ -19,7 +19,7 @@ namespace BusinessLogicLayer
 
         #region c-tor
 
-        public ServerController(ContactEndpoint endpoint)
+        public ServerController(ContactEndpoint endpoint, string identity, EventHandler handler)
         {
             if (endpoint.Port != 0)
             {
@@ -29,7 +29,7 @@ namespace BusinessLogicLayer
             {
                 _address = "https://" + endpoint.Address + endpoint.Path;
             }
-            _server = ServerBuilder.BuildWCFServer(_address);
+            _server = ServerBuilder.BuildWCFServer(_address, handler, identity);
         }
 
         #endregion

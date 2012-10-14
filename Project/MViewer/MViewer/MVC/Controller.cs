@@ -25,7 +25,7 @@ namespace MViewer
         public Controller()
         {
             // initialize the model
-            _model = new Model();
+            _model = new Model(new EventHandler(this.ClientConnected));
             // initalize the view
             _view = new View(_model);
 
@@ -82,6 +82,41 @@ namespace MViewer
             IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
             _model.PresenterManager.AddPresenter(e.Identity, presenter);
             _model.PresenterManager.StartPresentation(e.Identity);
+
+            Session serverSession = new ServerSession(e.Identity);
+            serverSession.SessionState = GenericEnums.SessionState.Opened;
+            _model.SessionManager.AddSession(serverSession);
+            MViewerClient client = _model.ClientController.GetClient(e.Identity);
+            client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Video);
+        }
+
+        public void ClientConnected(object sender, EventArgs e)
+        {
+            // todo: implement ClientConnected
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            switch (args.ActionType)
+            {
+                case GenericEnums.RoomActionType.Audio:
+
+                    break;
+                case GenericEnums.RoomActionType.Video:
+                    StartVideoChat(args.Identity);
+                    break;
+                case GenericEnums.RoomActionType.Remoting:
+
+                    break;
+                case GenericEnums.RoomActionType.Send:
+
+                    break;
+            }
+        }
+
+        public void StartVideoChat(string identity)
+        {
+            Session clientSession = new ClientSession(identity);
+            clientSession.SessionState = GenericEnums.SessionState.Opened;
+            _model.SessionManager.AddSession(clientSession);
+            _model.SessionManager.UpdateSession(identity, new ConnectedPeers() { Video = true }, clientSession.SessionState);
         }
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)
@@ -150,6 +185,8 @@ namespace MViewer
 
             _view.NotifyIdentityObserver();
 
+            // todo: bind client connected observer
+
             _model.ServerController.StartServer();
 
             Thread.Sleep(2000);
@@ -197,7 +234,8 @@ namespace MViewer
             _model.ClientController.AddClient(e.Identity);
             _model.ClientController.StartClient(e.Identity);
             _view.ShowMyWebcamForm(e);
-
+            //Thread.Sleep(10000);
+            
         }
 
         #endregion
