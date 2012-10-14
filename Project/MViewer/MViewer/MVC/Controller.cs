@@ -96,7 +96,7 @@ namespace MViewer
         public void StartVideoChat(WebcamCapture webcamControl, RoomActionEventArgs e)
         {
             // create Presenter and start the presentation
-            int timerInterval = 20;
+            int timerInterval = 100;
             int height = 354, width = 360;
 
             IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
