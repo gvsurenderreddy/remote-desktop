@@ -194,15 +194,15 @@ namespace GenericDataLayer
             catch (Exception excep)
             {
                 error = true;
-                _timerRunning = true;
-                MessageBox.Show("An error ocurred while capturing the video image. The video capture will now be terminated.\r\n\n" + excep.Message);
+                //_timerRunning = true;
+                //MessageBox.Show("An error ocurred while capturing the video image. The video capture will now be terminated.\r\n\n" + excep.ToString());
                 //StopCapturing(); // stop the capturing process
             }
             finally
             {
                 // restart the timer
                 //Application.DoEvents();
-                if (_timerRunning == false && error == false)
+                if (_timerRunning == false)// && error == false)
                 {
                     _timerRunning = true;
                     _timer.Start();

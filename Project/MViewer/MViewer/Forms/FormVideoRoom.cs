@@ -81,7 +81,13 @@ namespace MViewer
         public void ShowRoom()
         {
             // todo: implement ShowRoom
-            this.ShowDialog();
+            try
+            {
+                this.ShowDialog();
+            }
+            catch
+            {
+            }
         }
 
         #endregion

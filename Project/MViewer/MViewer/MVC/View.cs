@@ -77,6 +77,7 @@ namespace MViewer
                     _formWebCapture.ShowDialog();
                     //Thread.Sleep(Timeout.Infinite);
                 });
+                t.SetApartmentState(ApartmentState.STA);
                 t.Start();
             }
         }

@@ -118,8 +118,8 @@ namespace MViewer
             // tell the server to initialize a new Video Chat form
             client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Video);
 
-            // tell the server to initialize a new Audio Chat form
-            client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
+            // todo: tell the server to initialize a new Audio Chat form
+            //client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
         }
 
         public void ClientConnected(object sender, EventArgs e)
@@ -175,6 +175,7 @@ namespace MViewer
                 clientSession.SessionState);
             Thread t = new Thread(delegate()
             {
+                Thread.Sleep(1000);
                 IntPtr handle = IntPtr.Zero;
                 FormVideoRoom videoRoom = new FormVideoRoom(ref handle);
                 _view.RoomManager.AddRoom(identity, videoRoom);
@@ -275,6 +276,9 @@ namespace MViewer
 
             // ping every single contact in the list and update it's status
             GetContactsStatus();
+
+            // todo: notify all online contacts that you came on too
+
         }
 
         public void StopApplication()

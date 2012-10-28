@@ -56,6 +56,7 @@ namespace BusinessLogicLayer
 
         public void UpdateSession(string identity, ConnectedPeers peers, GenericEnums.SessionState sessionState)
         {
+            // todo: add session type param if needed
             if (_clientSessions != null && _clientSessions.ContainsKey(identity))
             {
                 Session session = _clientSessions[identity];
@@ -70,54 +71,60 @@ namespace BusinessLogicLayer
             switch(sessionType)
             {
                 case GenericEnums.SessionType.ClientSession:
-                    foreach (Session session in _clientSessions.Values)
+                    if (_clientSessions != null)
                     {
-                        switch(actionType)
+                        foreach (Session session in _clientSessions.Values)
                         {
-                            case GenericEnums.RoomActionType.Audio:
-                                if (session.Peers.Audio == true)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                            case GenericEnums.RoomActionType.Video:
-                                if (session.Peers.Video == true)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                            case GenericEnums.RoomActionType.Remoting:
-                                if (session.Peers.Remoting == true)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
+                            switch (actionType)
+                            {
+                                case GenericEnums.RoomActionType.Audio:
+                                    if (session.Peers.Audio == true)
+                                    {
+                                        sessions.Add(session.Identity);
+                                    }
+                                    break;
+                                case GenericEnums.RoomActionType.Video:
+                                    if (session.Peers.Video == true)
+                                    {
+                                        sessions.Add(session.Identity);
+                                    }
+                                    break;
+                                case GenericEnums.RoomActionType.Remoting:
+                                    if (session.Peers.Remoting == true)
+                                    {
+                                        sessions.Add(session.Identity);
+                                    }
+                                    break;
+                            }
                         }
                     }
                     break;
                 case GenericEnums.SessionType.ServerSession:
-                    foreach(Session session in _serverSessions.Values)
+                    if (_serverSessions != null)
                     {
-                        switch(actionType)
+                        foreach (Session session in _serverSessions.Values)
                         {
-                            case GenericEnums.RoomActionType.Audio:
-                                if (session.Peers.Audio == true)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                            case GenericEnums.RoomActionType.Video:
-                                if (session.Peers.Video == true)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                            case GenericEnums.RoomActionType.Remoting:
-                                if (session.Peers.Remoting == true)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
+                            switch (actionType)
+                            {
+                                case GenericEnums.RoomActionType.Audio:
+                                    if (session.Peers.Audio == true)
+                                    {
+                                        sessions.Add(session.Identity);
+                                    }
+                                    break;
+                                case GenericEnums.RoomActionType.Video:
+                                    if (session.Peers.Video == true)
+                                    {
+                                        sessions.Add(session.Identity);
+                                    }
+                                    break;
+                                case GenericEnums.RoomActionType.Remoting:
+                                    if (session.Peers.Remoting == true)
+                                    {
+                                        sessions.Add(session.Identity);
+                                    }
+                                    break;
+                            }
                         }
                     }
                     break;
