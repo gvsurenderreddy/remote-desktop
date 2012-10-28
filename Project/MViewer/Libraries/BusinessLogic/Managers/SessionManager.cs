@@ -12,7 +12,7 @@ namespace BusinessLogicLayer
         #region private members
 
         IDictionary<string, Session> _clientSessions;
-        IDictionary<string, Session> _serverSessions;
+        //IDictionary<string, Session> _serverSessions;
 
         #endregion
 
@@ -32,16 +32,16 @@ namespace BusinessLogicLayer
                         _clientSessions.Add(session.Identity, session);
                     }
                     break;
-                case GenericEnums.SessionType.ServerSession:
-                    if (_serverSessions == null)
-                    {
-                        _serverSessions = new Dictionary<string, Session>();
-                    }
-                    if (_serverSessions.ContainsKey(session.Identity) == false)
-                    {
-                        _serverSessions.Add(session.Identity, session);
-                    }
-                    break;
+                //case GenericEnums.SessionType.ServerSession:
+                //    if (_serverSessions == null)
+                //    {
+                //        _serverSessions = new Dictionary<string, Session>();
+                //    }
+                //    if (_serverSessions.ContainsKey(session.Identity) == false)
+                //    {
+                //        _serverSessions.Add(session.Identity, session);
+                //    }
+                //    break;
             }
         }
 
@@ -100,33 +100,33 @@ namespace BusinessLogicLayer
                     }
                     break;
                 case GenericEnums.SessionType.ServerSession:
-                    if (_serverSessions != null)
-                    {
-                        foreach (Session session in _serverSessions.Values)
-                        {
-                            switch (actionType)
-                            {
-                                case GenericEnums.RoomActionType.Audio:
-                                    if (session.Peers.Audio == true)
-                                    {
-                                        sessions.Add(session.Identity);
-                                    }
-                                    break;
-                                case GenericEnums.RoomActionType.Video:
-                                    if (session.Peers.Video == true)
-                                    {
-                                        sessions.Add(session.Identity);
-                                    }
-                                    break;
-                                case GenericEnums.RoomActionType.Remoting:
-                                    if (session.Peers.Remoting == true)
-                                    {
-                                        sessions.Add(session.Identity);
-                                    }
-                                    break;
-                            }
-                        }
-                    }
+                    //if (_serverSessions != null)
+                    //{
+                    //    foreach (Session session in _serverSessions.Values)
+                    //    {
+                    //        switch (actionType)
+                    //        {
+                    //            case GenericEnums.RoomActionType.Audio:
+                    //                if (session.Peers.Audio == true)
+                    //                {
+                    //                    sessions.Add(session.Identity);
+                    //                }
+                    //                break;
+                    //            case GenericEnums.RoomActionType.Video:
+                    //                if (session.Peers.Video == true)
+                    //                {
+                    //                    sessions.Add(session.Identity);
+                    //                }
+                    //                break;
+                    //            case GenericEnums.RoomActionType.Remoting:
+                    //                if (session.Peers.Remoting == true)
+                    //                {
+                    //                    sessions.Add(session.Identity);
+                    //                }
+                    //                break;
+                    //        }
+                    //    }
+                    //}
                     break;
             }
           

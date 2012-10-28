@@ -93,16 +93,16 @@ namespace DataAccessLayer
 
         public static Contact GetContact(string identity)
         {
-            _contactsDataView.RowFilter = "identity='" + identity + "'";
-            _contactsDataView.Sort = "identity";
-            DataRow dr = null;
-            if (_contactsDataView.Count > 0)
+            DataTable contacts = _contactsDataSet.Tables["Contacts"];
+            IEnumerable<DataRow> query =
+                from product in contacts.AsEnumerable()
+                where product["Identity"].Equals(identity)
+                select product;
+            Contact contact = null;
+            if (query != null && query.Count() > 0)
             {
-                dr = _contactsDataView[0].Row;
+                contact = new Contact(int.Parse(query.ElementAt(0)["ContactNo"].ToString()), query.ElementAt(0)["FriendlyName"].ToString(), query.ElementAt(0)["Identity"].ToString());
             }
-            _contactsDataView.RowFilter = "";
-
-            Contact contact = new Contact(int.Parse(dr["ContactNo"].ToString()), dr["FriendlyName"].ToString(), dr["Identity"].ToString());
             return contact;
         }
 

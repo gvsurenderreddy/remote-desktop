@@ -165,10 +165,14 @@ namespace UIControls
 
         public KeyValuePair<string, string> GetSelectedContact()
         {
+            KeyValuePair<string, string> contact = new KeyValuePair<string, string>();
             DataGridViewSelectedRowCollection selectedRows = dgvContacts.SelectedRows;
-            string identity = selectedRows[0].Cells["Identity"].Value.ToString();
-            string friendlyName = selectedRows[0].Cells["FriendlyName"].Value.ToString();
-            KeyValuePair<string, string> contact = new KeyValuePair<string, string>(identity, friendlyName);
+            if (selectedRows.Count > 0)
+            {
+                string identity = selectedRows[0].Cells["Identity"].Value.ToString();
+                string friendlyName = selectedRows[0].Cells["FriendlyName"].Value.ToString();
+                contact = new KeyValuePair<string, string>(identity, friendlyName);
+            }
             return contact;
         }
 

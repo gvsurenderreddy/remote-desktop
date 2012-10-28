@@ -39,8 +39,6 @@ namespace MViewer
             _model = new Model(handlers);
             // initalize the view
             _view = new View(_model);
-
-
         }
 
         #endregion
@@ -108,15 +106,42 @@ namespace MViewer
             PresenterManager.StartPresentation(webcamControl, e.Identity, timerInterval, height, width,
                 new EventHandler(this.WebCamImageCaptured));
 
-            Session serverSession = new ServerSession(e.Identity);
+            Session serverSession = new ClientSession(e.Identity);
             serverSession.SessionState = GenericEnums.SessionState.Opened;
-            // save the Server to which we are sending the webcam captures
+            switch (e.ActionType)
+            {
+                case GenericEnums.RoomActionType.Audio:
+                    serverSession.Peers = new ConnectedPeers()
+                    {
+                        Audio = true,
+                        Video = false,
+                        Remoting = false
+                    };
+                    break;
+                case GenericEnums.RoomActionType.Video:
+                    serverSession.Peers = new ConnectedPeers()
+                    {
+                        Audio = true,
+                        Video = true,
+                        Remoting = false
+                    };
+                    break;
+                case GenericEnums.RoomActionType.Remoting:
+                    serverSession.Peers = new ConnectedPeers()
+                    {
+                        Audio = false,
+                        Video = false,
+                        Remoting = true
+                    };
+                    break;
+            }
+            // save the proxy to which we are sending the webcam captures
             _model.SessionManager.AddSession(serverSession);
 
-            // retrieve the client based on the Server's identity
-            MViewerClient client = _model.ClientController.GetClient(e.Identity);
-            // tell the server to initialize a new Video Chat form
-            client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Video);
+            //// retrieve the client based on the Server's identity
+            //MViewerClient client = _model.ClientController.GetClient(e.Identity);
+            //// tell the server to initialize a new Video Chat form
+            //client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Video);
 
             // todo: tell the server to initialize a new Audio Chat form
             //client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
@@ -136,7 +161,7 @@ namespace MViewer
                     StartVideoChat(args.Identity);
 
                     // todo: open my webcam form and send my captures to the connected contact
-                    Program.Controller.PerformRoomAction(sender, args);
+                    //Program.Controller.PerformRoomAction(sender, args);
 
                     break;
                 case GenericEnums.RoomActionType.Remoting:
@@ -160,21 +185,23 @@ namespace MViewer
 
         public void StartVideoChat(string identity)
         {
-            Session clientSession = new ClientSession(identity);
-            clientSession.SessionState = GenericEnums.SessionState.Opened;
-            // save the connected client session
-            _model.SessionManager.AddSession(clientSession);
-            _model.SessionManager.UpdateSession(identity, 
-                new ConnectedPeers() 
-                { 
-                    Video = true ,
+            //Session clientSession = new ClientSession(identity);
+            //clientSession.SessionState = GenericEnums.SessionState.Opened;
+            //// save the connected client session
+            //_model.SessionManager.AddSession(clientSession);
+            //_model.SessionManager.UpdateSession(identity, 
+            //    new ConnectedPeers() 
+            //    { 
+            //        Video = true ,
                     
-                    // todo: perform specific actions when audio chat is started
-                    //Audio = true 
-                }, 
-                clientSession.SessionState);
+            //        // todo: perform specific actions when audio chat is started
+            //        //Audio = true 
+            //    }, 
+            //    clientSession.SessionState);
+
             Thread t = new Thread(delegate()
             {
+                // initialize new video chat form
                 Thread.Sleep(1000);
                 IntPtr handle = IntPtr.Zero;
                 FormVideoRoom videoRoom = new FormVideoRoom(ref handle);
@@ -188,7 +215,6 @@ namespace MViewer
             );
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
-            // initialize new video chat form
         }
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)

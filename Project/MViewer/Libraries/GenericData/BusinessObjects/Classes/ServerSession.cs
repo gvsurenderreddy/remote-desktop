@@ -6,25 +6,27 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public class ServerSession : Session
-    {
-        #region c-tor
+    // todo: remove ServerSession class if not needed
 
-        public ServerSession(string identity)
-        {
-            _sessionType = GenericEnums.SessionType.ServerSession;
-            _identity = identity;
-            _peers.Audio = false;
-            _peers.Video = false;
-            _peers.Remoting = false;
-        }
+    //public class ServerSession : Session
+    //{
+    //    #region c-tor
 
-        #endregion
+    //    public ServerSession(string identity)
+    //    {
+    //        _sessionType = GenericEnums.SessionType.ServerSession;
+    //        _identity = identity;
+    //        _peers.Audio = false;
+    //        _peers.Video = false;
+    //        _peers.Remoting = false;
+    //    }
 
-        #region public methods
+    //    #endregion
+
+    //    #region public methods
 
 
 
-        #endregion
-    }
+    //    #endregion
+    //}
 }

@@ -158,11 +158,20 @@ namespace MViewer
                 // this is the first opened room
                 // retrieve the selected contact from the Contacts list
                 KeyValuePair<string, string> contact = _formMain.GetSelectedContact();
-                args.Identity = contact.Key;
-                args.FriendlyName = contact.Value;
-               
+                if (!string.IsNullOrEmpty(contact.Key) && !string.IsNullOrEmpty(contact.Value))
+                {
+                    args.Identity = contact.Key;
+                    args.FriendlyName = contact.Value;
+                }
+                else
+                {
+                    args = null;
+                }
             }
-            Program.Controller.PerformRoomAction(sender, args);
+            if (args != null)
+            {
+                Program.Controller.PerformRoomAction(sender, args);
+            }
         }
 
         public void UpdateWebcapture(Image image)
