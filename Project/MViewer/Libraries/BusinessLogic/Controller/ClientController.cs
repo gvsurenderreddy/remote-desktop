@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using GenericDataLayer;
 using System.Drawing;
+using Utils;
 
 namespace BusinessLogicLayer
 {
@@ -34,6 +35,16 @@ namespace BusinessLogicLayer
         #endregion
 
         #region public methods
+
+        public void SendRoomCommand(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+        {
+            // todo: implement SendRoomCommand
+            if (_clients.ContainsKey(identity))
+            {
+                MViewerClient client = _clients[identity];
+                client.SendRoomAction(identity, roomType, signalType);
+            }
+        }
         
         public MViewerClient GetClient(string identity)
         {
@@ -108,14 +119,16 @@ namespace BusinessLogicLayer
             return client.Ping();
         }
 
-        public IDictionary<string, byte[]> SendCapture(byte[]capture)
+        public void SendCapture(byte[]capture, string identity)
         {
-            IDictionary<string, byte[]> receivedCaptures = new Dictionary<string, byte[]>();
-            foreach (MViewerClient client in _clients.Values)
+            if(_clients.ContainsKey(identity))
             {
-                client.SendWebcamCapture(capture);
+                MViewerClient client = _clients[identity];
+                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    client.SendWebcamCapture(capture);
+                }
             }
-            return receivedCaptures;
         }
 
         #endregion

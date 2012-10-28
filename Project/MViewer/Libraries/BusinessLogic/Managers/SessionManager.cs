@@ -64,6 +64,68 @@ namespace BusinessLogicLayer
             }
         }
 
+        public IList<string> GetConnectedSessions(GenericEnums.SessionType sessionType, GenericEnums.RoomActionType actionType)
+        {
+            IList<string> sessions = new List<string>();
+            switch(sessionType)
+            {
+                case GenericEnums.SessionType.ClientSession:
+                    foreach (Session session in _clientSessions.Values)
+                    {
+                        switch(actionType)
+                        {
+                            case GenericEnums.RoomActionType.Audio:
+                                if (session.Peers.Audio == true)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                            case GenericEnums.RoomActionType.Video:
+                                if (session.Peers.Video == true)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                            case GenericEnums.RoomActionType.Remoting:
+                                if (session.Peers.Remoting == true)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                        }
+                    }
+                    break;
+                case GenericEnums.SessionType.ServerSession:
+                    foreach(Session session in _serverSessions.Values)
+                    {
+                        switch(actionType)
+                        {
+                            case GenericEnums.RoomActionType.Audio:
+                                if (session.Peers.Audio == true)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                            case GenericEnums.RoomActionType.Video:
+                                if (session.Peers.Video == true)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                            case GenericEnums.RoomActionType.Remoting:
+                                if (session.Peers.Remoting == true)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                        }
+                    }
+                    break;
+            }
+          
+            return sessions;
+        }
+
         #endregion
     }
 }

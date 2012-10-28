@@ -99,13 +99,6 @@ namespace VideoChatClient
             _webcamClient.Endpoint.Contract = contract;
             _webcamClient.Endpoint.Binding = CreateServerBinding();
             _webcamClient.Endpoint.Binding.Name = "binding1_IVideoChatRoom";
-            
-
-
-
-
-
-
 
             //IdentityClaim 
             //System.IdentityModel.Tokens.EncryptedKeyIdentifierClause clause = 

@@ -48,7 +48,7 @@ namespace BusinessLogicLayer
             binding.CloseTimeout = new TimeSpan(0, 1, 0);
             binding.OpenTimeout = new TimeSpan(0, 1, 0);
             binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-            binding.SendTimeout = new TimeSpan(0, 1, 0);
+            binding.SendTimeout = new TimeSpan(0, 10, 0);
 
             binding.MaxBufferPoolSize = 100000000;
             binding.ReaderQuotas.MaxArrayLength = 100000000;

@@ -68,4 +68,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.InitializeRoom(identity, roomType);
     }
 
+    public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+    {
+        base.Channel.SendRoomAction(identity, roomType, signalType);
+    }
+
 }

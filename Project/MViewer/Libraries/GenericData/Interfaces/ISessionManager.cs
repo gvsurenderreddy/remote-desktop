@@ -11,5 +11,6 @@ namespace GenericDataLayer
         void AddSession(Session session);
         void RemoveSession(string identity);
         void UpdateSession(string identity, ConnectedPeers peers, GenericEnums.SessionState sessionState);
+        IList<string> GetConnectedSessions(GenericEnums.SessionType sessionType, GenericEnums.RoomActionType actionType);
     }
 }

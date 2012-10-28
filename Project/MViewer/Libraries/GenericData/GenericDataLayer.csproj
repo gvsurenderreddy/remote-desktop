@@ -76,7 +76,6 @@
     <Compile Include="Interfaces\IMViewerChannel.cs" />
     <Compile Include="Interfaces\IMViewerService.cs" />
     <Compile Include="Interfaces\IPresenter.cs" />
-    <Compile Include="Interfaces\IPresenterManager.cs" />
     <Compile Include="Interfaces\IRemotingRoom.cs" />
     <Compile Include="Interfaces\IRoom.cs" />
     <Compile Include="Interfaces\IRoomManager.cs" />

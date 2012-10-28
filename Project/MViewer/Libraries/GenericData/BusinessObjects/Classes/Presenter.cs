@@ -49,7 +49,7 @@ namespace GenericDataLayer
 
         public void StopPresentation()
         {
-
+            _webcamCapture.StopCapturing();
         }
 
         #endregion

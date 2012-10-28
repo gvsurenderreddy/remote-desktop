@@ -6,60 +6,70 @@ using GenericDataLayer;
 
 namespace BusinessLogicLayer
 {
-    public class PresenterManager : IPresenterManager
+    public static class PresenterManager 
     {
         #region private members
 
-        IDictionary<string, IPresenter> _presenters;
+        static readonly object _syncPresenter = new object();
+        static IPresenter _presenter;
 
         #endregion
 
         #region c-tor
 
-        public PresenterManager()
+        static PresenterManager()
         {
-            _presenters = new Dictionary<string, IPresenter>();
+
         }
 
         #endregion
 
         #region public methods
 
-        public void AddPresenter(string identity, IPresenter presenter)
+        //public void AddPresenter(string identity, IPresenter presenter)
+        //{
+        //    if (_presenters == null)
+        //    {
+        //        _presenters = new Dictionary<string, IPresenter>();
+        //    }
+        //    if (!_presenters.ContainsKey(identity))
+        //    {
+        //        _presenters.Add(identity, presenter);
+        //    }
+        //}
+
+        //public void RemovePresenter(string identity)
+        //{
+        //    if (_presenters != null && _presenters.ContainsKey(identity))
+        //    {
+        //        _presenters[identity].StopPresentation();
+        //        _presenters.Remove(identity);
+        //    }
+        //}
+
+        public static void StartPresentation(WebcamCapture webcapture, string identity, int timerInterval, int height, int width, EventHandler webCamImageCaptured)
         {
-            if (_presenters == null)
+            if (_presenter == null)
             {
-                _presenters = new Dictionary<string, IPresenter>();
+                lock (_syncPresenter)
+                {
+                    if (_presenter == null)
+                    {
+                        _presenter = new Presenter(webcapture, identity, timerInterval, height, width, webCamImageCaptured);
+                    }
+                }
             }
-            if (!_presenters.ContainsKey(identity))
-            {
-                _presenters.Add(identity, presenter);
-            }
+            _presenter.StartPresentation();
         }
 
-        public void RemovePresenter(string identity)
+        public static void StopPresentation()
         {
-            if (_presenters != null && _presenters.ContainsKey(identity))
+            lock (_syncPresenter)
             {
-                _presenters[identity].StopPresentation();
-                _presenters.Remove(identity);
-            }
-        }
-
-        public void StartPresentation(string identity)
-        {
-            if (_presenters != null && _presenters.ContainsKey(identity))
-            {
-                IPresenter presenter = _presenters[identity];
-                presenter.StartPresentation();
-            }
-        }
-
-        public void StopPresentation(string identity)
-        {
-            if (_presenters != null && _presenters.ContainsKey(identity))
-            {
-                _presenters[identity].StopPresentation();
+                if (_presenter != null)
+                {
+                    _presenter.StopPresentation();
+                }
             }
         }
 

@@ -57,6 +57,7 @@
             this.Controls.Add(this.pnlMain);
             this.Name = "FormVideoRoom";
             this.Text = "Video Chat";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormVideoRoom_FormClosing);
             this.Resize += new System.EventHandler(this.FormVideoRoom_Resize);
             this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);

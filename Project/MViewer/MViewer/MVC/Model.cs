@@ -21,7 +21,6 @@ namespace MViewer
         IClientController _clientController;
         IServerController _serverController;
 
-        IPresenterManager _presenterManager;
         ISessionManager _sessionManager;
         
         #endregion
@@ -37,7 +36,7 @@ namespace MViewer
 
             ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
             _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handlers);
-            _presenterManager = new PresenterManager();
+        
             _sessionManager = new SessionManager();
         }
 
@@ -108,11 +107,6 @@ namespace MViewer
         public ISessionManager SessionManager
         {
             get { return _sessionManager; }
-        }
-
-        public IPresenterManager PresenterManager
-        {
-            get { return _presenterManager; }
         }
 
         public string FriendlyName

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using Utils;
 
 namespace GenericDataLayer
 {
@@ -13,6 +14,7 @@ namespace GenericDataLayer
         void AddClient(string identity);
         MViewerClient GetClient(string identity);
         bool IsContactOnline(string identity);
-        IDictionary<string, byte[]> SendCapture(byte[]capture);
+        void SendCapture(byte[]capture, string identity);
+        void SendRoomCommand(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType);
     }
 }

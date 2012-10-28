@@ -5,24 +5,26 @@ using System.Text;
 
 namespace GenericDataLayer
 {
-    public struct ConnectedView
-    {
-        public IRoom AudioChatView
-        {
-            get;
-            set;
-        }
+    // todo: remove ConnectedView struct if not needed
 
-        public IRoom VideoChatView
-        {
-            get;
-            set;
-        }
+    //public struct ConnectedView
+    //{
+    //    public IRoom AudioChatView
+    //    {
+    //        get;
+    //        set;
+    //    }
 
-        public IRoom RemotingView
-        {
-            get;
-            set;
-        }
-    }
+    //    public IRoom VideoChatView
+    //    {
+    //        get;
+    //        set;
+    //    }
+
+    //    public IRoom RemotingView
+    //    {
+    //        get;
+    //        set;
+    //    }
+    //}
 }

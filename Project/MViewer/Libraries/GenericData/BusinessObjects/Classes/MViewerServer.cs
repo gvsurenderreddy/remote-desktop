@@ -32,13 +32,31 @@ namespace GenericDataLayer
 
         public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
         {
-            // todo: implement InitializeRoom
-            _controllerHandlers.ClientConnectedHandler.Invoke(this, new RoomActionEventArgs()
+            switch (roomType)
             {
-                ActionType = GenericEnums.RoomActionType.Video,
-                SignalType = GenericEnums.SignalType.Start,
-                Identity = _identity
-            });
+                case GenericEnums.RoomActionType.Video:
+                    // initialize video chat form to receive captures from the client
+                    _controllerHandlers.ClientConnectedHandler.Invoke(this, new RoomActionEventArgs()
+                    {
+                        ActionType = GenericEnums.RoomActionType.Video,
+                        SignalType = GenericEnums.SignalType.Start,
+                        Identity = _identity
+                    });
+
+                    // todo: initialize my webcam form so that I can send my captures to the connected contact
+
+
+                    break;
+                case GenericEnums.RoomActionType.Audio:
+
+                    break;
+                case GenericEnums.RoomActionType.Remoting:
+
+                    break;
+                case GenericEnums.RoomActionType.Send:
+
+                    break;
+            }
         }
 
         public void SendWebcamCapture(byte[] capture)
@@ -66,6 +84,12 @@ namespace GenericDataLayer
                 Computer computer = new Computer();
                 computer.Audio.Play(capture, AudioPlayMode.Background);
             }
+        }
+
+        public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+        {
+            // todo: implement SendRoomAction
+
         }
 
         public bool Ping()

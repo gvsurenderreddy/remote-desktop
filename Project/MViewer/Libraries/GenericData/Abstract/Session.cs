@@ -13,7 +13,7 @@ namespace GenericDataLayer
 
         protected string _identity;
         protected ConnectedPeers _peers;
-        protected ConnectedView _view;
+        //protected ConnectedView _view;
         protected GenericEnums.SessionType _sessionType;
         private GenericEnums.SessionState _sessionState;
 
@@ -21,16 +21,16 @@ namespace GenericDataLayer
 
         #region proprieties
 
-        public ConnectedView View
-        {
-            get { return _view; }
-            set
-            {
-                _view.AudioChatView = value.AudioChatView;
-                _view.VideoChatView = value.VideoChatView;
-                _view.RemotingView = value.RemotingView;
-            }
-        }
+        //public ConnectedView View
+        //{
+        //    get { return _view; }
+        //    set
+        //    {
+        //        _view.AudioChatView = value.AudioChatView;
+        //        _view.VideoChatView = value.VideoChatView;
+        //        _view.RemotingView = value.RemotingView;
+        //    }
+        //}
 
         public string Identity
         {

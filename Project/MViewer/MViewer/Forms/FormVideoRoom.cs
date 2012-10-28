@@ -17,7 +17,7 @@ namespace MViewer
     {
         #region private members
 
-        
+        bool _formClosing;
 
         #endregion
 
@@ -27,6 +27,7 @@ namespace MViewer
         {
             InitializeComponent();
             handle = this.Handle;
+            _formClosing = false;
         }
 
         #endregion
@@ -42,6 +43,12 @@ namespace MViewer
             videoControl.Height = pnlMain.Height - 38 - 5;
         }
 
+        private void FormVideoRoom_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _formClosing = true;
+            // todo: perform other specific actions when the Video Chat room is closing
+        }
+
         #endregion
 
         #region public methods
@@ -53,13 +60,22 @@ namespace MViewer
 
         public void SetPicture(Image picture)
         {
-            videoControl.SetPicture(picture);
+            if (!_formClosing)
+            {
+                videoControl.SetPicture(picture);
+            }
         }
 
         public void CloseRoom()
         {
-            // todo: implement CloseRoom
-            this.Close();
+            if (_formClosing == false)
+            {
+                // todo: implement CloseRoom
+                //this.Close();
+                _formClosing = true;
+                Thread.Sleep(1000);
+                this.BeginInvoke(new Action(() => this.Close()));
+            }
         }
 
         public void ShowRoom()
@@ -91,6 +107,8 @@ namespace MViewer
         }
 
         #endregion
+
+    
 
       
     }

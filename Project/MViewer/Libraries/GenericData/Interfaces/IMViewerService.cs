@@ -23,6 +23,10 @@ namespace GenericDataLayer
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/InitializeRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/InitializeRoomResponse")]
         void InitializeRoom(string identity, GenericEnums.RoomActionType roomType);
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendRoomAction", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendRoomActionResponse")]
+        void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType);
         
+
     }
 }

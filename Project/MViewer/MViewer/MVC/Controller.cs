@@ -68,9 +68,13 @@ namespace MViewer
                 byte[] bitmapBytes = ms.GetBuffer();
 
                 // todo: send to server
-                // loop on all connected contacts and send them the captures
-                IDictionary<string, byte[]> receivedCaptures = _model.ClientController.SendCapture(bitmapBytes);
+                // loop on all connected peers and send them the captures
 
+                IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.SessionType.ClientSession, GenericEnums.RoomActionType.Video);
+                foreach (string identity in connectedSessions)
+                {
+                    _model.ClientController.SendCapture(bitmapBytes, identity);
+                }
             }
             catch (Exception ex)
             {
@@ -99,15 +103,22 @@ namespace MViewer
             int timerInterval = 100;
             int height = 354, width = 360;
 
-            IPresenter presenter = new Presenter(webcamControl, e.Identity, timerInterval, height, width, new EventHandler(this.WebCamImageCaptured));
-            _model.PresenterManager.AddPresenter(e.Identity, presenter);
-            _model.PresenterManager.StartPresentation(e.Identity);
+            // initialize the presenter that will send webcam captures to all Server Sessions
+            PresenterManager.StartPresentation(webcamControl, e.Identity, timerInterval, height, width,
+                new EventHandler(this.WebCamImageCaptured));
 
             Session serverSession = new ServerSession(e.Identity);
             serverSession.SessionState = GenericEnums.SessionState.Opened;
+            // save the Server to which we are sending the webcam captures
             _model.SessionManager.AddSession(serverSession);
+
+            // retrieve the client based on the Server's identity
             MViewerClient client = _model.ClientController.GetClient(e.Identity);
+            // tell the server to initialize a new Video Chat form
             client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Video);
+
+            // tell the server to initialize a new Audio Chat form
+            client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
         }
 
         public void ClientConnected(object sender, EventArgs e)
@@ -120,7 +131,12 @@ namespace MViewer
 
                     break;
                 case GenericEnums.RoomActionType.Video:
+                    // open new Video Chat form to receive the captures
                     StartVideoChat(args.Identity);
+
+                    // todo: open my webcam form and send my captures to the connected contact
+                    Program.Controller.PerformRoomAction(sender, args);
+
                     break;
                 case GenericEnums.RoomActionType.Remoting:
 
@@ -131,15 +147,29 @@ namespace MViewer
             }
         }
 
+        public void StopVideChat(string identity)
+        {
+            // todo: implement StopVideChat
+
+            // remove the connected client session
+            _model.SessionManager.RemoveSession(identity);
+            _view.RoomManager.CloseRoom(identity);
+            _view.RoomManager.RemoveRoom(identity);
+        }
+
         public void StartVideoChat(string identity)
         {
             Session clientSession = new ClientSession(identity);
             clientSession.SessionState = GenericEnums.SessionState.Opened;
+            // save the connected client session
             _model.SessionManager.AddSession(clientSession);
             _model.SessionManager.UpdateSession(identity, 
                 new ConnectedPeers() 
                 { 
-                    Video = true 
+                    Video = true ,
+                    
+                    // todo: perform specific actions when audio chat is started
+                    //Audio = true 
                 }, 
                 clientSession.SessionState);
             Thread t = new Thread(delegate()
@@ -150,6 +180,7 @@ namespace MViewer
                 Contact contact = _model.GetContact(identity);
                 // get friendly name from contacts list
                 _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                // finally, show the video chat form where we'll see the webcam captures
                 _view.RoomManager.ShowRoom(identity);
             }
             );
@@ -179,12 +210,20 @@ namespace MViewer
                             // start the video chat
                             Thread t = new Thread(delegate()
                             {
-                                StartVideoChat(sender, e);
+                                PerformVideoChatAction(sender, e);
                             });
                             t.SetApartmentState(ApartmentState.STA);
                             t.Start();
                             break;
                         case GenericEnums.SignalType.Pause:
+
+                            break;
+                        case GenericEnums.SignalType.Stop:
+                            PerformVideoChatAction(sender, e);
+                            
+                            // todo: send the stop signal to the server session
+                            _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, e.ActionType, e.SignalType);
+                            _model.SessionManager.RemoveSession(e.Identity);
 
                             break;
                     }
@@ -202,6 +241,7 @@ namespace MViewer
             else
             {
                 contact = _model.PerformContactOperation(e);
+                // todo: notify other contact of performed operation (ADD/REMOVE)
             }
             return contact;
         }
@@ -270,13 +310,33 @@ namespace MViewer
 
         #region private methods
 
-        void StartVideoChat(object sender, RoomActionEventArgs e)
+        void PerformVideoChatAction(object sender, RoomActionEventArgs e)
         {
-            _model.ClientController.AddClient(e.Identity);
-            _model.ClientController.StartClient(e.Identity);
-            _view.ShowMyWebcamForm(e);
-            //Thread.Sleep(10000);
-            
+            switch(e.SignalType)
+            {
+                case GenericEnums.SignalType.Start:
+
+                    // I am going to send my captures by using the below client
+
+                    _model.ClientController.AddClient(e.Identity);
+                    _model.ClientController.StartClient(e.Identity);
+
+                
+                    // initialize the webcamCapture form
+                    // this form will be used to capture the images and send them to all Server Sessions
+                    _view.ShowMyWebcamForm(e);
+                    //Thread.Sleep(10000);
+                    break;
+                case GenericEnums.SignalType.Stop:
+                    
+                    StopVideChat(e.Identity);
+                    // todo: dispose the webcamCapture form from the View if there is no active video chat left
+                           
+                    break;
+                case GenericEnums.SignalType.Pause:
+
+                    break;
+            }
         }
 
         #endregion

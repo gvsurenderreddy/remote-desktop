@@ -68,13 +68,17 @@ namespace MViewer
 
         public void ShowMyWebcamForm(RoomActionEventArgs e)
         {
-            Thread t = new Thread(delegate()
-            {
-                _formWebCapture = new FormMyWebcam(e);
-                _formWebCapture.ShowDialog();
-                //Thread.Sleep(Timeout.Infinite);
-            });
-            t.Start();
+            if (_formWebCapture == null)
+            {    
+                // open my webcam form if no video chat was previously started
+                Thread t = new Thread(delegate()
+                {
+                    _formWebCapture = new FormMyWebcam(e);
+                    _formWebCapture.ShowDialog();
+                    //Thread.Sleep(Timeout.Infinite);
+                });
+                t.Start();
+            }
         }
 
         //public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
@@ -155,6 +159,7 @@ namespace MViewer
                 KeyValuePair<string, string> contact = _formMain.GetSelectedContact();
                 args.Identity = contact.Key;
                 args.FriendlyName = contact.Value;
+               
             }
             Program.Controller.PerformRoomAction(sender, args);
         }

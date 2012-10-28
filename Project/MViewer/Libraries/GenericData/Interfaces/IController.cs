@@ -18,6 +18,7 @@ namespace GenericDataLayer
         void PerformRoomAction(object sender, RoomActionEventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs e);
         void StartVideoChat(WebcamCapture webcamControl, RoomActionEventArgs e);
+        void StopVideChat(string identity);
         void ShowVideoCapture(object sender, EventArgs e);
     }
 }

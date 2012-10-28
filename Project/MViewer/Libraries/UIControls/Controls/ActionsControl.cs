@@ -62,7 +62,14 @@ namespace UIControls
             // do specific action , check what button was clicked by looking at the sender
             if (sender == btnAudio || sender == btnVideo || sender == btnRemote)
             {
-                signalType = GenericEnums.SignalType.Start;
+                if (((Button)sender).Text == "Start")
+                {
+                    signalType = GenericEnums.SignalType.Start;
+                }
+                else
+                {
+                    signalType = GenericEnums.SignalType.Stop;
+                }
             }
             else
             {

@@ -13,11 +13,6 @@ namespace GenericDataLayer
         void PingContacts();
         Contact GetContact(string identity);
 
-        IPresenterManager PresenterManager
-        {
-            get;
-        }
-
         ISessionManager SessionManager
         {
             get;

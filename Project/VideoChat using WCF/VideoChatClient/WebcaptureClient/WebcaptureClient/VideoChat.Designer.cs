@@ -89,7 +89,7 @@
             this.txtServer.Name = "txtServer";
             this.txtServer.Size = new System.Drawing.Size(214, 20);
             this.txtServer.TabIndex = 5;
-            this.txtServer.Text = "http://Mihai-PC:8001/WebcaptureService";
+            this.txtServer.Text = "http://10.19.0.124:8081/WebcaptureService";
             // 
             // label2
             // 
