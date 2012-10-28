@@ -138,10 +138,10 @@ namespace MViewer
             // save the proxy to which we are sending the webcam captures
             _model.SessionManager.AddSession(serverSession);
 
-            //// retrieve the client based on the Server's identity
-            //MViewerClient client = _model.ClientController.GetClient(e.Identity);
-            //// tell the server to initialize a new Video Chat form
-            //client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Video);
+            // retrieve the client based on the Server's identity
+            MViewerClient client = _model.ClientController.GetClient(e.Identity);
+            // tell the server to initialize a new Video Chat form
+            client.InitializeRoom(_model.Identity.MyIdentity, GenericEnums.RoomActionType.Video);
 
             // todo: tell the server to initialize a new Audio Chat form
             //client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
