@@ -73,4 +73,13 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.SendRoomAction(identity, roomType, signalType);
     }
 
+    public void AddContact(string identity, string friendlyName)
+    {
+        base.Channel.AddContact(identity, friendlyName);
+    }
+
+    public void RemoveContact(string identity)
+    {
+        base.Channel.RemoveContact(identity);
+    }
 }

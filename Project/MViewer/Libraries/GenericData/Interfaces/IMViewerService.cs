@@ -26,7 +26,11 @@ namespace GenericDataLayer
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendRoomAction", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendRoomActionResponse")]
         void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType);
-        
 
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/AddContact", ReplyAction = "http://tempuri.org/IVideoChatRoom/AddContactResponse")]
+        void AddContact(string identity, string friendlyName);
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/RemoveContact", ReplyAction = "http://tempuri.org/IVideoChatRoom/RemoveContactResponse")]
+        void RemoveContact(string identity);
     }
 }

@@ -97,7 +97,9 @@ namespace UIControls
         private void btnRemove_Click(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
-            Contact contact = new Contact(int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), string.Empty, string.Empty);
+            Contact contact = new Contact(int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()),
+                selectedRow.Cells["FriendlyName"].Value.ToString(),
+                selectedRow.Cells["Identity"].Value.ToString());
             // pass the removed contact no as argument
             _contactsUpdated.Invoke(this, new ContactsEventArgs()
                 {

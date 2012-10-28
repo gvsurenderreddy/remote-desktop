@@ -76,7 +76,14 @@ namespace MViewer
                 case GenericEnums.ContactsOperation.Add:
                     int contactNo = ContactsRepository.AddContact(e.UpdatedContact);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
-                    contact = ContactsRepository.GetContact(contactNo);
+                    contact = ContactsRepository.GetContact(e.UpdatedContact.Identity);
+                    if(e.UpdatedContact.ContactNo != -1)
+                    {
+                        // notify other contact of performed operation (ADD/REMOVE)
+                        ClientController.AddClient(contact.Identity);
+                        MViewerClient client = ClientController.GetClient(contact.Identity);
+                        client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
+                    }
                     PingContacts();
                     break;
                 case GenericEnums.ContactsOperation.Update:
@@ -85,8 +92,16 @@ namespace MViewer
                     contact = ContactsRepository.GetContact(e.UpdatedContact.ContactNo);
                     break;
                 case GenericEnums.ContactsOperation.Remove:
-                    ContactsRepository.RemoveContact(e.UpdatedContact.ContactNo);
+                    contact = ContactsRepository.GetContact(e.UpdatedContact.Identity);
+                    ContactsRepository.RemoveContact(contact.ContactNo);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+                    
+                    if (e.UpdatedContact.ContactNo != -1)
+                    {
+                        ClientController.AddClient(contact.Identity);
+                        MViewerClient client2 = ClientController.GetClient(contact.Identity);
+                        client2.RemoveContact(_identity.MyIdentity);
+                    }
                     break;
                 case GenericEnums.ContactsOperation.Get:
                     contact = ContactsRepository.GetContact(e.UpdatedContact.ContactNo);

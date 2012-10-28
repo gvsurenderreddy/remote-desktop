@@ -32,7 +32,8 @@ namespace MViewer
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
                 ClientConnectedHandler = this.ClientConnected,
-                VideoCaptureHandler = this.ShowVideoCapture
+                VideoCaptureHandler = this.ShowVideoCapture,
+                ContactsHandler = this.ContactRequest
             };
 
             _model = new Model(handlers);
@@ -241,7 +242,7 @@ namespace MViewer
             else
             {
                 contact = _model.PerformContactOperation(e);
-                // todo: notify other contact of performed operation (ADD/REMOVE)
+                NotifyContactsObserver();
             }
             return contact;
         }
@@ -309,6 +310,12 @@ namespace MViewer
         #endregion
 
         #region private methods
+
+        void ContactRequest(object sender, EventArgs e)
+        {
+            // todo: implement ContactRequest
+            PerformContactsOperation(sender, (ContactsEventArgs)e);
+        }
 
         void PerformVideoChatAction(object sender, RoomActionEventArgs e)
         {

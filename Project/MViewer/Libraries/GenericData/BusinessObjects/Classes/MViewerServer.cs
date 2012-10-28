@@ -92,6 +92,28 @@ namespace GenericDataLayer
 
         }
 
+        public void AddContact(string identity, string friendlyName)
+        {
+            // todo: implement AddContact
+            ContactsEventArgs args = new ContactsEventArgs()
+            {
+                Operation = GenericEnums.ContactsOperation.Add,
+                UpdatedContact = new Contact(-1, friendlyName, identity)
+            };
+            _controllerHandlers.ContactsHandler.Invoke(this, args);
+        }
+
+        public void RemoveContact(string identity)
+        {
+            // todo: implement AddContact
+            ContactsEventArgs args = new ContactsEventArgs()
+            {
+                Operation = GenericEnums.ContactsOperation.Remove,
+                UpdatedContact = new Contact(-1, "", identity)
+            };
+            _controllerHandlers.ContactsHandler.Invoke(this, args);
+        }
+
         public bool Ping()
         {
             return true;
