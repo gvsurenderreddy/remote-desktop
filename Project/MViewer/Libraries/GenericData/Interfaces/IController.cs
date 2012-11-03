@@ -17,7 +17,7 @@ namespace GenericDataLayer
         void IdentityUpdated(object sender, IdentityEventArgs e);
         void PerformRoomAction(object sender, RoomActionEventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
-        void StartVideoChat(WebcamCapture webcamControl, RoomActionEventArgs e);
+        void StartVideoChat(WebcamCapture webcamControl);
         void StopVideChat(string identity);
         void ShowVideoCapture(object sender, EventArgs e);
     }

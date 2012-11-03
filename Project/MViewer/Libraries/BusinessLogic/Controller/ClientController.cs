@@ -119,14 +119,14 @@ namespace BusinessLogicLayer
             return client.Ping();
         }
 
-        public void SendCapture(byte[]capture, string identity)
+        public void SendCapture(byte[]capture, string receiverIdentity, string senderIdentity)
         {
-            if(_clients.ContainsKey(identity))
+            if(_clients.ContainsKey(receiverIdentity))
             {
-                MViewerClient client = _clients[identity];
+                MViewerClient client = _clients[receiverIdentity];
                 if (client.State == System.ServiceModel.CommunicationState.Opened)
                 {
-                    client.SendWebcamCapture(capture);
+                    client.SendWebcamCapture(capture, senderIdentity);
                 }
             }
         }

@@ -14,11 +14,11 @@ namespace MViewer
     {
         WebcamCapture _webcamCapture;
 
-        public FormMyWebcam(RoomActionEventArgs e)
+        public FormMyWebcam()
         {
             InitializeComponent();
             _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32());
-            Program.Controller.StartVideoChat(_webcamCapture, e);
+            Program.Controller.StartVideoChat(_webcamCapture);
         }
 
         public void SetPicture(Image image)

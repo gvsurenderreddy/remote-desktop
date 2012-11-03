@@ -48,9 +48,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
 
     }
 
-    public void SendWebcamCapture(byte[] capture)
+    public void SendWebcamCapture(byte[] capture, string senderIdentity)
     {
-        base.Channel.SendWebcamCapture(capture);
+        base.Channel.SendWebcamCapture(capture, senderIdentity);
     }
     
     public void SendMicrophoneCapture(byte[] capture)
@@ -63,10 +63,10 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         return base.Channel.Ping();
     }
 
-    public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
-    {
-        base.Channel.InitializeRoom(identity, roomType);
-    }
+    //public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
+    //{
+    //    base.Channel.InitializeRoom(identity, roomType);
+    //}
 
     public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
     {

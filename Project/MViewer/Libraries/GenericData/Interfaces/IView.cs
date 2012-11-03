@@ -16,11 +16,13 @@ namespace GenericDataLayer
         void BindObservers(bool bind);
 
         void ShowMainForm(bool close);
-        void ShowMyWebcamForm(RoomActionEventArgs e);
+        void ShowMyWebcamForm();
         void UpdateWebcapture(Image image);
 
         void PerformRoomAction(object sender, EventArgs e);
         //IntPtr ShowRoomForm(object sender, EventArgs e);
+
+        bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType);
 
         IRoomManager RoomManager
         {

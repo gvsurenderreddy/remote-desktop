@@ -13,7 +13,7 @@ namespace GenericDataLayer
     {
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendWebcamCapture", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendWebcamCaptureResponse")]
-        void SendWebcamCapture(byte[] capture);
+        void SendWebcamCapture(byte[] capture, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendMicrophoneCapture", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendMicrophoneCaptureResponse")]
         void SendMicrophoneCapture(byte[] capture);
@@ -21,8 +21,8 @@ namespace GenericDataLayer
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/Ping", ReplyAction = "http://tempuri.org/IVideoChatRoom/PingResponse")]
         bool Ping();
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/InitializeRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/InitializeRoomResponse")]
-        void InitializeRoom(string identity, GenericEnums.RoomActionType roomType);
+        //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/InitializeRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/InitializeRoomResponse")]
+        //void InitializeRoom(string identity, GenericEnums.RoomActionType roomType);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendRoomAction", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendRoomActionResponse")]
         void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType);

@@ -23,10 +23,10 @@ namespace MViewer
 
         #region c-tor
 
-        public FormVideoRoom(ref IntPtr handle)
+        public FormVideoRoom()
         {
             InitializeComponent();
-            handle = this.Handle;
+            //handle = this.Handle;
             _formClosing = false;
         }
 
@@ -83,7 +83,24 @@ namespace MViewer
             // todo: implement ShowRoom
             try
             {
-                this.ShowDialog();
+                if (this.InvokeRequired)
+                {
+                    this.Invoke
+                        (
+                        new MethodInvoker
+                        (
+                       delegate
+                       {
+                           this.Show();
+                       }
+                        )
+                        );
+
+                }
+                else
+                {
+                    this.Show();
+                }
             }
             catch
             {

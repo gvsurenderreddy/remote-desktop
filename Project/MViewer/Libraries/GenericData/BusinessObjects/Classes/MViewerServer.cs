@@ -30,36 +30,7 @@ namespace GenericDataLayer
             _controllerHandlers = controllerHandlers;
         }
 
-        public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
-        {
-            switch (roomType)
-            {
-                case GenericEnums.RoomActionType.Video:
-                    // initialize video chat form to receive captures from the client
-                    _controllerHandlers.ClientConnectedHandler.Invoke(this, new RoomActionEventArgs()
-                    {
-                        ActionType = GenericEnums.RoomActionType.Video,
-                        SignalType = GenericEnums.SignalType.Start,
-                        Identity = _identity
-                    });
-
-                    // todo: initialize my webcam form so that I can send my captures to the connected contact
-
-
-                    break;
-                case GenericEnums.RoomActionType.Audio:
-
-                    break;
-                case GenericEnums.RoomActionType.Remoting:
-
-                    break;
-                case GenericEnums.RoomActionType.Send:
-
-                    break;
-            }
-        }
-
-        public void SendWebcamCapture(byte[] capture)
+        public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
             Thread.Sleep(2000);
             MemoryStream ms = new MemoryStream(capture);
@@ -69,7 +40,7 @@ namespace GenericDataLayer
             _controllerHandlers.VideoCaptureHandler.Invoke(this,
                 new VideoCaptureEventArgs()
                 {
-                    Identity = _identity,
+                    Identity = senderIdentity,
                     CapturedImage = bmp
                 });
 

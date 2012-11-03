@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using GenericDataLayer;
+using Utils;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace BusinessLogicLayer
 {
@@ -11,15 +14,18 @@ namespace BusinessLogicLayer
     {
         #region private members
 
+        readonly object _syncRooms = new object();
         IDictionary<string, IRoom> _rooms;
         string _activeRoom;
+        Form _mainForm;
 
         #endregion
 
         #region c-tor
 
-        public RoomManager()
+        public RoomManager(Form mainForm)
         {
+            _mainForm = mainForm;
             _rooms = new Dictionary<string, IRoom>();
         }
 
@@ -27,58 +33,101 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType)
+        {
+            bool activated = false;
+            lock (_syncRooms)
+            {
+                bool roomExists = _rooms.ContainsKey(identity);
+                if (roomExists)
+                {
+                    activated = _rooms[identity].RoomType == roomType;
+                }
+            }
+            return activated;
+        }
+
         public void ShowPicture(string identity, Image picture)
         {
-            if (_rooms != null && _rooms.ContainsKey(identity))
+            lock (_syncRooms)
             {
-                IVideoRoom room = (IVideoRoom)_rooms[identity];
-                room.SetPicture(picture);
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    IVideoRoom room = (IVideoRoom)_rooms[identity];
+                    room.SetPicture(picture);
+                }
             }
         }
 
         public void SetPartnerName(string identity, string friendlyName)
         {
-            if (_rooms != null && _rooms.ContainsKey(identity))
+            lock (_syncRooms)
             {
-                IRoom room = _rooms[identity];
-                room.SetPartnerName(friendlyName);
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    IRoom room = _rooms[identity];
+                    room.SetPartnerName(friendlyName);
+                }
             }
         }
 
         public void AddRoom(string identity, IRoom room)
         {
-            if (_rooms == null)
-            {
-                _rooms = new Dictionary<string, IRoom>();
-            }
-            if (!_rooms.ContainsKey(identity))
-            {
-                _rooms.Add(identity, room);
-            }
+            Thread t = new Thread(delegate()
+                {
+                    lock (_syncRooms)
+                    {
+                        if (_rooms == null)
+                        {
+                            _rooms = new Dictionary<string, IRoom>();
+                        }
+                        if (!_rooms.ContainsKey(identity))
+                        {
+                            _rooms.Add(identity, room);
+                        }
+                    }
+                }
+                );
+            t.Start();
         }
 
         public void RemoveRoom(string identity)
         {
-            if (_rooms != null && _rooms.ContainsKey(identity))
+            lock (_syncRooms)
             {
-                _rooms[identity].CloseRoom();
-                _rooms.Remove(identity);
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    _rooms[identity].CloseRoom();
+                    _rooms.Remove(identity);
+                }
             }
         }
 
         public void ShowRoom(string identity)
         {
-            if (_rooms != null && _rooms.ContainsKey(identity))
+            //lock (_syncRooms)
             {
-                _rooms[identity].ShowRoom();
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    //_mainForm.BeginInvoke((Action)delegate
+                    //{
+                    //    Form roomForm = (Form)_rooms[identity];
+                    //    roomForm.Show();
+
+                    //});
+                    Application.Run((Form)_rooms[identity]);
+                }
             }
         }
 
         public void CloseRoom(string identity)
         {
-            if (_rooms != null && _rooms.ContainsKey(identity))
+            lock (_syncRooms)
             {
-                _rooms[identity].CloseRoom();
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    _rooms[identity].CloseRoom();
+                }
             }
         }
 
@@ -88,8 +137,16 @@ namespace BusinessLogicLayer
 
         public string ActiveRoom
         {
-            get { return _activeRoom; }
-            set { _activeRoom = value; }
+            get
+            {
+                lock (_syncRooms)
+                { return _activeRoom; }
+            }
+            set
+            {
+                lock (_syncRooms)
+                { _activeRoom = value; }
+            }
         }
 
         #endregion

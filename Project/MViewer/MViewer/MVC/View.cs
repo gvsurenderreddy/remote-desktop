@@ -25,7 +25,7 @@ namespace MViewer
         IDictionary<Type, object> _observers;
         bool _observersActive;
 
-        IRoomManager _roomManager = new RoomManager();
+        IRoomManager _roomManager;
 
         IModel _model;
 
@@ -43,12 +43,18 @@ namespace MViewer
         {
             _model = model;
             _formMain = new FormMain();
+            _roomManager = new RoomManager(_formMain);
             _formActions = new FormActions(new EventHandler(this.PerformRoomAction));
         }
 
         #endregion
 
         #region public methods
+
+        public bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType)
+        {
+            return _roomManager.IsRoomActivated(identity, roomType);
+        }
 
         public void BindObservers(bool bind)
         {
@@ -66,14 +72,14 @@ namespace MViewer
             _observersActive = bind;
         }
 
-        public void ShowMyWebcamForm(RoomActionEventArgs e)
+        public void ShowMyWebcamForm()
         {
             if (_formWebCapture == null)
             {    
                 // open my webcam form if no video chat was previously started
                 Thread t = new Thread(delegate()
                 {
-                    _formWebCapture = new FormMyWebcam(e);
+                    _formWebCapture = new FormMyWebcam();
                     _formWebCapture.ShowDialog();
                     //Thread.Sleep(Timeout.Infinite);
                 });

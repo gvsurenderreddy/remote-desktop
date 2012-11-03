@@ -68,11 +68,15 @@ namespace MViewer
 
                 // todo: send to server
                 // loop on all connected peers and send them the captures
+                // broadcast the webcaptures
 
                 IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.SessionType.ClientSession, GenericEnums.RoomActionType.Video);
-                foreach (string identity in connectedSessions)
+                foreach (string receiverIdentity in connectedSessions)
                 {
-                    _model.ClientController.SendCapture(bitmapBytes, identity);
+                    _model.ClientController.SendCapture(bitmapBytes, receiverIdentity, 
+                        _model.Identity.MyIdentity);
+                    // todo: send audio capture
+                    break;
                 }
             }
             catch (Exception ex)
@@ -96,55 +100,26 @@ namespace MViewer
             _model.Identity.UpdateFriendlyName(e.FriendlyName);
         }
 
-        public void StartVideoChat(WebcamCapture webcamControl, RoomActionEventArgs e)
+        public void StartVideoChat(WebcamCapture webcamControl)
         {
             // create Presenter and start the presentation
             int timerInterval = 100;
             int height = 354, width = 360;
 
             // initialize the presenter that will send webcam captures to all Server Sessions
-            PresenterManager.StartPresentation(webcamControl, e.Identity, timerInterval, height, width,
+            PresenterManager.StartPresentation(webcamControl, _model.Identity.MyIdentity,
+                timerInterval, height, width,
                 new EventHandler(this.WebCamImageCaptured));
 
-            Session serverSession = new ClientSession(e.Identity);
-            serverSession.SessionState = GenericEnums.SessionState.Opened;
-            switch (e.ActionType)
-            {
-                case GenericEnums.RoomActionType.Audio:
-                    serverSession.Peers = new ConnectedPeers()
-                    {
-                        Audio = true,
-                        Video = false,
-                        Remoting = false
-                    };
-                    break;
-                case GenericEnums.RoomActionType.Video:
-                    serverSession.Peers = new ConnectedPeers()
-                    {
-                        Audio = true,
-                        Video = true,
-                        Remoting = false
-                    };
-                    break;
-                case GenericEnums.RoomActionType.Remoting:
-                    serverSession.Peers = new ConnectedPeers()
-                    {
-                        Audio = false,
-                        Video = false,
-                        Remoting = true
-                    };
-                    break;
-            }
-            // save the proxy to which we are sending the webcam captures
-            _model.SessionManager.AddSession(serverSession);
+            
 
-            // retrieve the client based on the Server's identity
-            MViewerClient client = _model.ClientController.GetClient(e.Identity);
-            // tell the server to initialize a new Video Chat form
-            client.InitializeRoom(_model.Identity.MyIdentity, GenericEnums.RoomActionType.Video);
+            //// retrieve the client based on the Server's identity
+            //MViewerClient client = _model.ClientController.GetClient(eArgs.Identity);
+            //// tell the server to initialize a new Video Chat form
+            //client.InitializeRoom(_model.Identity.MyIdentity, GenericEnums.RoomActionType.Video);
 
-            // todo: tell the server to initialize a new Audio Chat form
-            //client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
+            //// todo: tell the server to initialize a new Audio Chat form
+            ////client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
         }
 
         public void ClientConnected(object sender, EventArgs e)
@@ -158,8 +133,12 @@ namespace MViewer
                     break;
                 case GenericEnums.RoomActionType.Video:
                     // open new Video Chat form to receive the captures
-                    StartVideoChat(args.Identity);
-
+                    Thread t = new Thread(delegate()
+                    {
+                        StartVideoChat(args.Identity);
+                    });
+                    t.SetApartmentState(ApartmentState.STA);
+                    t.Start();
                     // todo: open my webcam form and send my captures to the connected contact
                     //Program.Controller.PerformRoomAction(sender, args);
 
@@ -199,22 +178,26 @@ namespace MViewer
             //    }, 
             //    clientSession.SessionState);
 
-            Thread t = new Thread(delegate()
+            if (!_view.IsRoomActivated(identity, GenericEnums.RoomActionType.Video))
             {
-                // initialize new video chat form
-                Thread.Sleep(1000);
-                IntPtr handle = IntPtr.Zero;
-                FormVideoRoom videoRoom = new FormVideoRoom(ref handle);
-                _view.RoomManager.AddRoom(identity, videoRoom);
-                Contact contact = _model.GetContact(identity);
-                // get friendly name from contacts list
-                _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
-                // finally, show the video chat form where we'll see the webcam captures
-                _view.RoomManager.ShowRoom(identity);
+                Thread t = new Thread(delegate()
+                {
+                    //IntPtr handle = IntPtr.Zero;
+                    FormVideoRoom videoRoom = new FormVideoRoom();
+                    _view.RoomManager.AddRoom(identity, videoRoom);
+                    // initialize new video chat form
+                    Thread.Sleep(1000);
+                    
+                    Contact contact = _model.GetContact(identity);
+                    // get friendly name from contacts list
+                    _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                    // finally, show the video chat form where we'll see the webcam captures
+                    _view.RoomManager.ShowRoom(identity);
+                }
+                );
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
             }
-            );
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
         }
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)
@@ -277,6 +260,9 @@ namespace MViewer
         public void ShowVideoCapture(object sender, EventArgs e)
         {
             VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
+
+            InitializeRoom(args.Identity, GenericEnums.RoomActionType.Video);
+
             _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
         }
 
@@ -347,26 +333,87 @@ namespace MViewer
             PerformContactsOperation(sender, (ContactsEventArgs)e);
         }
 
-        void PerformVideoChatAction(object sender, RoomActionEventArgs e)
+        void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
         {
-            switch(e.SignalType)
+            switch (roomType)
+            {
+                case GenericEnums.RoomActionType.Video:
+                    // initialize video chat form to receive captures from the client
+                    ClientConnected(null, new RoomActionEventArgs()
+                    {
+                        ActionType = GenericEnums.RoomActionType.Video,
+                        SignalType = GenericEnums.SignalType.Start,
+                        Identity = identity
+                    });
+
+                    // todo: initialize my webcam form so that I can send my captures to the connected contact
+
+
+                    break;
+                case GenericEnums.RoomActionType.Audio:
+
+                    break;
+                case GenericEnums.RoomActionType.Remoting:
+
+                    break;
+                case GenericEnums.RoomActionType.Send:
+
+                    break;
+            }
+        }
+
+        void PerformVideoChatAction(object sender, RoomActionEventArgs eArgs)
+        {
+            switch(eArgs.SignalType)
             {
                 case GenericEnums.SignalType.Start:
 
                     // I am going to send my captures by using the below client
 
-                    _model.ClientController.AddClient(e.Identity);
-                    _model.ClientController.StartClient(e.Identity);
+                    _model.ClientController.AddClient(eArgs.Identity);
+                    _model.ClientController.StartClient(eArgs.Identity);
 
+                    // todo: create client session
+                    Session clientSession = new ClientSession(eArgs.Identity);
+                    clientSession.SessionState = GenericEnums.SessionState.Opened;
+                    switch (eArgs.ActionType)
+                    {
+                        case GenericEnums.RoomActionType.Audio:
+                            clientSession.Peers = new ConnectedPeers()
+                            {
+                                Audio = true,
+                                Video = false,
+                                Remoting = false
+                            };
+                            break;
+                        case GenericEnums.RoomActionType.Video:
+                            clientSession.Peers = new ConnectedPeers()
+                            {
+                                Audio = true,
+                                Video = true,
+                                Remoting = false
+                            };
+                            break;
+                        case GenericEnums.RoomActionType.Remoting:
+                            clientSession.Peers = new ConnectedPeers()
+                            {
+                                Audio = false,
+                                Video = false,
+                                Remoting = true
+                            };
+                            break;
+                    }
+                    // save the proxy to which we are sending the webcam captures
+                    _model.SessionManager.AddSession(clientSession);
                 
                     // initialize the webcamCapture form
                     // this form will be used to capture the images and send them to all Server Sessions
-                    _view.ShowMyWebcamForm(e);
+                    _view.ShowMyWebcamForm();
                     //Thread.Sleep(10000);
                     break;
                 case GenericEnums.SignalType.Stop:
                     
-                    StopVideChat(e.Identity);
+                    StopVideChat(eArgs.Identity);
                     // todo: dispose the webcamCapture form from the View if there is no active video chat left
                            
                     break;
