@@ -63,11 +63,6 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         return base.Channel.Ping();
     }
 
-    //public void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
-    //{
-    //    base.Channel.InitializeRoom(identity, roomType);
-    //}
-
     public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
     {
         base.Channel.SendRoomAction(identity, roomType, signalType);
@@ -82,4 +77,5 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     {
         base.Channel.RemoveContact(identity);
     }
+    
 }

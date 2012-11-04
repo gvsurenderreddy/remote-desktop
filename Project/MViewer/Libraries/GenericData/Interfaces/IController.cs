@@ -20,5 +20,7 @@ namespace GenericDataLayer
         void StartVideoChat(WebcamCapture webcamControl);
         void StopVideChat(string identity);
         void ShowVideoCapture(object sender, EventArgs e);
+        void RoomClosing(object sender, EventArgs e);
+
     }
 }

@@ -33,7 +33,8 @@ namespace MViewer
             {
                 ClientConnectedHandler = this.ClientConnected,
                 VideoCaptureHandler = this.ShowVideoCapture,
-                ContactsHandler = this.ContactRequest
+                ContactsHandler = this.ContactRequest,
+                RoomClosingHandler = this.RoomClosing
             };
 
             _model = new Model(handlers);
@@ -122,6 +123,32 @@ namespace MViewer
             ////client.InitializeRoom(e.Identity, GenericEnums.RoomActionType.Audio);
         }
 
+        public void RoomClosing(object sender, EventArgs e)
+        {
+            // todo: implement ClientConnected
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            switch (args.ActionType)
+            {
+                case GenericEnums.RoomActionType.Audio:
+
+                    break;
+                case GenericEnums.RoomActionType.Video:
+
+                    // todo: close the video chat form
+                    _view.PerformRoomAction(sender, e);
+
+                    // todo: send close signal to other side
+
+                    // todo: remove the client session (client used to send my webcaptures)
+
+                    
+                    break;
+                case GenericEnums.RoomActionType.Remoting:
+
+                    break;
+            }
+        }
+
         public void ClientConnected(object sender, EventArgs e)
         {
             // todo: implement ClientConnected
@@ -155,6 +182,9 @@ namespace MViewer
         public void StopVideChat(string identity)
         {
             // todo: implement StopVideChat
+
+            // todo: send the stop signal to the server session
+            _model.ClientController.SendRoomCommand(identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
 
             // remove the connected client session
             _model.SessionManager.RemoveSession(identity);
@@ -231,11 +261,6 @@ namespace MViewer
                             break;
                         case GenericEnums.SignalType.Stop:
                             PerformVideoChatAction(sender, e);
-                            
-                            // todo: send the stop signal to the server session
-                            _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, e.ActionType, e.SignalType);
-                            _model.SessionManager.RemoveSession(e.Identity);
-
                             break;
                     }
                     break;
@@ -415,7 +440,8 @@ namespace MViewer
                     
                     StopVideChat(eArgs.Identity);
                     // todo: dispose the webcamCapture form from the View if there is no active video chat left
-                           
+
+                  
                     break;
                 case GenericEnums.SignalType.Pause:
 

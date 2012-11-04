@@ -32,5 +32,10 @@ namespace GenericDataLayer
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/RemoveContact", ReplyAction = "http://tempuri.org/IVideoChatRoom/RemoveContactResponse")]
         void RemoveContact(string identity);
+
+        //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/CloseRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/CloseRoomResponse")]
+        //void CloseRoom(string identity, GenericEnums.RoomActionType roomType);
+
+
     }
 }

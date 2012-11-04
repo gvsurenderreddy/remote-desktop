@@ -123,6 +123,16 @@ namespace UIControls
                         button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
                     }
                     break;
+                case GenericEnums.SignalType.Stop:
+                    if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
+                    {
+                        button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                    }
+                    else
+                    {
+                        button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    }
+                    break;
                 case GenericEnums.SignalType.Pause:
                     if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
                     {

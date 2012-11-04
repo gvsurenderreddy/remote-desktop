@@ -24,11 +24,28 @@ namespace GenericDataLayer
 
         #endregion
 
+        #region c-tor
+
         public MViewerServer(ControllerEventHandlers controllerHandlers, string identity)
         {
             _identity = identity;
             _controllerHandlers = controllerHandlers;
         }
+
+        #endregion
+
+        #region public methods
+
+        //public void CloseRoom(string identity, GenericEnums.RoomActionType roomType)
+        //{
+        //    _controllerHandlers.RoomClosingHandler.Invoke(this,
+        //        new RoomActionEventArgs()
+        //        {
+        //            ActionType = GenericEnums.RoomActionType.Video,
+        //            Identity = identity,
+        //            SignalType= GenericEnums.SignalType.Stop
+        //        });
+        //}
 
         public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
@@ -60,7 +77,22 @@ namespace GenericDataLayer
         public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
             // todo: implement SendRoomAction
+            switch(signalType)
+            {
+                case GenericEnums.SignalType.Pause:
 
+                    break;
+                case GenericEnums.SignalType.Stop:
+                    _controllerHandlers.RoomClosingHandler.Invoke(this,
+                        new RoomActionEventArgs()
+                        {
+                            ActionType = roomType,
+                            Identity = identity,
+                            SignalType = signalType
+                        });
+                    break;
+            }
+            
         }
 
         public void AddContact(string identity, string friendlyName)
@@ -89,6 +121,8 @@ namespace GenericDataLayer
         {
             return true;
         }
+
+        #endregion
 
         //public void SendWebcamCapture2(Stream stream)
         //{

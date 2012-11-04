@@ -92,7 +92,7 @@
     <Compile Include="MVC\Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Global\SystemConfiguration.cs" />
+    <Compile Include="Forms\Global\SystemConfiguration.cs" />
     <Compile Include="MVC\View.cs" />
     <EmbeddedResource Include="Forms\FormActions.resx">
       <DependentUpon>FormActions.cs</DependentUpon>

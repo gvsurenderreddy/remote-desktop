@@ -20,7 +20,7 @@ namespace GenericDataLayer
         void UpdateWebcapture(Image image);
 
         void PerformRoomAction(object sender, EventArgs e);
-        //IntPtr ShowRoomForm(object sender, EventArgs e);
+        void RoomClosing(RoomActionEventArgs args);
 
         bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType);
 

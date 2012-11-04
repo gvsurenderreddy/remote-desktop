@@ -19,22 +19,29 @@ using System.Collections;
 	{
         public static System.Drawing.Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
         {
-            //a holder for the result
-            Bitmap result = new Bitmap(width, height);
-            // set the resolutions the same to avoid cropping due to resolution differences
-            result.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-
-            //use a graphics object to draw the resized image into the bitmap
-            using (Graphics graphics = Graphics.FromImage(result))
+            Bitmap result = null;
+            try
             {
-                //set the resize quality modes to high quality
-                graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
-                graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                //draw the image into the target bitmap
-                graphics.DrawImage(image, 0, 0, result.Width, result.Height);
-            }
+                //a holder for the result
+                result = new Bitmap(width, height);
+                // set the resolutions the same to avoid cropping due to resolution differences
+                result.SetResolution(image.HorizontalResolution, image.VerticalResolution);
 
+                //use a graphics object to draw the resized image into the bitmap
+                using (Graphics graphics = Graphics.FromImage(result))
+                {
+                    //set the resize quality modes to high quality
+                    graphics.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+                    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+                    //draw the image into the target bitmap
+                    graphics.DrawImage(image, 0, 0, result.Width, result.Height);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
             //return the resulting bitmap
             return result;
         }

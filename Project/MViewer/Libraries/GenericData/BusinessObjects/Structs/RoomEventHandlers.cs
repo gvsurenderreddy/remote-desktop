@@ -13,6 +13,12 @@ namespace GenericDataLayer
             set;
         }
 
+        public EventHandler RoomClosingHandler
+        {
+            get;
+            set;
+        }
+
         public EventHandler VideoCaptureHandler
         {
             get;

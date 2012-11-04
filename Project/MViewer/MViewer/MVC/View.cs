@@ -155,6 +155,12 @@ namespace MViewer
             }
         }
 
+        public void RoomClosing(RoomActionEventArgs args)
+        {
+            _roomManager.CloseRoom(args.Identity);
+            _roomManager.RemoveRoom(args.Identity);
+        }
+
         public void PerformRoomAction(object sender, EventArgs e)
         {
             string activeRoom = _roomManager.ActiveRoom;
