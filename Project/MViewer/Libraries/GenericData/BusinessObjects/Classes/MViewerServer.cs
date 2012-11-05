@@ -49,6 +49,8 @@ namespace GenericDataLayer
 
         public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
+            // todo: check if the video session is still active
+
             Thread.Sleep(2000);
             MemoryStream ms = new MemoryStream(capture);
             //read the Bitmap back
