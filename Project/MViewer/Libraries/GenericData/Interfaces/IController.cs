@@ -14,13 +14,13 @@ namespace GenericDataLayer
         void NotifyContactsObserver();
         void GetContactsStatus();
 
-        void IdentityUpdated(object sender, IdentityEventArgs e);
+        void IdentityObserver(object sender, IdentityEventArgs e);
         void PerformRoomAction(object sender, RoomActionEventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideoChat(WebcamCapture webcamControl);
         void StopVideChat(string identity);
-        void ShowVideoCapture(object sender, EventArgs e);
-        void RoomClosing(object sender, EventArgs e);
+        void NotifyVideoCaptureObserver(object sender, EventArgs e);
+        void RoomClosingObserver(object sender, EventArgs e);
 
     }
 }

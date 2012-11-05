@@ -160,7 +160,7 @@ namespace MViewer
             _roomManager.CloseRoom(args.Identity);
             _roomManager.RemoveRoom(args.Identity);
 
-            // todo: close the webcapture form if there s no room left
+            // close the webcapture form if there s no room left
             if (!_roomManager.RoomsLeft())
             {
                 _formWebCapture.Close();

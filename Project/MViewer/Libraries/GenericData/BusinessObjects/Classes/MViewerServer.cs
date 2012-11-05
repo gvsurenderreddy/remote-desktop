@@ -21,6 +21,7 @@ namespace GenericDataLayer
         //Computer computer = new Computer();
         ControllerEventHandlers _controllerHandlers;
         string _identity;
+        readonly object _syncVideoCaptures = new object();
 
         #endregion
 
@@ -36,34 +37,24 @@ namespace GenericDataLayer
 
         #region public methods
 
-        //public void CloseRoom(string identity, GenericEnums.RoomActionType roomType)
-        //{
-        //    _controllerHandlers.RoomClosingHandler.Invoke(this,
-        //        new RoomActionEventArgs()
-        //        {
-        //            ActionType = GenericEnums.RoomActionType.Video,
-        //            Identity = identity,
-        //            SignalType= GenericEnums.SignalType.Stop
-        //        });
-        //}
-
         public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
-            // todo: check if the video session is still active
+            lock (_syncVideoCaptures)
+            {
+                //Thread.Sleep(2000);
+                MemoryStream ms = new MemoryStream(capture);
+                //read the Bitmap back
+                Image bmp = (Bitmap)Bitmap.FromStream(ms);
 
-            Thread.Sleep(2000);
-            MemoryStream ms = new MemoryStream(capture);
-            //read the Bitmap back
-            Image bmp = (Bitmap)Bitmap.FromStream(ms);
+                _controllerHandlers.VideoCaptureObserver.Invoke(this,
+                    new VideoCaptureEventArgs()
+                    {
+                        Identity = senderIdentity,
+                        CapturedImage = bmp
+                    });
 
-            _controllerHandlers.VideoCaptureHandler.Invoke(this,
-                new VideoCaptureEventArgs()
-                {
-                    Identity = senderIdentity,
-                    CapturedImage = bmp
-                });
-
-            GC.Collect();
+                GC.Collect();
+            }
         }
 
         readonly object _sync = new object();
@@ -78,23 +69,25 @@ namespace GenericDataLayer
 
         public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
-            // todo: implement SendRoomAction
-            switch(signalType)
+            lock (_syncVideoCaptures)
             {
-                case GenericEnums.SignalType.Pause:
+                // todo: implement SendRoomAction
+                switch (signalType)
+                {
+                    case GenericEnums.SignalType.Pause:
 
-                    break;
-                case GenericEnums.SignalType.Stop:
-                    _controllerHandlers.RoomClosingHandler.Invoke(this,
-                        new RoomActionEventArgs()
-                        {
-                            ActionType = roomType,
-                            Identity = identity,
-                            SignalType = signalType
-                        });
-                    break;
+                        break;
+                    case GenericEnums.SignalType.Stop:
+                        _controllerHandlers.RoomClosingObserver.Invoke(this,
+                            new RoomActionEventArgs()
+                            {
+                                ActionType = roomType,
+                                Identity = identity,
+                                SignalType = signalType
+                            });
+                        break;
+                }
             }
-            
         }
 
         public void AddContact(string identity, string friendlyName)
@@ -105,7 +98,7 @@ namespace GenericDataLayer
                 Operation = GenericEnums.ContactsOperation.Add,
                 UpdatedContact = new Contact(-1, friendlyName, identity)
             };
-            _controllerHandlers.ContactsHandler.Invoke(this, args);
+            _controllerHandlers.ContactsObserver.Invoke(this, args);
         }
 
         public void RemoveContact(string identity)
@@ -116,7 +109,7 @@ namespace GenericDataLayer
                 Operation = GenericEnums.ContactsOperation.Remove,
                 UpdatedContact = new Contact(-1, "", identity)
             };
-            _controllerHandlers.ContactsHandler.Invoke(this, args);
+            _controllerHandlers.ContactsObserver.Invoke(this, args);
         }
 
         public bool Ping()

@@ -7,43 +7,43 @@ namespace GenericDataLayer
 {
     public struct ControllerEventHandlers
     {
-        public EventHandler ClientConnectedHandler
+        public EventHandler ClientConnectedObserver
         {
             get;
             set;
         }
 
-        public EventHandler RoomClosingHandler
+        public EventHandler RoomClosingObserver
         {
             get;
             set;
         }
 
-        public EventHandler VideoCaptureHandler
+        public EventHandler VideoCaptureObserver
         {
             get;
             set;
         }
 
-        public EventHandler AudioCaptureHandler
+        public EventHandler AudioCaptureObserver
         {
             get;
             set;
         }
 
-        public EventHandler ScreenSCaptureHandler
+        public EventHandler ScreenSCaptureObserver
         {
             get;
             set;
         }
 
-        public EventHandler MouseCaptureHandler
+        public EventHandler MouseCaptureObserver
         {
             get;
             set;
         }
 
-        public EventHandler ContactsHandler
+        public EventHandler ContactsObserver
         {
             get;
             set;
