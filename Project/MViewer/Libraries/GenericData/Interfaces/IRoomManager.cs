@@ -18,6 +18,8 @@ namespace GenericDataLayer
         void SetPartnerName(string identity, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType);
 
+        bool RoomsLeft();
+
         string ActiveRoom
         {
             get;

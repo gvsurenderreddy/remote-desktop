@@ -33,6 +33,11 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public bool RoomsLeft()
+        {
+            return _rooms != null ? _rooms.Count > 0 ? true : false : false;
+        }
+
         public bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType)
         {
             bool activated = false;

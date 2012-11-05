@@ -125,7 +125,7 @@ namespace MViewer
 
         public void RoomClosing(object sender, EventArgs e)
         {
-            // todo: implement ClientConnected
+            // todo: implement RoomClosing
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             switch (args.ActionType)
             {
@@ -135,7 +135,7 @@ namespace MViewer
                 case GenericEnums.RoomActionType.Video:
 
                     // todo: close the video chat form
-                    _view.PerformRoomAction(sender, e);
+                    PerformRoomAction(sender, args);
 
                     // todo: send close signal to other side
 
@@ -167,7 +167,7 @@ namespace MViewer
                     t.SetApartmentState(ApartmentState.STA);
                     t.Start();
                     // todo: open my webcam form and send my captures to the connected contact
-                    //Program.Controller.PerformRoomAction(sender, args);
+                    Program.Controller.PerformRoomAction(sender, args);
 
                     break;
                 case GenericEnums.RoomActionType.Remoting:
