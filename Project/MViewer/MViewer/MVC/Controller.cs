@@ -81,6 +81,9 @@ namespace MViewer
                     {
                         //Thread.Sleep(10 * 1000);
 
+                        // todo: check if the stop signal has been sent from the UI
+                        // todo: send the last capture and stop the process
+
                         ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
                         if (peers.Video == true)
                         {
@@ -187,11 +190,18 @@ namespace MViewer
 
         public void StopVideChat(string identity)
         {
+            // todo: check if the webcapture is pending for being sent
+            // todo: wait for it to finish and block the next sending
+
             ConnectedPeers peers = _model.SessionManager.GetPeers(identity);
+            // todo: update the session
             peers.Audio = false;
             peers.Video = false;
             _model.SessionManager.UpdateSession(identity,
                 peers, GenericEnums.SessionState.Closed);
+            
+            // todo: unblock the sending process; it must know that the chat has been stopped
+            
             // send the stop signal to the server session
             _model.ClientController.SendRoomCommand(identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
 
