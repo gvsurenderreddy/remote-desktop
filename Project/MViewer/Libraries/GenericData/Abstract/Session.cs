@@ -16,25 +16,28 @@ namespace GenericDataLayer
         //protected ConnectedView _view;
         protected GenericEnums.SessionType _sessionType;
         private GenericEnums.SessionState _sessionState;
+        protected PendingTransfer _pendingTransfer;
+        protected TransferUptading _transferUpdating;
 
         #endregion
 
         #region proprieties
 
-        //public ConnectedView View
-        //{
-        //    get { return _view; }
-        //    set
-        //    {
-        //        _view.AudioChatView = value.AudioChatView;
-        //        _view.VideoChatView = value.VideoChatView;
-        //        _view.RemotingView = value.RemotingView;
-        //    }
-        //}
-
         public string Identity
         {
             get { return _identity; }
+        }
+
+        public PendingTransfer PendingTransfer
+        {
+            get { return _pendingTransfer; }
+            set { _pendingTransfer = value; }
+        }
+
+        public TransferUptading TransferUpdating
+        {
+            get { return _transferUpdating; }
+            set { _transferUpdating = value; }
         }
 
         public ConnectedPeers Peers

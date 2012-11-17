@@ -70,8 +70,6 @@ namespace MViewer
         {
             if (_formClosing == false)
             {
-                // todo: implement CloseRoom
-                //this.Close();
                 _formClosing = true;
                 Thread.Sleep(1000);
                 this.BeginInvoke(new Action(() => this.Close()));

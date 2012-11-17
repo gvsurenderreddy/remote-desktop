@@ -17,6 +17,13 @@ namespace GenericDataLayer
             _peers.Audio = false;
             _peers.Video = false;
             _peers.Remoting = false;
+            _pendingTransfer.Audio = false;
+            _pendingTransfer.Video = false;
+            _pendingTransfer.Remoting = false;
+            _transferUpdating.IsAudioUpdating = false;
+            _transferUpdating.IsVideoUpdating = false;
+            _transferUpdating.IsRemotingUpdating = false;
+
         }
 
         #endregion

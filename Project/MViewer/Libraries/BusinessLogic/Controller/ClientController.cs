@@ -38,7 +38,6 @@ namespace BusinessLogicLayer
 
         public void SendRoomCommand(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
-            // todo: implement SendRoomCommand
             if (_clients.ContainsKey(identity))
             {
                 MViewerClient client = _clients[identity];

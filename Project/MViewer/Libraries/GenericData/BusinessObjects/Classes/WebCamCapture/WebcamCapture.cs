@@ -180,7 +180,7 @@ namespace GenericDataLayer
                     }
                     else
                     {
-                        MessageBox.Show("The Data In Clipboard is not as image format");
+                        //MessageBox.Show("The Data In Clipboard is not as image format");
                     }
                     /* todo: For some reason, the API is not resizing the video
                     * feed to the width and height provided when the video

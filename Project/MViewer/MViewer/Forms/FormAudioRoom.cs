@@ -35,7 +35,7 @@ namespace MViewer.Forms
 
         public void SetPartnerName(string friendlyName)
         {
-            // todo: implement PlayAudioCapture
+            // todo: implement SetPartnerName
         }
 
         public void CloseRoom()

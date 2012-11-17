@@ -12,7 +12,6 @@ namespace BusinessLogicLayer
         #region private members
 
         IDictionary<string, Session> _clientSessions;
-        //IDictionary<string, Session> _serverSessions;
         readonly object _syncSessions = new object();
 
         #endregion
@@ -35,16 +34,6 @@ namespace BusinessLogicLayer
                             _clientSessions.Add(session.Identity, session);
                         }
                         break;
-                    //case GenericEnums.SessionType.ServerSession:
-                    //    if (_serverSessions == null)
-                    //    {
-                    //        _serverSessions = new Dictionary<string, Session>();
-                    //    }
-                    //    if (_serverSessions.ContainsKey(session.Identity) == false)
-                    //    {
-                    //        _serverSessions.Add(session.Identity, session);
-                    //    }
-                    //    break;
                 }
             }
         }
@@ -89,73 +78,84 @@ namespace BusinessLogicLayer
             }
         }
 
-        public IList<string> GetConnectedSessions(GenericEnums.SessionType sessionType, GenericEnums.RoomActionType actionType)
+        public TransferUptading GetTransferActivity(string identity)
+        {
+            lock (_syncSessions)
+            {
+                if (_clientSessions != null && _clientSessions.ContainsKey(identity))
+                {
+                    return _clientSessions[identity].TransferUpdating;
+                }
+                return new TransferUptading
+                {
+                    IsAudioUpdating = false,
+                    IsRemotingUpdating = false,
+                    IsVideoUpdating = false
+                };
+            }
+        }
+
+        public PendingTransfer GetTransferStatus(string identity)
+        {
+            lock (_syncSessions)
+            {
+                if (_clientSessions != null && _clientSessions.ContainsKey(identity))
+                {
+                    return _clientSessions[identity].PendingTransfer;
+                }
+                return new PendingTransfer
+                    {
+                        Audio = false,
+                        Remoting = false,
+                        Video = false
+                    };
+            }
+        }
+
+        public GenericEnums.SessionState GetSessionState(string identity)
+        {
+            lock (_syncSessions)
+            {
+                if (_clientSessions != null && _clientSessions.ContainsKey(identity))
+                {
+                    return _clientSessions[identity].SessionState;
+                }
+                return GenericEnums.SessionState.Undefined;
+            }
+        }
+
+        public IList<string> GetConnectedSessions(GenericEnums.RoomActionType roomType)
         {
             lock (_syncSessions)
             {
                 IList<string> sessions = new List<string>();
-                switch (sessionType)
+                if (_clientSessions != null)
                 {
-                    case GenericEnums.SessionType.ClientSession:
-                        if (_clientSessions != null)
+                    foreach (Session session in _clientSessions.Values)
+                    {
+                        switch (roomType)
                         {
-                            foreach (Session session in _clientSessions.Values)
-                            {
-                                switch (actionType)
+                            case GenericEnums.RoomActionType.Audio:
+                                if (session.Peers.Audio == true && session.SessionState == GenericEnums.SessionState.Opened)
                                 {
-                                    case GenericEnums.RoomActionType.Audio:
-                                        if (session.Peers.Audio == true)
-                                        {
-                                            sessions.Add(session.Identity);
-                                        }
-                                        break;
-                                    case GenericEnums.RoomActionType.Video:
-                                        if (session.Peers.Video == true)
-                                        {
-                                            sessions.Add(session.Identity);
-                                        }
-                                        break;
-                                    case GenericEnums.RoomActionType.Remoting:
-                                        if (session.Peers.Remoting == true)
-                                        {
-                                            sessions.Add(session.Identity);
-                                        }
-                                        break;
+                                    sessions.Add(session.Identity);
                                 }
-                            }
+                                break;
+                            case GenericEnums.RoomActionType.Video:
+                                if (session.Peers.Video == true && session.SessionState == GenericEnums.SessionState.Opened)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
+                            case GenericEnums.RoomActionType.Remoting:
+                                if (session.Peers.Remoting == true && session.SessionState == GenericEnums.SessionState.Opened)
+                                {
+                                    sessions.Add(session.Identity);
+                                }
+                                break;
                         }
-                        break;
-                    case GenericEnums.SessionType.ServerSession:
-                        //if (_serverSessions != null)
-                        //{
-                        //    foreach (Session session in _serverSessions.Values)
-                        //    {
-                        //        switch (actionType)
-                        //        {
-                        //            case GenericEnums.RoomActionType.Audio:
-                        //                if (session.Peers.Audio == true)
-                        //                {
-                        //                    sessions.Add(session.Identity);
-                        //                }
-                        //                break;
-                        //            case GenericEnums.RoomActionType.Video:
-                        //                if (session.Peers.Video == true)
-                        //                {
-                        //                    sessions.Add(session.Identity);
-                        //                }
-                        //                break;
-                        //            case GenericEnums.RoomActionType.Remoting:
-                        //                if (session.Peers.Remoting == true)
-                        //                {
-                        //                    sessions.Add(session.Identity);
-                        //                }
-                        //                break;
-                        //        }
-                        //    }
-                        //}
-                        break;
+                    }
                 }
-
                 return sessions;
             }
         }

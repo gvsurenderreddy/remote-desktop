@@ -15,5 +15,6 @@ namespace Utils
         // todo: remove the SessionType if not needed - we'll use only Client Sessions
         public enum SessionType { Undefined = 0, ClientSession = 1, ServerSession };
         public enum SessionState { Undefined = 0, Opened = 1, Closed = 2 };
+   
     }
 }

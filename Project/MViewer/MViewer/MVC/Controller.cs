@@ -18,9 +18,6 @@ namespace MViewer
     {
         #region private members
 
-        readonly object _syncRoomObservers = new object();
-
-
         IView _view;
         IModel _model;
 
@@ -70,32 +67,42 @@ namespace MViewer
                 //get the buffer 
                 byte[] bitmapBytes = ms.GetBuffer();
 
-                // todo: send to server
-                // loop on all connected peers and send them the captures
-                // broadcast the webcaptures
+                // broadcast the webcaptures to all connected peers
 
-                lock (_syncRoomObservers)
+                IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
+                foreach (string receiverIdentity in connectedSessions)
                 {
-                    IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.SessionType.ClientSession, GenericEnums.RoomActionType.Video);
-                    foreach (string receiverIdentity in connectedSessions)
+                    //Thread.Sleep(10 * 1000);
+
+                    TransferUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                    while (transfer.IsVideoUpdating)
                     {
-                        //Thread.Sleep(10 * 1000);
-
-                        // todo: check if the stop signal has been sent from the UI
-                        // todo: send the last capture and stop the process
-
-                        ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
-                        if (peers.Video == true)
-                        {
-                            _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
-                                _model.Identity.MyIdentity);
-                        }
-                        if (peers.Audio == true)
-                        {
-                            // todo: send audio capture
-                        }
-                        break;
+                        Thread.Sleep(200);
                     }
+
+                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                    // todo: check if the stop signal has been sent from the UI
+
+                    // todo: check if the stop signal has been sent by the partner
+                 
+                    ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
+                    if (peers.Video == true)
+                    {
+                        transferStatus.Video = true;
+                        _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
+                            _model.Identity.MyIdentity);
+                    }   
+                    // todo: stop the process if one of the above is true
+                    transferStatus.Video = false;
+                    if (peers.Audio == true)
+                    {
+                        transferStatus.Audio = true;
+                    
+                        // todo: send audio capture
+
+                        transferStatus.Audio = false;
+                    }
+                    break;
                 }
             }
             catch (Exception ex)
@@ -140,16 +147,7 @@ namespace MViewer
 
                     break;
                 case GenericEnums.RoomActionType.Video:
-                    lock (_syncRoomObservers)
-                    {
-                        // todo: close the video chat form
                         PerformRoomAction(sender, args);
-
-                        // todo: send close signal to other side
-
-                        // todo: remove the client session (client used to send my webcaptures)
-
-                    }
                     break;
                 case GenericEnums.RoomActionType.Remoting:
 
@@ -190,18 +188,32 @@ namespace MViewer
 
         public void StopVideChat(string identity)
         {
+            TransferUptading transfer = _model.SessionManager.GetTransferActivity(identity);
+            transfer.IsVideoUpdating = true;
+
             // todo: check if the webcapture is pending for being sent
-            // todo: wait for it to finish and block the next sending
+            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(identity);
+            while (transferStatus.Video)
+            {
+                // todo: wait for it to finish and block the next sending
+                Thread.Sleep(200);
+            }
 
             ConnectedPeers peers = _model.SessionManager.GetPeers(identity);
-            // todo: update the session
+            // todo: update the session status
             peers.Audio = false;
             peers.Video = false;
-            _model.SessionManager.UpdateSession(identity,
-                peers, GenericEnums.SessionState.Closed);
-            
-            // todo: unblock the sending process; it must know that the chat has been stopped
-            
+            if (peers.Remoting == false)
+            {
+                _model.SessionManager.UpdateSession(identity,
+                    peers, GenericEnums.SessionState.Closed);
+            }
+            else
+            {
+                GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity);
+                _model.SessionManager.UpdateSession(identity, peers, sessionState);
+            }
+
             // send the stop signal to the server session
             _model.ClientController.SendRoomCommand(identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
 
@@ -213,20 +225,6 @@ namespace MViewer
 
         public void StartVideoChat(string identity)
         {
-            //Session clientSession = new ClientSession(identity);
-            //clientSession.SessionState = GenericEnums.SessionState.Opened;
-            //// save the connected client session
-            //_model.SessionManager.AddSession(clientSession);
-            //_model.SessionManager.UpdateSession(identity, 
-            //    new ConnectedPeers() 
-            //    { 
-            //        Video = true ,
-
-            //        // todo: perform specific actions when audio chat is started
-            //        //Audio = true 
-            //    }, 
-            //    clientSession.SessionState);
-
             if (!_view.IsRoomActivated(identity, GenericEnums.RoomActionType.Video))
             {
                 Thread t = new Thread(delegate()
@@ -303,15 +301,12 @@ namespace MViewer
 
         public void NotifyVideoCaptureObserver(object sender, EventArgs e)
         {
-            lock (_syncRoomObservers)
+            VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
+            ConnectedPeers peer = _model.SessionManager.GetPeers(args.Identity);
+            //if (peer.Video == true)
             {
-                VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-                ConnectedPeers peers = _model.SessionManager.GetPeers(args.Identity);
-                if (peers.Video == true)
-                {
-                    InitializeRoom(args.Identity, GenericEnums.RoomActionType.Video);
-                    _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
-                }
+                InitializeRoom(args.Identity, GenericEnums.RoomActionType.Video);
+                _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
             }
         }
 
@@ -328,9 +323,6 @@ namespace MViewer
             Thread.Sleep(2000);
 
             _view.NotifyIdentityObserver();
-
-            // todo: bind client connected observer
-
             _model.ServerController.StartServer();
 
             Thread.Sleep(2000);
@@ -378,7 +370,6 @@ namespace MViewer
 
         void ContactRequest(object sender, EventArgs e)
         {
-            // todo: implement ContactRequest
             PerformContactsOperation(sender, (ContactsEventArgs)e);
         }
 

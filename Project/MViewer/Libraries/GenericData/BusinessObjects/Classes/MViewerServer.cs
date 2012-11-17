@@ -92,7 +92,6 @@ namespace GenericDataLayer
 
         public void AddContact(string identity, string friendlyName)
         {
-            // todo: implement AddContact
             ContactsEventArgs args = new ContactsEventArgs()
             {
                 Operation = GenericEnums.ContactsOperation.Add,
@@ -103,7 +102,6 @@ namespace GenericDataLayer
 
         public void RemoveContact(string identity)
         {
-            // todo: implement AddContact
             ContactsEventArgs args = new ContactsEventArgs()
             {
                 Operation = GenericEnums.ContactsOperation.Remove,

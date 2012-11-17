@@ -64,7 +64,9 @@
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
     <Compile Include="BusinessObjects\Structs\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Structs\ConnectedView.cs" />
+    <Compile Include="BusinessObjects\Structs\PendingTransfer.cs" />
     <Compile Include="BusinessObjects\Structs\RoomEventHandlers.cs" />
+    <Compile Include="BusinessObjects\Structs\TransferUptading.cs" />
     <Compile Include="EventArgs\CaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
