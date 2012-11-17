@@ -81,9 +81,9 @@ namespace MViewer
                     }
 
                     PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                    // todo: check if the stop signal has been sent from the UI
+                    // check if the stop signal has been sent from the UI
 
-                    // todo: check if the stop signal has been sent by the partner
+                    // check if the stop signal has been sent by the partner
                  
                     ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
                     if (peers.Video == true)
@@ -91,8 +91,11 @@ namespace MViewer
                         transferStatus.Video = true;
                         _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
                             _model.Identity.MyIdentity);
-                    }   
-                    // todo: stop the process if one of the above is true
+                    }
+                    else
+                    {
+                        // todo: stop the process if one of the above is true
+                    }
                     transferStatus.Video = false;
                     if (peers.Audio == true)
                     {
@@ -201,26 +204,29 @@ namespace MViewer
 
             ConnectedPeers peers = _model.SessionManager.GetPeers(identity);
             // todo: update the session status
-            peers.Audio = false;
-            peers.Video = false;
-            if (peers.Remoting == false)
+            if (peers.Video == true)
             {
-                _model.SessionManager.UpdateSession(identity,
-                    peers, GenericEnums.SessionState.Closed);
-            }
-            else
-            {
-                GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity);
-                _model.SessionManager.UpdateSession(identity, peers, sessionState);
-            }
+                peers.Audio = false;
+                peers.Video = false;
+                if (peers.Remoting == false)
+                {
+                    _model.SessionManager.UpdateSession(identity,
+                        peers, GenericEnums.SessionState.Closed);
+                }
+                else
+                {
+                    GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity);
+                    _model.SessionManager.UpdateSession(identity, peers, sessionState);
+                }
 
-            // send the stop signal to the server session
-            _model.ClientController.SendRoomCommand(identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
+                // send the stop signal to the server session
+                _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
 
-            // remove the connected client session
-            _model.SessionManager.RemoveSession(identity);
-            _view.RoomManager.CloseRoom(identity);
-            _view.RoomManager.RemoveRoom(identity);
+                // remove the connected client session
+                _model.SessionManager.RemoveSession(identity);
+                _view.RoomManager.CloseRoom(identity);
+                _view.RoomManager.RemoveRoom(identity);
+            }
         }
 
         public void StartVideoChat(string identity)

@@ -36,12 +36,12 @@ namespace BusinessLogicLayer
 
         #region public methods
 
-        public void SendRoomCommand(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+        public void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
             if (_clients.ContainsKey(identity))
             {
                 MViewerClient client = _clients[identity];
-                client.SendRoomAction(identity, roomType, signalType);
+                client.SendRoomAction(myIdentity, roomType, signalType);
             }
         }
         
