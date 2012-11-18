@@ -39,21 +39,28 @@ namespace GenericDataLayer
 
         public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
-            lock (_syncVideoCaptures)
+            try
             {
-                //Thread.Sleep(2000);
-                MemoryStream ms = new MemoryStream(capture);
-                //read the Bitmap back
-                Image bmp = (Bitmap)Bitmap.FromStream(ms);
+                lock (_syncVideoCaptures)
+                {
+                    //Thread.Sleep(2000);
+                    MemoryStream ms = new MemoryStream(capture);
+                    //read the Bitmap back
+                    Image bmp = (Bitmap)Bitmap.FromStream(ms);
 
-                _controllerHandlers.VideoCaptureObserver.Invoke(this,
-                    new VideoCaptureEventArgs()
-                    {
-                        Identity = senderIdentity,
-                        CapturedImage = bmp
-                    });
+                    _controllerHandlers.VideoCaptureObserver.Invoke(this,
+                        new VideoCaptureEventArgs()
+                        {
+                            Identity = senderIdentity,
+                            CapturedImage = bmp
+                        });
 
-                GC.Collect();
+                    GC.Collect();
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
@@ -130,6 +137,6 @@ namespace GenericDataLayer
 
         //    }
         //}
-        
+
     }
 }

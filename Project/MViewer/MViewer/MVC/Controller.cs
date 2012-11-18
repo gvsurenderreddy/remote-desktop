@@ -18,6 +18,10 @@ namespace MViewer
     {
         #region private members
 
+        bool _webcaptureClosing;
+        bool _capturePending;
+
+        Presenter _presenter;
         IView _view;
         IModel _model;
 
@@ -50,68 +54,80 @@ namespace MViewer
         {
             try
             {
-                VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-                // display the captured picture
-                _view.UpdateWebcapture(args.CapturedImage);
-
-                //while (!_audioCapture.AudioCaptureReady)
-                //{
-                //    Thread.Sleep(200);
-                //}
-
-                //we want to get a byte[] representation ... a MemoryStreams buffer will do
-                MemoryStream ms = new MemoryStream();
-                //save image to stream ... the stream will write it into the buffer
-                args.CapturedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-
-                //get the buffer 
-                byte[] bitmapBytes = ms.GetBuffer();
-
-                // broadcast the webcaptures to all connected peers
-
-                IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
-                foreach (string receiverIdentity in connectedSessions)
+                _capturePending = true;
+                if (_webcaptureClosing == false)
                 {
-                    //Thread.Sleep(10 * 1000);
+                    VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
+                    // display the captured picture
+                    _view.UpdateWebcapture(args.CapturedImage);
 
-                    TransferUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                    while (transfer.IsVideoUpdating)
-                    {
-                        Thread.Sleep(200);
-                    }
+                    //while (!_audioCapture.AudioCaptureReady)
+                    //{
+                    //    Thread.Sleep(200);
+                    //}
 
-                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                    // check if the stop signal has been sent from the UI
+                    //we want to get a byte[] representation ... a MemoryStreams buffer will do
+                    MemoryStream ms = new MemoryStream();
+                    //save image to stream ... the stream will write it into the buffer
+                    args.CapturedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
 
-                    // check if the stop signal has been sent by the partner
-                 
-                    ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
-                    if (peers.Video == true)
-                    {
-                        transferStatus.Video = true;
-                        _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
-                            _model.Identity.MyIdentity);
-                    }
-                    else
-                    {
-                        // todo: stop the process if one of the above is true
-                    }
-                    transferStatus.Video = false;
-                    if (peers.Audio == true)
-                    {
-                        transferStatus.Audio = true;
-                    
-                        // todo: send audio capture
+                    //get the buffer 
+                    byte[] bitmapBytes = ms.GetBuffer();
 
-                        transferStatus.Audio = false;
+                    // broadcast the webcaptures to all connected peers
+
+                    IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
+                    foreach (string receiverIdentity in connectedSessions)
+                    {
+                        //Thread.Sleep(10 * 1000);
+
+                        TransferUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                        while (transfer.IsVideoUpdating)
+                        {
+                            Thread.Sleep(200);
+                        }
+
+                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                        // check if the stop signal has been sent from the UI
+
+                        // check if the stop signal has been sent by the partner
+
+                        ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
+                        if (peers.Video == true)
+                        {
+                            transferStatus.Video = true;
+                            _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
+                                _model.Identity.MyIdentity);
+                        }
+                        else
+                        {
+                            // todo: stop the process if one of the above is true
+                        }
+                        transferStatus.Video = false;
+                        if (peers.Audio == true)
+                        {
+                            transferStatus.Audio = true;
+
+                            // todo: send audio capture
+
+                            transferStatus.Audio = false;
+                        }
+                        break;
                     }
-                    break;
+                }
+                else
+                {
+                    _presenter.StopPresentation();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 //_webcamCapture.StopCapturing();
+            }
+            finally
+            {
+                _capturePending = false;
             }
         }
 
@@ -136,9 +152,10 @@ namespace MViewer
             int height = 354, width = 360;
 
             // initialize the presenter that will send webcam captures to all Server Sessions
-            PresenterManager.StartPresentation(webcamControl, _model.Identity.MyIdentity,
+            _presenter = PresenterManager.Instance(webcamControl, _model.Identity.MyIdentity,
                 timerInterval, height, width,
                 new EventHandler(this.WebCamImageCaptured));
+            _presenter.StartPresentation();
         }
 
         public void RoomClosingObserver(object sender, EventArgs e)
@@ -272,18 +289,31 @@ namespace MViewer
                     {
                         case GenericEnums.SignalType.Start:
                             // start the video chat
-                            Thread t = new Thread(delegate()
-                            {
+                            //Thread t = new Thread(delegate()
+                            //{
+                                _webcaptureClosing = false;
                                 PerformVideoChatAction(sender, e);
-                            });
-                            t.SetApartmentState(ApartmentState.STA);
-                            t.Start();
+                            //});
+                            //t.SetApartmentState(ApartmentState.STA);
+                            //t.Start();
                             break;
                         case GenericEnums.SignalType.Pause:
 
                             break;
                         case GenericEnums.SignalType.Stop:
                             PerformVideoChatAction(sender, e);
+                            // close the webcapture form if there s no room left
+                            if (!_view.RoomManager.RoomsLeft())
+                            {
+                                _webcaptureClosing = true;
+                                _presenter.StopPresentation();
+                                Thread.Sleep(1000);
+                                while (_capturePending)
+                                {
+                                    Thread.Sleep(200);
+                                }
+                                _view.ShowMyWebcamForm(false);
+                            }
                             break;
                     }
                     break;
@@ -453,8 +483,8 @@ namespace MViewer
                     _model.SessionManager.AddSession(clientSession);
 
                     // initialize the webcamCapture form
-                    // this form will be used to capture the images and send them to all Server Sessions
-                    _view.ShowMyWebcamForm();
+                    // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
+                    _view.ShowMyWebcamForm(true);
                     break;
                 case GenericEnums.SignalType.Stop:
 

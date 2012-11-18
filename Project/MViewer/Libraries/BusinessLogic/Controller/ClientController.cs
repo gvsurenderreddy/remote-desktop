@@ -125,7 +125,14 @@ namespace BusinessLogicLayer
                 MViewerClient client = _clients[receiverIdentity];
                 if (client.State == System.ServiceModel.CommunicationState.Opened)
                 {
-                    client.SendWebcamCapture(capture, senderIdentity);
+                    try
+                    {
+                        client.SendWebcamCapture(capture, senderIdentity);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
             }
         }

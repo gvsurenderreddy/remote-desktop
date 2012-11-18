@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace GenericDataLayer
 {
-    public class Presenter : IPresenter
+    public class Presenter
     {
         #region private members
 

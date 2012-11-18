@@ -21,6 +21,9 @@ namespace MViewer
         FormMain _formMain;
         FormActions _formActions; 
         FormMyWebcam _formWebCapture;
+        Thread _threadWebcaptureForm;
+
+        bool _myWebcaptureRunning;
 
         IDictionary<Type, object> _observers;
         bool _observersActive;
@@ -72,19 +75,32 @@ namespace MViewer
             _observersActive = bind;
         }
 
-        public void ShowMyWebcamForm()
+        public void ShowMyWebcamForm(bool show)
         {
-            if (_formWebCapture == null)
-            {    
-                // open my webcam form if no video chat was previously started
-                Thread t = new Thread(delegate()
+            if (show)
+            {
+                if (_formWebCapture == null || _myWebcaptureRunning == false)
                 {
-                    _formWebCapture = new FormMyWebcam();
-                    _formWebCapture.ShowDialog();
-                    //Thread.Sleep(Timeout.Infinite);
-                });
-                t.SetApartmentState(ApartmentState.STA);
-                t.Start();
+                    // open my webcam form if no video chat was previously started
+                    _threadWebcaptureForm = new Thread(delegate()
+                    {
+                        _myWebcaptureRunning = true;
+                        _formWebCapture = new FormMyWebcam();
+                        _formWebCapture.ShowDialog();
+                    });
+                    _threadWebcaptureForm.SetApartmentState(ApartmentState.STA);
+                    _threadWebcaptureForm.Start();
+                }
+            }
+            else
+            {
+                if (_formWebCapture != null && _threadWebcaptureForm.IsAlive)
+                {
+                    _myWebcaptureRunning = false;
+                    _threadWebcaptureForm.Abort();
+                    _threadWebcaptureForm = null;
+                    _formWebCapture = null;
+                }
             }
         }
 
@@ -152,19 +168,6 @@ namespace MViewer
             {
                 _formMain.Close();
                 _formMain.Dispose();
-            }
-        }
-
-        public void RoomClosing(RoomActionEventArgs args)
-        {
-            _roomManager.CloseRoom(args.Identity);
-            _roomManager.RemoveRoom(args.Identity);
-
-            // close the webcapture form if there s no room left
-            if (!_roomManager.RoomsLeft())
-            {
-                _formWebCapture.Close();
-                _formWebCapture = null;
             }
         }
 

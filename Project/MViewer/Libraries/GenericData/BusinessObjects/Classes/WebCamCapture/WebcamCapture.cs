@@ -36,6 +36,7 @@ namespace GenericDataLayer
         int _captureWindowHandler;
         int _windowHandle;
         VideoCaptureEventArgs _eventArgs;
+        bool _threadAborted;
 
         #endregion
 
@@ -93,8 +94,6 @@ namespace GenericDataLayer
 
         public void StartCapturing()
         {
-            // todo: implement StartCapturing
-
             // make sure that the capturing is stopped
             StopCapturing();
 
@@ -131,16 +130,22 @@ namespace GenericDataLayer
 
         public void StopCapturing()
         {
-            // todo: implement StopCapturing
-            // stop the timer
-            if (_timerRunning)
+            try
             {
-                _timer.Stop();
-                // disconnect from the video capturing device
-                // Application.DoEvents();
-                Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
+                // stop the timer
+                if (_timerRunning)
+                {
+                    _timer.Stop();
+                    // disconnect from the video capturing device
+                    // Application.DoEvents();
+                    Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
+                }
+                _timerRunning = false;
             }
-            _timerRunning = false; 
+            catch (ThreadAbortException)
+            {
+                _threadAborted = true;
+            }
         }
 
         #endregion
@@ -158,40 +163,50 @@ namespace GenericDataLayer
             {
                 // pause the timer
                 _timer.Stop();
-                _timerRunning = false;
-
-                // get the next image
-                Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
-
-                // copy the image to the clipboard
-                Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
-
-                // push the image into the capture event args
-                if (ImageCaptured != null)
+                if (!_threadAborted)
                 {
-                    // get image from the clipboard
-                    System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
-                    Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
-                    if (tempObject.GetDataPresent(DataFormats.Bitmap))
+                    _timerRunning = false;
+
+                    // todo: check if the webcapture form is being closed
+
+                    // get the next image
+                    Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
+
+                    // copy the image to the clipboard
+                    Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
+
+                    // push the image into the capture event args
+                    if (ImageCaptured != null)
                     {
-                        Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
-                        _eventArgs = new VideoCaptureEventArgs();
-                        _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
+                        // get image from the clipboard
+                        System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
+                        Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
+                        if (tempObject.GetDataPresent(DataFormats.Bitmap))
+                        {
+                            Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
+                            _eventArgs = new VideoCaptureEventArgs();
+                            _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
+                        }
+                        else
+                        {
+                            //MessageBox.Show("The Data In Clipboard is not as image format");
+                        }
+                        /* todo: For some reason, the API is not resizing the video
+                        * feed to the width and height provided when the video
+                        * feed was started, so we must resize the image here
+                        */
+
+                        // raise the event
+                        this.ImageCaptured(this, _eventArgs);
                     }
-                    else
-                    {
-                        //MessageBox.Show("The Data In Clipboard is not as image format");
-                    }
-                    /* todo: For some reason, the API is not resizing the video
-                    * feed to the width and height provided when the video
-                    * feed was started, so we must resize the image here
-                    */
-                   
-                    // raise the event
-                    this.ImageCaptured(this, _eventArgs);
                 }
             }
-            catch (Exception excep)
+            catch (ThreadAbortException taex)
+            {
+                _threadAborted = true;
+                StopCapturing();
+            }
+            catch (Exception ex)
             {
                 error = true;
                 //_timerRunning = true;
@@ -202,7 +217,7 @@ namespace GenericDataLayer
             {
                 // restart the timer
                 //Application.DoEvents();
-                if (_timerRunning == false)// && error == false)
+                if (_timerRunning == false && !_threadAborted)// && error == false)
                 {
                     _timerRunning = true;
                     _timer.Start();
