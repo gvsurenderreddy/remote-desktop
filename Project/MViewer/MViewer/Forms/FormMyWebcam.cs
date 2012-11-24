@@ -21,11 +21,20 @@ namespace MViewer
             Program.Controller.StartVideoChat(_webcamCapture);
         }
 
+        #region public methods
+
         public void SetPicture(Image image)
         {
             Image resized = ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
             pbWebcam.Image = resized;
         }
+
+        public void StopCapturing()
+        {
+            _webcamCapture.StopCapturing();
+        }
+
+        #endregion
 
         #region prorieties
 

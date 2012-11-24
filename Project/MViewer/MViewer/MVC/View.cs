@@ -97,7 +97,8 @@ namespace MViewer
                 if (_formWebCapture != null && _threadWebcaptureForm.IsAlive)
                 {
                     _myWebcaptureRunning = false;
-                    _threadWebcaptureForm.Abort();
+                    _formWebCapture.StopCapturing();
+                    _formWebCapture.Close();
                     _threadWebcaptureForm = null;
                     _formWebCapture = null;
                 }
