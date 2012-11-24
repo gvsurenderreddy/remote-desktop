@@ -38,7 +38,7 @@ using System.Collections;
                     graphics.DrawImage(image, 0, 0, result.Width, result.Height);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

@@ -37,6 +37,7 @@ namespace GenericDataLayer
         int _windowHandle;
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
+        //Mutex _mutex = new Mutex(true, "WebCapture");
 
         #endregion
 
@@ -158,7 +159,6 @@ namespace GenericDataLayer
         [STAThread]
         private void TimerTick(object sender, System.EventArgs e)
         {
-            bool error = false;
             try
             {
                 // pause the timer
@@ -167,8 +167,10 @@ namespace GenericDataLayer
                 {
                     _timerRunning = false;
 
-                    // todo: check if the webcapture form is being closed
-
+                    // wait for the clipboard to be unused
+                    //_mutex.WaitOne();
+                    //_pool.WaitOne();
+                    
                     // get the next image
                     Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
 
@@ -201,20 +203,22 @@ namespace GenericDataLayer
                     }
                 }
             }
-            catch (ThreadAbortException taex)
+            catch (ThreadAbortException)
             {
                 _threadAborted = true;
                 StopCapturing();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                error = true;
                 //_timerRunning = true;
                 //MessageBox.Show("An error ocurred while capturing the video image. The video capture will now be terminated.\r\n\n" + excep.ToString());
                 //StopCapturing(); // stop the capturing process
             }
             finally
             {
+                // free the clipboard
+                //_mutex.ReleaseMutex();
+
                 // restart the timer
                 //Application.DoEvents();
                 if (_timerRunning == false && !_threadAborted)// && error == false)

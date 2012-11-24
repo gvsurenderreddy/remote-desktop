@@ -58,7 +58,7 @@ namespace GenericDataLayer
                     GC.Collect();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

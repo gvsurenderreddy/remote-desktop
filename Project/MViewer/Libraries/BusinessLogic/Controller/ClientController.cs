@@ -129,7 +129,7 @@ namespace BusinessLogicLayer
                     {
                         client.SendWebcamCapture(capture, senderIdentity);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }

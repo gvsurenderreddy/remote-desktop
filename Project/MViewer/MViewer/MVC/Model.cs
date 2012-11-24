@@ -60,7 +60,7 @@ namespace MViewer
                     bool isOnline = _clientController.IsContactOnline(identity);
                     contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online : GenericEnums.ContactStatus.Offline;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     contact["Status"] = GenericEnums.ContactStatus.Offline;
                 }
