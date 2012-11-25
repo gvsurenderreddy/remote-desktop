@@ -65,6 +65,7 @@ namespace GenericDataLayer
             _timer = new System.Windows.Forms.Timer(_components);
             _timerRunning = false;
             _threadAborted = false;
+            _webcamDisconnected = false;
 
             _windowHandle = windowHandle;
             _timer.Interval = interval;
@@ -101,7 +102,7 @@ namespace GenericDataLayer
         {
             // make sure that the capturing is stopped
             StopCapturing();
-
+            _webcamDisconnected = false;
             // setup a capture window
             _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
 
@@ -113,6 +114,8 @@ namespace GenericDataLayer
             int connectAttempts = 0;
             while (!SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 0, 0))
             {
+                // todo: find & fix the issue that is preventing the webcam from being restarted
+
                 connectAttempts++;
                 //if(connectAttempts > 10)
                 //{
@@ -136,9 +139,9 @@ namespace GenericDataLayer
 
         public void StopCapturing()
         {
-            _sync.Reset();
             try
             {
+                _sync.Reset();
                 // stop the timer
                 if (_timerRunning || _timer.Enabled)
                 {
@@ -188,41 +191,47 @@ namespace GenericDataLayer
                 _sync.WaitOne();
                 if (!_threadAborted && !_webcamDisconnected)
                 {
-                    _timerRunning = false;
-
-                    // wait for the clipboard to be unused
-                    //_mutex.WaitOne();
-                    //_pool.WaitOne();
-
-                    // get the next image
-                    Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
-
-                    // copy the image to the clipboard
-                    Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
-
-                    // push the image into the capture event args
-                    if (ImageCaptured != null)
+                    lock (_syncDisconnected)
                     {
-                        // get image from the clipboard
-                        System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
-                        Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
-                        if (tempObject.GetDataPresent(DataFormats.Bitmap))
+                        if (!_threadAborted && !_webcamDisconnected)
                         {
-                            Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
-                            _eventArgs = new VideoCaptureEventArgs();
-                            _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
-                        }
-                        else
-                        {
-                            //MessageBox.Show("The Data In Clipboard is not as image format");
-                        }
-                        /* todo: For some reason, the API is not resizing the video
-                        * feed to the width and height provided when the video
-                        * feed was started, so we must resize the image here
-                        */
+                            _timerRunning = false;
 
-                        // raise the event
-                        this.ImageCaptured(this, _eventArgs);
+                            // wait for the clipboard to be unused
+                            //_mutex.WaitOne();
+                            //_pool.WaitOne();
+
+                            // get the next image
+                            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
+
+                            // copy the image to the clipboard
+                            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
+
+                            // push the image into the capture event args
+                            if (ImageCaptured != null)
+                            {
+                                // get image from the clipboard
+                                System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
+                                Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
+                                if (tempObject.GetDataPresent(DataFormats.Bitmap))
+                                {
+                                    Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
+                                    _eventArgs = new VideoCaptureEventArgs();
+                                    _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
+                                }
+                                else
+                                {
+                                    //MessageBox.Show("The Data In Clipboard is not as image format");
+                                }
+                                /* todo: For some reason, the API is not resizing the video
+                                * feed to the width and height provided when the video
+                                * feed was started, so we must resize the image here
+                                */
+
+                                // raise the event
+                                this.ImageCaptured(this, _eventArgs);
+                            }
+                        }
                     }
                 }
             }

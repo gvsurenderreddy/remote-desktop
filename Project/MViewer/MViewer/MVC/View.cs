@@ -75,6 +75,13 @@ namespace MViewer
             _observersActive = bind;
         }
 
+        public void WebCaptureClosing(object sender, EventArgs args)
+        {
+            _threadWebcaptureForm = null;
+            _formWebCapture = null;
+            _myWebcaptureRunning = false;
+        }
+
         public void ShowMyWebcamForm(bool show)
         {
             if (show)
@@ -85,10 +92,8 @@ namespace MViewer
                     _threadWebcaptureForm = new Thread(delegate()
                     {
                         _myWebcaptureRunning = true;
-                        _formWebCapture = new FormMyWebcam();
+                        _formWebCapture = new FormMyWebcam(this.WebCaptureClosing);
                         _formWebCapture.ShowDialog();
-
-                        MessageBox.Show("Closed webcam form");
                     });
                     _threadWebcaptureForm.IsBackground = true;
                     _threadWebcaptureForm.SetApartmentState(ApartmentState.STA);
@@ -97,7 +102,7 @@ namespace MViewer
             }
             else
             {
-                if (_formWebCapture != null && _threadWebcaptureForm.IsAlive)
+                if (_formWebCapture != null && _threadWebcaptureForm != null && _threadWebcaptureForm.IsAlive)
                 {
                     _myWebcaptureRunning = false;
                     _formWebCapture.StopCapturing();

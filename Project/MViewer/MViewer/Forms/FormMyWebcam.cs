@@ -13,9 +13,11 @@ namespace MViewer
     public partial class FormMyWebcam : Form
     {
         WebcamCapture _webcamCapture;
+        EventHandler _formClosingEvent;
 
-        public FormMyWebcam()
+        public FormMyWebcam(EventHandler formClosingEvent)
         {
+            _formClosingEvent = formClosingEvent;
             InitializeComponent();
             _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32(), this.WebcaptureClosing);
             Program.Controller.StartVideoChat(_webcamCapture);
@@ -27,6 +29,8 @@ namespace MViewer
         {
             this.Close();
             this.Dispose();
+            // todo: notify the View that webcapturing has stopped and it should open a new form next time
+            _formClosingEvent.Invoke(null, null);
         }
 
         public void SetPicture(Image image)
