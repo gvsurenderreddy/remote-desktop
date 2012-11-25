@@ -50,6 +50,8 @@ namespace MViewer
 
         #region event handlers
 
+        readonly object _syncCapture = new object();
+
         private void WebCamImageCaptured(object source, EventArgs e)
         {
             try
@@ -57,62 +59,65 @@ namespace MViewer
                 _capturePending = true;
                 if (_webcaptureClosing == false)
                 {
-                    VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-                    // display the captured picture
-                    _view.UpdateWebcapture(args.CapturedImage);
-
-                    //while (!_audioCapture.AudioCaptureReady)
-                    //{
-                    //    Thread.Sleep(200);
-                    //}
-
-                    //we want to get a byte[] representation ... a MemoryStreams buffer will do
-                    MemoryStream ms = new MemoryStream();
-                    //save image to stream ... the stream will write it into the buffer
-                    args.CapturedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-
-                    //get the buffer 
-                    byte[] bitmapBytes = ms.GetBuffer();
-
-                    // broadcast the webcaptures to all connected peers
-
-                    IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
-                    foreach (string receiverIdentity in connectedSessions)
+                    lock (_syncCapture)
                     {
-                        //Thread.Sleep(10 * 1000);
+                        VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
+                        // display the captured picture
+                        _view.UpdateWebcapture(args.CapturedImage);
 
-                        TransferUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                        while (transfer.IsVideoUpdating)
+                        //while (!_audioCapture.AudioCaptureReady)
+                        //{
+                        //    Thread.Sleep(200);
+                        //}
+
+                        //we want to get a byte[] representation ... a MemoryStreams buffer will do
+                        MemoryStream ms = new MemoryStream();
+                        //save image to stream ... the stream will write it into the buffer
+                        args.CapturedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+                        //get the buffer 
+                        byte[] bitmapBytes = ms.GetBuffer();
+
+                        // broadcast the webcaptures to all connected peers
+
+                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
+                        foreach (string receiverIdentity in connectedSessions)
                         {
-                            Thread.Sleep(200);
+                            //Thread.Sleep(10 * 1000);
+
+                            TransferUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                            while (transfer.IsVideoUpdating)
+                            {
+                                Thread.Sleep(200);
+                            }
+
+                            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                            // check if the stop signal has been sent from the UI
+
+                            // check if the stop signal has been sent by the partner
+
+                            ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
+                            if (peers.Video == true)
+                            {
+                                transferStatus.Video = true;
+                                _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
+                                    _model.Identity.MyIdentity);
+                            }
+                            else
+                            {
+                                // todo: stop the process if one of the above is true
+                            }
+                            transferStatus.Video = false;
+                            if (peers.Audio == true)
+                            {
+                                transferStatus.Audio = true;
+
+                                // todo: send audio capture
+
+                                transferStatus.Audio = false;
+                            }
+                            break;
                         }
-
-                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                        // check if the stop signal has been sent from the UI
-
-                        // check if the stop signal has been sent by the partner
-
-                        ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
-                        if (peers.Video == true)
-                        {
-                            transferStatus.Video = true;
-                            _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
-                                _model.Identity.MyIdentity);
-                        }
-                        else
-                        {
-                            // todo: stop the process if one of the above is true
-                        }
-                        transferStatus.Video = false;
-                        if (peers.Audio == true)
-                        {
-                            transferStatus.Audio = true;
-
-                            // todo: send audio capture
-
-                            transferStatus.Audio = false;
-                        }
-                        break;
                     }
                 }
                 else
@@ -238,7 +243,8 @@ namespace MViewer
 
                 // send the stop signal to the server session
                 _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
-
+                // todo: check if SendRoomCommand has finished the execution (put a return flag)
+                //Thread.Sleep(1000);
                 // remove the connected client session
                 _model.SessionManager.RemoveSession(identity);
                 _view.RoomManager.CloseRoom(identity);
@@ -265,6 +271,7 @@ namespace MViewer
                     _view.RoomManager.ShowRoom(identity);
                 }
                 );
+                t.IsBackground = true;
                 t.SetApartmentState(ApartmentState.STA);
                 t.Start();
             }

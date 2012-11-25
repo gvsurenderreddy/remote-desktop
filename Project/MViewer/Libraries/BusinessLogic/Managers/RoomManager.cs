@@ -93,6 +93,7 @@ namespace BusinessLogicLayer
                     }
                 }
                 );
+            t.IsBackground = true;
             t.Start();
         }
 

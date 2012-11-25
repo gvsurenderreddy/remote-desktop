@@ -37,6 +37,10 @@ namespace GenericDataLayer
         int _windowHandle;
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
+        bool _webcamDisconnected;
+        ManualResetEvent _sync = new ManualResetEvent(false);
+        readonly object _syncDisconnected = new object();
+
         //Mutex _mutex = new Mutex(true, "WebCapture");
 
         #endregion
@@ -47,24 +51,24 @@ namespace GenericDataLayer
         public delegate void WebCamEventHandler(object source, VideoCaptureEventArgs e);
         public event WebCamEventHandler ImageCaptured;
 
+        EventHandler _closingEvent;
+
         #endregion
 
         #region c-tor & d-tor
 
-        public WebcamCapture(int interval, int windowHandle)
+        public WebcamCapture(int interval, int windowHandle, EventHandler closingEvent)
         {
+            _closingEvent = closingEvent;
             _components = new Container();
             // set the timer interval
             _timer = new System.Windows.Forms.Timer(_components);
             _timerRunning = false;
+            _threadAborted = false;
+
             _windowHandle = windowHandle;
             _timer.Interval = interval;
             _timer.Tick += new EventHandler(TimerTick);
-        }
-
-        ~WebcamCapture()
-        {
-            StopCapturing();
         }
 
         #endregion
@@ -103,12 +107,12 @@ namespace GenericDataLayer
 
             // connect to the capture device
             //Application.DoEvents();
-            
+
             //Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 0, 0);
 
             int connectAttempts = 0;
             while (!SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 0, 0))
-            {    
+            {
                 connectAttempts++;
                 //if(connectAttempts > 10)
                 //{
@@ -119,6 +123,7 @@ namespace GenericDataLayer
                 Thread.Sleep(1000);
             }
             Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
+            _webcamDisconnected = false;
 
             // set the frame number
             //m_FrameNumber = FrameNum;
@@ -131,15 +136,14 @@ namespace GenericDataLayer
 
         public void StopCapturing()
         {
+            _sync.Reset();
             try
             {
                 // stop the timer
-                if (_timerRunning)
+                if (_timerRunning || _timer.Enabled)
                 {
                     _timer.Stop();
-                    // disconnect from the video capturing device
-                    // Application.DoEvents();
-                    Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
+                    _threadAborted = true;
                 }
                 _timerRunning = false;
             }
@@ -147,6 +151,23 @@ namespace GenericDataLayer
             {
                 _threadAborted = true;
             }
+            finally
+            {
+                try
+                {
+                    lock (_syncDisconnected)
+                    {
+                        if (!_webcamDisconnected)
+                        {
+                            // disconnect from the video capturing device
+                            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
+                            _webcamDisconnected = true;
+                        }
+                    }
+                }
+                catch { }
+            }
+            _sync.Set();
         }
 
         #endregion
@@ -159,18 +180,20 @@ namespace GenericDataLayer
         [STAThread]
         private void TimerTick(object sender, System.EventArgs e)
         {
+
             try
             {
                 // pause the timer
                 _timer.Stop();
-                if (!_threadAborted)
+                _sync.WaitOne();
+                if (!_threadAborted && !_webcamDisconnected)
                 {
                     _timerRunning = false;
 
                     // wait for the clipboard to be unused
                     //_mutex.WaitOne();
                     //_pool.WaitOne();
-                    
+
                     // get the next image
                     Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
 
@@ -221,10 +244,18 @@ namespace GenericDataLayer
 
                 // restart the timer
                 //Application.DoEvents();
-                if (_timerRunning == false && !_threadAborted)// && error == false)
+                if (_timerRunning == false && !_threadAborted && !_webcamDisconnected)// && error == false)
                 {
                     _timerRunning = true;
                     _timer.Start();
+                }
+                else
+                {
+                    if (_threadAborted || _webcamDisconnected)
+                    {
+                        // todo: close the parent web capture form
+                        _closingEvent.Invoke(null, null);
+                    }
                 }
             }
         }
@@ -232,6 +263,11 @@ namespace GenericDataLayer
         #endregion
 
         #region proprieties
+
+        public bool ThreadAborted
+        {
+            get { return _threadAborted; }
+        }
 
         public int CaptureTimespan
         {

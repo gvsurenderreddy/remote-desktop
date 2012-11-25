@@ -55,6 +55,7 @@ namespace BusinessLogicLayer
                 Thread.Sleep(Timeout.Infinite);
 
             });
+            t.IsBackground = true;
             t.Start();
         }
 

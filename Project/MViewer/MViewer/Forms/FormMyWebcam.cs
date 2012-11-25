@@ -17,16 +17,30 @@ namespace MViewer
         public FormMyWebcam()
         {
             InitializeComponent();
-            _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32());
+            _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32(), this.WebcaptureClosing);
             Program.Controller.StartVideoChat(_webcamCapture);
         }
 
         #region public methods
 
+        public void WebcaptureClosing(object sender, EventArgs args)
+        {
+            this.Close();
+            this.Dispose();
+        }
+
         public void SetPicture(Image image)
         {
-            Image resized = ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
-            pbWebcam.Image = resized;
+            if (!_webcamCapture.ThreadAborted)
+            {
+                Image resized = ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
+                pbWebcam.Image = resized;
+            }
+            else
+            {
+                _webcamCapture.StopCapturing();
+                this.Close();
+            }
         }
 
         public void StopCapturing()
