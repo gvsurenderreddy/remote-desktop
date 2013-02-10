@@ -1,0 +1,5 @@
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\DBAccess\bin\Debug\DBAccess.dll
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\DBAccess\bin\Debug\DBAccess.pdb
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\DBAccess\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\DBAccess\obj\Debug\DBAccess.dll
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\DBAccess\obj\Debug\DBAccess.pdb

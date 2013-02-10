@@ -1,0 +1,8 @@
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\bin\Debug\WebcamCaptureLib.dll
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\bin\Debug\WebcamCaptureLib.pdb
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\obj\x86\Debug\WebcamCaptureLib.Properties.Resources.resources
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\obj\x86\Debug\WebcamCaptureLib.dll
+F:\facultate\master\dizertatie\backupProject\VideoChat using WCF\Libs\WebcamCaptureLib\obj\x86\Debug\WebcamCaptureLib.pdb

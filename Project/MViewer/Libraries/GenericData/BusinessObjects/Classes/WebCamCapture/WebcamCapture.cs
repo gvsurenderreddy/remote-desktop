@@ -102,6 +102,8 @@ namespace GenericDataLayer
         {
             // make sure that the capturing is stopped
             StopCapturing();
+            _timerRunning = false;
+            _threadAborted = false;
             _webcamDisconnected = false;
             // setup a capture window
             _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);

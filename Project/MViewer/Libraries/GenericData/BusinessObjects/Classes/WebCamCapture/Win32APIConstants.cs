@@ -7,10 +7,11 @@ namespace GenericDataLayer
 {
     public static class Win32APIConstants
     {
-        public const int WM_USER = 1024;
+        public const int WM_USER = 0x400;
 
         public const int WM_CAP_CONNECT = 1034;
         public const int WM_CAP_DISCONNECT = 1035;
+        public const int WM_CAP_STOP = WM_USER + 68;
         public const int WM_CAP_GET_FRAME = 1084;
         public const int WM_CAP_COPY = 1054;
 

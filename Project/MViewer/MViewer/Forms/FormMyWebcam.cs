@@ -27,8 +27,9 @@ namespace MViewer
 
         public void WebcaptureClosing(object sender, EventArgs args)
         {
-            this.Close();
-            this.Dispose();
+            //this.Close();
+            //this.Dispose();
+
             // todo: notify the View that webcapturing has stopped and it should open a new form next time
             _formClosingEvent.Invoke(null, null);
         }
@@ -50,6 +51,12 @@ namespace MViewer
         public void StopCapturing()
         {
             _webcamCapture.StopCapturing();
+        }
+
+        public void StartCapturing()
+        {
+            _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32(), this.WebcaptureClosing);
+            Program.Controller.StartVideoChat(_webcamCapture);
         }
 
         #endregion

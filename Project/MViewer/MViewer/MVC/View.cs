@@ -77,8 +77,8 @@ namespace MViewer
 
         public void WebCaptureClosing(object sender, EventArgs args)
         {
-            _threadWebcaptureForm = null;
-            _formWebCapture = null;
+            //_threadWebcaptureForm = null;
+            //_formWebCapture = null;
             _myWebcaptureRunning = false;
         }
 
@@ -86,29 +86,38 @@ namespace MViewer
         {
             if (show)
             {
-                if (_formWebCapture == null || _myWebcaptureRunning == false)
+                if (_formWebCapture != null && _myWebcaptureRunning == false)
                 {
-                    // open my webcam form if no video chat was previously started
-                    _threadWebcaptureForm = new Thread(delegate()
+                    _myWebcaptureRunning = true;
+                    _formWebCapture.StartCapturing();
+                }
+                else
+                {
+                    if (_myWebcaptureRunning == false)
                     {
-                        _myWebcaptureRunning = true;
-                        _formWebCapture = new FormMyWebcam(this.WebCaptureClosing);
-                        _formWebCapture.ShowDialog();
-                    });
-                    _threadWebcaptureForm.IsBackground = true;
-                    _threadWebcaptureForm.SetApartmentState(ApartmentState.STA);
-                    _threadWebcaptureForm.Start();
+                        // open my webcam form if no video chat was previously started
+                        _threadWebcaptureForm = new Thread(delegate()
+                        {
+                            _myWebcaptureRunning = true;
+                            _formWebCapture = new FormMyWebcam(this.WebCaptureClosing);
+                            _formWebCapture.ShowDialog();
+                        });
+                        _threadWebcaptureForm.IsBackground = true;
+                        _threadWebcaptureForm.SetApartmentState(ApartmentState.STA);
+                        _threadWebcaptureForm.Start();
+                    }
                 }
             }
             else
             {
-                if (_formWebCapture != null && _threadWebcaptureForm != null && _threadWebcaptureForm.IsAlive)
+                if (_myWebcaptureRunning && _formWebCapture != null)
                 {
+                    _formWebCapture.Visible = false;
                     _myWebcaptureRunning = false;
                     _formWebCapture.StopCapturing();
-                    
-                    _threadWebcaptureForm = null;
-                    _formWebCapture = null;
+
+                    //_threadWebcaptureForm = null;
+                    //_formWebCapture = null;
                 }
             }
         }

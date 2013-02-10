@@ -13,3 +13,15 @@ http://msdn.microsoft.com/en-us/library/aa702697(v=vs.100).aspx
 image scaling
 http://stackoverflow.com/questions/249587/high-quality-image-scaling-c-sharp
 
+Windows API Code Pack 
+http://archive.msdn.microsoft.com/WindowsAPICodePack
+
+Webcam functionality using C#
+http://www.c-sharpcorner.com/uploadfile/yougerthen/integrate-the-web-webcam-functionality-using-C-Sharp-net-and-com-part-viii/
+
+
+
+
+
+display library ? not used yet
+http://developer.amd.com/tools/graphics-development/display-library-adl-sdk/
