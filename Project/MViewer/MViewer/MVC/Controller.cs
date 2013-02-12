@@ -157,10 +157,17 @@ namespace MViewer
             int height = 354, width = 360;
 
             // initialize the presenter that will send webcam captures to all Server Sessions
-            _presenter = PresenterManager.Instance(webcamControl, _model.Identity.MyIdentity,
-                timerInterval, height, width,
-                new EventHandler(this.WebCamImageCaptured));
-            _presenter.StartPresentation();
+            if (_presenter == null)
+            {
+                _presenter = PresenterManager.Instance(webcamControl, _model.Identity.MyIdentity,
+                    timerInterval, height, width,
+                    new EventHandler(this.WebCamImageCaptured));
+                _presenter.StartPresentation(true);
+            }
+            else
+            {
+                _presenter.StartPresentation(false);
+            }
         }
 
         public void RoomClosingObserver(object sender, EventArgs e)

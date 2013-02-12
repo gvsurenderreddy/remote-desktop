@@ -112,12 +112,8 @@ namespace MViewer
             {
                 if (_myWebcaptureRunning && _formWebCapture != null)
                 {
-                    _formWebCapture.Visible = false;
                     _myWebcaptureRunning = false;
                     _formWebCapture.StopCapturing();
-
-                    //_threadWebcaptureForm = null;
-                    //_formWebCapture = null;
                 }
             }
         }
@@ -226,11 +222,6 @@ namespace MViewer
 
         #region private methods
 
-        //void OpenRoomForm(Object threadContext)
-        //{
-        //    ((Form)threadContext).Show();
-        //}
-
         void OpenMainForm(object identity)
         {
             Application.Run(_formMain);
@@ -239,10 +230,15 @@ namespace MViewer
 
         void OpenActionsForm(Object threadContext)
         {
-            _formActions.StartPosition = FormStartPosition.Manual;
-            // position the Actions form at the right bottom of the screen
-            _formActions.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - _formActions.Width, Screen.PrimaryScreen.WorkingArea.Height - _formActions.Height);
-            _formActions.ShowDialog();
+            Thread t = new Thread(delegate()
+                        {
+                            _formActions.StartPosition = FormStartPosition.Manual;
+                            // position the Actions form at the right bottom of the screen
+                            _formActions.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - _formActions.Width, Screen.PrimaryScreen.WorkingArea.Height - _formActions.Height);
+                            _formActions.ShowDialog();
+                        });
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
         }
 
         #endregion

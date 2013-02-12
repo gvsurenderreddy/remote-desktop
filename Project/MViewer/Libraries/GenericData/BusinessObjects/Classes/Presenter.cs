@@ -41,10 +41,10 @@ namespace GenericDataLayer
 
         #region public methods
 
-        public void StartPresentation()
+        public void StartPresentation(bool firstTimeCapturing)
         {
             // start the video capturing
-            _webcamCapture.StartCapturing();
+            _webcamCapture.StartCapturing(firstTimeCapturing);
         }
 
         public void StopPresentation()

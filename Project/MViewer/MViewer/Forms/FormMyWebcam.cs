@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Windows.Forms;
 using GenericDataLayer;
 
@@ -14,13 +15,20 @@ namespace MViewer
     {
         WebcamCapture _webcamCapture;
         EventHandler _formClosingEvent;
+        System.Timers.Timer _visibleTimer;
 
         public FormMyWebcam(EventHandler formClosingEvent)
         {
             _formClosingEvent = formClosingEvent;
+            _visibleTimer = new System.Timers.Timer(3000);
+            _visibleTimer.Elapsed += new ElapsedEventHandler(VisibleTimerCallback);
+            //_visibleTimer.Start();
+
             InitializeComponent();
             _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32(), this.WebcaptureClosing);
+            _webcamCapture.ParentForm = this;
             Program.Controller.StartVideoChat(_webcamCapture);
+
         }
 
         #region public methods
@@ -55,7 +63,10 @@ namespace MViewer
 
         public void StartCapturing()
         {
-            _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32(), this.WebcaptureClosing);
+            if (_webcamCapture == null)
+            {
+                _webcamCapture = new WebcamCapture(20, this.Handle.ToInt32(), this.WebcaptureClosing);
+            }
             Program.Controller.StartVideoChat(_webcamCapture);
         }
 
@@ -74,6 +85,27 @@ namespace MViewer
         #endregion
 
         #region callbacks
+
+        private void VisibleTimerCallback(object sender, ElapsedEventArgs e)
+        {
+            _visibleTimer.Stop();
+
+            if (_webcamCapture.WebcamDisconnected)
+            {
+                if (this.Visible == true)
+                {
+                    this.Hide();
+                }
+            }
+            else
+            {
+                if (this.Visible == false)
+                {
+                    this.Show();
+                }
+            }
+            _visibleTimer.Start();
+        }
 
         private void FormMyWebcam_Resize(object sender, EventArgs e)
         {

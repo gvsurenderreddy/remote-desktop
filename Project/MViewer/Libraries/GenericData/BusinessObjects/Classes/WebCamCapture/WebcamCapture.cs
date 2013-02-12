@@ -29,6 +29,8 @@ namespace GenericDataLayer
 
         IContainer _components;
         System.Windows.Forms.Timer _timer;
+
+
         bool _timerRunning;
         int _captureTimespan;
         int _width;
@@ -38,6 +40,7 @@ namespace GenericDataLayer
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
         bool _webcamDisconnected;
+
         ManualResetEvent _sync = new ManualResetEvent(false);
         readonly object _syncDisconnected = new object();
 
@@ -52,6 +55,7 @@ namespace GenericDataLayer
         public event WebCamEventHandler ImageCaptured;
 
         EventHandler _closingEvent;
+        int _interval;
 
         #endregion
 
@@ -62,33 +66,15 @@ namespace GenericDataLayer
             _closingEvent = closingEvent;
             _components = new Container();
             // set the timer interval
-            _timer = new System.Windows.Forms.Timer(_components);
+            _interval = interval;
+            InitializeTimer(interval);
+
             _timerRunning = false;
             _threadAborted = false;
             _webcamDisconnected = false;
 
             _windowHandle = windowHandle;
-            _timer.Interval = interval;
-            _timer.Tick += new EventHandler(TimerTick);
-        }
 
-        #endregion
-
-        #region private methods
-
-        private ImageCodecInfo GetEncoder(ImageFormat format)
-        {
-
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.FormatID == format.Guid)
-                {
-                    return codec;
-                }
-            }
-            return null;
         }
 
         #endregion
@@ -98,40 +84,30 @@ namespace GenericDataLayer
         [DllImport("user32", EntryPoint = "SendMessage")]
         static extern bool SendMessage(int hWnd, uint wMsg, int wParam, int lParam);
 
-        public void StartCapturing()
+        public void StartCapturing(bool firstTimeCapturing)
         {
             // make sure that the capturing is stopped
             StopCapturing();
-            _timerRunning = false;
-            _threadAborted = false;
-            _webcamDisconnected = false;
+            InitializeTimer(_interval);
             // setup a capture window
             _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
 
-            // connect to the capture device
-            //Application.DoEvents();
-
-            //Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 0, 0);
-
+            // connect this application to the capture device
             int connectAttempts = 0;
             while (!SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 0, 0))
             {
-                // todo: find & fix the issue that is preventing the webcam from being restarted
-
                 connectAttempts++;
-                //if(connectAttempts > 10)
-                //{
-                //    DestroyWindow(hHwnd)
-                //    Me.Cursor = Cursors.Default
-                //    Return False
-                //}
                 Thread.Sleep(1000);
             }
             Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
             _webcamDisconnected = false;
 
-            // set the frame number
-            //m_FrameNumber = FrameNum;
+            // wait for the web cam capture form to be visible
+            Form myWebcamForm = this.ParentForm;
+            while (!firstTimeCapturing && myWebcamForm.Visible == false)
+            {
+                Thread.Sleep(1000);
+            }
 
             // set the timer information
             _timerRunning = true;
@@ -179,13 +155,35 @@ namespace GenericDataLayer
 
         #region private methods
 
+
+        void InitializeTimer(int interval)
+        {
+            _timer = new System.Windows.Forms.Timer(_components);
+            _timer.Interval = interval;
+            _timer.Tick += new EventHandler(TimerTick);
+        }
+
+        private ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
         /// <summary>
         /// capture the next image from the video capturing device
         /// </summary>
         [STAThread]
         private void TimerTick(object sender, System.EventArgs e)
         {
-
             try
             {
                 // pause the timer
@@ -197,6 +195,10 @@ namespace GenericDataLayer
                     {
                         if (!_threadAborted && !_webcamDisconnected)
                         {
+                            while (ParentForm.Visible == false)
+                            {
+                                Thread.Sleep(1000);
+                            }
                             _timerRunning = false;
 
                             // wait for the clipboard to be unused
@@ -241,7 +243,14 @@ namespace GenericDataLayer
             {
                 _threadAborted = true;
                 StopCapturing();
+                MessageBox.Show("capturing thread aborted");
             }
+            //catch (ThreadStateException tsex)
+            //{
+            //    _timer.Stop();
+            //    InitializeTimer(_interval);
+            //    StartCapturing(false);
+            //}
             catch (Exception)
             {
                 //_timerRunning = true;
@@ -274,6 +283,19 @@ namespace GenericDataLayer
         #endregion
 
         #region proprieties
+
+        Form _parentForm;
+
+        public new Form ParentForm 
+        { 
+            get { return _parentForm;}
+            set { _parentForm = value; }
+        }
+
+        public bool WebcamDisconnected
+        {
+            get { return _webcamDisconnected; }
+        }
 
         public bool ThreadAborted
         {
