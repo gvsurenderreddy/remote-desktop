@@ -41,6 +41,8 @@ namespace GenericDataLayer
 
         #region public methods
 
+        
+
         public void StartPresentation(bool firstTimeCapturing)
         {
             // start the video capturing

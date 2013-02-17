@@ -68,7 +68,7 @@ namespace GenericDataLayer
             // set the timer interval
             _interval = interval;
             InitializeTimer(interval);
-
+            
             _timerRunning = false;
             _threadAborted = false;
             _webcamDisconnected = false;
@@ -84,10 +84,10 @@ namespace GenericDataLayer
         [DllImport("user32", EntryPoint = "SendMessage")]
         static extern bool SendMessage(int hWnd, uint wMsg, int wParam, int lParam);
 
-        public void StartCapturing(bool firstTimeCapturing)
+        delegate void StartPres(bool firstTimeCapturing);
+
+        void StartCaptureProcess(bool firstTimeCapturing)
         {
-            // make sure that the capturing is stopped
-            StopCapturing();
             InitializeTimer(_interval);
             // setup a capture window
             _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
@@ -99,7 +99,7 @@ namespace GenericDataLayer
                 connectAttempts++;
                 Thread.Sleep(1000);
             }
-            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
+            int x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
             _webcamDisconnected = false;
 
             // wait for the web cam capture form to be visible
@@ -113,6 +113,21 @@ namespace GenericDataLayer
             _timerRunning = true;
             _timer.Start();
             _timer.Enabled = true;
+        }
+
+        public void StartCapturing(bool firstTimeCapturing)
+        {
+            // make sure that the capturing is stopped
+            StopCapturing();
+            if (firstTimeCapturing)
+            {
+                StartCaptureProcess(firstTimeCapturing);
+            }
+            else
+            {
+                this.ParentForm.Invoke(new StartPres(StartCaptureProcess), firstTimeCapturing);
+            }
+            
         }
 
         public void StopCapturing()
@@ -158,9 +173,13 @@ namespace GenericDataLayer
 
         void InitializeTimer(int interval)
         {
-            _timer = new System.Windows.Forms.Timer(_components);
-            _timer.Interval = interval;
-            _timer.Tick += new EventHandler(TimerTick);
+            if (_timer == null)
+            {
+                _timer = new System.Windows.Forms.Timer(_components);
+                _timer.Interval = interval;
+                _timer.Tag = this;
+                _timer.Tick += new EventHandler(TimerTick);
+            }
         }
 
         private ImageCodecInfo GetEncoder(ImageFormat format)

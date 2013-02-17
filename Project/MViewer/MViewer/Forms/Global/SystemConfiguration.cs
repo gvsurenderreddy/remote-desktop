@@ -13,6 +13,8 @@ namespace MViewer
         public static readonly string ServicePath = ConfigurationManager.AppSettings["ServicePath"];
         public static readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
         public static readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
+        public static readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
+
         public static string MyIdentity;
     }
 }
