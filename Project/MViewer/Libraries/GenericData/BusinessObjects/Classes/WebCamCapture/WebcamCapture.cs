@@ -19,12 +19,6 @@ namespace GenericDataLayer
     [Designer("Sytem.Windows.Forms.Design.ParentControlDesigner,System.Design", typeof(System.ComponentModel.Design.IDesigner))] // make composite
     public class WebcamCapture : System.Windows.Forms.UserControl
     {
-        /* todo: If you want to allow the user to change the display size and 
-         * color format of the video capture, call:
-         * SendMessage (mCapHwnd, WM_CAP_DLG_VIDEOFORMAT, 0, 0);
-         * You will need to requery the capture device to get the new settings
-        */
-
         #region private members
 
         IContainer _components;
@@ -240,19 +234,12 @@ namespace GenericDataLayer
                                 {
                                     Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
                                     _eventArgs = new VideoCaptureEventArgs();
+                                    // resize the image to the required size (the API isn't doing that)
                                     _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
-                                }
-                                else
-                                {
-                                    //MessageBox.Show("The Data In Clipboard is not as image format");
-                                }
-                                /* todo: For some reason, the API is not resizing the video
-                                * feed to the width and height provided when the video
-                                * feed was started, so we must resize the image here
-                                */
 
-                                // raise the event
-                                this.ImageCaptured(this, _eventArgs);
+                                    // raise the capture event
+                                    this.ImageCaptured(this, _eventArgs);
+                                }
                             }
                         }
                     }

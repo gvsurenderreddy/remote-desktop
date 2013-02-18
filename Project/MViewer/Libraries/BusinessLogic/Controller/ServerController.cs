@@ -41,8 +41,6 @@ namespace BusinessLogicLayer
 
         #region public methods
 
-        // todo: use async operations for start/stop if necessary
-
         public void StartServer()
         {
             Thread t = new Thread(delegate()

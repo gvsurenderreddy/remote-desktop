@@ -51,7 +51,7 @@ namespace MViewer
 
         public void PingContacts()
         {
-            // todo: ping all contacts to get their status
+            // ping all contacts to get their status
             foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
             {
                 string identity = contact["Identity"].ToString();

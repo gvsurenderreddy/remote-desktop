@@ -105,7 +105,7 @@ namespace MViewer
                             }
                             else
                             {
-                                // todo: stop the process if one of the above is true
+                                // todo: decide if to stop the video process if the flag isn't true
                             }
                             transferStatus.Video = false;
                             if (peers.Audio == true)
@@ -115,6 +115,10 @@ namespace MViewer
                                 // todo: send audio capture
 
                                 transferStatus.Audio = false;
+                            }
+                            else
+                            {
+                                // todo: decide if to stop the audio process if the flag isn't true
                             }
                             break;
                         }
@@ -190,7 +194,7 @@ namespace MViewer
 
         public void ClientConnected(object sender, EventArgs e)
         {
-            // todo: implement ClientConnected
+            // todo: complete implementation of ClientConnected
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             switch (args.ActionType)
             {
@@ -223,16 +227,16 @@ namespace MViewer
             TransferUptading transfer = _model.SessionManager.GetTransferActivity(identity);
             transfer.IsVideoUpdating = true;
 
-            // todo: check if the webcapture is pending for being sent
+            // check if the webcapture is pending for being sent
             PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(identity);
             while (transferStatus.Video)
             {
-                // todo: wait for it to finish and block the next sending
+                // wait for it to finish and block the next sending
                 Thread.Sleep(200);
             }
 
             ConnectedPeers peers = _model.SessionManager.GetPeers(identity);
-            // todo: update the session status
+            // update the session status to closed
             if (peers.Video == true)
             {
                 peers.Audio = false;
@@ -250,7 +254,7 @@ namespace MViewer
 
                 // send the stop signal to the server session
                 _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
-                // todo: check if SendRoomCommand has finished the execution (put a return flag)
+                // todo: optional - check if SendRoomCommand has finished the execution (put a return flag)
                 //Thread.Sleep(1000);
                 // remove the connected client session
                 _model.SessionManager.RemoveSession(identity);
@@ -286,7 +290,7 @@ namespace MViewer
 
         public void PerformRoomAction(object sender, RoomActionEventArgs e)
         {
-            // todo: perform specific action when action event has been triggered
+            // perform specific action when room action event has been triggered
             switch (e.ActionType)
             {
                 case GenericEnums.RoomActionType.Audio:
@@ -389,7 +393,7 @@ namespace MViewer
             // unbind the observers
             _view.BindObservers(false);
 
-            // todo: update the StopApplication method
+            // todo: update the StopApplication method with other actions
             _model.ServerController.StopServer();
 
             // exit the environment
@@ -429,16 +433,13 @@ namespace MViewer
             {
                 case GenericEnums.RoomActionType.Video:
                     // initialize video chat form to receive captures from the client
+                    // initialize my webcam form so that I can send my captures to the connected contact
                     ClientConnected(null, new RoomActionEventArgs()
                     {
                         ActionType = GenericEnums.RoomActionType.Video,
                         SignalType = GenericEnums.SignalType.Start,
                         Identity = identity
                     });
-
-                    // todo: initialize my webcam form so that I can send my captures to the connected contact
-
-
                     break;
                 case GenericEnums.RoomActionType.Audio:
 

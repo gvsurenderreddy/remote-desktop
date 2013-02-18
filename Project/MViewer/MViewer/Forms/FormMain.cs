@@ -45,7 +45,6 @@ namespace MViewer
 
         private void ContactsUpdated(object sender, EventArgs e)
         {
-            // todo: implement ContactsUpdated
             if (((ContactsEventArgs)e).Operation == GenericEnums.ContactsOperation.Load && ((ContactsEventArgs)e).ContactsDV != null)
             {
                 contactsControl.SetContacts(((ContactsEventArgs)e).ContactsDV);
@@ -55,7 +54,6 @@ namespace MViewer
                 Contact contact = Program.Controller.PerformContactsOperation(sender, (ContactsEventArgs)e);
                 ((ContactsEventArgs)e).UpdatedContact = contact;
             }
-
         }
 
         private void UpdateIdentity(object sender, EventArgs e)

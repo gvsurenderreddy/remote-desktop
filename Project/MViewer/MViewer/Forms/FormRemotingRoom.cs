@@ -36,17 +36,17 @@ namespace MViewer.Forms
 
         public void SetPartnerName(string friendlyName)
         {
-            // todo: implement PlayAudioCapture
+            // todo: implement SetPartnerName  - remoting room
         }
 
         public void CloseRoom()
         {
-            // todo: implement CloseRoom
+            // todo: implement CloseRoom - remoting room
         }
 
         public void ShowRoom()
         {
-            // todo: implement ShowRoom
+            // todo: implement ShowRoom - remoting room
         }
 
         #endregion

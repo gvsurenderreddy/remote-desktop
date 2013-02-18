@@ -120,7 +120,7 @@ namespace MViewer
 
         //public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
         //{
-        //    // todo: implement ShowRoomForm
+        //    // todo: implement ShowRoomForm - if necessary
         //    RoomActionEventArgs args = (RoomActionEventArgs)e;
         //    IRoom room = null;
         //    IntPtr handle = IntPtr.Zero;

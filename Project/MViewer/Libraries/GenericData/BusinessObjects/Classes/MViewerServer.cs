@@ -78,7 +78,7 @@ namespace GenericDataLayer
         {
             lock (_syncVideoCaptures)
             {
-                // todo: implement SendRoomAction
+                // todo: complete implementation of SendRoomAction
                 switch (signalType)
                 {
                     case GenericEnums.SignalType.Pause:

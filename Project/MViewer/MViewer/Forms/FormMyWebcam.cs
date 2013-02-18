@@ -35,10 +35,6 @@ namespace MViewer
 
         public void WebcaptureClosing(object sender, EventArgs args)
         {
-            //this.Close();
-            //this.Dispose();
-
-            // todo: notify the View that webcapturing has stopped and it should open a new form next time
             _formClosingEvent.Invoke(null, null);
         }
 

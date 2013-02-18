@@ -30,22 +30,22 @@ namespace MViewer.Forms
 
         public void PlayAudioCapture(byte[] capture)
         {
-            // todo: implement PlayAudioCapture
+            // todo: implement PlayAudioCapture - audio room
         }
 
         public void SetPartnerName(string friendlyName)
         {
-            // todo: implement SetPartnerName
+            // todo: implement SetPartnerName - audio room
         }
 
         public void CloseRoom()
         {
-            // todo: implement CloseRoom
+            // todo: implement CloseRoom - audio room
         }
 
         public void ShowRoom()
         {
-            // todo: implement ShowRoom
+            // todo: implement ShowRoom - audio room
         }
 
         #endregion

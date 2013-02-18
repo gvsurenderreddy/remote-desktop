@@ -78,7 +78,6 @@ namespace MViewer
 
         public void ShowRoom()
         {
-            // todo: implement ShowRoom
             try
             {
                 if (this.InvokeRequired)
@@ -128,9 +127,5 @@ namespace MViewer
         }
 
         #endregion
-
-    
-
-      
     }
 }
