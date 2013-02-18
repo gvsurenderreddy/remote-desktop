@@ -146,7 +146,7 @@ namespace MViewer
 
         public void GetContactsStatus()
         {
-            _model.PingContacts();
+            _model.PingContacts(null);
         }
 
         public void IdentityObserver(object sender, IdentityEventArgs e)
@@ -343,10 +343,12 @@ namespace MViewer
             Contact contact = null;
             if (e.Operation == GenericEnums.ContactsOperation.Load)
             {
+                // don't need to send signal to the Model
                 NotifyContactsObserver();
             }
             else
             {
+                // add/remove/get/status update
                 contact = _model.PerformContactOperation(e);
                 NotifyContactsObserver();
             }
@@ -384,8 +386,8 @@ namespace MViewer
             // ping every single contact in the list and update it's status
             GetContactsStatus();
 
-            // todo: notify all online contacts that you came on too
-
+            // notify all online contacts that you came on too
+            _model.NotifyContacts(GenericEnums.ContactStatus.Online);
         }
 
         public void StopApplication()
@@ -396,13 +398,15 @@ namespace MViewer
             // todo: update the StopApplication method with other actions
             _model.ServerController.StopServer();
 
+            // notify all contacts that you exited the chat
+            _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+
             // exit the environment
             Environment.Exit(0);
         }
 
         public void NotifyContactsObserver()
         {
-            //_model.ContactsUpdated();
             _view.NotifyContactsObserver();
         }
 

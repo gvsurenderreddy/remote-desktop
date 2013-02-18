@@ -22,7 +22,8 @@ namespace GenericDataLayer
         ControllerEventHandlers _controllerHandlers;
         string _identity;
         readonly object _syncVideoCaptures = new object();
-
+        readonly object _syncAudioCaptures = new object();
+        
         #endregion
 
         #region c-tor
@@ -37,13 +38,22 @@ namespace GenericDataLayer
 
         #region public methods
 
+        public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
+        {
+            // propagate the update to the UI, through the controller
+            _controllerHandlers.ContactsObserver.Invoke(this, new ContactsEventArgs()
+            {
+                Operation = GenericEnums.ContactsOperation.Status,
+                UpdatedContact = new Contact(-1, senderIdentity, newStatus)
+            });
+        }
+
         public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
             try
             {
                 lock (_syncVideoCaptures)
                 {
-                    //Thread.Sleep(2000);
                     MemoryStream ms = new MemoryStream(capture);
                     //read the Bitmap back
                     Image bmp = (Bitmap)Bitmap.FromStream(ms);
@@ -64,10 +74,9 @@ namespace GenericDataLayer
             }
         }
 
-        readonly object _sync = new object();
         public void SendMicrophoneCapture(byte[] capture)
         {
-            lock (_sync)
+            lock (_syncAudioCaptures)
             {
                 Computer computer = new Computer();
                 computer.Audio.Play(capture, AudioPlayMode.Background);

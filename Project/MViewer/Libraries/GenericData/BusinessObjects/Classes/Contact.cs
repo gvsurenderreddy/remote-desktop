@@ -24,7 +24,13 @@ namespace GenericDataLayer
             _contactNo = contactNo;
             _friendlyName = friendlyName;
             _identity = identity;
-            //_status = Utils.GenericEnums.ContactStatus.Offline;
+        }
+
+        public Contact(int contactNo, string identity, GenericEnums.ContactStatus newStatus)
+        {
+            _contactNo = contactNo;
+            _identity = identity;
+            _status = newStatus;
         }
 
         #endregion

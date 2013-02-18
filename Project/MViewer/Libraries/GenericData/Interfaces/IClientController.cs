@@ -16,5 +16,6 @@ namespace GenericDataLayer
         bool IsContactOnline(string identity);
         void SendCapture(byte[] capture, string receiverIdentity, string senderIdentity);
         void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType);
+        void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus);
     }
 }

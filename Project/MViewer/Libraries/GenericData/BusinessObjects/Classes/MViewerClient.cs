@@ -48,6 +48,11 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
 
     }
 
+    public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
+    {
+        base.Channel.UpdateContactStatus(senderIdentity, newStatus);
+    }
+
     public void SendWebcamCapture(byte[] capture, string senderIdentity)
     {
         base.Channel.SendWebcamCapture(capture, senderIdentity);

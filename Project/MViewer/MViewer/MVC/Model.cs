@@ -44,35 +44,59 @@ namespace MViewer
 
         #region public methods
 
+        public void NotifyContacts(GenericEnums.ContactStatus newStatus)
+        {
+            // retrieve a list of contact identities and tell them about your new status
+            string[] identities = this.GetOnlineContactIdentities();
+            foreach (string identity in identities)
+            {
+                _clientController.AddClient(identity);
+                _clientController.UpdateContactStatus(identity, Identity.MyIdentity, newStatus);
+                _clientController.RemoveClient(identity);
+            }
+        }
+
         public Contact GetContact(string identity)
         {
             return ContactsRepository.GetContact(identity);
         }
 
-        public void PingContacts()
+        public void PingContacts(string pingIdentity)
         {
-            // ping all contacts to get their status
-            foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
+            if (string.IsNullOrEmpty(pingIdentity))
             {
-                string identity = contact["Identity"].ToString();
-                try
+                // ping all contacts to get their status
+                foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
                 {
-                    bool isOnline = _clientController.IsContactOnline(identity);
-                    contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online : GenericEnums.ContactStatus.Offline;
+                    string identity = contact["Identity"].ToString();
+                    try
+                    {
+                        bool isOnline = _clientController.IsContactOnline(identity);
+                        contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online : GenericEnums.ContactStatus.Offline;
+                    }
+                    catch (Exception)
+                    {
+                        contact["Status"] = GenericEnums.ContactStatus.Offline;
+                    }
                 }
-                catch (Exception)
-                {
-                    contact["Status"] = GenericEnums.ContactStatus.Offline;
-                }
+            }
+            else
+            {
+                // ping only the specified contact
+                bool isOnline = _clientController.IsContactOnline(pingIdentity);
+                UpdateContactStatus(pingIdentity, isOnline == true ? GenericEnums.ContactStatus.Online
+                    : GenericEnums.ContactStatus.Offline);
             }
         }
 
         public Contact PerformContactOperation(ContactsEventArgs e)
         {
             Contact contact = null;
-
             switch (e.Operation)
             {
+                case GenericEnums.ContactsOperation.Status:
+                    PingContacts(e.UpdatedContact.Identity);
+                    break;
                 case GenericEnums.ContactsOperation.Add:
                     int contactNo = ContactsRepository.AddContact(e.UpdatedContact);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
@@ -84,7 +108,7 @@ namespace MViewer
                         MViewerClient client = ClientController.GetClient(contact.Identity);
                         client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
                     }
-                    PingContacts();
+                    PingContacts(null);
                     break;
                 case GenericEnums.ContactsOperation.Update:
                     ContactsRepository.UpdateContact(e.UpdatedContact);
@@ -108,11 +132,37 @@ namespace MViewer
                     break;
                 case GenericEnums.ContactsOperation.Load:
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
-                    
                     break;
-            } 
-
+            }
             return contact;
+        }
+
+        #endregion
+
+        #region private methods
+
+        string[] GetOnlineContactIdentities()
+        {
+            return _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
+                Where(s => s.Field<string>("Status") == GenericEnums.ContactStatus.Online.ToString()
+                ).Select(s => s.Field<string>("Identity")).ToArray<string>();
+        }
+
+        void UpdateContactStatus(string identity, GenericEnums.ContactStatus newStatus)
+        {
+            try
+            {
+                DataRow contact = _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
+                    Where(s => s.Field<string>("Identity") == identity).First();
+                if (contact != null)
+                {
+                    contact["Status"] = newStatus.ToString();
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         #endregion

@@ -10,8 +10,9 @@ namespace GenericDataLayer
     public interface IModel
     {
         Contact PerformContactOperation(ContactsEventArgs e);
-        void PingContacts();
+        void PingContacts(string identity);
         Contact GetContact(string identity);
+        void NotifyContacts(GenericEnums.ContactStatus newStatus);
 
         ISessionManager SessionManager
         {

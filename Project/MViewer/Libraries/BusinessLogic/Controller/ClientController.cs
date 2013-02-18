@@ -36,6 +36,21 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus)
+        {
+            if (_clients != null)
+            {
+                if (_clients.ContainsKey(partnerIdentity))
+                {
+                    MViewerClient client = _clients[partnerIdentity];
+                    if (client != null)
+                    {
+                        client.UpdateContactStatus(myIdentity, newStatus);
+                    }
+                }
+            }
+        }
+
         public void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
             if (_clients.ContainsKey(identity))
@@ -113,9 +128,18 @@ namespace BusinessLogicLayer
 
         public bool IsContactOnline(string identity)
         {
-            ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
-            MViewerClient client = ClientBuilder.BuildWCFClient(endpoint);
-            return client.Ping();
+            bool isOnline = false;
+            try
+            {
+                ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
+                MViewerClient client = ClientBuilder.BuildWCFClient(endpoint);
+                isOnline = client.Ping();
+            }
+            catch
+            {
+                isOnline = false;
+            }
+            return isOnline;
         }
 
         public void SendCapture(byte[]capture, string receiverIdentity, string senderIdentity)

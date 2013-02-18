@@ -20,6 +20,11 @@ namespace DataAccessLayer
 
         #region public static methods
 
+        public static string[] GetContactIdentities()
+        {
+            return _contactsDataSet.Tables[0].AsEnumerable().Select(s => s.Field<string>("Identity")).ToArray<string>();
+        }
+
         public static DataView LoadContacts(string xmlFilePath)
         {
             _xmlFilePath = xmlFilePath;
