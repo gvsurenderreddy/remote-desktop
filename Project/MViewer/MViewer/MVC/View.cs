@@ -54,6 +54,11 @@ namespace MViewer
 
         #region public methods
 
+        public void PauseWebchat(bool pause)
+        {
+            _formWebCapture.PauseWebchat(pause);
+        }
+
         public bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType)
         {
             return _roomManager.IsRoomActivated(identity, roomType);

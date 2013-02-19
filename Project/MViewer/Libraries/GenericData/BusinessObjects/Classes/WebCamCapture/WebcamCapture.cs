@@ -34,9 +34,11 @@ namespace GenericDataLayer
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
         bool _webcamDisconnected;
+        bool _webcamPaused;
 
         ManualResetEvent _sync = new ManualResetEvent(false);
         readonly object _syncDisconnected = new object();
+        readonly object _syncPaused = new object();
 
         //Mutex _mutex = new Mutex(true, "WebCapture");
 
@@ -62,7 +64,7 @@ namespace GenericDataLayer
             // set the timer interval
             _interval = interval;
             InitializeTimer(interval);
-            
+
             _timerRunning = false;
             _threadAborted = false;
             _webcamDisconnected = false;
@@ -109,6 +111,14 @@ namespace GenericDataLayer
             _timer.Enabled = true;
         }
 
+        public void PauseCapturing(bool pause)
+        {
+            lock (_syncPaused)
+            {
+                _webcamPaused = pause;
+            }
+        }
+
         public void StartCapturing(bool firstTimeCapturing)
         {
             // make sure that the capturing is stopped
@@ -121,7 +131,7 @@ namespace GenericDataLayer
             {
                 this.ParentForm.Invoke(new StartPres(StartCaptureProcess), firstTimeCapturing);
             }
-            
+
         }
 
         public void StopCapturing()
@@ -202,6 +212,8 @@ namespace GenericDataLayer
                 // pause the timer
                 _timer.Stop();
                 _sync.WaitOne();
+
+
                 if (!_threadAborted && !_webcamDisconnected)
                 {
                     lock (_syncDisconnected)
@@ -237,8 +249,14 @@ namespace GenericDataLayer
                                     // resize the image to the required size (the API isn't doing that)
                                     _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
 
-                                    // raise the capture event
-                                    this.ImageCaptured(this, _eventArgs);
+                                    lock (_syncPaused)
+                                    {
+                                        if (!_webcamPaused)
+                                        {
+                                            // raise the capture event
+                                            this.ImageCaptured(this, _eventArgs);
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -292,9 +310,9 @@ namespace GenericDataLayer
 
         Form _parentForm;
 
-        public new Form ParentForm 
-        { 
-            get { return _parentForm;}
+        public new Form ParentForm
+        {
+            get { return _parentForm; }
             set { _parentForm = value; }
         }
 

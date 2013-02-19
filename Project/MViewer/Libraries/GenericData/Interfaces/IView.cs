@@ -17,6 +17,7 @@ namespace GenericDataLayer
 
         void ShowMainForm(bool close);
         void ShowMyWebcamForm(bool show);
+        void PauseWebchat(bool pause);
         void UpdateWebcapture(Image image);
 
         void PerformRoomAction(object sender, EventArgs e);

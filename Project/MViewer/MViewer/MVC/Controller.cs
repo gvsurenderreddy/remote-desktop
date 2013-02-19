@@ -307,16 +307,15 @@ namespace MViewer
                     {
                         case GenericEnums.SignalType.Start:
                             // start the video chat
-                            //Thread t = new Thread(delegate()
-                            //{
-                                _webcaptureClosing = false;
-                                PerformVideoChatAction(sender, e);
-                            //});
-                            //t.SetApartmentState(ApartmentState.STA);
-                            //t.Start();
+                            _webcaptureClosing = false;
+                            PerformVideoChatAction(sender, e);
                             break;
                         case GenericEnums.SignalType.Pause:
-
+                            // pause the video chat (stop sending the captured images, don't disconnect the webcam yet)
+                            PerformVideoChatAction(sender, e);
+                            break;
+                        case GenericEnums.SignalType.Resume:
+                            PerformVideoChatAction(sender, e);
                             break;
                         case GenericEnums.SignalType.Stop:
                             PerformVideoChatAction(sender, e);
@@ -511,7 +510,10 @@ namespace MViewer
 
                     break;
                 case GenericEnums.SignalType.Pause:
-
+                    _view.PauseWebchat(true);
+                    break;
+                case GenericEnums.SignalType.Resume:
+                    _view.PauseWebchat(false);
                     break;
             }
         }
