@@ -14,6 +14,9 @@ namespace GenericDataLayer
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/UpdateContactStatus", ReplyAction = "http://tempuri.org/IVideoChatRoom/UpdateContactStatusResponse")]
         void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus);
 
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/UpdateFriendlyName", ReplyAction = "http://tempuri.org/IVideoChatRoom/UpdateFriendlyNameResponse")]
+        void UpdateFriendlyName(string senderIdentity, string newFriendlyName);
+
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendWebcamCapture", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendWebcamCaptureResponse")]
         void SendWebcamCapture(byte[] capture, string senderIdentity);
 

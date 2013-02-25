@@ -44,6 +44,20 @@ namespace MViewer
 
         #region public methods
 
+        public void NotifyContacts(string newFriendlyName)
+        {
+            // retrieve a list of contact identities and tell them about your new status
+            string[] identities = this.GetOnlineContactIdentities();
+            foreach (string identity in identities)
+            {
+                _clientController.AddClient(identity);
+                _clientController.UpdateFriendlyName(identity, Identity.MyIdentity, newFriendlyName);
+
+                //todo: remove the client only if it doesn't have any active chats
+                _clientController.RemoveClient(identity);
+            }
+        }
+
         public void NotifyContacts(GenericEnums.ContactStatus newStatus)
         {
             // retrieve a list of contact identities and tell them about your new status

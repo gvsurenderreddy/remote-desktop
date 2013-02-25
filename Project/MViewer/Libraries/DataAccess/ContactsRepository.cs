@@ -76,23 +76,39 @@ namespace DataAccessLayer
         public static void UpdateContact(Contact contact)
         {
             DataRow dr = GetContact2(contact.ContactNo);
-            dr.SetField("FriendlyName", contact.FriendlyName);
-            SaveContacts(); 
-            LoadContacts(_xmlFilePath);
+            if (dr == null)
+            {
+                Contact toUpdate = GetContact(contact.Identity);
+                dr = GetContact2(contact.ContactNo);
+            }
+            if (dr != null)
+            {
+                dr.SetField("FriendlyName", contact.FriendlyName);
+                SaveContacts();
+                LoadContacts(_xmlFilePath);
+            }
         }
 
         public static Contact GetContact(int contactNo)
         {
-            _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
-            _contactsDataView.Sort = "identity";
-            DataRow dr = null;
-            if (_contactsDataView.Count > 0)
+            Contact contact = null;
+            if (contactNo >= 0)
             {
-                dr = _contactsDataView[0].Row;
+                _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
+                _contactsDataView.Sort = "identity";
+                DataRow dr = null;
+                if (_contactsDataView.Count > 0)
+                {
+                    dr = _contactsDataView[0].Row;
+                    if (dr != null)
+                    {
+                        contact = new Contact(
+                         int.Parse(dr["ContactNo"].ToString()),
+                         dr["FriendlyName"].ToString(),
+                         dr["Identity"].ToString());
+                    }
+                }
             }
-            _contactsDataView.RowFilter = "";
-
-            Contact contact = new Contact(int.Parse(dr["ContactNo"].ToString()), dr["FriendlyName"].ToString(), dr["Identity"].ToString());
             return contact;
         }
 

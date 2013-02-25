@@ -152,6 +152,8 @@ namespace MViewer
         public void IdentityObserver(object sender, IdentityEventArgs e)
         {
             _model.Identity.UpdateFriendlyName(e.FriendlyName);
+            // todo: online contacts of updated friendly name
+            _model.NotifyContacts(e.FriendlyName);
         }
 
         public void StartVideoChat(WebcamCapture webcamControl)
@@ -340,7 +342,7 @@ namespace MViewer
             }
             else
             {
-                // add/remove/get/status update
+                // add/remove/get/status/name update
                 contact = _model.PerformContactOperation(e);
                 NotifyContactsObserver();
             }
@@ -469,7 +471,10 @@ namespace MViewer
         void StopWebCapturing()
         {
             _webcaptureClosing = true;
-            _presenter.StopPresentation();
+            if (_presenter != null)
+            {
+                _presenter.StopPresentation();
+            }
             Thread.Sleep(1000);
             while (_capturePending)
             {

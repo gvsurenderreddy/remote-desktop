@@ -62,8 +62,6 @@ namespace UIControls
                 {
                     FriendlyName = newFriendlyName
                 });
-                // todo: notify online contacts of updated friendly name
-                MessageBox.Show("Must restart the app for others to be notified!", "Restart needed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             _textChanged = false;
         }

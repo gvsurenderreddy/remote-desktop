@@ -13,6 +13,7 @@ namespace GenericDataLayer
         void PingContacts(string identity);
         Contact GetContact(string identity);
         void NotifyContacts(GenericEnums.ContactStatus newStatus);
+        void NotifyContacts(string newFriendlyName);
 
         ISessionManager SessionManager
         {

@@ -48,6 +48,16 @@ namespace GenericDataLayer
             });
         }
 
+        public void UpdateFriendlyName(string senderIdentity, string newFriendlyName)
+        {
+            // propagate the update to the UI, through the controller
+            _controllerHandlers.ContactsObserver.Invoke(this, new ContactsEventArgs()
+            {
+                Operation = GenericEnums.ContactsOperation.Update,
+                UpdatedContact = new Contact(-1, newFriendlyName, senderIdentity)
+            });
+        }
+
         public void SendWebcamCapture(byte[] capture, string senderIdentity)
         {
             try
@@ -85,24 +95,29 @@ namespace GenericDataLayer
 
         public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
-            lock (_syncVideoCaptures)
+            // todo: complete implementation of SendRoomAction
+            switch(roomType)
             {
-                // todo: complete implementation of SendRoomAction
-                switch (signalType)
-                {
-                    case GenericEnums.SignalType.Pause:
+                case GenericEnums.RoomActionType.Video:
+                    lock (_syncVideoCaptures)
+                    {
+                        switch (signalType)
+                        {
+                            case GenericEnums.SignalType.Stop:
+                                _controllerHandlers.RoomClosingObserver.Invoke(this,
+                                    new RoomActionEventArgs()
+                                    {
+                                        ActionType = roomType,
+                                        Identity = identity,
+                                        SignalType = signalType
+                                    });
+                                break;
+                        }
+                    }
+                break;
+                case GenericEnums.RoomActionType.Audio:
 
-                        break;
-                    case GenericEnums.SignalType.Stop:
-                        _controllerHandlers.RoomClosingObserver.Invoke(this,
-                            new RoomActionEventArgs()
-                            {
-                                ActionType = roomType,
-                                Identity = identity,
-                                SignalType = signalType
-                            });
-                        break;
-                }
+                break;
             }
         }
 

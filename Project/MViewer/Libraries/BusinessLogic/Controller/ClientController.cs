@@ -51,6 +51,21 @@ namespace BusinessLogicLayer
             }
         }
 
+        public void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName)
+        {
+            if (_clients != null)
+            {
+                if (_clients.ContainsKey(partnerIdentity))
+                {
+                    MViewerClient client = _clients[partnerIdentity];
+                    if (client != null)
+                    {
+                        client.UpdateFriendlyName(myIdentity, newFriendlyName);
+                    }
+                }
+            }
+        }
+
         public void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
         {
             if (_clients.ContainsKey(identity))

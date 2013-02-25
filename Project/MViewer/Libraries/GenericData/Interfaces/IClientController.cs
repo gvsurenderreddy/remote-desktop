@@ -17,5 +17,6 @@ namespace GenericDataLayer
         void SendCapture(byte[] capture, string receiverIdentity, string senderIdentity);
         void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType);
         void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus);
+        void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName);
     }
 }

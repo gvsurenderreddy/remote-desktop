@@ -48,6 +48,11 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
 
     }
 
+    public void UpdateFriendlyName(string senderIdentity, string newFriendlyName)
+    {
+        base.Channel.UpdateFriendlyName(senderIdentity, newFriendlyName);
+    }
+
     public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
     {
         base.Channel.UpdateContactStatus(senderIdentity, newStatus);
