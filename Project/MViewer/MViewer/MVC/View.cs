@@ -223,6 +223,26 @@ namespace MViewer
             }
         }
 
+        public bool ExitConfirmation()
+        {
+            bool canExit = true;
+
+            bool roomsActive = RoomManager.RoomsLeft();
+
+            if (roomsActive)
+            {
+                DialogResult result = MessageBox.Show(_formMain,
+                    "Close all active chats?", 
+                    "Exit confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                if (result != DialogResult.Yes)
+                {
+                    canExit = false;
+                }
+            }
+
+            return canExit;
+        }
+
         #endregion
 
         #region private methods
@@ -249,14 +269,6 @@ namespace MViewer
         #endregion
 
         #region proprieties
-
-        public WebcamCapture GetWebcaptureControl
-        {
-            get
-            {
-                return _formWebCapture.CaptureControl;
-            }
-        }
 
         public IRoomManager RoomManager
         {

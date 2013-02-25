@@ -23,13 +23,9 @@ namespace GenericDataLayer
         void PerformRoomAction(object sender, EventArgs e);
   
         bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType);
+        bool ExitConfirmation();
 
         IRoomManager RoomManager
-        {
-            get;
-        }
-
-        WebcamCapture GetWebcaptureControl
         {
             get;
         }

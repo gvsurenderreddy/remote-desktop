@@ -96,7 +96,7 @@ namespace MViewer
 
                             // check if the stop signal has been sent by the partner
 
-                            ConnectedPeers peers = _model.SessionManager.GetPeers(receiverIdentity);
+                            PeerStatus peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
                             if (peers.Video == true)
                             {
                                 transferStatus.Video = true;
@@ -235,7 +235,7 @@ namespace MViewer
                 Thread.Sleep(200);
             }
 
-            ConnectedPeers peers = _model.SessionManager.GetPeers(identity);
+            PeerStatus peers = _model.SessionManager.GetPeerStatus(identity);
             // update the session status to closed
             if (peers.Video == true)
             {
@@ -322,14 +322,7 @@ namespace MViewer
                             // close the webcapture form if there s no room left
                             if (!_view.RoomManager.RoomsLeft())
                             {
-                                _webcaptureClosing = true;
-                                _presenter.StopPresentation();
-                                Thread.Sleep(1000);
-                                while (_capturePending)
-                                {
-                                    Thread.Sleep(200);
-                                }
-                                _view.ShowMyWebcamForm(false);
+                                StopWebCapturing();
                             }
                             break;
                     }
@@ -357,8 +350,8 @@ namespace MViewer
         public void NotifyVideoCaptureObserver(object sender, EventArgs e)
         {
             VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-            ConnectedPeers peer = _model.SessionManager.GetPeers(args.Identity);
-            //if (peer.Video == true)
+            PeerStatus peer = _model.SessionManager.GetPeerStatus(args.Identity);
+            if (_webcaptureClosing == false)
             {
                 InitializeRoom(args.Identity, GenericEnums.RoomActionType.Video);
                 _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
@@ -391,17 +384,34 @@ namespace MViewer
 
         public void StopApplication()
         {
-            // unbind the observers
-            _view.BindObservers(false);
-
             // todo: update the StopApplication method with other actions
-            _model.ServerController.StopServer();
 
-            // notify all contacts that you exited the chat
-            _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+            // check for running video/audio/remoting chats
+            bool canExit = _view.ExitConfirmation();
+            if (canExit)
+            {
+                // stop all active rooms
+                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
+                foreach (string identity in partnerIdentities)
+                {
+                    StopVideChat(identity);
+                }
+                // stop my webcapture form
+                StopWebCapturing();
 
-            // exit the environment
-            Environment.Exit(0);
+                // todo: stop the audio & remoting rooms also
+
+                // unbind the observers
+                _view.BindObservers(false);
+
+                _model.ServerController.StopServer();
+
+                // notify all contacts that you exited the chat
+                _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+
+                // exit the environment
+                Environment.Exit(0);
+            }
         }
 
         public void NotifyContactsObserver()
@@ -456,6 +466,18 @@ namespace MViewer
             }
         }
 
+        void StopWebCapturing()
+        {
+            _webcaptureClosing = true;
+            _presenter.StopPresentation();
+            Thread.Sleep(1000);
+            while (_capturePending)
+            {
+                Thread.Sleep(200);
+            }
+            _view.ShowMyWebcamForm(false);
+        }
+
         void PerformVideoChatAction(object sender, RoomActionEventArgs eArgs)
         {
             switch (eArgs.SignalType)
@@ -473,7 +495,7 @@ namespace MViewer
                     switch (eArgs.ActionType)
                     {
                         case GenericEnums.RoomActionType.Audio:
-                            clientSession.Peers = new ConnectedPeers()
+                            clientSession.Peers = new PeerStatus()
                             {
                                 Audio = true,
                                 Video = false,
@@ -481,7 +503,7 @@ namespace MViewer
                             };
                             break;
                         case GenericEnums.RoomActionType.Video:
-                            clientSession.Peers = new ConnectedPeers()
+                            clientSession.Peers = new PeerStatus()
                             {
                                 Audio = true,
                                 Video = true,
@@ -489,7 +511,7 @@ namespace MViewer
                             };
                             break;
                         case GenericEnums.RoomActionType.Remoting:
-                            clientSession.Peers = new ConnectedPeers()
+                            clientSession.Peers = new PeerStatus()
                             {
                                 Audio = false,
                                 Video = false,

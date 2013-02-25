@@ -49,7 +49,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public ConnectedPeers GetPeers(string identity)
+        public PeerStatus GetPeerStatus(string identity)
         {
             lock (_syncSessions)
             {
@@ -57,14 +57,14 @@ namespace BusinessLogicLayer
                 {
                     return _clientSessions[identity].Peers;
                 }
-                return new ConnectedPeers() 
+                return new PeerStatus() 
                 {
                     Audio = false, Remoting = false, Video = false
                 };
             }
         }
 
-        public void UpdateSession(string identity, ConnectedPeers peers, GenericEnums.SessionState sessionState)
+        public void UpdateSession(string identity, PeerStatus peers, GenericEnums.SessionState sessionState)
         {
             lock (_syncSessions)
             {

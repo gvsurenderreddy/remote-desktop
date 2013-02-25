@@ -72,11 +72,12 @@ namespace MViewer
 
         private void ContactsControl_ClosePressed(object sender, EventArgs e)
         {
-            this.Close();
+            Program.Controller.StopApplication();
         }
 
         private void FormIsClosing(object sender, FormClosingEventArgs e)
         {
+            e.Cancel = true; //prevent the form from closing if the Exit app confirmation wasn't received
             Program.Controller.StopApplication();
         }
 

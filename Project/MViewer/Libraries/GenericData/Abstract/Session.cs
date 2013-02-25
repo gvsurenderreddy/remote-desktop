@@ -12,7 +12,7 @@ namespace GenericDataLayer
         #region protected members
 
         protected string _identity;
-        protected ConnectedPeers _peers;
+        protected PeerStatus _peers;
         //protected ConnectedView _view;
         protected GenericEnums.SessionType _sessionType;
         private GenericEnums.SessionState _sessionState;
@@ -40,7 +40,7 @@ namespace GenericDataLayer
             set { _transferUpdating = value; }
         }
 
-        public ConnectedPeers Peers
+        public PeerStatus Peers
         {
             get { return _peers; }
             set

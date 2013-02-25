@@ -10,8 +10,8 @@ namespace GenericDataLayer
     {
         void AddSession(Session session);
         void RemoveSession(string identity);
-        ConnectedPeers GetPeers(string identity);
-        void UpdateSession(string identity, ConnectedPeers peers, GenericEnums.SessionState sessionState);
+        PeerStatus GetPeerStatus(string identity);
+        void UpdateSession(string identity, PeerStatus peers, GenericEnums.SessionState sessionState);
         IList<string> GetConnectedSessions(GenericEnums.RoomActionType actionType);
         GenericEnums.SessionState GetSessionState(string identity);
         PendingTransfer GetTransferStatus(string identity);

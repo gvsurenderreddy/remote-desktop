@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GenericDataLayer
 {
-    public struct ConnectedPeers
+    public struct PeerStatus
     {
         public bool Video
         {
