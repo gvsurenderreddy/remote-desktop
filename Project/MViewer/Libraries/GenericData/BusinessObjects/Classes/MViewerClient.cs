@@ -73,7 +73,7 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         return base.Channel.Ping();
     }
 
-    public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+    public void SendRoomAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
     {
         base.Channel.SendRoomAction(identity, roomType, signalType);
     }

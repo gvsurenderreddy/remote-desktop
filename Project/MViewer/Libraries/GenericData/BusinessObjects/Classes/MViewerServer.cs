@@ -21,7 +21,7 @@ namespace GenericDataLayer
         //Computer computer = new Computer();
         ControllerEventHandlers _controllerHandlers;
         string _identity;
-        readonly object _syncVideoCaptures = new object();
+        ManualResetEvent _syncVideoCaptures = new ManualResetEvent(true);
         readonly object _syncAudioCaptures = new object();
         
         #endregion
@@ -62,21 +62,22 @@ namespace GenericDataLayer
         {
             try
             {
-                lock (_syncVideoCaptures)
-                {
-                    MemoryStream ms = new MemoryStream(capture);
-                    //read the Bitmap back
-                    Image bmp = (Bitmap)Bitmap.FromStream(ms);
+                // wait for the room command to finish (might be a stop signal)
+                _syncVideoCaptures.WaitOne();
+               
+                MemoryStream ms = new MemoryStream(capture);
+                //read the Bitmap back
+                Image bmp = (Bitmap)Bitmap.FromStream(ms);
 
-                    _controllerHandlers.VideoCaptureObserver.Invoke(this,
-                        new VideoCaptureEventArgs()
-                        {
-                            Identity = senderIdentity,
-                            CapturedImage = bmp
-                        });
+                _controllerHandlers.VideoCaptureObserver.Invoke(this,
+                    new VideoCaptureEventArgs()
+                    {
+                        Identity = senderIdentity,
+                        CapturedImage = bmp
+                    });
 
-                    GC.Collect();
-                }
+                GC.Collect();
+                
             }
             catch (Exception)
             {
@@ -93,29 +94,28 @@ namespace GenericDataLayer
             }
         }
 
-        public void SendRoomAction(string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+        public void SendRoomAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
         {
             // todo: complete implementation of SendRoomAction
             switch(roomType)
             {
-                case GenericEnums.RoomActionType.Video:
-                    lock (_syncVideoCaptures)
+                case GenericEnums.RoomType.Video:
+                    _syncVideoCaptures.Reset();
+                    switch (signalType)
                     {
-                        switch (signalType)
-                        {
-                            case GenericEnums.SignalType.Stop:
-                                _controllerHandlers.RoomClosingObserver.Invoke(this,
-                                    new RoomActionEventArgs()
-                                    {
-                                        ActionType = roomType,
-                                        Identity = identity,
-                                        SignalType = signalType
-                                    });
-                                break;
-                        }
+                        case GenericEnums.SignalType.Stop:
+                            _controllerHandlers.RoomClosingObserver.Invoke(this,
+                                new RoomActionEventArgs()
+                                {
+                                    ActionType = roomType,
+                                    Identity = identity,
+                                    SignalType = signalType
+                                });
+                            break;
                     }
+                    _syncVideoCaptures.Set();
                 break;
-                case GenericEnums.RoomActionType.Audio:
+                case GenericEnums.RoomType.Audio:
 
                 break;
             }

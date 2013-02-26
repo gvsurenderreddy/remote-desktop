@@ -12,12 +12,9 @@ namespace GenericDataLayer
         #region protected members
 
         protected string _identity;
-        protected PeerStatus _peers;
-        //protected ConnectedView _view;
-        protected GenericEnums.SessionType _sessionType;
-        private GenericEnums.SessionState _sessionState;
+        protected PeerStates _peers;
         protected PendingTransfer _pendingTransfer;
-        protected TransferUptading _transferUpdating;
+        protected TransferStatusUptading _transferUpdating;
 
         #endregion
 
@@ -34,32 +31,36 @@ namespace GenericDataLayer
             set { _pendingTransfer = value; }
         }
 
-        public TransferUptading TransferUpdating
+        public TransferStatusUptading TransferUpdating
         {
             get { return _transferUpdating; }
             set { _transferUpdating = value; }
         }
 
-        public PeerStatus Peers
+        public PeerStates Peers
         {
-            get { return _peers; }
-            set
-            {
-                _peers.Audio = value.Audio;
-                _peers.Video = value.Video;
-                _peers.Remoting = value.Remoting;
+            get 
+            { 
+                return _peers; 
             }
         }
 
-        public GenericEnums.SessionType SessionType
+        public GenericEnums.SessionState VideoSessionState
         {
-            get { return _sessionType; }
+            get { return _peers.VideoSessionState; }
+            set { _peers.VideoSessionState = value; }
         }
 
-        public GenericEnums.SessionState SessionState
+        public GenericEnums.SessionState AudioSessionState
         {
-            get { return _sessionState; }
-            set { _sessionState = value; }
+            get { return _peers.AudioSessionState; }
+            set { _peers.AudioSessionState = value; }
+        }
+
+        public GenericEnums.SessionState RemotingSessionState
+        {
+            get { return _peers.RemotingSessionState; }
+            set { _peers.RemotingSessionState = value; }
         }
 
         #endregion

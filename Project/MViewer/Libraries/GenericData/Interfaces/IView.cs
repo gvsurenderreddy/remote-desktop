@@ -21,11 +21,13 @@ namespace GenericDataLayer
         // todo: remove this method and use the Peer status in the Controller
         void PauseWebchat(bool pause);
 
+        void UpdateLabels(string identity, GenericEnums.RoomType roomType);
+
         void UpdateWebcapture(Image image);
 
         void PerformRoomAction(object sender, EventArgs e);
   
-        bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType);
+        bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         bool ExitConfirmation();
 
         IRoomManager RoomManager

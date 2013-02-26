@@ -22,18 +22,13 @@ namespace BusinessLogicLayer
         {
             lock (_syncSessions)
             {
-                switch (session.SessionType)
+                if (_clientSessions == null)
                 {
-                    case GenericEnums.SessionType.ClientSession:
-                        if (_clientSessions == null)
-                        {
-                            _clientSessions = new Dictionary<string, Session>();
-                        }
-                        if (_clientSessions.ContainsKey(session.Identity) == false)
-                        {
-                            _clientSessions.Add(session.Identity, session);
-                        }
-                        break;
+                    _clientSessions = new Dictionary<string, Session>();
+                }
+                if (_clientSessions.ContainsKey(session.Identity) == false)
+                {
+                    _clientSessions.Add(session.Identity, session);
                 }
             }
         }
@@ -49,7 +44,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public PeerStatus GetPeerStatus(string identity)
+        public PeerStates GetPeerStatus(string identity)
         {
             lock (_syncSessions)
             {
@@ -57,28 +52,30 @@ namespace BusinessLogicLayer
                 {
                     return _clientSessions[identity].Peers;
                 }
-                return new PeerStatus() 
+                return new PeerStates() 
                 {
-                    Audio = false, Remoting = false, Video = false
+                    AudioSessionState = GenericEnums.SessionState.Undefined,
+                    RemotingSessionState = GenericEnums.SessionState.Undefined,
+                    VideoSessionState = GenericEnums.SessionState.Undefined
                 };
             }
         }
 
-        public void UpdateSession(string identity, PeerStatus peers, GenericEnums.SessionState sessionState)
+        public void UpdateSession(string identity, PeerStates peers)
         {
             lock (_syncSessions)
             {
-                // todo: add session type param if needed
                 if (_clientSessions != null && _clientSessions.ContainsKey(identity))
                 {
                     Session session = _clientSessions[identity];
-                    session.Peers = peers;
-                    session.SessionState = sessionState;
+                    session.AudioSessionState = peers.AudioSessionState;
+                    session.VideoSessionState = peers.VideoSessionState;
+                    session.RemotingSessionState = peers.RemotingSessionState;
                 }
             }
         }
 
-        public TransferUptading GetTransferActivity(string identity)
+        public TransferStatusUptading GetTransferActivity(string identity)
         {
             lock (_syncSessions)
             {
@@ -86,7 +83,7 @@ namespace BusinessLogicLayer
                 {
                     return _clientSessions[identity].TransferUpdating;
                 }
-                return new TransferUptading
+                return new TransferStatusUptading
                 {
                     IsAudioUpdating = false,
                     IsRemotingUpdating = false,
@@ -112,19 +109,32 @@ namespace BusinessLogicLayer
             }
         }
 
-        public GenericEnums.SessionState GetSessionState(string identity)
+        public GenericEnums.SessionState GetSessionState(string identity, GenericEnums.RoomType roomType)
         {
+            GenericEnums.SessionState returnState = GenericEnums.SessionState.Undefined;
             lock (_syncSessions)
             {
                 if (_clientSessions != null && _clientSessions.ContainsKey(identity))
                 {
-                    return _clientSessions[identity].SessionState;
+                    switch (roomType)
+                    {
+                        case GenericEnums.RoomType.Video:
+                            returnState = _clientSessions[identity].VideoSessionState;
+                            break;
+                        case GenericEnums.RoomType.Audio:
+                            returnState = _clientSessions[identity].AudioSessionState;
+                            break;
+                        case GenericEnums.RoomType.Remoting:
+                            returnState = _clientSessions[identity].RemotingSessionState;
+                            break;
+                    }
+                  
                 }
-                return GenericEnums.SessionState.Undefined;
             }
+            return returnState;
         }
 
-        public IList<string> GetConnectedSessions(GenericEnums.RoomActionType roomType)
+        public IList<string> GetConnectedSessions(GenericEnums.RoomType roomType)
         {
             lock (_syncSessions)
             {
@@ -135,20 +145,20 @@ namespace BusinessLogicLayer
                     {
                         switch (roomType)
                         {
-                            case GenericEnums.RoomActionType.Audio:
-                                if (session.Peers.Audio == true && session.SessionState == GenericEnums.SessionState.Opened)
+                            case GenericEnums.RoomType.Audio:
+                                if (session.AudioSessionState == GenericEnums.SessionState.Opened)
                                 {
                                     sessions.Add(session.Identity);
                                 }
                                 break;
-                            case GenericEnums.RoomActionType.Video:
-                                if (session.Peers.Video == true && session.SessionState == GenericEnums.SessionState.Opened)
+                            case GenericEnums.RoomType.Video:
+                                if (session.VideoSessionState == GenericEnums.SessionState.Opened)
                                 {
                                     sessions.Add(session.Identity);
                                 }
                                 break;
-                            case GenericEnums.RoomActionType.Remoting:
-                                if (session.Peers.Remoting == true && session.SessionState == GenericEnums.SessionState.Opened)
+                            case GenericEnums.RoomType.Remoting:
+                                if (session.RemotingSessionState == GenericEnums.SessionState.Opened)
                                 {
                                     sessions.Add(session.Identity);
                                 }

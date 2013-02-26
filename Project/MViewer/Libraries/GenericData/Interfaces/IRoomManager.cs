@@ -16,7 +16,7 @@ namespace GenericDataLayer
 
         void ShowPicture(string identity, Image picture);
         void SetPartnerName(string identity, string friendlyName);
-        bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType);
+        bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
 
         bool RoomsLeft();
 

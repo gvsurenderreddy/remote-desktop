@@ -12,11 +12,10 @@ namespace GenericDataLayer
 
         public ClientSession(string identity)
         {
-            _sessionType = GenericEnums.SessionType.ClientSession;
             _identity = identity;
-            _peers.Audio = false;
-            _peers.Video = false;
-            _peers.Remoting = false;
+            _peers.AudioSessionState = GenericEnums.SessionState.Closed;
+            _peers.VideoSessionState = GenericEnums.SessionState.Closed; ;
+            _peers.RemotingSessionState = GenericEnums.SessionState.Closed; ;
             _pendingTransfer.Audio = false;
             _pendingTransfer.Video = false;
             _pendingTransfer.Remoting = false;

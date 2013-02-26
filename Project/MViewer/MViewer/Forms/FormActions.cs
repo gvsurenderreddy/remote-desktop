@@ -18,6 +18,8 @@ namespace MViewer
 
         public readonly EventHandlers.ActionsEventHandler ActionsObserver;
         EventHandler _actionButtonPressed;
+        public delegate void UpdateLabelsDel(bool start, bool pause, GenericEnums.RoomType roomType);
+        public UpdateLabelsDel myDelegate;
 
         #endregion
 
@@ -26,6 +28,7 @@ namespace MViewer
         public FormActions()
         {
             InitializeComponent();
+            myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
         }
 
         public FormActions(EventHandler actionsEventHandler)
@@ -33,6 +36,7 @@ namespace MViewer
             InitializeComponent();
             _actionButtonPressed = actionsEventHandler;
             ActionsObserver = new EventHandlers.ActionsEventHandler(ActionTriggered);
+            myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
         }
 
         #endregion
@@ -56,7 +60,12 @@ namespace MViewer
 
         #endregion
 
-        #region private methods
+        #region public methods
+
+        public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
+        {
+            this.Invoke(myDelegate, start, pause, roomType);
+        }
 
         #endregion
     }

@@ -66,7 +66,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomActionType roomType, GenericEnums.SignalType signalType)
+        public void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
         {
             if (_clients.ContainsKey(identity))
             {

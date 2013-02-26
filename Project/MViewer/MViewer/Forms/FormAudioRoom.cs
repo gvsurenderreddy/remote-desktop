@@ -53,9 +53,9 @@ namespace MViewer.Forms
 
         #region proprieties
 
-        public GenericEnums.RoomActionType RoomType
+        public GenericEnums.RoomType RoomType
         {
-            get { return GenericEnums.RoomActionType.Audio; }
+            get { return GenericEnums.RoomType.Audio; }
         }
 
         public string ContactIdentity

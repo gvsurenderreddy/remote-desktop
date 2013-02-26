@@ -8,7 +8,7 @@ namespace GenericDataLayer
 {
     public class RoomActionEventArgs : EventArgs
     {
-        public GenericEnums.RoomActionType ActionType
+        public GenericEnums.RoomType ActionType
         {
             get;
             set;

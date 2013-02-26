@@ -18,8 +18,19 @@ namespace MViewer
     {
         #region private members
 
+        /// <summary>
+        /// flag used to tell the webcapturing thread to end it's activity
+        /// </summary>
         bool _webcaptureClosing;
+
+        /// <summary>
+        /// flag used to tell the capturing thread to wait before ending it's activity
+        /// </summary>
         bool _capturePending;
+
+        /// <summary>
+        /// object used to synchronize the capture sent to partners
+        /// </summary>
         readonly object _syncCapture = new object();
 
         Presenter _presenter;
@@ -79,12 +90,12 @@ namespace MViewer
 
                         // broadcast the webcaptures to all connected peers
 
-                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
+                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                         foreach (string receiverIdentity in connectedSessions)
                         {
                             //Thread.Sleep(10 * 1000);
 
-                            TransferUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
                             while (transfer.IsVideoUpdating)
                             {
                                 Thread.Sleep(200);
@@ -95,8 +106,8 @@ namespace MViewer
 
                             // check if the stop signal has been sent by the partner
 
-                            PeerStatus peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                            if (peers.Video == true)
+                            PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                            if (peers.VideoSessionState == GenericEnums.SessionState.Opened)
                             {
                                 // send the capture if the session isn't paused
                                 transferStatus.Video = true;
@@ -105,7 +116,7 @@ namespace MViewer
                             }
                             
                             transferStatus.Video = false;
-                            if (peers.Audio == true)
+                            if (peers.AudioSessionState == GenericEnums.SessionState.Opened)
                             {
                                 transferStatus.Audio = true;
 
@@ -138,10 +149,12 @@ namespace MViewer
 
         #region public methods
 
-        public void ActiveRoomChanged(string newIdentity)
+        public void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
         {
             // update the active room identity
             _view.RoomManager.ActiveRoom = newIdentity;
+            // update the actions form button labels
+            _view.UpdateLabels(newIdentity, roomType);
         }
 
         public void GetContactsStatus()
@@ -181,13 +194,13 @@ namespace MViewer
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             switch (args.ActionType)
             {
-                case GenericEnums.RoomActionType.Audio:
+                case GenericEnums.RoomType.Audio:
 
                     break;
-                case GenericEnums.RoomActionType.Video:
+                case GenericEnums.RoomType.Video:
                         PerformRoomAction(sender, args);
                     break;
-                case GenericEnums.RoomActionType.Remoting:
+                case GenericEnums.RoomType.Remoting:
 
                     break;
             }
@@ -200,10 +213,10 @@ namespace MViewer
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             switch (args.ActionType)
             {
-                case GenericEnums.RoomActionType.Audio:
+                case GenericEnums.RoomType.Audio:
 
                     break;
-                case GenericEnums.RoomActionType.Video:
+                case GenericEnums.RoomType.Video:
                     // open new Video Chat form to receive the captures
                     Thread t = new Thread(delegate()
                     {
@@ -215,10 +228,10 @@ namespace MViewer
                     Program.Controller.PerformRoomAction(sender, args);
 
                     break;
-                case GenericEnums.RoomActionType.Remoting:
+                case GenericEnums.RoomType.Remoting:
 
                     break;
-                case GenericEnums.RoomActionType.Send:
+                case GenericEnums.RoomType.Send:
 
                     break;
             }
@@ -226,7 +239,7 @@ namespace MViewer
 
         public void StopVideChat(string identity)
         {
-            TransferUptading transfer = _model.SessionManager.GetTransferActivity(identity);
+            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
             transfer.IsVideoUpdating = true;
 
             // check if the webcapture is pending for being sent
@@ -237,25 +250,27 @@ namespace MViewer
                 Thread.Sleep(200);
             }
 
-            PeerStatus peers = _model.SessionManager.GetPeerStatus(identity);
+            PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
             // update the session status to closed
-            if (peers.Video == true)
+            if (peers.VideoSessionState != GenericEnums.SessionState.Closed)
             {
-                peers.Audio = false;
-                peers.Video = false;
-                if (peers.Remoting == false)
-                {
-                    _model.SessionManager.UpdateSession(identity,
-                        peers, GenericEnums.SessionState.Closed);
-                }
-                else
-                {
-                    GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity);
-                    _model.SessionManager.UpdateSession(identity, peers, sessionState);
-                }
+                peers.AudioSessionState = GenericEnums.SessionState.Closed;
+                peers.VideoSessionState = GenericEnums.SessionState.Closed;
+                //if (peers.RemotingSessionState == GenericEnums.SessionState.Closed)
+                //{
+                //    _model.SessionManager.UpdateSession(identity,
+                //        peers, GenericEnums.SessionState.Closed);
+                //}
+                //else
+                //{
+                //    GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity, 
+                //        GenericEnums.RoomType.Video);
+                //    _model.SessionManager.UpdateSession(identity, peers, sessionState);
+                //}
 
                 // send the stop signal to the server session
-                _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity, GenericEnums.RoomActionType.Video, GenericEnums.SignalType.Stop);
+                _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity, 
+                    GenericEnums.RoomType.Video, GenericEnums.SignalType.Stop);
                 // todo: optional - check if SendRoomCommand has finished the execution (put a return flag)
                 //Thread.Sleep(1000);
                 // remove the connected client session
@@ -267,7 +282,7 @@ namespace MViewer
 
         public void StartVideoChat(string identity)
         {
-            if (!_view.IsRoomActivated(identity, GenericEnums.RoomActionType.Video))
+            if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Video))
             {
                 Thread t = new Thread(delegate()
                 {
@@ -295,16 +310,16 @@ namespace MViewer
             // perform specific action when room action event has been triggered
             switch (e.ActionType)
             {
-                case GenericEnums.RoomActionType.Audio:
+                case GenericEnums.RoomType.Audio:
 
                     break;
-                case GenericEnums.RoomActionType.Remoting:
+                case GenericEnums.RoomType.Remoting:
 
                     break;
-                case GenericEnums.RoomActionType.Send:
+                case GenericEnums.RoomType.Send:
 
                     break;
-                case GenericEnums.RoomActionType.Video:
+                case GenericEnums.RoomType.Video:
                     switch (e.SignalType)
                     {
                         case GenericEnums.SignalType.Start:
@@ -352,10 +367,18 @@ namespace MViewer
         public void NotifyVideoCaptureObserver(object sender, EventArgs e)
         {
             VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-            PeerStatus peer = _model.SessionManager.GetPeerStatus(args.Identity);
-            //if (_webcaptureClosing == false)  // todo: check was is keeping this flag set to false
+            PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
+
+            if (peer.VideoSessionState == GenericEnums.SessionState.Undefined)
             {
-                InitializeRoom(args.Identity, GenericEnums.RoomActionType.Video);
+                // receiving captures for the first time, have to initalize a form
+                InitializeRoom(args.Identity, GenericEnums.RoomType.Video);
+                peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
+            }
+
+            // check the videochat status before displaying the picture
+            if (peer.VideoSessionState == GenericEnums.SessionState.Opened) 
+            {
                 _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
             }
         }
@@ -393,7 +416,7 @@ namespace MViewer
             if (canExit)
             {
                 // stop all active rooms
-                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomActionType.Video);
+                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                 foreach (string identity in partnerIdentities)
                 {
                     StopVideChat(identity);
@@ -442,27 +465,27 @@ namespace MViewer
             PerformContactsOperation(sender, (ContactsEventArgs)e);
         }
 
-        void InitializeRoom(string identity, GenericEnums.RoomActionType roomType)
+        void InitializeRoom(string identity, GenericEnums.RoomType roomType)
         {
             switch (roomType)
             {
-                case GenericEnums.RoomActionType.Video:
+                case GenericEnums.RoomType.Video:
                     // initialize video chat form to receive captures from the client
                     // initialize my webcam form so that I can send my captures to the connected contact
                     ClientConnected(null, new RoomActionEventArgs()
                     {
-                        ActionType = GenericEnums.RoomActionType.Video,
+                        ActionType = GenericEnums.RoomType.Video,
                         SignalType = GenericEnums.SignalType.Start,
                         Identity = identity
                     });
                     break;
-                case GenericEnums.RoomActionType.Audio:
+                case GenericEnums.RoomType.Audio:
 
                     break;
-                case GenericEnums.RoomActionType.Remoting:
+                case GenericEnums.RoomType.Remoting:
 
                     break;
-                case GenericEnums.RoomActionType.Send:
+                case GenericEnums.RoomType.Send:
 
                     break;
             }
@@ -495,32 +518,15 @@ namespace MViewer
 
                     // create client session
                     Session clientSession = new ClientSession(eArgs.Identity);
-                    clientSession.SessionState = GenericEnums.SessionState.Opened;
+                    clientSession.VideoSessionState = GenericEnums.SessionState.Opened;
                     switch (eArgs.ActionType)
                     {
-                        case GenericEnums.RoomActionType.Audio:
-                            clientSession.Peers = new PeerStatus()
-                            {
-                                Audio = true,
-                                Video = false,
-                                Remoting = false
-                            };
+                        case GenericEnums.RoomType.Audio:
+                            clientSession.AudioSessionState = GenericEnums.SessionState.Opened;
                             break;
-                        case GenericEnums.RoomActionType.Video:
-                            clientSession.Peers = new PeerStatus()
-                            {
-                                Audio = true,
-                                Video = true,
-                                Remoting = false
-                            };
-                            break;
-                        case GenericEnums.RoomActionType.Remoting:
-                            clientSession.Peers = new PeerStatus()
-                            {
-                                Audio = false,
-                                Video = false,
-                                Remoting = true
-                            };
+                        case GenericEnums.RoomType.Video:
+                            clientSession.AudioSessionState = GenericEnums.SessionState.Opened;
+                            clientSession.VideoSessionState = GenericEnums.SessionState.Opened;
                             break;
                     }
                     // save the proxy to which we are sending the webcam captures
@@ -541,10 +547,10 @@ namespace MViewer
 
                     // todo: use the peer status of the selected chatroom
                     string identity = string.Empty; // this will be the active/selected room
-                    PeerStatus peers = _model.SessionManager.GetPeerStatus(identity);
-                    peers.Audio = false;
-                    peers.Video = false; // pause the audio&video chat
-                    _model.SessionManager.UpdateSession(identity, peers, GenericEnums.SessionState.Paused);
+                    PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+                    //peers.Audio = false;
+                    peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
+                    _model.SessionManager.UpdateSession(identity, peers);
 
                     break;
                 case GenericEnums.SignalType.Resume:

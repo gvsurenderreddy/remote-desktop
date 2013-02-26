@@ -2,27 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace GenericDataLayer
 {
-    public struct PeerStatus
+    public struct PeerStates
     {
-        public bool Video
-        {
-            get;
-            set;
-        }
-
-        public bool Audio
-        {
-            get;
-            set;
-        }
-
-        public bool Remoting
-        {
-            get;
-            set;
-        }
+        public GenericEnums.SessionState VideoSessionState;
+        public GenericEnums.SessionState AudioSessionState;
+        public GenericEnums.SessionState RemotingSessionState;
     }
 }

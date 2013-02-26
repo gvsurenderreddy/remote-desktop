@@ -54,12 +54,23 @@ namespace MViewer
 
         #region public methods
 
+        public void UpdateLabels(string identity, GenericEnums.RoomType roomType)
+        {
+            PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+            GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity, roomType);
+            bool start = sessionState == GenericEnums.SessionState.Closed ? true : false;
+            bool pause = sessionState == GenericEnums.SessionState.Paused ? false : true;
+            
+            // call the labels update for each room type
+            _formActions.UpdateLabels(start, pause, roomType);
+        }
+
         public void PauseWebchat(bool pause)
         {
             _formWebCapture.PauseWebchat(pause);
         }
 
-        public bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType)
+        public bool IsRoomActivated(string identity, GenericEnums.RoomType roomType)
         {
             return _roomManager.IsRoomActivated(identity, roomType);
         }

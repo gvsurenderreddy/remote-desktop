@@ -1,7 +1,7 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\MViewer.exe.config
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Images\actions.ico
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Images\chatBackg.jpg
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Images\chatRoomIcon.ico
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\MViewer.exe.config
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\MViewer.exe
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\MViewer.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\BusinessLogicLayer.dll

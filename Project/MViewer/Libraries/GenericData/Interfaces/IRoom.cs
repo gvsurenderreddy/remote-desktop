@@ -18,7 +18,7 @@ namespace GenericDataLayer
             set;
         }
 
-        GenericEnums.RoomActionType RoomType
+        GenericEnums.RoomType RoomType
         {
             get;
         }

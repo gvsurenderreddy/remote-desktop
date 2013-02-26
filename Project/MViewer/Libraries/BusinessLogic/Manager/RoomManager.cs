@@ -38,7 +38,7 @@ namespace BusinessLogicLayer
             return _rooms != null ? _rooms.Count > 0 ? true : false : false;
         }
 
-        public bool IsRoomActivated(string identity, GenericEnums.RoomActionType roomType)
+        public bool IsRoomActivated(string identity, GenericEnums.RoomType roomType)
         {
             bool activated = false;
             lock (_syncRooms)

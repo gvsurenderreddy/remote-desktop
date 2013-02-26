@@ -36,6 +36,71 @@ namespace UIControls
 
         #endregion
 
+        #region public methods
+
+        public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
+        {
+            switch (roomType)
+            {
+                case GenericEnums.RoomType.Video:
+                    if (pause)
+                    {
+                        btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                    }
+                    else
+                    {
+                        btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                    }
+                    if (start)
+                    {
+                        btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    }
+                    else
+                    {
+                        btnVideo.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                    }
+                    break;
+                case GenericEnums.RoomType.Audio:
+                    if (pause)
+                    {
+                        btnMuteAudio.Text = ButtonStatuses.AudioStatus.Mute.ToString();
+                    }
+                    else
+                    {
+                        btnMuteAudio.Text = ButtonStatuses.AudioStatus.Unmute.ToString();
+                    }
+                    if (start)
+                    {
+                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    }
+                    else
+                    {
+                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                    }
+                    break;
+                case GenericEnums.RoomType.Remoting:
+                    if (pause)
+                    {
+                        btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                    }
+                    else
+                    {
+                        btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                    }
+                    if (start)
+                    {
+                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    }
+                    else
+                    {
+                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                    }
+                    break;
+            }
+        }
+
+        #endregion
+
         #region event callbacks
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -82,20 +147,20 @@ namespace UIControls
                     signalType = GenericEnums.SignalType.Resume;
                 }
             }
-            GenericEnums.RoomActionType actionType = GenericEnums.RoomActionType.Undefined;
+            GenericEnums.RoomType actionType = GenericEnums.RoomType.Undefined;
             if (sender == btnAudio || sender == btnMuteAudio)
             {
-                actionType = GenericEnums.RoomActionType.Audio;
+                actionType = GenericEnums.RoomType.Audio;
             }
             else
             {
                 if (sender == btnVideo || sender == btnPauseVideo)
                 {
-                    actionType = GenericEnums.RoomActionType.Video;
+                    actionType = GenericEnums.RoomType.Video;
                 }
                 else
                 {
-                    actionType = GenericEnums.RoomActionType.Remoting;
+                    actionType = GenericEnums.RoomType.Remoting;
                 }
             }
 

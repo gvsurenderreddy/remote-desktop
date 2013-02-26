@@ -38,7 +38,7 @@ namespace MViewer
         private void FormVideoRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.ActiveRoomChanged(this.ContactIdentity);
+            Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
         }
 
         private void FormVideoRoom_Resize(object sender, EventArgs e)
@@ -121,11 +121,11 @@ namespace MViewer
             set;
         }
 
-        public GenericEnums.RoomActionType RoomType
+        public GenericEnums.RoomType RoomType
         {
             get
             {
-                return Utils.GenericEnums.RoomActionType.Video;
+                return Utils.GenericEnums.RoomType.Video;
             }
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GenericDataLayer
 {
-    public struct TransferUptading
+    public struct TransferStatusUptading
     {
         public bool IsVideoUpdating
         {
