@@ -146,12 +146,21 @@ namespace BusinessLogicLayer
             get
             {
                 lock (_syncRooms)
-                { return _activeRoom; }
+                {
+                    if (RoomsLeft() == false) 
+                    {
+                        // reset the active room identity if the rooms were all closed
+                        _activeRoom = string.Empty;
+                    }
+                    return _activeRoom; 
+                }
             }
             set
             {
                 lock (_syncRooms)
-                { _activeRoom = value; }
+                { 
+                    _activeRoom = value; 
+                }
             }
         }
 

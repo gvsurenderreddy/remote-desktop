@@ -21,6 +21,6 @@ namespace GenericDataLayer
         void StopVideChat(string identity);
         void NotifyVideoCaptureObserver(object sender, EventArgs e);
         void RoomClosingObserver(object sender, EventArgs e);
-
+        void ActiveRoomChanged(string newIdentity);
     }
 }

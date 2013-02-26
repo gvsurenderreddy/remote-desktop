@@ -13,7 +13,7 @@ using System.Threading;
 
 namespace MViewer
 {
-    public partial class FormVideoRoom : Form, IVideoRoom, IRoom
+    public partial class FormVideoRoom : Form, IVideoRoom
     {
         #region private members
 
@@ -23,9 +23,10 @@ namespace MViewer
 
         #region c-tor
 
-        public FormVideoRoom()
+        public FormVideoRoom(string identity)
         {
             InitializeComponent();
+            ContactIdentity = identity;
             //handle = this.Handle;
             _formClosing = false;
         }
@@ -33,6 +34,12 @@ namespace MViewer
         #endregion
 
         #region callbacks
+
+        private void FormVideoRoom_Activated(object sender, EventArgs e)
+        {
+            // tell the controller to update the active form
+            Program.Controller.ActiveRoomChanged(this.ContactIdentity);
+        }
 
         private void FormVideoRoom_Resize(object sender, EventArgs e)
         {
@@ -107,6 +114,12 @@ namespace MViewer
         #endregion
 
         #region proprieties
+
+        public string ContactIdentity
+        {
+            get;
+            set;
+        }
 
         public GenericEnums.RoomActionType RoomType
         {

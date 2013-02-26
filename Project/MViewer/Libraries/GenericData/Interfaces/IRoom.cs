@@ -12,6 +12,12 @@ namespace GenericDataLayer
         void CloseRoom();
         void ShowRoom();
 
+        string ContactIdentity
+        {
+            get;
+            set;
+        }
+
         GenericEnums.RoomActionType RoomType
         {
             get;

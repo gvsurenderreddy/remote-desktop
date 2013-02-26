@@ -202,14 +202,19 @@ namespace MViewer
                 if (!string.IsNullOrEmpty(contact.Key) && !string.IsNullOrEmpty(contact.Value))
                 {
                     args.Identity = contact.Key;
-                    args.FriendlyName = contact.Value;
+                    //args.FriendlyName = contact.Value;
                 }
                 else
                 {
                     args = null;
                 }
             }
-            if (args != null)
+            else
+            {
+                // todo: perform specified action against the active chat room
+                args.Identity = activeRoom;
+            }
+            if (args != null) // check if there is a selected contact or active chat room
             {
                 Program.Controller.PerformRoomAction(sender, args);
             }

@@ -20,6 +20,7 @@ namespace MViewer
 
         bool _webcaptureClosing;
         bool _capturePending;
+        readonly object _syncCapture = new object();
 
         Presenter _presenter;
         IView _view;
@@ -42,15 +43,13 @@ namespace MViewer
             };
 
             _model = new Model(handlers);
-            // initalize the view
+            // initalize the view and bind it to the model
             _view = new View(_model);
         }
 
         #endregion
 
         #region event handlers
-
-        readonly object _syncCapture = new object();
 
         private void WebCamImageCaptured(object source, EventArgs e)
         {
@@ -99,14 +98,12 @@ namespace MViewer
                             PeerStatus peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
                             if (peers.Video == true)
                             {
+                                // send the capture if the session isn't paused
                                 transferStatus.Video = true;
                                 _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
                                     _model.Identity.MyIdentity);
                             }
-                            else
-                            {
-                                // todo: decide if to stop the video process if the flag isn't true
-                            }
+                            
                             transferStatus.Video = false;
                             if (peers.Audio == true)
                             {
@@ -116,10 +113,7 @@ namespace MViewer
 
                                 transferStatus.Audio = false;
                             }
-                            else
-                            {
-                                // todo: decide if to stop the audio process if the flag isn't true
-                            }
+                            
                             break;
                         }
                     }
@@ -143,6 +137,12 @@ namespace MViewer
         #endregion
 
         #region public methods
+
+        public void ActiveRoomChanged(string newIdentity)
+        {
+            // update the active room identity
+            _view.RoomManager.ActiveRoom = newIdentity;
+        }
 
         public void GetContactsStatus()
         {
@@ -272,7 +272,7 @@ namespace MViewer
                 Thread t = new Thread(delegate()
                 {
                     //IntPtr handle = IntPtr.Zero;
-                    FormVideoRoom videoRoom = new FormVideoRoom();
+                    FormVideoRoom videoRoom = new FormVideoRoom(identity);
                     _view.RoomManager.AddRoom(identity, videoRoom);
                     // initialize new video chat form
                     Thread.Sleep(1000);
@@ -353,7 +353,7 @@ namespace MViewer
         {
             VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
             PeerStatus peer = _model.SessionManager.GetPeerStatus(args.Identity);
-            if (_webcaptureClosing == false)
+            //if (_webcaptureClosing == false)  // todo: check was is keeping this flag set to false
             {
                 InitializeRoom(args.Identity, GenericEnums.RoomActionType.Video);
                 _view.RoomManager.ShowPicture(args.Identity, args.CapturedImage);
@@ -490,7 +490,6 @@ namespace MViewer
                 case GenericEnums.SignalType.Start:
 
                     // I am going to send my captures by using the below client
-
                     _model.ClientController.AddClient(eArgs.Identity);
                     _model.ClientController.StartClient(eArgs.Identity);
 
@@ -537,7 +536,16 @@ namespace MViewer
 
                     break;
                 case GenericEnums.SignalType.Pause:
-                    _view.PauseWebchat(true);
+
+                    _view.PauseWebchat(true); // todo: stop using Pause all option
+
+                    // todo: use the peer status of the selected chatroom
+                    string identity = string.Empty; // this will be the active/selected room
+                    PeerStatus peers = _model.SessionManager.GetPeerStatus(identity);
+                    peers.Audio = false;
+                    peers.Video = false; // pause the audio&video chat
+                    _model.SessionManager.UpdateSession(identity, peers, GenericEnums.SessionState.Paused);
+
                     break;
                 case GenericEnums.SignalType.Resume:
                     _view.PauseWebchat(false);

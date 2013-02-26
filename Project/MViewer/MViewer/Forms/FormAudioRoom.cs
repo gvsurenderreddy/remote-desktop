@@ -11,7 +11,7 @@ using Utils;
 
 namespace MViewer.Forms
 {
-    public partial class FormAudioRoom : Form, IAudioRoom, IRoom
+    public partial class FormAudioRoom : Form, IAudioRoom
     {
         #region private members
 
@@ -19,9 +19,10 @@ namespace MViewer.Forms
 
         #region c-tor
 
-        public FormAudioRoom()
+        public FormAudioRoom(string identity)
         {
             InitializeComponent();
+            ContactIdentity = identity;
         }
 
         #endregion
@@ -55,6 +56,12 @@ namespace MViewer.Forms
         public GenericEnums.RoomActionType RoomType
         {
             get { return GenericEnums.RoomActionType.Audio; }
+        }
+
+        public string ContactIdentity
+        {
+            get;
+            set;
         }
 
         #endregion

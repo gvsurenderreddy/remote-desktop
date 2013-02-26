@@ -211,6 +211,9 @@ namespace GenericDataLayer
             {
                 // pause the timer
                 _timer.Stop();
+
+                //MessageBox.Show("tick");
+
                 _sync.WaitOne();
 
 

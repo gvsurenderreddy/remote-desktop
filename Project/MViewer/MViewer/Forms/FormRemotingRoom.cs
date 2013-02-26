@@ -11,13 +11,14 @@ using Utils;
 
 namespace MViewer.Forms
 {
-    public partial class FormRemotingRoom : Form, IRemotingRoom, IRoom
+    public partial class FormRemotingRoom : Form, IRemotingRoom
     {
         #region c-tor
 
-        public FormRemotingRoom()
+        public FormRemotingRoom(string identity)
         {
             InitializeComponent();
+            ContactIdentity = identity;
         }
 
         #endregion
@@ -52,6 +53,12 @@ namespace MViewer.Forms
         #endregion
 
         #region proprieties
+
+        public string ContactIdentity
+        {
+            get;
+            set;
+        }
 
         public GenericEnums.RoomActionType RoomType
         {

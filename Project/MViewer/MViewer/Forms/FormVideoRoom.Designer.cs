@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormVideoRoom));
             this.pnlMain = new System.Windows.Forms.Panel();
             this.videoControl = new UIControls.VideoControl();
             this.pnlMain.SuspendLayout();
@@ -55,8 +56,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 408);
             this.Controls.Add(this.pnlMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormVideoRoom";
             this.Text = "Video Chat";
+            this.Activated += new System.EventHandler(this.FormVideoRoom_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormVideoRoom_FormClosing);
             this.Resize += new System.EventHandler(this.FormVideoRoom_Resize);
             this.pnlMain.ResumeLayout(false);

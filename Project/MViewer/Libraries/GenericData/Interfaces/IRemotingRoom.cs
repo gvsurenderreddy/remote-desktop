@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GenericDataLayer
 {
-    public interface IRemotingRoom
+    public interface IRemotingRoom : IRoom
     {
         void ShowMouseCapture(byte[] capture);
         void ShowScreenCapture(byte[] capture);

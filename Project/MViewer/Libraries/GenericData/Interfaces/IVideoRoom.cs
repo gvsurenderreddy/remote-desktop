@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace GenericDataLayer
 {
-    public interface IVideoRoom
+    public interface IVideoRoom : IRoom
     {
         void SetPicture(Image picture);
 
