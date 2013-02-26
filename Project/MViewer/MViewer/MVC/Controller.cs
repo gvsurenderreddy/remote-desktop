@@ -152,7 +152,7 @@ namespace MViewer
         public void IdentityObserver(object sender, IdentityEventArgs e)
         {
             _model.Identity.UpdateFriendlyName(e.FriendlyName);
-            // todo: online contacts of updated friendly name
+            // notify online contacts of updated friendly name
             _model.NotifyContacts(e.FriendlyName);
         }
 

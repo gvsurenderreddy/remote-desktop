@@ -72,7 +72,7 @@ namespace MViewer
 
         public Contact GetContact(string identity)
         {
-            return ContactsRepository.GetContact(identity);
+            return ContactsRepository.GetContactByIdentity(identity);
         }
 
         public void PingContacts(string pingIdentity)
@@ -114,7 +114,7 @@ namespace MViewer
                 case GenericEnums.ContactsOperation.Add:
                     int contactNo = ContactsRepository.AddContact(e.UpdatedContact);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
-                    contact = ContactsRepository.GetContact(e.UpdatedContact.Identity);
+                    contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
                     if(e.UpdatedContact.ContactNo != -1)
                     {
                         // notify other contact of performed operation (ADD/REMOVE)
@@ -127,10 +127,10 @@ namespace MViewer
                 case GenericEnums.ContactsOperation.Update:
                     ContactsRepository.UpdateContact(e.UpdatedContact);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
-                    contact = ContactsRepository.GetContact(e.UpdatedContact.ContactNo);
+                    contact = ContactsRepository.GetContactByNumber(e.UpdatedContact.ContactNo);
                     break;
                 case GenericEnums.ContactsOperation.Remove:
-                    contact = ContactsRepository.GetContact(e.UpdatedContact.Identity);
+                    contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
                     ContactsRepository.RemoveContact(contact.ContactNo);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
                     
@@ -142,7 +142,7 @@ namespace MViewer
                     }
                     break;
                 case GenericEnums.ContactsOperation.Get:
-                    contact = ContactsRepository.GetContact(e.UpdatedContact.ContactNo);
+                    contact = ContactsRepository.GetContactByNumber(e.UpdatedContact.ContactNo);
                     break;
                 case GenericEnums.ContactsOperation.Load:
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);

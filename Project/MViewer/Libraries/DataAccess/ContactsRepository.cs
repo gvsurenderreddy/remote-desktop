@@ -75,11 +75,11 @@ namespace DataAccessLayer
 
         public static void UpdateContact(Contact contact)
         {
-            DataRow dr = GetContact2(contact.ContactNo);
+            DataRow dr = GetContactByNo(contact.ContactNo);
             if (dr == null)
             {
-                Contact toUpdate = GetContact(contact.Identity);
-                dr = GetContact2(contact.ContactNo);
+                Contact toUpdate = GetContactByIdentity(contact.Identity);
+                dr = GetContactByNo(toUpdate.ContactNo);
             }
             if (dr != null)
             {
@@ -89,7 +89,7 @@ namespace DataAccessLayer
             }
         }
 
-        public static Contact GetContact(int contactNo)
+        public static Contact GetContactByNumber(int contactNo)
         {
             Contact contact = null;
             if (contactNo >= 0)
@@ -112,7 +112,7 @@ namespace DataAccessLayer
             return contact;
         }
 
-        public static Contact GetContact(string identity)
+        public static Contact GetContactByIdentity(string identity)
         {
             DataTable contacts = _contactsDataSet.Tables["Contacts"];
             IEnumerable<DataRow> query =
@@ -136,17 +136,19 @@ namespace DataAccessLayer
 
         #region private static methods
 
-        static DataRow GetContact2(int contactNo)
+        static DataRow GetContactByNo(int contactNo)
         {
-            _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
-            _contactsDataView.Sort = "identity";
             DataRow dr = null;
-            if (_contactsDataView.Count > 0)
+            if (contactNo >= 0)
             {
-                dr = _contactsDataView[0].Row;
-            }
-            _contactsDataView.RowFilter = "";
+                _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
+                _contactsDataView.Sort = "identity";
 
+                if (_contactsDataView.Count > 0)
+                {
+                    dr = _contactsDataView[0].Row;
+                }
+            }
             return dr;
         }
 
