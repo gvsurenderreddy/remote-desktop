@@ -14,28 +14,25 @@ namespace MViewer
     public partial class FormMyWebcam : Form
     {
         WebcamCapture _webcamCapture;
-        EventHandler _formClosingEvent;
         System.Timers.Timer _visibleTimer;
+
         /// <summary>
         /// flag used to tell the webcapturing thread to end it's activity
         /// </summary>
-        bool _webcaptureClosed;
-
         public bool WebcaptureClosed
         {
-            get { return _webcaptureClosed; }
-            set { _webcaptureClosed = value; }
+            get { return _webcamCapture.WebcaptureClosed; }
+            //set { _webcamCapture.WebcaptureClosed = value; }
         }
 
-        public FormMyWebcam(EventHandler formClosingEvent)
+        public FormMyWebcam()
         {
-            _formClosingEvent = formClosingEvent;
             _visibleTimer = new System.Timers.Timer(3000);
             _visibleTimer.Elapsed += new ElapsedEventHandler(VisibleTimerCallback);
             //_visibleTimer.Start();
 
             InitializeComponent();
-            _webcamCapture = new WebcamCapture(SystemConfiguration.TimerInterval, this.Handle.ToInt32(), this.WebcaptureClosing);
+            _webcamCapture = new WebcamCapture(SystemConfiguration.TimerInterval, this.Handle.ToInt32());
             _webcamCapture.ParentForm = this;
             Program.Controller.StartVideoChat(_webcamCapture);
 
@@ -43,10 +40,10 @@ namespace MViewer
 
         #region public methods
 
-        public void WebcaptureClosing(object sender, EventArgs args)
-        {
-            _formClosingEvent.Invoke(null, null);
-        }
+        //public void WebcaptureClosing(object sender, EventArgs args)
+        //{
+        //    _formClosingEvent.Invoke(null, null);
+        //}
 
         public void SetPicture(Image image)
         {
@@ -76,7 +73,7 @@ namespace MViewer
         {
             if (_webcamCapture == null)
             {
-                _webcamCapture = new WebcamCapture(SystemConfiguration.TimerInterval, this.Handle.ToInt32(), this.WebcaptureClosing);
+                _webcamCapture = new WebcamCapture(SystemConfiguration.TimerInterval, this.Handle.ToInt32());
             }
             Program.Controller.StartVideoChat(_webcamCapture);
         }
@@ -106,7 +103,7 @@ namespace MViewer
         {
             _visibleTimer.Stop();
 
-            if (_webcamCapture.WebcamDisconnected)
+            if (_webcamCapture.WebcaptureClosed)
             {
                 if (this.Visible == true)
                 {

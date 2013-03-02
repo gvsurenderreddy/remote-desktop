@@ -33,7 +33,7 @@ namespace GenericDataLayer
         int _windowHandle;
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
-        bool _webcamDisconnected;
+        bool _webcamClosed;
         bool _webcamPaused;
 
         ManualResetEvent _syncCaptures = new ManualResetEvent(false);
@@ -49,16 +49,16 @@ namespace GenericDataLayer
         public delegate void WebCamEventHandler(object source, VideoCaptureEventArgs e);
         public event WebCamEventHandler ImageCaptured;
 
-        EventHandler _closingEvent;
+        //EventHandler _closingEvent;
         int _interval;
 
         #endregion
 
         #region c-tor & d-tor
 
-        public WebcamCapture(int interval, int windowHandle, EventHandler closingEvent)
+        public WebcamCapture(int interval, int windowHandle)
         {
-            _closingEvent = closingEvent;
+            //_closingEvent = closingEvent;
             _components = new Container();
             // set the timer interval
             _interval = interval;
@@ -66,7 +66,7 @@ namespace GenericDataLayer
 
             _timerRunning = false;
             _threadAborted = false;
-            _webcamDisconnected = false;
+            _webcamClosed = false;
 
             _windowHandle = windowHandle;
 
@@ -95,7 +95,7 @@ namespace GenericDataLayer
                 Thread.Sleep(1000);
             }
             int x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
-            _webcamDisconnected = false;
+            _webcamClosed = false;
 
             // wait for the web cam capture form to be visible
             Form myWebcamForm = this.ParentForm;
@@ -167,11 +167,11 @@ namespace GenericDataLayer
             {
                 try
                 {
-                    if (!_webcamDisconnected)
+                    if (!_webcamClosed)
                     {
                         // disconnect from the video capturing device
                         Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
-                        _webcamDisconnected = true;
+                        _webcamClosed = true;
                     }
                 }
                 catch { }
@@ -223,9 +223,9 @@ namespace GenericDataLayer
 
                 _syncCaptures.WaitOne();
 
-                if (!_threadAborted && !_webcamDisconnected)
+                if (!_threadAborted && !_webcamClosed)
                 {
-                    if (!_threadAborted && !_webcamDisconnected)
+                    if (!_threadAborted && !_webcamClosed)
                     {
                         while (ParentForm.Visible == false)
                         {
@@ -295,19 +295,19 @@ namespace GenericDataLayer
 
                 // restart the timer
                 //Application.DoEvents();
-                if (_timerRunning == false && !_threadAborted && !_webcamDisconnected)// && error == false)
+                if (_timerRunning == false && !_threadAborted && !_webcamClosed)// && error == false)
                 {
                     _timerRunning = true;
                     _timer.Start();
                 }
-                else
-                {
-                    if (_threadAborted || _webcamDisconnected)
-                    {
-                        // todo: close/hide the parent web capture form
-                        _closingEvent.Invoke(null, null);
-                    }
-                }
+                //else
+                //{
+                //    if (_threadAborted || _webcamClosed)
+                //    {
+                //        // todo: close/hide the parent web capture form
+                //        _closingEvent.Invoke(null, null);
+                //    }
+                //}
             }
         }
 
@@ -323,9 +323,9 @@ namespace GenericDataLayer
             set { _parentForm = value; }
         }
 
-        public bool WebcamDisconnected
+        public bool WebcaptureClosed
         {
-            get { return _webcamDisconnected; }
+            get { return _webcamClosed; }
         }
 
         public bool ThreadAborted

@@ -89,12 +89,12 @@ namespace MViewer
             _observersActive = bind;
         }
 
-        public void WebCaptureClosing(object sender, EventArgs args)
-        {
-            //_threadWebcaptureForm = null;
-            //_formWebCapture = null;
-            this.WebcaptureClosed = false;
-        }
+        //public void WebCaptureClosing(object sender, EventArgs args)
+        //{
+        //    //_threadWebcaptureForm = null;
+        //    //_formWebCapture = null;
+        //    this.WebcaptureClosed = false;
+        //}
 
         public void ShowMyWebcamForm(bool show)
         {
@@ -102,7 +102,6 @@ namespace MViewer
             {
                 if (_formWebCapture != null && this.WebcaptureClosed == true)
                 {
-                    this.WebcaptureClosed = false;
                     _formWebCapture.StartCapturing();
                 }
                 else
@@ -112,8 +111,7 @@ namespace MViewer
                         // open my webcam form if no video chat was previously started
                         _threadWebcaptureForm = new Thread(delegate()
                         {
-                            _formWebCapture = new FormMyWebcam(this.WebCaptureClosing);
-                            this.WebcaptureClosed = false;
+                            _formWebCapture = new FormMyWebcam();
                             _formWebCapture.ShowDialog();
                         });
                         _threadWebcaptureForm.IsBackground = true;
@@ -126,7 +124,6 @@ namespace MViewer
             {
                 if (_formWebCapture != null)
                 {
-                    this.WebcaptureClosed = true;
                     _formWebCapture.StopCapturing();
                 }
             }
@@ -318,18 +315,18 @@ namespace MViewer
                 }
                 return isClosed;
             }
-            set
-            {
-                if (this._formWebCapture != null)
-                {
-                    this._formWebCapture.WebcaptureClosed = value;
-                }
-                else
-                {
-                    // todo: remove the break
-                    System.Diagnostics.Debugger.Break();
-                }
-            }
+            //set
+            //{
+            //    if (this._formWebCapture != null)
+            //    {
+            //        this._formWebCapture.WebcaptureClosed = value;
+            //    }
+            //    else
+            //    {
+            //        // todo: remove the break
+            //        System.Diagnostics.Debugger.Break();
+            //    }
+            //}
         }
 
         #endregion

@@ -34,7 +34,7 @@ namespace GenericDataLayer
         bool WebcaptureClosed
         {
             get;
-            set;
+            //set;
         }
 
         IRoomManager RoomManager

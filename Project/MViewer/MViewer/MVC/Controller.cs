@@ -536,7 +536,6 @@ namespace MViewer
 
         void StopWebCapturing()
         {
-            _view.WebcaptureClosed = true;
             if (_presenter != null)
             {
                 _presenter.StopPresentation();
