@@ -5,6 +5,7 @@ using System.Text;
 using GenericDataLayer;
 using System.Drawing;
 using Utils;
+using System.IO;
 
 namespace BusinessLogicLayer
 {
@@ -35,6 +36,21 @@ namespace BusinessLogicLayer
         #endregion
 
         #region public methods
+
+        public void SendFile(byte[] fileBytes, string partnerIdentity, string fileName)
+        {
+            if (_clients != null)
+            {
+                if (_clients.ContainsKey(partnerIdentity))
+                {
+                    MViewerClient client = _clients[partnerIdentity];
+                    if (client != null)
+                    {
+                        client.SendFile(fileBytes, fileName);
+                    }
+                }
+            }
+        }
 
         public void WaitRoomButtonAction(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType, bool wait)
         {

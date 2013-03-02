@@ -53,7 +53,12 @@ namespace MViewer
         private void FormVideoRoom_FormClosing(object sender, FormClosingEventArgs e)
         {
             _formClosing = true;
-            // todo: perform other specific actions when the Video Chat room is closing
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true; // chatroom can be closed only by using the UI button
+            }
+            // todo: later - perform other specific actions when the Video Chat room is closing
+                
         }
 
         #endregion

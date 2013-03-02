@@ -16,6 +16,7 @@ using GenericDataLayer;
 using Utils;
 using System;
 using System.Drawing;
+using System.IO;
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -91,6 +92,11 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     public void RemoveContact(string identity)
     {
         base.Channel.RemoveContact(identity);
+    }
+
+    public void SendFile(byte[] fileBytes, string fileName)
+    {
+        base.Channel.SendFile(fileBytes, fileName);
     }
     
 }

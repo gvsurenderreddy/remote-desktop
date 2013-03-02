@@ -38,6 +38,16 @@ namespace GenericDataLayer
 
         #region public methods
 
+        public void SendFile(byte[] fileStream, string fileName)
+        {
+            // SendFile
+            _controllerHandlers.FileTransferObserver.Invoke(fileStream, new RoomActionEventArgs()
+            {
+                RoomType = GenericEnums.RoomType.Send,
+                FileName = fileName
+            });
+        }
+
         public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
         {
             // propagate the update to the UI, through the controller
@@ -159,7 +169,7 @@ namespace GenericDataLayer
 
         #endregion
 
-        //public void SendWebcamCapture2(Stream stream)
+        //public void SendWebcamCapture2(FileStream stream)
         //{
         //    try
         //    {

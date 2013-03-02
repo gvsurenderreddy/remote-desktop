@@ -53,8 +53,15 @@ namespace MViewer
                 _clientController.AddClient(identity);
                 _clientController.UpdateFriendlyName(identity, Identity.MyIdentity, newFriendlyName);
 
-                //todo: remove the client only if it doesn't have any active chats
-                _clientController.RemoveClient(identity);
+                // remove the client only if it doesn't have any active chats
+                PeerStates peers = SessionManager.GetPeerStatus(identity);
+                if (
+                    (peers.AudioSessionState == GenericEnums.SessionState.Closed || peers.AudioSessionState == GenericEnums.SessionState.Undefined)
+                    && (peers.RemotingSessionState == GenericEnums.SessionState.Closed || peers.RemotingSessionState == GenericEnums.SessionState.Undefined)
+                    && (peers.VideoSessionState == GenericEnums.SessionState.Closed || peers.VideoSessionState == GenericEnums.SessionState.Undefined))
+                {
+                    _clientController.RemoveClient(identity);
+                }
             }
         }
 

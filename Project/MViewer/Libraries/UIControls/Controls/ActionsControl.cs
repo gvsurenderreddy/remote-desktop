@@ -106,19 +106,12 @@ namespace UIControls
         private void btnSend_Click(object sender, EventArgs e)
         {
             // send the file to the selected contact
-
-            // todo: fetch the partner identity from the active room or contact list
-            ulong contactID = 0;
-
-            string filePath = string.Empty;
-            FileDialog fileDialog = new OpenFileDialog();
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            // provide the file path to the File transfer module
+            _roomActionTriggered.Invoke(null, new RoomActionEventArgs()
             {
-                filePath = fileDialog.FileName;
-
-                // todo: provide the file path and contact ID to the File transfer module
-
-            }
+                RoomType = GenericEnums.RoomType.Send
+            });
+            
         }
 
         private void BtnAction_Click(object sender, EventArgs e)

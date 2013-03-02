@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using Utils;
+using System.IO;
 
 namespace GenericDataLayer
 {
@@ -19,6 +20,6 @@ namespace GenericDataLayer
         void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus);
         void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName);
         void WaitRoomButtonAction(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType, bool wait);
-
+        void SendFile(byte[] fileBytes, string partnerIdentity, string fileName);
     }
 }

@@ -54,5 +54,11 @@ namespace GenericDataLayer
             get;
             set;
         }
+
+        public EventHandler FileTransferObserver
+        {
+            get;
+            set;
+        }
     }
 }

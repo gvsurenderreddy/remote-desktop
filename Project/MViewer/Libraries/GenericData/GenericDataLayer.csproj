@@ -59,14 +59,12 @@
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="BusinessObjects\Classes\Presenter.cs" />
-    <Compile Include="BusinessObjects\Classes\ServerSession.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIConstants.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
     <Compile Include="BusinessObjects\Structs\ConnectedPeers.cs" />
-    <Compile Include="BusinessObjects\Structs\ConnectedView.cs" />
     <Compile Include="BusinessObjects\Structs\PendingTransfer.cs" />
     <Compile Include="BusinessObjects\Structs\RoomEventHandlers.cs" />
     <Compile Include="BusinessObjects\Structs\TransferUptading.cs" />

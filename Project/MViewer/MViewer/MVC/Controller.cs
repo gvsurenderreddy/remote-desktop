@@ -48,7 +48,8 @@ namespace MViewer
                 VideoCaptureObserver = this.NotifyVideoCaptureObserver,
                 ContactsObserver = this.ContactRequest,
                 RoomClosingObserver = this.RoomClosingObserver,
-                WaitRoomActionObserver = this.WaitRoomButtonActionObserver
+                WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
+                FileTransferObserver = this.FileTransferObserver
             };
 
             _model = new Model(handlers);
@@ -197,6 +198,44 @@ namespace MViewer
             }
         }
 
+        public void FileTransferObserver(object sender, EventArgs e)
+        {
+            Thread t = new Thread(delegate()
+            {
+                RoomActionEventArgs args = (RoomActionEventArgs)e;
+
+                byte[] buffer = (byte[])sender;
+
+                // open file path dialog
+
+                string extension = Path.GetExtension(args.FileName);// get file extension
+
+                // Displays a SaveFileDialog so the user can save the Image
+                // assigned to Button2.
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "File|*." + extension + "";
+                saveFileDialog1.Title = "Save File";
+                saveFileDialog1.FileName = args.FileName;
+                saveFileDialog1.ShowDialog();
+
+                // If the file name is not an empty string open it for saving.
+                if (saveFileDialog1.FileName != "")
+                {
+                    // Saves the Image via a FileStream created by the OpenFile method.
+                    System.IO.FileStream fs =
+                       (System.IO.FileStream)saveFileDialog1.OpenFile();
+
+                    fs.Write(buffer, 0, buffer.Length);
+
+                    fs.Close();
+                }
+
+            });
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+        }
+
         public void RoomClosingObserver(object sender, EventArgs e)
         {
             RoomActionEventArgs args = (RoomActionEventArgs)e;
@@ -260,6 +299,32 @@ namespace MViewer
                     break;
                 case GenericEnums.RoomType.Send:
 
+                    if (_model.ClientController.IsContactOnline(e.Identity))
+                    {
+                        string filePath = string.Empty;
+                        FileDialog fileDialog = new OpenFileDialog();
+                        if (fileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            filePath = fileDialog.FileName;
+                            // the file to send will be placed in the 'sender' obj
+
+                            string selectedPartner = e.Identity;
+
+                            // send the file via WCF client
+                            // todo: move this code to a file transfer module
+                            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                            _model.ClientController.AddClient(e.Identity);
+                            byte[] fileContent = new byte[fileStream.Length];
+                            fileStream.Read(fileContent, 0, fileContent.Length);
+                            _model.ClientController.SendFile(fileContent, e.Identity, Path.GetFileName(filePath));
+                            _model.ClientController.RemoveClient(e.Identity);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Selected person is offline", "Cannot send", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                   
                     break;
                 case GenericEnums.RoomType.Video:
                     switch (e.SignalType)

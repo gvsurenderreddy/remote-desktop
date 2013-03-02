@@ -34,10 +34,8 @@ namespace GenericDataLayer
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
         bool _webcamClosed;
-        bool _webcamPaused;
 
         ManualResetEvent _syncCaptures = new ManualResetEvent(false);
-        readonly object _syncPaused = new object();
 
         //Mutex _mutex = new Mutex(true, "WebCapture");
 
@@ -247,14 +245,8 @@ namespace GenericDataLayer
                                 // resize the image to the required size (the API isn't doing that)
                                 _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
 
-                                lock (_syncPaused)
-                                {
-                                    if (!_webcamPaused)
-                                    {
-                                        // raise the capture event
-                                        this.ImageCaptured(this, _eventArgs);
-                                    }
-                                }
+                                // raise the capture event
+                                this.ImageCaptured(this, _eventArgs);
                             }
                         }
                     }
