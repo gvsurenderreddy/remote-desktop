@@ -36,8 +36,7 @@ namespace GenericDataLayer
         bool _webcamDisconnected;
         bool _webcamPaused;
 
-        ManualResetEvent _sync = new ManualResetEvent(false);
-        readonly object _syncDisconnected = new object();
+        ManualResetEvent _syncCaptures = new ManualResetEvent(false);
         readonly object _syncPaused = new object();
 
         //Mutex _mutex = new Mutex(true, "WebCapture");
@@ -111,6 +110,7 @@ namespace GenericDataLayer
             _timer.Enabled = true;
         }
 
+        //todo: remove this obsolete method PauseCapturing
         public void PauseCapturing(bool pause)
         {
             lock (_syncPaused)
@@ -134,11 +134,23 @@ namespace GenericDataLayer
 
         }
 
+        public void WaitRoomButtonAction(bool wait)
+        {
+            if (wait)
+            {
+                _syncCaptures.Reset();
+            }
+            else
+            {
+                _syncCaptures.Set();
+            }
+        }
+
         public void StopCapturing()
         {
             try
             {
-                _sync.Reset();
+                _syncCaptures.Reset();
                 // stop the timer
                 if (_timerRunning || _timer.Enabled)
                 {
@@ -155,19 +167,16 @@ namespace GenericDataLayer
             {
                 try
                 {
-                    lock (_syncDisconnected)
+                    if (!_webcamDisconnected)
                     {
-                        if (!_webcamDisconnected)
-                        {
-                            // disconnect from the video capturing device
-                            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
-                            _webcamDisconnected = true;
-                        }
+                        // disconnect from the video capturing device
+                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
+                        _webcamDisconnected = true;
                     }
                 }
                 catch { }
             }
-            _sync.Set();
+            _syncCaptures.Set();
         }
 
         #endregion
@@ -212,58 +221,53 @@ namespace GenericDataLayer
                 // pause the timer
                 _timer.Stop();
 
-                //MessageBox.Show("tick");
-
-                _sync.WaitOne();
-
+                _syncCaptures.WaitOne();
 
                 if (!_threadAborted && !_webcamDisconnected)
                 {
-                    lock (_syncDisconnected)
+                    if (!_threadAborted && !_webcamDisconnected)
                     {
-                        if (!_threadAborted && !_webcamDisconnected)
+                        while (ParentForm.Visible == false)
                         {
-                            while (ParentForm.Visible == false)
+                            Thread.Sleep(1000);
+                        }
+                        _timerRunning = false;
+
+                        // wait for the clipboard to be unused
+                        //_mutex.WaitOne();
+                        //_pool.WaitOne();
+
+                        // get the next image
+                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
+
+                        // copy the image to the clipboard
+                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
+
+                        // push the image into the capture event args
+                        if (ImageCaptured != null)
+                        {
+                            // get image from the clipboard
+                            System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
+                            Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
+                            if (tempObject.GetDataPresent(DataFormats.Bitmap))
                             {
-                                Thread.Sleep(1000);
-                            }
-                            _timerRunning = false;
+                                Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
+                                _eventArgs = new VideoCaptureEventArgs();
+                                // resize the image to the required size (the API isn't doing that)
+                                _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
 
-                            // wait for the clipboard to be unused
-                            //_mutex.WaitOne();
-                            //_pool.WaitOne();
-
-                            // get the next image
-                            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
-
-                            // copy the image to the clipboard
-                            Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
-
-                            // push the image into the capture event args
-                            if (ImageCaptured != null)
-                            {
-                                // get image from the clipboard
-                                System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
-                                Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
-                                if (tempObject.GetDataPresent(DataFormats.Bitmap))
+                                lock (_syncPaused)
                                 {
-                                    Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
-                                    _eventArgs = new VideoCaptureEventArgs();
-                                    // resize the image to the required size (the API isn't doing that)
-                                    _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
-
-                                    lock (_syncPaused)
+                                    if (!_webcamPaused)
                                     {
-                                        if (!_webcamPaused)
-                                        {
-                                            // raise the capture event
-                                            this.ImageCaptured(this, _eventArgs);
-                                        }
+                                        // raise the capture event
+                                        this.ImageCaptured(this, _eventArgs);
                                     }
                                 }
                             }
                         }
                     }
+                    
                 }
             }
             catch (ThreadAbortException)
@@ -300,7 +304,7 @@ namespace GenericDataLayer
                 {
                     if (_threadAborted || _webcamDisconnected)
                     {
-                        // todo: close the parent web capture form
+                        // todo: close/hide the parent web capture form
                         _closingEvent.Invoke(null, null);
                     }
                 }

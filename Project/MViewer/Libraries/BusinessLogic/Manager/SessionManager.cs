@@ -146,19 +146,22 @@ namespace BusinessLogicLayer
                         switch (roomType)
                         {
                             case GenericEnums.RoomType.Audio:
-                                if (session.AudioSessionState == GenericEnums.SessionState.Opened)
+                                if (session.AudioSessionState == GenericEnums.SessionState.Opened
+                                    || session.AudioSessionState == GenericEnums.SessionState.Pending)
                                 {
                                     sessions.Add(session.Identity);
                                 }
                                 break;
                             case GenericEnums.RoomType.Video:
-                                if (session.VideoSessionState == GenericEnums.SessionState.Opened)
+                                if (session.VideoSessionState == GenericEnums.SessionState.Opened
+                                    || session.VideoSessionState == GenericEnums.SessionState.Pending)
                                 {
                                     sessions.Add(session.Identity);
                                 }
                                 break;
                             case GenericEnums.RoomType.Remoting:
-                                if (session.RemotingSessionState == GenericEnums.SessionState.Opened)
+                                if (session.RemotingSessionState == GenericEnums.SessionState.Opened
+                                    || session.RemotingSessionState == GenericEnums.SessionState.Pending)
                                 {
                                     sessions.Add(session.Identity);
                                 }

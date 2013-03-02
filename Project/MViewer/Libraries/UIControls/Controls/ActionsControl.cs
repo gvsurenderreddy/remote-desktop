@@ -15,7 +15,7 @@ namespace UIControls
     {
         #region private members
 
-        EventHandler _actionTriggered;
+        EventHandler _roomActionTriggered;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace UIControls
         {
             InitializeComponent();
 
-            _actionTriggered = actionTriggered;
+            _roomActionTriggered = actionTriggered;
         }
 
         #endregion
@@ -171,10 +171,10 @@ namespace UIControls
             // provide the action type as event arg
             RoomActionEventArgs args = new RoomActionEventArgs()
             {
-                ActionType = actionType,
+                RoomType = actionType,
                 SignalType = signalType
             };
-            _actionTriggered.Invoke(this, args);
+            _roomActionTriggered.Invoke(this, args);
         }
 
         #endregion

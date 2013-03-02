@@ -23,8 +23,6 @@ namespace MViewer
         FormMyWebcam _formWebCapture;
         Thread _threadWebcaptureForm;
 
-        bool _myWebcaptureRunning;
-
         IDictionary<Type, object> _observers;
         bool _observersActive;
 
@@ -47,7 +45,7 @@ namespace MViewer
             _model = model;
             _formMain = new FormMain();
             _roomManager = new RoomManager(_formMain);
-            _formActions = new FormActions(new EventHandler(this.PerformRoomAction));
+            _formActions = new FormActions(new EventHandler(this.RoomButtonAction));
         }
 
         #endregion
@@ -95,27 +93,27 @@ namespace MViewer
         {
             //_threadWebcaptureForm = null;
             //_formWebCapture = null;
-            _myWebcaptureRunning = false;
+            this.WebcaptureClosed = false;
         }
 
         public void ShowMyWebcamForm(bool show)
         {
             if (show)
             {
-                if (_formWebCapture != null && _myWebcaptureRunning == false)
+                if (_formWebCapture != null && this.WebcaptureClosed == true)
                 {
-                    _myWebcaptureRunning = true;
+                    this.WebcaptureClosed = false;
                     _formWebCapture.StartCapturing();
                 }
                 else
                 {
-                    if (_myWebcaptureRunning == false)
+                    if (this._threadWebcaptureForm == null) // first time when the video chat is starting
                     {
                         // open my webcam form if no video chat was previously started
                         _threadWebcaptureForm = new Thread(delegate()
                         {
-                            _myWebcaptureRunning = true;
                             _formWebCapture = new FormMyWebcam(this.WebCaptureClosing);
+                            this.WebcaptureClosed = false;
                             _formWebCapture.ShowDialog();
                         });
                         _threadWebcaptureForm.IsBackground = true;
@@ -126,9 +124,9 @@ namespace MViewer
             }
             else
             {
-                if (_myWebcaptureRunning && _formWebCapture != null)
+                if (_formWebCapture != null)
                 {
-                    _myWebcaptureRunning = false;
+                    this.WebcaptureClosed = true;
                     _formWebCapture.StopCapturing();
                 }
             }
@@ -137,18 +135,18 @@ namespace MViewer
         //public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
         //{
         //    // todo: implement ShowRoomForm - if necessary
-        //    RoomActionEventArgs args = (RoomActionEventArgs)e;
+        //    RoomButtonActionEventArgs args = (RoomButtonActionEventArgs)e;
         //    IRoom room = null;
         //    IntPtr handle = IntPtr.Zero;
         //    switch(args.ActionType)
         //    {
-        //        case GenericEnums.RoomActionType.Audio:
+        //        case GenericEnums.RoomButtonActionType.Audio:
 
         //            break;
-        //        case GenericEnums.RoomActionType.Remoting:
+        //        case GenericEnums.RoomButtonActionType.Remoting:
 
         //            break;
-        //        case GenericEnums.RoomActionType.Video:
+        //        case GenericEnums.RoomButtonActionType.Video:
         //            room = new FormVideoRoom(ref handle);
         //            room.SetPartnerName(args.FriendlyName);
         //            OpenRoomForm(room);
@@ -201,8 +199,13 @@ namespace MViewer
             }
         }
 
-        public void PerformRoomAction(object sender, EventArgs e)
+        public void RoomButtonAction(object sender, EventArgs e)
         {
+            if (_formWebCapture != null)
+            {
+                _formWebCapture.WaitRoomButtonAction(true);
+            }
+
             string activeRoom = _roomManager.ActiveRoom;
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             if (string.IsNullOrEmpty(activeRoom))
@@ -227,7 +230,12 @@ namespace MViewer
             }
             if (args != null) // check if there is a selected contact or active chat room
             {
-                Program.Controller.PerformRoomAction(sender, args);
+                Program.Controller.RoomButtonAction(sender, args);
+            }
+
+            if (_formWebCapture != null)
+            {
+                _formWebCapture.WaitRoomButtonAction(false);
             }
         }
 
@@ -257,6 +265,14 @@ namespace MViewer
             }
 
             return canExit;
+        }
+
+        public void WaitRoomButtonAction(bool wait)
+        {
+            if (_formWebCapture != null)
+            {
+                _formWebCapture.WaitRoomButtonAction(wait);
+            }
         }
 
         #endregion
@@ -289,6 +305,31 @@ namespace MViewer
         public IRoomManager RoomManager
         {
             get { return _roomManager; }
+        }
+
+        public bool WebcaptureClosed
+        {
+            get
+            {
+                bool isClosed = false;
+                if (this._formWebCapture != null)
+                {
+                    isClosed= this._formWebCapture.WebcaptureClosed;
+                }
+                return isClosed;
+            }
+            set
+            {
+                if (this._formWebCapture != null)
+                {
+                    this._formWebCapture.WebcaptureClosed = value;
+                }
+                else
+                {
+                    // todo: remove the break
+                    System.Diagnostics.Debugger.Break();
+                }
+            }
         }
 
         #endregion

@@ -16,6 +16,16 @@ namespace MViewer
         WebcamCapture _webcamCapture;
         EventHandler _formClosingEvent;
         System.Timers.Timer _visibleTimer;
+        /// <summary>
+        /// flag used to tell the webcapturing thread to end it's activity
+        /// </summary>
+        bool _webcaptureClosed;
+
+        public bool WebcaptureClosed
+        {
+            get { return _webcaptureClosed; }
+            set { _webcaptureClosed = value; }
+        }
 
         public FormMyWebcam(EventHandler formClosingEvent)
         {
@@ -55,6 +65,11 @@ namespace MViewer
         public void StopCapturing()
         {
             _webcamCapture.StopCapturing();
+        }
+
+        public void WaitRoomButtonAction(bool wait)
+        {
+            _webcamCapture.WaitRoomButtonAction(wait);
         }
 
         public void StartCapturing()

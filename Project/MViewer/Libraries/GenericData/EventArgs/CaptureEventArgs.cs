@@ -11,7 +11,6 @@ namespace GenericDataLayer
         #region private members
 
         private Image _capturedImage;
-        //private ulong _frameNumber;
         string _identity;
 
         #endregion
@@ -20,7 +19,7 @@ namespace GenericDataLayer
 
         public VideoCaptureEventArgs()
         {
-            //_frameNumber = 0;
+            
         }
 
         #endregion
@@ -41,21 +40,6 @@ namespace GenericDataLayer
                 _capturedImage = value; 
             }
         }
-
-        ///// <summary>
-        ///// the sequence number of the frame capture
-        ///// </summary>
-        //public ulong FrameNumber
-        //{
-        //    get
-        //    {
-        //        return _frameNumber; 
-        //    }
-        //    set
-        //    {
-        //        _frameNumber = value; 
-        //    }
-        //}
 
         public string Identity
         {

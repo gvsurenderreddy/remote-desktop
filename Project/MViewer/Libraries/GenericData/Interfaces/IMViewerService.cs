@@ -27,10 +27,13 @@ namespace GenericDataLayer
         bool Ping();
 
         //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/InitializeRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/InitializeRoomResponse")]
-        //void InitializeRoom(string identity, GenericEnums.RoomActionType roomType);
+        //void InitializeRoom(string identity, GenericEnums.RoomButtonActionType roomType);
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendRoomAction", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendRoomActionResponse")]
-        void SendRoomAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType);
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendRoomButtonAction", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendRoomButtonActionResponse")]
+        void SendRoomButtonAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType);
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/WaitRoomButtonAction", ReplyAction = "http://tempuri.org/IVideoChatRoom/WaitRoomButtonActionResponse")]
+        void WaitRoomButtonAction(string senderIdentity, GenericEnums.RoomType roomType, bool wait);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/AddContact", ReplyAction = "http://tempuri.org/IVideoChatRoom/AddContactResponse")]
         void AddContact(string identity, string friendlyName);
@@ -39,7 +42,7 @@ namespace GenericDataLayer
         void RemoveContact(string identity);
 
         //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/CloseRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/CloseRoomResponse")]
-        //void CloseRoom(string identity, GenericEnums.RoomActionType roomType);
+        //void CloseRoom(string identity, GenericEnums.RoomButtonActionType roomType);
 
 
     }

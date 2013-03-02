@@ -48,5 +48,11 @@ namespace GenericDataLayer
             get;
             set;
         }
+
+        public EventHandler WaitRoomActionObserver
+        {
+            get;
+            set;
+        }
     }
 }

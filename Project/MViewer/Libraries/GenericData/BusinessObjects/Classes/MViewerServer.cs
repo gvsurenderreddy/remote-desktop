@@ -94,9 +94,20 @@ namespace GenericDataLayer
             }
         }
 
-        public void SendRoomAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
+        public void WaitRoomButtonAction(string senderIdentity, GenericEnums.RoomType roomType, bool wait)
         {
-            // todo: complete implementation of SendRoomAction
+            _controllerHandlers.WaitRoomActionObserver.Invoke(null,
+                new RoomActionEventArgs()
+                {
+                    Identity = senderIdentity,
+                    RoomType = roomType,
+                    SignalType = wait == true ? GenericEnums.SignalType.Wait: GenericEnums.SignalType.RemoveWait
+                });
+        }
+
+        public void SendRoomButtonAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
+        {
+            // todo: complete implementation of SendRoomButtonAction
             switch(roomType)
             {
                 case GenericEnums.RoomType.Video:
@@ -107,7 +118,7 @@ namespace GenericDataLayer
                             _controllerHandlers.RoomClosingObserver.Invoke(this,
                                 new RoomActionEventArgs()
                                 {
-                                    ActionType = roomType,
+                                    RoomType = roomType,
                                     Identity = identity,
                                     SignalType = signalType
                                 });

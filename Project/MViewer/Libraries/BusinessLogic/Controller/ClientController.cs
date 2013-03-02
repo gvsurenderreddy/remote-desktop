@@ -36,6 +36,21 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public void WaitRoomButtonAction(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType, bool wait)
+        {
+            if (_clients != null)
+            {
+                if (_clients.ContainsKey(partnerIdentity))
+                {
+                    MViewerClient client = _clients[partnerIdentity];
+                    if (client != null)
+                    {
+                        client.WaitRoomButtonAction(myIdentity, roomType, wait);
+                    }
+                }
+            }
+        }
+
         public void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus)
         {
             if (_clients != null)
@@ -71,7 +86,7 @@ namespace BusinessLogicLayer
             if (_clients.ContainsKey(identity))
             {
                 MViewerClient client = _clients[identity];
-                client.SendRoomAction(myIdentity, roomType, signalType);
+                client.SendRoomButtonAction(myIdentity, roomType, signalType);
             }
         }
         

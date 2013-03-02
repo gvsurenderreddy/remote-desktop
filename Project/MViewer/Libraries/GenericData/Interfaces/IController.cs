@@ -15,11 +15,9 @@ namespace GenericDataLayer
         void GetContactsStatus();
 
         void IdentityObserver(object sender, IdentityEventArgs e);
-        void PerformRoomAction(object sender, RoomActionEventArgs e);
+        void RoomButtonAction(object sender, RoomActionEventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideoChat(WebcamCapture webcamControl);
-        void StopVideChat(string identity);
-        void NotifyVideoCaptureObserver(object sender, EventArgs e);
         void RoomClosingObserver(object sender, EventArgs e);
         void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
     }

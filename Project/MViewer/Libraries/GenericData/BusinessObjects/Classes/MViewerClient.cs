@@ -73,9 +73,14 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         return base.Channel.Ping();
     }
 
-    public void SendRoomAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
+    public void SendRoomButtonAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
     {
-        base.Channel.SendRoomAction(identity, roomType, signalType);
+        base.Channel.SendRoomButtonAction(identity, roomType, signalType);
+    }
+
+    public void WaitRoomButtonAction(string senderIdentity, GenericEnums.RoomType roomType, bool wait)
+    {
+        base.Channel.WaitRoomButtonAction(senderIdentity, roomType, wait);
     }
 
     public void AddContact(string identity, string friendlyName)

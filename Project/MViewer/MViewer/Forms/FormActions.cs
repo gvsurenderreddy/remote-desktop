@@ -17,7 +17,7 @@ namespace MViewer
         #region private members
 
         public readonly EventHandlers.ActionsEventHandler ActionsObserver;
-        EventHandler _actionButtonPressed;
+        EventHandler _roomActionEventHandler;
         public delegate void UpdateLabelsDel(bool start, bool pause, GenericEnums.RoomType roomType);
         public UpdateLabelsDel myDelegate;
 
@@ -31,10 +31,10 @@ namespace MViewer
             myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
         }
 
-        public FormActions(EventHandler actionsEventHandler)
+        public FormActions(EventHandler roomActionEventHandler)
         {
             InitializeComponent();
-            _actionButtonPressed = actionsEventHandler;
+            _roomActionEventHandler = roomActionEventHandler;
             ActionsObserver = new EventHandlers.ActionsEventHandler(ActionTriggered);
             myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
         }
@@ -55,7 +55,7 @@ namespace MViewer
         private void ActionTriggered(object sender, EventArgs e)
         {
             // use the Controller and take specific action when event has been triggered using the Actions control
-            _actionButtonPressed.Invoke(sender, e);
+            _roomActionEventHandler.Invoke(sender, e);
         }
 
         #endregion

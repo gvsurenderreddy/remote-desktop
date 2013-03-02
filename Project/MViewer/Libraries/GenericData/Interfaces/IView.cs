@@ -25,10 +25,17 @@ namespace GenericDataLayer
 
         void UpdateWebcapture(Image image);
 
-        void PerformRoomAction(object sender, EventArgs e);
+        void RoomButtonAction(object sender, EventArgs e);
   
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         bool ExitConfirmation();
+        void WaitRoomButtonAction(bool wait);
+
+        bool WebcaptureClosed
+        {
+            get;
+            set;
+        }
 
         IRoomManager RoomManager
         {
