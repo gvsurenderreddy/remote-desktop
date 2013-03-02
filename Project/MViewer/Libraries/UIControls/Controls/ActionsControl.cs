@@ -107,7 +107,7 @@ namespace UIControls
         {
             // send the file to the selected contact
 
-            // todo: determine which contact window is activated and save the contact ID
+            // todo: fetch the partner identity from the active room or contact list
             ulong contactID = 0;
 
             string filePath = string.Empty;

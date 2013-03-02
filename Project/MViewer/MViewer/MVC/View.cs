@@ -222,7 +222,7 @@ namespace MViewer
             }
             else
             {
-                // todo: perform specified action against the active chat room
+                // perform specified action against the active chat room
                 args.Identity = activeRoom;
             }
             if (args != null) // check if there is a selected contact or active chat room
@@ -315,18 +315,6 @@ namespace MViewer
                 }
                 return isClosed;
             }
-            //set
-            //{
-            //    if (this._formWebCapture != null)
-            //    {
-            //        this._formWebCapture.WebcaptureClosed = value;
-            //    }
-            //    else
-            //    {
-            //        // todo: remove the break
-            //        System.Diagnostics.Debugger.Break();
-            //    }
-            //}
         }
 
         #endregion

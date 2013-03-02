@@ -385,7 +385,7 @@ namespace MViewer
 
         void StopVideChat(string identity, bool sendStopSignal)
         {
-            // todo: tell the partner to pause capturing & sending while processing room Stop command
+            // tell the partner to pause capturing & sending while processing room Stop command
 
             _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
                 true);
@@ -415,9 +415,7 @@ namespace MViewer
                     _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity,
                         GenericEnums.RoomType.Video, GenericEnums.SignalType.Stop);
                 }
-                
-                // todo: optional - check if SendRoomCommand has finished the execution (put a return flag)
-                //Thread.Sleep(1000);
+
                 // remove the connected client session
                 _model.SessionManager.RemoveSession(identity);
                 _view.RoomManager.CloseRoom(identity);
