@@ -110,15 +110,6 @@ namespace GenericDataLayer
             _timer.Enabled = true;
         }
 
-        //todo: remove this obsolete method PauseCapturing
-        public void PauseCapturing(bool pause)
-        {
-            lock (_syncPaused)
-            {
-                _webcamPaused = pause;
-            }
-        }
-
         public void StartCapturing(bool firstTimeCapturing)
         {
             // make sure that the capturing is stopped

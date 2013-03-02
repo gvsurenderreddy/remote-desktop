@@ -18,10 +18,8 @@ namespace GenericDataLayer
         void ShowMainForm(bool close);
         void ShowMyWebcamForm(bool show);
 
-        // todo: remove this method and use the Peer status in the Controller
-        void PauseWebchat(bool pause);
-
         void UpdateLabels(string identity, GenericEnums.RoomType roomType);
+        void ResetLabels(GenericEnums.RoomType roomType);
 
         void UpdateWebcapture(Image image);
 

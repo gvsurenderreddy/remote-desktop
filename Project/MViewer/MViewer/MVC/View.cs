@@ -52,6 +52,17 @@ namespace MViewer
 
         #region public methods
 
+        public void ResetLabels(GenericEnums.RoomType roomType)
+        {
+            // call the labels update for each room type
+            _formActions.UpdateLabels(true, true, roomType);
+            if (roomType == GenericEnums.RoomType.Video)
+            {
+                // reset the audio labels also
+                _formActions.UpdateLabels(true, true, GenericEnums.RoomType.Audio);
+            }
+        }
+
         public void UpdateLabels(string identity, GenericEnums.RoomType roomType)
         {
             PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
@@ -61,11 +72,6 @@ namespace MViewer
             
             // call the labels update for each room type
             _formActions.UpdateLabels(start, pause, roomType);
-        }
-
-        public void PauseWebchat(bool pause)
-        {
-            _formWebCapture.PauseWebchat(pause);
         }
 
         public bool IsRoomActivated(string identity, GenericEnums.RoomType roomType)

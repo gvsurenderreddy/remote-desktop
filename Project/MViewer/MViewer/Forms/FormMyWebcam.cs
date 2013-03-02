@@ -78,11 +78,6 @@ namespace MViewer
             Program.Controller.StartVideoChat(_webcamCapture);
         }
 
-        public void PauseWebchat(bool pause)
-        {
-            _webcamCapture.PauseCapturing(pause);
-        }
-
         #endregion
 
         #region prorieties

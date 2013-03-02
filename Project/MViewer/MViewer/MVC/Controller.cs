@@ -424,6 +424,11 @@ namespace MViewer
 
             _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
                 false);
+
+            if (_view.RoomManager.RoomsLeft() == false)
+            {
+                _view.ResetLabels(GenericEnums.RoomType.Video);
+            }
         }
         void StartVideoChat(string identity)
         {
@@ -548,6 +553,9 @@ namespace MViewer
 
         void PerformVideoChatAction(object sender, RoomActionEventArgs eArgs)
         {
+            string identity = eArgs.Identity; // this will be the active/selected room
+            PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+                    
             switch (eArgs.SignalType)
             {
                 case GenericEnums.SignalType.Start:
@@ -576,29 +584,21 @@ namespace MViewer
                     _view.ShowMyWebcamForm(true);
                     break;
                 case GenericEnums.SignalType.Stop:
-
                     bool sendStopSignal = true;
                     if(sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
                         sendStopSignal = false;
                     }
                     StopVideChat(eArgs.Identity, sendStopSignal);
-
                     break;
                 case GenericEnums.SignalType.Pause:
-
-                    _view.PauseWebchat(true); // todo: stop using Pause all option
-
-                    // todo: use the peer status of the selected chatroom
-                    string identity = string.Empty; // this will be the active/selected room
-                    PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
-                    //peers.Audio = false;
+                    // use the peer status of the selected chatroom
                     peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
                     _model.SessionManager.UpdateSession(identity, peers);
-
                     break;
                 case GenericEnums.SignalType.Resume:
-                    _view.PauseWebchat(false);
+                    peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
+                    _model.SessionManager.UpdateSession(identity, peers);
                     break;
             }
         }

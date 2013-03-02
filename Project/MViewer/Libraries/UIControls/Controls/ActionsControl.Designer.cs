@@ -115,7 +115,7 @@
             this.btnMuteAudio.Name = "btnMuteAudio";
             this.btnMuteAudio.Size = new System.Drawing.Size(66, 23);
             this.btnMuteAudio.TabIndex = 6;
-            this.btnMuteAudio.Text = "Pause";
+            this.btnMuteAudio.Text = "Mute";
             this.btnMuteAudio.UseVisualStyleBackColor = true;
             this.btnMuteAudio.Click += new System.EventHandler(this.BtnAction_Click);
             // 
