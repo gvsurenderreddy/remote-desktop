@@ -28,6 +28,7 @@ namespace GenericDataLayer
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         bool ExitConfirmation();
         void WaitRoomButtonAction(bool wait);
+        bool RequestTransferPermission(string identity, string fileName, long fileSize);
 
         bool WebcaptureClosed
         {

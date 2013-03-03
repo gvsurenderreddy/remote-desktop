@@ -14,6 +14,7 @@ namespace GenericDataLayer
         Contact GetContact(string identity);
         void NotifyContacts(GenericEnums.ContactStatus newStatus);
         void NotifyContacts(string newFriendlyName);
+        void SendFile(string filePath, string identity);
 
         ISessionManager SessionManager
         {

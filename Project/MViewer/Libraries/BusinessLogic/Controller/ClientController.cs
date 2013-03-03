@@ -37,6 +37,23 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public bool SendingPermission(string fileName, long fileSize, string partnerIdentity, string myIdentity)
+        {
+            bool canSend = false;
+            if (_clients != null)
+            {
+                if (_clients.ContainsKey(partnerIdentity))
+                {
+                    MViewerClient client = _clients[partnerIdentity];
+                    if (client != null)
+                    {
+                        canSend = client.SendingPermission(myIdentity, fileName, fileSize);
+                    }
+                }
+            }
+            return canSend;
+        }
+
         public void SendFile(byte[] fileBytes, string partnerIdentity, string fileName)
         {
             if (_clients != null)

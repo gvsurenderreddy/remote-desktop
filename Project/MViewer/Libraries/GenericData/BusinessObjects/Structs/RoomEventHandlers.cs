@@ -60,5 +60,11 @@ namespace GenericDataLayer
             get;
             set;
         }
+
+        public EventHandler FilePermissionObserver
+        {
+            get;
+            set;
+        }
     }
 }

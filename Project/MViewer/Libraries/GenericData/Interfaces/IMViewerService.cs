@@ -12,6 +12,9 @@ namespace GenericDataLayer
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "IVideoChatRoom")]
     public interface IMViewerService
     {
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendingPermission", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendingPermissionResponse")]
+        bool SendingPermission(string senderIdentity, string fileName, long fileSize);
+
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/UpdateContactStatus", ReplyAction = "http://tempuri.org/IVideoChatRoom/UpdateContactStatusResponse")]
         void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus);
 

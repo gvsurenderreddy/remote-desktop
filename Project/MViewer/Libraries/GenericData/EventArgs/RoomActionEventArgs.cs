@@ -26,10 +26,10 @@ namespace GenericDataLayer
             set;
         }
 
-        public string FileName
-        {
-            get;
-            set;
+        public TransferInfo TransferInfo 
+        { 
+            get; 
+            set; 
         }
     }
 }

@@ -98,5 +98,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     {
         base.Channel.SendFile(fileBytes, fileName);
     }
-    
+
+    public bool SendingPermission(string senderIdentity, string fileName, long fileSize)
+    {
+        return base.Channel.SendingPermission(senderIdentity, fileName, fileSize);
+    }
 }

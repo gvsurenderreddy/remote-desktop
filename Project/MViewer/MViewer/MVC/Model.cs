@@ -8,6 +8,8 @@ using DataAccessLayer;
 using Utils;
 using System.Data;
 using BusinessLogicLayer;
+using System.IO;
+using System.Windows.Forms;
 
 namespace MViewer
 {
@@ -43,6 +45,28 @@ namespace MViewer
         #endregion
 
         #region public methods
+
+        public void SendFile(string filePath, string identity)
+        {
+            // send the file via WCF client
+            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            ClientController.AddClient(identity);
+                
+            // ask for sending permission
+            bool hasPermission = ClientController.SendingPermission(Path.GetFileName(filePath), fileStream.Length,
+                identity, _identity.MyIdentity);
+            if (hasPermission)
+            {
+                byte[] fileContent = new byte[fileStream.Length];
+                fileStream.Read(fileContent, 0, fileContent.Length);
+                ClientController.SendFile(fileContent, identity, Path.GetFileName(filePath));
+            }
+            else
+            {
+                MessageBox.Show("Partner refused the transfer", "Transfer denied", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            ClientController.RemoveClient(identity);
+        }
 
         public void NotifyContacts(string newFriendlyName)
         {

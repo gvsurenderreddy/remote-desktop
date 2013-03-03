@@ -52,6 +52,26 @@ namespace MViewer
 
         #region public methods
 
+        public bool RequestTransferPermission(string identity, string fileName, long fileSize)
+        {
+            bool canSend = false;
+
+            string friendlyName = _model.GetContact(identity).FriendlyName;
+            string fileSize2 = ImageConverter.GetSize(fileSize);
+
+            DialogResult dialogResult = MessageBox.Show(
+                string.Format("{0} is sending you the file {1} of {2} long. Permit transfer?",
+                friendlyName, fileName, fileSize2),
+                "Transfer confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                canSend = true;
+            }
+
+            return canSend;
+        }
+
         public void ResetLabels(GenericEnums.RoomType roomType)
         {
             // call the labels update for each room type

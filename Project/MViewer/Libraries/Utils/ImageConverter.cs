@@ -17,6 +17,23 @@ using System.Collections;
 	/// </summary>
 	public static class ImageConverter
 	{
+        public static string GetSize(long bytes)
+        {
+            string[] sizes = { "B", "KB", "MB", "GB" };
+            double len = bytes;
+            int order = 0;
+            while (len >= 1024 && order + 1 < sizes.Length)
+            {
+                order++;
+                len = len / 1024;
+            }
+
+            // Adjust the format string to your preferences. For example "{0:0.#}{1}" would
+            // show a single decimal place, and no space.
+            string result = String.Format("{0:0.##} {1}", len, sizes[order]);
+            return result;
+        }
+
         public static System.Drawing.Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
         {
             Bitmap result = null;

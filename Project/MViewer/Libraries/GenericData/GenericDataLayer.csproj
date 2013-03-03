@@ -59,6 +59,7 @@
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="BusinessObjects\Classes\Presenter.cs" />
+    <Compile Include="BusinessObjects\Classes\TransferInfo.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
     </Compile>

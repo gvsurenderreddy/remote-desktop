@@ -21,5 +21,6 @@ namespace GenericDataLayer
         void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName);
         void WaitRoomButtonAction(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType, bool wait);
         void SendFile(byte[] fileBytes, string partnerIdentity, string fileName);
+        bool SendingPermission(string fileName, long fileSize, string partnerIdentity, string myIdentity);
     }
 }

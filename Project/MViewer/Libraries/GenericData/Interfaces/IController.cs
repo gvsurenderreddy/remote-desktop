@@ -21,5 +21,6 @@ namespace GenericDataLayer
         void RoomClosingObserver(object sender, EventArgs e);
         void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
         void FileTransferObserver(object sender, EventArgs e);
+        void FileTransferPermission(object sender, EventArgs e);
     }
 }

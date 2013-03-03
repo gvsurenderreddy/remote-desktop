@@ -49,7 +49,8 @@ namespace MViewer
                 ContactsObserver = this.ContactRequest,
                 RoomClosingObserver = this.RoomClosingObserver,
                 WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
-                FileTransferObserver = this.FileTransferObserver
+                FileTransferObserver = this.FileTransferObserver,
+                FilePermissionObserver = this.FileTransferPermission
             };
 
             _model = new Model(handlers);
@@ -158,6 +159,13 @@ namespace MViewer
 
         #region public methods
 
+        public void FileTransferPermission(object sender, EventArgs e)
+        {
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            bool canSend = _view.RequestTransferPermission(args.Identity, args.TransferInfo.FileName, args.TransferInfo.FileSize);
+            args.TransferInfo.HasPermission = canSend;
+        }
+
         public void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
         {
             // update the active room identity
@@ -208,19 +216,25 @@ namespace MViewer
 
                 // open file path dialog
 
-                string extension = Path.GetExtension(args.FileName);// get file extension
+                string extension = Path.GetExtension(args.TransferInfo.FileName);// get file extension
 
                 // Displays a SaveFileDialog so the user can save the Image
                 // assigned to Button2.
                 SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                 saveFileDialog1.Filter = "File|*." + extension + "";
                 saveFileDialog1.Title = "Save File";
-                saveFileDialog1.FileName = args.FileName;
-                saveFileDialog1.ShowDialog();
+                saveFileDialog1.FileName = args.TransferInfo.FileName;
+                DialogResult dialogResult = saveFileDialog1.ShowDialog();
 
                 // If the file name is not an empty string open it for saving.
-                if (saveFileDialog1.FileName != "")
+                if (dialogResult == DialogResult.OK && saveFileDialog1.FileName != "")
                 {
+                    // remove the existing file if the user confirmed
+                    if (File.Exists(saveFileDialog1.FileName))
+                    {
+                        File.Delete(saveFileDialog1.FileName);
+                    }
+
                     // Saves the Image via a FileStream created by the OpenFile method.
                     System.IO.FileStream fs =
                        (System.IO.FileStream)saveFileDialog1.OpenFile();
@@ -306,18 +320,8 @@ namespace MViewer
                         if (fileDialog.ShowDialog() == DialogResult.OK)
                         {
                             filePath = fileDialog.FileName;
-                            // the file to send will be placed in the 'sender' obj
-
-                            string selectedPartner = e.Identity;
-
-                            // send the file via WCF client
-                            // todo: move this code to a file transfer module
-                            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                            _model.ClientController.AddClient(e.Identity);
-                            byte[] fileContent = new byte[fileStream.Length];
-                            fileStream.Read(fileContent, 0, fileContent.Length);
-                            _model.ClientController.SendFile(fileContent, e.Identity, Path.GetFileName(filePath));
-                            _model.ClientController.RemoveClient(e.Identity);
+                            _model.SendFile(filePath, e.Identity);
+                            
                         }
                     }
                     else

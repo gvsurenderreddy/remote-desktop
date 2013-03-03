@@ -38,13 +38,34 @@ namespace GenericDataLayer
 
         #region public methods
 
+        public bool SendingPermission(string senderIdentity, string fileName, long fileSize)
+        {
+            bool canSend = false;
+
+            TransferInfo transferInfo = new TransferInfo()
+                {
+                    FileName = fileName,
+                    FileSize = fileSize
+                };
+
+            // request permission from the user
+            _controllerHandlers.FilePermissionObserver.Invoke(this, new RoomActionEventArgs()
+            {
+                Identity = senderIdentity,
+                RoomType = GenericEnums.RoomType.Send,
+                TransferInfo = transferInfo
+            });
+            canSend = transferInfo.HasPermission;
+            return canSend;
+        }
+
         public void SendFile(byte[] fileStream, string fileName)
         {
             // SendFile
             _controllerHandlers.FileTransferObserver.Invoke(fileStream, new RoomActionEventArgs()
             {
                 RoomType = GenericEnums.RoomType.Send,
-                FileName = fileName
+                TransferInfo = new TransferInfo() { FileName = fileName }
             });
         }
 
