@@ -235,6 +235,8 @@ namespace MViewer
                         File.Delete(saveFileDialog1.FileName);
                     }
 
+                    // todo: add a progress bar (into a TransfersForm)
+
                     // Saves the Image via a FileStream created by the OpenFile method.
                     System.IO.FileStream fs =
                        (System.IO.FileStream)saveFileDialog1.OpenFile();
