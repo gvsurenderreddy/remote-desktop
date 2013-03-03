@@ -1,0 +1,14 @@
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingCommon\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingCommon\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingCommon\DesktopSharingCommon\obj\Debug\ResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingCommon\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\Project\Libraries\DesktopSharingCommon\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\Libraries\DesktopSharingCommon\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\Libraries\DesktopSharingCommon\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\Libraries\DesktopSharingCommon\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\Libraries\DesktopSharingCommon\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.csprojResolveAssemblyReference.cache

@@ -4,59 +4,76 @@ using System.Linq;
 using System.Text;
 using GenericDataLayer;
 using System.Threading;
+using Utils;
 
 namespace GenericDataLayer
 {
-    public class Presenter
+    public class Presenter : IPresenter
     {
         #region private members
 
         string _identity;
         WebcamCapture _webcamCapture;
         int _timerInterval;
-        int _height;
-        int _width;
+        Structures.ScreenSize _videoSize;
+        static bool _firstTimeCapturing;
 
         #endregion
 
         #region c-tor
 
-        public Presenter(WebcamCapture captureControl, string identity, int timerInterval, int height, int width, EventHandler webCamImageCaptured)
+        public Presenter(PresenterSettings presenterSettings)
         {
-            _identity = identity;
-            _timerInterval = timerInterval;
-            _width = width;
-            _height = height;
+            _identity = presenterSettings.identity;
+            _timerInterval = presenterSettings.timerInterval;
+            _videoSize = presenterSettings.videoSize;
             // initialize the webcam capture obj
-            _webcamCapture = captureControl;
+            _webcamCapture = presenterSettings.captureControl;
             // initialize the image capture size
-            _webcamCapture.ImageHeight = _height;
-            _webcamCapture.ImageWidth = _width;
+            _webcamCapture.ImageHeight = _videoSize.Height;
+            _webcamCapture.ImageWidth = _videoSize.Width;
+
+            _firstTimeCapturing = true;
 
             // bind the image captured event
-            _webcamCapture.ImageCaptured += new WebcamCapture.WebCamEventHandler(webCamImageCaptured);
+            _webcamCapture.ImageCaptured += new WebcamCapture.WebCamEventHandler(presenterSettings.webCamImageCaptured);
         }
 
         #endregion
 
-        #region public methods
+        #region IPresenter Members
 
-        
-
-        public void StartPresentation(bool firstTimeCapturing)
+        public void StartVideoPresentation()
         {
             // start the video capturing
-            _webcamCapture.StartCapturing(firstTimeCapturing);
+            _webcamCapture.StartCapturing(_firstTimeCapturing);
+            _firstTimeCapturing = false;
         }
 
-        public void StopPresentation()
+        public void StopVideoPresentation()
         {
             _webcamCapture.StopCapturing();
         }
 
-        #endregion
+        public void StartAudioPresentation()
+        {
+            throw new NotImplementedException();
+        }
 
-        #region private methods
+        public void StopAudioPresentation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StartRemotingPresentation()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StopRemotingPresentation()
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }

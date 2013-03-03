@@ -30,7 +30,8 @@ namespace MViewer
 
         ManualResetEvent _syncCaptureActivity = new ManualResetEvent(true);
 
-        Presenter _presenter;
+        PresenterSettings _presenterSettings;
+
         IView _view;
         IModel _model;
 
@@ -40,8 +41,6 @@ namespace MViewer
 
         public Controller()
         {
-            // initialize the model
-
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
                 ClientConnectedObserver = this.ClientConnected,
@@ -53,9 +52,13 @@ namespace MViewer
                 FilePermissionObserver = this.FileTransferPermission
             };
 
+           // initialize the model
             _model = new Model(handlers);
             // initalize the view and bind it to the model
             _view = new View(_model);
+
+            InitializePresenterSettings();
+            
         }
 
         #endregion
@@ -95,7 +98,7 @@ namespace MViewer
                         IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                         if (connectedSessions.Count == 0)
                         {
-                            _presenter.StopPresentation();
+                            PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
                         }
                         else
                         {
@@ -118,6 +121,9 @@ namespace MViewer
                                 {
                                     // send the capture if the session isn't paused
                                     transferStatus.Video = true;
+
+                                    // todo: enforce web timer start for partner side
+
                                     _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
                                         _model.Identity.MyIdentity);
                                 }
@@ -139,7 +145,7 @@ namespace MViewer
                 }
                 else
                 {
-                    _presenter.StopPresentation();
+                    PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
                 }
             }
             catch (Exception ex)
@@ -187,21 +193,11 @@ namespace MViewer
         public void StartVideoChat(WebcamCapture webcamControl)
         {
             // create Presenter and start the presentation
-            int timerInterval = 100;
-            int height = 354, width = 360;
-
             // initialize the presenter that will send webcam captures to all Server Sessions
-            if (_presenter == null)
-            {
-                _presenter = PresenterManager.Instance(webcamControl, _model.Identity.MyIdentity,
-                    timerInterval, height, width,
-                    new EventHandler(this.WebCamImageCaptured));
-                _presenter.StartPresentation(true);
-            }
-            else
-            {
-                _presenter.StartPresentation(false);
-            }
+
+            _presenterSettings.captureControl = webcamControl;
+            PresenterManager.Instance(_presenterSettings).StartVideoPresentation();
+
         }
 
         public void FileTransferObserver(object sender, EventArgs e)
@@ -452,6 +448,26 @@ namespace MViewer
 
         #region private methods
 
+        void InitializePresenterSettings()
+        {
+            int timerInterval = 100;
+            int height = 354, width = 360;
+
+            _presenterSettings = new PresenterSettings()
+            {
+                identity = _model.Identity.MyIdentity,
+                    timerInterval = timerInterval, 
+                    videoSize =
+                    new Structures.ScreenSize()
+                    {
+                        Height = height,
+                        Width = width
+                    },
+                    webCamImageCaptured =
+                    new EventHandler(this.WebCamImageCaptured)
+            };
+        }
+
         void StopVideChat(string identity, bool sendStopSignal)
         {
             // tell the partner to pause capturing & sending while processing room Stop command
@@ -608,10 +624,8 @@ namespace MViewer
 
         void StopWebCapturing()
         {
-            if (_presenter != null)
-            {
-                _presenter.StopPresentation();
-            }
+            PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
+            
             Thread.Sleep(1000);
             while (_capturePending)
             {

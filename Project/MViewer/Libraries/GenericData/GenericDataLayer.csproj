@@ -59,6 +59,7 @@
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="BusinessObjects\Classes\Presenter.cs" />
+    <Compile Include="BusinessObjects\Classes\PresenterMembers.cs" />
     <Compile Include="BusinessObjects\Classes\TransferInfo.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
@@ -79,6 +80,7 @@
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\IMViewerChannel.cs" />
     <Compile Include="Interfaces\IMViewerService.cs" />
+    <Compile Include="Interfaces\IPresenter.cs" />
     <Compile Include="Interfaces\IRemotingRoom.cs" />
     <Compile Include="Interfaces\IRoom.cs" />
     <Compile Include="Interfaces\IRoomManager.cs" />

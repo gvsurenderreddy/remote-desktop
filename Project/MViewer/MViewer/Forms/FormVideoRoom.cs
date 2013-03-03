@@ -18,6 +18,7 @@ namespace MViewer
         #region private members
 
         bool _formClosing;
+        ManualResetEvent _syncClosing = new ManualResetEvent(true);
 
         #endregion
 
@@ -53,12 +54,9 @@ namespace MViewer
         private void FormVideoRoom_FormClosing(object sender, FormClosingEventArgs e)
         {
             _formClosing = true;
-            if (e.CloseReason == CloseReason.UserClosing)
-            {
-                e.Cancel = true; // chatroom can be closed only by using the UI button
-            }
+
             // todo: later - perform other specific actions when the Video Chat room is closing
-                
+            _syncClosing.Set();
         }
 
         #endregion
@@ -72,6 +70,7 @@ namespace MViewer
 
         public void SetPicture(Image picture)
         {
+            _syncClosing.WaitOne();
             if (!_formClosing)
             {
                 videoControl.SetPicture(picture);
@@ -80,12 +79,15 @@ namespace MViewer
 
         public void CloseRoom()
         {
-            if (_formClosing == false)
-            {
-                _formClosing = true;
-                Thread.Sleep(1000);
-                this.BeginInvoke(new Action(() => this.Close()));
-            }
+            _syncClosing.Reset();
+
+            ////if (_formClosing == false)
+            //{
+            //    _formClosing = true;
+                //Thread.Sleep(1000);
+                //this.BeginInvoke(new Action(() => this.Close()));
+                this.Close();
+            //}
         }
 
         public void ShowRoom()
