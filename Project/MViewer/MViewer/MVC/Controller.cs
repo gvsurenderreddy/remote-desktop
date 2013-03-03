@@ -101,8 +101,6 @@ namespace MViewer
                         {
                             foreach (string receiverIdentity in connectedSessions)
                             {
-                                //Thread.Sleep(10 * 1000);
-
                                 TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
                                 while (transfer.IsVideoUpdating)
                                 {
