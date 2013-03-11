@@ -37,10 +37,10 @@
             // 
             // pbFileProgress
             // 
-            this.pbFileProgress.Location = new System.Drawing.Point(3, 27);
+            this.pbFileProgress.Location = new System.Drawing.Point(3, 55);
             this.pbFileProgress.Maximum = 10;
             this.pbFileProgress.Name = "pbFileProgress";
-            this.pbFileProgress.Size = new System.Drawing.Size(385, 23);
+            this.pbFileProgress.Size = new System.Drawing.Size(378, 23);
             this.pbFileProgress.Step = 1;
             this.pbFileProgress.TabIndex = 0;
             // 
@@ -58,21 +58,21 @@
             this.txtFilename.Enabled = false;
             this.txtFilename.Location = new System.Drawing.Point(55, 4);
             this.txtFilename.Name = "txtFilename";
-            this.txtFilename.Size = new System.Drawing.Size(172, 20);
+            this.txtFilename.Size = new System.Drawing.Size(326, 20);
             this.txtFilename.TabIndex = 2;
             // 
             // txtPartner
             // 
             this.txtPartner.Enabled = false;
-            this.txtPartner.Location = new System.Drawing.Point(288, 4);
+            this.txtPartner.Location = new System.Drawing.Point(55, 30);
             this.txtPartner.Name = "txtPartner";
-            this.txtPartner.Size = new System.Drawing.Size(100, 20);
+            this.txtPartner.Size = new System.Drawing.Size(326, 20);
             this.txtPartner.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(233, 7);
+            this.label2.Location = new System.Drawing.Point(8, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 3;
@@ -82,7 +82,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 58);
+            this.ClientSize = new System.Drawing.Size(387, 83);
+            this.ControlBox = false;
             this.Controls.Add(this.txtPartner);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtFilename);
