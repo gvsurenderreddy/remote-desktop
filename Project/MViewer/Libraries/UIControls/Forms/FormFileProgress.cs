@@ -30,7 +30,7 @@ namespace UIControls.Forms
             // Set Minimum to 1 to represent the first file being copied.
             pbFileProgress.Minimum = 1;
             // Set Maximum to the total number of files to copy.
-            pbFileProgress.Maximum = 10;
+            pbFileProgress.Maximum = 50;
             // Set the initial value of the ProgressBar.
             pbFileProgress.Value = 1;
             // Set the Step property to a value of 1 to represent each file being copied.
