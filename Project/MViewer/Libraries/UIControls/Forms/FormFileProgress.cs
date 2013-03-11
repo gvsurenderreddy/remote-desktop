@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,10 +25,47 @@ namespace UIControls.Forms
             txtFilename.Text = fileName;
             txtPartner.Text = partner;
 
+            // Display the ProgressBar control.
+            pbFileProgress.Visible = true;
+            // Set Minimum to 1 to represent the first file being copied.
+            pbFileProgress.Minimum = 1;
+            // Set Maximum to the total number of files to copy.
+            pbFileProgress.Maximum = 10;
+            // Set the initial value of the ProgressBar.
+            pbFileProgress.Value = 1;
+            // Set the Step property to a value of 1 to represent each file being copied.
+            pbFileProgress.Step = 1;
+
+        }
+
+        public void StartPB()
+        {
             _isRunning = true;
-            pbFileProgress.Value = 0;
-            ThreadPool.QueueUserWorkItem(new WaitCallback(StartProgress));
-            //StartProgress(null);
+            while (_isRunning)
+            {
+                if (pbFileProgress.Value < pbFileProgress.Maximum)
+                {
+                    Thread.Sleep(500);
+                    UpdatePB();
+                }
+                else
+                {
+                    //pbFileProgress.Value = 1;
+                    if (pbFileProgress.InvokeRequired)
+                    {
+                        pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.Value = 1; }));
+                    }
+                }
+
+                lock (_syncProgress)
+                {
+                    if (!_isRunning)
+                    {
+                        break;
+                    }
+                }
+            }
+            this.Invoke(new MethodInvoker(delegate() { this.Close(); }));
         }
 
         public void StopProgress()
@@ -37,47 +75,17 @@ namespace UIControls.Forms
                 _isRunning = false;
             }
         }
-
-        delegate void UpdateProgress();
-
-        void ResetPB()
-        {
-            pbFileProgress.Value = 0; pbFileProgress.Refresh();
-        }
+        delegate void MyHandlerDelegate();
 
         void UpdatePB()
         {
-            pbFileProgress.Value += 1; pbFileProgress.Refresh();
+            //pbFileProgress.PerformStep();
+            if (pbFileProgress.InvokeRequired)
+            {
+                pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.PerformStep(); }));
+            }
+
         }
 
-        void StartProgress(object state)
-        {
-            while (_isRunning)
-            {
-                if (pbFileProgress.Value < pbFileProgress.Maximum)
-                {
-                    pbFileProgress.BeginInvoke(new UpdateProgress(
-                    UpdatePB
-                        )
-                    );
-                }
-                else
-                {
-                    pbFileProgress.BeginInvoke(new UpdateProgress(
-                      ResetPB
-                          )
-                      );
-                    
-                }
-               
-                lock (_syncProgress)
-                {
-                    if (!_isRunning)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
     }
 }

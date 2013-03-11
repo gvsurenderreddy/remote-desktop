@@ -208,22 +208,38 @@ namespace MViewer
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     filePath = fileDialog.FileName;
+                    FormFileProgress fileProgressFrom = null;
                     bool sent = false;
                     Thread t = new Thread(delegate()
                     {
-                        FormFileProgress fileProgressFrom = new FormFileProgress(
+                        fileProgressFrom = new FormFileProgress(
                             Path.GetFileName(filePath), contact.FriendlyName);
-                        fileProgressFrom.Show();
-                        while (!sent)
-                        {
-                            Thread.Sleep(500);
-                        }
-                        fileProgressFrom.StopProgress();
-                        fileProgressFrom.Close();
+
+                        Application.Run(fileProgressFrom);
+
+
+                        //Thread.Sleep(1000);
+                        //while (sent == false)
+                        //{
+                        //    Thread.Sleep(500);
+                        //}
+                        //fileProgressFrom.StartPB();
                     });
-                    t.Start();
+                    t.Start(); 
+                    Thread.Sleep(500);
+                    Thread t2 = new Thread(delegate()
+                    {
+                        fileProgressFrom.StartPB();
+                    });
+                    t2.Start();
                     _model.SendFile(filePath, args.Identity);
                     sent = true;
+                   
+                    if (fileProgressFrom != null)
+                    {
+                        fileProgressFrom.StopProgress();
+                    }               
+                   
                 }
             }
             else

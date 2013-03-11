@@ -41,6 +41,7 @@
             this.pbFileProgress.Maximum = 10;
             this.pbFileProgress.Name = "pbFileProgress";
             this.pbFileProgress.Size = new System.Drawing.Size(385, 23);
+            this.pbFileProgress.Step = 1;
             this.pbFileProgress.TabIndex = 0;
             // 
             // label1
@@ -54,6 +55,7 @@
             // 
             // txtFilename
             // 
+            this.txtFilename.Enabled = false;
             this.txtFilename.Location = new System.Drawing.Point(55, 4);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(172, 20);
@@ -61,6 +63,7 @@
             // 
             // txtPartner
             // 
+            this.txtPartner.Enabled = false;
             this.txtPartner.Location = new System.Drawing.Point(288, 4);
             this.txtPartner.Name = "txtPartner";
             this.txtPartner.Size = new System.Drawing.Size(100, 20);
