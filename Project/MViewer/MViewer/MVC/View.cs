@@ -155,34 +155,10 @@ namespace MViewer
             }
         }
 
-        //public IntPtr ShowRoomForm(object sender, EventArgs e) // GenericEnums.FrontEndActionType roomType, string friendlyName, string identity)
-        //{
-        //    // todo: implement ShowRoomForm - if necessary
-        //    RoomButtonActionEventArgs args = (RoomButtonActionEventArgs)e;
-        //    IRoom room = null;
-        //    IntPtr handle = IntPtr.Zero;
-        //    switch(args.ActionType)
-        //    {
-        //        case GenericEnums.RoomButtonActionType.Audio:
-
-        //            break;
-        //        case GenericEnums.RoomButtonActionType.Remoting:
-
-        //            break;
-        //        case GenericEnums.RoomButtonActionType.Video:
-        //            room = new FormVideoRoom(ref handle);
-        //            room.SetPartnerName(args.FriendlyName);
-        //            OpenRoomForm(room);
-        //            break;
-        //    }
-        //    _roomManager.AddRoom(args.Identity, room);
-        //    return handle;
-        //}
-        
         public void NotifyContactsObserver()
         {
-            EventHandlers.ContactsEventHandler contactsEventHandler = 
-                (EventHandlers.ContactsEventHandler)_observers[typeof(EventHandlers.ContactsEventHandler)];
+            Delegates.ContactsEventHandler contactsEventHandler =
+                (Delegates.ContactsEventHandler)_observers[typeof(Delegates.ContactsEventHandler)];
             contactsEventHandler.Invoke(this, new ContactsEventArgs() 
             { 
                 ContactsDV = _model.Contacts,
@@ -192,18 +168,12 @@ namespace MViewer
 
         public void NotifyIdentityObserver()
         {
-            EventHandlers.IdentityEventHandler identityObserver = (EventHandlers.IdentityEventHandler)_observers[typeof(EventHandlers.IdentityEventHandler)];
+            Delegates.IdentityEventHandler identityObserver = (Delegates.IdentityEventHandler)_observers[typeof(Delegates.IdentityEventHandler)];
             identityObserver.Invoke(this, new IdentityEventArgs() 
             {
                 FriendlyName = _model.FriendlyName,
                 MyIdentity = _model.Identity.MyIdentity
             });
-        }
-
-        public void NotifyActionsObserver()
-        {
-            EventHandlers.ActionsEventHandler actionsObserver = (EventHandlers.ActionsEventHandler)_observers[typeof(EventHandlers.ActionsEventHandler)];
-            actionsObserver.Invoke(this, null);
         }
 
         public void ShowMainForm(bool close)
@@ -224,13 +194,23 @@ namespace MViewer
 
         public void RoomButtonAction(object sender, EventArgs e)
         {
-            if (_formWebCapture != null)
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            if (args.RoomType == GenericEnums.RoomType.Video && _formWebCapture != null)
             {
+                // put the video transfers on hold
                 _formWebCapture.WaitRoomButtonAction(true);
             }
 
+            // todo: put the remoting transfers on hold
+
+
+
+
+            // todo: put the audio transfers on hold
+
+
+
             string activeRoom = _roomManager.ActiveRoom;
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
             if (string.IsNullOrEmpty(activeRoom))
             {
                 // this is the first opened room
@@ -256,10 +236,17 @@ namespace MViewer
                 Program.Controller.RoomButtonAction(sender, args);
             }
 
-            if (_formWebCapture != null)
+            if (args.RoomType == GenericEnums.RoomType.Video && _formWebCapture != null)
             {
+                // release video lock
                 _formWebCapture.WaitRoomButtonAction(false);
             }
+
+            // todo: release audio lock
+
+
+            // todo: release remoting lock
+
         }
 
         public void UpdateWebcapture(Image image)

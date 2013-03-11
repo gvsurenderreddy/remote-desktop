@@ -11,6 +11,7 @@ using BusinessLogicLayer;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
+using UIControls.Forms;
 
 namespace MViewer
 {
@@ -21,16 +22,20 @@ namespace MViewer
         /// <summary>
         /// flag used to tell the capturing thread to wait before ending it's activity
         /// </summary>
-        bool _capturePending;
+        bool _videoCapturePending;
 
         /// <summary>
         /// object used to synchronize the capture sent to partners
         /// </summary>
-        readonly object _syncCaptureSending = new object();
+        readonly object _syncVideoCaptureSending = new object();
 
-        ManualResetEvent _syncCaptureActivity = new ManualResetEvent(true);
+        ManualResetEvent _syncVideoCaptureActivity = new ManualResetEvent(true);
 
         PresenterSettings _presenterSettings;
+
+        IRoomCommandInvoker _roomCommandInvoker;
+
+        ControllerRoomHandlers _roomHandlers;
 
         IView _view;
         IModel _model;
@@ -46,11 +51,13 @@ namespace MViewer
                 ClientConnectedObserver = this.ClientConnected,
                 VideoCaptureObserver = this.NotifyVideoCaptureObserver,
                 ContactsObserver = this.ContactRequest,
-                RoomClosingObserver = this.RoomClosingObserver,
+                RoomClosingObserver = this.RoomButtonAction,
                 WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                 FileTransferObserver = this.FileTransferObserver,
                 FilePermissionObserver = this.FileTransferPermission
             };
+
+            InitializeRoomHandlers();
 
            // initialize the model
             _model = new Model(handlers);
@@ -69,12 +76,12 @@ namespace MViewer
         {
             try
             {
-                _syncCaptureActivity.WaitOne(); // wait for any room action to end
+                _syncVideoCaptureActivity.WaitOne(); // wait for any room action to end
 
-                _capturePending = true;
+                _videoCapturePending = true;
                 if (_view.WebcaptureClosed == false)
                 {
-                    lock (_syncCaptureSending)
+                    lock (_syncVideoCaptureSending)
                     {
                         VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
                         // display the captured picture
@@ -155,7 +162,7 @@ namespace MViewer
             }
             finally
             {
-                _capturePending = false;
+                _videoCapturePending = false;
             }
         }
 
@@ -163,13 +170,7 @@ namespace MViewer
 
         #region public methods
 
-        public void FileTransferPermission(object sender, EventArgs e)
-        {
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            bool canSend = _view.RequestTransferPermission(args.Identity, args.TransferInfo.FileName, args.TransferInfo.FileSize);
-            args.TransferInfo.HasPermission = canSend;
-        }
-
+        // todo: convert this to an event handler , use it in the Video Form as observer
         public void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
         {
             // update the active room identity
@@ -178,11 +179,7 @@ namespace MViewer
             _view.UpdateLabels(newIdentity, roomType);
         }
 
-        public void GetContactsStatus()
-        {
-            _model.PingContacts(null);
-        }
-
+        // todo: convert this to an event handler , use it in the Main Form as observer
         public void IdentityObserver(object sender, IdentityEventArgs e)
         {
             _model.Identity.UpdateFriendlyName(e.FriendlyName);
@@ -190,6 +187,7 @@ namespace MViewer
             _model.NotifyContacts(e.FriendlyName);
         }
 
+        // todo: convert this to an event handler , use it in the Webcam Form as observer
         public void StartVideoChat(WebcamCapture webcamControl)
         {
             // create Presenter and start the presentation
@@ -200,16 +198,174 @@ namespace MViewer
 
         }
 
-        public void FileTransferObserver(object sender, EventArgs e)
+        void SendFileHandler(object sender, RoomActionEventArgs args)
+        {
+            if (_model.ClientController.IsContactOnline(args.Identity))
+            {
+                Contact contact = _model.GetContact(args.Identity);
+                string filePath = string.Empty;
+                FileDialog fileDialog = new OpenFileDialog();
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = fileDialog.FileName;
+                    bool sent = false;
+                    Thread t = new Thread(delegate()
+                    {
+                        FormFileProgress fileProgressFrom = new FormFileProgress(
+                            Path.GetFileName(filePath), contact.FriendlyName);
+                        fileProgressFrom.Show();
+                        while (!sent)
+                        {
+                            Thread.Sleep(500);
+                        }
+                        fileProgressFrom.StopProgress();
+                        fileProgressFrom.Close();
+                    });
+                    t.Start();
+                    _model.SendFile(filePath, args.Identity);
+                    sent = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selected person is offline", "Cannot send", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        // todo: convert this to an event handler , use it in the View as observer
+        public void RoomButtonAction(object sender, EventArgs e)
+        {
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            _roomCommandInvoker.PerformCommand(sender, args);
+        }
+
+        // todo: convert this to an event handler , use it in the Main Form as observer
+        public Contact PerformContactsOperation(object sender, ContactsEventArgs e)
+        {
+            Contact contact = null;
+            if (e.Operation == GenericEnums.ContactsOperation.Load)
+            {
+                // don't need to send signal to the Model
+                _view.NotifyContactsObserver();
+            }
+            else
+            {
+                // add/remove/get/status/name update
+                contact = _model.PerformContactOperation(e);
+                _view.NotifyContactsObserver();
+            }
+            return contact;
+        }
+
+        public void StartApplication()
+        {
+            // bind the observers
+            _view.BindObservers(true);
+
+            // open main form
+            _view.ShowMainForm(false);
+            _view.NotifyContactsObserver();
+
+            // todo: use manual reset event instead of thread.sleep(0)
+            Thread.Sleep(2000);
+
+            _view.NotifyIdentityObserver();
+            _model.ServerController.StartServer();
+
+            Thread.Sleep(2000);
+
+            // ping every single contact in the list and update it's status
+            _model.PingContacts(null);
+
+            // notify all online contacts that you came on too
+            _model.NotifyContacts(GenericEnums.ContactStatus.Online);
+        }
+
+        public void StopApplication()
+        {
+            // todo: update the StopApplication method with other actions
+
+            // check for running video/audio/remoting chats
+            bool canExit = _view.ExitConfirmation();
+            if (canExit)
+            {
+                // stop all active rooms
+                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
+                foreach (string identity in partnerIdentities)
+                {
+                    StopVideChat(null, new RoomActionEventArgs()
+                        {
+                            Identity = identity,
+                            RoomType = GenericEnums.RoomType.Video,
+                            SignalType = GenericEnums.SignalType.Stop 
+                        });
+                }
+                // stop my webcapture form
+                StopWebCapturing();
+
+                // todo: stop the audio & remoting rooms also
+
+                // unbind the observers
+                _view.BindObservers(false);
+
+                _model.ServerController.StopServer();
+
+                // notify all contacts that you exited the chat
+                _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+
+                // exit the environment
+                Environment.Exit(0);
+            }
+        }
+
+        #endregion
+
+        #region private methods
+
+        void VideoStart(object sender, RoomActionEventArgs args)
+        {
+            // open new Video Chat form to receive the captures
+            StartVideoChat(args.Identity);
+
+            // I am going to send my captures by using the below client
+            _model.ClientController.AddClient(args.Identity);
+            _model.ClientController.StartClient(args.Identity);
+
+            // create client session
+            Session clientSession = new ClientSession(args.Identity);
+            switch (args.RoomType)
+            {
+                case GenericEnums.RoomType.Audio:
+                    clientSession.AudioSessionState = GenericEnums.SessionState.Pending;
+                    break;
+                case GenericEnums.RoomType.Video:
+                    clientSession.AudioSessionState = GenericEnums.SessionState.Pending;
+                    clientSession.VideoSessionState = GenericEnums.SessionState.Pending;
+                    break;
+            }
+            // save the proxy to which we are sending the webcam captures
+            _model.SessionManager.AddSession(clientSession);
+
+            // initialize the webcamCapture form
+            // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
+            _view.ShowMyWebcamForm(true);
+        }
+
+        void ClientConnected(object sender, EventArgs e)
+        {
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            _roomCommandInvoker.PerformCommand(sender, args);
+        }
+
+        void FileTransferObserver(object sender, EventArgs e)
         {
             Thread t = new Thread(delegate()
             {
                 RoomActionEventArgs args = (RoomActionEventArgs)e;
 
-                byte[] buffer = (byte[])sender;
+                byte[] buffer = (byte[])sender; // this is the file sent
 
                 // open file path dialog
-
                 string extension = Path.GetExtension(args.TransferInfo.FileName);// get file extension
 
                 // Displays a SaveFileDialog so the user can save the Image
@@ -246,207 +402,33 @@ namespace MViewer
             t.Join();
         }
 
-        public void RoomClosingObserver(object sender, EventArgs e)
+        void FileTransferPermission(object sender, EventArgs e)
         {
             RoomActionEventArgs args = (RoomActionEventArgs)e;
-            switch (args.RoomType)
+            bool canSend = _view.RequestTransferPermission(args.Identity, args.TransferInfo.FileName, args.TransferInfo.FileSize);
+            args.TransferInfo.HasPermission = canSend;
+        }
+
+        void InitializeRoomHandlers()
+        {
+            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
+            videoDelegates.Add(GenericEnums.SignalType.Start, this.VideoStart);
+            videoDelegates.Add(GenericEnums.SignalType.Stop, this.StopVideChat);
+            videoDelegates.Add(GenericEnums.SignalType.Pause, this.PauseVideo);
+            videoDelegates.Add(GenericEnums.SignalType.Resume, this.ResumeVideo);
+
+            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
+            transferDelegates.Add(GenericEnums.SignalType.Start, this.SendFileHandler);
+
+            _roomHandlers = new ControllerRoomHandlers()
             {
-                case GenericEnums.RoomType.Audio:
-
-                    break;
-                case GenericEnums.RoomType.Video:
-                        RoomButtonAction(sender, args);
-                    break;
-                case GenericEnums.RoomType.Remoting:
-
-                    break;
-            }
-
+                // todo: add audio & remoting handlers handlers by signal type
+                Video = videoDelegates,
+                Transfer = transferDelegates
+            };
+       
+            _roomCommandInvoker = new RoomCommandInvoker(_roomHandlers);
         }
-
-        public void ClientConnected(object sender, EventArgs e)
-        {
-            // todo: complete implementation of ClientConnected
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            switch (args.RoomType)
-            {
-                case GenericEnums.RoomType.Audio:
-
-                    break;
-                case GenericEnums.RoomType.Video:
-                    // open new Video Chat form to receive the captures
-                    Thread t = new Thread(delegate()
-                    {
-                        StartVideoChat(args.Identity);
-                    });
-                    t.SetApartmentState(ApartmentState.STA);
-                    t.Start();
-                    // open my webcam form and send my captures to the connected contact
-                    Program.Controller.RoomButtonAction(sender, args);
-
-                    break;
-                case GenericEnums.RoomType.Remoting:
-
-                    break;
-                case GenericEnums.RoomType.Send:
-
-                    break;
-            }
-        }
-
-        public void RoomButtonAction(object sender, RoomActionEventArgs e)
-        {
-            _syncCaptureActivity.Reset();
-
-            // perform specific action when room action event has been triggered
-            switch (e.RoomType)
-            {
-                case GenericEnums.RoomType.Audio:
-
-                    break;
-                case GenericEnums.RoomType.Remoting:
-
-                    break;
-                case GenericEnums.RoomType.Send:
-
-                    if (_model.ClientController.IsContactOnline(e.Identity))
-                    {
-                        string filePath = string.Empty;
-                        FileDialog fileDialog = new OpenFileDialog();
-                        if (fileDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            filePath = fileDialog.FileName;
-                            _model.SendFile(filePath, e.Identity);
-                            
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Selected person is offline", "Cannot send", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                   
-                    break;
-                case GenericEnums.RoomType.Video:
-                    switch (e.SignalType)
-                    {
-                        case GenericEnums.SignalType.Start:
-                            // start the video chat
-                            PerformVideoChatAction(sender, e);
-                            break;
-                        case GenericEnums.SignalType.Pause:
-                            // pause the video chat (stop sending the captured images, don't disconnect the webcam yet)
-                            PerformVideoChatAction(sender, e);
-                            break;
-                        case GenericEnums.SignalType.Resume:
-                            PerformVideoChatAction(sender, e);
-                            break;
-                        case GenericEnums.SignalType.Stop:
-                            PerformVideoChatAction(sender, e);
-                            // close the webcapture form if there s no room left
-                            if (!_view.RoomManager.RoomsLeft())
-                            {
-                                StopWebCapturing();
-                            }
-                            break;
-                    }
-                    break;
-            }
-            _syncCaptureActivity.Set();
-        }
-
-        public Contact PerformContactsOperation(object sender, ContactsEventArgs e)
-        {
-            Contact contact = null;
-            if (e.Operation == GenericEnums.ContactsOperation.Load)
-            {
-                // don't need to send signal to the Model
-                NotifyContactsObserver();
-            }
-            else
-            {
-                // add/remove/get/status/name update
-                contact = _model.PerformContactOperation(e);
-                NotifyContactsObserver();
-            }
-            return contact;
-        }
-
-        public void StartApplication()
-        {
-            // bind the observers
-            _view.BindObservers(true);
-
-            // open main form
-            _view.ShowMainForm(false);
-            NotifyContactsObserver();
-
-            // todo: use manual reset event instead of thread.sleep(0)
-            Thread.Sleep(2000);
-
-            _view.NotifyIdentityObserver();
-            _model.ServerController.StartServer();
-
-            Thread.Sleep(2000);
-
-            // ping every single contact in the list and update it's status
-            GetContactsStatus();
-
-            // notify all online contacts that you came on too
-            _model.NotifyContacts(GenericEnums.ContactStatus.Online);
-        }
-
-        public void StopApplication()
-        {
-            // todo: update the StopApplication method with other actions
-
-            // check for running video/audio/remoting chats
-            bool canExit = _view.ExitConfirmation();
-            if (canExit)
-            {
-                // stop all active rooms
-                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
-                foreach (string identity in partnerIdentities)
-                {
-                    StopVideChat(identity, true);
-                }
-                // stop my webcapture form
-                StopWebCapturing();
-
-                // todo: stop the audio & remoting rooms also
-
-                // unbind the observers
-                _view.BindObservers(false);
-
-                _model.ServerController.StopServer();
-
-                // notify all contacts that you exited the chat
-                _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
-
-                // exit the environment
-                Environment.Exit(0);
-            }
-        }
-
-        public void NotifyContactsObserver()
-        {
-            _view.NotifyContactsObserver();
-        }
-
-        public void NotifyIdentityObserver()
-        {
-            //_model.ContactsUpdated();
-            _view.NotifyIdentityObserver();
-        }
-
-        public void NotifyActionsObserver()
-        {
-            //_model.ContactsUpdated();
-            _view.NotifyActionsObserver();
-        }
-
-        #endregion
-
-        #region private methods
 
         void InitializePresenterSettings()
         {
@@ -468,8 +450,16 @@ namespace MViewer
             };
         }
 
-        void StopVideChat(string identity, bool sendStopSignal)
+        void StopVideChat(object sender, RoomActionEventArgs args)
         {
+            _syncVideoCaptureActivity.Reset();
+
+            bool sendStopSignal = true;
+            if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+            {
+                sendStopSignal = false;
+            }
+            string identity = args.Identity;
             // tell the partner to pause capturing & sending while processing room Stop command
 
             _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
@@ -514,9 +504,21 @@ namespace MViewer
             {
                 _view.ResetLabels(GenericEnums.RoomType.Video);
             }
+
+            // close the webcapture form if there s no room left
+            if (!_view.RoomManager.RoomsLeft())
+            {
+                StopWebCapturing();
+            }
+
+            _syncVideoCaptureActivity.Set();
+
         }
+
         void StartVideoChat(string identity)
         {
+            _syncVideoCaptureActivity.Reset();
+           
             if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Video))
             {
                 Thread t = new Thread(delegate()
@@ -540,11 +542,18 @@ namespace MViewer
                     _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
                     // finally, show the video chat form where we'll see the webcam captures
                     _view.RoomManager.ShowRoom(identity);
+
+                    
                 }
                 );
                 t.IsBackground = true;
                 t.SetApartmentState(ApartmentState.STA);
                 t.Start();
+
+                Thread.Sleep(500);
+                _syncVideoCaptureActivity.Set();
+
+
             }
         }
 
@@ -566,7 +575,11 @@ namespace MViewer
             }
         }
 
-
+        /// <summary>
+        /// method used to diplay a received video capture
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void NotifyVideoCaptureObserver(object sender, EventArgs e)
         {
             VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
@@ -576,7 +589,13 @@ namespace MViewer
                 peer.VideoSessionState == GenericEnums.SessionState.Pending)
             {
                 // receiving captures for the first time, have to initalize a form
-                InitializeRoom(args.Identity, GenericEnums.RoomType.Video);
+                ClientConnected(null,
+                       new RoomActionEventArgs()
+                       {
+                           RoomType = GenericEnums.RoomType.Video,
+                           SignalType = GenericEnums.SignalType.Start,
+                           Identity = args.Identity
+                       });
                 while (peer.VideoSessionState != GenericEnums.SessionState.Opened)
                 {
                     Thread.Sleep(2000);
@@ -591,106 +610,48 @@ namespace MViewer
             }
         }
 
+        // don't remove this one yet because PerformContactsOperation has a return type (cannot be used as event handler)
         void ContactRequest(object sender, EventArgs e)
         {
             PerformContactsOperation(sender, (ContactsEventArgs)e);
-        }
-
-        void InitializeRoom(string identity, GenericEnums.RoomType roomType)
-        {
-            switch (roomType)
-            {
-                case GenericEnums.RoomType.Video:
-                    // initialize video chat form to receive captures from the client
-                    // initialize my webcam form so that I can send my captures to the connected contact
-                    ClientConnected(null, new RoomActionEventArgs()
-                    {
-                        RoomType = GenericEnums.RoomType.Video,
-                        SignalType = GenericEnums.SignalType.Start,
-                        Identity = identity
-                    });
-                    break;
-                case GenericEnums.RoomType.Audio:
-
-                    break;
-                case GenericEnums.RoomType.Remoting:
-
-                    break;
-                case GenericEnums.RoomType.Send:
-
-                    break;
-            }
         }
 
         void StopWebCapturing()
         {
             PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
             
-            Thread.Sleep(1000);
-            while (_capturePending)
+            Thread.Sleep(500);
+            while (_videoCapturePending)
             {
                 Thread.Sleep(200);
             }
             _view.ShowMyWebcamForm(false);
         }
 
-        void PerformVideoChatAction(object sender, RoomActionEventArgs eArgs)
+        void ResumeVideo(object sender, RoomActionEventArgs args)
         {
-            string identity = eArgs.Identity; // this will be the active/selected room
-            PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
-                    
-            switch (eArgs.SignalType)
-            {
-                case GenericEnums.SignalType.Start:
+            _syncVideoCaptureActivity.Reset();
 
-                    // I am going to send my captures by using the below client
-                    _model.ClientController.AddClient(eArgs.Identity);
-                    _model.ClientController.StartClient(eArgs.Identity);
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
+            _model.SessionManager.UpdateSession(args.Identity, peers);
 
-                    // create client session
-                    Session clientSession = new ClientSession(eArgs.Identity);
-                    switch (eArgs.RoomType)
-                    {
-                        case GenericEnums.RoomType.Audio:
-                            clientSession.AudioSessionState = GenericEnums.SessionState.Pending;
-                            break;
-                        case GenericEnums.RoomType.Video:
-                            clientSession.AudioSessionState = GenericEnums.SessionState.Pending;
-                            clientSession.VideoSessionState = GenericEnums.SessionState.Pending;
-                            break;
-                    }
-                    // save the proxy to which we are sending the webcam captures
-                    _model.SessionManager.AddSession(clientSession);
+            _syncVideoCaptureActivity.Set();
 
-                    // initialize the webcamCapture form
-                    // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
-                    _view.ShowMyWebcamForm(true);
-                    break;
-                case GenericEnums.SignalType.Stop:
-                    bool sendStopSignal = true;
-                    if(sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
-                    {
-                        sendStopSignal = false;
-                    }
-                    StopVideChat(eArgs.Identity, sendStopSignal);
-                    break;
-                case GenericEnums.SignalType.Pause:
-                    // use the peer status of the selected chatroom
-                    peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
-                    _model.SessionManager.UpdateSession(identity, peers);
-                    break;
-                case GenericEnums.SignalType.Resume:
-                    peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
-                    _model.SessionManager.UpdateSession(identity, peers);
-                    break;
-            }
         }
 
-        #endregion
+        void PauseVideo(object sender, RoomActionEventArgs args)
+        {
+            _syncVideoCaptureActivity.Reset();
 
-        #region proprieties
+            // use the peer status of the selected chatroom
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
+            _model.SessionManager.UpdateSession(args.Identity, peers);
 
+            _syncVideoCaptureActivity.Set();
 
+        }
 
         #endregion
     }

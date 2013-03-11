@@ -16,7 +16,7 @@ namespace MViewer
     {
         #region private members
 
-        public readonly EventHandlers.ActionsEventHandler ActionsObserver;
+        public readonly Delegates.ActionsEventHandler ActionsObserver;
         EventHandler _roomActionEventHandler;
         public delegate void UpdateLabelsDel(bool start, bool pause, GenericEnums.RoomType roomType);
         public UpdateLabelsDel myDelegate;
@@ -35,7 +35,7 @@ namespace MViewer
         {
             InitializeComponent();
             _roomActionEventHandler = roomActionEventHandler;
-            ActionsObserver = new EventHandlers.ActionsEventHandler(ActionTriggered);
+            ActionsObserver = new Delegates.ActionsEventHandler(ActionTriggered);
             myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
         }
 

@@ -78,8 +78,8 @@ namespace BusinessLogicLayer
 
         public void AddRoom(string identity, IRoom room)
         {
-            Thread t = new Thread(delegate()
-                {
+            //Thread t = new Thread(delegate()
+            //    {
                     lock (_syncRooms)
                     {
                         if (_rooms == null)
@@ -91,10 +91,10 @@ namespace BusinessLogicLayer
                             _rooms.Add(identity, room);
                         }
                     }
-                }
-                );
-            t.IsBackground = true;
-            t.Start();
+            //    }
+            //    );
+            //t.IsBackground = true;
+            //t.Start();
         }
 
         public void RemoveRoom(string identity)
@@ -103,7 +103,6 @@ namespace BusinessLogicLayer
             {
                 if (_rooms != null && _rooms.ContainsKey(identity))
                 {
-                    _rooms[identity].CloseRoom();
                     _rooms.Remove(identity);
                 }
             }
@@ -126,13 +125,16 @@ namespace BusinessLogicLayer
             }
         }
 
+        delegate void CloseDelegate();
+
         public void CloseRoom(string identity)
         {
             lock (_syncRooms)
             {
                 if (_rooms != null && _rooms.ContainsKey(identity))
                 {
-                    _rooms[identity].CloseRoom();
+                    _rooms[identity].SyncClosing.Reset();
+                    ((Form)_rooms[identity]).Invoke(new CloseDelegate(((Form)_rooms[identity]).Close));
                 }
             }
         }

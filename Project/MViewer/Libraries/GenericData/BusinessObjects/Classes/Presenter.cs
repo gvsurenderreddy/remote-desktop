@@ -30,13 +30,16 @@ namespace GenericDataLayer
             // initialize the webcam capture obj
             _webcamCapture = presenterSettings.captureControl;
             // initialize the image capture size
-            _webcamCapture.ImageHeight = _videoSize.Height;
-            _webcamCapture.ImageWidth = _videoSize.Width;
+            if (_webcamCapture != null)
+            {
+                _webcamCapture.ImageHeight = _videoSize.Height;
+                _webcamCapture.ImageWidth = _videoSize.Width;
 
-            _firstTimeCapturing = true;
+                _firstTimeCapturing = true;
 
-            // bind the image captured event
-            _webcamCapture.ImageCaptured += new WebcamCapture.WebCamEventHandler(presenterSettings.webCamImageCaptured);
+                // bind the image captured event
+                _webcamCapture.ImageCaptured += new WebcamCapture.WebCamEventHandler(presenterSettings.webCamImageCaptured);
+            }
         }
 
         #endregion
@@ -52,7 +55,10 @@ namespace GenericDataLayer
 
         public void StopVideoPresentation()
         {
-            _webcamCapture.StopCapturing();
+            if (_webcamCapture != null)
+            {
+                _webcamCapture.StopCapturing();
+            }
         }
 
         public void StartAudioPresentation()

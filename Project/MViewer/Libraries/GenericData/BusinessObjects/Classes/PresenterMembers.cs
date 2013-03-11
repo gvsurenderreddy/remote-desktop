@@ -7,7 +7,7 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public class PresenterSettings
+    public struct PresenterSettings
     {
         public WebcamCapture captureControl { get; set; }
         public string identity { get; set; }

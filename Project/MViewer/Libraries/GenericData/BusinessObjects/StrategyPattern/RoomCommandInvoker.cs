@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using GenericDataLayer;
+using Utils;
+
+namespace MViewer
+{
+    public class RoomCommandInvoker : IRoomCommandInvoker
+    {
+        Dictionary<GenericEnums.RoomType, ICommand> commands;
+
+        public RoomCommandInvoker(ControllerRoomHandlers roomHandlers)
+        {
+            // todo: provide the video/audio/remoting event handlers from the controller
+
+            //VideoCommand audioCommand = new VideoCommand(roomHandlers.Audio);
+            VideoCommands videoCommands = new VideoCommands()
+            {
+                StartVideoChat = roomHandlers.Video[GenericEnums.SignalType.Start],
+                StopVideChat = roomHandlers.Video[GenericEnums.SignalType.Stop],
+                PauseVideoChat = roomHandlers.Video[GenericEnums.SignalType.Pause],
+                ResumeVideoChat = roomHandlers.Video[GenericEnums.SignalType.Resume],
+
+            };
+            videoCommands.BindCommands();
+      
+            TransferCommands transferCommands = new TransferCommands()
+            {
+                SendFile = roomHandlers.Transfer[GenericEnums.SignalType.Start]
+            };
+            transferCommands.BindCommands();
+
+            commands = new Dictionary<GenericEnums.RoomType, ICommand>();
+            //commands.Add(GenericEnums.RoomType.Audio, audioCommand);
+            commands.Add(GenericEnums.RoomType.Video, videoCommands);
+            commands.Add(GenericEnums.RoomType.Send, transferCommands);
+            //commands.Add(GenericEnums.RoomType.Remoting, remotingCommand);
+        }
+
+        public void PerformCommand(object sender, RoomActionEventArgs args)
+        {
+            commands[args.RoomType].Execute(sender, args);
+        }
+
+
+    }
+}

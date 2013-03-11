@@ -54,6 +54,9 @@
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
+    <Compile Include="BusinessObjects\ControllerHandlers\ControllerRoomHandlers.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\CommandBase.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\ICommand.cs" />
     <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />
     <Compile Include="BusinessObjects\Classes\Identity.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
@@ -66,10 +69,15 @@
     </Compile>
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIConstants.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
-    <Compile Include="BusinessObjects\Structs\ConnectedPeers.cs" />
-    <Compile Include="BusinessObjects\Structs\PendingTransfer.cs" />
-    <Compile Include="BusinessObjects\Structs\RoomEventHandlers.cs" />
-    <Compile Include="BusinessObjects\Structs\TransferUptading.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\IRoomCommandInvoker.cs" />
+    <Compile Include="BusinessObjects\Descriptor\ConnectedPeers.cs" />
+    <Compile Include="BusinessObjects\Descriptor\PendingTransfer.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\TransferCommands.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\VideoCommands.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\RoomCommandInvoker.cs" />
+    <Compile Include="BusinessObjects\Structs\ControllerEventHandlers.cs" />
+    <Compile Include="BusinessObjects\Descriptor\TransferUptading.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="EventArgs\CaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />

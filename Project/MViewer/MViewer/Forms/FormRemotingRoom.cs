@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using GenericDataLayer;
 using Utils;
@@ -13,6 +14,12 @@ namespace MViewer.Forms
 {
     public partial class FormRemotingRoom : Form, IRemotingRoom
     {
+        #region private members
+
+        ManualResetEvent _syncClosing = new ManualResetEvent(true);
+
+        #endregion
+
         #region c-tor
 
         public FormRemotingRoom(string identity)
@@ -53,6 +60,11 @@ namespace MViewer.Forms
         #endregion
 
         #region proprieties
+
+        public ManualResetEvent SyncClosing
+        {
+            get { return _syncClosing; }
+        }
 
         public string ContactIdentity
         {

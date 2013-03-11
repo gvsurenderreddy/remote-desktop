@@ -11,16 +11,13 @@ namespace GenericDataLayer
     {
         void StartApplication();
         void StopApplication();
-        void NotifyContactsObserver();
-        void GetContactsStatus();
-
+    
         void IdentityObserver(object sender, IdentityEventArgs e);
-        void RoomButtonAction(object sender, RoomActionEventArgs e);
+        void RoomButtonAction(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideoChat(WebcamCapture webcamControl);
-        void RoomClosingObserver(object sender, EventArgs e);
+        //void RoomClosingObserver(object sender, EventArgs e);
         void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
-        void FileTransferObserver(object sender, EventArgs e);
-        void FileTransferPermission(object sender, EventArgs e);
+
     }
 }

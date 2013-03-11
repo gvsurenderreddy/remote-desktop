@@ -13,12 +13,15 @@ namespace GenericDataLayer
         public ClientSession(string identity)
         {
             _identity = identity;
+            _peers = new PeerStates();
             _peers.AudioSessionState = GenericEnums.SessionState.Closed;
-            _peers.VideoSessionState = GenericEnums.SessionState.Closed; ;
-            _peers.RemotingSessionState = GenericEnums.SessionState.Closed; ;
+            _peers.VideoSessionState = GenericEnums.SessionState.Closed; 
+            _peers.RemotingSessionState = GenericEnums.SessionState.Closed;
+            _pendingTransfer = new PendingTransfer();
             _pendingTransfer.Audio = false;
             _pendingTransfer.Video = false;
             _pendingTransfer.Remoting = false;
+            _transferUpdating = new TransferStatusUptading();
             _transferUpdating.IsAudioUpdating = false;
             _transferUpdating.IsVideoUpdating = false;
             _transferUpdating.IsRemotingUpdating = false;

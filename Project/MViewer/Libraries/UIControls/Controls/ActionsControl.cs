@@ -109,7 +109,8 @@ namespace UIControls
             // provide the file path to the File transfer module
             _roomActionTriggered.Invoke(null, new RoomActionEventArgs()
             {
-                RoomType = GenericEnums.RoomType.Send
+                RoomType = GenericEnums.RoomType.Send,
+                SignalType= GenericEnums.SignalType.Start
             });
             
         }

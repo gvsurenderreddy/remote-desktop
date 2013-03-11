@@ -24,8 +24,8 @@ namespace MViewer
 
         #region observers
 
-        public readonly EventHandlers.IdentityEventHandler IdentityObserver;
-        public readonly EventHandlers.ContactsEventHandler ContactsObserver;
+        public readonly Delegates.IdentityEventHandler IdentityObserver;
+        public readonly Delegates.ContactsEventHandler ContactsObserver;
 
         #endregion
 
@@ -35,8 +35,8 @@ namespace MViewer
         {
             InitializeComponent();
 
-            IdentityObserver = new EventHandlers.IdentityEventHandler(UpdateIdentity);
-            ContactsObserver = new EventHandlers.ContactsEventHandler(ContactsUpdated);
+            IdentityObserver = new Delegates.IdentityEventHandler(UpdateIdentity);
+            ContactsObserver = new Delegates.ContactsEventHandler(ContactsUpdated);
         }
 
         #endregion

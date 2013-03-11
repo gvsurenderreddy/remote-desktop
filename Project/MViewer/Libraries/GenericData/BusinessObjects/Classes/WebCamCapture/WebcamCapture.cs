@@ -24,6 +24,7 @@ namespace GenericDataLayer
         IContainer _components;
         System.Windows.Forms.Timer _timer;
 
+        delegate void StartPresenting(bool firstTimeCapturing);
 
         bool _timerRunning;
         int _captureTimespan;
@@ -77,8 +78,6 @@ namespace GenericDataLayer
         [DllImport("user32", EntryPoint = "SendMessage")]
         static extern bool SendMessage(int hWnd, uint wMsg, int wParam, int lParam);
 
-        delegate void StartPres(bool firstTimeCapturing);
-
         void StartCaptureProcess(bool firstTimeCapturing)
         {
             InitializeTimer(_interval);
@@ -94,6 +93,7 @@ namespace GenericDataLayer
             }
             int x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
             _webcamClosed = false;
+            _threadAborted = false;
 
             // wait for the web cam capture form to be visible
             Form myWebcamForm = this.ParentForm;
@@ -118,7 +118,7 @@ namespace GenericDataLayer
             }
             else
             {
-                this.ParentForm.Invoke(new StartPres(StartCaptureProcess), firstTimeCapturing);
+                this.ParentForm.Invoke(new StartPresenting(StartCaptureProcess), firstTimeCapturing);
             }
 
         }
