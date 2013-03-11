@@ -208,37 +208,39 @@ namespace MViewer
                 if (fileDialog.ShowDialog() == DialogResult.OK)
                 {
                     filePath = fileDialog.FileName;
-                    FormFileProgress fileProgressFrom = null;
-                    bool sent = false;
-                    Thread t = new Thread(delegate()
-                    {
-                        fileProgressFrom = new FormFileProgress(
-                            Path.GetFileName(filePath), contact.FriendlyName);
 
-                        Application.Run(fileProgressFrom);
-
-
-                        //Thread.Sleep(1000);
-                        //while (sent == false)
-                        //{
-                        //    Thread.Sleep(500);
-                        //}
-                        //fileProgressFrom.StartPB();
-                    });
-                    t.Start(); 
-                    Thread.Sleep(500);
-                    Thread t2 = new Thread(delegate()
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    if (fileInfo.Length <= 10485760)
                     {
-                        fileProgressFrom.StartPB();
-                    });
-                    t2.Start();
-                    _model.SendFile(filePath, args.Identity);
-                    sent = true;
-                   
-                    if (fileProgressFrom != null)
+
+                        FormFileProgress fileProgressFrom = null;
+
+                        Thread t = new Thread(delegate()
+                        {
+                            fileProgressFrom = new FormFileProgress(
+                                Path.GetFileName(filePath), contact.FriendlyName);
+
+                            Application.Run(fileProgressFrom);
+
+                        });
+                        t.Start();
+                        Thread.Sleep(500);
+                        Thread t2 = new Thread(delegate()
+                        {
+                            fileProgressFrom.StartPB();
+                        });
+                        t2.Start();
+                        _model.SendFile(filePath, args.Identity);
+
+                        if (fileProgressFrom != null)
+                        {
+                            fileProgressFrom.StopProgress();
+                        }
+                    }
+                    else
                     {
-                        fileProgressFrom.StopProgress();
-                    }               
+                        MessageBox.Show("Sorry, cannot transfer files larger than 10 MB in MViewer-lite", "Transfer not possible", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
                    
                 }
             }
@@ -402,7 +404,24 @@ namespace MViewer
                     }
 
                     // todo: add a progress bar (into a TransfersForm)
+                    FormFileProgress fileProgressFrom = null;
+                    Contact contact = _model.GetContact(args.Identity);
+                    Thread t3 = new Thread(delegate()
+                    {
+                        fileProgressFrom = new FormFileProgress(
+                            Path.GetFileName(saveFileDialog1.FileName), contact.FriendlyName);
 
+                        Application.Run(fileProgressFrom);
+
+                    });
+                    t3.Start();
+                    Thread.Sleep(500);
+                    Thread t2 = new Thread(delegate()
+                    {
+                        fileProgressFrom.StartPB();
+                    });
+                    t2.Start();
+                    
                     // Saves the Image via a FileStream created by the OpenFile method.
                     System.IO.FileStream fs =
                        (System.IO.FileStream)saveFileDialog1.OpenFile();
@@ -410,6 +429,11 @@ namespace MViewer
                     fs.Write(buffer, 0, buffer.Length);
 
                     fs.Close();
+
+                    if (fileProgressFrom != null)
+                    {
+                        fileProgressFrom.StopProgress();
+                    }  
                 }
 
             });

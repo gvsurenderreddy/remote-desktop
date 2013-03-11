@@ -50,8 +50,9 @@ namespace MViewer
         {
             // send the file via WCF client
             FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
             ClientController.AddClient(identity);
-                
+
             // ask for sending permission
             bool hasPermission = ClientController.SendingPermission(Path.GetFileName(filePath), fileStream.Length,
                 identity, _identity.MyIdentity);
@@ -66,6 +67,7 @@ namespace MViewer
                 MessageBox.Show("Partner refused the transfer", "Transfer denied", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             ClientController.RemoveClient(identity);
+            
         }
 
         public void NotifyContacts(string newFriendlyName)
