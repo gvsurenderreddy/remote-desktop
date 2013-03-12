@@ -1,4 +1,3 @@
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.csprojResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.ActionsControl.resources
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.AudioControl.resources
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.ContactsControl.resources
@@ -6,6 +5,7 @@ F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\De
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.RemoteControl.resources
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.VideoControl.resources
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.FormContact.resources
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.Forms.FormFileProgress.resources
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.csproj.GenerateResource.Cache
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\UIControls.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\UIControls.pdb
@@ -13,6 +13,6 @@ F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\De
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\Utils.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\GenericDataLayer.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\Utils.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.csprojResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.pdb
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.Forms.FormFileProgress.resources

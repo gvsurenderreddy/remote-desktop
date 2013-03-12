@@ -451,6 +451,8 @@ namespace MViewer
 
         void InitializeRoomHandlers()
         {
+            // todo: move the handlers initialization & storage to a different class
+
             Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
             videoDelegates.Add(GenericEnums.SignalType.Start, this.VideoStart);
             videoDelegates.Add(GenericEnums.SignalType.Stop, this.StopVideChat);
@@ -460,11 +462,18 @@ namespace MViewer
             Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
             transferDelegates.Add(GenericEnums.SignalType.Start, this.SendFileHandler);
 
+            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            remotingDelegates.Add(GenericEnums.SignalType.Start, this.StartRemoting);
+            remotingDelegates.Add(GenericEnums.SignalType.Start, this.StopRemoting);
+            videoDelegates.Add(GenericEnums.SignalType.Pause, this.PauseRemoting);
+            videoDelegates.Add(GenericEnums.SignalType.Resume, this.ResumeRemoting);
+
             _roomHandlers = new ControllerRoomHandlers()
             {
                 // todo: add audio & remoting handlers handlers by signal type
                 Video = videoDelegates,
-                Transfer = transferDelegates
+                Transfer = transferDelegates,
+                Remoting = remotingDelegates
             };
        
             _roomCommandInvoker = new RoomCommandInvoker(_roomHandlers);
@@ -475,6 +484,7 @@ namespace MViewer
             int timerInterval = 100;
             int height = 354, width = 360;
 
+            // todo: move the presenter settings to the system configuration class
             _presenterSettings = new PresenterSettings()
             {
                 identity = _model.Identity.MyIdentity,
@@ -552,6 +562,30 @@ namespace MViewer
             }
 
             _syncVideoCaptureActivity.Set();
+
+        }
+
+        //todo: implement ResumeRemoting
+        private void ResumeRemoting(object sender, RoomActionEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        //todo: implement PauseRemoting
+        private void PauseRemoting(object sender, RoomActionEventArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        //todo: implement StartRemoting
+        void StartRemoting(object sender, RoomActionEventArgs args)
+        {
+
+        }
+
+        //todo: implement StopRemoting
+        void StopRemoting(object sender, RoomActionEventArgs args)
+        {
 
         }
 

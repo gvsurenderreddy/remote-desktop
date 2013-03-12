@@ -20,11 +20,5 @@ namespace GenericDataLayer
             _transferCommands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
             _transferCommands.Add(GenericEnums.SignalType.Start, SendFile);
         }
-
-        protected override void PerformCommand(object sender, RoomActionEventArgs args)
-        {
-            // todo: perform specific video command
-            _transferCommands[args.SignalType].Invoke(sender, args);
-        }
     }
 }

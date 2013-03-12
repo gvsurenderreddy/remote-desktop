@@ -22,8 +22,7 @@ namespace MViewer
                 StartVideoChat = roomHandlers.Video[GenericEnums.SignalType.Start],
                 StopVideChat = roomHandlers.Video[GenericEnums.SignalType.Stop],
                 PauseVideoChat = roomHandlers.Video[GenericEnums.SignalType.Pause],
-                ResumeVideoChat = roomHandlers.Video[GenericEnums.SignalType.Resume],
-
+                ResumeVideoChat = roomHandlers.Video[GenericEnums.SignalType.Resume]
             };
             videoCommands.BindCommands();
       
@@ -33,11 +32,20 @@ namespace MViewer
             };
             transferCommands.BindCommands();
 
+            RemotingCommands remotingCommands = new RemotingCommands()
+            {
+                StartRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Start],
+                StopRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Stop],
+                PauseRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Pause],
+                ResumeRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Resume]
+            };
+            remotingCommands.BindCommands();
+
             commands = new Dictionary<GenericEnums.RoomType, ICommand>();
             //commands.Add(GenericEnums.RoomType.Audio, audioCommand);
             commands.Add(GenericEnums.RoomType.Video, videoCommands);
             commands.Add(GenericEnums.RoomType.Send, transferCommands);
-            //commands.Add(GenericEnums.RoomType.Remoting, remotingCommand);
+            commands.Add(GenericEnums.RoomType.Remoting, remotingCommands);
         }
 
         public void PerformCommand(object sender, RoomActionEventArgs args)

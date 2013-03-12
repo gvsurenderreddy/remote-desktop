@@ -6,15 +6,38 @@ using System.Configuration;
 
 namespace MViewer
 {
-    public static class SystemConfiguration
+    public class SystemConfiguration
     {
-        public static readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
-        public static readonly int Port = int.Parse(ConfigurationManager.AppSettings["port"]);
-        public static readonly string ServicePath = ConfigurationManager.AppSettings["ServicePath"];
-        public static readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
-        public static readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
-        public static readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
+        static readonly object _syncInstance = new object();
+        static SystemConfiguration _instance;
 
-        public static string MyIdentity;
+        private SystemConfiguration() { }
+
+        public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
+        public readonly int Port = int.Parse(ConfigurationManager.AppSettings["port"]);
+        public readonly string ServicePath = ConfigurationManager.AppSettings["ServicePath"];
+        public readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
+        public readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
+        public readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
+
+        public string MyIdentity;
+
+        public static SystemConfiguration Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (_syncInstance)
+                    {
+                        if (_instance == null)
+                        {
+                            _instance = new SystemConfiguration();
+                        }
+                    }
+                }
+                return _instance;
+            }
+        }
     }
 }

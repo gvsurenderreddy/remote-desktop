@@ -32,7 +32,7 @@ namespace MViewer
             //_visibleTimer.Start();
 
             InitializeComponent();
-            _webcamCapture = new WebcamCapture(SystemConfiguration.TimerInterval, this.Handle.ToInt32());
+            _webcamCapture = new WebcamCapture(SystemConfiguration.Instance.TimerInterval, this.Handle.ToInt32());
             _webcamCapture.ParentForm = this;
             Program.Controller.StartVideoChat(_webcamCapture);
 
@@ -73,7 +73,7 @@ namespace MViewer
         {
             if (_webcamCapture == null)
             {
-                _webcamCapture = new WebcamCapture(SystemConfiguration.TimerInterval, this.Handle.ToInt32());
+                _webcamCapture = new WebcamCapture(SystemConfiguration.Instance.TimerInterval, this.Handle.ToInt32());
             }
             Program.Controller.StartVideoChat(_webcamCapture);
         }

@@ -31,9 +31,9 @@ namespace MViewer
 
         public Model(ControllerEventHandlers handlers)
         {
-            _identity = new Identity(SystemConfiguration.FriendlyName);
-            SystemConfiguration.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.MyAddress, SystemConfiguration.Port, SystemConfiguration.ServicePath);
-            _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+            _identity = new Identity(SystemConfiguration.Instance.FriendlyName);
+            SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
+            _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
             _clientController = new ClientController();
 
             ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
@@ -146,7 +146,7 @@ namespace MViewer
                     break;
                 case GenericEnums.ContactsOperation.Add:
                     int contactNo = ContactsRepository.AddContact(e.UpdatedContact);
-                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                     contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
                     if(e.UpdatedContact.ContactNo != -1)
                     {
@@ -159,13 +159,13 @@ namespace MViewer
                     break;
                 case GenericEnums.ContactsOperation.Update:
                     ContactsRepository.UpdateContact(e.UpdatedContact);
-                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                     contact = ContactsRepository.GetContactByNumber(e.UpdatedContact.ContactNo);
                     break;
                 case GenericEnums.ContactsOperation.Remove:
                     contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
                     ContactsRepository.RemoveContact(contact.ContactNo);
-                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                     
                     if (e.UpdatedContact.ContactNo != -1)
                     {
@@ -178,7 +178,7 @@ namespace MViewer
                     contact = ContactsRepository.GetContactByNumber(e.UpdatedContact.ContactNo);
                     break;
                 case GenericEnums.ContactsOperation.Load:
-                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.DataBasePath);
+                    _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                     break;
             }
             return contact;

@@ -72,6 +72,7 @@
     <Compile Include="BusinessObjects\StrategyPattern\IRoomCommandInvoker.cs" />
     <Compile Include="BusinessObjects\Descriptor\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Descriptor\PendingTransfer.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\RemotingCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\TransferCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\VideoCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\RoomCommandInvoker.cs" />

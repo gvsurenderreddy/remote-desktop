@@ -10,8 +10,6 @@ namespace GenericDataLayer
 {
     public class VideoCommands : CommandBase
     {
-        Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> _videoCommands;
-
         // todo: add delegate handlers
         public Delegates.CommandDelegate StartVideoChat;
         public Delegates.CommandDelegate StopVideChat;
@@ -19,19 +17,18 @@ namespace GenericDataLayer
         public Delegates.CommandDelegate ResumeVideoChat;
 
 
+        // todo: move these to audio class
+        public Delegates.CommandDelegate StartAudioChat;
+        public Delegates.CommandDelegate StopAudioChat;
+
+
         public override void BindCommands()
         {
-            _videoCommands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
-            _videoCommands.Add(GenericEnums.SignalType.Start, StartVideoChat);
-            _videoCommands.Add(GenericEnums.SignalType.Stop, StopVideChat);
-            _videoCommands.Add(GenericEnums.SignalType.Pause, PauseVideoChat);
-            _videoCommands.Add(GenericEnums.SignalType.Resume, ResumeVideoChat);
-        }
-
-        protected override void PerformCommand(object sender, RoomActionEventArgs args)
-        {
-            // todo: perform specific video command
-            _videoCommands[args.SignalType].Invoke(sender, args);
+            _commands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            _commands.Add(GenericEnums.SignalType.Start, StartVideoChat);
+            _commands.Add(GenericEnums.SignalType.Stop, StopVideChat);
+            _commands.Add(GenericEnums.SignalType.Pause, PauseVideoChat);
+            _commands.Add(GenericEnums.SignalType.Resume, ResumeVideoChat);
         }
     }
 }

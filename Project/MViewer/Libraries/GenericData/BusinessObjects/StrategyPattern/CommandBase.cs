@@ -9,6 +9,8 @@ namespace GenericDataLayer
 {
     public abstract class CommandBase : ICommand 
     {
+        protected Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> _commands;
+
         Delegates.CommandDelegate _command;
 
         public CommandBase()
@@ -23,9 +25,9 @@ namespace GenericDataLayer
 
         public abstract void BindCommands();
 
-        protected abstract void PerformCommand(object sender, RoomActionEventArgs args);
-        //{
-        //    return 0;
-        //}
+        public void PerformCommand(object sender, RoomActionEventArgs args)
+        {
+            _commands[args.SignalType].Invoke(sender, args);
+        }
     }
 }
