@@ -29,10 +29,9 @@ namespace GenericDataLayer
         void WaitRoomButtonAction(bool wait);
         bool RequestTransferPermission(string identity, string fileName, long fileSize);
 
-        bool WebcaptureClosed
+        bool VideoCaptureClosed
         {
             get;
-            //set;
         }
 
         IRoomManager RoomManager

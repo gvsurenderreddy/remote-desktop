@@ -10,13 +10,25 @@ namespace GenericDataLayer
     {
          #region c-tor
 
-        public ClientSession(string identity)
+        public ClientSession(string identity, GenericEnums.RoomType roomType)
         {
             _identity = identity;
             _peers = new PeerStates();
-            _peers.AudioSessionState = GenericEnums.SessionState.Closed;
-            _peers.VideoSessionState = GenericEnums.SessionState.Closed; 
-            _peers.RemotingSessionState = GenericEnums.SessionState.Closed;
+
+            switch (roomType)
+            {
+                case GenericEnums.RoomType.Audio:
+                    AudioSessionState = GenericEnums.SessionState.Pending;
+                    break;
+                case GenericEnums.RoomType.Video:
+                    AudioSessionState = GenericEnums.SessionState.Pending;
+                    VideoSessionState = GenericEnums.SessionState.Pending;
+                    break;
+                case GenericEnums.RoomType.Remoting:
+                    RemotingSessionState = GenericEnums.SessionState.Pending;
+                    break;
+            }
+
             _pendingTransfer = new PendingTransfer();
             _pendingTransfer.Audio = false;
             _pendingTransfer.Video = false;

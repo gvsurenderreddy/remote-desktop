@@ -17,10 +17,6 @@ namespace GenericDataLayer
 
         #region c-tor
 
-        public VideoCaptureEventArgs()
-        {
-            
-        }
 
         #endregion
 

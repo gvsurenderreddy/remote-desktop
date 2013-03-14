@@ -6,6 +6,8 @@ using DesktopSharingViewer;
 using System.Threading;
 using System.Drawing;
 using DesktopSharing;
+using GenericDataLayer;
+using Utils;
 
 namespace DesktopSharingViewer
 {
@@ -15,18 +17,17 @@ namespace DesktopSharingViewer
 
         readonly Dictionary<Guid, ViewerContext> _contexts = new Dictionary<Guid, ViewerContext>();
         CommandQueue _commandQueue;
-        public delegate void DesktopChangedEventHandler(System.Drawing.Image display, string remoteIp);
-        event DesktopChangedEventHandler OnDesktopChanged;
+        event Delegates.DesktopChangedEventHandler _onDesktopChanged;
 
         #endregion
 
         #region c-tor
 
-        public DesktopViewer(DesktopChangedEventHandler imageChangedHandler)
+        public DesktopViewer(Delegates.DesktopChangedEventHandler imageChangedHandler)
         {
             _commandQueue = new CommandQueue();
             _contexts = new Dictionary<Guid, ViewerContext>();
-            OnDesktopChanged += imageChangedHandler;
+            _onDesktopChanged += imageChangedHandler;
         }
 
         #endregion
@@ -49,9 +50,9 @@ namespace DesktopSharingViewer
                         viewContext.Display = viewContext.Display;
                     }
 
-                    if (OnDesktopChanged != null)
+                    if (_onDesktopChanged != null)
                     {
-                        OnDesktopChanged(viewContext.Display, viewContext.Id.ToString());
+                        _onDesktopChanged(viewContext.Display, viewContext.Id.ToString());
                     }
                 }
             }
@@ -71,7 +72,6 @@ namespace DesktopSharingViewer
                 ViewerContext viewContext;
                 if (_contexts.ContainsKey(id))
                 {
-                    
                     _contexts.Remove(id);
                 }
                 // create new viewer context

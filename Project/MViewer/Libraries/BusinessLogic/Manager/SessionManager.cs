@@ -39,7 +39,13 @@ namespace BusinessLogicLayer
             {
                 if (_clientSessions != null && _clientSessions.ContainsKey(identity))
                 {
-                    _clientSessions.Remove(identity);
+                    if (_clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Closed
+                        && _clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Closed
+                        && _clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Closed
+                        )
+                    {
+                        _clientSessions.Remove(identity);
+                    }
                 }
             }
         }
@@ -58,20 +64,6 @@ namespace BusinessLogicLayer
                     RemotingSessionState = GenericEnums.SessionState.Undefined,
                     VideoSessionState = GenericEnums.SessionState.Undefined
                 };
-            }
-        }
-
-        public void UpdateSession(string identity, PeerStates peers)
-        {
-            lock (_syncSessions)
-            {
-                if (_clientSessions != null && _clientSessions.ContainsKey(identity))
-                {
-                    Session session = _clientSessions[identity];
-                    session.AudioSessionState = peers.AudioSessionState;
-                    session.VideoSessionState = peers.VideoSessionState;
-                    session.RemotingSessionState = peers.RemotingSessionState;
-                }
             }
         }
 

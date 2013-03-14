@@ -12,11 +12,11 @@ namespace GenericDataLayer
     {
         #region private members
 
-        string _identity;
-        WebcamCapture _webcamCapture;
-        int _timerInterval;
-        Structures.ScreenSize _videoSize;
+        WebcamCapture _videoCapture;
+        ScreenCaptureTool _screenCapture;
         static bool _firstTimeCapturing;
+
+        PresenterSettings _presenterSettings;
 
         #endregion
 
@@ -24,22 +24,22 @@ namespace GenericDataLayer
 
         public Presenter(PresenterSettings presenterSettings)
         {
-            _identity = presenterSettings.identity;
-            _timerInterval = presenterSettings.timerInterval;
-            _videoSize = presenterSettings.videoSize;
-            // initialize the webcam capture obj
-            _webcamCapture = presenterSettings.captureControl;
+            _presenterSettings = presenterSettings;
+            _videoCapture = _presenterSettings.VideoCaptureControl;
+
             // initialize the image capture size
-            if (_webcamCapture != null)
+            if (_videoCapture != null)
             {
-                _webcamCapture.ImageHeight = _videoSize.Height;
-                _webcamCapture.ImageWidth = _videoSize.Width;
+                _videoCapture.ImageHeight = presenterSettings.VideoScreenSize.Height;
+                _videoCapture.ImageWidth = presenterSettings.VideoScreenSize.Width;
 
                 _firstTimeCapturing = true;
 
                 // bind the image captured event
-                _webcamCapture.ImageCaptured += new WebcamCapture.WebCamEventHandler(presenterSettings.webCamImageCaptured);
+                _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.VideoImageCaptured);
             }
+
+            _screenCapture = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.RemotingImageCaptured);
         }
 
         #endregion
@@ -49,36 +49,45 @@ namespace GenericDataLayer
         public void StartVideoPresentation()
         {
             // start the video capturing
-            _webcamCapture.StartCapturing(_firstTimeCapturing);
+            _videoCapture.StartCapturing(_firstTimeCapturing);
             _firstTimeCapturing = false;
         }
 
         public void StopVideoPresentation()
         {
-            if (_webcamCapture != null)
+            if (_videoCapture != null)
             {
-                _webcamCapture.StopCapturing();
+                _videoCapture.StopCapturing();
             }
         }
 
         public void StartAudioPresentation()
         {
-            throw new NotImplementedException();
+            // todo: implement StartAudioPresentation
         }
 
         public void StopAudioPresentation()
         {
-            throw new NotImplementedException();
+            // todo: implement StopAudioPresentation
         }
 
         public void StartRemotingPresentation()
         {
-            throw new NotImplementedException();
+            _screenCapture.TogglerTimer(true);
         }
 
         public void StopRemotingPresentation()
         {
-            throw new NotImplementedException();
+            // todo: implement StopRemotingPresentation
+        }
+
+        #endregion
+
+        #region proprieties
+
+        public bool RemotingCaptureClosed()
+        {
+            return _screenCapture.RemotingCaptureClosed;
         }
 
         #endregion

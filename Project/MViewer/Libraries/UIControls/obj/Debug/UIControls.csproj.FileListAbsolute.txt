@@ -16,3 +16,7 @@ F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\De
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.csprojResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\obj\Debug\UIControls.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\DesktopSharingCommon.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\DesktopSharing.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\DesktopSharingCommon.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\Debug\DesktopSharing.pdb

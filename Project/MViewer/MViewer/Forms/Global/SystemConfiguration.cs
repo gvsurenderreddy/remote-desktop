@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using GenericDataLayer;
+using Utils;
 
 namespace MViewer
 {
@@ -11,7 +13,27 @@ namespace MViewer
         static readonly object _syncInstance = new object();
         static SystemConfiguration _instance;
 
-        private SystemConfiguration() { }
+        private SystemConfiguration() 
+        {
+            int timerInterval = 100;
+            int height = 354, width = 360;
+
+            // todo: move the presenter settings to the system configuration class
+            _presenterSettings = new PresenterSettings()
+            {
+                Identity = Program.Controller.MyIdentity(),
+                VideoTimerInterval = timerInterval,
+                VideoScreenSize =
+                    new Structures.ScreenSize()
+                    {
+                        Height = height,
+                        Width = width
+                    },
+                VideoImageCaptured = new EventHandler(Program.Controller.VideoImageCaptured),
+                RemotingTimerInterval = 50,
+                RemotingImageCaptured = new EventHandler(Program.Controller.RemotingImageCaptured)
+            };
+        }
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
         public readonly int Port = int.Parse(ConfigurationManager.AppSettings["port"]);
@@ -19,6 +41,13 @@ namespace MViewer
         public readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
         public readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
         public readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
+        
+        private PresenterSettings _presenterSettings;
+
+        public PresenterSettings PresenterSettings
+        {
+            get { return _presenterSettings; }
+        }
 
         public string MyIdentity;
 
@@ -33,6 +62,8 @@ namespace MViewer
                         if (_instance == null)
                         {
                             _instance = new SystemConfiguration();
+
+
                         }
                     }
                 }

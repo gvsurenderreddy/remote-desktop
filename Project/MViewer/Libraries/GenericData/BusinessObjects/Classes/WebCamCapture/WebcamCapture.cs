@@ -44,9 +44,7 @@ namespace GenericDataLayer
 
         #region public members
 
-        // event delegate fired when a new image is captured by the webcam device
-        public delegate void WebCamEventHandler(object source, VideoCaptureEventArgs e);
-        public event WebCamEventHandler ImageCaptured;
+        public event Delegates.WebCamEventHandler ImageCaptured;
 
         //EventHandler _closingEvent;
         int _interval;

@@ -9,5 +9,6 @@ namespace DesktopSharing
     {
         byte[] CaptureDekstopImage();
         byte[] CaptureMouseImage();
+        void TogglerTimer(bool start);
     }
 }

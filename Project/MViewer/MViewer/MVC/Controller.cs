@@ -23,15 +23,16 @@ namespace MViewer
         /// flag used to tell the capturing thread to wait before ending it's activity
         /// </summary>
         bool _videoCapturePending;
+        bool _remotingCapturePending;
 
         /// <summary>
         /// object used to synchronize the capture sent to partners
         /// </summary>
         readonly object _syncVideoCaptureSending = new object();
+        readonly object _syncRemotingCaptureSending = new object();
 
         ManualResetEvent _syncVideoCaptureActivity = new ManualResetEvent(true);
-
-        PresenterSettings _presenterSettings;
+        ManualResetEvent _syncRemotingCaptureActivity = new ManualResetEvent(true);
 
         IRoomCommandInvoker _roomCommandInvoker;
 
@@ -48,38 +49,101 @@ namespace MViewer
         {
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
-                ClientConnectedObserver = this.ClientConnected,
-                VideoCaptureObserver = this.NotifyVideoCaptureObserver,
-                ContactsObserver = this.ContactRequest,
-                RoomClosingObserver = this.RoomButtonAction,
+                ClientConnectedObserver = this.ClientConnectedObserver,
+                VideoCaptureObserver = this.VideoCaptureObserver,
+                ContactsObserver = this.ContactRequestObserver,
+                RoomButtonObserver = this.RoomButtonAction,
                 WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                 FileTransferObserver = this.FileTransferObserver,
-                FilePermissionObserver = this.FileTransferPermission
+                FilePermissionObserver = this.FileTransferPermission,
+                RemotingCaptureObserver = this.RemotingCaptureObserver
             };
 
             InitializeRoomHandlers();
 
-           // initialize the model
+            // initialize the model
             _model = new Model(handlers);
             // initalize the view and bind it to the model
             _view = new View(_model);
-
-            InitializePresenterSettings();
-            
         }
 
         #endregion
 
         #region event handlers
 
-        private void WebCamImageCaptured(object source, EventArgs e)
+        public void RemotingImageCaptured(object source, EventArgs e)
+        {
+            // todo: bind RemotingImageCaptured to the remoting capture object
+            try
+            {
+                _syncRemotingCaptureActivity.WaitOne(); // wait for any room action to end
+
+                _remotingCapturePending = true;
+                if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).RemotingCaptureClosed() == false)
+                {
+                    lock (_syncRemotingCaptureSending)
+                    {
+                        // broadcast the webcaptures to all connected peers
+                        RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
+                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Remoting);
+                        if (connectedSessions.Count == 0)
+                        {
+                            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                        }
+                        else
+                        {
+                            foreach (string receiverIdentity in connectedSessions)
+                            {
+                                TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                                while (transfer.IsRemotingUpdating)
+                                {
+                                    Thread.Sleep(200);
+                                }
+
+                                PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                                // check if the stop signal has been sent from the UI
+
+                                // check if the stop signal has been sent by the partner
+
+                                PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                                if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
+                                    || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
+                                {
+                                    // send the capture if the session isn't paused
+                                    transferStatus.Remoting = true;
+
+                                    _model.ClientController.SendRemotingCapture(args.Capture, receiverIdentity,
+                                        _model.Identity.MyIdentity);
+                                }
+
+                                transferStatus.Remoting = false;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                _remotingCapturePending = false;
+            }
+        }
+
+        public void VideoImageCaptured(object source, EventArgs e)
         {
             try
             {
                 _syncVideoCaptureActivity.WaitOne(); // wait for any room action to end
 
                 _videoCapturePending = true;
-                if (_view.WebcaptureClosed == false)
+                if (_view.VideoCaptureClosed == false)
                 {
                     lock (_syncVideoCaptureSending)
                     {
@@ -105,7 +169,7 @@ namespace MViewer
                         IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                         if (connectedSessions.Count == 0)
                         {
-                            PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
+                            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
                         }
                         else
                         {
@@ -131,7 +195,7 @@ namespace MViewer
 
                                     // todo: enforce web timer start for partner side
 
-                                    _model.ClientController.SendCapture(bitmapBytes, receiverIdentity,
+                                    _model.ClientController.SendVideoCapture(bitmapBytes, receiverIdentity,
                                         _model.Identity.MyIdentity);
                                 }
 
@@ -152,7 +216,7 @@ namespace MViewer
                 }
                 else
                 {
-                    PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
+                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
                 }
             }
             catch (Exception ex)
@@ -193,8 +257,8 @@ namespace MViewer
             // create Presenter and start the presentation
             // initialize the presenter that will send webcam captures to all Server Sessions
 
-            _presenterSettings.captureControl = webcamControl;
-            PresenterManager.Instance(_presenterSettings).StartVideoPresentation();
+            SystemConfiguration.Instance.PresenterSettings.VideoCaptureControl = webcamControl;
+            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartVideoPresentation();
 
         }
 
@@ -319,7 +383,7 @@ namespace MViewer
                         });
                 }
                 // stop my webcapture form
-                StopWebCapturing();
+                StopVideoCapturing();
 
                 // todo: stop the audio & remoting rooms also
 
@@ -340,27 +404,47 @@ namespace MViewer
 
         #region private methods
 
-        void VideoStart(object sender, RoomActionEventArgs args)
+        private void RemotingCaptureObserver(object sender, EventArgs e)
+        {
+            RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
+            PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
+
+            if (peer.RemotingSessionState == GenericEnums.SessionState.Undefined ||
+                peer.RemotingSessionState == GenericEnums.SessionState.Pending)
+            {
+                // receiving captures for the first time, have to initalize a form
+                ClientConnectedObserver(null,
+                       new RoomActionEventArgs()
+                       {
+                           RoomType = GenericEnums.RoomType.Remoting,
+                           SignalType = GenericEnums.SignalType.Start,
+                           Identity = args.Identity
+                       });
+                while (peer.RemotingSessionState != GenericEnums.SessionState.Opened)
+                {
+                    Thread.Sleep(2000);
+                    peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
+                }
+            }
+
+            // check the videochat status before displaying the picture
+            if (peer.RemotingSessionState == GenericEnums.SessionState.Opened)
+            {
+                //todo : display the remoting capture in the opened form
+            }
+        }
+
+        void StartVideoChat(object sender, RoomActionEventArgs args)
         {
             // open new Video Chat form to receive the captures
-            StartVideoChat(args.Identity);
+            OpenVideoForm(args.Identity);
 
             // I am going to send my captures by using the below client
             _model.ClientController.AddClient(args.Identity);
             _model.ClientController.StartClient(args.Identity);
 
             // create client session
-            Session clientSession = new ClientSession(args.Identity);
-            switch (args.RoomType)
-            {
-                case GenericEnums.RoomType.Audio:
-                    clientSession.AudioSessionState = GenericEnums.SessionState.Pending;
-                    break;
-                case GenericEnums.RoomType.Video:
-                    clientSession.AudioSessionState = GenericEnums.SessionState.Pending;
-                    clientSession.VideoSessionState = GenericEnums.SessionState.Pending;
-                    break;
-            }
+            Session clientSession = new ClientSession(args.Identity, args.RoomType);
             // save the proxy to which we are sending the webcam captures
             _model.SessionManager.AddSession(clientSession);
 
@@ -369,7 +453,7 @@ namespace MViewer
             _view.ShowMyWebcamForm(true);
         }
 
-        void ClientConnected(object sender, EventArgs e)
+        void ClientConnectedObserver(object sender, EventArgs e)
         {
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             _roomCommandInvoker.PerformCommand(sender, args);
@@ -454,7 +538,7 @@ namespace MViewer
             // todo: move the handlers initialization & storage to a different class
 
             Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
-            videoDelegates.Add(GenericEnums.SignalType.Start, this.VideoStart);
+            videoDelegates.Add(GenericEnums.SignalType.Start, this.StartVideoChat);
             videoDelegates.Add(GenericEnums.SignalType.Stop, this.StopVideChat);
             videoDelegates.Add(GenericEnums.SignalType.Pause, this.PauseVideo);
             videoDelegates.Add(GenericEnums.SignalType.Resume, this.ResumeVideo);
@@ -477,27 +561,6 @@ namespace MViewer
             };
        
             _roomCommandInvoker = new RoomCommandInvoker(_roomHandlers);
-        }
-
-        void InitializePresenterSettings()
-        {
-            int timerInterval = 100;
-            int height = 354, width = 360;
-
-            // todo: move the presenter settings to the system configuration class
-            _presenterSettings = new PresenterSettings()
-            {
-                identity = _model.Identity.MyIdentity,
-                    timerInterval = timerInterval, 
-                    videoSize =
-                    new Structures.ScreenSize()
-                    {
-                        Height = height,
-                        Width = width
-                    },
-                    webCamImageCaptured =
-                    new EventHandler(this.WebCamImageCaptured)
-            };
         }
 
         void StopVideChat(object sender, RoomActionEventArgs args)
@@ -532,7 +595,6 @@ namespace MViewer
             {
                 peers.AudioSessionState = GenericEnums.SessionState.Closed;
                 peers.VideoSessionState = GenericEnums.SessionState.Closed;
-                _model.SessionManager.UpdateSession(identity, peers);
 
                 if (sendStopSignal)
                 {
@@ -558,7 +620,7 @@ namespace MViewer
             // close the webcapture form if there s no room left
             if (!_view.RoomManager.RoomsLeft())
             {
-                StopWebCapturing();
+                StopVideoCapturing();
             }
 
             _syncVideoCaptureActivity.Set();
@@ -568,28 +630,49 @@ namespace MViewer
         //todo: implement ResumeRemoting
         private void ResumeRemoting(object sender, RoomActionEventArgs args)
         {
-            throw new NotImplementedException();
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.RemotingSessionState = GenericEnums.SessionState.Opened; // resume the remoting
+ 
         }
 
         //todo: implement PauseRemoting
         private void PauseRemoting(object sender, RoomActionEventArgs args)
         {
-            throw new NotImplementedException();
+            // use the peer status of the selected chatroom
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.RemotingSessionState = GenericEnums.SessionState.Paused; // pause the remoting
+      
         }
 
-        //todo: implement StartRemoting
         void StartRemoting(object sender, RoomActionEventArgs args)
         {
+            // I am going to send my captures by using the below client
+            _model.ClientController.AddClient(args.Identity);
+            _model.ClientController.StartClient(args.Identity);
 
+            // create client session
+            Session clientSession = new ClientSession(args.Identity, args.RoomType);
+            // save the proxy to which we are sending the remoting captures
+            _model.SessionManager.AddSession(clientSession);
+
+            // initialize the remoting tool and start it's timer
+            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
         }
 
         //todo: implement StopRemoting
         void StopRemoting(object sender, RoomActionEventArgs args)
         {
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.RemotingSessionState = GenericEnums.SessionState.Closed;
+            _model.SessionManager.RemoveSession(args.Identity);
 
+            _model.RemoveClient(args.Identity);
+
+            // todo: check if any remoting session is still active
+            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
         }
 
-        void StartVideoChat(string identity)
+        void OpenVideoForm(string identity)
         {
             _syncVideoCaptureActivity.Reset();
            
@@ -606,11 +689,7 @@ namespace MViewer
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.VideoSessionState = GenericEnums.SessionState.Opened;
                     peers.AudioSessionState = GenericEnums.SessionState.Opened;
-
-                    _model.SessionManager.UpdateSession(identity, peers);
-
-                    peers = _model.SessionManager.GetPeerStatus(identity);
-
+                  
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
                     _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
@@ -654,7 +733,7 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void NotifyVideoCaptureObserver(object sender, EventArgs e)
+        void VideoCaptureObserver(object sender, EventArgs e)
         {
             VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
             PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
@@ -663,7 +742,7 @@ namespace MViewer
                 peer.VideoSessionState == GenericEnums.SessionState.Pending)
             {
                 // receiving captures for the first time, have to initalize a form
-                ClientConnected(null,
+                ClientConnectedObserver(null,
                        new RoomActionEventArgs()
                        {
                            RoomType = GenericEnums.RoomType.Video,
@@ -685,14 +764,14 @@ namespace MViewer
         }
 
         // don't remove this one yet because PerformContactsOperation has a return type (cannot be used as event handler)
-        void ContactRequest(object sender, EventArgs e)
+        void ContactRequestObserver(object sender, EventArgs e)
         {
             PerformContactsOperation(sender, (ContactsEventArgs)e);
         }
 
-        void StopWebCapturing()
+        void StopVideoCapturing()
         {
-            PresenterManager.Instance(_presenterSettings).StopVideoPresentation();
+            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
             
             Thread.Sleep(500);
             while (_videoCapturePending)
@@ -708,8 +787,7 @@ namespace MViewer
 
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
-            _model.SessionManager.UpdateSession(args.Identity, peers);
-
+ 
             _syncVideoCaptureActivity.Set();
 
         }
@@ -721,10 +799,18 @@ namespace MViewer
             // use the peer status of the selected chatroom
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
-            _model.SessionManager.UpdateSession(args.Identity, peers);
-
+      
             _syncVideoCaptureActivity.Set();
 
+        }
+
+        #endregion
+
+        #region proprieties
+
+        public string MyIdentity()
+        {
+            return _model.Identity.MyIdentity;
         }
 
         #endregion

@@ -11,6 +11,7 @@ using Microsoft.VisualBasic.Devices;
 using Utils;
 using System.Drawing;
 using System.Drawing.Imaging;
+using GenericDataLayer;
 
 namespace GenericDataLayer
 {
@@ -38,6 +39,17 @@ namespace GenericDataLayer
 
         #region public methods
 
+        public void SendRemotingCapture(byte[] capture, string senderIdentity)
+        {
+            // todo: implement SendRemotingCapture
+            _controllerHandlers.RemotingCaptureObserver.Invoke(this,
+                new RemotingCaptureEventArgs()
+                {
+                    Identity = senderIdentity,
+                    Capture = capture
+                });
+        }
+
         public bool SendingPermission(string senderIdentity, string fileName, long fileSize)
         {
             bool canSend = false;
@@ -49,12 +61,13 @@ namespace GenericDataLayer
                 };
 
             // request permission from the user
-            _controllerHandlers.FilePermissionObserver.Invoke(this, new RoomActionEventArgs()
-            {
-                Identity = senderIdentity,
-                RoomType = GenericEnums.RoomType.Send,
-                TransferInfo = transferInfo
-            });
+            _controllerHandlers.FilePermissionObserver.Invoke(this, 
+                new RoomActionEventArgs()
+                {
+                    Identity = senderIdentity,
+                    RoomType = GenericEnums.RoomType.Send,
+                    TransferInfo = transferInfo
+                });
             canSend = transferInfo.HasPermission;
             return canSend;
         }
@@ -146,7 +159,7 @@ namespace GenericDataLayer
                     switch (signalType)
                     {
                         case GenericEnums.SignalType.Stop:
-                            _controllerHandlers.RoomClosingObserver.Invoke(this,
+                            _controllerHandlers.RoomButtonObserver.Invoke(this,
                                 new RoomActionEventArgs()
                                 {
                                     RoomType = roomType,

@@ -48,21 +48,18 @@
   <ItemGroup>
     <Compile Include="Win32\GraphicDeviceInterfaceImports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RemoteDesktopTool\IScreenCaptureTool.cs" />
-    <Compile Include="RemoteDesktopTool\ScreenCaptureTool.cs" />
     <Compile Include="ScreenCapture\ScreenCapture.cs" />
     <Compile Include="ScreenCapture\ScreenCaptureBase.cs" />
     <Compile Include="Win32\Win32Imports.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DesktopSharingViewer\DesktopSharingViewer\DesktopSharingViewer.csproj">
-      <Project>{041771ee-6e65-4a37-87aa-3e94d07e12c7}</Project>
-      <Name>DesktopSharingViewer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Utils\Utils.csproj">
       <Project>{d5b65f88-df4b-4a9a-af3c-d3328ca0b364}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RemoteDesktopTool\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -37,6 +37,25 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public void SendRemotingCapture(byte[] capture, string receiverIdentity, string senderIdentity)
+        {
+            if (_clients.ContainsKey(receiverIdentity))
+            {
+                MViewerClient client = _clients[receiverIdentity];
+                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    try
+                    {
+                        client.SendRemotingCapture(capture, senderIdentity);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+        }
+
         public bool SendingPermission(string fileName, long fileSize, string partnerIdentity, string myIdentity)
         {
             bool canSend = false;
@@ -205,7 +224,7 @@ namespace BusinessLogicLayer
             return isOnline;
         }
 
-        public void SendCapture(byte[]capture, string receiverIdentity, string senderIdentity)
+        public void SendVideoCapture(byte[]capture, string receiverIdentity, string senderIdentity)
         {
             if(_clients.ContainsKey(receiverIdentity))
             {

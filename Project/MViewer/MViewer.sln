@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogicLayer", "Libra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopSharingCore", "Libraries\DesktopSharing\DesktopSharing\DesktopSharingCore.csproj", "{4A68A730-8D2C-485D-B9C9-91EA2CEC5A3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopSharingViewer", "Libraries\DesktopSharingViewer\DesktopSharingViewer\DesktopSharingViewer.csproj", "{041771EE-6E65-4A37-87AA-3E94D07E12C7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesktopSharingCommon", "Libraries\DesktopSharingCommon\DesktopSharingCommon.csproj", "{38C91ED6-4DCD-4427-BC47-8425C07BF66D}"
 EndProject
 Global
@@ -52,10 +50,6 @@ Global
 		{4A68A730-8D2C-485D-B9C9-91EA2CEC5A3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A68A730-8D2C-485D-B9C9-91EA2CEC5A3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A68A730-8D2C-485D-B9C9-91EA2CEC5A3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{041771EE-6E65-4A37-87AA-3E94D07E12C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{38C91ED6-4DCD-4427-BC47-8425C07BF66D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{38C91ED6-4DCD-4427-BC47-8425C07BF66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38C91ED6-4DCD-4427-BC47-8425C07BF66D}.Release|Any CPU.ActiveCfg = Release|Any CPU

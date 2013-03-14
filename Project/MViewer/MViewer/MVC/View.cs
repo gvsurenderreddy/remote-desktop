@@ -126,7 +126,7 @@ namespace MViewer
         {
             if (show)
             {
-                if (_formWebCapture != null && this.WebcaptureClosed == true)
+                if (_formWebCapture != null && this.VideoCaptureClosed == true)
                 {
                     _formWebCapture.StartCapturing();
                 }
@@ -317,7 +317,7 @@ namespace MViewer
             get { return _roomManager; }
         }
 
-        public bool WebcaptureClosed
+        public bool VideoCaptureClosed
         {
             get
             {

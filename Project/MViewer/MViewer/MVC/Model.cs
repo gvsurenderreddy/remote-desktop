@@ -46,6 +46,18 @@ namespace MViewer
 
         #region public methods
 
+        public void RemoveClient(string identity)
+        {
+            PeerStates peers = SessionManager.GetPeerStatus(identity);
+            if (peers.AudioSessionState == GenericEnums.SessionState.Closed
+                       && peers.VideoSessionState == GenericEnums.SessionState.Closed
+                       && peers.RemotingSessionState == GenericEnums.SessionState.Closed
+                       )
+            {
+                ClientController.RemoveClient(identity);
+            }
+        }
+
         public void SendFile(string filePath, string identity)
         {
             // send the file via WCF client
@@ -66,7 +78,7 @@ namespace MViewer
             {
                 MessageBox.Show("Partner refused the transfer", "Transfer denied", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            ClientController.RemoveClient(identity);
+            RemoveClient(identity);
             
         }
 
@@ -86,7 +98,7 @@ namespace MViewer
                     && (peers.RemotingSessionState == GenericEnums.SessionState.Closed || peers.RemotingSessionState == GenericEnums.SessionState.Undefined)
                     && (peers.VideoSessionState == GenericEnums.SessionState.Closed || peers.VideoSessionState == GenericEnums.SessionState.Undefined))
                 {
-                    _clientController.RemoveClient(identity);
+                    RemoveClient(identity);
                 }
             }
         }
@@ -99,7 +111,7 @@ namespace MViewer
             {
                 _clientController.AddClient(identity);
                 _clientController.UpdateContactStatus(identity, Identity.MyIdentity, newStatus);
-                _clientController.RemoveClient(identity);
+                RemoveClient(identity);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -19,5 +20,9 @@ namespace GenericDataLayer
         //void RoomClosingObserver(object sender, EventArgs e);
         void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
 
+        string MyIdentity();
+        void VideoImageCaptured(object source, EventArgs e);
+
+        void RemotingImageCaptured(object source, EventArgs e);
     }
 }

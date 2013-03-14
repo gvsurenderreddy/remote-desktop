@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.IO;
 
-namespace DesktopSharingViewer
+namespace Utils
 {
     public static class DesktopViewerUtils
     {
@@ -40,7 +40,8 @@ namespace DesktopSharingViewer
             }
             finally
             {
-                if (g != null) g.Dispose();
+                if (g != null) 
+                    g.Dispose();
             }
         }
 

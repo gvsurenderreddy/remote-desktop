@@ -17,5 +17,6 @@ namespace GenericDataLayer
         void StartRemotingPresentation();
         void StopRemotingPresentation();
 
+        bool RemotingCaptureClosed();
     }
 }

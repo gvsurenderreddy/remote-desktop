@@ -26,6 +26,7 @@ namespace DesktopSharing
         {
             _newCapture = new Bitmap(1, 1);
             _graphics = Graphics.FromImage(new Bitmap(10, 10));
+            
         }
 
         #endregion

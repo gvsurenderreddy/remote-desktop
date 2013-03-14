@@ -13,7 +13,7 @@ namespace GenericDataLayer
             set;
         }
 
-        public EventHandler RoomClosingObserver
+        public EventHandler RoomButtonObserver
         {
             get;
             set;
@@ -31,7 +31,7 @@ namespace GenericDataLayer
             set;
         }
 
-        public EventHandler ScreenSCaptureObserver
+        public EventHandler RemotingCaptureObserver
         {
             get;
             set;

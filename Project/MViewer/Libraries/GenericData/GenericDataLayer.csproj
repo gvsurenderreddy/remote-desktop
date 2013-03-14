@@ -54,6 +54,10 @@
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
+    <Compile Include="BusinessObjects\Classes\DesktopViewer.cs" />
+    <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
+    <Compile Include="BusinessObjects\Classes\ScreenCaptureTool.cs" />
+    <Compile Include="BusinessObjects\Classes\ViewerContext.cs" />
     <Compile Include="BusinessObjects\ControllerHandlers\ControllerRoomHandlers.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\CommandBase.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\ICommand.cs" />
@@ -62,7 +66,7 @@
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="BusinessObjects\Classes\Presenter.cs" />
-    <Compile Include="BusinessObjects\Classes\PresenterMembers.cs" />
+    <Compile Include="BusinessObjects\Classes\PresenterSettings.cs" />
     <Compile Include="BusinessObjects\Classes\TransferInfo.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
@@ -79,13 +83,14 @@
     <Compile Include="BusinessObjects\Structs\ControllerEventHandlers.cs" />
     <Compile Include="BusinessObjects\Descriptor\TransferUptading.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="EventArgs\CaptureEventArgs.cs" />
+    <Compile Include="EventArgs\VideoCaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
     <Compile Include="EventArgs\IdentityEventArgs.cs" />
     <Compile Include="Interfaces\IAudioRoom.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
     <Compile Include="Interfaces\IController.cs" />
+    <Compile Include="Interfaces\IDesktopViewer.cs" />
     <Compile Include="Interfaces\IModel.cs" />
     <Compile Include="Interfaces\IMViewerChannel.cs" />
     <Compile Include="Interfaces\IMViewerService.cs" />
@@ -93,6 +98,7 @@
     <Compile Include="Interfaces\IRemotingRoom.cs" />
     <Compile Include="Interfaces\IRoom.cs" />
     <Compile Include="Interfaces\IRoomManager.cs" />
+    <Compile Include="Interfaces\IScreenCaptureTool.cs" />
     <Compile Include="Interfaces\IServerController.cs" />
     <Compile Include="Interfaces\ISessionManager.cs" />
     <Compile Include="Interfaces\IVideoRoom.cs" />
@@ -100,6 +106,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DesktopSharingCommon\DesktopSharingCommon.csproj">
+      <Project>{38c91ed6-4dcd-4427-bc47-8425c07bf66d}</Project>
+      <Name>DesktopSharingCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DesktopSharing\DesktopSharing\DesktopSharingCore.csproj">
+      <Project>{4a68a730-8d2c-485d-b9c9-91ea2cec5a3a}</Project>
+      <Name>DesktopSharingCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>
       <Name>Utils</Name>

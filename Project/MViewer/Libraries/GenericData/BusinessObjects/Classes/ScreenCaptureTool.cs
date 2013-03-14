@@ -5,29 +5,82 @@ using System.Text;
 using System.Drawing;
 using DesktopSharing;
 using Utils;
+using System.Timers;
+using GenericDataLayer;
+using System.Windows.Forms;
 
-namespace WpfRemotingServer
+namespace GenericDataLayer
 {
     public class ScreenCaptureTool : IScreenCaptureTool
     {
         #region members
+        
+        ScreenCapture _captureToolInstance;
 
-        ScreenCapture _capture;
+        System.Timers.Timer _remotingTimer;
+        EventHandler _captureReady;
 
         #endregion
 
         #region c-tor
 
-        public ScreenCaptureTool()
+        public ScreenCaptureTool(int timerInterval, EventHandler captureReady)
         {
-            _capture = new ScreenCapture();
+            _captureToolInstance = new ScreenCapture();
+            _captureReady = captureReady;
+            InitializeTimer(timerInterval);
         }
 
         #endregion
 
         #region methods
 
+        void InitializeTimer(int timerInterval)
+        {
+            _remotingTimer = new System.Timers.Timer(timerInterval);
+            _remotingTimer.Elapsed += new ElapsedEventHandler(TimerTick);
+        }
+
+        void TimerTick(object sender, ElapsedEventArgs e)
+        {
+            // todo: implement TimerTick
+            try
+            {
+                _remotingTimer.Stop();
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                _remotingTimer.Start();
+            }
+
+        }
+
         //int testNo = 1;
+
+        public void TogglerTimer(bool start)
+        {
+            if (start)
+            {
+                if (_remotingTimer == null)
+                {
+
+                }
+                _remotingTimer.Start();
+            }
+            else
+            {
+                if (_remotingTimer != null)
+                {
+                    _remotingTimer.Stop();
+                }
+            }
+        }
 
         /// <summary>
         /// method used to capture and serialize the desktop image
@@ -37,7 +90,7 @@ namespace WpfRemotingServer
         {
             byte[] serialized = null;
             Rectangle rect = new Rectangle();
-            Bitmap screenCapture = _capture.CaptureScreen(ref rect);
+            Bitmap screenCapture = _captureToolInstance.CaptureScreen(ref rect);
 
             if (screenCapture != null)
             {
@@ -47,7 +100,7 @@ namespace WpfRemotingServer
                 System.Drawing.Image partialDesktop;
                 System.Drawing.Rectangle rect2;
                 Guid id;
-                DesktopSharingViewer.DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+                DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
 
                 //partialDesktop.Save("c:/test/test" + testNo.ToString() + "Sent.bmp");
                 //testNo++;
@@ -71,7 +124,7 @@ namespace WpfRemotingServer
         {
             byte[] serialized = null;
             int x = 0, y = 0;
-            Image cursorCapture = _capture.GetCursorCapture(ref x, ref y);
+            Image cursorCapture = _captureToolInstance.GetCursorCapture(ref x, ref y);
             if (cursorCapture != null)
             {
                 // something has changed
@@ -87,5 +140,18 @@ namespace WpfRemotingServer
         }
 
         #endregion
+
+        #region proprieties
+
+        public bool RemotingCaptureClosed
+        {
+            get
+            {
+                // todo: implement RemotingCaptureClosed
+                return false;
+            }
+        }
+        #endregion
+
     }
 }
