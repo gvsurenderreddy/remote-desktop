@@ -45,8 +45,6 @@ namespace MViewer
 
         public Controller()
         {
-            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
-
             // initialize the model
             _model = new Model();
             // initalize the view and bind it to the model
@@ -57,8 +55,10 @@ namespace MViewer
 
         #region event handlers
 
-        public void InitializeModel()
+        public void InitializeSettings()
         {
+            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
+
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
                 ClientConnectedObserver = this.ClientConnectedObserver,

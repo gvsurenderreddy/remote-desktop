@@ -35,6 +35,6 @@ namespace GenericDataLayer
 
         void RemotingImageCaptured(object source, EventArgs e);
 
-        void InitializeModel();
+        void InitializeSettings();
     }
 }
