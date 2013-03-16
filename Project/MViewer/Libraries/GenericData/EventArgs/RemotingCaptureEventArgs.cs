@@ -14,12 +14,20 @@ namespace GenericDataLayer
             get { return _identity; }
             set { _identity = value; }
         }
-        byte[] _capture;
+        byte[] _screenCapture;
 
-        public byte[] Capture
+        public byte[] ScreenCapture
         {
-            get { return _capture; }
-            set { _capture = value; }
+            get { return _screenCapture; }
+            set { _screenCapture = value; }
+        }
+
+        byte[] _mouseCapture;
+
+        public byte[] MouseCapture
+        {
+            get { return _mouseCapture; }
+            set { _mouseCapture = value; }
         }
     }
 }

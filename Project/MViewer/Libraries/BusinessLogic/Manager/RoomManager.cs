@@ -52,7 +52,20 @@ namespace BusinessLogicLayer
             return activated;
         }
 
-        public void ShowPicture(string identity, Image picture)
+        public void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture)
+        {
+            lock (_syncRooms)
+            {
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    IRemotingRoom room = (IRemotingRoom)_rooms[identity];
+                    room.ShowScreenCapture(screenCapture);
+                    room.ShowMouseCapture(mouseCapture);
+                }
+            }
+        }
+
+        public void ShowVideoCapture(string identity, Image picture)
         {
             lock (_syncRooms)
             {
@@ -78,23 +91,17 @@ namespace BusinessLogicLayer
 
         public void AddRoom(string identity, IRoom room)
         {
-            //Thread t = new Thread(delegate()
-            //    {
-                    lock (_syncRooms)
-                    {
-                        if (_rooms == null)
-                        {
-                            _rooms = new Dictionary<string, IRoom>();
-                        }
-                        if (!_rooms.ContainsKey(identity))
-                        {
-                            _rooms.Add(identity, room);
-                        }
-                    }
-            //    }
-            //    );
-            //t.IsBackground = true;
-            //t.Start();
+            lock (_syncRooms)
+            {
+                if (_rooms == null)
+                {
+                    _rooms = new Dictionary<string, IRoom>();
+                }
+                if (!_rooms.ContainsKey(identity))
+                {
+                    _rooms.Add(identity, room);
+                }
+            }
         }
 
         public void RemoveRoom(string identity)
@@ -125,8 +132,6 @@ namespace BusinessLogicLayer
             }
         }
 
-        delegate void CloseDelegate();
-
         public void CloseRoom(string identity)
         {
             lock (_syncRooms)
@@ -134,7 +139,7 @@ namespace BusinessLogicLayer
                 if (_rooms != null && _rooms.ContainsKey(identity))
                 {
                     _rooms[identity].SyncClosing.Reset();
-                    ((Form)_rooms[identity]).Invoke(new CloseDelegate(((Form)_rooms[identity]).Close));
+                    ((Form)_rooms[identity]).Invoke(new Delegates.CloseDelegate(((Form)_rooms[identity]).Close));
                 }
             }
         }

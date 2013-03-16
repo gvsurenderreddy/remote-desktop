@@ -25,7 +25,7 @@ namespace GenericDataLayer
         void SendWebcamCapture(byte[] capture, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendRemotingCapture", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendRemotingCaptureResponse")]
-        void SendRemotingCapture(byte[] capture, string senderIdentity);
+        void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendMicrophoneCapture", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendMicrophoneCaptureResponse")]
         void SendMicrophoneCapture(byte[] capture);

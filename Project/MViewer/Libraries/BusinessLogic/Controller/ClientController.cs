@@ -37,7 +37,7 @@ namespace BusinessLogicLayer
 
         #region public methods
 
-        public void SendRemotingCapture(byte[] capture, string receiverIdentity, string senderIdentity)
+        public void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity)
         {
             if (_clients.ContainsKey(receiverIdentity))
             {
@@ -46,7 +46,7 @@ namespace BusinessLogicLayer
                 {
                     try
                     {
-                        client.SendRemotingCapture(capture, senderIdentity);
+                        client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
                     }
                     catch (Exception)
                     {

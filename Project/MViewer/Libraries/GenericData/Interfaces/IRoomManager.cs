@@ -14,7 +14,8 @@ namespace GenericDataLayer
         void ShowRoom(string identity);
         void CloseRoom(string identity);
 
-        void ShowPicture(string identity, Image picture);
+        void ShowVideoCapture(string identity, Image picture);
+        void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture);
         void SetPartnerName(string identity, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
 

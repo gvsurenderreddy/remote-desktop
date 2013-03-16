@@ -52,7 +52,21 @@ namespace GenericDataLayer
             {
                 _remotingTimer.Stop();
 
+                Rectangle rectangle = new Rectangle();
+                Bitmap screenCapture = _captureToolInstance.CaptureScreen(ref rectangle);
+                
+                int x = 0, y = 0;
+                Bitmap mouseCapture = _captureToolInstance.CaptureMouse(ref x, ref y);
 
+                byte[] serializedScreen = ImageConverter.ImageToByteArray(screenCapture);
+                byte[] serializedMouse = ImageConverter.ImageToByteArray(mouseCapture);
+
+                _captureReady.Invoke(this, 
+                    new RemotingCaptureEventArgs()
+                    {
+                        ScreenCapture = serializedScreen,
+                        MouseCapture = serializedMouse
+                    });
             }
             catch (Exception ex)
             {

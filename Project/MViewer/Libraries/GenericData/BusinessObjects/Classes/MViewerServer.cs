@@ -40,7 +40,7 @@ namespace GenericDataLayer
 
         #region public methods
 
-        public void SendRemotingCapture(byte[] capture, string senderIdentity)
+        public void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string senderIdentity)
         {
             _syncRemotingCaptures.WaitOne();
 
@@ -48,7 +48,8 @@ namespace GenericDataLayer
                 new RemotingCaptureEventArgs()
                 {
                     Identity = senderIdentity,
-                    Capture = capture
+                    ScreenCapture = screenCapture,
+                    MouseCapture = mouseCapture
                 });
         }
 

@@ -20,5 +20,11 @@ namespace UIControls
         {
             txtPartner.Text = friendlyName;
         }
+
+        public void SetPicture(Image picture)
+        {
+            Image resized = ImageConverter.ResizeImage(picture, pbRemote.Width, pbRemote.Height);
+            pbRemote.Image = resized;
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace GenericDataLayer
         MViewerClient GetClient(string identity);
         bool IsContactOnline(string identity);
         void SendVideoCapture(byte[] capture, string receiverIdentity, string senderIdentity);
-        void SendRemotingCapture(byte[] capture, string receiverIdentity, string senderIdentity);
+        void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity);
         void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType);
         void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus);
         void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName);

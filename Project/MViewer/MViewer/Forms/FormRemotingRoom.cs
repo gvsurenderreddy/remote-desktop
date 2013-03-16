@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using GenericDataLayer;
 using Utils;
 
-namespace MViewer.Forms
+namespace MViewer
 {
     public partial class FormRemotingRoom : Form, IRemotingRoom
     {
         #region private members
 
+        bool _formClosing;
         ManualResetEvent _syncClosing = new ManualResetEvent(true);
 
         #endregion
@@ -26,6 +27,8 @@ namespace MViewer.Forms
         {
             InitializeComponent();
             ContactIdentity = identity;
+            _formClosing = false;
+
         }
 
         #endregion
@@ -39,7 +42,12 @@ namespace MViewer.Forms
 
         public void ShowScreenCapture(byte[] capture)
         {
-            // todo: implement ShowScreenCapture
+            _syncClosing.WaitOne();
+            Image picture = ImageConverter.ByteArrayToImage(capture);
+            if (!_formClosing)
+            {
+                remoteControl.SetPicture(picture);
+            }
         }
 
         public void SetPartnerName(string friendlyName)
@@ -93,6 +101,27 @@ namespace MViewer.Forms
         public GenericEnums.RoomType RoomType
         {
             get { return GenericEnums.RoomType.Remoting; }
+        }
+
+        #endregion
+
+        #region private methods
+
+        private void FormRemotingRoom_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _formClosing = true;
+
+            // todo: later - perform other specific actions when the remoting Chat room is closing
+            _syncClosing.Set();
+        }
+
+        private void FormRemotingRoom_Resize(object sender, EventArgs e)
+        {
+            pnlMain.Width = this.Width - 20 - 1;
+            pnlMain.Height = this.Height - 20 - 1;
+
+            remoteControl.Width = pnlMain.Width - 15 - 5;
+            remoteControl.Height = pnlMain.Height - 38 - 5;
         }
 
         #endregion

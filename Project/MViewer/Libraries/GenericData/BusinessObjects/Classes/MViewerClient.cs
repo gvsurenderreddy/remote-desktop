@@ -64,9 +64,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.SendWebcamCapture(capture, senderIdentity);
     }
 
-    public void SendRemotingCapture(byte[] captre, string senderIdentity)
+    public void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string senderIdentity)
     {
-        base.Channel.SendRemotingCapture(captre, senderIdentity);
+        base.Channel.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
     }
 
     public void SendMicrophoneCapture(byte[] capture)
