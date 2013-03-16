@@ -11,7 +11,6 @@ namespace GenericDataLayer
     {
         Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> _transferCommands;
 
-        // todo: add delegate handlers
         public Delegates.CommandDelegate SendFile;
         public Delegates.CommandDelegate TransferPermission;
 

@@ -16,7 +16,6 @@ namespace MViewer
         {
             // todo: provide the video/audio/remoting event handlers from the controller
 
-            //VideoCommand audioCommand = new VideoCommand(roomHandlers.Audio);
             VideoCommands videoCommands = new VideoCommands()
             {
                 StartVideoChat = roomHandlers.Video[GenericEnums.SignalType.Start],

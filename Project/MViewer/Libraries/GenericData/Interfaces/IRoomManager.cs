@@ -18,7 +18,7 @@ namespace GenericDataLayer
         void SetPartnerName(string identity, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
 
-        bool RoomsLeft();
+        bool VideoRoomsLeft();
 
         string ActiveRoom
         {

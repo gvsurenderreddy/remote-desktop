@@ -11,9 +11,6 @@ namespace GenericDataLayer
     {
         void SetPartnerName(string friendlyName);
 
-        // todo: remove close room
-        //void CloseRoom();
-        
         void ShowRoom();
 
         string ContactIdentity

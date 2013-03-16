@@ -11,7 +11,8 @@ namespace GenericDataLayer
         void AddSession(Session session);
         void RemoveSession(string identity);
         PeerStates GetPeerStatus(string identity);
-      
+
+        bool RemotingRoomsLeft();
         IList<string> GetConnectedSessions(GenericEnums.RoomType actionType);
         GenericEnums.SessionState GetSessionState(string identity, GenericEnums.RoomType roomType);
         PendingTransfer GetTransferStatus(string identity);

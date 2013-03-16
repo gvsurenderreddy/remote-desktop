@@ -25,9 +25,6 @@ namespace MViewer
             get { return _syncClosing; }
         }
 
-        //Container _components;
-        //System.Windows.Forms.Timer _closeTimer;
-
         #endregion
 
         #region c-tor
@@ -36,13 +33,7 @@ namespace MViewer
         {
             InitializeComponent();
 
-            //_components = new Container();
-            //_closeTimer = new System.Windows.Forms.Timer(_components);
-            //_closeTimer.Interval = 50;
-            //_closeTimer.Tick += new EventHandler(CloseFormTimer);
-
             ContactIdentity = identity;
-            //handle = this.Handle;
             _formClosing = false;
         }
 
@@ -90,22 +81,6 @@ namespace MViewer
                 videoControl.SetPicture(picture);
             }
         }
-
-        //delegate void CloseDelegate();  
-
-        //// todo: remove close room from base class
-        //public void CloseRoom()
-        //{
-        //    _syncClosing.Reset();
-
-        //    _formClosing = true;
-        //    _closeTimer.Start();
-        //}
-
-        //private void CloseFormTimer(object sender, EventArgs args)
-        //{
-        //    this.Invoke(new CloseDelegate(this.Close));
-        //}
 
         public void ShowRoom()
         {

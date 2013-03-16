@@ -201,14 +201,17 @@ namespace MViewer
                 _formWebCapture.WaitRoomButtonAction(true);
             }
 
-            // todo: put the remoting transfers on hold
+            if (args.RoomType == GenericEnums.RoomType.Remoting)
+            {
+                // todo: put the remoting transfers on hold
+            
+            }
 
+            if (args.RoomType == GenericEnums.RoomType.Audio)
+            {
+                // todo: put the audio transfers on hold
 
-
-
-            // todo: put the audio transfers on hold
-
-
+            }
 
             string activeRoom = _roomManager.ActiveRoom;
             if (string.IsNullOrEmpty(activeRoom))
@@ -219,7 +222,6 @@ namespace MViewer
                 if (!string.IsNullOrEmpty(contact.Key) && !string.IsNullOrEmpty(contact.Value))
                 {
                     args.Identity = contact.Key;
-                    //args.FriendlyName = contact.Value;
                 }
                 else
                 {
@@ -261,7 +263,7 @@ namespace MViewer
         {
             bool canExit = true;
 
-            bool roomsActive = RoomManager.RoomsLeft();
+            bool roomsActive = RoomManager.VideoRoomsLeft();
 
             if (roomsActive)
             {

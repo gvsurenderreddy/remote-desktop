@@ -40,6 +40,11 @@ namespace UIControls
 
         #region public methods
 
+        public void SetPartnerName(string friendlyName)
+        {
+            txtPartner.Text = friendlyName;
+        }
+
         public void ToggleStatusUpdate()
         {
             /// switch bewteen muted/unmuted status

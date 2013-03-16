@@ -18,10 +18,9 @@ namespace MViewer
             int timerInterval = 100;
             int height = 354, width = 360;
 
-            // todo: move the presenter settings to the system configuration class
             _presenterSettings = new PresenterSettings()
             {
-                Identity = Program.Controller.MyIdentity(),
+                Identity = FriendlyName,
                 VideoTimerInterval = timerInterval,
                 VideoScreenSize =
                     new Structures.ScreenSize()
@@ -33,6 +32,30 @@ namespace MViewer
                 RemotingTimerInterval = 50,
                 RemotingImageCaptured = new EventHandler(Program.Controller.RemotingImageCaptured)
             };
+
+            // handlers initialization 
+            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideoChat);
+            videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideChat);
+            videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideoChat);
+            videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideoChat);
+
+            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            transferDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.SendFileHandler);
+
+            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            remotingDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartRemotingChat);
+            remotingDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopRemotingChat);
+            remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemotingChat);
+            remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemotingChat);
+
+            _roomHandlers = new ControllerRoomHandlers()
+            {
+                // todo: add audio & remoting handlers handlers by signal type
+                Video = videoDelegates,
+                Transfer = transferDelegates,
+                Remoting = remotingDelegates
+            };
         }
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
@@ -43,6 +66,13 @@ namespace MViewer
         public readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
         
         private PresenterSettings _presenterSettings;
+
+        ControllerRoomHandlers _roomHandlers;
+
+        public ControllerRoomHandlers RoomHandlers
+        {
+            get { return _roomHandlers; }
+        }
 
         public PresenterSettings PresenterSettings
         {
@@ -62,8 +92,6 @@ namespace MViewer
                         if (_instance == null)
                         {
                             _instance = new SystemConfiguration();
-
-
                         }
                     }
                 }

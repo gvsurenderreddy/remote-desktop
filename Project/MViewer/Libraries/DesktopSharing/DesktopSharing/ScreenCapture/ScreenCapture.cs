@@ -262,9 +262,8 @@ namespace DesktopSharing
                     }
                 }
             }
-            catch (Exception)
+            catch 
             {
-                //todo: Do something with this info.
                 System.Diagnostics.Debugger.Break();
             }
             finally

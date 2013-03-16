@@ -16,6 +16,7 @@ namespace GenericDataLayer
         void NotifyContacts(string newFriendlyName);
         void SendFile(string filePath, string identity);
         void RemoveClient(string identity);
+        void IntializeModel(ControllerEventHandlers handlers);
 
         ISessionManager SessionManager
         {

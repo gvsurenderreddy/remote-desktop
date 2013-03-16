@@ -23,6 +23,7 @@ namespace GenericDataLayer
         ControllerEventHandlers _controllerHandlers;
         string _identity;
         ManualResetEvent _syncVideoCaptures = new ManualResetEvent(true);
+        ManualResetEvent _syncRemotingCaptures = new ManualResetEvent(true);
         readonly object _syncAudioCaptures = new object();
         
         #endregion
@@ -41,7 +42,8 @@ namespace GenericDataLayer
 
         public void SendRemotingCapture(byte[] capture, string senderIdentity)
         {
-            // todo: implement SendRemotingCapture
+            _syncRemotingCaptures.WaitOne();
+
             _controllerHandlers.RemotingCaptureObserver.Invoke(this,
                 new RemotingCaptureEventArgs()
                 {
@@ -151,29 +153,19 @@ namespace GenericDataLayer
 
         public void SendRoomButtonAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
         {
-            // todo: complete implementation of SendRoomButtonAction
-            switch(roomType)
-            {
-                case GenericEnums.RoomType.Video:
-                    _syncVideoCaptures.Reset();
-                    switch (signalType)
-                    {
-                        case GenericEnums.SignalType.Stop:
-                            _controllerHandlers.RoomButtonObserver.Invoke(this,
-                                new RoomActionEventArgs()
-                                {
-                                    RoomType = roomType,
-                                    Identity = identity,
-                                    SignalType = signalType
-                                });
-                            break;
-                    }
-                    _syncVideoCaptures.Set();
-                break;
-                case GenericEnums.RoomType.Audio:
+            _syncVideoCaptures.Reset();
+            _syncRemotingCaptures.Reset();
 
-                break;
-            }
+            _controllerHandlers.RoomButtonObserver.Invoke(this,
+                new RoomActionEventArgs()
+                {
+                    RoomType = roomType,
+                    Identity = identity,
+                    SignalType = signalType
+                });
+
+            _syncRemotingCaptures.Set();
+            _syncVideoCaptures.Set();
         }
 
         public void AddContact(string identity, string friendlyName)

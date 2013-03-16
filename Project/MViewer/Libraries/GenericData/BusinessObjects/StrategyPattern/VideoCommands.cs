@@ -10,7 +10,6 @@ namespace GenericDataLayer
 {
     public class VideoCommands : CommandBase
     {
-        // todo: add delegate handlers
         public Delegates.CommandDelegate StartVideoChat;
         public Delegates.CommandDelegate StopVideChat;
         public Delegates.CommandDelegate PauseVideoChat;

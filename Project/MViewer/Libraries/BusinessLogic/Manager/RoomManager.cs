@@ -33,7 +33,7 @@ namespace BusinessLogicLayer
 
         #region public methods
 
-        public bool RoomsLeft()
+        public bool VideoRoomsLeft()
         {
             return _rooms != null ? _rooms.Count > 0 ? true : false : false;
         }
@@ -149,7 +149,7 @@ namespace BusinessLogicLayer
             {
                 lock (_syncRooms)
                 {
-                    if (RoomsLeft() == false) 
+                    if (VideoRoomsLeft() == false) 
                     {
                         // reset the active room identity if the rooms were all closed
                         _activeRoom = string.Empty;

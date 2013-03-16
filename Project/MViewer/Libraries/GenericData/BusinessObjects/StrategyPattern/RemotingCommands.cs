@@ -19,7 +19,7 @@ namespace GenericDataLayer
             _commands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
             _commands.Add(GenericEnums.SignalType.Start, StartRemoting);
             _commands.Add(GenericEnums.SignalType.Stop, StopRemoting);
-            _commands.Add(GenericEnums.SignalType.Start, PauseRemoting);
+            _commands.Add(GenericEnums.SignalType.Pause, PauseRemoting);
             _commands.Add(GenericEnums.SignalType.Resume, ResumeRemoting);
         }
     }

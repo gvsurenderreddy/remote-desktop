@@ -29,22 +29,24 @@ namespace MViewer
 
         #region c-tor
 
-        public Model(ControllerEventHandlers handlers)
+        public Model()
         {
-            _identity = new Identity(SystemConfiguration.Instance.FriendlyName);
-            SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
-            _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-            _clientController = new ClientController();
-
-            ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
-            _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handlers);
-        
+            _clientController = new ClientController();        
             _sessionManager = new SessionManager();
         }
 
         #endregion
 
         #region public methods
+
+        public void IntializeModel(ControllerEventHandlers handlers)
+        {
+            _identity = new Identity(SystemConfiguration.Instance.FriendlyName);
+            SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
+            _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+            ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
+            _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handlers);
+        }
 
         public void RemoveClient(string identity)
         {

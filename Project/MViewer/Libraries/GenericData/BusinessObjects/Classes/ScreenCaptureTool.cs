@@ -17,6 +17,9 @@ namespace GenericDataLayer
         
         ScreenCapture _captureToolInstance;
 
+        bool _remotingClosed;
+
+        int _timerInterval;
         System.Timers.Timer _remotingTimer;
         EventHandler _captureReady;
 
@@ -29,6 +32,7 @@ namespace GenericDataLayer
             _captureToolInstance = new ScreenCapture();
             _captureReady = captureReady;
             InitializeTimer(timerInterval);
+            _timerInterval = timerInterval;
         }
 
         #endregion
@@ -69,8 +73,9 @@ namespace GenericDataLayer
             {
                 if (_remotingTimer == null)
                 {
-
+                    InitializeTimer(_timerInterval);
                 }
+                _remotingClosed = false;
                 _remotingTimer.Start();
             }
             else
@@ -79,6 +84,7 @@ namespace GenericDataLayer
                 {
                     _remotingTimer.Stop();
                 }
+                _remotingClosed = true;
             }
         }
 
@@ -147,8 +153,7 @@ namespace GenericDataLayer
         {
             get
             {
-                // todo: implement RemotingCaptureClosed
-                return false;
+                return _remotingClosed;
             }
         }
         #endregion

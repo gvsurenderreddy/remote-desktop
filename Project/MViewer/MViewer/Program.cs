@@ -32,6 +32,7 @@ namespace MViewer
             Application.SetCompatibleTextRenderingDefault(false);
 
             _controller = new Controller();
+            _controller.InitializeModel();
             _controller.StartApplication();
           
             // todo: use manual reset event instead of thread.sleep(0)

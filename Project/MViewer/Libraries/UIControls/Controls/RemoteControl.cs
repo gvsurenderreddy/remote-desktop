@@ -15,5 +15,10 @@ namespace UIControls
         {
             InitializeComponent();
         }
+
+        public void SetPartnerName(string friendlyName)
+        {
+            txtPartner.Text = friendlyName;
+        }
     }
 }

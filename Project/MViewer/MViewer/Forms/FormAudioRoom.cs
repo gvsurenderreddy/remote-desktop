@@ -39,17 +39,35 @@ namespace MViewer.Forms
 
         public void SetPartnerName(string friendlyName)
         {
-            // todo: implement SetPartnerName - audio room
-        }
-
-        public void CloseRoom()
-        {
-            // todo: implement CloseRoom - audio room
+            audioControl.SetPartnerName(friendlyName);
         }
 
         public void ShowRoom()
         {
-            // todo: implement ShowRoom - audio room
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke
+                        (
+                        new MethodInvoker
+                        (
+                       delegate
+                       {
+                           this.Show();
+                       }
+                        )
+                        );
+
+                }
+                else
+                {
+                    this.Show();
+                }
+            }
+            catch
+            {
+            }
         }
 
         #endregion

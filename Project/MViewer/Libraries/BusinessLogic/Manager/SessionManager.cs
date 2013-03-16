@@ -18,6 +18,26 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public bool RemotingRoomsLeft()
+        {
+            bool left = false;
+            lock (_syncSessions)
+            {
+                if (_clientSessions != null)
+                {
+                    foreach (Session session in _clientSessions.Values)
+                    {
+                        if (session.RemotingSessionState != GenericEnums.SessionState.Closed)
+                        {
+                            left = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            return left;
+        }
+
         public void AddSession(Session session)
         {
             lock (_syncSessions)

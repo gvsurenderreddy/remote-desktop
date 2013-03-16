@@ -36,8 +36,6 @@ namespace MViewer
 
         IRoomCommandInvoker _roomCommandInvoker;
 
-        ControllerRoomHandlers _roomHandlers;
-
         IView _view;
         IModel _model;
 
@@ -46,6 +44,20 @@ namespace MViewer
         #region c-tor
 
         public Controller()
+        {
+            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
+
+            // initialize the model
+            _model = new Model();
+            // initalize the view and bind it to the model
+            _view = new View(_model);
+        }
+
+        #endregion
+
+        #region event handlers
+
+        public void InitializeModel()
         {
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
@@ -58,22 +70,12 @@ namespace MViewer
                 FilePermissionObserver = this.FileTransferPermission,
                 RemotingCaptureObserver = this.RemotingCaptureObserver
             };
-
-            InitializeRoomHandlers();
-
-            // initialize the model
-            _model = new Model(handlers);
-            // initalize the view and bind it to the model
-            _view = new View(_model);
+            _model.IntializeModel(handlers);
         }
-
-        #endregion
-
-        #region event handlers
 
         public void RemotingImageCaptured(object source, EventArgs e)
         {
-            // todo: bind RemotingImageCaptured to the remoting capture object
+            // binded RemotingImageCaptured to the remoting capture object
             try
             {
                 _syncRemotingCaptureActivity.WaitOne(); // wait for any room action to end
@@ -262,58 +264,6 @@ namespace MViewer
 
         }
 
-        void SendFileHandler(object sender, RoomActionEventArgs args)
-        {
-            if (_model.ClientController.IsContactOnline(args.Identity))
-            {
-                Contact contact = _model.GetContact(args.Identity);
-                string filePath = string.Empty;
-                FileDialog fileDialog = new OpenFileDialog();
-                if (fileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    filePath = fileDialog.FileName;
-
-                    FileInfo fileInfo = new FileInfo(filePath);
-                    if (fileInfo.Length <= 10485760)
-                    {
-
-                        FormFileProgress fileProgressFrom = null;
-
-                        Thread t = new Thread(delegate()
-                        {
-                            fileProgressFrom = new FormFileProgress(
-                                Path.GetFileName(filePath), contact.FriendlyName);
-
-                            Application.Run(fileProgressFrom);
-
-                        });
-                        t.Start();
-                        Thread.Sleep(500);
-                        Thread t2 = new Thread(delegate()
-                        {
-                            fileProgressFrom.StartPB();
-                        });
-                        t2.Start();
-                        _model.SendFile(filePath, args.Identity);
-
-                        if (fileProgressFrom != null)
-                        {
-                            fileProgressFrom.StopProgress();
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Sorry, cannot transfer files larger than 10 MB in MViewer-lite", "Transfer not possible", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                   
-                }
-            }
-            else
-            {
-                MessageBox.Show("Selected person is offline", "Cannot send", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
         // todo: convert this to an event handler , use it in the View as observer
         public void RoomButtonAction(object sender, EventArgs e)
         {
@@ -363,207 +313,7 @@ namespace MViewer
             _model.NotifyContacts(GenericEnums.ContactStatus.Online);
         }
 
-        public void StopApplication()
-        {
-            // todo: update the StopApplication method with other actions
-
-            // check for running video/audio/remoting chats
-            bool canExit = _view.ExitConfirmation();
-            if (canExit)
-            {
-                // stop all active rooms
-                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
-                foreach (string identity in partnerIdentities)
-                {
-                    StopVideChat(null, new RoomActionEventArgs()
-                        {
-                            Identity = identity,
-                            RoomType = GenericEnums.RoomType.Video,
-                            SignalType = GenericEnums.SignalType.Stop 
-                        });
-                }
-                // stop my webcapture form
-                StopVideoCapturing();
-
-                // todo: stop the audio & remoting rooms also
-
-                // unbind the observers
-                _view.BindObservers(false);
-
-                _model.ServerController.StopServer();
-
-                // notify all contacts that you exited the chat
-                _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
-
-                // exit the environment
-                Environment.Exit(0);
-            }
-        }
-
-        #endregion
-
-        #region private methods
-
-        private void RemotingCaptureObserver(object sender, EventArgs e)
-        {
-            RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
-            PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
-
-            if (peer.RemotingSessionState == GenericEnums.SessionState.Undefined ||
-                peer.RemotingSessionState == GenericEnums.SessionState.Pending)
-            {
-                // receiving captures for the first time, have to initalize a form
-                ClientConnectedObserver(null,
-                       new RoomActionEventArgs()
-                       {
-                           RoomType = GenericEnums.RoomType.Remoting,
-                           SignalType = GenericEnums.SignalType.Start,
-                           Identity = args.Identity
-                       });
-                while (peer.RemotingSessionState != GenericEnums.SessionState.Opened)
-                {
-                    Thread.Sleep(2000);
-                    peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
-                }
-            }
-
-            // check the videochat status before displaying the picture
-            if (peer.RemotingSessionState == GenericEnums.SessionState.Opened)
-            {
-                //todo : display the remoting capture in the opened form
-            }
-        }
-
-        void StartVideoChat(object sender, RoomActionEventArgs args)
-        {
-            // open new Video Chat form to receive the captures
-            OpenVideoForm(args.Identity);
-
-            // I am going to send my captures by using the below client
-            _model.ClientController.AddClient(args.Identity);
-            _model.ClientController.StartClient(args.Identity);
-
-            // create client session
-            Session clientSession = new ClientSession(args.Identity, args.RoomType);
-            // save the proxy to which we are sending the webcam captures
-            _model.SessionManager.AddSession(clientSession);
-
-            // initialize the webcamCapture form
-            // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
-            _view.ShowMyWebcamForm(true);
-        }
-
-        void ClientConnectedObserver(object sender, EventArgs e)
-        {
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            _roomCommandInvoker.PerformCommand(sender, args);
-        }
-
-        void FileTransferObserver(object sender, EventArgs e)
-        {
-            Thread t = new Thread(delegate()
-            {
-                RoomActionEventArgs args = (RoomActionEventArgs)e;
-
-                byte[] buffer = (byte[])sender; // this is the file sent
-
-                // open file path dialog
-                string extension = Path.GetExtension(args.TransferInfo.FileName);// get file extension
-
-                // Displays a SaveFileDialog so the user can save the Image
-                // assigned to Button2.
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-                saveFileDialog1.Filter = "File|*." + extension + "";
-                saveFileDialog1.Title = "Save File";
-                saveFileDialog1.FileName = args.TransferInfo.FileName;
-                DialogResult dialogResult = saveFileDialog1.ShowDialog();
-
-                // If the file name is not an empty string open it for saving.
-                if (dialogResult == DialogResult.OK && saveFileDialog1.FileName != "")
-                {
-                    // remove the existing file if the user confirmed
-                    if (File.Exists(saveFileDialog1.FileName))
-                    {
-                        File.Delete(saveFileDialog1.FileName);
-                    }
-
-                    // todo: add a progress bar (into a TransfersForm)
-                    FormFileProgress fileProgressFrom = null;
-                    Contact contact = _model.GetContact(args.Identity);
-                    Thread t3 = new Thread(delegate()
-                    {
-                        fileProgressFrom = new FormFileProgress(
-                            Path.GetFileName(saveFileDialog1.FileName), contact.FriendlyName);
-
-                        Application.Run(fileProgressFrom);
-
-                    });
-                    t3.Start();
-                    Thread.Sleep(500);
-                    Thread t2 = new Thread(delegate()
-                    {
-                        fileProgressFrom.StartPB();
-                    });
-                    t2.Start();
-                    
-                    // Saves the Image via a FileStream created by the OpenFile method.
-                    System.IO.FileStream fs =
-                       (System.IO.FileStream)saveFileDialog1.OpenFile();
-
-                    fs.Write(buffer, 0, buffer.Length);
-
-                    fs.Close();
-
-                    if (fileProgressFrom != null)
-                    {
-                        fileProgressFrom.StopProgress();
-                    }  
-                }
-
-            });
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-            t.Join();
-        }
-
-        void FileTransferPermission(object sender, EventArgs e)
-        {
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            bool canSend = _view.RequestTransferPermission(args.Identity, args.TransferInfo.FileName, args.TransferInfo.FileSize);
-            args.TransferInfo.HasPermission = canSend;
-        }
-
-        void InitializeRoomHandlers()
-        {
-            // todo: move the handlers initialization & storage to a different class
-
-            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
-            videoDelegates.Add(GenericEnums.SignalType.Start, this.StartVideoChat);
-            videoDelegates.Add(GenericEnums.SignalType.Stop, this.StopVideChat);
-            videoDelegates.Add(GenericEnums.SignalType.Pause, this.PauseVideo);
-            videoDelegates.Add(GenericEnums.SignalType.Resume, this.ResumeVideo);
-
-            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType,Delegates.CommandDelegate>();
-            transferDelegates.Add(GenericEnums.SignalType.Start, this.SendFileHandler);
-
-            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
-            remotingDelegates.Add(GenericEnums.SignalType.Start, this.StartRemoting);
-            remotingDelegates.Add(GenericEnums.SignalType.Start, this.StopRemoting);
-            videoDelegates.Add(GenericEnums.SignalType.Pause, this.PauseRemoting);
-            videoDelegates.Add(GenericEnums.SignalType.Resume, this.ResumeRemoting);
-
-            _roomHandlers = new ControllerRoomHandlers()
-            {
-                // todo: add audio & remoting handlers handlers by signal type
-                Video = videoDelegates,
-                Transfer = transferDelegates,
-                Remoting = remotingDelegates
-            };
-       
-            _roomCommandInvoker = new RoomCommandInvoker(_roomHandlers);
-        }
-
-        void StopVideChat(object sender, RoomActionEventArgs args)
+        public void StopVideChat(object sender, RoomActionEventArgs args)
         {
             _syncVideoCaptureActivity.Reset();
 
@@ -612,13 +362,13 @@ namespace MViewer
             _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
                 false);
 
-            if (_view.RoomManager.RoomsLeft() == false)
+            if (_view.RoomManager.VideoRoomsLeft() == false)
             {
                 _view.ResetLabels(GenericEnums.RoomType.Video);
             }
 
             // close the webcapture form if there s no room left
-            if (!_view.RoomManager.RoomsLeft())
+            if (!_view.RoomManager.VideoRoomsLeft())
             {
                 StopVideoCapturing();
             }
@@ -627,24 +377,99 @@ namespace MViewer
 
         }
 
-        //todo: implement ResumeRemoting
-        private void ResumeRemoting(object sender, RoomActionEventArgs args)
+        public void PauseVideoChat(object sender, RoomActionEventArgs args)
+        {
+            _syncVideoCaptureActivity.Reset();
+
+            // use the peer status of the selected chatroom
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
+
+            _syncVideoCaptureActivity.Set();
+
+        }
+
+        public void ResumeVideoChat(object sender, RoomActionEventArgs args)
+        {
+            _syncVideoCaptureActivity.Reset();
+
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
+
+            _syncVideoCaptureActivity.Set();
+
+        }
+
+        public void SendFileHandler(object sender, RoomActionEventArgs args)
+        {
+            if (_model.ClientController.IsContactOnline(args.Identity))
+            {
+                Contact contact = _model.GetContact(args.Identity);
+                string filePath = string.Empty;
+                FileDialog fileDialog = new OpenFileDialog();
+                if (fileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    filePath = fileDialog.FileName;
+
+                    FileInfo fileInfo = new FileInfo(filePath);
+                    if (fileInfo.Length <= 10485760)
+                    {
+
+                        FormFileProgress fileProgressFrom = null;
+
+                        Thread t = new Thread(delegate()
+                        {
+                            fileProgressFrom = new FormFileProgress(
+                                Path.GetFileName(filePath), contact.FriendlyName);
+
+                            Application.Run(fileProgressFrom);
+
+                        });
+                        t.Start();
+                        Thread.Sleep(500);
+                        Thread t2 = new Thread(delegate()
+                        {
+                            fileProgressFrom.StartPB();
+                        });
+                        t2.Start();
+                        _model.SendFile(filePath, args.Identity);
+
+                        if (fileProgressFrom != null)
+                        {
+                            fileProgressFrom.StopProgress();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry, cannot transfer files larger than 10 MB in MViewer-lite", "Transfer not possible", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selected person is offline", "Cannot send", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        //todo: complete ResumeRemoting
+        public void ResumeRemotingChat(object sender, RoomActionEventArgs args)
         {
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.RemotingSessionState = GenericEnums.SessionState.Opened; // resume the remoting
- 
+
         }
 
-        //todo: implement PauseRemoting
-        private void PauseRemoting(object sender, RoomActionEventArgs args)
+        //todo: complete PauseRemoting
+        public void PauseRemotingChat(object sender, RoomActionEventArgs args)
         {
             // use the peer status of the selected chatroom
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.RemotingSessionState = GenericEnums.SessionState.Paused; // pause the remoting
-      
+
         }
 
-        void StartRemoting(object sender, RoomActionEventArgs args)
+        public void StartRemotingChat(object sender, RoomActionEventArgs args)
         {
             // I am going to send my captures by using the below client
             _model.ClientController.AddClient(args.Identity);
@@ -659,8 +484,7 @@ namespace MViewer
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
         }
 
-        //todo: implement StopRemoting
-        void StopRemoting(object sender, RoomActionEventArgs args)
+        public void StopRemotingChat(object sender, RoomActionEventArgs args)
         {
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.RemotingSessionState = GenericEnums.SessionState.Closed;
@@ -668,8 +492,184 @@ namespace MViewer
 
             _model.RemoveClient(args.Identity);
 
-            // todo: check if any remoting session is still active
-            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+            if (!_model.SessionManager.RemotingRoomsLeft())
+            {
+                // check if any remoting session is still active
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+            }
+        }
+
+        public void StartVideoChat(object sender, RoomActionEventArgs args)
+        {
+            // open new Video Chat form to receive the captures
+            OpenVideoForm(args.Identity);
+
+            // I am going to send my captures by using the below client
+            _model.ClientController.AddClient(args.Identity);
+            _model.ClientController.StartClient(args.Identity);
+
+            // create client session
+            Session clientSession = new ClientSession(args.Identity, args.RoomType);
+            // save the proxy to which we are sending the webcam captures
+            _model.SessionManager.AddSession(clientSession);
+
+            // initialize the webcamCapture form
+            // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
+            _view.ShowMyWebcamForm(true);
+        }
+
+        public void StopApplication()
+        {
+            // todo: update the StopApplication method with other actions
+
+            // check for running video/audio/remoting chats
+            bool canExit = _view.ExitConfirmation();
+            if (canExit)
+            {
+                // stop all active rooms
+                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
+                foreach (string identity in partnerIdentities)
+                {
+                    StopVideChat(null, new RoomActionEventArgs()
+                        {
+                            Identity = identity,
+                            RoomType = GenericEnums.RoomType.Video,
+                            SignalType = GenericEnums.SignalType.Stop 
+                        });
+                }
+                // stop my webcapture form
+                StopVideoCapturing();
+
+                // stop the audio rooms also
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
+            
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+
+                // unbind the observers
+                _view.BindObservers(false);
+
+                _model.ServerController.StopServer();
+
+                // notify all contacts that you exited the chat
+                _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+
+                // exit the environment
+                Environment.Exit(0);
+            }
+        }
+
+        #endregion
+
+        #region private methods
+
+        private void RemotingCaptureObserver(object sender, EventArgs e)
+        {
+            RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
+            PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
+
+            if (peer.RemotingSessionState == GenericEnums.SessionState.Undefined ||
+                peer.RemotingSessionState == GenericEnums.SessionState.Pending)
+            {
+                // receiving captures for the first time, have to initalize a form
+                ClientConnectedObserver(null,
+                       new RoomActionEventArgs()
+                       {
+                           RoomType = GenericEnums.RoomType.Remoting,
+                           SignalType = GenericEnums.SignalType.Start,
+                           Identity = args.Identity
+                       });
+                while (peer.RemotingSessionState != GenericEnums.SessionState.Opened)
+                {
+                    Thread.Sleep(2000);
+                    peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
+                }
+            }
+
+            // check the videochat status before displaying the picture
+            if (peer.RemotingSessionState == GenericEnums.SessionState.Opened)
+            {
+                //todo : display the remoting capture in the opened form
+            }
+        }
+
+        void ClientConnectedObserver(object sender, EventArgs e)
+        {
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            _roomCommandInvoker.PerformCommand(sender, args);
+        }
+
+        void FileTransferObserver(object sender, EventArgs e)
+        {
+            Thread t = new Thread(delegate()
+            {
+                RoomActionEventArgs args = (RoomActionEventArgs)e;
+
+                byte[] buffer = (byte[])sender; // this is the file sent
+
+                // open file path dialog
+                string extension = Path.GetExtension(args.TransferInfo.FileName);// get file extension
+
+                // Displays a SaveFileDialog so the user can save the Image
+                // assigned to Button2.
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+                saveFileDialog1.Filter = "File|*." + extension + "";
+                saveFileDialog1.Title = "Save File";
+                saveFileDialog1.FileName = args.TransferInfo.FileName;
+                DialogResult dialogResult = saveFileDialog1.ShowDialog();
+
+                // If the file name is not an empty string open it for saving.
+                if (dialogResult == DialogResult.OK && saveFileDialog1.FileName != "")
+                {
+                    // remove the existing file if the user confirmed
+                    if (File.Exists(saveFileDialog1.FileName))
+                    {
+                        File.Delete(saveFileDialog1.FileName);
+                    }
+
+                    // add a progress bar (into a TransfersForm)
+                    FormFileProgress fileProgressFrom = null;
+                    Contact contact = _model.GetContact(args.Identity);
+                    Thread t3 = new Thread(delegate()
+                    {
+                        fileProgressFrom = new FormFileProgress(
+                            Path.GetFileName(saveFileDialog1.FileName), contact.FriendlyName);
+
+                        Application.Run(fileProgressFrom);
+
+                    });
+                    t3.Start();
+                    Thread.Sleep(500);
+                    Thread t2 = new Thread(delegate()
+                    {
+                        fileProgressFrom.StartPB();
+                    });
+                    t2.Start();
+                    
+                    // Saves the Image via a FileStream created by the OpenFile method.
+                    System.IO.FileStream fs =
+                       (System.IO.FileStream)saveFileDialog1.OpenFile();
+
+                    fs.Write(buffer, 0, buffer.Length);
+
+                    fs.Close();
+
+                    if (fileProgressFrom != null)
+                    {
+                        fileProgressFrom.StopProgress();
+                    }  
+                }
+
+            });
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+            t.Join();
+        }
+
+        void FileTransferPermission(object sender, EventArgs e)
+        {
+            RoomActionEventArgs args = (RoomActionEventArgs)e;
+            bool canSend = _view.RequestTransferPermission(args.Identity, args.TransferInfo.FileName, args.TransferInfo.FileSize);
+            args.TransferInfo.HasPermission = canSend;
         }
 
         void OpenVideoForm(string identity)
@@ -779,29 +779,6 @@ namespace MViewer
                 Thread.Sleep(200);
             }
             _view.ShowMyWebcamForm(false);
-        }
-
-        void ResumeVideo(object sender, RoomActionEventArgs args)
-        {
-            _syncVideoCaptureActivity.Reset();
-
-            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
-            peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
- 
-            _syncVideoCaptureActivity.Set();
-
-        }
-
-        void PauseVideo(object sender, RoomActionEventArgs args)
-        {
-            _syncVideoCaptureActivity.Reset();
-
-            // use the peer status of the selected chatroom
-            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
-            peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
-      
-            _syncVideoCaptureActivity.Set();
-
         }
 
         #endregion

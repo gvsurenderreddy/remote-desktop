@@ -44,17 +44,35 @@ namespace MViewer.Forms
 
         public void SetPartnerName(string friendlyName)
         {
-            // todo: implement SetPartnerName  - remoting room
-        }
-
-        public void CloseRoom()
-        {
-            // todo: implement CloseRoom - remoting room
+            remoteControl.SetPartnerName(friendlyName);
         }
 
         public void ShowRoom()
         {
-            // todo: implement ShowRoom - remoting room
+            try
+            {
+                if (this.InvokeRequired)
+                {
+                    this.Invoke
+                        (
+                        new MethodInvoker
+                        (
+                       delegate
+                       {
+                           this.Show();
+                       }
+                        )
+                        );
+
+                }
+                else
+                {
+                    this.Show();
+                }
+            }
+            catch
+            {
+            }
         }
 
         #endregion

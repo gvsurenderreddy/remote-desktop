@@ -63,7 +63,7 @@ using System.Collections;
             return result;
         }
 
-        // todo: update the below methods - if necessary
+        // todo: update imageToByteArray or byteArrayToImage - if necessary
 
         //public static byte[] imageToByteArray(System.Drawing.Image imageIn)
         //{

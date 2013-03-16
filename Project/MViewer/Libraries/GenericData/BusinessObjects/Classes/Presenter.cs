@@ -78,7 +78,7 @@ namespace GenericDataLayer
 
         public void StopRemotingPresentation()
         {
-            // todo: implement StopRemotingPresentation
+            _screenCapture.TogglerTimer(false);
         }
 
         #endregion
