@@ -20,6 +20,8 @@ namespace GenericDataLayer
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
 
         bool VideoRoomsLeft();
+        bool RemotingRoomsLeft();
+        bool AudioRoomsLeft();
 
         string ActiveRoom
         {

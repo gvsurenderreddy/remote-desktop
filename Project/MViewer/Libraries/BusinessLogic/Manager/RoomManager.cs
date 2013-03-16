@@ -33,9 +33,24 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        // todo: add room type check to the below 3 methods
+
         public bool VideoRoomsLeft()
         {
-            return _rooms != null ? _rooms.Count > 0 ? true : false : false;
+            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == GenericEnums.RoomType.Video).Count() > 0
+                ? true : false : false;
+        }
+
+        public bool RemotingRoomsLeft()
+        {
+            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == GenericEnums.RoomType.Remoting).Count() > 0
+                ? true : false : false;
+        }
+
+        public bool AudioRoomsLeft()
+        {
+            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == GenericEnums.RoomType.Audio).Count() > 0
+                 ? true : false : false;
         }
 
         public bool IsRoomActivated(string identity, GenericEnums.RoomType roomType)

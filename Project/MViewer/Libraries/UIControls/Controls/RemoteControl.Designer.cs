@@ -84,6 +84,7 @@
             this.Controls.Add(this.pnlRemote);
             this.Name = "RemoteControl";
             this.Size = new System.Drawing.Size(547, 416);
+            this.Resize += new System.EventHandler(this.RemoteControl_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pbRemote)).EndInit();
             this.pnlRemote.ResumeLayout(false);
             this.ResumeLayout(false);

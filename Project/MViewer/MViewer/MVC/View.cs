@@ -263,9 +263,11 @@ namespace MViewer
         {
             bool canExit = true;
 
-            bool roomsActive = RoomManager.VideoRoomsLeft();
+            bool videoRoomsActive = RoomManager.VideoRoomsLeft();
+            bool remotingRoomsActive = RoomManager.RemotingRoomsLeft();
+            bool audioRoomsActive = RoomManager.AudioRoomsLeft();
 
-            if (roomsActive)
+            if (videoRoomsActive || remotingRoomsActive || audioRoomsActive)
             {
                 DialogResult result = MessageBox.Show(_formMain,
                     "Close all active chats?", 

@@ -115,13 +115,25 @@ namespace MViewer
             _syncClosing.Set();
         }
 
+        private void FormRemotingRoom_Activated(object sender, EventArgs e)
+        {
+            // tell the controller to update the active form
+            Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
+        }
+
         private void FormRemotingRoom_Resize(object sender, EventArgs e)
         {
-            pnlMain.Width = this.Width - 20 - 1;
-            pnlMain.Height = this.Height - 20 - 1;
+            //pnl main width = form width - (591 - 573) = form width - 18
+            //pnl main height = form height - (483 - 442) = form height - 41
 
-            remoteControl.Width = pnlMain.Width - 15 - 5;
-            remoteControl.Height = pnlMain.Height - 38 - 5;
+            //remote control width = pnl main width - (573 - 547) = pnl main width - 26
+            //remote control height = pnl main height - (442 - 416) = pnl main height - 26
+
+            pnlMain.Width = this.Width - 18;
+            pnlMain.Height = this.Height - 41;
+
+            remoteControl.Width = pnlMain.Width - 26;
+            remoteControl.Height = pnlMain.Height - 26;
         }
 
         #endregion
