@@ -488,6 +488,18 @@ namespace MViewer
         {
             _syncRemotingCaptureActivity.Reset();
 
+            // todo: wait untill the peding capture is being sent to the partner
+            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(args.Identity);
+            transfer.IsRemotingUpdating = true;
+
+            // check if the screen capture is pending for being sent
+            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(args.Identity);
+            while (transferStatus.Remoting)
+            {
+                // wait for it to finish and block the next sending
+                Thread.Sleep(200);
+            }
+
             if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
             {
                 // send the stop command to the partner
@@ -508,6 +520,9 @@ namespace MViewer
                 // check if any remoting session is still active
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
             }
+
+            // unblock the capture sending
+            transfer.IsRemotingUpdating = false;
 
             _syncRemotingCaptureActivity.Set();
         }
