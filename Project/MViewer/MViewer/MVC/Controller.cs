@@ -373,6 +373,7 @@ namespace MViewer
                 StopVideoCapturing();
             }
 
+            transfer.IsVideoUpdating = false;
             _syncVideoCaptureActivity.Set();
 
         }
@@ -530,7 +531,7 @@ namespace MViewer
                 IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                 foreach (string identity in partnerIdentities)
                 {
-                    StopVideChat(null, new RoomActionEventArgs()
+                    StopVideChat(this, new RoomActionEventArgs()
                         {
                             Identity = identity,
                             RoomType = GenericEnums.RoomType.Video,

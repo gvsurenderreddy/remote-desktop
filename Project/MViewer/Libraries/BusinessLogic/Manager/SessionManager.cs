@@ -59,9 +59,15 @@ namespace BusinessLogicLayer
             {
                 if (_clientSessions != null && _clientSessions.ContainsKey(identity))
                 {
-                    if (_clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Closed
-                        && _clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Closed
-                        && _clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Closed
+                    if (
+                        (_clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Closed
+                        || _clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Undefined)
+
+                        && (_clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Closed
+                        || _clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Undefined)
+
+                        && (_clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Closed
+                        || _clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Undefined)
                         )
                     {
                         _clientSessions.Remove(identity);
