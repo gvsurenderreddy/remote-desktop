@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Utils;
 
 namespace UIControls
 {
@@ -21,9 +22,32 @@ namespace UIControls
             txtPartner.Text = friendlyName;
         }
 
-        public void SetPicture(Image picture)
+        public void UpdateScreen(byte[] screenCapture, byte[] mouseCapture)
         {
-            Image resized = ImageConverter.ResizeImage(picture, pbRemote.Width, pbRemote.Height);
+            Image screenImage = null;
+                
+            if(screenCapture != null)
+            {    
+                Rectangle screenBounds = new Rectangle();
+                Guid screenID = new Guid();
+                DesktopViewerUtils.Deserialize(screenCapture, out screenImage, out screenBounds, out screenID);
+            
+            }
+            Image finalDisplay = null;
+            if (mouseCapture != null)
+            {
+                // Unpack the data.
+                //
+                Image cursor;
+                int cursorX, cursorY;
+                Guid id;
+                DesktopViewerUtils.Deserialize(mouseCapture, out cursor, out cursorX, out cursorY, out id);
+
+                finalDisplay = DesktopViewerUtils.AppendMouseToDesktop(screenImage,
+                        cursor, cursorX, cursorY);
+            }
+
+            Image resized = ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
             pbRemote.Image = resized;
         }
 

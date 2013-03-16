@@ -35,18 +35,12 @@ namespace MViewer
 
         #region public methods
 
-        public void ShowMouseCapture(byte[] capture)
-        {
-            // todo: implement ShowMouseCapture
-        }
-
-        public void ShowScreenCapture(byte[] capture)
+        public void ShowScreenCapture(byte[] screenCapture, byte[] mouseCapture)
         {
             _syncClosing.WaitOne();
-            Image picture = ImageConverter.ByteArrayToImage(capture);
             if (!_formClosing)
             {
-                remoteControl.SetPicture(picture);
+                remoteControl.UpdateScreen(screenCapture, mouseCapture);
             }
         }
 

@@ -52,14 +52,8 @@ namespace GenericDataLayer
             {
                 _remotingTimer.Stop();
 
-                Rectangle rectangle = new Rectangle();
-                Bitmap screenCapture = _captureToolInstance.CaptureScreen(ref rectangle);
-                
-                int x = 0, y = 0;
-                Bitmap mouseCapture = _captureToolInstance.CaptureMouse(ref x, ref y);
-
-                byte[] serializedScreen = ImageConverter.ImageToByteArray(screenCapture);
-                byte[] serializedMouse = ImageConverter.ImageToByteArray(mouseCapture);
+                byte[] serializedScreen = CaptureDekstopImage();
+                byte[] serializedMouse = CaptureMouseImage();
 
                 _captureReady.Invoke(this, 
                     new RemotingCaptureEventArgs()
@@ -106,7 +100,7 @@ namespace GenericDataLayer
         /// method used to capture and serialize the desktop image
         /// </summary>
         /// <returns>serialized desktop image</returns>
-        public byte[] CaptureDekstopImage()
+        byte[] CaptureDekstopImage()
         {
             byte[] serialized = null;
             Rectangle rect = new Rectangle();
@@ -122,11 +116,6 @@ namespace GenericDataLayer
                 Guid id;
                 DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
 
-                //partialDesktop.Save("c:/test/test" + testNo.ToString() + "Sent.bmp");
-                //testNo++;
-
-                // todo: display the trafic
-
             }
             else
             {
@@ -140,7 +129,7 @@ namespace GenericDataLayer
         /// method used to capture and serialize the mouse cursor image
         /// </summary>
         /// <returns>serialized mouse cursor image</returns>
-        public byte[] CaptureMouseImage()
+        byte[] CaptureMouseImage()
         {
             byte[] serialized = null;
             int x = 0, y = 0;

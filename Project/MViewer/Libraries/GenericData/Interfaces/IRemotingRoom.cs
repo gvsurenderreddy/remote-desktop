@@ -7,7 +7,6 @@ namespace GenericDataLayer
 {
     public interface IRemotingRoom : IRoom
     {
-        void ShowMouseCapture(byte[] capture);
-        void ShowScreenCapture(byte[] capture);
+        void ShowScreenCapture(byte[] screenCapture, byte[] mouseCapture);
     }
 }

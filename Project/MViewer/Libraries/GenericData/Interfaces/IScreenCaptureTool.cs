@@ -7,8 +7,6 @@ namespace DesktopSharing
 {
     public interface IScreenCaptureTool
     {
-        byte[] CaptureDekstopImage();
-        byte[] CaptureMouseImage();
         void TogglerTimer(bool start);
     }
 }

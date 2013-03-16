@@ -74,8 +74,7 @@ namespace BusinessLogicLayer
                 if (_rooms != null && _rooms.ContainsKey(identity))
                 {
                     IRemotingRoom room = (IRemotingRoom)_rooms[identity];
-                    room.ShowScreenCapture(screenCapture);
-                    room.ShowMouseCapture(mouseCapture);
+                    room.ShowScreenCapture(screenCapture, mouseCapture);
                 }
             }
         }
