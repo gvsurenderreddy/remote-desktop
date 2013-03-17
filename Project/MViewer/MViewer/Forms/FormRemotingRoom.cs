@@ -35,7 +35,7 @@ namespace MViewer
 
         #region public methods
 
-        public void BindMouseHandlers(ControllerMouseHandlers handlers)
+        public void BindMouseHandlers(ControllerHookCommandHandlers handlers)
         {
             remoteControl.BindMouseHandlers(handlers);
         }

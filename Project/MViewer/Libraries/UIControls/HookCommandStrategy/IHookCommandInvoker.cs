@@ -7,8 +7,8 @@ using GenericDataLayer;
 
 namespace UIControls
 {
-    public interface IMouseCommandInvoker
+    public interface IHookCommandInvoker
     {
-        void PerformCommand(object sender, MouseActionEventArgs args);
+        void PerformCommand(object sender, EventArgs args);
     }
 }

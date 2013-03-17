@@ -7,25 +7,25 @@ using Utils;
 
 namespace GenericDataLayer
 {
-     public abstract class MouseCommandBase: IMouseCommands
+     public abstract class HookCommandBase: IHookCommands
     {
-         protected Dictionary<GenericEnums.MouseCommandType, Delegates.MouseCommandDelegate> _commands;
+         protected Dictionary<GenericEnums.RemotingCommandType, Delegates.HookCommandDelegate> _commands;
 
-         Delegates.MouseCommandDelegate _command;
+         Delegates.HookCommandDelegate _command;
 
-        public MouseCommandBase()
+        public HookCommandBase()
         {
             _command = PerformCommand;
         }
 
-        public void Execute(object sender, MouseActionEventArgs args)
+        public void Execute(object sender, EventArgs args)
         {
             _command.Invoke(sender, args);
         }
 
         public abstract void BindCommands();
 
-        public void PerformCommand(object sender, MouseActionEventArgs args)
+        public void PerformCommand(object sender, EventArgs args)
         {
             //_commands[args.SignalType].Invoke(sender, args);
         }

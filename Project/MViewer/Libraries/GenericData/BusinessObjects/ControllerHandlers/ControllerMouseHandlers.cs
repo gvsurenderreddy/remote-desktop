@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GenericDataLayer
 {
-    public class ControllerMouseHandlers
+    public class ControllerHookCommandHandlers
     {
-        // todo: implement ControllerMouseHandlers
+        // todo: implement ControllerHookCommandHandlers
     }
 }

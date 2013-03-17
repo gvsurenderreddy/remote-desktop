@@ -82,8 +82,8 @@
     <Compile Include="Forms\FormFileProgress.Designer.cs">
       <DependentUpon>FormFileProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="MouseHandlerStrategy\IMouseCommandInvoker.cs" />
-    <Compile Include="MouseHandlerStrategy\MouseCommandInvoker.cs" />
+    <Compile Include="HookCommandStrategy\IHookCommandInvoker.cs" />
+    <Compile Include="HookCommandStrategy\HookCommandInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\RemoteControl.cs">
       <SubType>UserControl</SubType>
@@ -138,9 +138,7 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MouseHandler\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

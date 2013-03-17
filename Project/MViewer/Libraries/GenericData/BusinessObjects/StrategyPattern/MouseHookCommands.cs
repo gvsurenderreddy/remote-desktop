@@ -7,7 +7,7 @@ using GenericDataLayer;
 
 namespace GenericDataLayer
 {
-    public class MouseCommands : MouseCommandBase
+    public class MouseCommands : HookCommandBase
     {
         // todo: implement MouseCommands
 

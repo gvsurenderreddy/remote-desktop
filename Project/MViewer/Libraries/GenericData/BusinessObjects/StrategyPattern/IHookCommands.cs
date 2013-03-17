@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace GenericDataLayer
 {
-    public interface IMouseCommands
+    public interface IHookCommands
     {
-        void Execute(object sender, EventArgs args);
-        void BindCommands();
+
     }
 }

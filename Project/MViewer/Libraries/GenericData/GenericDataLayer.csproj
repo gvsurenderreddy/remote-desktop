@@ -55,9 +55,11 @@
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
     <Compile Include="BusinessObjects\ControllerHandlers\ControllerMouseHandlers.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\IHookCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\IMouseCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\MouseCommandBase.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\MouseCommands.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\HookCommandBase.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\KeyboardHookCommands.cs" />
+    <Compile Include="BusinessObjects\StrategyPattern\MouseHookCommands.cs" />
     <Compile Include="EventArgs\MouseActionEventArgs.cs" />
     <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
     <Compile Include="BusinessObjects\Classes\ScreenCaptureTool.cs" />

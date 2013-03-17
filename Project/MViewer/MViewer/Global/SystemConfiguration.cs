@@ -67,10 +67,10 @@ namespace MViewer
         
         private PresenterSettings _presenterSettings;
 
-        ControllerMouseHandlers _mouseHandlers;
+        ControllerHookCommandHandlers _mouseHandlers;
         ControllerRoomHandlers _roomHandlers;
 
-        public ControllerMouseHandlers MouseHandlers
+        public ControllerHookCommandHandlers MouseHandlers
         {
             get { return _mouseHandlers; }
         }

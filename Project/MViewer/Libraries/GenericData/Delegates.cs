@@ -9,7 +9,7 @@ namespace GenericDataLayer
     public class Delegates
     {
         public delegate void RoomCommandDelegate(object sender, RoomActionEventArgs args);
-        public delegate void MouseCommandDelegate(object sender, MouseActionEventArgs args);
+        public delegate void HookCommandDelegate(object sender, EventArgs args);
 
         public delegate void DesktopChangedEventHandler(System.Drawing.Image display, string partnerIdentity);
         

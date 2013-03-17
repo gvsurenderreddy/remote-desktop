@@ -15,16 +15,16 @@ namespace UIControls
 {
     public partial class RemoteControl : UserControl
     {
-        IMouseCommandInvoker _mouseInvoker;
+        IHookCommandInvoker _mouseInvoker;
 
         public RemoteControl()
         {
             InitializeComponent();
         }
 
-        public void BindMouseHandlers(ControllerMouseHandlers mouseHandlers)
+        public void BindMouseHandlers(ControllerHookCommandHandlers mouseHandlers)
         {
-            _mouseInvoker = new MouseCommandInvoker(mouseHandlers);
+            _mouseInvoker = new HookCommandInvoker(mouseHandlers);
         }
 
         public void SetPartnerName(string friendlyName)
