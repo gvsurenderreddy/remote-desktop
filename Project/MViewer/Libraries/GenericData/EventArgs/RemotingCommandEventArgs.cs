@@ -14,6 +14,6 @@ namespace GenericDataLayer
 
         public GenericEnums.MouseCommandType MouseCommandType { get; set; }
 
-        public GenericEnums.KeyBoardCommandType KeyBoardCommandType { get; set; }
+        public GenericEnums.KeyboardCommandType KeyBoardCommandType { get; set; }
     }
 }

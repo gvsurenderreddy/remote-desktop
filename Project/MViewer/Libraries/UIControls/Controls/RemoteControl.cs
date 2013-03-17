@@ -15,7 +15,7 @@ namespace UIControls
 {
     public partial class RemoteControl : UserControl
     {
-        IHookCommandInvoker _mouseInvoker;
+        IHookCommandInvoker _commandInvoker;
 
         public RemoteControl()
         {
@@ -24,7 +24,7 @@ namespace UIControls
 
         public void BindMouseHandlers(ControllerHookCommandHandlers mouseHandlers)
         {
-            _mouseInvoker = new HookCommandInvoker(mouseHandlers);
+            _commandInvoker = new HookCommandInvoker(mouseHandlers);
         }
 
         public void SetPartnerName(string friendlyName)
@@ -122,7 +122,12 @@ namespace UIControls
 
         private new void KeyDown(object sender, KeyEventArgs e)
         {
-            
+            _commandInvoker.PerformCommand(this,
+                new RemotingCommandEventArgs()
+                {
+                    RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
+                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.Undefined // todo: send specific command
+                });
                 //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
                 //textBoxLog.ScrollToCaret();
             
@@ -130,7 +135,12 @@ namespace UIControls
 
         private new void KeyUp(object sender, KeyEventArgs e)
         {
-            
+            _commandInvoker.PerformCommand(this,
+                new RemotingCommandEventArgs()
+                {
+                    RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
+                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.Undefined // todo: send specific command
+                });
                 //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
                 //textBoxLog.ScrollToCaret();
             
@@ -139,7 +149,12 @@ namespace UIControls
 
         private new void KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            _commandInvoker.PerformCommand(this,
+                new RemotingCommandEventArgs()
+                {
+                    RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
+                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.Undefined // todo: send specific command
+                });
                 //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
                 //textBoxLog.ScrollToCaret();
             
@@ -150,6 +165,12 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                _commandInvoker.PerformCommand(this,
+                   new RemotingCommandEventArgs()
+                   {
+                       RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                       MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                   });
                 //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
             }
         }
@@ -158,6 +179,12 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                _commandInvoker.PerformCommand(this,
+                      new RemotingCommandEventArgs()
+                      {
+                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                      });
                 //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
             }
@@ -168,6 +195,12 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                _commandInvoker.PerformCommand(this,
+                      new RemotingCommandEventArgs()
+                      {
+                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                      });
                 //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
             }
@@ -178,6 +211,12 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                _commandInvoker.PerformCommand(this,
+                      new RemotingCommandEventArgs()
+                      {
+                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                      });
                 //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
             }
@@ -188,6 +227,12 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                _commandInvoker.PerformCommand(this,
+                      new RemotingCommandEventArgs()
+                      {
+                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                      });
                 //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
             }
@@ -198,6 +243,12 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                _commandInvoker.PerformCommand(this,
+                      new RemotingCommandEventArgs()
+                      {
+                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                      });
                 //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
             }
         }
