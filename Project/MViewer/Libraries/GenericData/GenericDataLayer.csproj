@@ -89,6 +89,7 @@
     <Compile Include="BusinessObjects\Structs\ControllerEventHandlers.cs" />
     <Compile Include="BusinessObjects\Descriptor\TransferUptading.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="EventArgs\RemotingCommandEventArgs.cs" />
     <Compile Include="EventArgs\VideoCaptureEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />

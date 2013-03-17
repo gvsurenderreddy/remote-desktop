@@ -72,6 +72,12 @@ namespace Utils
             Scroll = 4 
         }; // todo: complete MouseCommandType
 
+        public enum KeyBoardCommandType
+        {
+            Undefined = 0,
+            // todo: complete KeyBoardCommandType
+        }
+
         public enum RemotingCommandType 
         { 
             Undefined = 0, 

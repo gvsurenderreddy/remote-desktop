@@ -4,16 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GenericDataLayer;
+using Utils;
 
 namespace GenericDataLayer
 {
-    public class MouseCommands : HookCommandBase
+    public class MouseHookCommand : HookCommandBase
     {
-        // todo: implement MouseCommands
+        Delegates.HookCommandDelegate DoCommand;
 
         public override void BindCommands()
         {
-            //throw new NotImplementedException();
+            _commands = new Dictionary<GenericEnums.RemotingCommandType, Delegates.HookCommandDelegate>();
+            _commands.Add(GenericEnums.RemotingCommandType.Mouse, DoCommand);
         }
     }
 }

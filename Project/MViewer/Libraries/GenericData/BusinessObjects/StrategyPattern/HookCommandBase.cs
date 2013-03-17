@@ -7,27 +7,27 @@ using Utils;
 
 namespace GenericDataLayer
 {
-     public abstract class HookCommandBase: IHookCommands
+    public abstract class HookCommandBase : IHookCommands
     {
-         protected Dictionary<GenericEnums.RemotingCommandType, Delegates.HookCommandDelegate> _commands;
+        protected Dictionary<GenericEnums.RemotingCommandType, Delegates.HookCommandDelegate> _commands;
 
-         Delegates.HookCommandDelegate _command;
+        Delegates.HookCommandDelegate _command;
 
         public HookCommandBase()
         {
             _command = PerformCommand;
         }
 
-        public void Execute(object sender, EventArgs args)
+        public void Execute(object sender, RemotingCommandEventArgs args)
         {
             _command.Invoke(sender, args);
         }
 
         public abstract void BindCommands();
 
-        public void PerformCommand(object sender, EventArgs args)
+        public void PerformCommand(object sender, RemotingCommandEventArgs args)
         {
-            //_commands[args.SignalType].Invoke(sender, args);
+            _commands[args.RemotingCommandType].Invoke(sender, args);
         }
     }
 }

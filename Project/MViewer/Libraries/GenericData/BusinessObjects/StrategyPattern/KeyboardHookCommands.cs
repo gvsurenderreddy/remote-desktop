@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Utils;
 
 namespace GenericDataLayer
 {
-    public class KeyboardHookCommands : HookCommandBase
+    public class KeyboardHookCommand : HookCommandBase
     {
-        // todo: implement KeyboardHookCommands
+        Delegates.HookCommandDelegate DoCommand;
 
         public override void BindCommands()
         {
-            //throw new NotImplementedException();
+            _commands = new Dictionary<GenericEnums.RemotingCommandType, Delegates.HookCommandDelegate>();
+            _commands.Add(GenericEnums.RemotingCommandType.Keyboard, DoCommand);
         }
     }
 }

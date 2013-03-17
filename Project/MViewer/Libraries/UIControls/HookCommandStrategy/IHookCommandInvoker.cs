@@ -9,6 +9,6 @@ namespace UIControls
 {
     public interface IHookCommandInvoker
     {
-        void PerformCommand(object sender, EventArgs args);
+        void PerformCommand(object sender, RemotingCommandEventArgs args);
     }
 }

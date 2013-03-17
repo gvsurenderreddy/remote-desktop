@@ -14,9 +14,9 @@ namespace UIControls
 
         public HookCommandInvoker(ControllerHookCommandHandlers mouseHandlers)
         {
-            // todo: provide the mouse event handlers from the controller
+            // todo: provide the mouse/keyboard event handlers from the controller
 
-            MouseCommands mouseCommands = new MouseCommands()
+            MouseHookCommand mouseCommands = new MouseHookCommand()
             {
                 //StartVideoChat = mouseHandlers.Video[GenericEnums.SignalType.Start],
                 //StopVideChat = mouseHandlers.Video[GenericEnums.SignalType.Stop],
@@ -28,7 +28,7 @@ namespace UIControls
             commands = new Dictionary<GenericEnums.RemotingCommandType, IHookCommands>();
             commands.Add(GenericEnums.RemotingCommandType.Mouse, mouseCommands);
 
-            KeyboardHookCommands keyboardCommands = new KeyboardHookCommands()
+            KeyboardHookCommand keyboardCommands = new KeyboardHookCommand()
             {
 
             };
@@ -38,9 +38,10 @@ namespace UIControls
 
         }
 
-        public void PerformCommand(object sender, EventArgs args)
+        public void PerformCommand(object sender, RemotingCommandEventArgs args)
         {
-            //commands[args.RoomType].Execute(sender, args);
+
+            commands[args.RemotingCommandType].Execute(sender, args);
         }
 
 
