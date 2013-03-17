@@ -10,7 +10,7 @@ namespace MViewer
 {
     public class RoomCommandInvoker : IRoomCommandInvoker
     {
-        Dictionary<GenericEnums.RoomType, ICommand> commands;
+        Dictionary<GenericEnums.RoomType, IRoomCommands> commands;
 
         public RoomCommandInvoker(ControllerRoomHandlers roomHandlers)
         {
@@ -40,7 +40,7 @@ namespace MViewer
             };
             remotingCommands.BindCommands();
 
-            commands = new Dictionary<GenericEnums.RoomType, ICommand>();
+            commands = new Dictionary<GenericEnums.RoomType, IRoomCommands>();
             //commands.Add(GenericEnums.RoomType.Audio, audioCommand);
             commands.Add(GenericEnums.RoomType.Video, videoCommands);
             commands.Add(GenericEnums.RoomType.Send, transferCommands);

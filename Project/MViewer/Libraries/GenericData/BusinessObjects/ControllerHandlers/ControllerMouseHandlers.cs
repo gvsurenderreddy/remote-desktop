@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace GenericDataLayer
 {
-    public interface ICommand
+    public class ControllerMouseHandlers
     {
-        void Execute(object sender, RoomActionEventArgs args);
-        void BindCommands();
+        // todo: implement ControllerMouseHandlers
     }
 }

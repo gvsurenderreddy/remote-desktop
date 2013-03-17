@@ -13,6 +13,7 @@ namespace Utils
         public enum RoomType { Undefined = 0, Audio = 1, Video = 2, Remoting = 3, Send = 4 };
         public enum ContactsOperation { Undefined = 0, Add = 1, Update = 2, Remove = 3, Get = 4, Load = 5, Status = 6 };
         public enum SessionState { Undefined = 0, Opened = 1, Closed = 2, Paused = 3, Pending = 4 };
+        public enum MouseCommandType { Undefined = 0 }; // todo: complete MouseCommandType
    
     }
 }

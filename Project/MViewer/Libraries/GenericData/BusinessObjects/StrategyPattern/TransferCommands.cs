@@ -7,16 +7,16 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public class TransferCommands : CommandBase
+    public class TransferCommands : RoomCommandBase
     {
-        Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> _transferCommands;
+        Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> _transferCommands;
 
-        public Delegates.CommandDelegate SendFile;
-        public Delegates.CommandDelegate TransferPermission;
+        public Delegates.RoomCommandDelegate SendFile;
+        public Delegates.RoomCommandDelegate TransferPermission;
 
         public override void BindCommands()
         {
-            _transferCommands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            _transferCommands = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             _transferCommands.Add(GenericEnums.SignalType.Start, SendFile);
         }
     }

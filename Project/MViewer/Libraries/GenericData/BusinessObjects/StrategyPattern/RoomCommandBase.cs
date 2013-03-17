@@ -7,13 +7,13 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public abstract class CommandBase : ICommand 
+    public abstract class RoomCommandBase : IRoomCommands 
     {
-        protected Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> _commands;
+        protected Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> _commands;
 
-        Delegates.CommandDelegate _command;
+        Delegates.RoomCommandDelegate _command;
 
-        public CommandBase()
+        public RoomCommandBase()
         {
             _command = PerformCommand;
         }

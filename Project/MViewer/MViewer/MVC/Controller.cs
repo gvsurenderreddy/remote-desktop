@@ -57,7 +57,7 @@ namespace MViewer
         public void InitializeSettings()
         {
             _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
-
+ 
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
                 ClientConnectedObserver = this.ClientConnectedObserver,
@@ -69,6 +69,7 @@ namespace MViewer
                 FilePermissionObserver = this.FileTransferPermission,
                 RemotingCaptureObserver = this.RemotingCaptureObserver
             };
+
             _model.IntializeModel(handlers);
         }
 
@@ -706,6 +707,7 @@ namespace MViewer
                     //IntPtr handle = IntPtr.Zero;
                     FormRemotingRoom remotingRoom = new FormRemotingRoom(identity);
                     _view.RoomManager.AddRoom(identity, remotingRoom);
+                    remotingRoom.BindMouseHandlers(SystemConfiguration.Instance.MouseHandlers);
                     // initialize new remoting chat form
 
                     Contact contact = _model.GetContact(identity);

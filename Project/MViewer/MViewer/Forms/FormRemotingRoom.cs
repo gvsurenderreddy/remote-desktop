@@ -35,6 +35,11 @@ namespace MViewer
 
         #region public methods
 
+        public void BindMouseHandlers(ControllerMouseHandlers handlers)
+        {
+            remoteControl.BindMouseHandlers(handlers);
+        }
+
         public void ShowScreenCapture(byte[] screenCapture, byte[] mouseCapture)
         {
             _syncClosing.WaitOne();

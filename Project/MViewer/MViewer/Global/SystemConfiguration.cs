@@ -34,16 +34,16 @@ namespace MViewer
             };
 
             // handlers initialization 
-            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideoChat);
             videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideChat);
             videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideoChat);
             videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideoChat);
 
-            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             transferDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.SendFileHandler);
 
-            Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             remotingDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartRemotingChat);
             remotingDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopRemotingChat);
             remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemotingChat);
@@ -67,7 +67,13 @@ namespace MViewer
         
         private PresenterSettings _presenterSettings;
 
+        ControllerMouseHandlers _mouseHandlers;
         ControllerRoomHandlers _roomHandlers;
+
+        public ControllerMouseHandlers MouseHandlers
+        {
+            get { return _mouseHandlers; }
+        }
 
         public ControllerRoomHandlers RoomHandlers
         {

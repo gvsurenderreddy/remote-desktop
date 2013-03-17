@@ -18,7 +18,7 @@ namespace GenericDataLayer
         void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture);
         void SetPartnerName(string identity, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
-
+ 
         bool VideoRoomsLeft();
         bool RemotingRoomsLeft();
         bool AudioRoomsLeft();

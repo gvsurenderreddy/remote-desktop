@@ -7,16 +7,16 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public class RemotingCommands : CommandBase
+    public class RemotingCommands : RoomCommandBase
     {
-        public Delegates.CommandDelegate StartRemoting;
-        public Delegates.CommandDelegate StopRemoting;
-        public Delegates.CommandDelegate PauseRemoting;
-        public Delegates.CommandDelegate ResumeRemoting;
+        public Delegates.RoomCommandDelegate StartRemoting;
+        public Delegates.RoomCommandDelegate StopRemoting;
+        public Delegates.RoomCommandDelegate PauseRemoting;
+        public Delegates.RoomCommandDelegate ResumeRemoting;
 
         public override void BindCommands()
         {
-            _commands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            _commands = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             _commands.Add(GenericEnums.SignalType.Start, StartRemoting);
             _commands.Add(GenericEnums.SignalType.Stop, StopRemoting);
             _commands.Add(GenericEnums.SignalType.Pause, PauseRemoting);

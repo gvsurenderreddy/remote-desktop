@@ -8,22 +8,22 @@ using Utils;
 
 namespace GenericDataLayer
 {
-    public class VideoCommands : CommandBase
+    public class VideoCommands : RoomCommandBase
     {
-        public Delegates.CommandDelegate StartVideoChat;
-        public Delegates.CommandDelegate StopVideChat;
-        public Delegates.CommandDelegate PauseVideoChat;
-        public Delegates.CommandDelegate ResumeVideoChat;
+        public Delegates.RoomCommandDelegate StartVideoChat;
+        public Delegates.RoomCommandDelegate StopVideChat;
+        public Delegates.RoomCommandDelegate PauseVideoChat;
+        public Delegates.RoomCommandDelegate ResumeVideoChat;
 
 
         // todo: move these to audio class
-        public Delegates.CommandDelegate StartAudioChat;
-        public Delegates.CommandDelegate StopAudioChat;
+        public Delegates.RoomCommandDelegate StartAudioChat;
+        public Delegates.RoomCommandDelegate StopAudioChat;
 
 
         public override void BindCommands()
         {
-            _commands = new Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate>();
+            _commands = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             _commands.Add(GenericEnums.SignalType.Start, StartVideoChat);
             _commands.Add(GenericEnums.SignalType.Stop, StopVideChat);
             _commands.Add(GenericEnums.SignalType.Pause, PauseVideoChat);

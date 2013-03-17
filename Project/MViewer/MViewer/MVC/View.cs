@@ -28,6 +28,7 @@ namespace MViewer
 
         IRoomManager _roomManager;
 
+
         IModel _model;
 
         #endregion

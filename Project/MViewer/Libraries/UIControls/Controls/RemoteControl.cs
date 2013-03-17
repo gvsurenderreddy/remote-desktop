@@ -7,14 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Utils;
+using UIControls;
+using GenericDataLayer;
 
 namespace UIControls
 {
     public partial class RemoteControl : UserControl
     {
+        IMouseCommandInvoker _mouseInvoker;
+
         public RemoteControl()
         {
             InitializeComponent();
+        }
+
+        public void BindMouseHandlers(ControllerMouseHandlers mouseHandlers)
+        {
+            _mouseInvoker = new MouseCommandInvoker(mouseHandlers);
         }
 
         public void SetPartnerName(string friendlyName)

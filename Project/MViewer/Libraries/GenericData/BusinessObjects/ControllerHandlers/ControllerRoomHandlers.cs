@@ -9,9 +9,9 @@ namespace GenericDataLayer
 {
     public class ControllerRoomHandlers
     {
-        public Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> Audio { get; set; }
-        public Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> Video { get; set; }
-        public Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> Remoting { get; set; }
-        public Dictionary<GenericEnums.SignalType, Delegates.CommandDelegate> Transfer { get; set; }
+        public Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> Audio { get; set; }
+        public Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> Video { get; set; }
+        public Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> Remoting { get; set; }
+        public Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> Transfer { get; set; }
     }
 }
