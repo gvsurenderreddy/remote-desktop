@@ -8,6 +8,7 @@ using System.Text;
 using System.Timers;
 using System.Windows.Forms;
 using GenericDataLayer;
+using Utils;
 
 namespace MViewer
 {
@@ -49,7 +50,7 @@ namespace MViewer
         {
             if (!_webcamCapture.ThreadAborted)
             {
-                Image resized = ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
+                Image resized = Tools.Instance.ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
                 pbWebcam.Image = resized;
             }
             else
@@ -123,7 +124,7 @@ namespace MViewer
             pbWebcam.Width = pnlMain.Width - 22;
             pbWebcam.Height = pnlMain.Height - 22;
 
-            pbWebcam.Image = ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
+            pbWebcam.Image = Tools.Instance.ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
         }
 
         #endregion

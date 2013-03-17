@@ -109,12 +109,12 @@ namespace GenericDataLayer
             if (screenCapture != null)
             {
                 // something has changed on the screen
-                serialized = ScreenCaptureUtils.SerializeCapture(screenCapture, rect);
+                serialized = Tools.Instance.RemotingUtils.SerializeDesktopCapture(screenCapture, rect);
 
                 System.Drawing.Image partialDesktop;
                 System.Drawing.Rectangle rect2;
                 Guid id;
-                DesktopViewerUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+                Tools.Instance.RemotingUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
 
             }
             else
@@ -137,7 +137,7 @@ namespace GenericDataLayer
             if (cursorCapture != null)
             {
                 // something has changed
-                serialized = ScreenCaptureUtils.SerializeCapture(cursorCapture, x, y);
+                serialized = Tools.Instance.RemotingUtils.SerializeMouseCapture(cursorCapture, x, y);
                 // todo: display the trafic
             }
             else

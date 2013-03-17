@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Utils;
 
 namespace UIControls
 {
@@ -25,7 +26,7 @@ namespace UIControls
 
         public void SetPicture(Image picture)
         {
-            Image resized = ImageConverter.ResizeImage(picture, pbVideo.Width, pbVideo.Height);
+            Image resized = Tools.Instance.ImageConverter.ResizeImage(picture, pbVideo.Width, pbVideo.Height);
             pbVideo.Image = resized;
         }
 
@@ -41,7 +42,7 @@ namespace UIControls
             pbVideo.Width = pnlVideo.Width - 15 - 5;
             pbVideo.Height = pnlVideo.Height - 47 - 5;
 
-            pbVideo.Image = ImageConverter.ResizeImage(pbVideo.Image, pbVideo.Width, pbVideo.Height);
+            pbVideo.Image = Tools.Instance.ImageConverter.ResizeImage(pbVideo.Image, pbVideo.Width, pbVideo.Height);
         }
 
         #endregion

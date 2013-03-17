@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Reflection;
+using Utils;
 
 namespace GenericDataLayer
 {
@@ -40,7 +41,7 @@ namespace GenericDataLayer
         public string GenerateIdentity(string newAddress, int newPort, string newPath)
         {
             string toEncrypt = "http://" + newAddress + ":" + (newPort - 1).ToString() + "/" + newPath;
-            string encrypted = Utils.Cryptography.TrippleDESEncrypt(toEncrypt, true);
+            string encrypted = Tools.Instance.Cryptography.TrippleDESEncrypt(toEncrypt, true);
             _myIdentity = encrypted;
             return MyIdentity;
         }

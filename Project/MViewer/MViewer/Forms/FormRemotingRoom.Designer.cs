@@ -61,6 +61,7 @@
             this.Text = "Remoting Room";
             this.Activated += new System.EventHandler(this.FormRemotingRoom_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRemotingRoom_FormClosing);
+            this.Load += new System.EventHandler(this.FormRemotingRoom_Load);
             this.Resize += new System.EventHandler(this.FormRemotingRoom_Resize);
             this.pnlMain.ResumeLayout(false);
             this.ResumeLayout(false);

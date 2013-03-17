@@ -54,7 +54,7 @@
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
-    <Compile Include="BusinessObjects\Classes\DesktopViewer.cs" />
+    <Compile Include="EventArgs\MouseActionEventArgs.cs" />
     <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
     <Compile Include="BusinessObjects\Classes\ScreenCaptureTool.cs" />
     <Compile Include="BusinessObjects\Classes\ViewerContext.cs" />

@@ -7,13 +7,13 @@ using System.IO;
 
 namespace Utils
 {
-    public static class Cryptography
+    public class Cryptography
     {
-        static string _key = "MViewer";
+        string _key = "MViewer";
 
         #region public static methods
 
-        public static string TrippleDESEncrypt(string toEncrypt, bool useHash)
+        public string TrippleDESEncrypt(string toEncrypt, bool useHash)
         {
             byte[] keyArray;
             byte[] toEncryptArray = UTF8Encoding.UTF8.GetBytes(toEncrypt);
@@ -49,7 +49,7 @@ namespace Utils
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
 
-        public static string TrippleDESDecrypt(string toDecrypt, bool useHash)
+        public string TrippleDESDecrypt(string toDecrypt, bool useHash)
         {
             byte[] keyArray;
             //get the byte code of the string

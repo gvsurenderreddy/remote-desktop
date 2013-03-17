@@ -15,9 +15,9 @@ using System.Collections;
 	/// <summary>
 	/// Description of ImageConverter.
 	/// </summary>
-	public static class ImageConverter
+	public class ImageConverter
 	{
-        public static string GetSize(long bytes)
+        public string GetSize(long bytes)
         {
             string[] sizes = { "B", "KB", "MB", "GB" };
             double len = bytes;
@@ -34,7 +34,7 @@ using System.Collections;
             return result;
         }
 
-        public static System.Drawing.Bitmap ResizeImage(System.Drawing.Image image, int width, int height)
+        public Bitmap ResizeImage(Image image, int width, int height)
         {
             Bitmap result = null;
             try
@@ -63,19 +63,18 @@ using System.Collections;
             return result;
         }
 
-        public static byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
         {
             MemoryStream ms = new MemoryStream();
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             return ms.ToArray();
         }
 
-        public static Image ByteArrayToImage(byte[] byteArrayIn)
+        public Image ByteArrayToImage(byte[] byteArrayIn)
         {
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
-
         }
 		
 	}

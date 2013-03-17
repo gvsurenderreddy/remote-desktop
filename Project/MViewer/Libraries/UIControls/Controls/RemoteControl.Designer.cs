@@ -45,6 +45,7 @@
             this.pbRemote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbRemote.TabIndex = 1;
             this.pbRemote.TabStop = false;
+            this.pbRemote.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbRemote_MouseEvent);
             // 
             // pnlRemote
             // 

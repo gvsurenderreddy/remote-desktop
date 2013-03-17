@@ -14,8 +14,8 @@ namespace BusinessLogicLayer
         public static ContactEndpoint ResolveIdentity(string identity)
         {
             // pattern: "https://" + Address + ":" + Port.ToString() + "/" + Path;
-          
-            string decrypted = Cryptography.TrippleDESDecrypt(identity, true);
+
+            string decrypted = Tools.Instance.Cryptography.TrippleDESDecrypt(identity, true);
             Uri uri = new Uri(decrypted, UriKind.Absolute);
 
             string host = uri.Host;

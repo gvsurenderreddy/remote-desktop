@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using GenericDataLayer;
 using System.Drawing.Imaging;
 using System.IO;
+using Utils;
 
 namespace GenericDataLayer
 {
@@ -241,7 +242,7 @@ namespace GenericDataLayer
                                 Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
                                 _eventArgs = new VideoCaptureEventArgs();
                                 // resize the image to the required size (the API isn't doing that)
-                                _eventArgs.CapturedImage = ImageConverter.ResizeImage(tempImage, this._width, this._height);
+                                _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, this._width, this._height);
 
                                 // raise the capture event
                                 this.ImageCaptured(this, _eventArgs);

@@ -9,14 +9,12 @@ F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DataAcces
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\GenericDataLayer.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\UIControls.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Utils.dll
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DesktopSharingCommon.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DesktopSharing.dll
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\BusinessLogicLayer.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DataAccessLayer.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\GenericDataLayer.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\UIControls.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\Utils.pdb
-F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DesktopSharingCommon.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\DesktopSharing.pdb
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\Debug\MViewer.csprojResolveAssemblyReference.cache
 F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\obj\Debug\MViewer.FormActions.resources

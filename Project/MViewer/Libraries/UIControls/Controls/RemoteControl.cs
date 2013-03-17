@@ -30,7 +30,7 @@ namespace UIControls
             {    
                 Rectangle screenBounds = new Rectangle();
                 Guid screenID = new Guid();
-                DesktopViewerUtils.Deserialize(screenCapture, out screenImage, out screenBounds, out screenID);
+                Tools.Instance.RemotingUtils.Deserialize(screenCapture, out screenImage, out screenBounds, out screenID);
             
             }
             Image finalDisplay = null;
@@ -41,13 +41,13 @@ namespace UIControls
                 Image cursor;
                 int cursorX, cursorY;
                 Guid id;
-                DesktopViewerUtils.Deserialize(mouseCapture, out cursor, out cursorX, out cursorY, out id);
+                Tools.Instance.RemotingUtils.Deserialize(mouseCapture, out cursor, out cursorX, out cursorY, out id);
 
-                finalDisplay = DesktopViewerUtils.AppendMouseToDesktop(screenImage,
+                finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
                         cursor, cursorX, cursorY);
             }
 
-            Image resized = ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
+            Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
             pbRemote.Image = resized;
         }
 
@@ -65,7 +65,20 @@ namespace UIControls
             pbRemote.Width = pnlRemote.Width - 25;
             pbRemote.Height = pnlRemote.Height - 24;
 
-            pbRemote.Image = ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
+            pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
+        }
+
+        private void pbRemote_MouseEvent(object sender, MouseEventArgs e)
+        {
+            // todo: implement pbRemote_MouseMove
+            int cursorX = e.X * pbRemote.BackgroundImage.Width / pbRemote.Width;
+            int cursorY = e.Y * pbRemote.BackgroundImage.Height / pbRemote.Height;
+            string data = cursorX + "," + cursorY;
+
+            // todo: send the command to the controller
+
+            //CommandInfo cmd = new CommandInfo(CommandInfo.CommandTypeOption.MouseMove, data);
+            //ViewerService.Commands.Add(cmd);
         }
     }
 }

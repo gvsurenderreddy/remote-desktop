@@ -131,5 +131,13 @@ namespace MViewer
         }
 
         #endregion
+
+        private void FormRemotingRoom_Load(object sender, EventArgs e)
+        {
+            //force the form to double buffer repaints to reduce flickering
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.DoubleBuffer, true);
+        }
     }
 }
