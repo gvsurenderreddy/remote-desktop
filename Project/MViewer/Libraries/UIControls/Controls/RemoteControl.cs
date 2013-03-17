@@ -92,7 +92,6 @@ namespace UIControls
             var screenPosition1 = pbRemote.PointToScreen(new Point(0, 0));
             var screenPosition2 = pbRemote.PointToScreen(new Point(pbRemote.Bounds.Width, pbRemote.Bounds.Height));
 
-
             if (x >= screenPosition1.X && y >= screenPosition1.Y 
                 && x <= screenPosition2.X && y <= screenPosition2.Y)
             {
@@ -121,66 +120,89 @@ namespace UIControls
 
         #region Event handlers of particular events
 
-        private void KeyDown(object sender, KeyEventArgs e)
-        {
-            //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
-            //textBoxLog.ScrollToCaret();
-        }
-
-        private void KeyUp(object sender, KeyEventArgs e)
-        {
-            //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
-            //textBoxLog.ScrollToCaret();
-        }
-
-
-        private void KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
-            //textBoxLog.ScrollToCaret();
-        }
-
-
-        private void MouseMove(object sender, MouseEventArgs e)
-        {
-            //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
-        }
-
-        private void MouseClick(object sender, MouseEventArgs e)
+        private new void KeyDown(object sender, KeyEventArgs e)
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-
+                //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
+                //textBoxLog.ScrollToCaret();
             }
-            //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
-            //textBoxLog.ScrollToCaret();
+        }
+
+        private new void KeyUp(object sender, KeyEventArgs e)
+        {
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
+                //textBoxLog.ScrollToCaret();
+            }
         }
 
 
-        private void MouseUp(object sender, MouseEventArgs e)
+        private new void KeyPress(object sender, KeyPressEventArgs e)
         {
-            //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
-            //textBoxLog.ScrollToCaret();
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
+                //textBoxLog.ScrollToCaret();
+            }
         }
 
 
-        private void MouseDown(object sender, MouseEventArgs e)
+        private new void MouseMove(object sender, MouseEventArgs e)
         {
-            //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
-            //textBoxLog.ScrollToCaret();
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
+            }
+        }
+
+        private new void MouseClick(object sender, MouseEventArgs e)
+        {
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
+                //textBoxLog.ScrollToCaret();
+            }
         }
 
 
-        private void MouseDoubleClick(object sender, MouseEventArgs e)
+        private new void MouseUp(object sender, MouseEventArgs e)
         {
-            //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
-            //textBoxLog.ScrollToCaret();
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
+                //textBoxLog.ScrollToCaret();
+            }
         }
 
 
-        private void MouseWheel(object sender, MouseEventArgs e)
+        private new void MouseDown(object sender, MouseEventArgs e)
         {
-            //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
+                //textBoxLog.ScrollToCaret();
+            }
+        }
+
+
+        private new void MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
+                //textBoxLog.ScrollToCaret();
+            }
+        }
+
+
+        private new void MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+                //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
+            }
         }
 
         #endregion
