@@ -122,30 +122,27 @@ namespace UIControls
 
         private new void KeyDown(object sender, KeyEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
-            {
+            
                 //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
                 //textBoxLog.ScrollToCaret();
-            }
+            
         }
 
         private new void KeyUp(object sender, KeyEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
-            {
+            
                 //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
                 //textBoxLog.ScrollToCaret();
-            }
+            
         }
 
 
         private new void KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
-            {
+            
                 //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
                 //textBoxLog.ScrollToCaret();
-            }
+            
         }
 
 
