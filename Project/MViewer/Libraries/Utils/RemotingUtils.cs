@@ -21,6 +21,17 @@ namespace Utils
 
         #region static methods
 
+        //todo: use the below methods if necessary
+        public double convertXToAbsolute(int x)
+        {
+            return ((double)65535 * x) / (double)Screen.PrimaryScreen.Bounds.Width;
+        }
+
+        public double convertYToAbsolute(int y)
+        {
+            return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
+        }
+
         public byte[] SerializeDesktopCapture(Image capture, Rectangle rect)
         {
             byte[] data = _id.ToByteArray();

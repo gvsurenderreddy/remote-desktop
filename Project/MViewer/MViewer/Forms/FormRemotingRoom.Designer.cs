@@ -60,6 +60,7 @@
             this.Name = "FormRemotingRoom";
             this.Text = "Remoting Room";
             this.Activated += new System.EventHandler(this.FormRemotingRoom_Activated);
+            this.Deactivate += new System.EventHandler(this.FormRemotingRoom_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRemotingRoom_FormClosing);
             this.Load += new System.EventHandler(this.FormRemotingRoom_Load);
             this.Resize += new System.EventHandler(this.FormRemotingRoom_Resize);

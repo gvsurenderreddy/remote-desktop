@@ -125,6 +125,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommandHookMonitor\CommandHookMonitor.csproj">
+      <Project>{f52aa97e-180a-40ed-8f2b-09080171d6c7}</Project>
+      <Name>CommandHookMonitor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenericData\GenericDataLayer.csproj">
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
       <Name>GenericDataLayer</Name>

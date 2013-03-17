@@ -118,6 +118,8 @@ namespace MViewer
         {
             // tell the controller to update the active form
             Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
+
+            remoteControl.WireUpEventProvider();
         }
 
         private void FormRemotingRoom_Resize(object sender, EventArgs e)
@@ -134,9 +136,6 @@ namespace MViewer
             remoteControl.Width = pnlMain.Width - 26;
             remoteControl.Height = pnlMain.Height - 26;
         }
-
-        #endregion
-
         private void FormRemotingRoom_Load(object sender, EventArgs e)
         {
             //force the form to double buffer repaints to reduce flickering
@@ -144,5 +143,13 @@ namespace MViewer
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.DoubleBuffer, true);
         }
+
+        private void FormRemotingRoom_Deactivate(object sender, EventArgs e)
+        {
+            remoteControl.WireDownEventProvider();
+        }
+        #endregion
+
+
     }
 }

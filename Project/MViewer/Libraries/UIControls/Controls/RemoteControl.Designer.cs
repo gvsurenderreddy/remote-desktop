@@ -45,20 +45,6 @@
             this.pbRemote.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbRemote.TabIndex = 1;
             this.pbRemote.TabStop = false;
-            this.pbRemote.Click += new System.EventHandler(this.pbRemote_Click_or_DoubleClick);
-            this.pbRemote.DragDrop += new System.Windows.Forms.DragEventHandler(this.pbRemote_DragDrop_or_DragOver);
-            this.pbRemote.DragEnter += new System.Windows.Forms.DragEventHandler(this.pbRemote_DragEnter);
-            this.pbRemote.DragOver += new System.Windows.Forms.DragEventHandler(this.pbRemote_DragDrop_or_DragOver);
-            this.pbRemote.DragLeave += new System.EventHandler(this.pbRemote_DragLeave);
-            this.pbRemote.DoubleClick += new System.EventHandler(this.pbRemote_Click_or_DoubleClick);
-            this.pbRemote.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbRemote_MouseEvent);
-            this.pbRemote.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pbRemote_MouseEvent);
-            this.pbRemote.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbRemote_MouseEvent);
-            this.pbRemote.MouseEnter += new System.EventHandler(this.pbRemote_MouseEnter_or_MouseHover_or_MouseLeave);
-            this.pbRemote.MouseLeave += new System.EventHandler(this.pbRemote_MouseEnter_or_MouseHover_or_MouseLeave);
-            this.pbRemote.MouseHover += new System.EventHandler(this.pbRemote_MouseEnter_or_MouseHover_or_MouseLeave);
-            this.pbRemote.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbRemote_MouseEvent);
-            this.pbRemote.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbRemote_MouseEvent);
             // 
             // pnlRemote
             // 

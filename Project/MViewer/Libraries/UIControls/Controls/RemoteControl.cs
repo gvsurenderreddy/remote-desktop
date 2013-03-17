@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Utils;
 using UIControls;
 using GenericDataLayer;
+using CommandHookMonitor;
 
 namespace UIControls
 {
@@ -77,41 +78,90 @@ namespace UIControls
             pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
         }
 
-        private void pbRemote_MouseEvent(object sender, MouseEventArgs e)
+        #region Event handlers of particular events
+
+        private void KeyDown(object sender, KeyEventArgs e)
         {
-            // todo: implement pbRemote_MouseMove
-            int cursorX = e.X * pbRemote.BackgroundImage.Width / pbRemote.Width;
-            int cursorY = e.Y * pbRemote.BackgroundImage.Height / pbRemote.Height;
-
-            // todo: send the command to the controller
-
-            //CommandInfo cmd = new CommandInfo(CommandInfo.CommandTypeOption.MouseMove, data);
-            //ViewerService.Commands.Add(cmd);
+            //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
+            //textBoxLog.ScrollToCaret();
         }
 
-        private void pbRemote_DragDrop_or_DragOver(object sender, DragEventArgs e)
+        private void KeyUp(object sender, KeyEventArgs e)
         {
-            // todo: optional - implement drag&drop send feature
+            //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
+            //textBoxLog.ScrollToCaret();
         }
 
-        private void pbRemote_MouseEnter_or_MouseHover_or_MouseLeave(object sender, EventArgs e)
-        {
 
+        private void KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
+            //textBoxLog.ScrollToCaret();
         }
 
-        private void pbRemote_DragEnter(object sender, DragEventArgs e)
-        {
 
+        private void MouseMove(object sender, MouseEventArgs e)
+        {
+            //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
         }
 
-        private void pbRemote_DragLeave(object sender, EventArgs e)
+        private void MouseClick(object sender, MouseEventArgs e)
         {
-
+            //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
+            //textBoxLog.ScrollToCaret();
         }
 
-        private void pbRemote_Click_or_DoubleClick(object sender, EventArgs e)
-        {
 
+        private void MouseUp(object sender, MouseEventArgs e)
+        {
+            //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
+            //textBoxLog.ScrollToCaret();
+        }
+
+
+        private void MouseDown(object sender, MouseEventArgs e)
+        {
+            //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
+            //textBoxLog.ScrollToCaret();
+        }
+
+
+        private void MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
+            //textBoxLog.ScrollToCaret();
+        }
+
+
+        private void MouseWheel(object sender, MouseEventArgs e)
+        {
+            //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
+        }
+
+        #endregion
+
+        public void WireUpEventProvider()
+        {
+            HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            HookManager.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MouseClick);
+            HookManager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
+            HookManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown);
+            HookManager.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDown);
+            HookManager.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MouseUp);
+            HookManager.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUp);
+            HookManager.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
+        }
+
+        public void WireDownEventProvider()
+        {
+            HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            HookManager.MouseClick -= new System.Windows.Forms.MouseEventHandler(this.MouseClick);
+            HookManager.KeyPress -= new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
+            HookManager.KeyDown -= new System.Windows.Forms.KeyEventHandler(this.KeyDown);
+            HookManager.MouseDown -= new System.Windows.Forms.MouseEventHandler(this.MouseDown);
+            HookManager.MouseUp -= new System.Windows.Forms.MouseEventHandler(this.MouseUp);
+            HookManager.KeyUp -= new System.Windows.Forms.KeyEventHandler(this.KeyUp);
+            HookManager.MouseDoubleClick -= new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
         }
     }
 }

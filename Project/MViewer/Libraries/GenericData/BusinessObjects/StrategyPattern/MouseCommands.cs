@@ -13,7 +13,7 @@ namespace GenericDataLayer
 
         public override void BindCommands()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
