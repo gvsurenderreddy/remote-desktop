@@ -54,7 +54,7 @@
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
-    <Compile Include="BusinessObjects\ControllerHandlers\ControllerMouseHandlers.cs" />
+    <Compile Include="BusinessObjects\ControllerHandlers\ControllerHookCommandHandlers.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\IHookCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\IMouseCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\HookCommandBase.cs" />

@@ -386,6 +386,17 @@ namespace MViewer
 
         }
 
+        public void ExecuteMouseCommand(object sender, RemotingCommandEventArgs args)
+        {
+            // todo: implement ExecuteMouseCommand
+        }
+
+        public void ExecuteKeyboardCommand(object sender, RemotingCommandEventArgs args)
+        {
+            // todo: implement ExecuteKeyboardCommand
+        }
+
+
         public void ResumeVideoChat(object sender, RoomActionEventArgs args)
         {
             _syncVideoCaptureActivity.Reset();

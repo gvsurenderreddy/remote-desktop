@@ -56,6 +56,13 @@ namespace MViewer
                 Transfer = transferDelegates,
                 Remoting = remotingDelegates
             };
+
+            _hookCommandHandlers = new ControllerHookCommandHandlers()
+            {
+                // add mouse & keyboard delegates from the controller
+                Mouse = Program.Controller.ExecuteMouseCommand,
+                Keyboard = Program.Controller.ExecuteKeyboardCommand
+            };
         }
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
@@ -67,12 +74,12 @@ namespace MViewer
         
         private PresenterSettings _presenterSettings;
 
-        ControllerHookCommandHandlers _mouseHandlers;
+        ControllerHookCommandHandlers _hookCommandHandlers;
         ControllerRoomHandlers _roomHandlers;
 
         public ControllerHookCommandHandlers MouseHandlers
         {
-            get { return _mouseHandlers; }
+            get { return _hookCommandHandlers; }
         }
 
         public ControllerRoomHandlers RoomHandlers
