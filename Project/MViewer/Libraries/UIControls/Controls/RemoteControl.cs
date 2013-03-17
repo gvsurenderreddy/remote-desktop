@@ -82,12 +82,36 @@ namespace UIControls
             // todo: implement pbRemote_MouseMove
             int cursorX = e.X * pbRemote.BackgroundImage.Width / pbRemote.Width;
             int cursorY = e.Y * pbRemote.BackgroundImage.Height / pbRemote.Height;
-            string data = cursorX + "," + cursorY;
 
             // todo: send the command to the controller
 
             //CommandInfo cmd = new CommandInfo(CommandInfo.CommandTypeOption.MouseMove, data);
             //ViewerService.Commands.Add(cmd);
+        }
+
+        private void pbRemote_DragDrop_or_DragOver(object sender, DragEventArgs e)
+        {
+            // todo: optional - implement drag&drop send feature
+        }
+
+        private void pbRemote_MouseEnter_or_MouseHover_or_MouseLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbRemote_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void pbRemote_DragLeave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pbRemote_Click_or_DoubleClick(object sender, EventArgs e)
+        {
+
         }
     }
 }

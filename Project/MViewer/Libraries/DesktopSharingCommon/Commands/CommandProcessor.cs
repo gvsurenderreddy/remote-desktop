@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using Utils;
 
 namespace DesktopSharing
 {
     public static class CommandProcessor
     {
+        // todo: update CommandProcessor class
+
         #region static methods
 
         /// <summary>
@@ -17,7 +20,7 @@ namespace DesktopSharing
         /// <param name="command">command to execute</param>
         public static void ExecuteCommand(CommandInfo command)
         {
-            if (command.CommandType == CommandUtils.CommandType.Mouse)
+            if (command.CommandType == GenericEnums.RemotingCommandType.Mouse)
             {
                 // if the command type is Mouse than move the mouse cursor
                 MoveMouse(command.CommandString);

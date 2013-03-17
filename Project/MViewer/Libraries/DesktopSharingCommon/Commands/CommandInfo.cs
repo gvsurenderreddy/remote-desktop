@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace DesktopSharing
 {
@@ -9,14 +10,14 @@ namespace DesktopSharing
     {
         #region members
 
-        CommandUtils.CommandType _type;
+        GenericEnums.RemotingCommandType _type;
         string _arguments;
 
         #endregion
 
         #region c-tor
 
-        public CommandInfo(CommandUtils.CommandType type, string arguments)
+        public CommandInfo(GenericEnums.RemotingCommandType type, string arguments)
         {
             _arguments = arguments;
             _type = type;
@@ -35,16 +36,14 @@ namespace DesktopSharing
 
         #region proprieties
 
-        public CommandUtils.CommandType CommandType
+        public GenericEnums.RemotingCommandType CommandType
         {
             get { return _type; }
-            //set { _type = value; }
         }
 
         public string CommandString
         {
             get { return _arguments; }
-            //set { _arguments = value; }
         }
 
         #endregion

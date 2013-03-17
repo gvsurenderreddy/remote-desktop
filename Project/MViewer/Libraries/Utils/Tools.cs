@@ -16,7 +16,12 @@ namespace Utils
         static Tools _instance = new Tools();
         static readonly object _syncInstance = new object();
 
-        private Tools() { }
+        private Tools() 
+        {
+            _imageConverter = new ImageConverter();
+            _desktopViewerUtils = new RemotingUtils();
+            _cryptography = new Cryptography();
+        }
 
         public static Tools Instance
         {

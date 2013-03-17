@@ -14,6 +14,8 @@ namespace Utils
         public enum ContactsOperation { Undefined = 0, Add = 1, Update = 2, Remove = 3, Get = 4, Load = 5, Status = 6 };
         public enum SessionState { Undefined = 0, Opened = 1, Closed = 2, Paused = 3, Pending = 4 };
         public enum MouseCommandType { Undefined = 0 }; // todo: complete MouseCommandType
+        public enum RemotingCommandType { Undefined = 0, Mouse = 1, Keyboard = 2 };
+
    
     }
 }

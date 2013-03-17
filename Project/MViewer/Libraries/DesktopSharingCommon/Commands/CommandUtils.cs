@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace DesktopSharing
 {
@@ -9,8 +10,7 @@ namespace DesktopSharing
     {
         #region members
 
-        public enum CommandType { undefined = 0, Mouse = 1 };
-
+        
         #endregion
 
         #region static methods
@@ -25,7 +25,7 @@ namespace DesktopSharing
             }
             else
             {
-                CommandUtils.CommandType commandType = (CommandUtils.CommandType)Enum.Parse(typeof(CommandUtils.CommandType), splitted[0]);
+                GenericEnums.RemotingCommandType commandType = (GenericEnums.RemotingCommandType)Enum.Parse(typeof(GenericEnums.RemotingCommandType), splitted[0]);
                 string arguments = splitted[1];
                 commandInfo = new CommandInfo(commandType, arguments);
             }

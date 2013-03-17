@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace DesktopSharing
 {
     public class CommandQueue
     {
+        // todo: remove the CommandQueue and send commands when they occur
+
         #region members
 
         readonly Queue<CommandInfo> _commands;
@@ -47,7 +50,7 @@ namespace DesktopSharing
         /// </summary>
         /// <param name="type">command type</param>
         /// <param name="commandString">command arguments</param>
-        public void AddCommand(CommandUtils.CommandType type, string commandString)
+        public void AddCommand(GenericEnums.RemotingCommandType type, string commandString)
         {
             CommandInfo command = new CommandInfo(type, commandString);
             AddCommand(command);
