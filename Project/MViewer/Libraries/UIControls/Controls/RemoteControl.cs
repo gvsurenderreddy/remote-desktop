@@ -32,6 +32,30 @@ namespace UIControls
             txtPartner.Text = friendlyName;
         }
 
+        public void WireUpEventProvider()
+        {
+            HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            HookManager.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MouseClick);
+            HookManager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
+            HookManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown);
+            HookManager.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDown);
+            HookManager.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MouseUp);
+            HookManager.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUp);
+            HookManager.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
+        }
+
+        public void WireDownEventProvider()
+        {
+            HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            HookManager.MouseClick -= new System.Windows.Forms.MouseEventHandler(this.MouseClick);
+            HookManager.KeyPress -= new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
+            HookManager.KeyDown -= new System.Windows.Forms.KeyEventHandler(this.KeyDown);
+            HookManager.MouseDown -= new System.Windows.Forms.MouseEventHandler(this.MouseDown);
+            HookManager.MouseUp -= new System.Windows.Forms.MouseEventHandler(this.MouseUp);
+            HookManager.KeyUp -= new System.Windows.Forms.KeyEventHandler(this.KeyUp);
+            HookManager.MouseDoubleClick -= new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
+        }
+
         public void UpdateScreen(byte[] screenCapture, byte[] mouseCapture)
         {
             Image screenImage = null;
@@ -59,6 +83,23 @@ namespace UIControls
 
             Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
             pbRemote.Image = resized;
+        }
+
+        bool InPictureBoxArea(int x, int y)
+        {
+            bool inPictureBoxArea = false;
+
+            var screenPosition1 = pbRemote.PointToScreen(new Point(0, 0));
+            var screenPosition2 = pbRemote.PointToScreen(new Point(pbRemote.Bounds.Width, pbRemote.Bounds.Height));
+
+
+            if (x >= screenPosition1.X && y >= screenPosition1.Y 
+                && x <= screenPosition2.X && y <= screenPosition2.Y)
+            {
+                inPictureBoxArea = true;
+            }
+
+            return inPictureBoxArea;
         }
 
         private void RemoteControl_Resize(object sender, EventArgs e)
@@ -107,6 +148,10 @@ namespace UIControls
 
         private void MouseClick(object sender, MouseEventArgs e)
         {
+            if (InPictureBoxArea(e.X, e.Y))
+            {
+
+            }
             //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
             //textBoxLog.ScrollToCaret();
         }
@@ -140,28 +185,6 @@ namespace UIControls
 
         #endregion
 
-        public void WireUpEventProvider()
-        {
-            HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
-            HookManager.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MouseClick);
-            HookManager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
-            HookManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown);
-            HookManager.MouseDown += new System.Windows.Forms.MouseEventHandler(this.MouseDown);
-            HookManager.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MouseUp);
-            HookManager.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUp);
-            HookManager.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
-        }
-
-        public void WireDownEventProvider()
-        {
-            HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
-            HookManager.MouseClick -= new System.Windows.Forms.MouseEventHandler(this.MouseClick);
-            HookManager.KeyPress -= new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
-            HookManager.KeyDown -= new System.Windows.Forms.KeyEventHandler(this.KeyDown);
-            HookManager.MouseDown -= new System.Windows.Forms.MouseEventHandler(this.MouseDown);
-            HookManager.MouseUp -= new System.Windows.Forms.MouseEventHandler(this.MouseUp);
-            HookManager.KeyUp -= new System.Windows.Forms.KeyEventHandler(this.KeyUp);
-            HookManager.MouseDoubleClick -= new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
-        }
+        
     }
 }
