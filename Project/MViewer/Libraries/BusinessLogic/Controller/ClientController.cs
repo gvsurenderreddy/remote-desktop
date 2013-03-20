@@ -37,6 +37,25 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public void SendRemotingCommand(string receiverIdentity, RemotingCommandEventArgs commandArgs)
+        {
+            if (_clients.ContainsKey(receiverIdentity))
+            {
+                MViewerClient client = _clients[receiverIdentity];
+                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    try
+                    {
+                        client.SendRemotingCommand(commandArgs);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+        }
+
         public void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity)
         {
             if (_clients.ContainsKey(receiverIdentity))

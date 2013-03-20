@@ -8,11 +8,13 @@ using Utils;
 
 namespace UIControls
 {
+    // todo: remove HookCommandInvoker if not used
+
     public class HookCommandInvoker : IHookCommandInvoker
     {
         Dictionary<GenericEnums.RemotingCommandType, IHookCommands> commands;
 
-        public HookCommandInvoker(ControllerHookCommandHandlers mouseHandlers)
+        public HookCommandInvoker(Delegates.HookCommandDelegate remotingCommand)
         {
             // todo: provide the mouse/keyboard event handlers from the controller
 

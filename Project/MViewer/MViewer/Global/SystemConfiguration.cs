@@ -57,12 +57,8 @@ namespace MViewer
                 Remoting = remotingDelegates
             };
 
-            _hookCommandHandlers = new ControllerHookCommandHandlers()
-            {
-                // add mouse & keyboard delegates from the controller
-                Mouse = Program.Controller.ExecuteMouseCommand,
-                Keyboard = Program.Controller.ExecuteKeyboardCommand
-            };
+            // add mouse & keyboard delegates from the controller
+            RemotingCommand = Program.Controller.SendRemotingCommand;
         }
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
@@ -74,13 +70,14 @@ namespace MViewer
         
         private PresenterSettings _presenterSettings;
 
-        ControllerHookCommandHandlers _hookCommandHandlers;
-        ControllerRoomHandlers _roomHandlers;
+        Delegates.HookCommandDelegate _remotingCommand;
 
-        public ControllerHookCommandHandlers MouseHandlers
+        public Delegates.HookCommandDelegate RemotingCommand
         {
-            get { return _hookCommandHandlers; }
+            get { return _remotingCommand; }
+            set { _remotingCommand = value; }
         }
+        ControllerRoomHandlers _roomHandlers;
 
         public ControllerRoomHandlers RoomHandlers
         {

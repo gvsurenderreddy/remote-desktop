@@ -66,5 +66,11 @@ namespace GenericDataLayer
             get;
             set;
         }
+
+        public EventHandler RemotingCommandHandler
+        {
+            get;
+            set;
+        }
     }
 }

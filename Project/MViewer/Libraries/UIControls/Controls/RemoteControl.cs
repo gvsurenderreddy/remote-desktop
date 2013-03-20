@@ -15,7 +15,7 @@ namespace UIControls
 {
     public partial class RemoteControl : UserControl
     {
-        IHookCommandInvoker _commandInvoker;
+        Delegates.HookCommandDelegate _remotingCommand;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDoubleClick;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseClick;
 
@@ -31,9 +31,9 @@ namespace UIControls
 
         #region public methods
 
-        public void BindMouseHandlers(ControllerHookCommandHandlers mouseHandlers)
+        public void BindCommandHandler(Delegates.HookCommandDelegate remotingCommand)
         {
-            _commandInvoker = new HookCommandInvoker(mouseHandlers);
+            _remotingCommand = remotingCommand;
         }
 
         public void SetPartnerName(string friendlyName)
@@ -151,7 +151,7 @@ namespace UIControls
 
         private new void KeyDown(object sender, KeyEventArgs e)
         {
-            _commandInvoker.PerformCommand(this,
+            _remotingCommand.Invoke(this,
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
@@ -165,7 +165,7 @@ namespace UIControls
 
         private new void KeyUp(object sender, KeyEventArgs e)
         {
-            _commandInvoker.PerformCommand(this,
+            _remotingCommand.Invoke(this,
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
@@ -177,10 +177,9 @@ namespace UIControls
             
         }
 
-
         private new void KeyPress(object sender, KeyPressEventArgs e)
         {
-            _commandInvoker.PerformCommand(this,
+            _remotingCommand.Invoke(this,
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
@@ -197,7 +196,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                _commandInvoker.PerformCommand(this,
+                _remotingCommand.Invoke(this,
                    new RemotingCommandEventArgs()
                    {
                        RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
@@ -213,7 +212,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                _commandInvoker.PerformCommand(this,
+                _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
@@ -231,7 +230,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                _commandInvoker.PerformCommand(this,
+                _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
@@ -249,7 +248,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                _commandInvoker.PerformCommand(this,
+                _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
@@ -266,7 +265,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                _commandInvoker.PerformCommand(this,
+                _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
@@ -284,7 +283,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                _commandInvoker.PerformCommand(this,
+                _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,

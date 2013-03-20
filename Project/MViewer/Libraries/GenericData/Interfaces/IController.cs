@@ -23,8 +23,8 @@ namespace GenericDataLayer
         void PauseRemotingChat(object sender, RoomActionEventArgs args);
         void ResumeRemotingChat(object sender, RoomActionEventArgs args);
 
-        void ExecuteMouseCommand(object sender, RemotingCommandEventArgs args);
-        void ExecuteKeyboardCommand(object sender, RemotingCommandEventArgs args);
+        void SendRemotingCommand(object sender, RemotingCommandEventArgs args);
+        void ExecuteRemotingCommand(object sender, EventArgs e);
 
         void IdentityObserver(object sender, IdentityEventArgs e);
         void RoomButtonAction(object sender, EventArgs e);

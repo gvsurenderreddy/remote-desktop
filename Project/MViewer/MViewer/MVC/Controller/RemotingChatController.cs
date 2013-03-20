@@ -22,14 +22,15 @@ namespace MViewer
 
         #region public methods
 
-        public void ExecuteMouseCommand(object sender, RemotingCommandEventArgs args)
+        public void ExecuteRemotingCommand(object sender, EventArgs e)
         {
-            // todo: implement ExecuteMouseCommand
+            RemotingCommandEventArgs args = (RemotingCommandEventArgs)e;
+            // todo: implement ExecuteRemotingCommand
         }
 
-        public void ExecuteKeyboardCommand(object sender, RemotingCommandEventArgs args)
+        public void SendRemotingCommand(object sender, RemotingCommandEventArgs args)
         {
-            // todo: implement ExecuteKeyboardCommand
+            _model.ClientController.SendRemotingCommand(_view.RoomManager.ActiveRoom, args);
         }
 
         public void StartRemotingChat(object sender, RoomActionEventArgs args)
@@ -185,7 +186,7 @@ namespace MViewer
                     //IntPtr handle = IntPtr.Zero;
                     FormRemotingRoom remotingRoom = new FormRemotingRoom(identity);
                     _view.RoomManager.AddRoom(identity, remotingRoom);
-                    remotingRoom.BindMouseHandlers(SystemConfiguration.Instance.MouseHandlers);
+                    remotingRoom.BindCommandHandlers(SystemConfiguration.Instance.RemotingCommand);
                     // initialize new remoting chat form
 
                     Contact contact = _model.GetContact(identity);

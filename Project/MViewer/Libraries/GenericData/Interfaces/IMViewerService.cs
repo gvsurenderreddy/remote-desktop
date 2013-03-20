@@ -51,6 +51,9 @@ namespace GenericDataLayer
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendFile", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendFileResponse")]
         void SendFile(byte[] fileBytes, string fileName);
 
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/SendMouseCommand", ReplyAction = "http://tempuri.org/IVideoChatRoom/SendMouseCommandResponse")]
+        void SendRemotingCommand(RemotingCommandEventArgs commandArgs);
+
         //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoChatRoom/CloseRoom", ReplyAction = "http://tempuri.org/IVideoChatRoom/CloseRoomResponse")]
         //void CloseRoom(string identity, GenericEnums.RoomButtonActionType roomType);
 

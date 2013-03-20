@@ -52,6 +52,7 @@ namespace MViewer
                 WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                 FileTransferObserver = this.FileTransferObserver,
                 FilePermissionObserver = this.FileTransferPermission,
+                RemotingCommandHandler = this.ExecuteRemotingCommand,
                 RemotingCaptureObserver = this.RemotingCaptureObserver
             };
 

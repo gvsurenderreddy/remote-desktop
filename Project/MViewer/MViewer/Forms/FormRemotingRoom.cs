@@ -35,9 +35,9 @@ namespace MViewer
 
         #region public methods
 
-        public void BindMouseHandlers(ControllerHookCommandHandlers handlers)
+        public void BindCommandHandlers(Delegates.HookCommandDelegate remotingCommand)
         {
-            remoteControl.BindMouseHandlers(handlers);
+            remoteControl.BindCommandHandler(remotingCommand);
         }
 
         public void ShowScreenCapture(byte[] screenCapture, byte[] mouseCapture)

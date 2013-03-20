@@ -95,6 +95,12 @@ namespace GenericDataLayer
             });
         }
 
+        public void SendRemotingCommand(RemotingCommandEventArgs commandArgs)
+        {
+            // send command to controller handler
+            _controllerHandlers.RemotingCommandHandler.Invoke(this, commandArgs);
+        }
+
         public void UpdateFriendlyName(string senderIdentity, string newFriendlyName)
         {
             // propagate the update to the UI, through the controller
@@ -195,20 +201,5 @@ namespace GenericDataLayer
         }
 
         #endregion
-
-        //public void SendWebcamCapture2(FileStream stream)
-        //{
-        //    try
-        //    {
-        //        byte[] capture = new byte[10000000];
-        //        stream.Read(capture, 0, capture.Length);
-        //        form.DisplayCapture(capture);
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //}
-
     }
 }

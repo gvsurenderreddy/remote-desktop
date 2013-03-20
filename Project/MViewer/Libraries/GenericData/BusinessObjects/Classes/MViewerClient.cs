@@ -54,6 +54,11 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.UpdateFriendlyName(senderIdentity, newFriendlyName);
     }
 
+    public void SendRemotingCommand(RemotingCommandEventArgs commandArgs)
+    {
+        base.Channel.SendRemotingCommand(commandArgs);
+    }
+
     public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
     {
         base.Channel.UpdateContactStatus(senderIdentity, newStatus);
