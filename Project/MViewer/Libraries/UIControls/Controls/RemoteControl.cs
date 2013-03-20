@@ -16,11 +16,20 @@ namespace UIControls
     public partial class RemoteControl : UserControl
     {
         IHookCommandInvoker _commandInvoker;
+        Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDoubleClick;
+        Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseClick;
+
+        #region c-tor
 
         public RemoteControl()
         {
             InitializeComponent();
+            InitializeCommandTypes();
         }
+
+        #endregion
+
+        #region public methods
 
         public void BindMouseHandlers(ControllerHookCommandHandlers mouseHandlers)
         {
@@ -85,6 +94,24 @@ namespace UIControls
             pbRemote.Image = resized;
         }
 
+        #endregion
+
+        #region private methods
+
+        void InitializeCommandTypes()
+        {
+            _mouseDoubleClick = new Dictionary<MouseButtons, GenericEnums.MouseCommandType>();
+            _mouseDoubleClick.Add(System.Windows.Forms.MouseButtons.Left, GenericEnums.MouseCommandType.DoubleLeftClick);
+            _mouseDoubleClick.Add(System.Windows.Forms.MouseButtons.Right, GenericEnums.MouseCommandType.DoubleRightClick);
+            _mouseDoubleClick.Add(System.Windows.Forms.MouseButtons.Middle, GenericEnums.MouseCommandType.DoubleMiddleClick);
+
+            _mouseClick = new Dictionary<MouseButtons, GenericEnums.MouseCommandType>();
+            _mouseClick.Add(System.Windows.Forms.MouseButtons.Left, GenericEnums.MouseCommandType.LeftClick);
+            _mouseClick.Add(System.Windows.Forms.MouseButtons.Right, GenericEnums.MouseCommandType.RightClick);
+            _mouseClick.Add(System.Windows.Forms.MouseButtons.Middle, GenericEnums.MouseCommandType.MiddleClick);
+
+        }
+
         bool InPictureBoxArea(int x, int y)
         {
             bool inPictureBoxArea = false;
@@ -118,6 +145,8 @@ namespace UIControls
             pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
         }
 
+        #endregion
+
         #region Event handlers of particular events
 
         private new void KeyDown(object sender, KeyEventArgs e)
@@ -126,7 +155,8 @@ namespace UIControls
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.Undefined // todo: send specific command
+                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
+                    KeyCode = e.KeyCode
                 });
                 //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
                 //textBoxLog.ScrollToCaret();
@@ -139,7 +169,8 @@ namespace UIControls
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.Undefined // todo: send specific command
+                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
+                    KeyCode = e.KeyCode
                 });
                 //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
                 //textBoxLog.ScrollToCaret();
@@ -153,7 +184,8 @@ namespace UIControls
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.Undefined // todo: send specific command
+                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
+                    KeyChar = e.KeyChar
                 });
                 //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
                 //textBoxLog.ScrollToCaret();
@@ -169,7 +201,9 @@ namespace UIControls
                    new RemotingCommandEventArgs()
                    {
                        RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                       MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                       MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
+                       X = e.X,
+                       Y = e.Y
                    });
                 //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
             }
@@ -183,7 +217,9 @@ namespace UIControls
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                          MouseCommandType = _mouseClick[e.Button], // send specific command
+                          X = e.X,
+                          Y = e.Y
                       });
                 //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -199,7 +235,9 @@ namespace UIControls
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                          MouseCommandType = GenericEnums.MouseCommandType.MouseUp, // send specific command
+                          X = e.X,
+                          Y = e.Y
                       });
                 //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -215,13 +253,14 @@ namespace UIControls
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                          MouseCommandType = GenericEnums.MouseCommandType.MouseDown, // send specific command
+                          X = e.X,
+                          Y = e.Y
                       });
                 //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
             }
         }
-
 
         private new void MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -231,7 +270,9 @@ namespace UIControls
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                          MouseCommandType = _mouseDoubleClick[e.Button], // send specific command
+                          X = e.X,
+                          Y = e.Y
                       });
                 //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -247,7 +288,8 @@ namespace UIControls
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.Undefined // todo: send specific command
+                          MouseCommandType = GenericEnums.MouseCommandType.Wheel, // send specific command
+                          Delta = e.Delta
                       });
                 //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
             }

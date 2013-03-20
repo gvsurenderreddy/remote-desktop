@@ -30,7 +30,6 @@ namespace GenericDataLayer
         void RoomButtonAction(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideoChat(WebcamCapture webcamControl);
-        //void RoomClosingObserver(object sender, EventArgs e);
         void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
 
         string MyIdentity();

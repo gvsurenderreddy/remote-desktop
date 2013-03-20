@@ -1,4 +1,4 @@
-﻿namespace UIControls.Forms
+﻿namespace UIControls
 {
     partial class FormFileProgress
     {

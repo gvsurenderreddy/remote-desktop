@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UIControls.Forms
+namespace UIControls
 {
     public partial class FormFileProgress : Form
     {

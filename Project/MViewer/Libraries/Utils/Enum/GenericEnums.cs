@@ -68,13 +68,22 @@ namespace Utils
             Undefined = 0, 
             LeftClick = 1, 
             RightClick = 2, 
-            DoubleLeftClick = 3, 
-            Scroll = 4 
+            MiddleClick = 3,
+            DoubleLeftClick = 4, 
+            DoubleRightClick = 5,
+            DoubleMiddleClick = 6,
+            Wheel = 7,
+            Move = 8,
+            MouseUp = 9,
+            MouseDown = 10
         }; // todo: complete MouseCommandType
 
         public enum KeyboardCommandType
         {
             Undefined = 0,
+            KeyUp = 1,
+            KeyDown = 2,
+            KeyPress = 3
             // todo: complete KeyBoardCommandType
         }
 
