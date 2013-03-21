@@ -41,6 +41,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Selectors" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -54,6 +55,8 @@
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
+    <Compile Include="BusinessObjects\Classes\Product.cs" />
+    <Compile Include="BusinessObjects\Classes\WCFClient.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\IHookCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\IMouseCommands.cs" />
     <Compile Include="BusinessObjects\StrategyPattern\HookCommandBase.cs" />

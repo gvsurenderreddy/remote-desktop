@@ -43,6 +43,16 @@ namespace Utils
             Send = 4 
         };
 
+        public enum ServiceEndpointPart
+        {
+            Undefined = 0,
+            Certificate = 1, // client parts
+            Binding = 2,
+            Contract = 3,
+            Uri = 4, // server specific parts
+            Behavior = 5
+        }
+
         public enum ContactsOperation 
         { 
             Undefined = 0, 

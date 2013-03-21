@@ -12,12 +12,30 @@ using Utils;
 using System.Drawing;
 using System.Drawing.Imaging;
 using GenericDataLayer;
+using System.ServiceModel.Description;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security;
 
 namespace GenericDataLayer
 {
-    public class MViewerServer : IMViewerService
+    public class MViewerServer : Product, IMViewerService
     {
         #region private members
+
+        WSHttpBinding _binding;
+
+        public WSHttpBinding Binding
+        {
+            get { return _binding; }
+        }
+
+        Uri _httpURI;
+        string _httpsAddress;
+
+        public Uri HttpURI
+        {
+            get { return _httpURI; }
+        }
 
         //Computer computer = new Computer();
         ControllerEventHandlers _controllerHandlers;
@@ -29,6 +47,11 @@ namespace GenericDataLayer
         #endregion
 
         #region c-tor
+
+        public MViewerServer()
+        {
+            
+        }
 
         public MViewerServer(ControllerEventHandlers controllerHandlers, string identity)
         {
@@ -201,5 +224,80 @@ namespace GenericDataLayer
         }
 
         #endregion
+
+        public override void BuildServerBinding()
+        {
+            // Add MEX endpoint
+
+            _binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpsBinding();
+            //WSHttpBinding binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpBinding();
+
+            _binding.MaxBufferPoolSize = 100000000;
+            _binding.ReaderQuotas.MaxArrayLength = 100000000;
+            _binding.ReaderQuotas.MaxStringContentLength = 100000000;
+            _binding.ReaderQuotas.MaxBytesPerRead = 100000000;
+            _binding.MaxReceivedMessageSize = 100000000;
+
+            _binding.HostNameComparisonMode = HostNameComparisonMode.StrongWildcard;
+            _binding.Security.Mode = SecurityMode.Message;
+
+            _binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Certificate;
+            _binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
+            _binding.Security.Transport.Realm = string.Empty;
+
+            _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
+            _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
+            _binding.Security.Message.EstablishSecurityContext = false;
+            _binding.Security.Message.NegotiateServiceCredential = false;
+
+            _binding.Name = "binding1";
+
+            // todo : programmatically add global error handler to the WCF 
+
+
+            // Add application endpoint
+
+        }
+
+        public override void BuildUri(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity)
+        {
+            _httpsAddress = httpsAddress;
+            _httpURI = new Uri(httpsAddress.Replace("https", "http"), UriKind.Absolute);
+            int httpPort = _httpURI.Port - 1;
+            string httpAddress = _httpURI.ToString().Replace(_httpURI.Port.ToString(), httpPort.ToString());
+            _httpURI = new Uri(httpAddress, UriKind.Absolute);
+
+        }
+
+        public override void BuildBehavior(ServiceHost svcHost)
+        {
+            var behavior = svcHost.Description.Behaviors.Find<ServiceBehaviorAttribute>();
+            behavior.InstanceContextMode = InstanceContextMode.Single;
+            behavior.IncludeExceptionDetailInFaults = true;
+            behavior.AutomaticSessionShutdown = true;
+            behavior.ConcurrencyMode = ConcurrencyMode.Multiple;
+            behavior.Name = "MetadataExchangeHttpsBinding_IVideoChatRoom";
+
+            behavior.AddressFilterMode = AddressFilterMode.Any;
+
+            // Check to see if the service host already has a ServiceMetadataBehavior
+            ServiceMetadataBehavior smb = svcHost.Description.Behaviors.Find<ServiceMetadataBehavior>();
+            // If not, add one
+            if (smb == null)
+                smb = new ServiceMetadataBehavior();
+            smb.HttpGetEnabled = true;
+
+            smb.HttpsGetEnabled = true;
+            Uri httpsURI = new Uri(_httpsAddress);
+            smb.HttpsGetUrl = httpsURI;
+
+            smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
+            svcHost.Description.Behaviors.Add(smb);
+        }
+
+        // not needed
+        public override void BuildCertificate(){}
+        public override void BuildContract() { }
+        public override void BuildClientBinding(ContactEndpoint contractEndpoint) { }
     }
 }

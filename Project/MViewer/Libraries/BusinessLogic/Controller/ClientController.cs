@@ -184,7 +184,10 @@ namespace BusinessLogicLayer
                     _clients.Remove(identity);
                 } 
                 ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
-                MViewerClient client = ClientBuilder.BuildWCFClient(endpoint);
+
+                Builder clientBuilder = new ClientBuilder(endpoint);
+                Director.Instance.Construct(clientBuilder);
+                MViewerClient client = (MViewerClient)clientBuilder.GetResult();
                 _clients.Add(identity, client);
             }
         }
@@ -233,7 +236,9 @@ namespace BusinessLogicLayer
             try
             {
                 ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
-                MViewerClient client = ClientBuilder.BuildWCFClient(endpoint);
+                Builder clientBuilder = new ClientBuilder(endpoint);
+                Director.Instance.Construct(clientBuilder);
+                MViewerClient client = (MViewerClient)clientBuilder.GetResult();
                 isOnline = client.Ping();
             }
             catch

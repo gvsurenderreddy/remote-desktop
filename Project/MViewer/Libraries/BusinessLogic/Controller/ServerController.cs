@@ -29,7 +29,9 @@ namespace BusinessLogicLayer
             {
                 _address = "https://" + endpoint.Address + endpoint.Path;
             }
-            _server = ServerBuilder.BuildWCFServer(_address, handlers, identity);
+            Builder serverBuilder = new ServerBuilder(_address, handlers, identity);
+            Director.Instance.Construct(serverBuilder);
+            _server = (ServiceHost)serverBuilder.GetResult();
         }
 
         #endregion

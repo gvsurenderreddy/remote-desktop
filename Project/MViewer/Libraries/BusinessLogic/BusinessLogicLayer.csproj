@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\Builder.cs" />
     <Compile Include="Builder\ClientBuilder.cs" />
+    <Compile Include="Builder\Director.cs" />
     <Compile Include="Controller\ClientController.cs" />
     <Compile Include="Controller\ServerController.cs" />
     <Compile Include="IdentityResolver.cs" />

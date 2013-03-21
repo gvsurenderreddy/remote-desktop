@@ -10,88 +10,64 @@ using GenericDataLayer;
 
 namespace BusinessLogicLayer
 {
-    internal static class ServerBuilder
+    internal class ServerBuilder : Builder
     {
-        #region public static methods
+        #region private members
 
-        public static ServiceHost BuildWCFServer(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity)
+        MViewerServer _server = new MViewerServer();
+        ServiceHost _svcHost;
+
+        string _httpsAddress;
+        ControllerEventHandlers _controllerHandlers;
+        string _identity;
+
+        #endregion
+
+        #region c-tor
+
+        public ServerBuilder(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity)
         {
-            Uri httpURI = new Uri(httpsAddress.Replace("https", "http"), UriKind.Absolute);
-            int httpPort = httpURI.Port - 1;
-            string httpAddress = httpURI.ToString().Replace(httpURI.Port.ToString(), httpPort.ToString());
-            httpURI = new Uri(httpAddress, UriKind.Absolute);
-
-            MViewerServer server = new MViewerServer(controllerHandlers, identity);
-            ServiceHost svcHost = new ServiceHost(server, httpURI);
-
-            var behavior = svcHost.Description.Behaviors.Find<ServiceBehaviorAttribute>();
-            behavior.InstanceContextMode = InstanceContextMode.Single;
-            behavior.IncludeExceptionDetailInFaults = true;
-            behavior.AutomaticSessionShutdown = true;
-            behavior.ConcurrencyMode = ConcurrencyMode.Multiple;
-            behavior.Name = "MetadataExchangeHttpsBinding_IVideoChatRoom";
-
-            behavior.AddressFilterMode = AddressFilterMode.Any;
-
-            // Check to see if the service host already has a ServiceMetadataBehavior
-            ServiceMetadataBehavior smb = svcHost.Description.Behaviors.Find<ServiceMetadataBehavior>();
-            // If not, add one
-            if (smb == null)
-                smb = new ServiceMetadataBehavior();
-            smb.HttpGetEnabled = true;
-
-            smb.HttpsGetEnabled = true;
-            Uri httpsURI = new Uri(httpsAddress);
-            smb.HttpsGetUrl = httpsURI;
-
-            smb.MetadataExporter.PolicyVersion = PolicyVersion.Policy15;
-            svcHost.Description.Behaviors.Add(smb);
-            // Add MEX endpoint
-
-            WSHttpBinding binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpsBinding();
-            //WSHttpBinding binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpBinding();
-            
-            binding.MaxBufferPoolSize = 100000000;
-            binding.ReaderQuotas.MaxArrayLength = 100000000;
-            binding.ReaderQuotas.MaxStringContentLength = 100000000;
-            binding.ReaderQuotas.MaxBytesPerRead = 100000000;
-            binding.MaxReceivedMessageSize = 100000000;
-
-            binding.HostNameComparisonMode = HostNameComparisonMode.StrongWildcard;
-            binding.Security.Mode = SecurityMode.Message;
-
-            binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Certificate;
-            binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
-            binding.Security.Transport.Realm = string.Empty;
-
-            binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
-            binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
-            binding.Security.Message.EstablishSecurityContext = false;
-            binding.Security.Message.NegotiateServiceCredential = false;
-                
-            binding.Name = "binding1";
-
-            //ServiceEndpoint endpoint = new ServiceEndpoint(contract, binding, new EndpointAddress(myuri));
-            //endpoint.Binding = binding;
-            //endpoint.Name = "WCFEndpoint";
-
-            svcHost.Credentials.ServiceCertificate.Certificate = new X509Certificate2("c:\\Server.pfx");
-            X509ClientCertificateAuthentication authentication = svcHost.Credentials.ClientCertificate.Authentication;
-            authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            authentication.CustomCertificateValidator = new GenericDataLayer.CustomCertificateValidator("CN=Mihai-PC", new X509Certificate2("c:\\Client.pfx"));
-            svcHost.Credentials.ClientCertificate.Certificate = new X509Certificate2("c:\\Client.pfx");
-
-            // Add application endpoint
-            svcHost.AddServiceEndpoint(typeof(IMViewerService), binding, "");
-
-            // todo : programmatically add global error handler to the WCF 
-
-            return svcHost;
+            _httpsAddress = httpsAddress;
+            _controllerHandlers = controllerHandlers;
+            _identity = identity;
         }
 
         #endregion
 
-        #region private static methods
+        #region public methods
+
+        public override void BuildCertificate()
+        {
+            _svcHost.Credentials.ServiceCertificate.Certificate = new X509Certificate2("c:\\Server.pfx");
+            X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
+            authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+            authentication.CustomCertificateValidator = new GenericDataLayer.CustomCertificateValidator("CN=Mihai-PC", new X509Certificate2("c:\\Client.pfx"));
+            _svcHost.Credentials.ClientCertificate.Certificate = new X509Certificate2("c:\\Client.pfx");
+        }
+
+        public override void BuildBinding()
+        {
+            _server.BuildServerBinding();
+            _svcHost.AddServiceEndpoint(typeof(IMViewerService), _server.Binding, "");
+
+        }
+
+        public override void BuildUri()
+        {
+            _server.BuildUri(_httpsAddress, _controllerHandlers, _identity);
+            _server = new MViewerServer(_controllerHandlers, _identity);
+            _svcHost = new ServiceHost(_server, _server.HttpURI);
+        }
+
+        public override void BuildBehavior()
+        {
+            _server.BuildBehavior(_svcHost);
+        }
+
+        public override object GetResult()
+        {
+            return _svcHost;
+        }
 
         #endregion
 
