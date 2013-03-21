@@ -27,6 +27,7 @@ namespace MViewer
         {
             RemotingCommandEventArgs args = (RemotingCommandEventArgs)e;
             // todo: implement ExecuteRemotingCommand
+            _commandInvoker.PerformCommand(sender, args);
         }
 
         public void SendRemotingCommand(object sender, RemotingCommandEventArgs args)
