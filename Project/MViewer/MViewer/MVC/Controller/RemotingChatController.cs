@@ -23,10 +23,74 @@ namespace MViewer
 
         #region public methods
 
+        public void KeyDown(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void KeyPress(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void KeyUp(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void LeftClickCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void RightClickCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void MiddleClickCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void WheelCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void MoveCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void MouseDownCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
+        public void MouseUpCommand(object sender, RemotingCommandEventArgs args)
+        {
+
+        }
+
         public void ExecuteRemotingCommand(object sender, EventArgs e)
         {
             RemotingCommandEventArgs args = (RemotingCommandEventArgs)e;
-            // todo: implement ExecuteRemotingCommand
             _commandInvoker.PerformCommand(sender, args);
         }
 

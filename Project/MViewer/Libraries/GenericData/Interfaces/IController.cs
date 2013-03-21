@@ -38,5 +38,19 @@ namespace GenericDataLayer
         void RemotingImageCaptured(object source, EventArgs e);
 
         void InitializeSettings();
+
+        void KeyDown(object sender, RemotingCommandEventArgs args);
+        void KeyPress(object sender, RemotingCommandEventArgs args);
+        void KeyUp(object sender, RemotingCommandEventArgs args);
+        void LeftClickCommand(object sender, RemotingCommandEventArgs args);
+        void RightClickCommand(object sender, RemotingCommandEventArgs args);
+        void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args);
+        void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args);
+        void MiddleClickCommand(object sender, RemotingCommandEventArgs args);
+        void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args);
+        void WheelCommand(object sender, RemotingCommandEventArgs args);
+        void MoveCommand(object sender, RemotingCommandEventArgs args);
+        void MouseDownCommand(object sender, RemotingCommandEventArgs args);
+        void MouseUpCommand(object sender, RemotingCommandEventArgs args);
     }
 }

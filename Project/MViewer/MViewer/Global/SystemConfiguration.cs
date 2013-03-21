@@ -74,9 +74,27 @@ namespace MViewer
             // add mouse & keyboard delegate from the controller
             RemotingCommand = Program.Controller.SendRemotingCommand;
 
+            Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate> keyboardDelegates = new Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate>();
+            keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyDown, Program.Controller.KeyDown);
+            keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyPress, Program.Controller.KeyPress);
+            keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyUp, Program.Controller.KeyUp);
+
+            IDictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate> mouseDelegates = new Dictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate>();
+            mouseDelegates.Add(GenericEnums.MouseCommandType.LeftClick, Program.Controller.LeftClickCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.RightClick, Program.Controller.RightClickCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleRightClick, Program.Controller.DoubleRightClickCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleLeftClick, Program.Controller.DoubleLeftClickCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleClick, Program.Controller.MiddleClickCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleMiddleClick, Program.Controller.DoubleMiddleClickCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.MouseDown, Program.Controller.MouseDownCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.MouseUp, Program.Controller.MouseUpCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.Move, Program.Controller.MoveCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.Wheel, Program.Controller.WheelCommand);
+
             _remotingCommandHandlers = new ControllerRemotingHandlers()
             {
-                //KeyboardCommands = new Dictionary<
+                KeyboardCommands = keyboardDelegates,
+                MouseCommands = mouseDelegates
             };
         }
 
