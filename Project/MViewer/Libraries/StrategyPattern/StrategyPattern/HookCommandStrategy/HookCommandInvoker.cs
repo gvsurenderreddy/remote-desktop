@@ -50,7 +50,6 @@ namespace StrategyPattern
 
         public void PerformCommand(object sender, RemotingCommandEventArgs args)
         {
-
             commands[args.RemotingCommandType].Execute(sender, args);
         }
 

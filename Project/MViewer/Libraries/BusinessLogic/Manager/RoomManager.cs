@@ -168,11 +168,11 @@ namespace BusinessLogicLayer
             {
                 lock (_syncRooms)
                 {
-                    if (VideoRoomsLeft() == false) 
-                    {
-                        // reset the active room identity if the rooms were all closed
-                        _activeRoom = string.Empty;
-                    }
+                    //if (VideoRoomsLeft() == false || RemotingRoomsLeft() == false == AudioRoomsLeft() == false)
+                    //{
+                    //    // reset the active room identity if the rooms were all closed
+                    //    _activeRoom = string.Empty;
+                    //}
                     return _activeRoom; 
                 }
             }
