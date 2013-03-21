@@ -16,7 +16,7 @@ namespace StrategyPattern
         {
             // todo: provide the video/audio/remoting event handlers from the controller
 
-            VideoCommands videoCommands = new VideoCommands()
+            VideoChatCommands videoCommands = new VideoChatCommands()
             {
                 StartVideoChat = roomHandlers.Video[GenericEnums.SignalType.Start],
                 StopVideChat = roomHandlers.Video[GenericEnums.SignalType.Stop],
@@ -31,7 +31,7 @@ namespace StrategyPattern
             };
             transferCommands.BindCommands();
 
-            RemotingCommands remotingCommands = new RemotingCommands()
+            RemotingChatCommands remotingCommands = new RemotingChatCommands()
             {
                 StartRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Start],
                 StopRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Stop],

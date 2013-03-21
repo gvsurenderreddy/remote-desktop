@@ -8,13 +8,13 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public abstract class HookCommandBase : IHookCommands
+    public abstract class MouseHookCommandBase : IHookCommands
     {
-        protected Dictionary<GenericEnums.RemotingCommandType, Delegates.HookCommandDelegate> _commands;
+        protected Dictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate> _commands;
 
         Delegates.HookCommandDelegate _command;
 
-        public HookCommandBase()
+        public MouseHookCommandBase()
         {
             _command = PerformCommand;
         }
@@ -28,7 +28,7 @@ namespace StrategyPattern
 
         public void PerformCommand(object sender, RemotingCommandEventArgs args)
         {
-            _commands[args.RemotingCommandType].Invoke(sender, args);
+            _commands[args.MouseCommandType].Invoke(sender, args);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace MViewer
         #region private members
 
         IRoomCommandInvoker _roomCommandInvoker;
+        IHookCommandInvoker _commandInvoker;
 
         IView _view;
         IModel _model;
@@ -42,8 +43,9 @@ namespace MViewer
 
         public void InitializeSettings()
         {
-            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
- 
+            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.ChatRoomHandlers);
+            _commandInvoker = new HookCommandInvoker(SystemConfiguration.Instance.RemotingCommandHandlers);
+
             ControllerEventHandlers handlers = new ControllerEventHandlers()
             {
                 ClientConnectedObserver = this.ClientConnectedObserver,

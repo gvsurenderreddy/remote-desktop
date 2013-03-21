@@ -8,7 +8,7 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public class VideoCommands : RoomCommandBase
+    public class VideoChatCommands : RoomCommandBase
     {
         public Delegates.RoomCommandDelegate StartVideoChat;
         public Delegates.RoomCommandDelegate StopVideChat;

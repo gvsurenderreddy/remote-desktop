@@ -59,7 +59,6 @@
     <Compile Include="BusinessObjects\Classes\WCFClient.cs" />
     <Compile Include="BusinessObjects\Classes\ScreenCaptureTool.cs" />
     <Compile Include="BusinessObjects\Classes\ViewerContext.cs" />
-    <Compile Include="BusinessObjects\ControllerHandlers\ControllerRoomHandlers.cs" />
     <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />
     <Compile Include="BusinessObjects\Classes\Identity.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />

@@ -14,16 +14,16 @@ namespace StrategyPattern
     {
         Dictionary<GenericEnums.RemotingCommandType, IHookCommands> commands;
 
-        public HookCommandInvoker(Delegates.HookCommandDelegate remotingCommand)
+        public HookCommandInvoker(ControllerRemotingHandlers remotingCommandHandlers)
         {
             // todo: provide the mouse/keyboard event handlers from the controller
 
             MouseHookCommand mouseCommands = new MouseHookCommand()
             {
-                //StartVideoChat = mouseHandlers.Video[GenericEnums.SignalType.Start],
-                //StopVideChat = mouseHandlers.Video[GenericEnums.SignalType.Stop],
-                //PauseVideoChat = mouseHandlers.Video[GenericEnums.SignalType.Pause],
-                //ResumeVideoChat = mouseHandlers.Video[GenericEnums.SignalType.Resume]
+                //StartVideoChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Start],
+                //StopVideChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Stop],
+                //PauseVideoChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Pause],
+                //ResumeVideoChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Resume]
             };
             mouseCommands.BindCommands();
       

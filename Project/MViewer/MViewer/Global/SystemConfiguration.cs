@@ -5,13 +5,27 @@ using System.Text;
 using System.Configuration;
 using GenericDataLayer;
 using Utils;
+using StrategyPattern;
 
 namespace MViewer
 {
     public class SystemConfiguration
     {
+        #region private members
+
         static readonly object _syncInstance = new object();
         static SystemConfiguration _instance;
+
+        private PresenterSettings _presenterSettings;
+
+        ControllerRoomHandlers _chatRoomHandlers;
+        ControllerRemotingHandlers _remotingCommandHandlers;
+
+        Delegates.HookCommandDelegate _remotingCommandInvoker;
+
+        #endregion
+
+        #region c-tor
 
         private SystemConfiguration() 
         {
@@ -49,7 +63,7 @@ namespace MViewer
             remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemotingChat);
             remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemotingChat);
 
-            _roomHandlers = new ControllerRoomHandlers()
+            _chatRoomHandlers = new ControllerRoomHandlers()
             {
                 // todo: add audio & remoting handlers handlers by signal type
                 Video = videoDelegates,
@@ -57,9 +71,18 @@ namespace MViewer
                 Remoting = remotingDelegates
             };
 
-            // add mouse & keyboard delegates from the controller
+            // add mouse & keyboard delegate from the controller
             RemotingCommand = Program.Controller.SendRemotingCommand;
+
+            _remotingCommandHandlers = new ControllerRemotingHandlers()
+            {
+                //KeyboardCommands = new Dictionary<
+            };
         }
+
+        #endregion
+
+        #region properties
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
         public readonly int Port = int.Parse(ConfigurationManager.AppSettings["port"]);
@@ -67,26 +90,26 @@ namespace MViewer
         public readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
         public readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
         public readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
-        
-        private PresenterSettings _presenterSettings;
-
-        Delegates.HookCommandDelegate _remotingCommand;
 
         public Delegates.HookCommandDelegate RemotingCommand
         {
-            get { return _remotingCommand; }
-            set { _remotingCommand = value; }
+            get { return _remotingCommandInvoker; }
+            set { _remotingCommandInvoker = value; }
         }
-        ControllerRoomHandlers _roomHandlers;
 
-        public ControllerRoomHandlers RoomHandlers
+        public ControllerRoomHandlers ChatRoomHandlers
         {
-            get { return _roomHandlers; }
+            get { return _chatRoomHandlers; }
         }
 
         public PresenterSettings PresenterSettings
         {
             get { return _presenterSettings; }
+        }
+
+        public ControllerRemotingHandlers RemotingCommandHandlers
+        {
+            get { return _remotingCommandHandlers; }
         }
 
         public string MyIdentity;
@@ -108,5 +131,7 @@ namespace MViewer
                 return _instance;
             }
         }
+
+        #endregion
     }
 }

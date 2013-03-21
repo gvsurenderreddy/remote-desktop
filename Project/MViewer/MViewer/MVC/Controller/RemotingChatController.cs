@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using GenericDataLayer;
+using StrategyPattern;
 using Utils;
 
 namespace MViewer

@@ -39,13 +39,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerHandlers\ControllerRemotingHandlers.cs" />
+    <Compile Include="ControllerHandlers\ControllerRoomHandlers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StrategyPattern\HookCommandStrategy\HookCommandBase.cs" />
+    <Compile Include="StrategyPattern\HookCommandStrategy\KeyboardHookCommandBase.cs" />
+    <Compile Include="StrategyPattern\HookCommandStrategy\MouseHookCommandBase.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\HookCommandInvoker.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\IHookCommandInvoker.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\IHookCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\IMouseCommands.cs" />
-    <Compile Include="StrategyPattern\HookCommandStrategy\IRoomCommands.cs" />
+    <Compile Include="StrategyPattern\RoomCommandStrategy\IRoomCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\KeyboardHookCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\MouseHookCommands.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\IRoomCommandInvoker.cs" />

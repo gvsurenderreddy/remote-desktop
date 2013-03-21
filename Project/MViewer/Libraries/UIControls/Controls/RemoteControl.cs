@@ -155,7 +155,7 @@ namespace UIControls
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
+                    KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
                     KeyCode = e.KeyCode
                 });
                 //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
@@ -169,7 +169,7 @@ namespace UIControls
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
+                    KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
                     KeyCode = e.KeyCode
                 });
                 //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
@@ -183,7 +183,7 @@ namespace UIControls
                 new RemotingCommandEventArgs()
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyBoardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
+                    KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
                     KeyChar = e.KeyChar
                 });
                 //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
