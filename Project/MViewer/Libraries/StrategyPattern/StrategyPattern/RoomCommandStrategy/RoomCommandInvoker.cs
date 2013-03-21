@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GenericDataLayer;
 using Utils;
 
-namespace MViewer
+namespace StrategyPattern
 {
     public class RoomCommandInvoker : IRoomCommandInvoker
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GenericDataLayer;
 using Utils;
 
-namespace GenericDataLayer
+namespace StrategyPattern
 {
     public class VideoCommands : RoomCommandBase
     {

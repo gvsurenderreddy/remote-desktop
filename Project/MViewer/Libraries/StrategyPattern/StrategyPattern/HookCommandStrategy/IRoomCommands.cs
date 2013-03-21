@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using GenericDataLayer;
 
-namespace UIControls
+namespace StrategyPattern
 {
-    public interface IHookCommandInvoker
+    public interface IRoomCommands
     {
-        void PerformCommand(object sender, RemotingCommandEventArgs args);
+        void Execute(object sender, RoomActionEventArgs args);
+        void BindCommands();
     }
 }

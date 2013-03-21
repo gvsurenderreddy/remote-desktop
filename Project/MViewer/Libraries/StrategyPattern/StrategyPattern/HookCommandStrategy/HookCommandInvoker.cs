@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GenericDataLayer;
 using Utils;
 
-namespace UIControls
+namespace StrategyPattern
 {
     // todo: remove HookCommandInvoker if not used
 

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GenericDataLayer;
 using Utils;
 
-namespace GenericDataLayer
+namespace StrategyPattern
 {
     public abstract class RoomCommandBase : IRoomCommands 
     {

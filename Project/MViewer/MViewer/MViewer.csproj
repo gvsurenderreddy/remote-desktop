@@ -160,6 +160,10 @@
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
       <Name>GenericDataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\StrategyPattern\StrategyPattern.csproj">
+      <Project>{bfca88dd-1daf-4447-96a4-a112c03b1570}</Project>
+      <Name>StrategyPattern</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\UIControls\UIControls.csproj">
       <Project>{37D78FE4-C863-4E19-BF23-C5A6253CC734}</Project>
       <Name>UIControls</Name>

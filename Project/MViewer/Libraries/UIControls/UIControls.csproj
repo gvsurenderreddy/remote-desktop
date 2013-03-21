@@ -82,8 +82,6 @@
     <Compile Include="Forms\FormFileProgress.Designer.cs">
       <DependentUpon>FormFileProgress.cs</DependentUpon>
     </Compile>
-    <Compile Include="HookCommandStrategy\IHookCommandInvoker.cs" />
-    <Compile Include="HookCommandStrategy\HookCommandInvoker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controls\RemoteControl.cs">
       <SubType>UserControl</SubType>

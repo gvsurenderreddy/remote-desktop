@@ -57,45 +57,31 @@
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
     <Compile Include="BusinessObjects\Classes\Product.cs" />
     <Compile Include="BusinessObjects\Classes\WCFClient.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\IHookCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\IMouseCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\HookCommandBase.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\KeyboardHookCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\MouseHookCommands.cs" />
-    <Compile Include="EventArgs\MouseActionEventArgs.cs" />
-    <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
     <Compile Include="BusinessObjects\Classes\ScreenCaptureTool.cs" />
     <Compile Include="BusinessObjects\Classes\ViewerContext.cs" />
     <Compile Include="BusinessObjects\ControllerHandlers\ControllerRoomHandlers.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\RoomCommandBase.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\IRoomCommands.cs" />
     <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />
     <Compile Include="BusinessObjects\Classes\Identity.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerClient.cs" />
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="BusinessObjects\Classes\Presenter.cs" />
     <Compile Include="BusinessObjects\Classes\PresenterSettings.cs" />
-    <Compile Include="BusinessObjects\Classes\TransferInfo.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIConstants.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\Win32APIMethods.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\IRoomCommandInvoker.cs" />
     <Compile Include="BusinessObjects\Descriptor\ConnectedPeers.cs" />
     <Compile Include="BusinessObjects\Descriptor\PendingTransfer.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\RemotingCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\TransferCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\VideoCommands.cs" />
-    <Compile Include="BusinessObjects\StrategyPattern\RoomCommandInvoker.cs" />
     <Compile Include="BusinessObjects\Structs\ControllerEventHandlers.cs" />
     <Compile Include="BusinessObjects\Descriptor\TransferUptading.cs" />
     <Compile Include="Delegates.cs" />
-    <Compile Include="EventArgs\RemotingCommandEventArgs.cs" />
-    <Compile Include="EventArgs\VideoCaptureEventArgs.cs" />
-    <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
     <Compile Include="EventArgs\IdentityEventArgs.cs" />
+    <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
+    <Compile Include="EventArgs\RemotingCommandEventArgs.cs" />
+    <Compile Include="EventArgs\RoomActionEventArgs.cs" />
+    <Compile Include="EventArgs\VideoCaptureEventArgs.cs" />
     <Compile Include="Interfaces\IAudioRoom.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
     <Compile Include="Interfaces\IController.cs" />
@@ -113,6 +99,7 @@
     <Compile Include="Interfaces\IVideoRoom.cs" />
     <Compile Include="Interfaces\IView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BusinessObjects\Classes\TransferInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DesktopSharingCommon\DesktopSharingCommon.csproj">
