@@ -10,9 +10,9 @@ namespace StrategyPattern
 {
     public class KeyboardHookCommand : KeyboardHookCommandBase
     {
-        Delegates.HookCommandDelegate KeyDownCommand;
-        Delegates.HookCommandDelegate KeyPressCommand;
-        Delegates.HookCommandDelegate KeyUpCommand;
+        public Delegates.HookCommandDelegate KeyDownCommand;
+        public Delegates.HookCommandDelegate KeyPressCommand;
+        public Delegates.HookCommandDelegate KeyUpCommand;
 
         public override void BindCommands()
         {

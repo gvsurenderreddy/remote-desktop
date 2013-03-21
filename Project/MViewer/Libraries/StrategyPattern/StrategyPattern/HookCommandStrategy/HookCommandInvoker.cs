@@ -16,14 +16,20 @@ namespace StrategyPattern
 
         public HookCommandInvoker(ControllerRemotingHandlers remotingCommandHandlers)
         {
-            // todo: provide the mouse/keyboard event handlers from the controller
+            // provide the mouse/keyboard event handlers from the controller
 
             MouseHookCommand mouseCommands = new MouseHookCommand()
             {
-                //StartVideoChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Start],
-                //StopVideChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Stop],
-                //PauseVideoChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Pause],
-                //ResumeVideoChat = remotingCommandHandlers.Video[GenericEnums.SignalType.Resume]
+                LeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.LeftClick],
+                RightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.RightClick],
+                DoubleLeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleLeftClick],
+                DoubleRightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleRightClick],
+                MiddleClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MiddleClick],
+                DoubleMiddleClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleMiddleClick],
+                MouseDownCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MouseDown],
+                MouseUpCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MouseUp],
+                MoveCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.Move],
+                WheelCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.Wheel]
             };
             mouseCommands.BindCommands();
       
@@ -32,7 +38,9 @@ namespace StrategyPattern
 
             KeyboardHookCommand keyboardCommands = new KeyboardHookCommand()
             {
-
+                KeyDownCommand = remotingCommandHandlers.KeyboardCommands[GenericEnums.KeyboardCommandType.KeyDown],
+                KeyPressCommand = remotingCommandHandlers.KeyboardCommands[GenericEnums.KeyboardCommandType.KeyPress],
+                KeyUpCommand = remotingCommandHandlers.KeyboardCommands[GenericEnums.KeyboardCommandType.KeyUp]
             };
             keyboardCommands.BindCommands();
 

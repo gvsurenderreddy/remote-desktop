@@ -10,16 +10,16 @@ namespace StrategyPattern
 {
     public class MouseHookCommand : MouseHookCommandBase
     {
-        Delegates.HookCommandDelegate LeftClickCommand;
-        Delegates.HookCommandDelegate RightClickCommand;
-        Delegates.HookCommandDelegate DoubleRightClickCommand;
-        Delegates.HookCommandDelegate DoubleLeftClickCommand;
-        Delegates.HookCommandDelegate MiddleClickCommand;
-        Delegates.HookCommandDelegate DoubleMiddleClickCommand;
-        Delegates.HookCommandDelegate WheelCommand;
-        Delegates.HookCommandDelegate MoveCommand;
-        Delegates.HookCommandDelegate MouseDownCommand;
-        Delegates.HookCommandDelegate MouseUpCommand;
+        public Delegates.HookCommandDelegate LeftClickCommand;
+        public Delegates.HookCommandDelegate RightClickCommand;
+        public Delegates.HookCommandDelegate DoubleRightClickCommand;
+        public Delegates.HookCommandDelegate DoubleLeftClickCommand;
+        public Delegates.HookCommandDelegate MiddleClickCommand;
+        public Delegates.HookCommandDelegate DoubleMiddleClickCommand;
+        public Delegates.HookCommandDelegate WheelCommand;
+        public Delegates.HookCommandDelegate MoveCommand;
+        public Delegates.HookCommandDelegate MouseDownCommand;
+        public Delegates.HookCommandDelegate MouseUpCommand;
 
         public override void BindCommands()
         {
