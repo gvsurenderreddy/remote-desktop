@@ -172,6 +172,10 @@
       <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>
       <Name>Utils</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\WindowsInputSimulator\WindowsInputSimulator.csproj">
+      <Project>{3549cd6f-80f8-450f-b99e-cf0a736b1f2a}</Project>
+      <Name>WindowsInputSimulator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\actions.ico">

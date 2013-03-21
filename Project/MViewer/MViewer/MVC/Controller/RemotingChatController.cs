@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ using BusinessLogicLayer;
 using GenericDataLayer;
 using StrategyPattern;
 using Utils;
+using WindowsInput;
+using WindowsInputSimulator;
 
 namespace MViewer
 {
@@ -40,12 +43,46 @@ namespace MViewer
 
         public void LeftClickCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.LEFTDOWN,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void RightClickCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.RIGHTDOWN,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args)
@@ -60,32 +97,117 @@ namespace MViewer
 
         public void MiddleClickCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.MIDDLEDOWN,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            
         }
 
         public void WheelCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.WHEEL,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void MoveCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.MOVE,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void MouseDownCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.XDOWN,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void MouseUpCommand(object sender, RemotingCommandEventArgs args)
         {
-
+            var input = new INPUT
+            {
+                type = (uint)WindowsInput.InputType.MOUSE,
+                U = new InputUnion()
+                {
+                    mi = new MOUSEINPUT()
+                    {
+                        dx = 0,
+                        dy = 0,
+                        dwFlags = MOUSEEVENTF.XUP,
+                        mouseData = 0,
+                        dwExtraInfo = UIntPtr.Zero,
+                        time = 0
+                    }
+                }
+            };
+            var toSend = new INPUT[] { input };
+            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void ExecuteRemotingCommand(object sender, EventArgs e)
