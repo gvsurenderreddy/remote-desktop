@@ -24,6 +24,7 @@ namespace BusinessLogicLayer
         public ClientBuilder(ContactEndpoint serverEndpoint)
         {
             _endpoint = serverEndpoint;
+            _client = new WCFClient();
         }
 
         #endregion

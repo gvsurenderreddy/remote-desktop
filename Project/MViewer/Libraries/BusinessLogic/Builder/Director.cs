@@ -33,9 +33,9 @@ namespace BusinessLogicLayer
         {
             if (builder.GetType().Equals(typeof(ClientBuilder)))
             {
-                builder.BuildCertificate();
                 builder.BuildBinding();
                 builder.BuildContract();
+                builder.BuildCertificate();
             }
             else
             {

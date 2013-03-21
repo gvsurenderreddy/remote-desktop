@@ -54,8 +54,8 @@ namespace BusinessLogicLayer
 
         public override void BuildUri()
         {
-            _server.BuildUri(_httpsAddress, _controllerHandlers, _identity);
             _server = new MViewerServer(_controllerHandlers, _identity);
+            _server.BuildUri(_httpsAddress, _controllerHandlers, _identity);
             _svcHost = new ServiceHost(_server, _server.HttpURI);
         }
 
