@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using GenericDataLayer;
@@ -131,7 +131,7 @@ namespace MViewer
             _syncVideoCaptureActivity.Reset();
 
             bool sendStopSignal = true;
-            if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+            if (sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
             {
                 sendStopSignal = false;
             }

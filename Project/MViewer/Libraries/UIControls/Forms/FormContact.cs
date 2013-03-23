@@ -88,6 +88,8 @@ namespace UIControls
                 return;
             }
             
+            // todo: display progress bar while creating new contact
+
             switch (_formMode)
             {
                 case GenericEnums.FormMode.Add:

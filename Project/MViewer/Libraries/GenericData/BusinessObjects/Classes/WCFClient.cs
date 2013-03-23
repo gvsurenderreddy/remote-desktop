@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
-using System.Threading.Tasks;
+////using System.Threading.Tasks;
 
 namespace GenericDataLayer
 {
@@ -23,7 +23,7 @@ namespace GenericDataLayer
 
         public override void BuildCertificate()
         {
-            X509Certificate2 certificate = new X509Certificate2("c:\\Client.pfx");
+            X509Certificate2 certificate = new X509Certificate2("Client.pfx");
             _client.ClientCredentials.ClientCertificate.Certificate = certificate;
         }
 
@@ -40,7 +40,7 @@ namespace GenericDataLayer
             _client = new MViewerClient(_binding, _endpoint);
             _client.Endpoint.Binding = _binding; 
             _client.Endpoint.Binding.Name = "binding1_IVideoChatRoom";
-            _client.Endpoint.Contract = contract; 
+            //_client.Endpoint.Contract = contract; 
             
         }
 
@@ -99,7 +99,7 @@ namespace GenericDataLayer
         EndpointAddress CreateServerEndpoint(string serverAddress)
         {
             Uri uri = new Uri(serverAddress);
-            X509Certificate2 serverCert = new X509Certificate2("c:\\server2.cer");
+            X509Certificate2 serverCert = new X509Certificate2("server2.cer");
             EndpointIdentity identity = EndpointIdentity.CreateX509CertificateIdentity(serverCert);
             EndpointAddress endpoint = new EndpointAddress(uri, identity);
 

@@ -20,7 +20,13 @@
   </xs:schema>
   <Contacts>
     <ContactNo>0</ContactNo>
-    <Identity>8BO9P80/TkZBpLrSeeJxhMEQbS8ax1RlST6r8Jp0IFU=</Identity>
-    <FriendlyName>Mihai Darie2</FriendlyName>
+    <Identity>zq11DK2TxRbAfCU8GhQcPw8lnJNv6K+48XZ1dr+sgys=</Identity>
+    <FriendlyName>lazucu</FriendlyName>
+    <Status>Offline</Status>
+  </Contacts>
+  <Contacts>
+    <ContactNo>1</ContactNo>
+    <Identity>zq11DK2TxRbAfCU8GhQcP/yzkoJdSVJW8XZ1dr+sgys=</Identity>
+    <FriendlyName>virtualmihai</FriendlyName>
   </Contacts>
 </NewDataSet>

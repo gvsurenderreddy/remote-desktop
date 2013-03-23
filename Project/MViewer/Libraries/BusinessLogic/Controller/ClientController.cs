@@ -131,7 +131,14 @@ namespace BusinessLogicLayer
                     MViewerClient client = _clients[partnerIdentity];
                     if (client != null)
                     {
-                        client.UpdateContactStatus(myIdentity, newStatus);
+                        try
+                        {
+                            client.UpdateContactStatus(myIdentity, newStatus);
+                        }
+                        catch 
+                        {
+                        
+                        }
                     }
                 }
             }

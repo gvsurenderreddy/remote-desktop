@@ -5,6 +5,7 @@ using System.Text;
 using GenericDataLayer;
 using System.ServiceModel;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace BusinessLogicLayer
 {
@@ -47,13 +48,19 @@ namespace BusinessLogicLayer
         {
             Thread t = new Thread(delegate()
             {
-                _server.Open();
-                string addr = _server.Description.Endpoints[0].ListenUri.AbsoluteUri;
-                Console.WriteLine("Listening at: ");
-                Console.WriteLine(addr); 
-                
-                Thread.Sleep(Timeout.Infinite);
+                try
+                {
+                    _server.Open();
+                    string addr = _server.Description.Endpoints[0].ListenUri.AbsoluteUri;
+                    Console.WriteLine("Listening at: ");
+                    Console.WriteLine(addr);
 
+                    Thread.Sleep(Timeout.Infinite);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             });
             t.IsBackground = true;
             t.Start();

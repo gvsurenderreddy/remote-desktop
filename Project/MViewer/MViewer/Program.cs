@@ -28,16 +28,22 @@ namespace MViewer
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            try
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            _controller = new Controller();
-            _controller.InitializeSettings();
-            _controller.StartApplication();
-          
-            // todo: use manual reset event instead of thread.sleep(0)
-            Thread.Sleep(Timeout.Infinite);
+                _controller = new Controller();
+                _controller.InitializeSettings();
+                _controller.StartApplication();
 
+                // todo: use manual reset event instead of thread.sleep(0)
+                Thread.Sleep(Timeout.Infinite);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         #endregion

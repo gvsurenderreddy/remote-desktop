@@ -123,7 +123,7 @@ namespace MViewer
             _view.NotifyIdentityObserver();
             _model.ServerController.StartServer();
 
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
             // ping every single contact in the list and update it's status
             _model.PingContacts(null);

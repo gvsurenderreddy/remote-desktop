@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+//using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using GenericDataLayer;
@@ -309,7 +309,7 @@ namespace MViewer
                 Thread.Sleep(200);
             }
 
-            if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+            if (!sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
             {
                 // send the stop command to the partner
                 _model.ClientController.SendRoomCommand(MyIdentity(), args.Identity, args.RoomType, args.SignalType);
