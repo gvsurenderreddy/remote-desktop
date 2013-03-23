@@ -18,6 +18,9 @@ namespace UIControls
         Delegates.HookCommandDelegate _remotingCommand;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDoubleClick;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseClick;
+        Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDown;
+        Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseUp;
+
 
         #region c-tor
 
@@ -43,7 +46,7 @@ namespace UIControls
 
         public void WireUpEventProvider()
         {
-            HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+            //HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             HookManager.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MouseClick);
             HookManager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
             HookManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown);
@@ -68,13 +71,13 @@ namespace UIControls
         public void UpdateScreen(byte[] screenCapture, byte[] mouseCapture)
         {
             Image screenImage = null;
-                
-            if(screenCapture != null)
-            {    
+
+            if (screenCapture != null)
+            {
                 Rectangle screenBounds = new Rectangle();
                 Guid screenID = new Guid();
                 Tools.Instance.RemotingUtils.Deserialize(screenCapture, out screenImage, out screenBounds, out screenID);
-            
+
             }
             Image finalDisplay = null;
             if (mouseCapture != null)
@@ -110,17 +113,26 @@ namespace UIControls
             _mouseClick.Add(System.Windows.Forms.MouseButtons.Right, GenericEnums.MouseCommandType.RightClick);
             _mouseClick.Add(System.Windows.Forms.MouseButtons.Middle, GenericEnums.MouseCommandType.MiddleClick);
 
+            _mouseDown = new Dictionary<MouseButtons, GenericEnums.MouseCommandType>();
+            _mouseDown.Add(System.Windows.Forms.MouseButtons.Left, GenericEnums.MouseCommandType.LeftMouseDown);
+            _mouseDown.Add(System.Windows.Forms.MouseButtons.Right, GenericEnums.MouseCommandType.RightMouseDown);
+            _mouseDown.Add(System.Windows.Forms.MouseButtons.Middle, GenericEnums.MouseCommandType.MiddleMouseDown);
+
+            _mouseUp = new Dictionary<MouseButtons, GenericEnums.MouseCommandType>();
+            _mouseUp.Add(System.Windows.Forms.MouseButtons.Left, GenericEnums.MouseCommandType.LeftMouseUp);
+            _mouseUp.Add(System.Windows.Forms.MouseButtons.Right, GenericEnums.MouseCommandType.RightMouseUp);
+            _mouseUp.Add(System.Windows.Forms.MouseButtons.Middle, GenericEnums.MouseCommandType.MiddleMouseUp);
         }
 
         bool InPictureBoxArea(int x, int y)
         {
             bool inPictureBoxArea = false;
 
-            var screenPosition1 = pbRemote.PointToScreen(new Point(0, 0));
-            var screenPosition2 = pbRemote.PointToScreen(new Point(pbRemote.Bounds.Width, pbRemote.Bounds.Height));
+            var leftUpperCornerScreenPosition = pbRemote.PointToScreen(new Point(0, 0));
+            var rightBottomCornerScreenPosition = pbRemote.PointToScreen(new Point(pbRemote.Bounds.Width, pbRemote.Bounds.Height));
 
-            if (x >= screenPosition1.X && y >= screenPosition1.Y 
-                && x <= screenPosition2.X && y <= screenPosition2.Y)
+            if (x >= leftUpperCornerScreenPosition.X && y >= leftUpperCornerScreenPosition.Y
+                && x <= rightBottomCornerScreenPosition.X && y <= rightBottomCornerScreenPosition.Y)
             {
                 inPictureBoxArea = true;
             }
@@ -158,9 +170,9 @@ namespace UIControls
                     KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
                     KeyCode = e.KeyCode
                 });
-                //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
-                //textBoxLog.ScrollToCaret();
-            
+            //textBoxLog.AppendText(string.Format("KeyDown - {0}\n", e.KeyCode));
+            //textBoxLog.ScrollToCaret();
+
         }
 
         private new void KeyUp(object sender, KeyEventArgs e)
@@ -172,9 +184,9 @@ namespace UIControls
                     KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
                     KeyCode = e.KeyCode
                 });
-                //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
-                //textBoxLog.ScrollToCaret();
-            
+            //textBoxLog.AppendText(string.Format("KeyUp - {0}\n", e.KeyCode));
+            //textBoxLog.ScrollToCaret();
+
         }
 
         private new void KeyPress(object sender, KeyPressEventArgs e)
@@ -186,9 +198,9 @@ namespace UIControls
                     KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
                     KeyChar = e.KeyChar
                 });
-                //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
-                //textBoxLog.ScrollToCaret();
-            
+            //textBoxLog.AppendText(string.Format("KeyPress - {0}\n", e.KeyChar));
+            //textBoxLog.ScrollToCaret();
+
         }
 
 
@@ -196,13 +208,15 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                double x = 0, y = 0;
+                GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
                    new RemotingCommandEventArgs()
                    {
                        RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                        MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
-                       X = e.X,
-                       Y = e.Y
+                       X = x,
+                       Y = y
                    });
                 //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
             }
@@ -212,13 +226,16 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                double x = 0, y = 0;
+                GetRemotePosition(ref x, ref y, e.X, e.Y);
+
                 _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                           MouseCommandType = _mouseClick[e.Button], // send specific command
-                          X = e.X,
-                          Y = e.Y
+                          X = x,
+                          Y = y
                       });
                 //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -230,13 +247,15 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                double x = 0, y = 0;
+                GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.MouseUp, // send specific command
-                          X = e.X,
-                          Y = e.Y
+                          MouseCommandType = _mouseUp[e.Button], // send specific command
+                          X = x,
+                          Y = y
                       });
                 //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -248,13 +267,15 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                double x = 0, y = 0;
+                GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.MouseDown, // send specific command
-                          X = e.X,
-                          Y = e.Y
+                          MouseCommandType = _mouseDown[e.Button], // send specific command
+                          X = x,
+                          Y = y
                       });
                 //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -265,13 +286,15 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                double x = 0, y = 0;
+                GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                           MouseCommandType = _mouseDoubleClick[e.Button], // send specific command
-                          X = e.X,
-                          Y = e.Y
+                          X = x,
+                          Y = y
                       });
                 //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
                 //textBoxLog.ScrollToCaret();
@@ -294,8 +317,20 @@ namespace UIControls
             }
         }
 
+        void GetRemotePosition(ref double x, ref double y, int localX, int localY)
+        {
+            var leftUpperCornerScreenPosition = pbRemote.PointToScreen(new Point(0, 0));
+
+            x = Tools.Instance.RemotingUtils.ConvertXToRemote(
+                localX - leftUpperCornerScreenPosition.X,
+                pbRemote.Width);
+            y = Tools.Instance.RemotingUtils.ConvertYToRemote(
+                localY - leftUpperCornerScreenPosition.Y,
+                pbRemote.Height);
+        }
+
         #endregion
 
-        
+
     }
 }

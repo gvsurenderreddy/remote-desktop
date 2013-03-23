@@ -164,7 +164,7 @@ namespace CommandHookMonitor
                 //If someone listens to click and a click is heppened
                 if (s_MouseClick != null && clickCount > 0)
                 {
-                    s_MouseClick.Invoke(null, e);
+                     s_MouseClick.Invoke(null, e);
                 }
 
                 //If someone listens to click and a click is heppened

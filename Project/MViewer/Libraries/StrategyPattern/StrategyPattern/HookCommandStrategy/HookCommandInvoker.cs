@@ -26,13 +26,17 @@ namespace StrategyPattern
                 DoubleRightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleRightClick],
                 MiddleClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MiddleClick],
                 DoubleMiddleClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleMiddleClick],
-                MouseDownCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MouseDown],
-                MouseUpCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MouseUp],
+                LeftMouseDownCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.LeftMouseDown],
+                LeftMouseUpCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.LeftMouseUp],
+                RightMouseDownCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.RightMouseDown],
+                RightMouseUpCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.RightMouseUp],
+                MiddleMouseDownCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MiddleMouseDown],
+                MiddleMouseUpCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MiddleMouseUp],
                 MoveCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.Move],
                 WheelCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.Wheel]
             };
             mouseCommands.BindCommands();
-      
+
             commands = new Dictionary<GenericEnums.RemotingCommandType, IHookCommands>();
             commands.Add(GenericEnums.RemotingCommandType.Mouse, mouseCommands);
 

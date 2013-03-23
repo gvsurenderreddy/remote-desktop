@@ -74,18 +74,22 @@ namespace Utils
         };
 
         public enum MouseCommandType 
-        { 
-            Undefined = 0, 
-            LeftClick = 1, 
-            RightClick = 2, 
+        {
+            Undefined = 0,
+            LeftClick = 1,
+            RightClick = 2,
             MiddleClick = 3,
-            DoubleLeftClick = 4, 
+            DoubleLeftClick = 4,
             DoubleRightClick = 5,
             DoubleMiddleClick = 6,
             Wheel = 7,
             Move = 8,
-            MouseUp = 9,
-            MouseDown = 10
+            LeftMouseUp = 9,
+            LeftMouseDown = 10,
+            RightMouseUp = 11, // todo: use the right mouse up/down
+            RightMouseDown = 12, 
+            MiddleMouseUp = 13,
+            MiddleMouseDown = 14
         }; // todo: complete MouseCommandType
 
         public enum KeyboardCommandType

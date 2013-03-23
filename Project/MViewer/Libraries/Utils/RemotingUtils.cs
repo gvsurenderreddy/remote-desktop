@@ -22,14 +22,35 @@ namespace Utils
         #region static methods
 
         //todo: use the below methods if necessary
-        public double convertXToAbsolute(int x)
+        public double ConvertXToRemote(double local_x, double local_width)
         {
-            return ((double)65535 * x) / (double)Screen.PrimaryScreen.Bounds.Width;
+            //local_x * remote_width / local_width
+
+            double remote_x = local_x / local_width;
+            return remote_x;
         }
 
-        public double convertYToAbsolute(int y)
+        public double ConvertYToRemote(double local_y, double local_height)
         {
-            return ((double)65535 * y) / (double)Screen.PrimaryScreen.Bounds.Height;
+            //local_y * remote_height / local_height
+            double remote_y = local_y / local_height;
+            return remote_y;
+        }
+
+        ////todo: use the below methods if necessary
+        public double ConvertXToAbsolute(double remote_x)
+        {
+            //local_x * remote_width / local_width
+
+            double absolute_x = remote_x * Screen.PrimaryScreen.Bounds.Size.Width;
+            return absolute_x;
+        }
+
+        public double ConvertYToAbsolute(double remote_y)
+        {
+            //local_y * remote_height / local_height
+            double absolute_y = remote_y * Screen.PrimaryScreen.Bounds.Size.Height;
+            return absolute_y;
         }
 
         public byte[] SerializeDesktopCapture(Image capture, Rectangle rect)
@@ -207,11 +228,11 @@ namespace Utils
             //}
         }
 
-        public Size GetResolution()
-        {
-            Size size = Screen.PrimaryScreen.Bounds.Size;
-            return size;
-        }
+        //public Size GetResolution()
+        //{
+        //    Size size = Screen.PrimaryScreen.Bounds.Size;
+        //    return size;
+        //}
 
         #endregion
     }

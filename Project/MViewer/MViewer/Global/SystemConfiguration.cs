@@ -86,8 +86,12 @@ namespace MViewer
             mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleLeftClick, Program.Controller.DoubleLeftClickCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleClick, Program.Controller.MiddleClickCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleMiddleClick, Program.Controller.DoubleMiddleClickCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.MouseDown, Program.Controller.MouseDownCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.MouseUp, Program.Controller.MouseUpCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.LeftMouseDown, Program.Controller.LeftMouseDownCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.LeftMouseUp, Program.Controller.LeftMouseUpCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseDown, Program.Controller.RightMouseDownCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseUp, Program.Controller.RightMouseUpCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseDown, Program.Controller.MiddleMouseDownCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseUp, Program.Controller.MiddleMouseUpCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.Move, Program.Controller.MoveCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.Wheel, Program.Controller.WheelCommand);
 
