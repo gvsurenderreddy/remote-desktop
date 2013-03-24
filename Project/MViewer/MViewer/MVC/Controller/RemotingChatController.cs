@@ -62,6 +62,7 @@ namespace MViewer
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
+        //todo: remove click commands if not used
         public void RightClickCommand(object sender, RemotingCommandEventArgs args)
         {
             Thread t = new Thread(delegate()
@@ -80,43 +81,66 @@ namespace MViewer
 
         public void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args)
         {
+            Thread t = new Thread(delegate()
+            {
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
+                SetCursorPos((int)x, (int)y);
+                // todo: perform right click
+                mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
+            });
+            t.Start();
         }
 
         public void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args)
         {
+            Thread t = new Thread(delegate()
+            {
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
+                SetCursorPos((int)x, (int)y);
+                //  perform right click
+                mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+            });
+            t.Start();
         }
 
         public void MiddleClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            double x = Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-            double y = Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
-
-            var input = new INPUT
+            Thread t = new Thread(delegate()
             {
-                type = (uint)WindowsInput.InputType.MOUSE,
-                U = new InputUnion()
-                {
-                    mi = new MOUSEINPUT()
-                    {
-                        dx = (int)x,
-                        dy = (int)y,
-                        dwFlags = MOUSEEVENTF.MIDDLEDOWN,
-                        mouseData = 0,
-                        dwExtraInfo = UIntPtr.Zero,
-                        time = 0
-                    }
-                }
-            };
-            var toSend = new INPUT[] { input };
-            SetCursorPos((int)x, (int)y); 
-            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+
+                SetCursorPos((int)x, (int)y);
+                mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
+            });
+            t.Start();
         }
 
         public void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            
+            Thread t = new Thread(delegate()
+            {
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+
+                SetCursorPos((int)x, (int)y);
+                mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
+            });
+            t.Start();
         }
 
         public void WheelCommand(object sender, RemotingCommandEventArgs args)
