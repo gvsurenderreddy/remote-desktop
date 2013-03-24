@@ -329,13 +329,15 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                double x = 0, y = 0;
+                GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
                       new RemotingCommandEventArgs()
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                           MouseCommandType = GenericEnums.MouseCommandType.Wheel, // send specific command
-                          X = e.X,
-                          Y = e.Y,
+                          X = x,
+                          Y = y,
                           Delta = e.Delta
                       });
                 //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
