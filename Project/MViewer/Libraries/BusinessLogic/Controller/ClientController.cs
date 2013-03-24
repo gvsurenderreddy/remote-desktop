@@ -164,7 +164,11 @@ namespace BusinessLogicLayer
             if (_clients.ContainsKey(identity))
             {
                 MViewerClient client = _clients[identity];
-                client.SendRoomButtonAction(myIdentity, roomType, signalType);
+                try
+                {
+                    client.SendRoomButtonAction(myIdentity, roomType, signalType);
+                }
+                catch { }
             }
         }
         
