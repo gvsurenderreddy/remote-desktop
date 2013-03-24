@@ -172,24 +172,8 @@ namespace MViewer
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
-                var input = new INPUT
-                {
-                    type = (uint)WindowsInput.InputType.MOUSE,
-                    U = new InputUnion()
-                    {
-                        mi = new MOUSEINPUT()
-                        {
-                            dx = x,
-                            dy = y,
-                            dwFlags = MOUSEEVENTF.MOVE,
-                            mouseData = 0,
-                            dwExtraInfo = UIntPtr.Zero,
-                            time = 0
-                        }
-                    }
-                };
-                var toSend = new INPUT[] { input };
-                PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
+                SetCursorPos((int)x, (int)y);
+
             });
             t.Start();
         }
