@@ -136,6 +136,9 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="App.config" />
+    <None Include="Client.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Client.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
