@@ -49,7 +49,7 @@ namespace UIControls
         {
             try
             {
-                HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+                //HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
                 //HookManager.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MouseClick);
                 HookManager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
                 HookManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown);
@@ -57,6 +57,7 @@ namespace UIControls
                 HookManager.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MouseUp);
                 HookManager.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyUp);
                 HookManager.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
+                HookManager.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.MouseWheel);
             }
             catch
             {
@@ -76,6 +77,7 @@ namespace UIControls
                 HookManager.MouseUp -= new System.Windows.Forms.MouseEventHandler(this.MouseUp);
                 HookManager.KeyUp -= new System.Windows.Forms.KeyEventHandler(this.KeyUp);
                 HookManager.MouseDoubleClick -= new System.Windows.Forms.MouseEventHandler(this.MouseDoubleClick);
+                HookManager.MouseWheel -= new System.Windows.Forms.MouseEventHandler(this.MouseWheel);
             }
             catch
             {
