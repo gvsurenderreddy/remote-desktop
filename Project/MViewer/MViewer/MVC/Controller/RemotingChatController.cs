@@ -150,7 +150,7 @@ namespace MViewer
 
             SetCursorPos((int)x, (int)y);
             // todo: perform right click
-            mouse_event(MOUSE_WHEEL, x, y, 0, 0);
+            mouse_event(MOUSE_WHEEL, x, y, args.Delta, 0);
 
             //var input = new INPUT
             //{
