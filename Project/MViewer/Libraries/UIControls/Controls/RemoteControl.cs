@@ -209,7 +209,6 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                Thread.Sleep(100);
                 double x = 0, y = 0;
                 GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
@@ -220,7 +219,6 @@ namespace UIControls
                        X = x,
                        Y = y
                    });
-                //labelMousePosition.Text = string.Format("x={0:0000}; y={1:0000}", e.X, e.Y);
             }
         }
 
