@@ -332,6 +332,8 @@ namespace UIControls
                       {
                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                           MouseCommandType = GenericEnums.MouseCommandType.Wheel, // send specific command
+                          X = e.X,
+                          Y = e.Y,
                           Delta = e.Delta
                       });
                 //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
