@@ -209,16 +209,20 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
-                double x = 0, y = 0;
-                GetRemotePosition(ref x, ref y, e.X, e.Y);
-                _remotingCommand.Invoke(this,
-                   new RemotingCommandEventArgs()
-                   {
-                       RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                       MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
-                       X = x,
-                       Y = y
-                   });
+                Thread t = new Thread(delegate()
+                {
+                    double x = 0, y = 0;
+                    GetRemotePosition(ref x, ref y, e.X, e.Y);
+                    _remotingCommand.Invoke(this,
+                       new RemotingCommandEventArgs()
+                       {
+                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                           MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
+                           X = x,
+                           Y = y
+                       });
+                });
+                t.Start();
             }
         }
 
