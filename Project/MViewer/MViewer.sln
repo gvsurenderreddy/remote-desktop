@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MViewer", "MViewer\MViewer.csproj", "{30639E41-AEAF-4321-8E4F-BB80A2DEAB98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIControls", "Libraries\UIControls\UIControls.csproj", "{37D78FE4-C863-4E19-BF23-C5A6253CC734}"
