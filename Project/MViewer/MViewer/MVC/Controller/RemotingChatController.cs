@@ -309,7 +309,7 @@ namespace MViewer
                 Thread.Sleep(200);
             }
 
-            if (!sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
+            if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
             {
                 // send the stop command to the partner
                 _model.ClientController.SendRoomCommand(MyIdentity(), args.Identity, args.RoomType, args.SignalType);
