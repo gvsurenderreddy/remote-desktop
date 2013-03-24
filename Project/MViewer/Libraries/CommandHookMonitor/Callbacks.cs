@@ -211,8 +211,13 @@ namespace CommandHookMonitor
             return CallNextHookEx(s_MouseHookHandle, nCode, wParam, lParam);
         }
 
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern IntPtr LoadLibrary(string fileName);
+
         private static void EnsureSubscribedToGlobalMouseEvents()
         {
+            LoadLibrary("user32.dll");
+
             // install Mouse hook only if it is not installed and must be installed
             if (s_MouseHookHandle == 0)
             {
