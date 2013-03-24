@@ -216,7 +216,7 @@ namespace CommandHookMonitor
 
         private static void EnsureSubscribedToGlobalMouseEvents()
         {
-            LoadLibrary("user32.dll");
+            IntPtr ptr = LoadLibrary("user32.dll");
 
             // install Mouse hook only if it is not installed and must be installed
             if (s_MouseHookHandle == 0)
@@ -227,7 +227,7 @@ namespace CommandHookMonitor
                 s_MouseHookHandle = SetWindowsHookEx(
                     WH_MOUSE_LL,
                     s_MouseDelegate,
-                    IntPtr.Zero,
+                    ptr,
                     0);
                 //If SetWindowsHookEx fails.
                 if (s_MouseHookHandle == 0)
@@ -385,13 +385,15 @@ namespace CommandHookMonitor
             // install Keyboard hook only if it is not installed and must be installed
             if (s_KeyboardHookHandle == 0)
             {
+                IntPtr ptr = LoadLibrary("user32.dll");
+
                 //See comment of this field. To avoid GC to clean it up.
                 s_KeyboardDelegate = KeyboardHookProc;
                 //install hook
                 s_KeyboardHookHandle = SetWindowsHookEx(
                     WH_KEYBOARD_LL,
                     s_KeyboardDelegate,
-                    IntPtr.Zero,
+                    ptr,
                     0);
                 //If SetWindowsHookEx fails.
                 if (s_KeyboardHookHandle == 0)
