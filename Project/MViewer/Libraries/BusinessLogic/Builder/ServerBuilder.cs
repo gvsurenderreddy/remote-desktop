@@ -38,11 +38,16 @@ namespace BusinessLogicLayer
 
         public override void BuildCertificate()
         {
-            _svcHost.Credentials.ServiceCertificate.Certificate = new X509Certificate2("Server.pfx");
+            X509Certificate2 severCert = new X509Certificate2("Server.pfx", "", X509KeyStorageFlags.MachineKeySet);
+            _svcHost.Credentials.ServiceCertificate.Certificate = severCert; //new X509Certificate2("Server.pfx");
             X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
+            X509Certificate2 clientCert = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
+
+            // todo: decide if to keep the custome validator
             authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            authentication.CustomCertificateValidator = new GenericDataLayer.CustomCertificateValidator("CN=Mihai-PC", new X509Certificate2("Client.pfx"));
-            _svcHost.Credentials.ClientCertificate.Certificate = new X509Certificate2("Client.pfx");
+            authentication.CustomCertificateValidator = new GenericDataLayer.CustomCertificateValidator("CN=Mihai-PC", clientCert);
+            
+            _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
         }
 
         public override void BuildBinding()

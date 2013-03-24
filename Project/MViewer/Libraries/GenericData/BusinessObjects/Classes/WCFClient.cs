@@ -23,7 +23,7 @@ namespace GenericDataLayer
 
         public override void BuildCertificate()
         {
-            X509Certificate2 certificate = new X509Certificate2("Client.pfx");
+            X509Certificate2 certificate = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
             _client.ClientCredentials.ClientCertificate.Certificate = certificate;
         }
 
