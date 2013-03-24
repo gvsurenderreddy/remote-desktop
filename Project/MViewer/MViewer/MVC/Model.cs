@@ -10,6 +10,7 @@ using System.Data;
 using BusinessLogicLayer;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace MViewer
 {
@@ -130,15 +131,9 @@ namespace MViewer
                 foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
                 {
                     string identity = contact["Identity"].ToString();
-                    try
-                    {
-                        bool isOnline = _clientController.IsContactOnline(identity);
-                        contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online : GenericEnums.ContactStatus.Offline;
-                    }
-                    catch (Exception)
-                    {
-                        contact["Status"] = GenericEnums.ContactStatus.Offline;
-                    }
+                    bool isOnline = _clientController.IsContactOnline(identity);
+                    contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
+                        : GenericEnums.ContactStatus.Offline.ToString();
                 }
             }
             else
@@ -185,15 +180,19 @@ namespace MViewer
                     {
                         ClientController.AddClient(contact.Identity);
                         MViewerClient client2 = ClientController.GetClient(contact.Identity);
-                        bool isOnline = ClientController.IsContactOnline(contact.Identity);
-                        if (isOnline)
+                        Thread t = new Thread(delegate()
                         {
-                            client2.RemoveContact(_identity.MyIdentity);
-                        }
-                        else
-                        {
-                            //todo: create a message queue so that the partner will be notified of removal
-                        }
+                            bool isOnline = ClientController.IsContactOnline(contact.Identity);
+                            if (isOnline)
+                            {
+                                client2.RemoveContact(_identity.MyIdentity);
+                            }
+                            else
+                            {
+                                //todo: create a message queue so that the partner will be notified of removal
+                            }
+                        });
+                        t.Start();
                     }
                     break;
                 case GenericEnums.ContactsOperation.Get:
