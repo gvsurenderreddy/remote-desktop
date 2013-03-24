@@ -92,8 +92,8 @@ namespace MViewer
             mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseUp, Program.Controller.RightMouseUpCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseDown, Program.Controller.MiddleMouseDownCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseUp, Program.Controller.MiddleMouseUpCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.Move, Program.Controller.MoveCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.Wheel, Program.Controller.WheelCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.Move, Program.Controller.MouseMoveCommand);
+            mouseDelegates.Add(GenericEnums.MouseCommandType.Wheel, Program.Controller.MouseWheelCommand);
 
             _remotingCommandHandlers = new ControllerRemotingHandlers()
             {

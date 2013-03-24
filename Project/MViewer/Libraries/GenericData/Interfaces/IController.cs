@@ -48,8 +48,8 @@ namespace GenericDataLayer
         void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args);
         void MiddleClickCommand(object sender, RemotingCommandEventArgs args);
         void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args);
-        void WheelCommand(object sender, RemotingCommandEventArgs args);
-        void MoveCommand(object sender, RemotingCommandEventArgs args);
+        void MouseWheelCommand(object sender, RemotingCommandEventArgs args);
+        void MouseMoveCommand(object sender, RemotingCommandEventArgs args);
         void LeftMouseDownCommand(object sender, RemotingCommandEventArgs args);
         void LeftMouseUpCommand(object sender, RemotingCommandEventArgs args);
         void RightMouseDownCommand(object sender, RemotingCommandEventArgs args);

@@ -65,8 +65,8 @@ namespace MViewer
         //todo: remove click commands if not used
         public void RightClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            Thread t = new Thread(delegate()
-            {
+            //Thread t = new Thread(delegate()
+            //{
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
@@ -75,14 +75,14 @@ namespace MViewer
                 mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
                 
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         public void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            Thread t = new Thread(delegate()
-            {
+            //Thread t = new Thread(delegate()
+            //{
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
@@ -92,14 +92,14 @@ namespace MViewer
                 mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         public void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            Thread t = new Thread(delegate()
-            {
+            //Thread t = new Thread(delegate()
+            //{
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
@@ -109,28 +109,28 @@ namespace MViewer
                 mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         public void MiddleClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            Thread t = new Thread(delegate()
-            {
+            //Thread t = new Thread(delegate()
+            //{
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
                 SetCursorPos((int)x, (int)y);
                 mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         public void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            Thread t = new Thread(delegate()
-            {
+            //Thread t = new Thread(delegate()
+            //{
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
@@ -139,33 +139,40 @@ namespace MViewer
                 mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
                 mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
-        public void WheelCommand(object sender, RemotingCommandEventArgs args)
+        public void MouseWheelCommand(object sender, RemotingCommandEventArgs args)
         {
-            var input = new INPUT
-            {
-                type = (uint)WindowsInput.InputType.MOUSE,
-                U = new InputUnion()
-                {
-                    mi = new MOUSEINPUT()
-                    {
-                        dx = 0,
-                        dy = 0,
-                        dwFlags = MOUSEEVENTF.WHEEL,
-                        mouseData = 0,
-                        dwExtraInfo = UIntPtr.Zero,
-                        time = 0
-                    }
-                }
-            };
-            var toSend = new INPUT[] { input };
-            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
+            int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
+            int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+
+            SetCursorPos((int)x, (int)y);
+            // todo: perform right click
+            mouse_event(MOUSE_WHEEL, x, y, 0, 0);
+
+            //var input = new INPUT
+            //{
+            //    type = (uint)WindowsInput.InputType.MOUSE,
+            //    U = new InputUnion()
+            //    {
+            //        mi = new MOUSEINPUT()
+            //        {
+            //            dx = 0,
+            //            dy = 0,
+            //            dwFlags = MOUSEEVENTF.WHEEL,
+            //            mouseData = 0,
+            //            dwExtraInfo = UIntPtr.Zero,
+            //            time = 0
+            //        }
+            //    }
+            //};
+            //var toSend = new INPUT[] { input };
+            //PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
-        public void MoveCommand(object sender, RemotingCommandEventArgs args)
+        public void MouseMoveCommand(object sender, RemotingCommandEventArgs args)
         {
             //Thread t = new Thread(delegate()
             //{
@@ -184,6 +191,7 @@ namespace MViewer
         private const int MOUSEEVENTF_LEFTUP = 0x04;
         private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
         private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        private const int MOUSE_WHEEL = 0x800;
 
         public void RightMouseDownCommand(object sender, RemotingCommandEventArgs args)
         {
