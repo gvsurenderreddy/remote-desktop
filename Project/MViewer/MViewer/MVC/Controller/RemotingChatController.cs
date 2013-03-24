@@ -43,27 +43,18 @@ namespace MViewer
 
         public void LeftClickCommand(object sender, RemotingCommandEventArgs args)
         {
-            int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-            int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
-            var input = new INPUT
+            Thread t = new Thread(delegate()
             {
-                type = (uint)WindowsInput.InputType.MOUSE,
-                U = new InputUnion()
-                {
-                    mi = new MOUSEINPUT()
-                    {
-                        dx = x,
-                        dy = y,
-                        dwFlags = MOUSEEVENTF.LEFTDOWN,
-                        mouseData = 0,
-                        dwExtraInfo = UIntPtr.Zero,
-                        time = 0
-                    }
-                }
-            };
-            var toSend = new INPUT[] { input };
-            SetCursorPos(x, y);
-            PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+
+                SetCursorPos((int)x, (int)y);
+                //  perform right click
+                mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
+
+            });
+            t.Start();
         }
         //This is a replacement for Cursor.Position in WinForms
         [System.Runtime.InteropServices.DllImport("user32.dll")]
@@ -80,7 +71,8 @@ namespace MViewer
 
                 SetCursorPos((int)x, (int)y);
                 // todo: perform right click
-
+                mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
+                mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
                 
             });
             t.Start();
