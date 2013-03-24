@@ -210,8 +210,8 @@ namespace UIControls
             {
                 HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
 
-                Thread t = new Thread(delegate()
-                {
+                //Thread t = new Thread(delegate()
+                //{
                     double x = 0, y = 0;
                     GetRemotePosition(ref x, ref y, e.X, e.Y);
                     _remotingCommand.Invoke(this,
@@ -222,8 +222,8 @@ namespace UIControls
                            X = x,
                            Y = y
                        });
-                });
-                t.Start();
+                //});
+                //t.Start();
 
                 HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             }

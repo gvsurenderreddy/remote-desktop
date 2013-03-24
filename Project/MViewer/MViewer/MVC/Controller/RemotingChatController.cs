@@ -167,15 +167,15 @@ namespace MViewer
 
         public void MoveCommand(object sender, RemotingCommandEventArgs args)
         {
-            Thread t = new Thread(delegate()
-            {
+            //Thread t = new Thread(delegate()
+            //{
                 int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
                 int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
 
                 SetCursorPos((int)x, (int)y);
 
-            });
-            t.Start();
+            //});
+            //t.Start();
         }
 
         private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
