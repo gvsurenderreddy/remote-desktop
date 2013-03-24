@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 //using System.Threading.Tasks;
 using GenericDataLayer;
+using System.Windows.Forms;
 
 namespace BusinessLogicLayer
 {
@@ -31,18 +32,25 @@ namespace BusinessLogicLayer
 
         public void Construct(Builder builder)
         {
-            if (builder.GetType().Equals(typeof(ClientBuilder)))
+            try
             {
-                builder.BuildBinding();
-                builder.BuildContract();
-                builder.BuildCertificate();
+                if (builder.GetType().Equals(typeof(ClientBuilder)))
+                {
+                    builder.BuildBinding();
+                    builder.BuildContract();
+                    builder.BuildCertificate();
+                }
+                else
+                {
+                    builder.BuildUri();
+                    builder.BuildBehavior();
+                    builder.BuildBinding();
+                    builder.BuildCertificate();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                builder.BuildUri();
-                builder.BuildBehavior();
-                builder.BuildBinding();
-                builder.BuildCertificate();
+                MessageBox.Show(ex.ToString());
             }
         }
     }
