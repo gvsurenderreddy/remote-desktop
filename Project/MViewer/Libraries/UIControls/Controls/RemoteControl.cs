@@ -204,11 +204,12 @@ namespace UIControls
 
         }
 
-
         private new void MouseMove(object sender, MouseEventArgs e)
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+
                 Thread t = new Thread(delegate()
                 {
                     double x = 0, y = 0;
@@ -223,6 +224,8 @@ namespace UIControls
                        });
                 });
                 t.Start();
+
+                HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
             }
         }
 
