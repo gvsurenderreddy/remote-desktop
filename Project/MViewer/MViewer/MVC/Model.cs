@@ -180,12 +180,20 @@ namespace MViewer
                     contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
                     ContactsRepository.RemoveContact(contact.ContactNo);
                     _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                    
+
                     if (e.UpdatedContact.ContactNo != -1)
                     {
                         ClientController.AddClient(contact.Identity);
                         MViewerClient client2 = ClientController.GetClient(contact.Identity);
-                        client2.RemoveContact(_identity.MyIdentity);
+                        bool isOnline = ClientController.IsContactOnline(contact.Identity);
+                        if (isOnline)
+                        {
+                            client2.RemoveContact(_identity.MyIdentity);
+                        }
+                        else
+                        {
+                            //todo: create a message queue so that the partner will be notified of removal
+                        }
                     }
                     break;
                 case GenericEnums.ContactsOperation.Get:

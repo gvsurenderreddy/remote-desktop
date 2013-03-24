@@ -53,8 +53,7 @@ namespace BusinessLogicLayer
         public override void BuildBinding()
         {
             _server.BuildServerBinding();
-            _svcHost.AddServiceEndpoint(typeof(IMViewerService), _server.Binding, "");
-
+            _svcHost.AddServiceEndpoint(typeof(IMViewerService), _server.Binding, _server.HttpURI);
         }
 
         public override void BuildUri()

@@ -229,8 +229,8 @@ namespace GenericDataLayer
         {
             // Add MEX endpoint
 
-            _binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpsBinding();
-            //WSHttpBinding binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpBinding();
+            //_binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpsBinding();
+            _binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpBinding();
 
             _binding.MaxBufferPoolSize = 100000000;
             _binding.ReaderQuotas.MaxArrayLength = 100000000;
@@ -252,10 +252,7 @@ namespace GenericDataLayer
 
             _binding.Name = "binding1";
 
-            // todo : programmatically add global error handler to the WCF 
-
-
-            // Add application endpoint
+            // todo : programmatically add global error handler to the WCF
 
         }
 
@@ -286,6 +283,9 @@ namespace GenericDataLayer
             if (smb == null)
                 smb = new ServiceMetadataBehavior();
             smb.HttpGetEnabled = true;
+            smb.HttpGetUrl = _httpURI;
+
+            // todo: try to set the smb.HttpGetBinding and smb.HttpsGetBinding also
 
             smb.HttpsGetEnabled = true;
             Uri httpsURI = new Uri(_httpsAddress);
