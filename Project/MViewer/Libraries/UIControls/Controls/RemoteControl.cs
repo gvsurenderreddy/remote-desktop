@@ -10,6 +10,7 @@ using Utils;
 using UIControls;
 using GenericDataLayer;
 using CommandHookMonitor;
+using System.Threading;
 
 namespace UIControls
 {
@@ -208,6 +209,7 @@ namespace UIControls
         {
             if (InPictureBoxArea(e.X, e.Y))
             {
+                Thread.Sleep(100);
                 double x = 0, y = 0;
                 GetRemotePosition(ref x, ref y, e.X, e.Y);
                 _remotingCommand.Invoke(this,
