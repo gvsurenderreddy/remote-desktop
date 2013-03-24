@@ -64,7 +64,6 @@
     <Compile Include="KEYBDINPUT.cs" />
     <Compile Include="KeyboardFlag.cs" />
     <Compile Include="MOUSEKEYBDHARDWAREINPUT.cs" />
-    <Compile Include="MouseSimulator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VirtualKeyCode.cs" />
   </ItemGroup>

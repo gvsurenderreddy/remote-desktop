@@ -10,8 +10,6 @@ using BusinessLogicLayer;
 using GenericDataLayer;
 using StrategyPattern;
 using Utils;
-using WindowsInput;
-using WindowsInputSimulator;
 
 namespace MViewer
 {
@@ -152,24 +150,6 @@ namespace MViewer
             // todo: perform right click
             mouse_event(MOUSE_WHEEL, x, y, args.Delta, 0);
 
-            //var input = new INPUT
-            //{
-            //    type = (uint)WindowsInput.InputType.MOUSE,
-            //    U = new InputUnion()
-            //    {
-            //        mi = new MOUSEINPUT()
-            //        {
-            //            dx = 0,
-            //            dy = 0,
-            //            dwFlags = MOUSEEVENTF.WHEEL,
-            //            mouseData = 0,
-            //            dwExtraInfo = UIntPtr.Zero,
-            //            time = 0
-            //        }
-            //    }
-            //};
-            //var toSend = new INPUT[] { input };
-            //PInvoke.SendInput(1, toSend, Marshal.SizeOf(input));
         }
 
         public void MouseMoveCommand(object sender, RemotingCommandEventArgs args)
