@@ -242,7 +242,11 @@ namespace GenericDataLayer
                                 Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
                                 _eventArgs = new VideoCaptureEventArgs();
                                 // resize the image to the required size (the API isn't doing that)
-                                _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, this._width, this._height);
+
+                                // todo: add timestamp to be used for sinchron with audio
+
+                                // todo: resize to lower resolution for bandwidth saving
+                                _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, 50, 50);
 
                                 // raise the capture event
                                 this.ImageCaptured(this, _eventArgs);
