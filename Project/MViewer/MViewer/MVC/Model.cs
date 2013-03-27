@@ -94,7 +94,7 @@ namespace MViewer
                 _clientController.AddClient(identity);
                 _clientController.UpdateFriendlyName(identity, Identity.MyIdentity, newFriendlyName);
 
-                // remove the client only if it doesn't have any active chats
+                // remove the client only if it doesn't have any active s
                 PeerStates peers = SessionManager.GetPeerStatus(identity);
                 if (
                     (peers.AudioSessionState == GenericEnums.SessionState.Closed || peers.AudioSessionState == GenericEnums.SessionState.Undefined)

@@ -126,7 +126,7 @@ namespace MViewer
             }
         }
 
-        public void StopVideChat(object sender, RoomActionEventArgs args)
+        public void StopVide(object sender, RoomActionEventArgs args)
         {
             _syncVideoCaptureActivity.Reset();
 
@@ -191,31 +191,31 @@ namespace MViewer
 
         }
 
-        public void PauseVideoChat(object sender, RoomActionEventArgs args)
+        public void PauseVideo(object sender, RoomActionEventArgs args)
         {
             _syncVideoCaptureActivity.Reset();
 
-            // use the peer status of the selected chatroom
+            // use the peer status of the selected room
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
-            peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video chat
+            peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video 
 
             _syncVideoCaptureActivity.Set();
 
         }
 
-        public void ResumeVideoChat(object sender, RoomActionEventArgs args)
+        public void ResumeVideo(object sender, RoomActionEventArgs args)
         {
             _syncVideoCaptureActivity.Reset();
 
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
-            peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video chat
+            peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video 
 
             _syncVideoCaptureActivity.Set();
 
         }
 
         // todo: convert this to an event handler , use it in the Webcam Form as observer
-        public void StartVideoChat(WebcamCapture webcamControl)
+        public void StartVideo(WebcamCapture webcamControl)
         {
             // create Presenter and start the presentation
             // initialize the presenter that will send webcam captures to all Server Sessions
@@ -225,9 +225,9 @@ namespace MViewer
 
         }
 
-        public void StartVideoChat(object sender, RoomActionEventArgs args)
+        public void StartVideo(object sender, RoomActionEventArgs args)
         {
-            // open new Video Chat form to receive the captures
+            // open new Video  form to receive the captures
             OpenVideoForm(args.Identity);
 
             // I am going to send my captures by using the below client
@@ -276,7 +276,7 @@ namespace MViewer
                 }
             }
 
-            // check the videochat status before displaying the picture
+            // check the video status before displaying the picture
             if (peer.VideoSessionState == GenericEnums.SessionState.Opened)
             {
                 _view.RoomManager.ShowVideoCapture(args.Identity, args.CapturedImage);
@@ -306,7 +306,7 @@ namespace MViewer
                     //IntPtr handle = IntPtr.Zero;
                     FormVideoRoom videoRoom = new FormVideoRoom(identity);
                     _view.RoomManager.AddRoom(identity, videoRoom);
-                    // initialize new video chat form
+                    // initialize new video  form
                     Thread.Sleep(1000);
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
@@ -316,7 +316,7 @@ namespace MViewer
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
                     _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
-                    // finally, show the video chat form where we'll see the webcam captures
+                    // finally, show the video  form where we'll see the webcam captures
                     _view.RoomManager.ShowRoom(identity);
 
                 }

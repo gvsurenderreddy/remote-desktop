@@ -133,9 +133,9 @@ namespace MViewer
                 }
                 else
                 {
-                    if (this._threadWebcaptureForm == null) // first time when the video chat is starting
+                    if (this._threadWebcaptureForm == null) // first time when the video  is starting
                     {
-                        // open my webcam form if no video chat was previously started
+                        // open my webcam form if no video  was previously started
                         _threadWebcaptureForm = new Thread(delegate()
                         {
                             _formWebCapture = new FormMyWebcam();
@@ -231,10 +231,10 @@ namespace MViewer
             }
             else
             {
-                // perform specified action against the active chat room
+                // perform specified action against the active  room
                 args.Identity = activeRoom;
             }
-            if (args != null) // check if there is a selected contact or active chat room
+            if (args != null) // check if there is a selected contact or active  room
             {
                 Program.Controller.RoomButtonAction(sender, args);
             }
@@ -271,7 +271,7 @@ namespace MViewer
             if (videoRoomsActive || remotingRoomsActive || audioRoomsActive)
             {
                 DialogResult result = MessageBox.Show(_formMain,
-                    "Close all active chats?", 
+                    "Close all active s?", 
                     "Exit confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (result != DialogResult.Yes)
                 {

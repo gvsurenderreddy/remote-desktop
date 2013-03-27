@@ -262,7 +262,7 @@ namespace MViewer
             _model.ClientController.SendRemotingCommand(_view.RoomManager.ActiveRoom, args);
         }
 
-        public void StartRemotingChat(object sender, RoomActionEventArgs args)
+        public void StartRemoting(object sender, RoomActionEventArgs args)
         {
             _syncRemotingCaptureActivity.Reset();
 
@@ -281,7 +281,7 @@ namespace MViewer
             _syncRemotingCaptureActivity.Set();
         }
 
-        public void StopRemotingChat(object sender, RoomActionEventArgs args)
+        public void StopRemoting(object sender, RoomActionEventArgs args)
         {
             _syncRemotingCaptureActivity.Reset();
 
@@ -324,16 +324,16 @@ namespace MViewer
             _syncRemotingCaptureActivity.Set();
         }
 
-        public void ResumeRemotingChat(object sender, RoomActionEventArgs args)
+        public void ResumeRemoting(object sender, RoomActionEventArgs args)
         {
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.RemotingSessionState = GenericEnums.SessionState.Opened; // resume the remoting
 
         }
 
-        public void PauseRemotingChat(object sender, RoomActionEventArgs args)
+        public void PauseRemoting(object sender, RoomActionEventArgs args)
         {
-            // use the peer status of the selected chatroom
+            // use the peer status of the selected room
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.RemotingSessionState = GenericEnums.SessionState.Paused; // pause the remoting
 
@@ -416,7 +416,7 @@ namespace MViewer
                     FormRemotingRoom remotingRoom = new FormRemotingRoom(identity);
                     _view.RoomManager.AddRoom(identity, remotingRoom);
                     remotingRoom.BindCommandHandlers(SystemConfiguration.Instance.RemotingCommand);
-                    // initialize new remoting chat form
+                    // initialize new remoting  form
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
@@ -431,7 +431,7 @@ namespace MViewer
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.RemotingSessionState = GenericEnums.SessionState.Opened;
 
-                    // finally, show the video chat form where we'll see the webcam captures
+                    // finally, show the video  form where we'll see the webcam captures
                     _view.RoomManager.ShowRoom(identity);
                 }
                 );
@@ -462,7 +462,7 @@ namespace MViewer
                 }
             }
 
-            // check the videochat status before displaying the picture
+            // check the video status before displaying the picture
             if (peer.RemotingSessionState == GenericEnums.SessionState.Opened)
             {
                 //display the remoting capture in the opened form

@@ -110,7 +110,7 @@ namespace MViewer
         {
             _formClosing = true;
 
-            // todo: later - perform other specific actions when the remoting Chat room is closing
+            // todo: later - perform other specific actions when the remoting  room is closing
             _syncClosing.Set();
         }
 

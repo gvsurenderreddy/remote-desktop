@@ -13,15 +13,15 @@ namespace GenericDataLayer
         void StartApplication();
         void StopApplication();
 
-        void StartVideoChat(object sender, RoomActionEventArgs args);
-        void StopVideChat(object sender, RoomActionEventArgs args);
-        void PauseVideoChat(object sender, RoomActionEventArgs args);
-        void ResumeVideoChat(object sender, RoomActionEventArgs args);
+        void StartVideo(object sender, RoomActionEventArgs args);
+        void StopVide(object sender, RoomActionEventArgs args);
+        void PauseVideo(object sender, RoomActionEventArgs args);
+        void ResumeVideo(object sender, RoomActionEventArgs args);
         void SendFileHandler(object sender, RoomActionEventArgs args);
-        void StopRemotingChat(object sender, RoomActionEventArgs args);
-        void StartRemotingChat(object sender, RoomActionEventArgs args);
-        void PauseRemotingChat(object sender, RoomActionEventArgs args);
-        void ResumeRemotingChat(object sender, RoomActionEventArgs args);
+        void StopRemoting(object sender, RoomActionEventArgs args);
+        void StartRemoting(object sender, RoomActionEventArgs args);
+        void PauseRemoting(object sender, RoomActionEventArgs args);
+        void ResumeRemoting(object sender, RoomActionEventArgs args);
 
         void SendRemotingCommand(object sender, RemotingCommandEventArgs args);
         void ExecuteRemotingCommand(object sender, EventArgs e);
@@ -29,7 +29,7 @@ namespace GenericDataLayer
         void IdentityObserver(object sender, IdentityEventArgs e);
         void RoomButtonAction(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
-        void StartVideoChat(WebcamCapture webcamControl);
+        void StartVideo(WebcamCapture webcamControl);
         void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
 
         string MyIdentity();

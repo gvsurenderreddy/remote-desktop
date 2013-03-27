@@ -8,26 +8,26 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public class VideoChatCommands : RoomCommandBase
+    public class VideoCommands : RoomCommandBase
     {
-        public Delegates.RoomCommandDelegate StartVideoChat;
-        public Delegates.RoomCommandDelegate StopVideChat;
-        public Delegates.RoomCommandDelegate PauseVideoChat;
-        public Delegates.RoomCommandDelegate ResumeVideoChat;
+        public Delegates.RoomCommandDelegate StartVideo;
+        public Delegates.RoomCommandDelegate StopVide;
+        public Delegates.RoomCommandDelegate PauseVideo;
+        public Delegates.RoomCommandDelegate ResumeVideo;
 
 
         // todo: move these to audio class
-        public Delegates.RoomCommandDelegate StartAudioChat;
-        public Delegates.RoomCommandDelegate StopAudioChat;
+        public Delegates.RoomCommandDelegate StartAudio;
+        public Delegates.RoomCommandDelegate StopAudio;
 
 
         public override void BindCommands()
         {
             _commands = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            _commands.Add(GenericEnums.SignalType.Start, StartVideoChat);
-            _commands.Add(GenericEnums.SignalType.Stop, StopVideChat);
-            _commands.Add(GenericEnums.SignalType.Pause, PauseVideoChat);
-            _commands.Add(GenericEnums.SignalType.Resume, ResumeVideoChat);
+            _commands.Add(GenericEnums.SignalType.Start, StartVideo);
+            _commands.Add(GenericEnums.SignalType.Stop, StopVide);
+            _commands.Add(GenericEnums.SignalType.Pause, PauseVideo);
+            _commands.Add(GenericEnums.SignalType.Resume, ResumeVideo);
         }
     }
 }

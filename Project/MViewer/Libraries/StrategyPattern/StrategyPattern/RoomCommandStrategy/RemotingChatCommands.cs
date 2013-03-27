@@ -8,7 +8,7 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public class RemotingChatCommands : RoomCommandBase
+    public class RemotingCommands : RoomCommandBase
     {
         public Delegates.RoomCommandDelegate StartRemoting;
         public Delegates.RoomCommandDelegate StopRemoting;

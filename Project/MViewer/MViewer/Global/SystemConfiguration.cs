@@ -18,7 +18,7 @@ namespace MViewer
 
         private PresenterSettings _presenterSettings;
 
-        ControllerRoomHandlers _chatRoomHandlers;
+        ControllerRoomHandlers _RoomHandlers;
         ControllerRemotingHandlers _remotingCommandHandlers;
 
         Delegates.HookCommandDelegate _remotingCommandInvoker;
@@ -49,21 +49,21 @@ namespace MViewer
 
             // handlers initialization 
             Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideoChat);
-            videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideChat);
-            videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideoChat);
-            videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideoChat);
+            videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideo);
+            videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVide);
+            videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideo);
+            videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideo);
 
             Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             transferDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.SendFileHandler);
 
             Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            remotingDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartRemotingChat);
-            remotingDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopRemotingChat);
-            remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemotingChat);
-            remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemotingChat);
+            remotingDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartRemoting);
+            remotingDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopRemoting);
+            remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemoting);
+            remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemoting);
 
-            _chatRoomHandlers = new ControllerRoomHandlers()
+            _RoomHandlers = new ControllerRoomHandlers()
             {
                 // todo: add audio & remoting handlers handlers by signal type
                 Video = videoDelegates,
@@ -119,9 +119,9 @@ namespace MViewer
             set { _remotingCommandInvoker = value; }
         }
 
-        public ControllerRoomHandlers ChatRoomHandlers
+        public ControllerRoomHandlers RoomHandlers
         {
-            get { return _chatRoomHandlers; }
+            get { return _RoomHandlers; }
         }
 
         public PresenterSettings PresenterSettings

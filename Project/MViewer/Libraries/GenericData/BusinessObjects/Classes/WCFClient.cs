@@ -39,7 +39,7 @@ namespace GenericDataLayer
             CreateServerBinding();
             _client = new MViewerClient(_binding, _endpoint);
             _client.Endpoint.Binding = _binding; 
-            _client.Endpoint.Binding.Name = "binding1_IVideoChatRoom";
+            _client.Endpoint.Binding.Name = "binding1_IVideoRoom";
             //_client.Endpoint.Contract = contract; 
             
         }
@@ -82,7 +82,7 @@ namespace GenericDataLayer
             _binding.Security.Message.EstablishSecurityContext = false;
             _binding.Security.Message.NegotiateServiceCredential = false;
 
-            _binding.Name = "binding1_IVideoChatRoom";
+            _binding.Name = "binding1_IVideoRoom";
 
             _binding.ReliableSession.Ordered = true;
             _binding.ReliableSession.InactivityTimeout = TimeSpan.FromMinutes(10);

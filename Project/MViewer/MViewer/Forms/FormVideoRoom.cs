@@ -60,7 +60,7 @@ namespace MViewer
         {
             _formClosing = true;
 
-            // todo: later - perform other specific actions when the Video Chat room is closing
+            // todo: later - perform other specific actions when the Video  room is closing
             _syncClosing.Set();
         }
 

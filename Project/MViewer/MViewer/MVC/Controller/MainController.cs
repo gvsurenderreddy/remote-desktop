@@ -43,7 +43,7 @@ namespace MViewer
 
         public void InitializeSettings()
         {
-            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.ChatRoomHandlers);
+            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
             _commandInvoker = new HookCommandInvoker(SystemConfiguration.Instance.RemotingCommandHandlers);
 
             ControllerEventHandlers handlers = new ControllerEventHandlers()
@@ -136,7 +136,7 @@ namespace MViewer
         {
             // todo: update the StopApplication method with other actions
 
-            // check for running video/audio/remoting chats
+            // check for running video/audio/remoting s
             bool canExit = _view.ExitConfirmation();
             if (canExit)
             {
@@ -144,7 +144,7 @@ namespace MViewer
                 IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                 foreach (string identity in partnerIdentities)
                 {
-                    StopVideChat(this, new RoomActionEventArgs()
+                    StopVide(this, new RoomActionEventArgs()
                         {
                             Identity = identity,
                             RoomType = GenericEnums.RoomType.Video,
@@ -164,7 +164,7 @@ namespace MViewer
 
                 _model.ServerController.StopServer();
 
-                // notify all contacts that you exited the chat
+                // notify all contacts that you exited the 
                 _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
 
                 // exit the environment

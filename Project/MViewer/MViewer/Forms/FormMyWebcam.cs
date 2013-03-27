@@ -35,7 +35,7 @@ namespace MViewer
             InitializeComponent();
             _webcamCapture = new WebcamCapture(SystemConfiguration.Instance.TimerInterval, this.Handle.ToInt32());
             _webcamCapture.ParentForm = this;
-            Program.Controller.StartVideoChat(_webcamCapture);
+            Program.Controller.StartVideo(_webcamCapture);
 
         }
 
@@ -76,7 +76,7 @@ namespace MViewer
             {
                 _webcamCapture = new WebcamCapture(SystemConfiguration.Instance.TimerInterval, this.Handle.ToInt32());
             }
-            Program.Controller.StartVideoChat(_webcamCapture);
+            Program.Controller.StartVideo(_webcamCapture);
         }
 
         #endregion

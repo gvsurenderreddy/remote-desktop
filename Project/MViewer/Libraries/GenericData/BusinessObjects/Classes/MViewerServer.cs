@@ -273,7 +273,7 @@ namespace GenericDataLayer
             behavior.IncludeExceptionDetailInFaults = true;
             behavior.AutomaticSessionShutdown = true;
             behavior.ConcurrencyMode = ConcurrencyMode.Multiple;
-            behavior.Name = "MetadataExchangeHttpsBinding_IVideoChatRoom";
+            behavior.Name = "MetadataExchangeHttpsBinding_IVideoRoom";
 
             behavior.AddressFilterMode = AddressFilterMode.Any;
 
