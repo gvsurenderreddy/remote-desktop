@@ -38,7 +38,6 @@ namespace WindowsInput
                     case Keys.Tab:
                     virtualKeyCode = VirtualKeyCode.TAB;
                     break;
-
                 //case Keys.LineFeed:
                 //    virtualKeyCode = VirtualKeyCode.LineFeed;
                     break;
@@ -63,551 +62,456 @@ namespace WindowsInput
                     case Keys.Pause:
                     virtualKeyCode = VirtualKeyCode.PAUSE;
                     break;
-      
-        //
-        // Summary:
-        //     The CAPS LOCK key.
-        CapsLock = 20,
-        //
-        // Summary:
-        //     The CAPS LOCK key.
-        Capital = 20,
-        //
-        // Summary:
-        //     The IME Kana mode key.
-        KanaMode = 21,
-        //
-        // Summary:
-        //     The IME Hanguel mode key. (maintained for compatibility; use HangulMode)
-        HanguelMode = 21,
-        //
-        // Summary:
-        //     The IME Hangul mode key.
-        HangulMode = 21,
-        //
-        // Summary:
-        //     The IME Junja mode key.
-        JunjaMode = 23,
-        //
-        // Summary:
-        //     The IME final mode key.
-        FinalMode = 24,
-        //
-        // Summary:
-        //     The IME Kanji mode key.
-        KanjiMode = 25,
-        //
-        // Summary:
-        //     The IME Hanja mode key.
-        HanjaMode = 25,
-        //
-        // Summary:
-        //     The ESC key.
-        Escape = 27,
-        //
-        // Summary:
-        //     The IME convert key.
-        IMEConvert = 28,
-        //
-        // Summary:
-        //     The IME nonconvert key.
-        IMENonconvert = 29,
-        //
-        // Summary:
-        //     The IME accept key. Obsolete, use System.Windows.Forms.Keys.IMEAccept instead.
-        IMEAceept = 30,
-        //
-        // Summary:
-        //     The IME accept key, replaces System.Windows.Forms.Keys.IMEAceept.
-        IMEAccept = 30,
-        //
-        // Summary:
-        //     The IME mode change key.
-        IMEModeChange = 31,
-        //
-        // Summary:
-        //     The SPACEBAR key.
-        Space = 32,
-        //
-        // Summary:
-        //     The PAGE UP key.
-        Prior = 33,
-        //
-        // Summary:
-        //     The PAGE UP key.
-        PageUp = 33,
-        //
-        // Summary:
-        //     The PAGE DOWN key.
-        Next = 34,
-        //
-        // Summary:
-        //     The PAGE DOWN key.
-        PageDown = 34,
-        //
-        // Summary:
-        //     The END key.
-        End = 35,
-        //
-        // Summary:
-        //     The HOME key.
-        Home = 36,
-        //
-        // Summary:
-        //     The LEFT ARROW key.
-        Left = 37,
-        //
-        // Summary:
-        //     The UP ARROW key.
-        Up = 38,
-        //
-        // Summary:
-        //     The RIGHT ARROW key.
-        Right = 39,
-        //
-        // Summary:
-        //     The DOWN ARROW key.
-        Down = 40,
-        //
-        // Summary:
-        //     The SELECT key.
-        Select = 41,
-        //
-        // Summary:
-        //     The PRINT key.
-        Print = 42,
-        //
-        // Summary:
-        //     The EXECUTE key.
-        Execute = 43,
-        //
-        // Summary:
-        //     The PRINT SCREEN key.
-        PrintScreen = 44,
-        //
-        // Summary:
-        //     The PRINT SCREEN key.
-        Snapshot = 44,
-        //
-        // Summary:
-        //     The INS key.
-        Insert = 45,
-        //
-        // Summary:
-        //     The DEL key.
-        Delete = 46,
-        //
-        // Summary:
-        //     The HELP key.
-        Help = 47,
-        //
-        // Summary:
-        //     The 0 key.
-        D0 = 48,
-        //
-        // Summary:
-        //     The 1 key.
-        D1 = 49,
-        //
-        // Summary:
-        //     The 2 key.
-        D2 = 50,
-        //
-        // Summary:
-        //     The 3 key.
-        D3 = 51,
-        //
-        // Summary:
-        //     The 4 key.
-        D4 = 52,
-        //
-        // Summary:
-        //     The 5 key.
-        D5 = 53,
-        //
-        // Summary:
-        //     The 6 key.
-        D6 = 54,
-        //
-        // Summary:
-        //     The 7 key.
-        D7 = 55,
-        //
-        // Summary:
-        //     The 8 key.
-        D8 = 56,
-        //
-        // Summary:
-        //     The 9 key.
-        D9 = 57,
-        //
-        // Summary:
-        //     The A key.
-        A = 65,
-        //
-        // Summary:
-        //     The B key.
-        B = 66,
-        //
-        // Summary:
-        //     The C key.
-        C = 67,
-        //
-        // Summary:
-        //     The D key.
-        D = 68,
-        //
-        // Summary:
-        //     The E key.
-        E = 69,
-        //
-        // Summary:
-        //     The F key.
-        F = 70,
-        //
-        // Summary:
-        //     The G key.
-        G = 71,
-        //
-        // Summary:
-        //     The H key.
-        H = 72,
-        //
-        // Summary:
-        //     The I key.
-        I = 73,
-        //
-        // Summary:
-        //     The J key.
-        J = 74,
-        //
-        // Summary:
-        //     The K key.
-        K = 75,
-        //
-        // Summary:
-        //     The L key.
-        L = 76,
-        //
-        // Summary:
-        //     The M key.
-        M = 77,
-        //
-        // Summary:
-        //     The N key.
-        N = 78,
-        //
-        // Summary:
-        //     The O key.
-        O = 79,
-        //
-        // Summary:
-        //     The P key.
-        P = 80,
-        //
-        // Summary:
-        //     The Q key.
-        Q = 81,
-        //
-        // Summary:
-        //     The R key.
-        R = 82,
-        //
-        // Summary:
-        //     The S key.
-        S = 83,
-        //
-        // Summary:
-        //     The T key.
-        T = 84,
-        //
-        // Summary:
-        //     The U key.
-        U = 85,
-        //
-        // Summary:
-        //     The V key.
-        V = 86,
-        //
-        // Summary:
-        //     The W key.
-        W = 87,
-        //
-        // Summary:
-        //     The X key.
-        X = 88,
-        //
-        // Summary:
-        //     The Y key.
-        Y = 89,
-        //
-        // Summary:
-        //     The Z key.
-        Z = 90,
-        //
-        // Summary:
-        //     The left Windows logo key (Microsoft Natural Keyboard).
-        LWin = 91,
-        //
-        // Summary:
-        //     The right Windows logo key (Microsoft Natural Keyboard).
-        RWin = 92,
-        //
-        // Summary:
-        //     The application key (Microsoft Natural Keyboard).
-        Apps = 93,
-        //
-        // Summary:
-        //     The computer sleep key.
-        Sleep = 95,
-        //
-        // Summary:
-        //     The 0 key on the numeric keypad.
-        NumPad0 = 96,
-        //
-        // Summary:
-        //     The 1 key on the numeric keypad.
-        NumPad1 = 97,
-        //
-        // Summary:
-        //     The 2 key on the numeric keypad.
-        NumPad2 = 98,
-        //
-        // Summary:
-        //     The 3 key on the numeric keypad.
-        NumPad3 = 99,
-        //
-        // Summary:
-        //     The 4 key on the numeric keypad.
-        NumPad4 = 100,
-        //
-        // Summary:
-        //     The 5 key on the numeric keypad.
-        NumPad5 = 101,
-        //
-        // Summary:
-        //     The 6 key on the numeric keypad.
-        NumPad6 = 102,
-        //
-        // Summary:
-        //     The 7 key on the numeric keypad.
-        NumPad7 = 103,
-        //
-        // Summary:
-        //     The 8 key on the numeric keypad.
-        NumPad8 = 104,
-        //
-        // Summary:
-        //     The 9 key on the numeric keypad.
-        NumPad9 = 105,
-        //
-        // Summary:
-        //     The multiply key.
-        Multiply = 106,
-        //
-        // Summary:
-        //     The add key.
-        Add = 107,
-        //
-        // Summary:
-        //     The separator key.
-        Separator = 108,
-        //
-        // Summary:
-        //     The subtract key.
-        Subtract = 109,
-        //
-        // Summary:
-        //     The decimal key.
-        Decimal = 110,
-        //
-        // Summary:
-        //     The divide key.
-        Divide = 111,
-        //
-        // Summary:
-        //     The F1 key.
-        F1 = 112,
-        //
-        // Summary:
-        //     The F2 key.
-        F2 = 113,
-        //
-        // Summary:
-        //     The F3 key.
-        F3 = 114,
-        //
-        // Summary:
-        //     The F4 key.
-        F4 = 115,
-        //
-        // Summary:
-        //     The F5 key.
-        F5 = 116,
-        //
-        // Summary:
-        //     The F6 key.
-        F6 = 117,
-        //
-        // Summary:
-        //     The F7 key.
-        F7 = 118,
-        //
-        // Summary:
-        //     The F8 key.
-        F8 = 119,
-        //
-        // Summary:
-        //     The F9 key.
-        F9 = 120,
-        //
-        // Summary:
-        //     The F10 key.
-        F10 = 121,
-        //
-        // Summary:
-        //     The F11 key.
-        F11 = 122,
-        //
-        // Summary:
-        //     The F12 key.
-        F12 = 123,
-        //
-        // Summary:
-        //     The F13 key.
-        F13 = 124,
-        //
-        // Summary:
-        //     The F14 key.
-        F14 = 125,
-        //
-        // Summary:
-        //     The F15 key.
-        F15 = 126,
-        //
-        // Summary:
-        //     The F16 key.
-        F16 = 127,
-        //
-        // Summary:
-        //     The F17 key.
-        F17 = 128,
-        //
-        // Summary:
-        //     The F18 key.
-        F18 = 129,
-        //
-        // Summary:
-        //     The F19 key.
-        F19 = 130,
-        //
-        // Summary:
-        //     The F20 key.
-        F20 = 131,
-        //
-        // Summary:
-        //     The F21 key.
-        F21 = 132,
-        //
-        // Summary:
-        //     The F22 key.
-        F22 = 133,
-        //
-        // Summary:
-        //     The F23 key.
-        F23 = 134,
-        //
-        // Summary:
-        //     The F24 key.
-        F24 = 135,
-        //
-        // Summary:
-        //     The NUM LOCK key.
-        NumLock = 144,
-        //
-        // Summary:
-        //     The SCROLL LOCK key.
-        Scroll = 145,
-        //
-        // Summary:
-        //     The left SHIFT key.
-        LShiftKey = 160,
-        //
-        // Summary:
-        //     The right SHIFT key.
-        RShiftKey = 161,
-        //
-        // Summary:
-        //     The left CTRL key.
-        LControlKey = 162,
-        //
-        // Summary:
-        //     The right CTRL key.
-        RControlKey = 163,
-        //
-        // Summary:
-        //     The left ALT key.
-        LMenu = 164,
-        //
-        // Summary:
-        //     The right ALT key.
-        RMenu = 165,
-        //
-        // Summary:
-        //     The browser back key (Windows 2000 or later).
-        BrowserBack = 166,
-        //
-        // Summary:
-        //     The browser forward key (Windows 2000 or later).
-        BrowserForward = 167,
-        //
-        // Summary:
-        //     The browser refresh key (Windows 2000 or later).
-        BrowserRefresh = 168,
-        //
-        // Summary:
-        //     The browser stop key (Windows 2000 or later).
-        BrowserStop = 169,
-        //
-        // Summary:
-        //     The browser search key (Windows 2000 or later).
-        BrowserSearch = 170,
-        //
-        // Summary:
-        //     The browser favorites key (Windows 2000 or later).
-        BrowserFavorites = 171,
-        //
-        // Summary:
-        //     The browser home key (Windows 2000 or later).
-        BrowserHome = 172,
-        //
-        // Summary:
-        //     The volume mute key (Windows 2000 or later).
-        VolumeMute = 173,
-        //
-        // Summary:
-        //     The volume down key (Windows 2000 or later).
-        VolumeDown = 174,
-        //
-        // Summary:
-        //     The volume up key (Windows 2000 or later).
-        VolumeUp = 175,
-        //
-        // Summary:
-        //     The media next track key (Windows 2000 or later).
-        MediaNextTrack = 176,
-        //
-        // Summary:
-        //     The media previous track key (Windows 2000 or later).
-        MediaPreviousTrack = 177,
-        //
-        // Summary:
-        //     The media Stop key (Windows 2000 or later).
-        MediaStop = 178,
-        //
-        // Summary:
-        //     The media play pause key (Windows 2000 or later).
-        MediaPlayPause = 179,
+                    case Keys.CapsLock:
+                    virtualKeyCode = VirtualKeyCode.CapsLock;
+                    break;
+                case Keys.KanaMode:
+                    virtualKeyCode = VirtualKeyCode.KanaMode;
+                    break;
+                    case Keys.HanguelMode:
+                    virtualKeyCode = VirtualKeyCode.HANGEUL;
+                    break;
+                    case Keys.HangulMode:
+                    virtualKeyCode = VirtualKeyCode.HANGUL;
+                    break;
+                    case Keys.JunjaMode:
+                    virtualKeyCode = VirtualKeyCode.JUNJA;
+                    break;
+                    case Keys.FinalMode:
+                    virtualKeyCode = VirtualKeyCode.FINAL;
+                    break;
+                    case Keys.KanjiMode:
+                    virtualKeyCode = VirtualKeyCode.KANJI;
+                    break;
+                    case Keys.HanjaMode:
+                    virtualKeyCode = VirtualKeyCode.HANJA;
+                    break;
+                case Keys.Escape:
+                    virtualKeyCode = VirtualKeyCode.ESCAPE;
+                    break;
+                    case Keys.IMEConvert:
+                    virtualKeyCode = VirtualKeyCode.CONVERT;
+                    break;
+                    case Keys.IMENonconvert:
+                    virtualKeyCode = VirtualKeyCode.NONCONVERT;
+                    break;
+                    case Keys.IMEAccept:
+                    virtualKeyCode = VirtualKeyCode.ACCEPT;
+                    break;
+                    case Keys.IMEModeChange:
+                    virtualKeyCode = VirtualKeyCode.MODECHANGE;
+                    break;
+                    case Keys.Space:
+                    virtualKeyCode = VirtualKeyCode.SPACE;
+                    break;
+                    //case Keys.Prior:
+                    //virtualKeyCode = VirtualKeyCode.PageUp;
+                    //break;
+                    case Keys.PageUp:
+                    virtualKeyCode = VirtualKeyCode.PageUp;
+                    break;
+                    //case Keys.Next:
+                    //virtualKeyCode = VirtualKeyCode.PageDOWN;
+                    //break;
+                    case Keys.PageDown:
+                    virtualKeyCode = VirtualKeyCode.PageDOWN;
+                    break;
+                    case Keys.End:
+                    virtualKeyCode = VirtualKeyCode.END;
+                    break;
+                    case Keys.Home:
+                    virtualKeyCode = VirtualKeyCode.HOME;
+                    break;
+                    case Keys.Left:
+                    virtualKeyCode = VirtualKeyCode.LEFT;
+                    break;
+                    case Keys.Up:
+                    virtualKeyCode = VirtualKeyCode.UP;
+                    break;
+                    case Keys.Right:
+                    virtualKeyCode = VirtualKeyCode.RIGHT;
+                    break;
+                    case Keys.Down:
+                    virtualKeyCode = VirtualKeyCode.DOWN;
+                    break;
+                    case Keys.Select:
+                    virtualKeyCode = VirtualKeyCode.SELECT;
+                    break;
+                    case Keys.Print:
+                    virtualKeyCode = VirtualKeyCode.PRINT;
+                    break;
+                    case Keys.Execute:
+                    virtualKeyCode = VirtualKeyCode.EXECUTE;
+                    break;
+                    case Keys.Snapshot:
+                    virtualKeyCode = VirtualKeyCode.SNAPSHOT;
+                    break;
+
+
+                case Keys.Insert:
+                    virtualKeyCode = VirtualKeyCode.INSERT;
+                    break;
+                    case Keys.Delete:
+                    virtualKeyCode = VirtualKeyCode.DELETE;
+                    break;
+                    case Keys.Help:
+                    virtualKeyCode = VirtualKeyCode.HELP;
+                    break;
+                    case Keys.D0:
+                    virtualKeyCode = VirtualKeyCode.VK_0;
+                    break;
+                    case Keys.D1:
+                    virtualKeyCode = VirtualKeyCode.VK_1;
+                    break;
+                    case Keys.D2:
+                    virtualKeyCode = VirtualKeyCode.VK_2;
+                    break;
+                    case Keys.D3:
+                    virtualKeyCode = VirtualKeyCode.VK_3;
+                    break;
+                    case Keys.D4:
+                    virtualKeyCode = VirtualKeyCode.VK_4;
+                    break;
+                    case Keys.D5:
+                    virtualKeyCode = VirtualKeyCode.VK_5;
+                    break;
+                    case Keys.D6:
+                    virtualKeyCode = VirtualKeyCode.VK_6;
+                    break;
+                    case Keys.D7:
+                    virtualKeyCode = VirtualKeyCode.VK_7;
+                    break;
+                    case Keys.D8:
+                    virtualKeyCode = VirtualKeyCode.VK_8;
+                    break;
+                    case Keys.D9:
+                    virtualKeyCode = VirtualKeyCode.VK_9;
+                    break;
+                    case Keys.A:
+                    virtualKeyCode = VirtualKeyCode.VK_A;
+                    break;
+                    case Keys.B:
+                    virtualKeyCode = VirtualKeyCode.VK_B;
+                    break;
+                    case Keys.C:
+                    virtualKeyCode = VirtualKeyCode.VK_C;
+                    break;
+                    case Keys.D:
+                    virtualKeyCode = VirtualKeyCode.VK_D;
+                    break;
+                    case Keys.E:
+                    virtualKeyCode = VirtualKeyCode.VK_E;
+                    break;
+                    case Keys.F:
+                    virtualKeyCode = VirtualKeyCode.VK_F;
+                    break;
+                    case Keys.G:
+                    virtualKeyCode = VirtualKeyCode.VK_G;
+                    break;
+                    case Keys.H:
+                    virtualKeyCode = VirtualKeyCode.VK_H;
+                    break;
+                    case Keys.I:
+                    virtualKeyCode = VirtualKeyCode.VK_I;
+                    break;
+                    case Keys.J:
+                    virtualKeyCode = VirtualKeyCode.VK_J;
+                    break;
+                    case Keys.K:
+                    virtualKeyCode = VirtualKeyCode.VK_K;
+                    break;
+                    case Keys.L:
+                    virtualKeyCode = VirtualKeyCode.VK_L;
+                    break;
+                    case Keys.M:
+                    virtualKeyCode = VirtualKeyCode.VK_M;
+                    break;
+                    case Keys.N:
+                    virtualKeyCode = VirtualKeyCode.VK_N;
+                    break;
+                    case Keys.O:
+                    virtualKeyCode = VirtualKeyCode.VK_O;
+                    break;
+                    case Keys.P:
+                    virtualKeyCode = VirtualKeyCode.VK_P;
+                    break;
+                    case Keys.Q:
+                    virtualKeyCode = VirtualKeyCode.VK_Q;
+                    break;
+                    case Keys.R:
+                    virtualKeyCode = VirtualKeyCode.VK_R;
+                    break;
+                     case Keys.S:
+                    virtualKeyCode = VirtualKeyCode.VK_S;
+                    break;
+                    case Keys.T:
+                    virtualKeyCode = VirtualKeyCode.VK_T;
+                    break;
+                    case Keys.U:
+                    virtualKeyCode = VirtualKeyCode.VK_U;
+                    break;
+                    case Keys.V:
+                    virtualKeyCode = VirtualKeyCode.VK_V;
+                    break;
+                    case Keys.W:
+                    virtualKeyCode = VirtualKeyCode.VK_W;
+                    break;
+                    case Keys.X:
+                    virtualKeyCode = VirtualKeyCode.VK_X;
+                    break;
+                    case Keys.Y:
+                    virtualKeyCode = VirtualKeyCode.VK_Y;
+                    break;
+                    case Keys.Z:
+                    virtualKeyCode = VirtualKeyCode.VK_Z;
+                    break;
+                    case Keys.LWin:
+                    virtualKeyCode = VirtualKeyCode.LWIN;
+                    break;
+                    case Keys.RWin:
+                    virtualKeyCode = VirtualKeyCode.RWIN;
+                    break;
+                    case Keys.Apps:
+                    virtualKeyCode = VirtualKeyCode.APPS;
+                    break;
+                    case Keys.Sleep:
+                    virtualKeyCode = VirtualKeyCode.SLEEP;
+                    break;
+                    case Keys.NumPad0:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD0;
+                    break;
+                    case Keys.NumPad1:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD1;
+                    break;
+                    case Keys.NumPad2:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD2;
+                    break;
+                    case Keys.NumPad3:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD3;
+                    break;
+                    case Keys.NumPad4:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD4;
+                    break;
+                    case Keys.NumPad5:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD5;
+                    break;
+                    case Keys.NumPad6:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD6;
+                    break;
+                    case Keys.NumPad7:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD7;
+                    break;
+                    case Keys.NumPad8:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD8;
+                    break;
+                    case Keys.NumPad9:
+                    virtualKeyCode = VirtualKeyCode.NUMPAD9;
+                    break;
+                    case Keys.Multiply:
+                    virtualKeyCode = VirtualKeyCode.MULTIPLY;
+                    break;
+                    case Keys.Add:
+                    virtualKeyCode = VirtualKeyCode.ADD;
+                    break;
+                    case Keys.Separator:
+                    virtualKeyCode = VirtualKeyCode.SEPARATOR;
+                    break;
+                    case Keys.Subtract:
+                    virtualKeyCode = VirtualKeyCode.SUBTRACT;
+                    break;
+                    case Keys.Decimal:
+                    virtualKeyCode = VirtualKeyCode.DECIMAL;
+                    break;
+                    case Keys.Divide:
+                    virtualKeyCode = VirtualKeyCode.DIVIDE;
+                    break;
+                    case Keys.F1:
+                    virtualKeyCode = VirtualKeyCode.F1;
+                    break;
+                    case Keys.F2:
+                    virtualKeyCode = VirtualKeyCode.F2;
+                    break;
+                    case Keys.F3:
+                    virtualKeyCode = VirtualKeyCode.F3;
+                    break;
+                    case Keys.F4:
+                    virtualKeyCode = VirtualKeyCode.F4;
+                    break;
+                    case Keys.F5:
+                    virtualKeyCode = VirtualKeyCode.F5;
+                    break;
+                    case Keys.F6:
+                    virtualKeyCode = VirtualKeyCode.F6;
+                    break;
+                    case Keys.F7:
+                    virtualKeyCode = VirtualKeyCode.F7;
+                    break;
+                    case Keys.F8:
+                    virtualKeyCode = VirtualKeyCode.F8;
+                    break;
+                    case Keys.F9:
+                    virtualKeyCode = VirtualKeyCode.F9;
+                    break;
+                    case Keys.F10:
+                    virtualKeyCode = VirtualKeyCode.F10;
+                    break;
+                    case Keys.F11:
+                    virtualKeyCode = VirtualKeyCode.F11;
+                    break;
+                    case Keys.F12:
+                    virtualKeyCode = VirtualKeyCode.F12;
+                    break;
+                    case Keys.F13:
+                    virtualKeyCode = VirtualKeyCode.F13;
+                    break;
+                    case Keys.F14:
+                    virtualKeyCode = VirtualKeyCode.F14;
+                    break;
+                    case Keys.F15:
+                    virtualKeyCode = VirtualKeyCode.F15;
+                    break;
+                    case Keys.F16:
+                    virtualKeyCode = VirtualKeyCode.F16;
+                    break;
+                    case Keys.F17:
+                    virtualKeyCode = VirtualKeyCode.F17;
+                    break;
+                    case Keys.F18:
+                    virtualKeyCode = VirtualKeyCode.F18;
+                    break;
+                    case Keys.F19:
+                    virtualKeyCode = VirtualKeyCode.F19;
+                    break;
+                    case Keys.F20:
+                    virtualKeyCode = VirtualKeyCode.F20;
+                    break;
+                    case Keys.F21:
+                    virtualKeyCode = VirtualKeyCode.F21;
+                    break;
+                    case Keys.F22:
+                    virtualKeyCode = VirtualKeyCode.F22;
+                    break;
+                    case Keys.F23:
+                    virtualKeyCode = VirtualKeyCode.F23;
+                    break;
+                    case Keys.F24:
+                    virtualKeyCode = VirtualKeyCode.F24;
+                    break;
+                    case Keys.NumLock:
+                    virtualKeyCode = VirtualKeyCode.NUMLOCK;
+                    break;
+                    case Keys.Scroll:
+                    virtualKeyCode = VirtualKeyCode.SCROLL;
+                    break;
+                    case Keys.LShiftKey:
+                    virtualKeyCode = VirtualKeyCode.LSHIFT;
+                    break;
+                    case Keys.RShiftKey:
+                    virtualKeyCode = VirtualKeyCode.RSHIFT;
+                    break;
+                    case Keys.LControlKey:
+                    virtualKeyCode = VirtualKeyCode.LCONTROL;
+                    break;
+                    case Keys.RControlKey:
+                    virtualKeyCode = VirtualKeyCode.RCONTROL;
+                    break;
+                    case Keys.LMenu:
+                    virtualKeyCode = VirtualKeyCode.LMENU;
+                    break;
+                    case Keys.RMenu:
+                    virtualKeyCode = VirtualKeyCode.RMENU;
+                    break;
+                    case Keys.BrowserBack:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_BACK;
+                    break;
+                    case Keys.BrowserForward:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_FORWARD;
+                    break;
+                    case Keys.BrowserRefresh:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_REFRESH;
+                    break;
+                    case Keys.BrowserStop:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_STOP;
+                    break;
+                    case Keys.BrowserSearch:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_SEARCH;
+                    break;
+                    case Keys.BrowserFavorites:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_FAVORITES;
+                    break;
+                    case Keys.BrowserHome:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_HOME;
+                    break;
+                    case Keys.VolumeMute:
+                    virtualKeyCode = VirtualKeyCode.VOLUME_MUTE;
+                    break;
+                    case Keys.VolumeDown:
+                    virtualKeyCode = VirtualKeyCode.VOLUME_DOWN;
+                    break;
+                    case Keys.VolumeUp:
+                    virtualKeyCode = VirtualKeyCode.VOLUME_UP;
+                    break;
+                    case Keys.MediaNextTrack:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_NEXT_TRACK;
+                    break;
+                    case Keys.MediaPreviousTrack:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_PREV_TRACK;
+                    break;
+                    case Keys.MediaStop:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_STOP;
+                    break;
+                    case Keys.MediaPlayPause:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_PLAY_PAUSE;
+                    break;
+
+
+                                        case Keys.RMenu:
+                    virtualKeyCode = VirtualKeyCode.RMENU;
+                    break;
+                    case Keys.BrowserBack:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_BACK;
+                    break;
+                    case Keys.BrowserForward:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_FORWARD;
+                    break;
+                    case Keys.BrowserRefresh:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_REFRESH;
+                    break;
+                    case Keys.BrowserStop:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_STOP;
+                    break;
+                    case Keys.BrowserSearch:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_SEARCH;
+                    break;
+                    case Keys.BrowserFavorites:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_FAVORITES;
+                    break;
+                    case Keys.BrowserHome:
+                    virtualKeyCode = VirtualKeyCode.BROWSER_HOME;
+                    break;
+                    case Keys.VolumeMute:
+                    virtualKeyCode = VirtualKeyCode.VOLUME_MUTE;
+                    break;
+                    case Keys.VolumeDown:
+                    virtualKeyCode = VirtualKeyCode.VOLUME_DOWN;
+                    break;
+                    case Keys.VolumeUp:
+                    virtualKeyCode = VirtualKeyCode.VOLUME_UP;
+                    break;
+                    case Keys.MediaNextTrack:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_NEXT_TRACK;
+                    break;
+                    case Keys.MediaPreviousTrack:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_PREV_TRACK;
+                    break;
+                    case Keys.MediaStop:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_STOP;
+                    break;
+                    case Keys.MediaPlayPause:
+                    virtualKeyCode = VirtualKeyCode.MEDIA_PLAY_PAUSE;
+                    break;
+
+       
         //
         // Summary:
         //     The launch mail key (Windows 2000 or later).
@@ -864,12 +768,12 @@ namespace WindowsInput
         /// <summary>
         /// CAPS LOCK key
         /// </summary>
-        CAPITAL = 0x14,
+        CapsLock = 0x14,
 
         /// <summary>
         /// Input Method Editor (IME) Kana mode
         /// </summary>
-        KANA = 0x15,
+        KanaMode = 0x15,
 
         /// <summary>
         /// IME Hanguel mode (maintained for compatibility; use HANGUL)
@@ -938,12 +842,12 @@ namespace WindowsInput
         /// <summary>
         /// PAGE UP key
         /// </summary>
-        PRIOR = 0x21,
+        PageUp = 0x21,
 
         /// <summary>
         /// PAGE DOWN key
         /// </summary>
-        NEXT = 0x22,
+        PageDOWN = 0x22,
 
         /// <summary>
         /// END key
