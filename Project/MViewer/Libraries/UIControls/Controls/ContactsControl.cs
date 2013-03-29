@@ -39,7 +39,7 @@ namespace UIControls
             InitializeComponent();
             InitializeNotificationLabel();
             _onClosePressed = onClosePressed;
-            _onSelectedContactChanged = onContactsUpdated;
+            _onContactsUpdated = onContactsUpdated;
             _onSelectedContactChanged = onSelectedContactChanged;
         }
 
@@ -92,7 +92,7 @@ namespace UIControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormContact formContact = new FormContact(GenericEnums.FormMode.Add, _onSelectedContactChanged);
+            FormContact formContact = new FormContact(GenericEnums.FormMode.Add, _onContactsUpdated);
             formContact.ShowDialog(this);
         }
 
@@ -103,12 +103,12 @@ namespace UIControls
                 selectedRow.Cells["FriendlyName"].Value.ToString(),
                 selectedRow.Cells["Identity"].Value.ToString());
             // pass the removed contact no as argument
-            _onSelectedContactChanged.Invoke(this, new ContactsEventArgs()
+            _onContactsUpdated.Invoke(this, new ContactsEventArgs()
                 {
                     UpdatedContact = contact,
                     Operation = GenericEnums.ContactsOperation.Remove
                 });
-            _onSelectedContactChanged.BeginInvoke(this, 
+            _onContactsUpdated.BeginInvoke(this, 
                 new ContactsEventArgs()
                 {
                     Operation = GenericEnums.ContactsOperation.Load
@@ -120,11 +120,10 @@ namespace UIControls
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
-            
-            FormContact formContact = new FormContact(GenericEnums.FormMode.Update, int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), _onSelectedContactChanged);
+
+            FormContact formContact = new FormContact(GenericEnums.FormMode.Update, int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), _onContactsUpdated);
             formContact.ShowDialog(this);
         }
-
 
         private void dgvContacts_CellEnter(object sender, DataGridViewCellEventArgs e)
         {

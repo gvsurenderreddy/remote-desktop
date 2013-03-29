@@ -310,6 +310,8 @@ namespace MViewer
             // unblock the capture sending
             transfer.IsRemotingUpdating = false;
 
+            ActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
+
             _syncRemotingCaptureActivity.Set();
         }
 

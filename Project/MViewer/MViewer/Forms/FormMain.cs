@@ -60,9 +60,9 @@ namespace MViewer
         private void OnSelectedContactChanged(object sender, EventArgs e)
         {
             ContactsEventArgs args = (ContactsEventArgs)e;
-            Program.Controller.ActiveRoomChanged(args.UpdatedContact.Identity, GenericEnums.RoomType.Audio);
-            Program.Controller.ActiveRoomChanged(args.UpdatedContact.Identity, GenericEnums.RoomType.Video);
-            Program.Controller.ActiveRoomChanged(args.UpdatedContact.Identity, GenericEnums.RoomType.Remoting);
+            Program.Controller.ActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Audio);
+            Program.Controller.ActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Video);
+            Program.Controller.ActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Remoting);
         }
 
         private void OnContactsUpdated(object sender, EventArgs e)
