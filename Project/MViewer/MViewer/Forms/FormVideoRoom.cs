@@ -139,5 +139,10 @@ namespace MViewer
         }
 
         #endregion
+
+        private void FormVideoRoom_Deactivate(object sender, EventArgs e)
+        {
+            Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
+        }
     }
 }

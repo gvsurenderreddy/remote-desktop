@@ -49,6 +49,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAudioRoom";
             this.Text = "Audio Room";
+            this.Activated += new System.EventHandler(this.FormAudioRoom_Activated);
+            this.Deactivate += new System.EventHandler(this.FormAudioRoom_Deactivate);
             this.ResumeLayout(false);
 
         }

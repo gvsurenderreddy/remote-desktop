@@ -96,6 +96,14 @@ namespace UIControls
                         btnRemote.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
                     }
                     break;
+                case GenericEnums.RoomType.Undefined:
+                    btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                    btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                    btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                    btnMuteAudio.Text = ButtonStatuses.AudioStatus.Mute.ToString();
+                    break;
             }
         }
 

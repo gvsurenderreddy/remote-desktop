@@ -91,5 +91,16 @@ namespace MViewer.Forms
         }
 
         #endregion
+
+        private void FormAudioRoom_Deactivate(object sender, EventArgs e)
+        {
+            Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
+        }
+
+        private void FormAudioRoom_Activated(object sender, EventArgs e)
+        {
+            // tell the controller to update the active form
+            Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
+        }
     }
 }

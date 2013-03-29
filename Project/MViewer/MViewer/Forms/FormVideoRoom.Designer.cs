@@ -60,6 +60,7 @@
             this.Name = "FormVideoRoom";
             this.Text = "Video ";
             this.Activated += new System.EventHandler(this.FormVideoRoom_Activated);
+            this.Deactivate += new System.EventHandler(this.FormVideoRoom_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormVideoRoom_FormClosing);
             this.Resize += new System.EventHandler(this.FormVideoRoom_Resize);
             this.pnlMain.ResumeLayout(false);

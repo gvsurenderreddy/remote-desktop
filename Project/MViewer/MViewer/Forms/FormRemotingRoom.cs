@@ -147,6 +147,7 @@ namespace MViewer
         private void FormRemotingRoom_Deactivate(object sender, EventArgs e)
         {
             remoteControl.WireDownEventProvider();
+            Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
         }
         #endregion
 
