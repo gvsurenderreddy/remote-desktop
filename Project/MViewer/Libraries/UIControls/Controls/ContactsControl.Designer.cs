@@ -33,8 +33,8 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.pnlContacts = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
             this.dgvContacts = new System.Windows.Forms.DataGridView();
+            this.btnClose = new System.Windows.Forms.Button();
             this.pnlContacts.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).BeginInit();
             this.SuspendLayout();
@@ -95,18 +95,6 @@
             this.pnlContacts.Size = new System.Drawing.Size(192, 243);
             this.pnlContacts.TabIndex = 10;
             // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.Red;
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(141, 277);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(66, 23);
-            this.btnClose.TabIndex = 13;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.ContactsControl_ClosePressed);
-            // 
             // dgvContacts
             // 
             this.dgvContacts.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -121,6 +109,19 @@
             this.dgvContacts.ShowEditingIcon = false;
             this.dgvContacts.Size = new System.Drawing.Size(192, 207);
             this.dgvContacts.TabIndex = 10;
+            this.dgvContacts.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContacts_CellEnter);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Red;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.Location = new System.Drawing.Point(141, 277);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(66, 23);
+            this.btnClose.TabIndex = 13;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.ContactsControl_ClosePressed);
             // 
             // ContactsControl
             // 

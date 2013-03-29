@@ -36,14 +36,36 @@ namespace MViewer
             InitializeComponent();
 
             IdentityObserver = new Delegates.IdentityEventHandler(UpdateIdentity);
-            ContactsObserver = new Delegates.ContactsEventHandler(ContactsUpdated);
+            ContactsObserver = new Delegates.ContactsEventHandler(OnContactsUpdated);
         }
 
         #endregion
 
         #region event callbacks
 
-        private void ContactsUpdated(object sender, EventArgs e)
+        private void FormMain_Activated(object sender, EventArgs e)
+        {
+            // update labels according to selected contact
+            KeyValuePair<string, string> contact = GetSelectedContact();
+            Program.Controller.ActiveRoomChanged(contact.Key, GenericEnums.RoomType.Audio);
+            Program.Controller.ActiveRoomChanged(contact.Key, GenericEnums.RoomType.Video);
+            Program.Controller.ActiveRoomChanged(contact.Key, GenericEnums.RoomType.Remoting);
+        }
+
+        private void FormMain_Deactivate(object sender, EventArgs e)
+        {
+            Program.Controller.ActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
+        }
+
+        private void OnSelectedContactChanged(object sender, EventArgs e)
+        {
+            ContactsEventArgs args = (ContactsEventArgs)e;
+            Program.Controller.ActiveRoomChanged(args.UpdatedContact.Identity, GenericEnums.RoomType.Audio);
+            Program.Controller.ActiveRoomChanged(args.UpdatedContact.Identity, GenericEnums.RoomType.Video);
+            Program.Controller.ActiveRoomChanged(args.UpdatedContact.Identity, GenericEnums.RoomType.Remoting);
+        }
+
+        private void OnContactsUpdated(object sender, EventArgs e)
         {
             if (((ContactsEventArgs)e).Operation == GenericEnums.ContactsOperation.Load && ((ContactsEventArgs)e).ContactsDV != null)
             {
@@ -70,7 +92,7 @@ namespace MViewer
             Program.Controller.IdentityObserver(sender, args);
         }
 
-        private void ContactsControl_ClosePressed(object sender, EventArgs e)
+        private void OnContactsControl_ClosePressed(object sender, EventArgs e)
         {
             Program.Controller.StopApplication();
         }
@@ -97,5 +119,6 @@ namespace MViewer
         }
 
         #endregion
+
     }
 }

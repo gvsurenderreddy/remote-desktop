@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.identityControl = new UIControls.IdentityControl(this.IdentityUpdated);
-            this.contactsControl = new UIControls.ContactsControl(this.ContactsControl_ClosePressed, this.ContactsUpdated);
+            this.contactsControl = new UIControls.ContactsControl(this.OnContactsControl_ClosePressed, this.OnContactsUpdated, this.OnSelectedContactChanged);
             this.SuspendLayout();
             // 
             // identityControl
