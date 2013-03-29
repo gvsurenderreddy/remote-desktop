@@ -360,23 +360,19 @@ namespace MViewer
                                 // check if the stop signal has been sent from the UI
 
                                 // check if the stop signal has been sent by the partner
-                                Thread t = new Thread(delegate()
+                                PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                                if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
+                                    || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
                                 {
-                                    PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                                    if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
-                                        || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
-                                    {
-                                        // send the capture if the session isn't paused
-                                        transferStatus.Remoting = true;
+                                    // send the capture if the session isn't paused
+                                    transferStatus.Remoting = true;
 
-                                        _model.ClientController.SendRemotingCapture(args.ScreenCapture,
-                                            args.MouseCapture, receiverIdentity,
-                                            _model.Identity.MyIdentity);
-                                    }
+                                    _model.ClientController.SendRemotingCapture(args.ScreenCapture,
+                                        args.MouseCapture, receiverIdentity,
+                                        _model.Identity.MyIdentity);
+                                }
 
-                                    transferStatus.Remoting = false;
-                                });
-                                t.Start();
+                                transferStatus.Remoting = false;
                             }
                         }
                     }
@@ -412,8 +408,10 @@ namespace MViewer
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
-                    _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
-
+                    if (contact != null)
+                    {
+                        _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                    }
                     // I am going to send my captures by using the below client
 
                     // create session
