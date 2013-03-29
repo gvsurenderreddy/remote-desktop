@@ -1,0 +1,11 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\DataAccessLayer.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\DataAccessLayer.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\GenericDataLayer.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\Utils.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\DesktopSharing.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\GenericDataLayer.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\Utils.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\Debug\DesktopSharing.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\obj\Debug\DataAccessLayer.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\obj\Debug\DataAccessLayer.pdb
