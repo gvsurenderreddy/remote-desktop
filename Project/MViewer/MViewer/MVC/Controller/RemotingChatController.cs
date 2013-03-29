@@ -266,7 +266,7 @@ namespace MViewer
 
             // initialize the remoting tool and start it's timer
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
-
+            clientSession.Peers.RemotingSessionState = GenericEnums.SessionState.Opened;
             _syncRemotingCaptureActivity.Set();
         }
 
