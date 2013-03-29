@@ -168,7 +168,7 @@ namespace UIControls
                 RoomType = actionType,
                 SignalType = signalType
             };
-            _roomActionTriggered.Invoke(this, args);
+            _roomActionTriggered.BeginInvoke(this, args, null,null);
         }
 
         #endregion

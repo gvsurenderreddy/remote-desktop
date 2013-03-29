@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utils;
 using GenericDataLayer;
+using System.Threading;
 
 namespace UIControls
 {
@@ -15,6 +16,7 @@ namespace UIControls
     {
         #region private members
 
+        bool closing = false;
         GenericEnums.FormMode _formMode;
         EventHandler _contactsUpdated;
         int _contactNo;
@@ -30,8 +32,8 @@ namespace UIControls
 
             InitializeComponent();
 
-           
             SetFormMode();
+
         }
 
         public FormContact(GenericEnums.FormMode formMode, int contactNo, EventHandler contactsUpdated)
@@ -53,6 +55,7 @@ namespace UIControls
             txtIdentity.Text = eventArgs.UpdatedContact.Identity;
 
             SetFormMode();
+
         }
 
         #endregion
@@ -87,18 +90,16 @@ namespace UIControls
                 MessageBox.Show("Cannot insert empty text");
                 return;
             }
-            
-            // todo: display progress bar while creating new contact
 
             switch (_formMode)
             {
                 case GenericEnums.FormMode.Add:
                     Contact contact = new Contact(0, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
-                    _contactsUpdated.Invoke(sender, new ContactsEventArgs
+                    _contactsUpdated.BeginInvoke(sender, new ContactsEventArgs
                     {
                         UpdatedContact = contact,
                         Operation = GenericEnums.ContactsOperation.Add
-                    });
+                    }, null, null);
 
                     break;
                 case GenericEnums.FormMode.Update:
@@ -111,10 +112,11 @@ namespace UIControls
 
                     break;
             }
-            _contactsUpdated.Invoke(this, new ContactsEventArgs()
+            _contactsUpdated.BeginInvoke(this, new ContactsEventArgs()
                 {
                     Operation = GenericEnums.ContactsOperation.Load
-                });
+                }, null, null);
+
             this.Close();
         }
 

@@ -360,20 +360,23 @@ namespace MViewer
                                 // check if the stop signal has been sent from the UI
 
                                 // check if the stop signal has been sent by the partner
-
-                                PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                                if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
-                                    || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
+                                Thread t = new Thread(delegate()
                                 {
-                                    // send the capture if the session isn't paused
-                                    transferStatus.Remoting = true;
+                                    PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                                    if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
+                                        || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
+                                    {
+                                        // send the capture if the session isn't paused
+                                        transferStatus.Remoting = true;
 
-                                    _model.ClientController.SendRemotingCapture(args.ScreenCapture,
-                                        args.MouseCapture, receiverIdentity,
-                                        _model.Identity.MyIdentity);
-                                }
+                                        _model.ClientController.SendRemotingCapture(args.ScreenCapture,
+                                            args.MouseCapture, receiverIdentity,
+                                            _model.Identity.MyIdentity);
+                                    }
 
-                                transferStatus.Remoting = false;
+                                    transferStatus.Remoting = false;
+                                });
+                                t.Start();
                             }
                         }
                     }

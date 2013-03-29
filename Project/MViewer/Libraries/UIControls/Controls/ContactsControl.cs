@@ -106,10 +106,13 @@ namespace UIControls
                     UpdatedContact = contact,
                     Operation = GenericEnums.ContactsOperation.Remove
                 });
-            _contactsUpdated.Invoke(this, new ContactsEventArgs()
-            {
-                Operation = GenericEnums.ContactsOperation.Load
-            });
+            _contactsUpdated.BeginInvoke(this, 
+                new ContactsEventArgs()
+                {
+                    Operation = GenericEnums.ContactsOperation.Load
+                },
+                null, null
+                );
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
