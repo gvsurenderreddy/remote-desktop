@@ -89,11 +89,11 @@ namespace UIControls
                     }
                     if (start)
                     {
-                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
                     }
                     else
                     {
-                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                        btnRemote.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
                     }
                     break;
             }
