@@ -143,6 +143,11 @@ namespace UIControls
                 }
                 catch
                 {
+                    _onSelectedContactChanged.Invoke(this,
+                          new ContactsEventArgs()
+                          {
+                              UpdatedContact = null
+                          });
                 }
             }
         }
