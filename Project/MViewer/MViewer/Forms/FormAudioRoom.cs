@@ -94,7 +94,8 @@ namespace MViewer.Forms
 
         private void FormAudioRoom_Deactivate(object sender, EventArgs e)
         {
-            Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
+            // todo: find a better way to update the button labels
+            //Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
         }
 
         private void FormAudioRoom_Activated(object sender, EventArgs e)

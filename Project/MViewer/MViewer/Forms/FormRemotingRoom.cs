@@ -146,6 +146,7 @@ namespace MViewer
 
         private void FormRemotingRoom_Deactivate(object sender, EventArgs e)
         {
+            // todo: find a better way to update the button labels
             remoteControl.WireDownEventProvider();
             Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
         }
