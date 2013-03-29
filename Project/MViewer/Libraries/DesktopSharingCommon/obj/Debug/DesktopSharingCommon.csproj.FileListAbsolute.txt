@@ -1,7 +1,0 @@
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.dll
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\bin\Debug\DesktopSharingCommon.pdb
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\bin\Debug\Utils.dll
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\bin\Debug\Utils.pdb
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.csprojResolveAssemblyReference.cache
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.dll
-F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharingCommon\obj\Debug\DesktopSharingCommon.pdb
