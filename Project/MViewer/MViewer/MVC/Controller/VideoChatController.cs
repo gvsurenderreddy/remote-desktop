@@ -20,15 +20,12 @@ namespace MViewer
         /// flag used to tell the capturing thread to wait before ending it's activity
         /// </summary>
         bool _videoCapturePending;
-        bool _audioCapturePending;
 
         /// <summary>
         /// object used to synchronize the capture sent to partners
         /// </summary>
         readonly object _syncVideoCaptureSending = new object();
-        readonly object _syncAudioCaptureSending = new object();
 
-        ManualResetEvent _syncAudioCaptureActivity = new ManualResetEvent(true);
         ManualResetEvent _syncVideoCaptureActivity = new ManualResetEvent(true);
 
         #endregion

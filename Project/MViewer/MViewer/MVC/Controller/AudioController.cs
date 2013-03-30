@@ -12,6 +12,10 @@ namespace MViewer
 {
     public partial class Controller : IController
     {
+        readonly object _syncAudioCaptureSending = new object();
+        ManualResetEvent _syncAudioCaptureActivity = new ManualResetEvent(true);
+        bool _audioCapturePending;
+
         void AudioCaptureObserver(object sender, EventArgs e)
         {
             // todo: implement AudioCaptureObserver
