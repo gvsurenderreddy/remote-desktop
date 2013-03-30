@@ -33,8 +33,20 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -73,6 +85,7 @@
     <Compile Include="BusinessObjects\Structs\ControllerEventHandlers.cs" />
     <Compile Include="BusinessObjects\Descriptor\TransferUptading.cs" />
     <Compile Include="Delegates.cs" />
+    <Compile Include="EventArgs\AudioEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
     <Compile Include="EventArgs\IdentityEventArgs.cs" />
     <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
