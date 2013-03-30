@@ -69,11 +69,16 @@ namespace GenericObjects
 
         public void StopStreaming()
         {
-            _timer.Stop();
+            if (_timer != null)
+            {
+                _timer.Stop();
+            }
+            if (_audioStream != null)
+            {
+                _audioStream.StopAudio();
 
-            _audioStream.StopAudio();
-
-            _audioStream.Exit();
+                _audioStream.Exit();
+            }
         }
 
         public void PlayAudioCapture(byte[] capture)
