@@ -80,7 +80,7 @@ namespace UIControls
         {
             if (_onClosePressed != null)
             {
-                _onClosePressed.Invoke(sender, e);
+                _onClosePressed.BeginInvoke(sender, e, null, null);
             }
         }
 

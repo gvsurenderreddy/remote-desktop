@@ -114,12 +114,12 @@ namespace MViewer
             {
                 _clientController.AddClient(identity);
 
-                Thread t = new Thread(delegate()
-                {
+                //Thread t = new Thread(delegate()
+                //{
                     _clientController.UpdateContactStatus(identity, Identity.MyIdentity, newStatus);
                     RemoveClient(identity);
-                });
-                t.Start();
+                //});
+                //t.Start();
 
             }
         }
