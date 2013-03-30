@@ -74,9 +74,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
     }
 
-    public void SendMicrophoneCapture(byte[] capture)
+    public void SendMicrophoneCapture(byte[] capture, string senderIdentity)
     {
-        base.Channel.SendMicrophoneCapture(capture);
+        base.Channel.SendMicrophoneCapture(capture, senderIdentity);
     }
 
     public bool Ping()

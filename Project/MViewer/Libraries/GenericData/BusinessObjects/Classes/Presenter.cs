@@ -91,6 +91,11 @@ namespace GenericObjects
             return _screenCapture.RemotingCaptureClosed;
         }
 
+        public bool AudioCaptureClosed()
+        {
+            return _audioStreamManager.AudioCaptureClosed;
+        }
+
         #endregion
     }
 }

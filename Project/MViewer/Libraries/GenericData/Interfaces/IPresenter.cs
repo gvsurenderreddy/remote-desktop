@@ -18,5 +18,6 @@ namespace GenericObjects
         void StopRemotingPresentation();
 
         bool RemotingCaptureClosed();
+        bool AudioCaptureClosed();
     }
 }

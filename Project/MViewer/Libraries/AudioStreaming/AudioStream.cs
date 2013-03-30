@@ -31,6 +31,11 @@ namespace AudioStreaming
 
         #region proprieties
 
+        public bool IsRunning
+        {
+            get { return _isRunning; }
+        }
+
         public MemoryStream Stream
         {
             get { return _stream; }

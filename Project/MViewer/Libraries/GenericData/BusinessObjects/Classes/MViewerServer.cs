@@ -5,9 +5,7 @@ using System.Text;
 using System.IO;
 using System.ServiceModel;
 using System.Threading;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
-using Microsoft.VisualBasic.Devices;
 using Utils;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -154,10 +152,7 @@ namespace GenericObjects
                     {
                         Identity = senderIdentity,
                         CapturedImage = bmp
-                    });
-
-                GC.Collect();
-                
+                    });                
             }
             catch (Exception)
             {
@@ -165,12 +160,17 @@ namespace GenericObjects
             }
         }
 
-        public void SendMicrophoneCapture(byte[] capture)
+        public void SendMicrophoneCapture(byte[] capture, string senderIdentity)
         {
-            lock (_syncAudioCaptures)
+            // todo: decide if the sync audio is necessary
+            //lock (_syncAudioCaptures)
             {
-                Computer computer = new Computer();
-                computer.Audio.Play(capture, AudioPlayMode.Background);
+                _controllerHandlers.AudioCaptureObserver.Invoke(this,
+                    new AudioEventArgs()
+                    {
+                        Identity = senderIdentity,
+                        Capture = capture
+                    });
             }
         }
 

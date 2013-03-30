@@ -278,6 +278,25 @@ namespace BusinessLogicLayer
             }
         }
 
+        public void SendAudioCapture(byte[] capture, string receiverIdentity, string senderIdentity)
+        {
+            if (_clients.ContainsKey(receiverIdentity))
+            {
+                MViewerClient client = _clients[receiverIdentity];
+                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    try
+                    {
+                        client.SendMicrophoneCapture(capture, senderIdentity);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 }

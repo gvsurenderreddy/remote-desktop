@@ -50,6 +50,7 @@ namespace MViewer
             {
                 ClientConnectedObserver = this.ClientConnectedObserver,
                 VideoCaptureObserver = this.VideoCaptureObserver,
+                AudioCaptureObserver = this.AudioCaptureObserver,
                 ContactsObserver = this.ContactRequestObserver,
                 RoomButtonObserver = this.RoomButtonAction,
                 WaitRoomActionObserver = this.WaitRoomButtonActionObserver,

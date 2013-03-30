@@ -28,7 +28,7 @@ namespace GenericObjects
         void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendMicrophoneCapture", ReplyAction = "http://tempuri.org/IVideoRoom/SendMicrophoneCaptureResponse")]
-        void SendMicrophoneCapture(byte[] capture);
+        void SendMicrophoneCapture(byte[] capture, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/Ping", ReplyAction = "http://tempuri.org/IVideoRoom/PingResponse")]
         bool Ping();

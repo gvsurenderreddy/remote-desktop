@@ -88,5 +88,13 @@ namespace GenericObjects
         }
 
         #endregion
+
+        public bool AudioCaptureClosed
+        {
+            get
+            {
+                return _audioStream.IsRunning == false;
+            }
+        }
     }
 }

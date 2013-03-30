@@ -15,6 +15,7 @@ namespace GenericObjects
         void AddClient(string identity);
         MViewerClient GetClient(string identity);
         bool IsContactOnline(string identity);
+        void SendAudioCapture(byte[] capture, string receiverIdentity, string senderIdentity);
         void SendVideoCapture(byte[] capture, string receiverIdentity, string senderIdentity);
         void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity);
         void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType);
