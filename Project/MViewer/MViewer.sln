@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MViewer", "MViewer\MViewer.csproj", "{30639E41-AEAF-4321-8E4F-BB80A2DEAB98}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIControls", "Libraries\UIControls\UIControls.csproj", "{37D78FE4-C863-4E19-BF23-C5A6253CC734}"
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrategyPattern", "Libraries\StrategyPattern\StrategyPattern.csproj", "{BFCA88DD-1DAF-4447-96A4-A112C03B1570}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InputSimulator", "Libraries\InputSimulator\InputSimulator.csproj", "{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioStreaming", "Libraries\AudioStreaming\AudioStreaming.csproj", "{3195DEBD-9EEF-410E-8FB6-CF804C541FD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,10 @@ Global
 		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3195DEBD-9EEF-410E-8FB6-CF804C541FD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3195DEBD-9EEF-410E-8FB6-CF804C541FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3195DEBD-9EEF-410E-8FB6-CF804C541FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3195DEBD-9EEF-410E-8FB6-CF804C541FD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
