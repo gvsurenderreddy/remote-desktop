@@ -84,6 +84,10 @@ namespace AudioStreaming
             SyncChunk.WaitOne();
 
             _microphone.GetData(_buffer);
+            if (_stream == null)
+            {
+                _stream = new MemoryStream();
+            }
             _stream.Write(_buffer, 0, _buffer.Length);
         }
 
