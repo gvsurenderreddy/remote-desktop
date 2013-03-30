@@ -14,7 +14,7 @@ namespace GenericDataLayer
         void StopApplication();
 
         void StartVideo(object sender, RoomActionEventArgs args);
-        void StopVide(object sender, RoomActionEventArgs args);
+        void StopVideo(object sender, RoomActionEventArgs args);
         void PauseVideo(object sender, RoomActionEventArgs args);
         void ResumeVideo(object sender, RoomActionEventArgs args);
         void SendFileHandler(object sender, RoomActionEventArgs args);

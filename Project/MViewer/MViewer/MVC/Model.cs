@@ -113,8 +113,14 @@ namespace MViewer
             foreach (string identity in identities)
             {
                 _clientController.AddClient(identity);
-                _clientController.UpdateContactStatus(identity, Identity.MyIdentity, newStatus);
-                RemoveClient(identity);
+
+                Thread t = new Thread(delegate()
+                {
+                    _clientController.UpdateContactStatus(identity, Identity.MyIdentity, newStatus);
+                    RemoveClient(identity);
+                });
+                t.Start();
+
             }
         }
 

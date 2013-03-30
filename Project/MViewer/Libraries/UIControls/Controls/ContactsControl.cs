@@ -49,7 +49,7 @@ namespace UIControls
 
         public void SetContacts(DataView dvContacts)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(200);
             if (dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count > 0)
             {
                 ControlCrossThreading.SetValue(dgvContacts, true, "Visible");

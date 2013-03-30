@@ -126,7 +126,7 @@ namespace MViewer
             }
         }
 
-        public void StopVide(object sender, RoomActionEventArgs args)
+        public void StopVideo(object sender, RoomActionEventArgs args)
         {
             _syncVideoCaptureActivity.Reset();
 
@@ -287,7 +287,6 @@ namespace MViewer
         {
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
 
-            Thread.Sleep(500);
             while (_videoCapturePending)
             {
                 Thread.Sleep(200);
@@ -307,7 +306,6 @@ namespace MViewer
                     FormVideoRoom videoRoom = new FormVideoRoom(identity);
                     _view.RoomManager.AddRoom(identity, videoRoom);
                     // initialize new video  form
-                    Thread.Sleep(1000);
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.VideoSessionState = GenericEnums.SessionState.Opened;

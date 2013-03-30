@@ -118,12 +118,12 @@ namespace MViewer
             _view.NotifyContactsObserver();
 
             // todo: use manual reset event instead of thread.sleep(0)
-            Thread.Sleep(2000);
+            Thread.Sleep(200);
 
             _view.NotifyIdentityObserver();
             _model.ServerController.StartServer();
 
-            Thread.Sleep(1000);
+            Thread.Sleep(200);
 
             // ping every single contact in the list and update it's status
             _model.PingContacts(null);
@@ -140,20 +140,24 @@ namespace MViewer
             bool canExit = _view.ExitConfirmation();
             if (canExit)
             {
-                // stop all active rooms
-                IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
-                foreach (string identity in partnerIdentities)
+                Thread t = new Thread(delegate()
                 {
-                    StopVide(this, new RoomActionEventArgs()
-                        {
-                            Identity = identity,
-                            RoomType = GenericEnums.RoomType.Video,
-                            SignalType = GenericEnums.SignalType.Stop 
-                        });
-                }
-                // stop my webcapture form
-                StopVideoCapturing();
-
+                    // stop all active rooms
+                    IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
+                    foreach (string identity in partnerIdentities)
+                    {
+                        StopVideo(this, new RoomActionEventArgs()
+                            {
+                                Identity = identity,
+                                RoomType = GenericEnums.RoomType.Video,
+                                SignalType = GenericEnums.SignalType.Stop
+                            });
+                    }
+                    // stop my webcapture form
+                    StopVideoCapturing();
+                });
+                t.Start();
+                
                 // stop the audio rooms also
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
             

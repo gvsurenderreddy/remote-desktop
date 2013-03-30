@@ -50,7 +50,7 @@ namespace MViewer
             // handlers initialization 
             Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideo);
-            videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVide);
+            videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideo);
             videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideo);
             videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideo);
 
