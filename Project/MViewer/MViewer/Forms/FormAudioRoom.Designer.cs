@@ -1,4 +1,4 @@
-﻿namespace MViewer.Forms
+﻿namespace MViewer
 {
     partial class FormAudioRoom
     {

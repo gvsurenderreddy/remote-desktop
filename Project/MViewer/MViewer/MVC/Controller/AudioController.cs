@@ -14,11 +14,37 @@ namespace MViewer
     {
         readonly object _syncAudioCaptureSending = new object();
         ManualResetEvent _syncAudioCaptureActivity = new ManualResetEvent(true);
-        bool _audioCapturePending;
+        //bool _audioCapturePending;
 
         void AudioCaptureObserver(object sender, EventArgs e)
         {
             // todo: implement AudioCaptureObserver
+            AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
+            PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
+
+            if (peer.AudioSessionState == GenericEnums.SessionState.Undefined ||
+                peer.AudioSessionState == GenericEnums.SessionState.Pending)
+            {
+                // receiving captures for the first time, have to initalize a form
+                ClientConnectedObserver(this,
+                       new RoomActionEventArgs()
+                       {
+                           RoomType = GenericEnums.RoomType.Audio,
+                           SignalType = GenericEnums.SignalType.Start,
+                           Identity = args.Identity
+                       });
+                while (peer.AudioSessionState != GenericEnums.SessionState.Opened)
+                {
+                    Thread.Sleep(2000);
+                    peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
+                }
+            }
+
+            // check the Audio status before playing the sound
+            if (peer.AudioSessionState == GenericEnums.SessionState.Opened)
+            {
+                _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture);
+            }
         }
 
         public void OnAudioCaptured(object sender, EventArgs e)
@@ -28,12 +54,12 @@ namespace MViewer
             {
                 _syncAudioCaptureActivity.WaitOne(); // wait for any room action to end
 
-                _audioCapturePending = true;
+                //_audioCapturePending = true;
                 if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).AudioCaptureClosed() == false)
                 {
                     lock (_syncAudioCaptureSending)
                     {
-                        AudioEventArgs args = (AudioEventArgs)e;
+                        AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
 
                         // broadcast the audio captures to all connected peers
                         IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Audio);
@@ -94,18 +120,62 @@ namespace MViewer
             }
             finally
             {
-                _audioCapturePending = false;
+                //_audioCapturePending = false;
+            }
+        }
+
+        void OpenAudioForm(string identity)
+        {
+            _syncAudioCaptureActivity.Reset();
+
+            if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Audio))
+            {
+                Thread t = new Thread(delegate()
+                {
+                    //IntPtr handle = IntPtr.Zero;
+                    FormAudioRoom AudioRoom = new FormAudioRoom(identity, this.AudioCaptureObserver);
+                    _view.RoomManager.AddRoom(identity, AudioRoom);
+                    // initialize new Audio  form
+
+                    PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+                    peers.AudioSessionState = GenericEnums.SessionState.Opened;
+
+                    Contact contact = _model.GetContact(identity);
+                    // get friendly name from contacts list
+                    _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                    // finally, show the Audio  form where we'll see the webcam captures
+                    _view.RoomManager.ShowRoom(identity);
+
+                }
+                );
+                t.IsBackground = true;
+                t.SetApartmentState(ApartmentState.STA);
+                t.Start();
+
+                Thread.Sleep(500);
+                _syncAudioCaptureActivity.Set();
             }
         }
 
         public void PauseAudio(object sender, RoomActionEventArgs args)
         {
-            // todo: implement PauseAudio
+            _syncAudioCaptureActivity.Reset();
+
+            // use the peer status of the selected room
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.AudioSessionState = GenericEnums.SessionState.Paused; // pause the Audio 
+
+            _syncAudioCaptureActivity.Set();
         }
 
         public void ResumeAudio(object sender, RoomActionEventArgs args)
         {
-            // todo: implement ResumeAudio
+            _syncAudioCaptureActivity.Reset();
+
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.AudioSessionState = GenericEnums.SessionState.Opened; // resume the Audio 
+
+            _syncAudioCaptureActivity.Set();
         }
 
         public void StartAudio(object sender, RoomActionEventArgs args)
@@ -115,7 +185,7 @@ namespace MViewer
 
         public void StopAudio(object sender, RoomActionEventArgs args)
         {
-            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
+            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
         }
     }
 }

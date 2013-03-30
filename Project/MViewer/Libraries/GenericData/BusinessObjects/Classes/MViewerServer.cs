@@ -166,7 +166,7 @@ namespace GenericObjects
             //lock (_syncAudioCaptures)
             {
                 _controllerHandlers.AudioCaptureObserver.Invoke(this,
-                    new AudioEventArgs()
+                    new AudioCaptureEventArgs()
                     {
                         Identity = senderIdentity,
                         Capture = capture

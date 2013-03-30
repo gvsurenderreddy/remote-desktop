@@ -67,6 +67,18 @@ namespace BusinessLogicLayer
             return activated;
         }
 
+        public void PlayAudioCapture(string identity, byte[] capture)
+        {
+            lock (_syncRooms)
+            {
+                if (_rooms != null && _rooms.ContainsKey(identity))
+                {
+                    IAudioRoom room = (IAudioRoom)_rooms[identity];
+                    room.PlayAudioCapture(capture);
+                }
+            }
+        }
+
         public void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture)
         {
             lock (_syncRooms)

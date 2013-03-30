@@ -14,6 +14,7 @@ namespace GenericObjects
         void ShowRoom(string identity);
         void CloseRoom(string identity);
 
+        void PlayAudioCapture(string identity, byte[] capture);
         void ShowVideoCapture(string identity, Image picture);
         void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture);
         void SetPartnerName(string identity, string friendlyName);

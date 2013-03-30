@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GenericObjects
 {
-    public class AudioEventArgs : EventArgs
+    public class AudioCaptureEventArgs : EventArgs
     {
         public byte[] Capture { get; set; }
         public string Identity { get; set; }

@@ -16,7 +16,6 @@ namespace UIControls
     {
         #region private members
 
-        bool closing = false;
         GenericEnums.FormMode _formMode;
         EventHandler _contactsUpdated;
         int _contactNo;

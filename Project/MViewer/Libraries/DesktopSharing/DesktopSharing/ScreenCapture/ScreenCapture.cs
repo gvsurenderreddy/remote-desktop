@@ -11,10 +11,8 @@ namespace DesktopSharing
     {
         #region members
 
-        Bitmap _oldCapture;
         Bitmap _newCapture;
         Graphics _graphics;
-        double _percentDisplayed;
         const int _numBytesPerPixel = 4;
 
         #endregion
@@ -93,7 +91,6 @@ namespace DesktopSharing
 
         public void ResetCaptures()
         {
-            _oldCapture = null;
             _newCapture = new Bitmap(1, 1);
         }
 

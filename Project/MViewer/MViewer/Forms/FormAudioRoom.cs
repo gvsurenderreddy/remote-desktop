@@ -10,22 +10,24 @@ using System.Windows.Forms;
 using GenericObjects;
 using Utils;
 
-namespace MViewer.Forms
+namespace MViewer
 {
     public partial class FormAudioRoom : Form, IAudioRoom
     {
         #region private members
-        
+
         ManualResetEvent _syncClosing = new ManualResetEvent(true);
+        EventHandler _onCaptureReceived;
 
         #endregion
 
         #region c-tor
 
-        public FormAudioRoom(string identity)
+        public FormAudioRoom(string identity, EventHandler onCaptureReceived)
         {
             InitializeComponent();
             ContactIdentity = identity;
+            _onCaptureReceived = onCaptureReceived;
         }
 
         #endregion
@@ -34,7 +36,11 @@ namespace MViewer.Forms
 
         public void PlayAudioCapture(byte[] capture)
         {
-            // todo: implement PlayAudioCapture - audio room
+            _onCaptureReceived.BeginInvoke(this, new AudioCaptureEventArgs()
+            {
+                Capture = capture,
+                Identity = this.ContactIdentity
+            }, null, null);
         }
 
         public void SetPartnerName(string friendlyName)
