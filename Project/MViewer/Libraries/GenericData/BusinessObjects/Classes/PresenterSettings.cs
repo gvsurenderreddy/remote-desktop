@@ -5,7 +5,7 @@ using System.Text;
 ////using System.Threading.Tasks;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class PresenterSettings
     {
@@ -14,9 +14,11 @@ namespace GenericDataLayer
 
         public int VideoTimerInterval { get; set; }
         public Structures.ScreenSize VideoScreenSize { get; set; }
-        public EventHandler VideoImageCaptured { get; set; }
+        public EventHandler OnVideoImageCaptured { get; set; }
 
-        public EventHandler RemotingImageCaptured { get; set; }
+        public EventHandler OnRemotingImageCaptured { get; set; }
         public int RemotingTimerInterval { get; set; }
+
+        public EventHandler OnAudioCaptureAvailable { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 
 namespace MViewer
@@ -117,7 +117,7 @@ namespace MViewer
         private void FormRemotingRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(this.ContactIdentity, this.RoomType);
 
             remoteControl.WireUpEventProvider();
         }
@@ -148,7 +148,7 @@ namespace MViewer
         {
             // todo: find a better way to update the button labels
             remoteControl.WireDownEventProvider();
-            Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
         #endregion
 

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utils;
 using UIControls;
-using GenericDataLayer;
+using GenericObjects;
 using CommandHookMonitor;
 using System.Threading;
 

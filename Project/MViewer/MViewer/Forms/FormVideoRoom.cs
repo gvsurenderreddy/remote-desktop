@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 using UIControls.CrossThreadOperations;
 using System.Threading;
@@ -44,7 +44,7 @@ namespace MViewer
         private void FormVideoRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.ActiveRoomChanged(this.ContactIdentity, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(this.ContactIdentity, this.RoomType);
         }
 
         private void FormVideoRoom_Resize(object sender, EventArgs e)
@@ -143,7 +143,7 @@ namespace MViewer
         private void FormVideoRoom_Deactivate(object sender, EventArgs e)
         { 
             // todo: find a better way to update the button labels
-            Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
     }
 }

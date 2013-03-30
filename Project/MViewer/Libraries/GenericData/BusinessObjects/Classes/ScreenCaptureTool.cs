@@ -6,10 +6,10 @@ using System.Drawing;
 using DesktopSharing;
 using Utils;
 using System.Timers;
-using GenericDataLayer;
+using GenericObjects;
 using System.Windows.Forms;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class ScreenCaptureTool : IScreenCaptureTool
     {

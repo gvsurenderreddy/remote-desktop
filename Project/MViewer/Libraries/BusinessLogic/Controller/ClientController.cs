@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GenericDataLayer;
+using GenericObjects;
 using System.Drawing;
 using Utils;
 using System.IO;

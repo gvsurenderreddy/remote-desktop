@@ -13,9 +13,9 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace MicrophoneSample
+namespace AudioStreaming
 {
-    internal class AudioStream : Microsoft.Xna.Framework.Game
+    public class AudioStream : Microsoft.Xna.Framework.Game
     {
         #region private members
 

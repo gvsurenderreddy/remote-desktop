@@ -12,7 +12,7 @@
 
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 using System;
 using System.Drawing;

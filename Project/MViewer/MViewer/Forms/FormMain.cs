@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-using GenericDataLayer;
+using GenericObjects;
 using UIControls;
 using Utils;
 
@@ -47,22 +47,22 @@ namespace MViewer
         {
             // update labels according to selected contact
             KeyValuePair<string, string> contact = GetSelectedContact();
-            Program.Controller.ActiveRoomChanged(contact.Key, GenericEnums.RoomType.Audio);
-            Program.Controller.ActiveRoomChanged(contact.Key, GenericEnums.RoomType.Video);
-            Program.Controller.ActiveRoomChanged(contact.Key, GenericEnums.RoomType.Remoting);
+            Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Audio);
+            Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Video);
+            Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Remoting);
         }
 
         private void FormMain_Deactivate(object sender, EventArgs e)
         {
-            Program.Controller.ActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
+            Program.Controller.OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
         }
 
         private void OnSelectedContactChanged(object sender, EventArgs e)
         {
             ContactsEventArgs args = (ContactsEventArgs)e;
-            Program.Controller.ActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Audio);
-            Program.Controller.ActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Video);
-            Program.Controller.ActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Remoting);
+            Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Audio);
+            Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Video);
+            Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Remoting);
         }
 
         private void OnContactsUpdated(object sender, EventArgs e)

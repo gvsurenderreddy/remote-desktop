@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Tokens;
 using System.IdentityModel.Selectors;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class CustomCertificateValidator : X509CertificateValidator
     {

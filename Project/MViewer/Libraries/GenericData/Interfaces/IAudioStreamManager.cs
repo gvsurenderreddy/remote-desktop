@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AudioStreaming
+namespace GenericObjects
 {
     public interface IAudioStreamManager
     {

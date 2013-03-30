@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GenericDataLayer;
+using GenericObjects;
 using System.Threading;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class Presenter : IPresenter
     {
@@ -14,8 +14,8 @@ namespace GenericDataLayer
 
         WebcamCapture _videoCapture;
         ScreenCaptureTool _screenCapture;
-        static bool _firstTimeCapturing;
-
+        bool _firstTimeCapturing;
+        AudioStreamManager _audioStreamManager;
         PresenterSettings _presenterSettings;
 
         #endregion
@@ -26,6 +26,7 @@ namespace GenericDataLayer
         {
             _presenterSettings = presenterSettings;
             _videoCapture = _presenterSettings.VideoCaptureControl;
+            _audioStreamManager = new AudioStreamManager(_presenterSettings.OnAudioCaptureAvailable);
 
             // initialize the image capture size
             if (_videoCapture != null)
@@ -36,10 +37,10 @@ namespace GenericDataLayer
                 _firstTimeCapturing = true;
 
                 // bind the image captured event
-                _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.VideoImageCaptured);
+                _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.OnVideoImageCaptured);
             }
 
-            _screenCapture = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.RemotingImageCaptured);
+            _screenCapture = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.OnRemotingImageCaptured);
         }
 
         #endregion
@@ -63,12 +64,12 @@ namespace GenericDataLayer
 
         public void StartAudioPresentation()
         {
-            // todo: implement StartAudioPresentation
+            _audioStreamManager.StartStreaming();
         }
 
         public void StopAudioPresentation()
         {
-            // todo: implement StopAudioPresentation
+            _audioStreamManager.StopStreaming();
         }
 
         public void StartRemotingPresentation()

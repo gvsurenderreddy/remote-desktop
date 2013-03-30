@@ -85,6 +85,7 @@
     <Compile Include="Forms\FormMyWebcam.Designer.cs">
       <DependentUpon>FormMyWebcam.cs</DependentUpon>
     </Compile>
+    <Compile Include="MVC\Controller\AudioController.cs" />
     <Compile Include="MVC\Controller\FileTransferController.cs" />
     <Compile Include="MVC\Controller\MainController.cs" />
     <Compile Include="Forms\FormActions.cs">
@@ -167,9 +168,9 @@
       <Project>{B0788A7C-1297-4B64-BE84-10799BD6BE66}</Project>
       <Name>DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Libraries\GenericData\GenericDataLayer.csproj">
+    <ProjectReference Include="..\Libraries\GenericData\GenericObjects.csproj">
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
-      <Name>GenericDataLayer</Name>
+      <Name>GenericObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\InputSimulator\InputSimulator.csproj">
       <Project>{3549cd6f-80f8-450f-b99e-cf0a736b1f2a}</Project>

@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using Utils;
-using GenericDataLayer;
+using GenericObjects;
 using BusinessLogicLayer;
 using System.Drawing;
 using System.IO;
@@ -67,7 +67,7 @@ namespace MViewer
         #region public methods
 
         // todo: convert this to an event handler , use it in the Video Form as observer
-        public void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
+        public void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
         {
             // update the active room identity
             _view.RoomManager.ActiveRoom = newIdentity;

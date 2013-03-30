@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public interface IVideoRoom : IRoom
     {

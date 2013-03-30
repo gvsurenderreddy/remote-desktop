@@ -5,7 +5,7 @@ using System.Text;
 using System.Data;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public interface IModel
     {

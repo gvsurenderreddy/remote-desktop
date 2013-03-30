@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Threading;
-using GenericDataLayer;
+using GenericObjects;
 using System.ServiceModel.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;

@@ -6,7 +6,7 @@ using System.Drawing;
 using Utils;
 using System.IO;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public interface IClientController
     {

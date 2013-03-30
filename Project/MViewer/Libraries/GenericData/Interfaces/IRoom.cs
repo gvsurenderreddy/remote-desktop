@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public interface IRoom
     {

@@ -1,4 +1,5 @@
-﻿using MicrophoneSample;
+﻿
+using AudioStreaming;
 using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Timers;
 
-namespace AudioStreaming
+namespace GenericObjects
 {
     public class AudioStreamManager : IAudioStreamManager
     {
@@ -39,7 +40,7 @@ namespace AudioStreaming
             _audioStream.SyncChunk.Reset();
 
             byte[] file = _audioStream.Stream.GetBuffer();
-            _onCaptureAvailable.Invoke(this, 
+            //_onCaptureAvailable.Invoke(this, AudioEventArgs
             _audioStream.Stream = new MemoryStream();
 
             _audioStream.SyncChunk.Set();

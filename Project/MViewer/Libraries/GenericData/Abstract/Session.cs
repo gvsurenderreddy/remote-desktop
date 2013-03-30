@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public abstract class Session
     {

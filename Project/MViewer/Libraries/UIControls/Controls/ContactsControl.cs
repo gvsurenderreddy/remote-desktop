@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using GenericDataLayer;
+using GenericObjects;
 using System.Collections;
 using UIControls.CrossThreadOperations;
 using System.Threading;

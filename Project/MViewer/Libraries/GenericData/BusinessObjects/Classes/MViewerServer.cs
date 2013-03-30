@@ -11,12 +11,12 @@ using Microsoft.VisualBasic.Devices;
 using Utils;
 using System.Drawing;
 using System.Drawing.Imaging;
-using GenericDataLayer;
+using GenericObjects;
 using System.ServiceModel.Description;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Security;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class MViewerServer : Product, IMViewerService
     {

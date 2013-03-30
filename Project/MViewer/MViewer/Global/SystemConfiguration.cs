@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 using StrategyPattern;
 
@@ -18,7 +18,7 @@ namespace MViewer
 
         private PresenterSettings _presenterSettings;
 
-        ControllerRoomHandlers _RoomHandlers;
+        ControllerRoomHandlers _roomHandlers;
         ControllerRemotingHandlers _remotingCommandHandlers;
 
         Delegates.HookCommandDelegate _remotingCommandInvoker;
@@ -29,23 +29,7 @@ namespace MViewer
 
         private SystemConfiguration() 
         {
-            int timerInterval = 100;
-            int height = 354, width = 360;
-
-            _presenterSettings = new PresenterSettings()
-            {
-                Identity = FriendlyName,
-                VideoTimerInterval = timerInterval,
-                VideoScreenSize =
-                    new Structures.ScreenSize()
-                    {
-                        Height = height,
-                        Width = width
-                    },
-                VideoImageCaptured = new EventHandler(Program.Controller.VideoImageCaptured),
-                RemotingTimerInterval = 50,
-                RemotingImageCaptured = new EventHandler(Program.Controller.RemotingImageCaptured)
-            };
+            InitializePresenterSettings();
 
             // handlers initialization 
             Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
@@ -63,7 +47,7 @@ namespace MViewer
             remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemoting);
             remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemoting);
 
-            _RoomHandlers = new ControllerRoomHandlers()
+            _roomHandlers = new ControllerRoomHandlers()
             {
                 // todo: add audio & remoting handlers handlers by signal type
                 Video = videoDelegates,
@@ -104,6 +88,31 @@ namespace MViewer
 
         #endregion
 
+        #region private methods
+
+        private void InitializePresenterSettings()
+        {
+            int timerInterval = 100;
+            int height = 354, width = 360;
+            _presenterSettings = new PresenterSettings()
+            {
+                Identity = FriendlyName,
+                VideoTimerInterval = timerInterval,
+                VideoScreenSize =
+                    new Structures.ScreenSize()
+                    {
+                        Height = height,
+                        Width = width
+                    },
+                OnVideoImageCaptured = new EventHandler(Program.Controller.OnVideoImageCaptured),
+                RemotingTimerInterval = 50,
+                OnRemotingImageCaptured = new EventHandler(Program.Controller.OnRemotingImageCaptured),
+                OnAudioCaptureAvailable = new EventHandler(Program.Controller.OnAudioCaptured),
+            };
+        }
+
+        #endregion
+
         #region properties
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
@@ -121,7 +130,7 @@ namespace MViewer
 
         public ControllerRoomHandlers RoomHandlers
         {
-            get { return _RoomHandlers; }
+            get { return _roomHandlers; }
         }
 
         public PresenterSettings PresenterSettings

@@ -7,7 +7,7 @@ using System.Threading;
 //using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 
 namespace MViewer
@@ -32,7 +32,7 @@ namespace MViewer
 
         #region public methods
 
-        public void VideoImageCaptured(object source, EventArgs e)
+        public void OnVideoImageCaptured(object source, EventArgs e)
         {
             try
             {

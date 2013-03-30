@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.ServiceModel.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Description;
-using GenericDataLayer;
+using GenericObjects;
 
 namespace BusinessLogicLayer
 {
@@ -45,7 +45,7 @@ namespace BusinessLogicLayer
 
             // todo: decide if to keep the custome validator
             authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            authentication.CustomCertificateValidator = new GenericDataLayer.CustomCertificateValidator("CN=Mihai-PC", clientCert);
+            authentication.CustomCertificateValidator = new GenericObjects.CustomCertificateValidator("CN=Mihai-PC", clientCert);
             
             _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
         }

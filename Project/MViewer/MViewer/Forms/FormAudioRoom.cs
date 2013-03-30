@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 
 namespace MViewer.Forms
@@ -101,7 +101,7 @@ namespace MViewer.Forms
         private void FormAudioRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.ActiveRoomChanged(string.Empty, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
     }
 }

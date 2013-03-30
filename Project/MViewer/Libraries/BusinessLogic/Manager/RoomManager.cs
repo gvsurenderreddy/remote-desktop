@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 using System.Windows.Forms;
 using System.Threading;

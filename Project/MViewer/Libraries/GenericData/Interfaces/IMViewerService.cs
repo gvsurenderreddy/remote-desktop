@@ -6,7 +6,7 @@ using Utils;
 using System.Drawing;
 using System.IO;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "IVideoRoom")]

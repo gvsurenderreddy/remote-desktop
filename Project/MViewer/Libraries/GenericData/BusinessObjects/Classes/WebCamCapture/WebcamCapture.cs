@@ -9,12 +9,12 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Threading;
 using System.Runtime.InteropServices;
-using GenericDataLayer;
+using GenericObjects;
 using System.Drawing.Imaging;
 using System.IO;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     [System.Drawing.ToolboxBitmap(typeof(WebcamCapture), "CAMERA.ICO")] // toolbox bitmap
     [Designer("Sytem.Windows.Forms.Design.ParentControlDesigner,System.Design", typeof(System.ComponentModel.Design.IDesigner))] // make composite

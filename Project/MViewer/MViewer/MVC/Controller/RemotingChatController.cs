@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using BusinessLogicLayer;
-using GenericDataLayer;
+using GenericObjects;
 using StrategyPattern;
 using Utils;
 using WindowsInput;
@@ -310,7 +310,7 @@ namespace MViewer
             // unblock the capture sending
             transfer.IsRemotingUpdating = false;
 
-            ActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
+            OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
 
             _syncRemotingCaptureActivity.Set();
         }
@@ -330,7 +330,7 @@ namespace MViewer
 
         }
 
-        public void RemotingImageCaptured(object source, EventArgs e)
+        public void OnRemotingImageCaptured(object source, EventArgs e)
         {
             // binded RemotingImageCaptured to the remoting capture object
             try

@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using UIControls.CrossThreadOperations;
 using Utils;
-using GenericDataLayer;
+using GenericObjects;
 
 namespace UIControls
 {

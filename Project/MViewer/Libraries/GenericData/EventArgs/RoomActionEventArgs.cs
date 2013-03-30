@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class RoomActionEventArgs : EventArgs
     {

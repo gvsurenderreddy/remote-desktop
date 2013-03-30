@@ -6,7 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public interface IController
     {
@@ -30,12 +30,12 @@ namespace GenericDataLayer
         void RoomButtonAction(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideo(WebcamCapture webcamControl);
-        void ActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
+        void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
 
         string MyIdentity();
-        void VideoImageCaptured(object source, EventArgs e);
+        void OnVideoImageCaptured(object source, EventArgs e);
 
-        void RemotingImageCaptured(object source, EventArgs e);
+        void OnRemotingImageCaptured(object source, EventArgs e);
 
         void InitializeSettings();
 
@@ -56,5 +56,7 @@ namespace GenericDataLayer
         void RightMouseUpCommand(object sender, RemotingCommandEventArgs args);
         void MiddleMouseDownCommand(object sender, RemotingCommandEventArgs args);
         void MiddleMouseUpCommand(object sender, RemotingCommandEventArgs args);
+
+        void OnAudioCaptured(object sender, EventArgs e);
     }
 }

@@ -6,7 +6,7 @@ using System.Configuration;
 using System.Reflection;
 using Utils;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class Identity
     {

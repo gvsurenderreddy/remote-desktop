@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using GenericDataLayer;
+using GenericObjects;
 using System.Drawing;
 using UIControls;
 using Utils;

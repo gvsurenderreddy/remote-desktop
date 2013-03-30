@@ -8,7 +8,7 @@ using System.ServiceModel.Security;
 using System.Text;
 ////using System.Threading.Tasks;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public class WCFClient : Product
     {

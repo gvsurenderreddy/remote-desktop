@@ -6,7 +6,7 @@ using System.Data;
 using Utils;
 using System.Drawing;
 
-namespace GenericDataLayer
+namespace GenericObjects
 {
     public interface IView
     {

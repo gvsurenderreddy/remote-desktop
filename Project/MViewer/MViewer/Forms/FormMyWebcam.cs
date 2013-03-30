@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Windows.Forms;
-using GenericDataLayer;
+using GenericObjects;
 using Utils;
 
 namespace MViewer

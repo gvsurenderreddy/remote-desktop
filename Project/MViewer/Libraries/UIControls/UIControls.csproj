@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -126,9 +134,9 @@
       <Project>{f52aa97e-180a-40ed-8f2b-09080171d6c7}</Project>
       <Name>CommandHookMonitor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GenericData\GenericDataLayer.csproj">
-      <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
-      <Name>GenericDataLayer</Name>
+    <ProjectReference Include="..\GenericData\GenericObjects.csproj">
+      <Project>{f04c343c-9057-45be-b8e0-a6bb4cbd3e12}</Project>
+      <Name>GenericObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>

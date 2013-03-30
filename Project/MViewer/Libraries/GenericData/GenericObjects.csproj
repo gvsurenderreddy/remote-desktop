@@ -8,7 +8,7 @@
     <ProjectGuid>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GenericDataLayer</RootNamespace>
+    <RootNamespace>GenericObjects</RootNamespace>
     <AssemblyName>GenericDataLayer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -36,6 +36,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -46,6 +47,10 @@
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Game.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -63,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\Session.cs" />
+    <Compile Include="BusinessObjects\Classes\AudioStreamManager.cs" />
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
@@ -93,6 +99,7 @@
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
     <Compile Include="EventArgs\VideoCaptureEventArgs.cs" />
     <Compile Include="Interfaces\IAudioRoom.cs" />
+    <Compile Include="Interfaces\IAudioStreamManager.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
     <Compile Include="Interfaces\IController.cs" />
     <Compile Include="Interfaces\IDesktopViewer.cs" />
@@ -112,6 +119,10 @@
     <Compile Include="BusinessObjects\Classes\TransferInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AudioStreaming\AudioStreaming.csproj">
+      <Project>{3195debd-9eef-410e-8fb6-cf804c541fd7}</Project>
+      <Name>AudioStreaming</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DesktopSharingCommon\DesktopSharingCommon.csproj">
       <Project>{38c91ed6-4dcd-4427-bc47-8425c07bf66d}</Project>
       <Name>DesktopSharingCommon</Name>
