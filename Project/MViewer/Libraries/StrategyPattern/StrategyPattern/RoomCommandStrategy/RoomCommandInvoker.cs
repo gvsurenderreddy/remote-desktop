@@ -40,11 +40,22 @@ namespace StrategyPattern
             };
             remotingCommands.BindCommands();
 
+            AudioCommands audioCommands = new AudioCommands()
+            {
+                StartAudio = roomHandlers.Audio[GenericEnums.SignalType.Start],
+                StopAudio = roomHandlers.Audio[GenericEnums.SignalType.Stop],
+                PauseAudio = roomHandlers.Audio[GenericEnums.SignalType.Pause],
+                ResumeAudio = roomHandlers.Audio[GenericEnums.SignalType.Resume]
+            };
+            audioCommands.BindCommands();
+
             commands = new Dictionary<GenericEnums.RoomType, IRoomCommands>();
-            //commands.Add(GenericEnums.RoomType.Audio, audioCommand);
+            commands.Add(GenericEnums.RoomType.Audio, audioCommands);
             commands.Add(GenericEnums.RoomType.Video, videoCommands);
             commands.Add(GenericEnums.RoomType.Send, transferCommands);
             commands.Add(GenericEnums.RoomType.Remoting, remotingCommands);
+
+
         }
 
         public void PerformCommand(object sender, RoomActionEventArgs args)
