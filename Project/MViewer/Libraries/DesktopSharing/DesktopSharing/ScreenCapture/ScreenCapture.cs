@@ -14,8 +14,7 @@ namespace DesktopSharing
         Bitmap _oldCapture;
         Bitmap _newCapture;
         Graphics _graphics;
-        //double _percentDisplayed;
-        // ARGB images - 4 bytes
+        double _percentDisplayed;
         const int _numBytesPerPixel = 4;
 
         #endregion
@@ -39,35 +38,35 @@ namespace DesktopSharing
             lock (_newCapture)
             {
                 _newCapture = GetDesktopCapture();
-                //if (_oldCapture != null)
-                //{
-                //    // if we have a previous screen we have just to update it
-                //    rect = GetRectangle();
-                //    if (rect == Rectangle.Empty)
-                //    {
-                //        // nothing has changed to the screen
-                //        _percentDisplayed = 0.0;
-                //    }
-                //    else
-                //    {
-                //        screenCapture = new Bitmap(rect.Width, rect.Height);
-                //        _graphics = Graphics.FromImage(screenCapture);
-                //        _graphics.DrawImage(_newCapture, 0, 0, rect, GraphicsUnit.Pixel);
-                //        _oldCapture = _newCapture;
-                //        lock (_newCapture)
-                //        {
-                //            _percentDisplayed = 100.0 * (screenCapture.Height * screenCapture.Width) /
-                //                (_newCapture.Height * _newCapture.Width);
-                //        }
-                //    }
-                //}
-                //else
+                if (_oldCapture != null)
                 {
-                    // if we do not have a previous screen we have to capture the whole screen
+                    // if we have a previous screen we have just to update it
+                    rect = GetRectangle();
+                    if (rect == Rectangle.Empty)
+                    {
+                        // nothing has changed to the screen
+                        _percentDisplayed = 0.0;
+                    }
+                    else
+                    {
+                        screenCapture = new Bitmap(rect.Width, rect.Height);
+                        _graphics = Graphics.FromImage(screenCapture);
+                        _graphics.DrawImage(_newCapture, 0, 0, rect, GraphicsUnit.Pixel);
+                        _oldCapture = _newCapture;
+                        lock (_newCapture)
+                        {
+                            _percentDisplayed = 100.0 * (screenCapture.Height * screenCapture.Width) /
+                                (_newCapture.Height * _newCapture.Width);
+                        }
+                    }
+                }
+                else
+                {
+                     //if we do not have a previous screen we have to capture the whole screen
                     _oldCapture = _newCapture;
                     screenCapture = _newCapture;
                     rect = new Rectangle(0, 0, _newCapture.Width, _newCapture.Height);
-                    //_percentDisplayed = 100.0;
+                    _percentDisplayed = 100.0;
                 }
             }
             return screenCapture;
