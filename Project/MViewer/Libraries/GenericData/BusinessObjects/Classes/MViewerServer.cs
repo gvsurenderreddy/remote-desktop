@@ -110,12 +110,16 @@ namespace GenericDataLayer
 
         public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
         {
-            // propagate the update to the UI, through the controller
-            _controllerHandlers.ContactsObserver.Invoke(this, new ContactsEventArgs()
+            Thread t = new Thread(delegate()
             {
-                Operation = GenericEnums.ContactsOperation.Status,
-                UpdatedContact = new Contact(-1, senderIdentity, newStatus)
+                // propagate the update to the UI, through the controller
+                _controllerHandlers.ContactsObserver.Invoke(this, new ContactsEventArgs()
+                {
+                    Operation = GenericEnums.ContactsOperation.Status,
+                    UpdatedContact = new Contact(-1, senderIdentity, newStatus)
+                });
             });
+            t.Start();
         }
 
         public void SendRemotingCommand(RemotingCommandEventArgs commandArgs)
