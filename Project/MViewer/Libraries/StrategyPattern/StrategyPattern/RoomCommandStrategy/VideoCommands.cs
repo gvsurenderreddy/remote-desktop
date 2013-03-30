@@ -15,12 +15,6 @@ namespace StrategyPattern
         public Delegates.RoomCommandDelegate PauseVideo;
         public Delegates.RoomCommandDelegate ResumeVideo;
 
-
-        // todo: move these to audio class
-        public Delegates.RoomCommandDelegate StartAudio;
-        public Delegates.RoomCommandDelegate StopAudio;
-
-
         public override void BindCommands()
         {
             _commands = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();

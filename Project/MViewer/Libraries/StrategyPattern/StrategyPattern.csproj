@@ -56,15 +56,16 @@
     <Compile Include="StrategyPattern\HookCommandStrategy\IHookCommandInvoker.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\IHookCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\IMouseCommands.cs" />
+    <Compile Include="StrategyPattern\RoomCommandStrategy\AudioCommands.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\IRoomCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\KeyboardHookCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\MouseHookCommands.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\IRoomCommandInvoker.cs" />
-    <Compile Include="StrategyPattern\RoomCommandStrategy\RemotingChatCommands.cs" />
+    <Compile Include="StrategyPattern\RoomCommandStrategy\RemotingCommands.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\RoomCommandBase.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\RoomCommandInvoker.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\TransferCommands.cs" />
-    <Compile Include="StrategyPattern\RoomCommandStrategy\VideoChatCommands.cs" />
+    <Compile Include="StrategyPattern\RoomCommandStrategy\VideoCommands.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenericData\GenericObjects.csproj">
