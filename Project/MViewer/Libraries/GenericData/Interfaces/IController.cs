@@ -13,6 +13,11 @@ namespace GenericObjects
         void StartApplication();
         void StopApplication();
 
+        void StartAudio(object sender, RoomActionEventArgs args);
+        void StopAudio(object sender, RoomActionEventArgs args);
+        void PauseAudio(object sender, RoomActionEventArgs args);
+        void ResumeAudio(object sender, RoomActionEventArgs args);
+
         void StartVideo(object sender, RoomActionEventArgs args);
         void StopVideo(object sender, RoomActionEventArgs args);
         void PauseVideo(object sender, RoomActionEventArgs args);

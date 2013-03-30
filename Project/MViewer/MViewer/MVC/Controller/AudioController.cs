@@ -14,12 +14,22 @@ namespace MViewer
             // todo: implement OnAudioCaptured
         }
 
-        void StartAudio()
+        public void PauseAudio(object sender, RoomActionEventArgs args)
+        {
+            // todo: implement PauseAudio
+        }
+
+        public void ResumeAudio(object sender, RoomActionEventArgs args)
+        {
+            // todo: implement ResumeAudio
+        }
+
+        public void StartAudio(object sender, RoomActionEventArgs args)
         {
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
         }
 
-        void StopAudio()
+        public void StopAudio(object sender, RoomActionEventArgs args)
         {
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
         }

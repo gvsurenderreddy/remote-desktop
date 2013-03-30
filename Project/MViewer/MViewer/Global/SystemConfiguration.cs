@@ -32,6 +32,16 @@ namespace MViewer
             InitializePresenterSettings();
 
             // handlers initialization 
+            InitializeRoomActionHandlers();
+            InitializeRemotingCommandHandlers();
+        }
+
+        #endregion
+
+        #region private methods
+
+        void InitializeRoomActionHandlers()
+        {
             Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
             videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideo);
             videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideo);
@@ -47,14 +57,24 @@ namespace MViewer
             remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemoting);
             remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemoting);
 
+            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> audioDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
+            audioDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartAudio);
+            audioDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopAudio);
+            audioDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseAudio);
+            audioDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeAudio);
+
             _roomHandlers = new ControllerRoomHandlers()
             {
-                // todo: add audio & remoting handlers handlers by signal type
+                // add video & audio & remoting handlers by signal type
                 Video = videoDelegates,
                 Transfer = transferDelegates,
-                Remoting = remotingDelegates
+                Remoting = remotingDelegates,
+                Audio = audioDelegates
             };
+        }
 
+        void InitializeRemotingCommandHandlers()
+        {
             // add mouse & keyboard delegate from the controller
             RemotingCommand = Program.Controller.SendRemotingCommand;
 
@@ -85,10 +105,6 @@ namespace MViewer
                 MouseCommands = mouseDelegates
             };
         }
-
-        #endregion
-
-        #region private methods
 
         private void InitializePresenterSettings()
         {
