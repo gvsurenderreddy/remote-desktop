@@ -60,9 +60,9 @@ namespace GenericDataLayer
             //WSHttpBinding binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpBinding();
 
             _binding.CloseTimeout = new TimeSpan(0, 1, 0);
-            _binding.OpenTimeout = new TimeSpan(0, 1, 0);
-            _binding.ReceiveTimeout = new TimeSpan(0, 10, 0);
-            _binding.SendTimeout = new TimeSpan(0, 10, 0);
+            _binding.OpenTimeout = new TimeSpan(0, 0, 30);
+            _binding.ReceiveTimeout = new TimeSpan(0, 0, 30);
+            _binding.SendTimeout = new TimeSpan(0, 0, 30);
 
             _binding.MaxBufferPoolSize = 100000000;
             _binding.ReaderQuotas.MaxArrayLength = 100000000;

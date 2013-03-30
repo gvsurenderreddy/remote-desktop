@@ -36,8 +36,6 @@ namespace BusinessLogicLayer
             return _client.Client;
         }
 
-        #endregion
-
         public override void BuildCertificate()
         {
             _client.BuildCertificate();
@@ -52,5 +50,7 @@ namespace BusinessLogicLayer
         {
             _client.BuildContract();
         }
+
+        #endregion
     }
 }

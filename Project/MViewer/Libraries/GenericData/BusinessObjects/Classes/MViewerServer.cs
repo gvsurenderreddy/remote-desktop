@@ -256,6 +256,12 @@ namespace GenericDataLayer
 
             _binding.Name = "binding1";
 
+            _binding.OpenTimeout = new TimeSpan(0, 0, 20);
+            _binding.CloseTimeout = new TimeSpan(0, 0, 20);
+            _binding.ReceiveTimeout = new TimeSpan(0, 0, 20);
+            _binding.SendTimeout = new TimeSpan(0, 0, 20);
+
+
             // todo : programmatically add global error handler to the WCF
 
         }
