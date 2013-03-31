@@ -29,6 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            this.identityControl = new UIControls.IdentityControl(this.IdentityUpdated);
+            this.contactsControl = new UIControls.ContactsControl(this.OnContactsControl_ClosePressed, this.OnContactsUpdated, this.OnSelectedContactChanged);
+            this.SuspendLayout();
+            // 
+            // identityControl
+            // 
+            this.identityControl.Location = new System.Drawing.Point(3, 9);
+            this.identityControl.Name = "identityControl";
+            this.identityControl.Size = new System.Drawing.Size(282, 51);
+            this.identityControl.TabIndex = 0;
+
             this.lblActionResult = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -41,6 +52,14 @@
             this.lblActionResult.TabIndex = 0;
             this.lblActionResult.Visible = false;
             // 
+            // contactsControl
+            // 
+            this.contactsControl.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.contactsControl.Location = new System.Drawing.Point(291, 0);
+            this.contactsControl.Name = "contactsControl";
+            this.contactsControl.Size = new System.Drawing.Size(223, 305);
+            this.contactsControl.TabIndex = 1;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -48,7 +67,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(510, 305);
-            this.Controls.Add(this.lblActionResult);
+            this.Controls.Add(this.contactsControl);
+            this.Controls.Add(this.identityControl);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -58,7 +78,6 @@
             this.Text = "MViewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -67,7 +86,6 @@
         private UIControls.IdentityControl identityControl;
         private UIControls.ContactsControl contactsControl;
         private System.Windows.Forms.Label lblActionResult;
-
     }
 }
 
