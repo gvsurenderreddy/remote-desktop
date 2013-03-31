@@ -50,6 +50,8 @@ namespace MViewer
             Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Audio);
             Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Video);
             Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Remoting);
+
+            Program.Controller.FocusActionsForm();
         }
 
         private void FormMain_Deactivate(object sender, EventArgs e)

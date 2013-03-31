@@ -164,6 +164,19 @@ namespace MViewer
             }
         }
 
+        public void FocusActionsForm()
+        {
+            _formActions.Invoke(new MethodInvoker
+                       (
+                      delegate
+                      {
+                          _formActions.Show();
+                          _formActions.Focus();
+                      }
+                       )
+                       );
+        }
+
         public void NotifyContactsObserver()
         {
             if (_observers != null)

@@ -67,6 +67,11 @@ namespace MViewer
 
         #region public methods
 
+        public void FocusActionsForm()
+        {
+            _view.FocusActionsForm();
+        }
+
         // todo: convert this to an event handler , use it in the Video Form as observer
         public void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
         {

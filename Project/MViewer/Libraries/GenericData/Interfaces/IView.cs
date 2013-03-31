@@ -28,6 +28,7 @@ namespace GenericObjects
         bool ExitConfirmation();
         void WaitRoomButtonAction(bool wait);
         bool RequestTransferPermission(string identity, string fileName, long fileSize);
+        void FocusActionsForm();
 
         bool VideoCaptureClosed
         {
