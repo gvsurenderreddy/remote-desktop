@@ -15,6 +15,7 @@ namespace GenericObjects
     {
         #region private members
 
+        ManualResetEvent _syncAudioInstance = new ManualResetEvent(true);
         System.Timers.Timer _timer;
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
@@ -36,6 +37,9 @@ namespace GenericObjects
         void OnAudioReady(object sender, ElapsedEventArgs e)
         {
             _timer.Stop();
+
+            _syncAudioInstance.WaitOne();
+            Thread.Sleep(200);
 
             _audioStream.SyncChunk.Reset();
 
@@ -59,7 +63,12 @@ namespace GenericObjects
 
             Thread t = new Thread(delegate()
             {
+                _syncAudioInstance.Reset();
+
                 _audioStream = new AudioStream();
+
+                _syncAudioInstance.Set();
+
                 _audioStream.Run();
             });
             t.Start();
