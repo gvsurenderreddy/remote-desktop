@@ -304,7 +304,13 @@ namespace MViewer
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.VideoSessionState = GenericEnums.SessionState.Opened;
-                    peers.AudioSessionState = GenericEnums.SessionState.Opened;
+
+                    this.StartAudio(this, new RoomActionEventArgs()
+                    {
+                        Identity = identity,
+                        RoomType = GenericEnums.RoomType.Audio,
+                        SignalType = GenericEnums.SignalType.Start
+                    });
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
