@@ -69,6 +69,7 @@ namespace MViewer
 
         public void FocusActionsForm()
         {
+            // todo: remove FocusActionsForm if not necessary
             _view.FocusActionsForm();
         }
 

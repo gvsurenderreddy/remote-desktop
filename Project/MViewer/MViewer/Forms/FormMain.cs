@@ -51,7 +51,7 @@ namespace MViewer
             Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Video);
             Program.Controller.OnActiveRoomChanged(contact.Key, GenericEnums.RoomType.Remoting);
 
-            Program.Controller.FocusActionsForm();
+            //Program.Controller.FocusActionsForm();
         }
 
         private void FormMain_Deactivate(object sender, EventArgs e)
@@ -96,6 +96,7 @@ namespace MViewer
 
         private void OnContactsControl_ClosePressed(object sender, EventArgs e)
         {
+            this.Enabled = false;
             Program.Controller.StopApplication();
         }
 
