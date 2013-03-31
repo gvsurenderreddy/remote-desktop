@@ -24,7 +24,7 @@ namespace AudioStreaming
         ManualResetEvent _syncStatus = new ManualResetEvent(true);
         byte[] _buffer;
         MemoryStream _stream;
-        private Microphone _microphone = Microphone.Default;
+        private Microphone _microphone;
         bool _isRunning;
 
         #endregion
@@ -62,14 +62,9 @@ namespace AudioStreaming
         {
             try
             {
-                _graphicsManager = new GraphicsDeviceManager(this);
-                FrameworkDispatcher.Update();
-                _microphone.BufferDuration = TimeSpan.FromSeconds(1);
-                _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
-                _microphone.BufferReady += OnBufferReady;
-                _isRunning = true;
-                _stream = new MemoryStream();
+                _microphone = Microphone.Default;
 
+                _graphicsManager = new GraphicsDeviceManager(this);
                 _graphicsManager.PreferredBackBufferHeight = 1;
                 _graphicsManager.PreferredBackBufferWidth = 1;
 
@@ -77,6 +72,14 @@ namespace AudioStreaming
                 gameWindowForm.Hide();
                 gameWindowForm.ShowInTaskbar = false;
                 gameWindowForm.Opacity = 0;
+
+                FrameworkDispatcher.Update();
+                _microphone.BufferDuration = TimeSpan.FromSeconds(1);
+                _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
+                _microphone.BufferReady += OnBufferReady;
+                _isRunning = true;
+                _stream = new MemoryStream();
+               
             }
             catch (Exception ex)
             {
