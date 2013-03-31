@@ -113,7 +113,6 @@ namespace MViewer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                //_webcamCapture.StopCapturing();
             }
             finally
             {
