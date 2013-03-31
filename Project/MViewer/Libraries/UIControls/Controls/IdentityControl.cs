@@ -101,19 +101,26 @@ namespace UIControls
 
         private void lblLanguage_MouseClick(object sender, MouseEventArgs e)
         {
-            if (lblLanguage.Text.ToLower().Equals(GenericEnums.Language.RO.ToString().ToLower()))
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ro-RO");
-                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("ro-RO");
+                if (lblLanguage.Text.ToLower().Equals(GenericEnums.Language.RO.ToString().ToLower()))
+                {
+                    ChangeLanguage("ro-RO");
+                }
+                else
+                {
+                    ChangeLanguage("en-US");
+                }
             }
-            else
+        }
+
+        private void ChangeLanguage(string lang)
+        {
+            foreach (Control c in this.Controls)
             {
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
-                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+                ComponentResourceManager resources = new ComponentResourceManager(typeof(IdentityControl));
+                resources.ApplyResources(c, c.Name, new CultureInfo(lang));
             }
-            this.InitializeComponent();
-            this.Refresh();
-            this.Update();
         }
     }
 }

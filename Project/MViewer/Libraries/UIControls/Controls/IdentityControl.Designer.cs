@@ -28,57 +28,53 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IdentityControl));
             this.lblFriendlyName = new System.Windows.Forms.Label();
             this.lblID = new System.Windows.Forms.Label();
             this.txtFriendlyName = new System.Windows.Forms.TextBox();
             this.txtMyID = new System.Windows.Forms.TextBox();
+            this.lblLanguage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblFriendlyName
             // 
-            this.lblFriendlyName.AutoSize = true;
-            this.lblFriendlyName.Location = new System.Drawing.Point(5, 5);
+            resources.ApplyResources(this.lblFriendlyName, "lblFriendlyName");
             this.lblFriendlyName.Name = "lblFriendlyName";
-            this.lblFriendlyName.Size = new System.Drawing.Size(75, 13);
-            this.lblFriendlyName.TabIndex = 0;
-            this.lblFriendlyName.Text = "Friendly name:";
             // 
             // lblID
             // 
-            this.lblID.AutoSize = true;
-            this.lblID.Location = new System.Drawing.Point(42, 29);
+            resources.ApplyResources(this.lblID, "lblID");
             this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(38, 13);
-            this.lblID.TabIndex = 1;
-            this.lblID.Text = "My ID:";
             // 
             // txtFriendlyName
             // 
-            this.txtFriendlyName.Location = new System.Drawing.Point(86, 4);
+            resources.ApplyResources(this.txtFriendlyName, "txtFriendlyName");
             this.txtFriendlyName.Name = "txtFriendlyName";
-            this.txtFriendlyName.Size = new System.Drawing.Size(193, 20);
-            this.txtFriendlyName.TabIndex = 2;
             this.txtFriendlyName.TextChanged += new System.EventHandler(this.txtFriendlyName_TextChanged);
             this.txtFriendlyName.Leave += new System.EventHandler(this.txtFriendlyName_Leave);
             // 
             // txtMyID
             // 
-            this.txtMyID.Location = new System.Drawing.Point(86, 27);
+            resources.ApplyResources(this.txtMyID, "txtMyID");
             this.txtMyID.Name = "txtMyID";
-            this.txtMyID.Size = new System.Drawing.Size(193, 20);
-            this.txtMyID.TabIndex = 3;
             this.txtMyID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMyID_KeyDown);
+            // 
+            // lblLanguage
+            // 
+            resources.ApplyResources(this.lblLanguage, "lblLanguage");
+            this.lblLanguage.Name = "lblLanguage";
+            this.lblLanguage.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lblLanguage_MouseClick);
             // 
             // IdentityControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblLanguage);
             this.Controls.Add(this.txtMyID);
             this.Controls.Add(this.txtFriendlyName);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.lblFriendlyName);
             this.Name = "IdentityControl";
-            this.Size = new System.Drawing.Size(282, 51);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -90,5 +86,6 @@
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.TextBox txtFriendlyName;
         private System.Windows.Forms.TextBox txtMyID;
+        private System.Windows.Forms.Label lblLanguage;
     }
 }
