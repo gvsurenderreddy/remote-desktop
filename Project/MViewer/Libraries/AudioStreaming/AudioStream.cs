@@ -169,7 +169,7 @@ namespace AudioStreaming
                 _syncStop.Reset();
 
                 // todo: remove this
-                Thread.Sleep(5000);
+                //Thread.Sleep(5000);
                
                 _microphone.Stop();
             }
