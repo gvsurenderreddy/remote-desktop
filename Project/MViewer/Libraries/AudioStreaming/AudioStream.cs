@@ -133,6 +133,7 @@ namespace AudioStreaming
             if (!_isRunning)
             {
                 _microphone.Stop();
+                _microphone = null;
             }
 
             base.Update(gameTime);
