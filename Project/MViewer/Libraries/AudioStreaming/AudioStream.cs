@@ -22,6 +22,8 @@ namespace AudioStreaming
         GraphicsDeviceManager _graphicsManager;
         ManualResetEvent _syncChunk = new ManualResetEvent(true);
         ManualResetEvent _syncStatus = new ManualResetEvent(true);
+        ManualResetEvent _syncStop = new ManualResetEvent(false);
+
         byte[] _buffer;
         MemoryStream _stream;
         private Microphone _microphone;
@@ -30,6 +32,11 @@ namespace AudioStreaming
         #endregion
 
         #region proprieties
+
+        public ManualResetEvent SyncStop
+        {
+            get { return _syncStop; }
+        }
 
         public bool IsRunning
         {
@@ -132,11 +139,13 @@ namespace AudioStreaming
             _syncStatus.WaitOne();
             if (!_isRunning)
             {
+                _syncStop.Reset();
                 _microphone.Stop();
                 _microphone = null;
             }
 
             base.Update(gameTime);
+            _syncStop.Set();
         }
 
         #endregion

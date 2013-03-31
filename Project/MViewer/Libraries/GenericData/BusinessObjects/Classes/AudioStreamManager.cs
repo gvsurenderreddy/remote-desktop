@@ -92,7 +92,7 @@ namespace GenericObjects
             if (_audioStream != null)
             {
                 _audioStream.StopAudio();
-
+                _audioStream.SyncStop.WaitOne();
                 _audioStream.Exit();
             }
         }
