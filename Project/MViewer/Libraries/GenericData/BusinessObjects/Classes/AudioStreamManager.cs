@@ -15,7 +15,7 @@ namespace GenericObjects
     {
         #region private members
 
-        ManualResetEvent _syncAudioInstance = new ManualResetEvent(true);
+        ManualResetEvent _syncAudioInstance = new ManualResetEvent(false);
         System.Timers.Timer _timer;
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
@@ -41,6 +41,7 @@ namespace GenericObjects
             _syncAudioInstance.WaitOne();
             Thread.Sleep(200);
 
+            //todo: fix the issue that is preventing the audioStream object from being instanced before being used below
             _audioStream.SyncChunk.Reset();
 
             byte[] file = _audioStream.Stream.GetBuffer();
