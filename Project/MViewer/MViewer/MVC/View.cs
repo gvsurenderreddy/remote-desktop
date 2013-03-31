@@ -53,6 +53,11 @@ namespace MViewer
 
         #region public methods
 
+        public void SetResultText(string text)
+        {
+            _formMain.SetResultText(text);
+        }
+
         public bool RequestTransferPermission(string identity, string fileName, long fileSize)
         {
             bool canSend = false;

@@ -93,7 +93,15 @@ namespace MViewer
         public void RoomButtonAction(object sender, EventArgs e)
         {
             RoomActionEventArgs args = (RoomActionEventArgs)e;
-            _roomCommandInvoker.PerformCommand(sender, args);
+            bool isContactOnline = _model.ClientController.IsContactOnline(args.Identity);
+            if (isContactOnline)
+            {
+                _roomCommandInvoker.PerformCommand(sender, args);
+            }
+            else
+            {
+                _view.SetResultText("Partner isn't online...");
+            }
         }
 
         // todo: convert this to an event handler , use it in the Main Form as observer

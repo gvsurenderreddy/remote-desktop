@@ -115,6 +115,33 @@ namespace MViewer
 
         #region public methods
 
+        public void SetResultText(string text)
+        {
+            if (lblActionResult.InvokeRequired)
+            {
+                lblActionResult.Invoke(new MethodInvoker(delegate()
+                            {
+                                lblActionResult.Text = text;
+                                lblActionResult.Visible = false;
+                            }));
+            }
+            else
+            {
+                lblActionResult.Text = text;
+                lblActionResult.Visible = true;
+                Thread t = new Thread(delegate()
+                    {
+                        Thread.Sleep(5000);
+                        lblActionResult.Invoke(new MethodInvoker(delegate()
+                            {
+                                lblActionResult.Text = "";
+                                lblActionResult.Visible = false;
+                            }));
+                    });
+                t.Start();
+            }
+        }
+
         public KeyValuePair<string, string> GetSelectedContact()
         {
             return contactsControl.GetSelectedContact();
