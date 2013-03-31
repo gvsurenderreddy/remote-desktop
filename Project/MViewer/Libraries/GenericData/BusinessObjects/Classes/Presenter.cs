@@ -64,7 +64,10 @@ namespace GenericObjects
 
         public void StartAudioPresentation()
         {
-            _audioStreamManager.StartStreaming();
+            if (_audioStreamManager.AudioCaptureClosed)
+            {
+                _audioStreamManager.StartStreaming();
+            }
         }
 
         public void StopAudioPresentation()

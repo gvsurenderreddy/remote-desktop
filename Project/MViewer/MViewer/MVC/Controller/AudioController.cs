@@ -14,11 +14,9 @@ namespace MViewer
     {
         readonly object _syncAudioCaptureSending = new object();
         ManualResetEvent _syncAudioCaptureActivity = new ManualResetEvent(true);
-        //bool _audioCapturePending;
 
         void AudioCaptureObserver(object sender, EventArgs e)
         {
-            // todo: implement AudioCaptureObserver
             AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
             PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
 
@@ -49,12 +47,10 @@ namespace MViewer
 
         public void OnAudioCaptured(object sender, EventArgs e)
         {
-            // todo: implement OnAudioCaptured
             try
             {
                 _syncAudioCaptureActivity.WaitOne(); // wait for any room action to end
 
-                //_audioCapturePending = true;
                 if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).AudioCaptureClosed() == false)
                 {
                     lock (_syncAudioCaptureSending)
@@ -94,16 +90,7 @@ namespace MViewer
                                 }
 
                                 transferStatus.Audio = false;
-                                if (peers.AudioSessionState == GenericEnums.SessionState.Opened
-                                    || peers.AudioSessionState == GenericEnums.SessionState.Pending)
-                                {
-                                    transferStatus.Audio = true;
-
-                                    // todo: send audio capture
-
-                                    transferStatus.Audio = false;
-                                }
-
+                               
                             }
                         }
                     }
@@ -116,11 +103,6 @@ namespace MViewer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                //_webcamCapture.StopCapturing();
-            }
-            finally
-            {
-                //_audioCapturePending = false;
             }
         }
 
@@ -180,12 +162,17 @@ namespace MViewer
 
         public void StartAudio(object sender, RoomActionEventArgs args)
         {
+            // add client session
+            OpenAudioForm(args.Identity);
+
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
         }
 
         public void StopAudio(object sender, RoomActionEventArgs args)
         {
             PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
+
+            // todo: remove all active clients
         }
     }
 }
