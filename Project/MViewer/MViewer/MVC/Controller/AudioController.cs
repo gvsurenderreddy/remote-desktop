@@ -114,6 +114,9 @@ namespace MViewer
             {
                 Thread t = new Thread(delegate()
                 {
+                    Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Audio);
+                    _model.SessionManager.AddSession(clientSession);
+
                     //IntPtr handle = IntPtr.Zero;
                     FormAudioRoom AudioRoom = new FormAudioRoom(identity, this.AudioCaptureObserver);
                     _view.RoomManager.AddRoom(identity, AudioRoom);
@@ -170,9 +173,14 @@ namespace MViewer
 
         public void StopAudio(object sender, RoomActionEventArgs args)
         {
-            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
+            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+            peers.AudioSessionState = GenericEnums.SessionState.Closed;
+            _model.SessionManager.RemoveSession(args.Identity);
 
-            // todo: remove all active clients
+            if (_view.RoomManager.AudioRoomsLeft() == false)
+            {
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
+            }
         }
     }
 }
