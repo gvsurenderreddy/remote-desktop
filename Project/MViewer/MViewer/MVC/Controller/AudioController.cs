@@ -183,6 +183,8 @@ namespace MViewer
 
         public void StopAudio(object sender, RoomActionEventArgs args)
         {
+            _syncAudioCaptureActivity.Reset();
+
             string identity = args.Identity;
             PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
             // update the session status to closed
@@ -211,6 +213,8 @@ namespace MViewer
             {
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
             }
+
+            _syncAudioCaptureActivity.Set();
         }
     }
 }
