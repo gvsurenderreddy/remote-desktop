@@ -207,12 +207,17 @@ namespace MViewer
                 _model.SessionManager.RemoveSession(identity);
                 _view.RoomManager.CloseRoom(identity);
                 _view.RoomManager.RemoveRoom(identity);
+
+                _view.UpdateLabels(args.Identity, args.RoomType);
             }
 
             if (_view.RoomManager.AudioRoomsLeft() == false)
             {
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
+                _view.ResetLabels(args.RoomType);
             }
+
+            OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
 
             _syncAudioCaptureActivity.Set();
         }

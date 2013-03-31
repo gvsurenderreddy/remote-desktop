@@ -305,6 +305,7 @@ namespace MViewer
             {
                 // check if any remoting session is still active
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                _view.ResetLabels(args.RoomType);
             }
 
             // unblock the capture sending

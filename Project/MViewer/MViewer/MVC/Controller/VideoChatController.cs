@@ -165,6 +165,8 @@ namespace MViewer
                 _model.SessionManager.RemoveSession(identity);
                 _view.RoomManager.CloseRoom(identity);
                 _view.RoomManager.RemoveRoom(identity);
+
+                _view.UpdateLabels(args.Identity, args.RoomType);
             }
 
             _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
@@ -173,7 +175,7 @@ namespace MViewer
             // close the webcapture form if there s no room left
             if (!_view.RoomManager.VideoRoomsLeft())
             {
-                _view.ResetLabels(GenericEnums.RoomType.Video);
+                _view.ResetLabels(args.RoomType);
                 StopVideoCapturing();
             }
 
