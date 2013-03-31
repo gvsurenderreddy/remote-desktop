@@ -148,7 +148,7 @@ namespace MViewer
         {
             // todo: find a better way to update the button labels
             remoteControl.WireDownEventProvider();
-            Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
+            //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
         #endregion
 
