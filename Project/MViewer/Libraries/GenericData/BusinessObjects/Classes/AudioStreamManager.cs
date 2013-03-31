@@ -65,7 +65,7 @@ namespace GenericObjects
 
         public void StartStreaming()
         {
-            _timer = new System.Timers.Timer(1 * 1000);
+            _timer = new System.Timers.Timer(2 * 1000);
             _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
 
             Thread t = new Thread(delegate()
