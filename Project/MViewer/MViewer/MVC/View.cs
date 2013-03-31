@@ -279,7 +279,7 @@ namespace MViewer
             if (videoRoomsActive || remotingRoomsActive || audioRoomsActive)
             {
                 DialogResult result = MessageBox.Show(_formMain,
-                    "Close all active s?", 
+                    "Close all active rooms?", 
                     "Exit confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                 if (result != DialogResult.Yes)
                 {
