@@ -184,8 +184,19 @@ namespace MViewer
         public void StopAudio(object sender, RoomActionEventArgs args)
         {
             _syncAudioCaptureActivity.Reset();
-
             string identity = args.Identity;
+            
+            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
+            transfer.IsAudioUpdating = true;
+
+            // check if the webcapture is pending for being sent
+            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(identity);
+            while (transferStatus.Audio)
+            {
+                // wait for it to finish and block the next sending
+                Thread.Sleep(200);
+            }
+
             PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
             // update the session status to closed
             if (peers.AudioSessionState != GenericEnums.SessionState.Closed)
@@ -218,7 +229,7 @@ namespace MViewer
             }
 
             OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
-
+            transfer.IsAudioUpdating = false;
             _syncAudioCaptureActivity.Set();
         }
     }
