@@ -43,15 +43,15 @@ namespace GenericObjects
             //todo: fix the issue that is preventing the audioStream object from being instanced before being used below
             _audioStream.SyncChunk.Reset();
 
-            byte[] file = _audioStream.Stream.GetBuffer();
+            byte[] capture =  _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
             //_onCaptureAvailable.Invoke(this, AudioEventArgs
             _audioStream.Stream = new MemoryStream();
 
-            if (file != null && file.Length > 0)
+            if (capture != null && capture.Length > 0)
             {
                 _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
                 {
-                    Capture = file
+                    Capture = capture
                 });
             }
             _audioStream.SyncChunk.Set();
