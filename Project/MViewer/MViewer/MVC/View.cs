@@ -175,8 +175,7 @@ namespace MViewer
                        (
                       delegate
                       {
-                          _formActions.Show();
-                          _formActions.Focus();
+                          _formActions.Activate();
                       }
                        )
                        );
