@@ -246,7 +246,7 @@ namespace GenericObjects
                                 // todo: add timestamp to be used for sinchron with audio
 
                                 // todo: resize to lower resolution for bandwidth saving
-                                _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, 50, 50);
+                                _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, this._width, this._height);
 
                                 // raise the capture event
                                 this.ImageCaptured(this, _eventArgs);
