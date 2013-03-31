@@ -14,7 +14,7 @@ using Utils;
 namespace MViewer
 {
     public partial class FormMain : Form
-    { 
+    {
         #region private members
 
         // controller events
@@ -109,7 +109,7 @@ namespace MViewer
 
         #region private methods
 
-        
+
 
         #endregion
 
@@ -117,25 +117,35 @@ namespace MViewer
 
         public void SetResultText(string text)
         {
-            if (lblActionResult.InvokeRequired)
+            Label lblActionResult = new System.Windows.Forms.Label();
+            // 
+            lblActionResult.AutoSize = true;
+            lblActionResult.Location = new System.Drawing.Point(12, 283);
+            lblActionResult.Name = "lblActionResult";
+            lblActionResult.Size = new System.Drawing.Size(0, 13);
+            lblActionResult.TabIndex = 0;
+            lblActionResult.Visible = false;
+
             {
-                lblActionResult.Invoke(new MethodInvoker(delegate()
-                            {
-                                lblActionResult.Text = text;
-                                lblActionResult.Visible = false;
-                            }));
-            }
-            else
-            {
-                lblActionResult.Text = text;
-                lblActionResult.Visible = true;
+
+                this.Invoke(new MethodInvoker(delegate()
+                {
+                    lblActionResult.Text = text;
+                    lblActionResult.Visible = true;
+                    lblActionResult.Refresh();
+                    lblActionResult.Update();
+                    this.Refresh();
+                    this.Update();
+                }));
+
+                this.Invoke(new MethodInvoker(delegate() { this.Controls.Add(lblActionResult); }));
+
                 Thread t = new Thread(delegate()
                     {
                         Thread.Sleep(5000);
-                        lblActionResult.Invoke(new MethodInvoker(delegate()
+                        this.Invoke(new MethodInvoker(delegate()
                             {
-                                lblActionResult.Text = "";
-                                lblActionResult.Visible = false;
+                                this.Controls.Remove(lblActionResult);
                             }));
                     });
                 t.Start();

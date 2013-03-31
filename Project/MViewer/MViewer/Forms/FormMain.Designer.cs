@@ -40,17 +40,17 @@
             this.identityControl.Size = new System.Drawing.Size(282, 51);
             this.identityControl.TabIndex = 0;
 
-            this.lblActionResult = new System.Windows.Forms.Label();
+            //this.lblActionResult = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblActionResult
-            // 
-            this.lblActionResult.AutoSize = true;
-            this.lblActionResult.Location = new System.Drawing.Point(12, 283);
-            this.lblActionResult.Name = "lblActionResult";
-            this.lblActionResult.Size = new System.Drawing.Size(0, 13);
-            this.lblActionResult.TabIndex = 0;
-            this.lblActionResult.Visible = false;
+            //// 
+            //this.lblActionResult.AutoSize = true;
+            //this.lblActionResult.Location = new System.Drawing.Point(12, 283);
+            //this.lblActionResult.Name = "lblActionResult";
+            //this.lblActionResult.Size = new System.Drawing.Size(0, 13);
+            //this.lblActionResult.TabIndex = 0;
+            //this.lblActionResult.Visible = false;
             // 
             // contactsControl
             // 
@@ -86,7 +86,7 @@
 
         private UIControls.IdentityControl identityControl;
         private UIControls.ContactsControl contactsControl;
-        private System.Windows.Forms.Label lblActionResult;
+        //private System.Windows.Forms.Label lblActionResult;
     }
 }
 
