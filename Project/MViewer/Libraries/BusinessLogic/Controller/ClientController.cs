@@ -280,6 +280,11 @@ namespace BusinessLogicLayer
 
         public void SendAudioCapture(byte[] capture, string receiverIdentity, string senderIdentity)
         {
+            if (!_clients.ContainsKey(receiverIdentity))
+            {
+                AddClient(receiverIdentity);
+                StartClient(receiverIdentity);
+            }
             if (_clients.ContainsKey(receiverIdentity))
             {
                 MViewerClient client = _clients[receiverIdentity];
