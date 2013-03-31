@@ -179,11 +179,29 @@ namespace MViewer
 
         public void StopAudio(object sender, RoomActionEventArgs args)
         {
-            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
-            peers.AudioSessionState = GenericEnums.SessionState.Closed;
-            _model.SessionManager.RemoveSession(args.Identity);
+            string identity = args.Identity;
+            PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+            // update the session status to closed
+            if (peers.AudioSessionState != GenericEnums.SessionState.Closed)
+            {
+                peers.AudioSessionState = GenericEnums.SessionState.Closed;
+                bool sendStopSignal = true;
+                if (sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
+                {
+                    sendStopSignal = false;
+                }
+                if (sendStopSignal)
+                {
+                    // send the stop signal to the server session
+                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity,
+                        GenericEnums.RoomType.Audio, GenericEnums.SignalType.Stop);
+                }
 
-            _view.RoomManager.CloseRoom(args.Identity);
+                // remove the connected client session
+                _model.SessionManager.RemoveSession(identity);
+                _view.RoomManager.CloseRoom(identity);
+                _view.RoomManager.RemoveRoom(identity);
+            }
 
             if (_view.RoomManager.AudioRoomsLeft() == false)
             {

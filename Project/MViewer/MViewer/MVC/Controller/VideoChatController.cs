@@ -170,14 +170,10 @@ namespace MViewer
             _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
                 false);
 
-            if (_view.RoomManager.VideoRoomsLeft() == false)
-            {
-                _view.ResetLabels(GenericEnums.RoomType.Video);
-            }
-
             // close the webcapture form if there s no room left
             if (!_view.RoomManager.VideoRoomsLeft())
             {
+                _view.ResetLabels(GenericEnums.RoomType.Video);
                 StopVideoCapturing();
             }
 
