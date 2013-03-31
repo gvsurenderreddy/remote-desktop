@@ -155,6 +155,7 @@ namespace MViewer
             bool canExit = _view.ExitConfirmation();
             if (canExit)
             {
+                _view.SetResultText("Closing app...");
                 Thread t = new Thread(delegate()
                 {
                     // stop all active rooms

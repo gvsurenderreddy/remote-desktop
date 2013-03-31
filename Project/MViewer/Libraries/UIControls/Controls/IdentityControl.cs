@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using UIControls.CrossThreadOperations;
 using Utils;
 using GenericObjects;
+using System.Globalization;
+using System.Threading;
 
 namespace UIControls
 {
@@ -16,7 +18,8 @@ namespace UIControls
     {
         #region private members
 
-        EventHandler _identityUpdated;
+        EventHandler _onIdentityUpdated;
+        EventHandler _onLanguageChanged;
         bool _textChanged;
 
         #endregion
@@ -26,13 +29,15 @@ namespace UIControls
         public IdentityControl()
         {
             InitializeComponent();
+            //InitializeComponent("en-US");
         }
 
-        public IdentityControl(EventHandler identityUpdated)
+        public IdentityControl(EventHandler onIdentityUpdated, EventHandler onlanguageChanged)
         {
             InitializeComponent();
-            _identityUpdated = identityUpdated;
-
+            //InitializeComponent("en-US");
+            _onIdentityUpdated = onIdentityUpdated;
+            _onLanguageChanged = onlanguageChanged;
         }
 
         #endregion
@@ -58,7 +63,7 @@ namespace UIControls
             {
                 // update the friendly name
                 string newFriendlyName = txtFriendlyName.Text;
-                _identityUpdated.Invoke(this, new IdentityEventArgs()
+                _onIdentityUpdated.Invoke(this, new IdentityEventArgs()
                 {
                     FriendlyName = newFriendlyName
                 });
@@ -93,5 +98,22 @@ namespace UIControls
         }
 
         #endregion
+
+        private void lblLanguage_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lblLanguage.Text.ToLower().Equals(GenericEnums.Language.RO.ToString().ToLower()))
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("ro-RO");
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("ro-RO");
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en-US");
+                Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+            }
+            this.InitializeComponent();
+            this.Refresh();
+            this.Update();
+        }
     }
 }

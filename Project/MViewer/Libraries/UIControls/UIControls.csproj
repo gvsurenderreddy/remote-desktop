@@ -113,7 +113,13 @@
     <EmbeddedResource Include="Controls\ContactsControl.resx">
       <DependentUpon>ContactsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IdentityControl.en-US.resx">
+      <DependentUpon>IdentityControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\IdentityControl.resx">
+      <DependentUpon>IdentityControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\IdentityControl.ro-RO.resx">
       <DependentUpon>IdentityControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\RemoteControl.resx">

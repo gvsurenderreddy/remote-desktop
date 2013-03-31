@@ -1,4 +1,6 @@
-﻿namespace MViewer
+﻿using System.Globalization;
+using System.Threading;
+namespace MViewer
 {
     partial class FormMain
     {
@@ -29,16 +31,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.identityControl = new UIControls.IdentityControl(this.IdentityUpdated);
+            this.contactsControl = new UIControls.ContactsControl();
+            this.identityControl = new UIControls.IdentityControl();
             this.contactsControl = new UIControls.ContactsControl(this.OnContactsControl_ClosePressed, this.OnContactsUpdated, this.OnSelectedContactChanged);
-            this.SuspendLayout();
-            // 
-            // identityControl
-            // 
-            this.identityControl.Location = new System.Drawing.Point(3, 9);
-            this.identityControl.Name = "identityControl";
-            this.identityControl.Size = new System.Drawing.Size(282, 51);
-            this.identityControl.TabIndex = 0;
+            this.identityControl = new UIControls.IdentityControl(this.OnIdentityUpdated, this.OnLanguageUpdated);
 
             this.SuspendLayout();
             // 
@@ -50,6 +46,13 @@
             this.contactsControl.Size = new System.Drawing.Size(223, 305);
             this.contactsControl.TabIndex = 1;
             // 
+            // identityControl1
+            // 
+            this.identityControl.Location = new System.Drawing.Point(3, 12);
+            this.identityControl.Name = "identityControl1";
+            this.identityControl.Size = new System.Drawing.Size(282, 51);
+            this.identityControl.TabIndex = 2;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -57,8 +60,8 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(510, 305);
-            this.Controls.Add(this.contactsControl);
             this.Controls.Add(this.identityControl);
+            this.Controls.Add(this.contactsControl);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -66,16 +69,16 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MViewer";
+            this.Activated += new System.EventHandler(this.FormMain_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
             this.ResumeLayout(false);
-            this.Activated += new System.EventHandler(this.FormMain_Activated);
 
         }
 
         #endregion
 
-        private UIControls.IdentityControl identityControl;
         private UIControls.ContactsControl contactsControl;
+        private UIControls.IdentityControl identityControl;
     }
 }
 

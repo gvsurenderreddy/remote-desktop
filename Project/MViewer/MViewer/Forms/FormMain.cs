@@ -87,7 +87,12 @@ namespace MViewer
             identityControl.UpdateFriendlyName(args.FriendlyName);
         }
 
-        private void IdentityUpdated(object sender, EventArgs e)
+        private void OnLanguageUpdated(object sender, EventArgs e)
+        {
+            // todo: implement LanguageUpdated
+        }
+
+        private void OnIdentityUpdated(object sender, EventArgs e)
         {
             IdentityEventArgs args = (IdentityEventArgs)e;
             // update the identity in the Model by using the Controller
@@ -96,7 +101,7 @@ namespace MViewer
 
         private void OnContactsControl_ClosePressed(object sender, EventArgs e)
         {
-            this.Enabled = false;
+            this.Invoke(new MethodInvoker(delegate() { this.Enabled = false; }));
             Program.Controller.StopApplication();
         }
 

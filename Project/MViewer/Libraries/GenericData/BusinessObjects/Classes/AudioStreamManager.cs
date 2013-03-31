@@ -40,7 +40,6 @@ namespace GenericObjects
             _syncAudioInstance.WaitOne();
             Thread.Sleep(200);
 
-            //todo: fix the issue that is preventing the audioStream object from being instanced before being used below
             _audioStream.SyncChunk.Reset();
 
             byte[] capture =  _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];

@@ -7,6 +7,13 @@ namespace Utils
 {
     public static class GenericEnums
     {
+        public enum Language
+        {
+            Undefined = 0,
+            EN = 1,
+            RO = 2
+        }
+
         public enum FormMode 
         { 
             Undefined = 0, 

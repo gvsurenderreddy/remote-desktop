@@ -93,6 +93,7 @@
     <Compile Include="EventArgs\AudioEventArgs.cs" />
     <Compile Include="EventArgs\ContactsEventArgs.cs" />
     <Compile Include="EventArgs\IdentityEventArgs.cs" />
+    <Compile Include="EventArgs\LanguageEventArgs.cs" />
     <Compile Include="EventArgs\RemotingCaptureEventArgs.cs" />
     <Compile Include="EventArgs\RemotingCommandEventArgs.cs" />
     <Compile Include="EventArgs\RoomActionEventArgs.cs" />
@@ -121,10 +122,6 @@
     <ProjectReference Include="..\AudioStreaming\AudioStreaming.csproj">
       <Project>{3195debd-9eef-410e-8fb6-cf804c541fd7}</Project>
       <Name>AudioStreaming</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DesktopSharingCommon\DesktopSharingCommon.csproj">
-      <Project>{38c91ed6-4dcd-4427-bc47-8425c07bf66d}</Project>
-      <Name>DesktopSharingCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\DesktopSharing\DesktopSharing\DesktopSharingCore.csproj">
       <Project>{4a68a730-8d2c-485d-b9c9-91ea2cec5a3a}</Project>
