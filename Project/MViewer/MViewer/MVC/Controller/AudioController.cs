@@ -15,7 +15,13 @@ namespace MViewer
         readonly object _syncAudioCaptureSending = new object();
         ManualResetEvent _syncAudioCaptureActivity = new ManualResetEvent(true);
 
-        void AudioCaptureObserver(object sender, EventArgs e)
+        void PlayAudioCapture(object sender, EventArgs e)
+        {
+            AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
+            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).PlayAudioCapture(args.Capture);
+        }
+
+        void OnAudioCaptureReceived(object sender, EventArgs e)
         {
             AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
             PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
@@ -51,7 +57,7 @@ namespace MViewer
             {
                 _syncAudioCaptureActivity.WaitOne(); // wait for any room action to end
 
-                if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).AudioCaptureClosed() == false)
+                if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).AudioCaptureClosed == false)
                 {
                     lock (_syncAudioCaptureSending)
                     {
@@ -118,7 +124,7 @@ namespace MViewer
                     _model.SessionManager.AddSession(clientSession);
 
                     //IntPtr handle = IntPtr.Zero;
-                    FormAudioRoom AudioRoom = new FormAudioRoom(identity, this.AudioCaptureObserver);
+                    FormAudioRoom AudioRoom = new FormAudioRoom(identity, this.PlayAudioCapture);
                     _view.RoomManager.AddRoom(identity, AudioRoom);
                     // initialize new Audio  form
 

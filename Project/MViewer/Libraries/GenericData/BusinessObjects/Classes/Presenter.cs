@@ -15,7 +15,7 @@ namespace GenericObjects
         WebcamCapture _videoCapture;
         ScreenCaptureTool _screenCapture;
         bool _firstTimeCapturing;
-        AudioStreamManager _audioStreamManager;
+        IAudioStreamManager _audioStreamManager;
         PresenterSettings _presenterSettings;
 
         #endregion
@@ -85,6 +85,11 @@ namespace GenericObjects
             _screenCapture.TogglerTimer(false);
         }
 
+        public void PlayAudioCapture(byte[] capture)
+        {
+            _audioStreamManager.PlayAudioCapture(capture);
+        }
+
         #endregion
 
         #region proprieties
@@ -94,9 +99,12 @@ namespace GenericObjects
             return _screenCapture.RemotingCaptureClosed;
         }
 
-        public bool AudioCaptureClosed()
+        public bool AudioCaptureClosed
         {
-            return _audioStreamManager.AudioCaptureClosed;
+            get
+            {
+                return _audioStreamManager.AudioCaptureClosed;
+            }
         }
 
         #endregion
