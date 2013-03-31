@@ -63,11 +63,11 @@ namespace UIControls
                 case GenericEnums.RoomType.Audio:
                     if (pause)
                     {
-                        btnMuteAudio.Text = ButtonStatuses.AudioStatus.Mute.ToString();
+                        btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
                     }
                     else
                     {
-                        btnMuteAudio.Text = ButtonStatuses.AudioStatus.Unmute.ToString();
+                        btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
                     }
                     if (start)
                     {
@@ -102,7 +102,7 @@ namespace UIControls
                     btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
                     btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
                     btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    btnMuteAudio.Text = ButtonStatuses.AudioStatus.Mute.ToString();
+                    btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
                     break;
             }
         }
