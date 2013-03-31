@@ -63,8 +63,8 @@ namespace AudioStreaming
             _graphicsManager = new GraphicsDeviceManager(this);
             _microphone.BufferDuration = TimeSpan.FromSeconds(1);
             _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
-            _microphone.BufferReady += handleBufferReady;
-            _isRunning = false;
+            _microphone.BufferReady += OnBufferReady;
+            _isRunning = true;
             _stream = new MemoryStream();
 
             _graphicsManager.PreferredBackBufferHeight = 1;
@@ -80,7 +80,7 @@ namespace AudioStreaming
 
         #region private methods
 
-        private void handleBufferReady(object sender, EventArgs e)
+        private void OnBufferReady(object sender, EventArgs e)
         {
             SyncChunk.WaitOne();
 
