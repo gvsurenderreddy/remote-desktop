@@ -96,7 +96,7 @@ namespace GenericObjects
 
         public bool AudioCaptureClosed()
         {
-            return _audioStreamManager == null ? true : _audioStreamManager.AudioCaptureClosed;
+            return _audioStreamManager.AudioCaptureClosed;
         }
 
         #endregion

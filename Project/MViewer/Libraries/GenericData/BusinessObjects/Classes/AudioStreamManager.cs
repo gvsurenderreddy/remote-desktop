@@ -114,7 +114,7 @@ namespace GenericObjects
         {
             get
             {
-                return _audioStream.IsRunning == false;
+                return _audioStream == null? true : _audioStream.IsRunning == false;
             }
         }
     }
