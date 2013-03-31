@@ -26,7 +26,7 @@ namespace MViewer
         public FormAudioRoom(string identity, EventHandler onCaptureReceived)
         {
             InitializeComponent();
-            ContactIdentity = identity;
+            PartnerIdentity = identity;
             _onCaptureReceived = onCaptureReceived;
         }
 
@@ -39,7 +39,7 @@ namespace MViewer
             _onCaptureReceived.BeginInvoke(this, new AudioCaptureEventArgs()
             {
                 Capture = capture,
-                Identity = this.ContactIdentity
+                Identity = this.PartnerIdentity
             }, null, null);
         }
 
@@ -76,6 +76,11 @@ namespace MViewer
             }
         }
 
+        public void ToggleAudioStatus()
+        {
+            audioControl.ToggleStatusUpdate();
+        }
+
         #endregion
 
         #region proprieties
@@ -85,7 +90,7 @@ namespace MViewer
             get { return GenericEnums.RoomType.Audio; }
         }
 
-        public string ContactIdentity
+        public string PartnerIdentity
         {
             get;
             set;
@@ -107,7 +112,7 @@ namespace MViewer
         private void FormAudioRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
         }
     }
 }

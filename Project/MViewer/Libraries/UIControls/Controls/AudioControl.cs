@@ -48,13 +48,13 @@ namespace UIControls
         public void ToggleStatusUpdate()
         {
             /// switch bewteen muted/unmuted status
-            if (txtStatus.Text.Trim() == ButtonStatuses.AudioStatus.Mute.ToString())
+            if (txtStatus.Text.Trim() == "Muted")
             {
-                txtStatus.Text = ButtonStatuses.AudioStatus.Unmute.ToString();
+                txtStatus.Text = "Active";
             }
             else
             {
-                txtStatus.Text = ButtonStatuses.AudioStatus.Mute.ToString();
+                txtStatus.Text = "Muted";
             }
         }
 

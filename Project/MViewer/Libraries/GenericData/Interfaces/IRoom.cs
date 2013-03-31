@@ -13,7 +13,7 @@ namespace GenericObjects
 
         void ShowRoom();
 
-        string ContactIdentity
+        string PartnerIdentity
         {
             get;
             set;

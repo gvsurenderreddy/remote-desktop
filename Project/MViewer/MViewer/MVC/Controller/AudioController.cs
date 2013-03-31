@@ -124,12 +124,14 @@ namespace MViewer
                     _model.SessionManager.AddSession(clientSession);
 
                     //IntPtr handle = IntPtr.Zero;
-                    FormAudioRoom AudioRoom = new FormAudioRoom(identity, this.PlayAudioCapture);
-                    _view.RoomManager.AddRoom(identity, AudioRoom);
+                    FormAudioRoom audioRoom = new FormAudioRoom(identity, this.PlayAudioCapture);
+                    _view.RoomManager.AddRoom(identity, audioRoom);
                     // initialize new Audio  form
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.AudioSessionState = GenericEnums.SessionState.Opened;
+
+                    audioRoom.ToggleAudioStatus();
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
@@ -156,6 +158,8 @@ namespace MViewer
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.AudioSessionState = GenericEnums.SessionState.Paused; // pause the Audio 
 
+            _view.RoomManager.ToggleAudioStatus(args.Identity);
+
             _syncAudioCaptureActivity.Set();
         }
 
@@ -165,7 +169,7 @@ namespace MViewer
 
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.AudioSessionState = GenericEnums.SessionState.Opened; // resume the Audio 
-
+            _view.RoomManager.ToggleAudioStatus(args.Identity);
             _syncAudioCaptureActivity.Set();
         }
 

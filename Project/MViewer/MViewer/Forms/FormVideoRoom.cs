@@ -33,7 +33,7 @@ namespace MViewer
         {
             InitializeComponent();
 
-            ContactIdentity = identity;
+            PartnerIdentity = identity;
             _formClosing = false;
         }
 
@@ -44,7 +44,7 @@ namespace MViewer
         private void FormVideoRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.OnActiveRoomChanged(this.ContactIdentity, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
         }
 
         private void FormVideoRoom_Resize(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace MViewer
 
         #region proprieties
 
-        public string ContactIdentity
+        public string PartnerIdentity
         {
             get;
             set;

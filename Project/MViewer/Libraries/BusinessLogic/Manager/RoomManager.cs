@@ -16,6 +16,12 @@ namespace BusinessLogicLayer
 
         readonly object _syncRooms = new object();
         IDictionary<string, IRoom> _rooms;
+
+        // todo: use the below room lists and remove _rooms
+        IDictionary<string, IRoom> _videoRooms;
+        IDictionary<string, IRoom> _audioRooms;
+        IDictionary<string, IRoom> _remotingRooms;
+
         string _activeRoom;
         Form _mainForm;
 
@@ -33,7 +39,13 @@ namespace BusinessLogicLayer
 
         #region public methods
 
-        // todo: add room type check to the below 3 methods
+        public void ToggleAudioStatus(string identity)
+        {
+            if (_rooms != null && _rooms.ContainsKey(identity))
+            {
+                ((IAudioRoom)_rooms[identity]).ToggleAudioStatus();
+            }
+        }
 
         public bool VideoRoomsLeft()
         {
@@ -147,12 +159,6 @@ namespace BusinessLogicLayer
             {
                 if (_rooms != null && _rooms.ContainsKey(identity))
                 {
-                    //_mainForm.BeginInvoke((Action)delegate
-                    //{
-                    //    Form roomForm = (Form)_rooms[identity];
-                    //    roomForm.Show();
-
-                    //});
                     Application.Run((Form)_rooms[identity]);
                 }
             }

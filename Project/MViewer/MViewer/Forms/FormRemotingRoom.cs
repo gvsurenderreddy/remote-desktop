@@ -26,7 +26,7 @@ namespace MViewer
         public FormRemotingRoom(string identity)
         {
             InitializeComponent();
-            ContactIdentity = identity;
+            PartnerIdentity = identity;
             _formClosing = false;
 
         }
@@ -91,7 +91,7 @@ namespace MViewer
             get { return _syncClosing; }
         }
 
-        public string ContactIdentity
+        public string PartnerIdentity
         {
             get;
             set;
@@ -117,7 +117,7 @@ namespace MViewer
         private void FormRemotingRoom_Activated(object sender, EventArgs e)
         {
             // tell the controller to update the active form
-            Program.Controller.OnActiveRoomChanged(this.ContactIdentity, this.RoomType);
+            Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
 
             remoteControl.WireUpEventProvider();
         }

@@ -8,5 +8,6 @@ namespace GenericObjects
     public interface IAudioRoom : IRoom
     {
         void PlayAudioCapture(byte[] capture);
+        void ToggleAudioStatus();
     }
 }

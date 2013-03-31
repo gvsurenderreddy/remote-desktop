@@ -19,7 +19,8 @@ namespace GenericObjects
         void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture);
         void SetPartnerName(string identity, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
- 
+        void ToggleAudioStatus(string identity);
+
         bool VideoRoomsLeft();
         bool RemotingRoomsLeft();
         bool AudioRoomsLeft();
