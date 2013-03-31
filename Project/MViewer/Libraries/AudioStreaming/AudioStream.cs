@@ -60,20 +60,29 @@ namespace AudioStreaming
 
         public AudioStream()
         {
-            _graphicsManager = new GraphicsDeviceManager(this);
-            _microphone.BufferDuration = TimeSpan.FromSeconds(1);
-            _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
-            _microphone.BufferReady += OnBufferReady;
-            _isRunning = true;
-            _stream = new MemoryStream();
+            try
+            {
+                _graphicsManager = new GraphicsDeviceManager(this);
+                FrameworkDispatcher.Update();
+                _microphone.BufferDuration = TimeSpan.FromSeconds(1);
+                _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
+                _microphone.BufferReady += OnBufferReady;
+                _isRunning = true;
+                _stream = new MemoryStream();
 
-            _graphicsManager.PreferredBackBufferHeight = 1;
-            _graphicsManager.PreferredBackBufferWidth = 1;
+                _graphicsManager.PreferredBackBufferHeight = 1;
+                _graphicsManager.PreferredBackBufferWidth = 1;
 
-            Form gameWindowForm = (Form)Form.FromHandle(this.Window.Handle);
-            gameWindowForm.Hide();
-            gameWindowForm.ShowInTaskbar = false;
-            gameWindowForm.Opacity = 0;
+                Form gameWindowForm = (Form)Form.FromHandle(this.Window.Handle);
+                gameWindowForm.Hide();
+                gameWindowForm.ShowInTaskbar = false;
+                gameWindowForm.Opacity = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cannot initialize the audio module. Please restart the app.",
+                    "Audio Failure", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         #endregion
