@@ -40,7 +40,7 @@ namespace GenericObjects
         string _identity;
         ManualResetEvent _syncVideoCaptures = new ManualResetEvent(true);
         ManualResetEvent _syncRemotingCaptures = new ManualResetEvent(true);
-        readonly object _syncAudioCaptures = new object();
+        ManualResetEvent _syncAudioCaptures = new ManualResetEvent(true);
         
         #endregion
 
@@ -163,15 +163,13 @@ namespace GenericObjects
         public void SendMicrophoneCapture(byte[] capture, string senderIdentity)
         {
             // todo: decide if the sync audio is necessary
-            //lock (_syncAudioCaptures)
-            {
-                _controllerHandlers.AudioCaptureObserver.Invoke(this,
-                    new AudioCaptureEventArgs()
-                    {
-                        Identity = senderIdentity,
-                        Capture = capture
-                    });
-            }
+            _syncAudioCaptures.WaitOne();
+            _controllerHandlers.AudioCaptureObserver.Invoke(this,
+                new AudioCaptureEventArgs()
+                {
+                    Identity = senderIdentity,
+                    Capture = capture
+                });
         }
 
         public void WaitRoomButtonAction(string senderIdentity, GenericEnums.RoomType roomType, bool wait)
@@ -189,6 +187,7 @@ namespace GenericObjects
         {
             _syncVideoCaptures.Reset();
             _syncRemotingCaptures.Reset();
+            _syncAudioCaptures.Reset();
 
             _controllerHandlers.RoomButtonObserver.Invoke(this,
                 new RoomActionEventArgs()
@@ -200,6 +199,7 @@ namespace GenericObjects
 
             _syncRemotingCaptures.Set();
             _syncVideoCaptures.Set();
+            _syncAudioCaptures.Set();
         }
 
         public void AddContact(string identity, string friendlyName)
