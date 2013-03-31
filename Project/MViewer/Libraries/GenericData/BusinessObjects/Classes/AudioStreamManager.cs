@@ -47,6 +47,11 @@ namespace GenericObjects
             //_onCaptureAvailable.Invoke(this, AudioEventArgs
             _audioStream.Stream = new MemoryStream();
 
+            _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
+            {
+                Capture = file
+            });
+
             _audioStream.SyncChunk.Set();
 
             _timer.Start();
