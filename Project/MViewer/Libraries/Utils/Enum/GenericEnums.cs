@@ -86,11 +86,11 @@ namespace Utils
             Move = 8,
             LeftMouseUp = 9,
             LeftMouseDown = 10,
-            RightMouseUp = 11, // todo: use the right mouse up/down
+            RightMouseUp = 11, 
             RightMouseDown = 12, 
             MiddleMouseUp = 13,
             MiddleMouseDown = 14
-        }; // todo: complete MouseCommandType
+        }; 
 
         public enum KeyboardCommandType
         {
@@ -98,7 +98,6 @@ namespace Utils
             KeyUp = 1,
             KeyDown = 2,
             KeyPress = 3
-            // todo: complete KeyBoardCommandType
         }
 
         public enum RemotingCommandType 
