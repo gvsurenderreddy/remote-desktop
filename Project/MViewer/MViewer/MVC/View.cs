@@ -292,9 +292,9 @@ namespace MViewer
         {
             bool canExit = true;
 
-            bool videoRoomsActive = RoomManager.VideoRoomsLeft();
-            bool remotingRoomsActive = RoomManager.RemotingRoomsLeft();
-            bool audioRoomsActive = RoomManager.AudioRoomsLeft();
+            bool videoRoomsActive = RoomManager.RoomsLeft(GenericEnums.RoomType.Video);
+            bool remotingRoomsActive = RoomManager.RoomsLeft(GenericEnums.RoomType.Remoting);
+            bool audioRoomsActive = RoomManager.RoomsLeft(GenericEnums.RoomType.Audio);
 
             if (videoRoomsActive || remotingRoomsActive || audioRoomsActive)
             {

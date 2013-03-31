@@ -10,20 +10,18 @@ namespace GenericObjects
     public interface IRoomManager
     {
         void AddRoom(string identity, IRoom room);
-        void RemoveRoom(string identity);
-        void ShowRoom(string identity);
-        void CloseRoom(string identity);
+        void RemoveRoom(string identity, GenericEnums.RoomType roomType);
+        void ShowRoom(string identity, GenericEnums.RoomType roomType);
+        void CloseRoom(string identity, GenericEnums.RoomType roomType);
 
         void PlayAudioCapture(string identity, byte[] capture);
         void ShowVideoCapture(string identity, Image picture);
         void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture);
-        void SetPartnerName(string identity, string friendlyName);
+        void SetPartnerName(string identity, GenericEnums.RoomType roomType, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         void ToggleAudioStatus(string identity);
 
-        bool VideoRoomsLeft();
-        bool RemotingRoomsLeft();
-        bool AudioRoomsLeft();
+        bool RoomsLeft(GenericEnums.RoomType roomType);
 
         string ActiveRoom
         {

@@ -162,8 +162,8 @@ namespace MViewer
 
                 // remove the connected client session
                 _model.SessionManager.RemoveSession(identity);
-                _view.RoomManager.CloseRoom(identity);
-                _view.RoomManager.RemoveRoom(identity);
+                _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Video);
+                _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Video);
 
                 _view.UpdateLabels(args.Identity, args.RoomType);
             }
@@ -172,7 +172,7 @@ namespace MViewer
                 false);
 
             // close the webcapture form if there s no room left
-            if (!_view.RoomManager.VideoRoomsLeft())
+            if (!_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Video))
             {
                 _view.ResetLabels(args.RoomType);
                 StopVideoCapturing();
@@ -308,10 +308,10 @@ namespace MViewer
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
-                    _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                    _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Video, contact.FriendlyName);
                     // finally, show the video  form where we'll see the webcam captures
                     formOpened = true;
-                    _view.RoomManager.ShowRoom(identity);
+                    _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Video);
 
                 }
                 );

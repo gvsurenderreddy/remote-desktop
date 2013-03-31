@@ -135,9 +135,9 @@ namespace MViewer
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
-                    _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                    _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Audio, contact.FriendlyName);
                     // finally, show the Audio  form where we'll see the webcam captures
-                    _view.RoomManager.ShowRoom(identity);
+                    _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Audio);
 
                 }
                 );
@@ -216,13 +216,13 @@ namespace MViewer
 
                 // remove the connected client session
                 _model.SessionManager.RemoveSession(identity);
-                _view.RoomManager.CloseRoom(identity);
-                _view.RoomManager.RemoveRoom(identity);
+                _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
+                _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
 
                 _view.UpdateLabels(args.Identity, args.RoomType);
             }
 
-            if (_view.RoomManager.AudioRoomsLeft() == false)
+            if (_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Audio) == false)
             {
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
                 _view.ResetLabels(args.RoomType);

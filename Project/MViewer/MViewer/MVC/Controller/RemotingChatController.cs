@@ -298,8 +298,8 @@ namespace MViewer
 
             _model.RemoveClient(args.Identity);
 
-            _view.RoomManager.CloseRoom(args.Identity);
-            _view.RoomManager.RemoveRoom(args.Identity);
+            _view.RoomManager.CloseRoom(args.Identity, GenericEnums.RoomType.Remoting);
+            _view.RoomManager.RemoveRoom(args.Identity, GenericEnums.RoomType.Remoting);
 
             if (!_model.SessionManager.RemotingRoomsLeft())
             {
@@ -413,7 +413,7 @@ namespace MViewer
                     // get friendly name from contacts list
                     if (contact != null)
                     {
-                        _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
+                        _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Remoting, contact.FriendlyName);
                     }
                     // I am going to send my captures by using the below client
 
@@ -425,7 +425,7 @@ namespace MViewer
                     peers.RemotingSessionState = GenericEnums.SessionState.Opened;
 
                     // finally, show the video  form where we'll see the webcam captures
-                    _view.RoomManager.ShowRoom(identity);
+                    _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Remoting);
                 }
                 );
                 t.IsBackground = true;

@@ -17,11 +17,6 @@ namespace BusinessLogicLayer
         readonly object _syncRooms = new object();
         IDictionary<string, IRoom> _rooms;
 
-        // todo: use the below room lists and remove _rooms
-        IDictionary<string, IRoom> _videoRooms;
-        IDictionary<string, IRoom> _audioRooms;
-        IDictionary<string, IRoom> _remotingRooms;
-
         string _activeRoom;
         Form _mainForm;
 
@@ -41,28 +36,17 @@ namespace BusinessLogicLayer
 
         public void ToggleAudioStatus(string identity)
         {
-            if (_rooms != null && _rooms.ContainsKey(identity))
+            string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
+            if (_rooms != null && _rooms.ContainsKey(roomID))
             {
-                ((IAudioRoom)_rooms[identity]).ToggleAudioStatus();
+                ((IAudioRoom)_rooms[roomID]).ToggleAudioStatus();
             }
         }
 
-        public bool VideoRoomsLeft()
+        public bool RoomsLeft(GenericEnums.RoomType roomType)
         {
-            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == GenericEnums.RoomType.Video).Count() > 0
+            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == roomType).Count() > 0
                 ? true : false : false;
-        }
-
-        public bool RemotingRoomsLeft()
-        {
-            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == GenericEnums.RoomType.Remoting).Count() > 0
-                ? true : false : false;
-        }
-
-        public bool AudioRoomsLeft()
-        {
-            return _rooms != null ? _rooms.Where(kv => kv.Value.RoomType == GenericEnums.RoomType.Audio).Count() > 0
-                 ? true : false : false;
         }
 
         public bool IsRoomActivated(string identity, GenericEnums.RoomType roomType)
@@ -70,10 +54,11 @@ namespace BusinessLogicLayer
             bool activated = false;
             lock (_syncRooms)
             {
-                bool roomExists = _rooms.ContainsKey(identity);
+                string roomID = GenerateRoomID(identity, roomType);
+                bool roomExists = _rooms.ContainsKey(roomID);
                 if (roomExists)
                 {
-                    activated = _rooms[identity].RoomType == roomType;
+                    activated = _rooms[roomID].RoomType == roomType;
                 }
             }
             return activated;
@@ -83,9 +68,10 @@ namespace BusinessLogicLayer
         {
             lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    IAudioRoom room = (IAudioRoom)_rooms[identity];
+                    IAudioRoom room = (IAudioRoom)_rooms[roomID];
                     room.PlayAudioCapture(capture);
                 }
             }
@@ -95,9 +81,10 @@ namespace BusinessLogicLayer
         {
             lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Remoting);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    IRemotingRoom room = (IRemotingRoom)_rooms[identity];
+                    IRemotingRoom room = (IRemotingRoom)_rooms[roomID];
                     room.ShowScreenCapture(screenCapture, mouseCapture);
                 }
             }
@@ -107,21 +94,23 @@ namespace BusinessLogicLayer
         {
             lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Video);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    IVideoRoom room = (IVideoRoom)_rooms[identity];
+                    IVideoRoom room = (IVideoRoom)_rooms[roomID];
                     room.SetPicture(picture);
                 }
             }
         }
 
-        public void SetPartnerName(string identity, string friendlyName)
+        public void SetPartnerName(string identity, GenericEnums.RoomType roomType, string friendlyName)
         {
             lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, roomType);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    IRoom room = _rooms[identity];
+                    IRoom room = _rooms[roomID];
                     room.SetPartnerName(friendlyName);
                 }
             }
@@ -135,45 +124,58 @@ namespace BusinessLogicLayer
                 {
                     _rooms = new Dictionary<string, IRoom>();
                 }
-                if (!_rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, room.RoomType);
+                if (!_rooms.ContainsKey(roomID))
                 {
-                    _rooms.Add(identity, room);
+                    _rooms.Add(roomID, room);
                 }
             }
         }
 
-        public void RemoveRoom(string identity)
+        public void RemoveRoom(string identity, GenericEnums.RoomType roomType)
         {
             lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, roomType);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    _rooms.Remove(identity);
+                    _rooms.Remove(roomID);
                 }
             }
         }
 
-        public void ShowRoom(string identity)
+        public void ShowRoom(string identity, GenericEnums.RoomType roomType)
         {
             //lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, roomType);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    Application.Run((Form)_rooms[identity]);
+                    Application.Run((Form)_rooms[roomID]);
                 }
             }
         }
 
-        public void CloseRoom(string identity)
+        public void CloseRoom(string identity, GenericEnums.RoomType roomType)
         {
             lock (_syncRooms)
             {
-                if (_rooms != null && _rooms.ContainsKey(identity))
+                string roomID = GenerateRoomID(identity, roomType);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
                 {
-                    _rooms[identity].SyncClosing.Reset();
-                    ((Form)_rooms[identity]).Invoke(new Delegates.CloseDelegate(((Form)_rooms[identity]).Close));
+                    _rooms[roomID].SyncClosing.Reset();
+                    ((Form)_rooms[roomID]).Invoke(new Delegates.CloseDelegate(((Form)_rooms[roomID]).Close));
                 }
             }
+        }
+
+        #endregion
+
+        #region private methods
+
+        string GenerateRoomID(string partnerID, GenericEnums.RoomType roomType)
+        {
+            return partnerID + roomType.ToString();
         }
 
         #endregion

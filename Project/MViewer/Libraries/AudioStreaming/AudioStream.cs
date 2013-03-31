@@ -101,7 +101,7 @@ namespace AudioStreaming
                     retry = false;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     //MessageBox.Show("Cannot initialize the audio module. Please restart the app.",
                     //    "Audio Failure", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
