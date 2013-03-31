@@ -219,17 +219,17 @@ namespace MViewer
 
         public void StartVideo(object sender, RoomActionEventArgs args)
         {
+            // create client session
+            Session clientSession = new ClientSession(args.Identity, args.RoomType);
+            // save the proxy to which we are sending the webcam captures
+            _model.SessionManager.AddSession(clientSession);
+
             // open new Video  form to receive the captures
             OpenVideoForm(args.Identity);
 
             // I am going to send my captures by using the below client
             _model.ClientController.AddClient(args.Identity);
             _model.ClientController.StartClient(args.Identity);
-
-            // create client session
-            Session clientSession = new ClientSession(args.Identity, args.RoomType);
-            // save the proxy to which we are sending the webcam captures
-            _model.SessionManager.AddSession(clientSession);
 
             // initialize the webcamCapture form
             // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
@@ -261,6 +261,8 @@ namespace MViewer
                            SignalType = GenericEnums.SignalType.Start,
                            Identity = args.Identity
                        });
+
+                _syncVideoCaptureActivity.WaitOne();
                 while (peer.VideoSessionState != GenericEnums.SessionState.Opened)
                 {
                     Thread.Sleep(2000);
@@ -292,6 +294,7 @@ namespace MViewer
 
             if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Video))
             {
+                bool formOpened = false;
                 Thread t = new Thread(delegate()
                 {
                     //IntPtr handle = IntPtr.Zero;
@@ -307,6 +310,7 @@ namespace MViewer
                     // get friendly name from contacts list
                     _view.RoomManager.SetPartnerName(identity, contact.FriendlyName);
                     // finally, show the video  form where we'll see the webcam captures
+                    formOpened = true;
                     _view.RoomManager.ShowRoom(identity);
 
                 }
@@ -315,7 +319,11 @@ namespace MViewer
                 t.SetApartmentState(ApartmentState.STA);
                 t.Start();
 
-                Thread.Sleep(500);
+                while (formOpened == false)
+                {
+                    Thread.Sleep(1000);
+                }
+                Thread.Sleep(200);
                 _syncVideoCaptureActivity.Set();
             }
         }
