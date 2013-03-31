@@ -65,6 +65,7 @@ namespace AudioStreaming
             _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
             _microphone.BufferReady += handleBufferReady;
             _isRunning = false;
+            _stream = new MemoryStream();
 
             _graphicsManager.PreferredBackBufferHeight = 1;
             _graphicsManager.PreferredBackBufferWidth = 1;
