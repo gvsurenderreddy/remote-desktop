@@ -65,21 +65,30 @@ namespace GenericObjects
 
         public void StartStreaming()
         {
-            _timer = new System.Timers.Timer(3 * 1000);
-            _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
-
-            Thread t = new Thread(delegate()
+            if (_timer == null)
             {
-                _syncAudioInstance.Reset();
+                _timer = new System.Timers.Timer(3 * 1000);
+                _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
+            }
 
-                _audioStream = new AudioStream();
+            if (_audioStream == null)
+            {
+                Thread t = new Thread(delegate()
+                {
+                    _syncAudioInstance.Reset();
 
-                _syncAudioInstance.Set();
+                    _audioStream = new AudioStream();
 
-                _audioStream.Run();
-            });
-            t.Start();
+                    _syncAudioInstance.Set();
 
+                    _audioStream.Run();
+                });
+                t.Start();
+            }
+            else
+            {
+                _audioStream.StartAudio();
+            }
             _timer.Start();
         }
 
@@ -92,8 +101,9 @@ namespace GenericObjects
             if (_audioStream != null)
             {
                 _audioStream.StopAudio();
-                _audioStream.SyncStop.WaitOne();
-                _audioStream.Exit();
+                
+                //_audioStream.SyncStop.WaitOne();
+                //_audioStream.Exit();
             }
         }
 
