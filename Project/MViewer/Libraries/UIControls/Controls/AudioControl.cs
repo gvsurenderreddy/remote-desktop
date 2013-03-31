@@ -50,11 +50,25 @@ namespace UIControls
             /// switch bewteen muted/unmuted status
             if (txtStatus.Text.Trim() == "Muted")
             {
-                txtStatus.Text = "Active";
+                if (txtStatus.InvokeRequired)
+                {
+                    txtStatus.Invoke(new MethodInvoker(delegate { txtStatus.Text = "Active"; }));
+                }
+                else
+                {
+                    txtStatus.Text = "Active";
+                }
             }
             else
             {
-                txtStatus.Text = "Muted";
+                if (txtStatus.InvokeRequired)
+                {
+                    txtStatus.Invoke(new MethodInvoker(delegate { txtStatus.Text = "Muted"; }));
+                }
+                else
+                {
+                    txtStatus.Text = "Muted";
+                }
             }
         }
 
