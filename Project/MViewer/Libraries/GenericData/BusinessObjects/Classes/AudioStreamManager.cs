@@ -27,7 +27,6 @@ namespace GenericObjects
         public AudioStreamManager(EventHandler onCaptureAvailable)
         {
             _onCaptureAvailable = onCaptureAvailable;
-            //_audioStream = new AudioStream();
         }
 
         #endregion
