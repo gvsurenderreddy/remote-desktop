@@ -117,13 +117,21 @@ namespace AudioStreaming
         private void OnBufferReady(object sender, EventArgs e)
         {
             SyncChunk.WaitOne();
-
-            _microphone.GetData(_buffer);
-            if (_stream == null)
+            if (_isRunning)
             {
-                _stream = new MemoryStream();
+                _microphone.GetData(_buffer);
+                if (_stream == null)
+                {
+                    _stream = new MemoryStream();
+                }
+                _stream.Write(_buffer, 0, _buffer.Length);
             }
-            _stream.Write(_buffer, 0, _buffer.Length);
+            else
+            {
+                _microphone = Microphone.Default;
+                _microphone.Stop();
+                _microphone.BufferReady -= this.OnBufferReady;
+            }
         }
 
         #endregion
@@ -152,15 +160,18 @@ namespace AudioStreaming
         protected override void Update(GameTime gameTime)
         {
             _syncStatus.WaitOne();
-            if (!_isRunning)
+            if (_microphone == null)
+            {
+                _microphone = Microphone.Default;
+            }
+            if (!_isRunning && _microphone.State == MicrophoneState.Started)
             {
                 _syncStop.Reset();
 
                 // todo: remove this
                 Thread.Sleep(5000);
-
+               
                 _microphone.Stop();
-                _microphone = null;
             }
 
             base.Update(gameTime);
