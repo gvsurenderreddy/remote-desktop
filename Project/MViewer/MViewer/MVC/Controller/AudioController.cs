@@ -183,6 +183,8 @@ namespace MViewer
             peers.AudioSessionState = GenericEnums.SessionState.Closed;
             _model.SessionManager.RemoveSession(args.Identity);
 
+            _view.RoomManager.CloseRoom(args.Identity);
+
             if (_view.RoomManager.AudioRoomsLeft() == false)
             {
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
