@@ -166,13 +166,16 @@ namespace MViewer
 
         public void NotifyContactsObserver()
         {
-            Delegates.ContactsEventHandler contactsEventHandler =
-                (Delegates.ContactsEventHandler)_observers[typeof(Delegates.ContactsEventHandler)];
-            contactsEventHandler.Invoke(this, new ContactsEventArgs()
+            if (_observers != null)
             {
-                ContactsDV = _model.Contacts,
-                Operation = GenericEnums.ContactsOperation.Load
-            });
+                Delegates.ContactsEventHandler contactsEventHandler =
+                    (Delegates.ContactsEventHandler)_observers[typeof(Delegates.ContactsEventHandler)];
+                contactsEventHandler.Invoke(this, new ContactsEventArgs()
+                {
+                    ContactsDV = _model.Contacts,
+                    Operation = GenericEnums.ContactsOperation.Load
+                });
+            }
         }
 
         public void NotifyIdentityObserver()
