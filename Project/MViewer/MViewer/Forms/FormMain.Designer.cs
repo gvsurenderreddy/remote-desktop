@@ -78,6 +78,7 @@
             this.Text = "MViewer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormIsClosing);
             this.ResumeLayout(false);
+            this.Activated += new System.EventHandler(this.FormMain_Activated);
 
         }
 
