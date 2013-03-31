@@ -19,7 +19,7 @@ namespace MViewer
         #region private members
 
         FormMain _formMain;
-        FormActions _formActions; 
+        FormActions _formActions;
         FormMyWebcam _formWebCapture;
         Thread _threadWebcaptureForm;
 
@@ -36,7 +36,7 @@ namespace MViewer
         #region event handlers
 
 
- 
+
         #endregion
 
         #region c-tor
@@ -168,8 +168,8 @@ namespace MViewer
         {
             Delegates.ContactsEventHandler contactsEventHandler =
                 (Delegates.ContactsEventHandler)_observers[typeof(Delegates.ContactsEventHandler)];
-            contactsEventHandler.Invoke(this, new ContactsEventArgs() 
-            { 
+            contactsEventHandler.Invoke(this, new ContactsEventArgs()
+            {
                 ContactsDV = _model.Contacts,
                 Operation = GenericEnums.ContactsOperation.Load
             });
@@ -178,7 +178,7 @@ namespace MViewer
         public void NotifyIdentityObserver()
         {
             Delegates.IdentityEventHandler identityObserver = (Delegates.IdentityEventHandler)_observers[typeof(Delegates.IdentityEventHandler)];
-            identityObserver.Invoke(this, new IdentityEventArgs() 
+            identityObserver.Invoke(this, new IdentityEventArgs()
             {
                 FriendlyName = _model.FriendlyName,
                 MyIdentity = _model.Identity.MyIdentity
@@ -213,7 +213,7 @@ namespace MViewer
             if (args.RoomType == GenericEnums.RoomType.Remoting)
             {
                 // todo: put the remoting transfers on hold
-            
+
             }
 
             if (args.RoomType == GenericEnums.RoomType.Audio)
@@ -278,13 +278,20 @@ namespace MViewer
 
             if (videoRoomsActive || remotingRoomsActive || audioRoomsActive)
             {
-                DialogResult result = MessageBox.Show(_formMain,
-                    "Close all active rooms?", 
-                    "Exit confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                if (result != DialogResult.Yes)
-                {
-                    canExit = false;
-                }
+                _formMain.Invoke(new MethodInvoker
+                        (
+                       delegate
+                       {
+                           DialogResult result = MessageBox.Show(_formMain,
+                               "Close all active rooms?",
+                               "Exit confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                           if (result != DialogResult.Yes)
+                           {
+                               canExit = false;
+                           }
+                       }
+                        )
+                        );
             }
 
             return canExit;
@@ -337,7 +344,7 @@ namespace MViewer
                 bool isClosed = false;
                 if (this._formWebCapture != null)
                 {
-                    isClosed= this._formWebCapture.WebcaptureClosed;
+                    isClosed = this._formWebCapture.WebcaptureClosed;
                 }
                 return isClosed;
             }
