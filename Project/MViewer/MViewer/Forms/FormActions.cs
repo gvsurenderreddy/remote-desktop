@@ -28,7 +28,7 @@ namespace MViewer
         public FormActions()
         {
             InitializeComponent();
-            myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
+            myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
         }
 
         public FormActions(EventHandler roomActionEventHandler)
@@ -36,7 +36,7 @@ namespace MViewer
             InitializeComponent();
             _roomActionEventHandler = roomActionEventHandler;
             ActionsObserver = new Delegates.ActionsEventHandler(ActionTriggered);
-            myDelegate = new UpdateLabelsDel(actionsControl1.UpdateLabels);
+            myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
         }
 
         #endregion
@@ -61,6 +61,11 @@ namespace MViewer
         #endregion
 
         #region public methods
+
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormActions));
+        }
 
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {

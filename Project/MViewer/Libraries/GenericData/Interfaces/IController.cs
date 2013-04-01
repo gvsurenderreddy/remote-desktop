@@ -31,6 +31,7 @@ namespace GenericObjects
         void SendRemotingCommand(object sender, RemotingCommandEventArgs args);
         void ExecuteRemotingCommand(object sender, EventArgs e);
 
+        void ChangeLanguage(string language);
         void IdentityObserver(object sender, IdentityEventArgs e);
         void RoomButtonAction(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);

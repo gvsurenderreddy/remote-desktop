@@ -9,6 +9,7 @@ namespace GenericObjects
 {
     public interface IRoomManager
     {
+        void ChangeLanguage(string language);
         void AddRoom(string identity, IRoom room);
         void RemoveRoom(string identity, GenericEnums.RoomType roomType);
         void ShowRoom(string identity, GenericEnums.RoomType roomType);

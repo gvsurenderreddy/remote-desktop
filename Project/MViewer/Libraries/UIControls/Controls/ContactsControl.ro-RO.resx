@@ -117,160 +117,113 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="txtStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 20</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtPartner.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+  <data name="$this.Locked" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="pnlAudio.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 28</value>
-  </data>
-  <data name="&gt;&gt;txtPartner.Name" xml:space="preserve">
-    <value>txtPartner</value>
-  </data>
-  <data name="lblUser.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblUser.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblAudioStatus.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
-  </data>
-  <data name="lblAudioStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 16</value>
-  </data>
-  <data name="&gt;&gt;pnlAudio.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="lblUser.Text" xml:space="preserve">
-    <value>Partner: </value>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ContactsControl</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.UserControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txtPartner.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="&gt;&gt;btnAdd.Name" xml:space="preserve">
+    <value>btnAdd</value>
   </data>
-  <data name="&gt;&gt;txtStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
+    <value>pnlContacts</value>
   </data>
-  <data name="txtStatus.Text" xml:space="preserve">
-    <value>Muted</value>
+  <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="txtPartner.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 20</value>
-  </data>
-  <data name="&gt;&gt;lblUser.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="lblAudioStatus.Text" xml:space="preserve">
-    <value>Status: </value>
+  <data name="&gt;&gt;btnClose.Name" xml:space="preserve">
+    <value>btnClose</value>
   </data>
-  <data name="&gt;&gt;lblAudioStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnClose.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnClose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnClose.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.Name" xml:space="preserve">
+    <value>btnRemove</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.Parent" xml:space="preserve">
+    <value>pnlContacts</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnRemove.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Name" xml:space="preserve">
+    <value>btnUpdate</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Parent" xml:space="preserve">
+    <value>pnlContacts</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnUpdate.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dgvContacts.Name" xml:space="preserve">
+    <value>dgvContacts</value>
+  </data>
+  <data name="&gt;&gt;dgvContacts.Parent" xml:space="preserve">
+    <value>pnlContacts</value>
+  </data>
+  <data name="&gt;&gt;dgvContacts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvContacts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblUser.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="lblUser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 16</value>
+  <data name="&gt;&gt;pnlContacts.Name" xml:space="preserve">
+    <value>pnlContacts</value>
   </data>
-  <data name="&gt;&gt;lblUser.Parent" xml:space="preserve">
+  <data name="&gt;&gt;pnlContacts.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;pnlAudio.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;pnlContacts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtStatus.Name" xml:space="preserve">
-    <value>txtStatus</value>
-  </data>
-  <data name="&gt;&gt;lblAudioStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;pnlContacts.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblAudioStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 5</value>
+  <data name="btnAdd.Text" xml:space="preserve">
+    <value>Adauga</value>
   </data>
-  <data name="pnlAudio.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 33</value>
+  <data name="btnClose.Text" xml:space="preserve">
+    <value>Inchide</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="txtStatus.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
+  <data name="btnRemove.Text" xml:space="preserve">
+    <value>Sterge</value>
   </data>
-  <data name="lblUser.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 8</value>
+  <data name="btnUpdate.Text" xml:space="preserve">
+    <value>Actualiz</value>
   </data>
-  <data name="lblUser.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Contacte</value>
   </data>
-  <data name="&gt;&gt;lblAudioStatus.Name" xml:space="preserve">
-    <value>lblAudioStatus</value>
-  </data>
-  <data name="&gt;&gt;txtPartner.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlAudio.Name" xml:space="preserve">
-    <value>pnlAudio</value>
-  </data>
-  <data name="&gt;&gt;txtPartner.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtPartner.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblAudioStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;pnlAudio.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblUser.Name" xml:space="preserve">
-    <value>lblUser</value>
-  </data>
-  <data name="lblAudioStatus.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="txtStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblAudioStatus.Parent" xml:space="preserve">
-    <value>pnlAudio</value>
-  </data>
-  <data name="txtStatus.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="txtPartner.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 7</value>
-  </data>
-  <data name="&gt;&gt;txtStatus.Parent" xml:space="preserve">
-    <value>pnlAudio</value>
-  </data>
-  <data name="txtStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 3</value>
-  </data>
-  <data name="&gt;&gt;txtStatus.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="pnlAudio.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 69</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AudioControl</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>ro-RO</value>
-  </metadata>
 </root>

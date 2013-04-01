@@ -107,10 +107,19 @@
     <EmbeddedResource Include="Controls\ActionsControl.resx">
       <DependentUpon>ActionsControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ActionsControl.ro-RO.resx">
+      <DependentUpon>ActionsControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\AudioControl.resx">
       <DependentUpon>AudioControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\AudioControl.ro-RO.resx">
+      <DependentUpon>AudioControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\ContactsControl.resx">
+      <DependentUpon>ContactsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\ContactsControl.ro-RO.resx">
       <DependentUpon>ContactsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\IdentityControl.resx">
@@ -122,13 +131,25 @@
     <EmbeddedResource Include="Controls\RemoteControl.resx">
       <DependentUpon>RemoteControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RemoteControl.ro-RO.resx">
+      <DependentUpon>RemoteControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\VideoControl.resx">
+      <DependentUpon>VideoControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\VideoControl.ro-RO.resx">
       <DependentUpon>VideoControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormContact.resx">
       <DependentUpon>FormContact.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormContact.ro-RO.resx">
+      <DependentUpon>FormContact.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormFileProgress.resx">
+      <DependentUpon>FormFileProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormFileProgress.ro-RO.resx">
       <DependentUpon>FormFileProgress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

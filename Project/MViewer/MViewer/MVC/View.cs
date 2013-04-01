@@ -53,6 +53,13 @@ namespace MViewer
 
         #region public methods
 
+        public void ChangeLanguage(string language)
+        {
+            _formActions.ChangeLanguage(language);
+            _formMain.ChangeLanguage(language);
+            _roomManager.ChangeLanguage(language);
+        }
+
         public void SetResultText(string text)
         {
             _formMain.SetResultText(text);

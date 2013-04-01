@@ -68,6 +68,11 @@ namespace MViewer
 
         #region public methods
 
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormVideoRoom));
+        }
+
         public void SetPartnerName(string friendlyName)
         {
             videoControl.SetPartnerName(friendlyName);

@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormActions));
-            this.actionsControl1 = new UIControls.ActionsControl(this.ActionTriggered);
+            this.actionsControl = new UIControls.ActionsControl();
             this.SuspendLayout();
             // 
-            // actionsControl1
+            // actionsControl
             // 
-            this.actionsControl1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.actionsControl1.Location = new System.Drawing.Point(0, 0);
-            this.actionsControl1.Name = "actionsControl1";
-            this.actionsControl1.Size = new System.Drawing.Size(314, 91);
-            this.actionsControl1.TabIndex = 0;
+            this.actionsControl.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.actionsControl.Location = new System.Drawing.Point(0, 0);
+            this.actionsControl.Name = "actionsControl";
+            this.actionsControl.Size = new System.Drawing.Size(314, 91);
+            this.actionsControl.TabIndex = 0;
             // 
             // FormActions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(313, 90);
-            this.Controls.Add(this.actionsControl1);
+            this.Controls.Add(this.actionsControl);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -62,6 +62,6 @@
 
         #endregion
 
-        private UIControls.ActionsControl actionsControl1;
+        private UIControls.ActionsControl actionsControl;
     }
 }

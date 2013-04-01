@@ -67,6 +67,11 @@ namespace MViewer
 
         #region public methods
 
+        public void ChangeLanguage(string language)
+        {
+            _view.ChangeLanguage(language);
+        }
+
         public void FocusActionsForm()
         {
             // todo: remove FocusActionsForm if not necessary

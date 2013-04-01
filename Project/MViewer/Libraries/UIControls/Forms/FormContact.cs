@@ -59,6 +59,16 @@ namespace UIControls
 
         #endregion
 
+        #region public methods
+
+        // todo: use ChangeLanguage from FormContact
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormContact));
+        }
+
+        #endregion
+
         #region private methods
 
         void SetFormMode()

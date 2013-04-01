@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AudioControl));
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.txtPartner = new System.Windows.Forms.TextBox();
             this.lblUser = new System.Windows.Forms.Label();
@@ -38,66 +39,45 @@
             // 
             // txtStatus
             // 
+            resources.ApplyResources(this.txtStatus, "txtStatus");
             this.txtStatus.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtStatus.Enabled = false;
             this.txtStatus.ForeColor = System.Drawing.Color.Red;
-            this.txtStatus.Location = new System.Drawing.Point(76, 3);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(112, 20);
-            this.txtStatus.TabIndex = 0;
-            this.txtStatus.Text = "Muted";
-            this.txtStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtPartner
             // 
-            this.txtPartner.Enabled = false;
-            this.txtPartner.Location = new System.Drawing.Point(82, 7);
+            resources.ApplyResources(this.txtPartner, "txtPartner");
             this.txtPartner.Name = "txtPartner";
-            this.txtPartner.Size = new System.Drawing.Size(112, 20);
-            this.txtPartner.TabIndex = 8;
             // 
             // lblUser
             // 
-            this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lblUser, "lblUser");
             this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblUser.Location = new System.Drawing.Point(10, 8);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(66, 16);
-            this.lblUser.TabIndex = 7;
-            this.lblUser.Text = "Partner: ";
             // 
             // lblAudioStatus
             // 
-            this.lblAudioStatus.AutoSize = true;
-            this.lblAudioStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lblAudioStatus, "lblAudioStatus");
             this.lblAudioStatus.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblAudioStatus.Location = new System.Drawing.Point(10, 5);
             this.lblAudioStatus.Name = "lblAudioStatus";
-            this.lblAudioStatus.Size = new System.Drawing.Size(59, 16);
-            this.lblAudioStatus.TabIndex = 9;
-            this.lblAudioStatus.Text = "Status: ";
             // 
             // pnlAudio
             // 
+            resources.ApplyResources(this.pnlAudio, "pnlAudio");
             this.pnlAudio.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pnlAudio.Controls.Add(this.txtStatus);
             this.pnlAudio.Controls.Add(this.lblAudioStatus);
-            this.pnlAudio.Location = new System.Drawing.Point(6, 33);
             this.pnlAudio.Name = "pnlAudio";
-            this.pnlAudio.Size = new System.Drawing.Size(191, 28);
-            this.pnlAudio.TabIndex = 10;
             // 
             // AudioControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Controls.Add(this.pnlAudio);
             this.Controls.Add(this.txtPartner);
             this.Controls.Add(this.lblUser);
             this.Name = "AudioControl";
-            this.Size = new System.Drawing.Size(203, 69);
             this.pnlAudio.ResumeLayout(false);
             this.pnlAudio.PerformLayout();
             this.ResumeLayout(false);

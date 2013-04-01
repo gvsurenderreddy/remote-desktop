@@ -89,9 +89,8 @@ namespace MViewer
 
         private void OnLanguageUpdated(object sender, EventArgs e)
         {
-            // todo: implement LanguageUpdated
             LanguageEventArgs args = (LanguageEventArgs)e;
-
+            Program.Controller.ChangeLanguage(args.Language);
         }
 
         private void OnIdentityUpdated(object sender, EventArgs e)
@@ -122,6 +121,11 @@ namespace MViewer
         #endregion
 
         #region public methods
+
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormMain));
+        }
 
         public void SetResultText(string text)
         {

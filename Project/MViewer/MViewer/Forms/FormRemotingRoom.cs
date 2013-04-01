@@ -35,6 +35,11 @@ namespace MViewer
 
         #region public methods
 
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormRemotingRoom));
+        }
+
         public void BindCommandHandlers(Delegates.HookCommandDelegate remotingCommand)
         {
             remoteControl.BindCommandHandler(remotingCommand);

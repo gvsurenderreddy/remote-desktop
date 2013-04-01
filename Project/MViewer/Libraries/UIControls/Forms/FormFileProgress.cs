@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 //using System.Threading.Tasks;
 using System.Windows.Forms;
+using Utils;
 
 namespace UIControls
 {
@@ -36,6 +37,12 @@ namespace UIControls
             // Set the Step property to a value of 1 to represent each file being copied.
             pbFileProgress.Step = 1;
 
+        }
+
+        // todo: use ChangeLanguage from FormFileProgress
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormFileProgress));
         }
 
         public void StartPB()

@@ -12,6 +12,7 @@ namespace GenericObjects
         void SetPartnerName(string friendlyName);
 
         void ShowRoom();
+        void ChangeLanguage(string language);
 
         string PartnerIdentity
         {

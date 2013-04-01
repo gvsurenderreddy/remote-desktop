@@ -34,6 +34,18 @@ namespace BusinessLogicLayer
 
         #region public methods
 
+        public void ChangeLanguage(string language)
+        {
+            foreach (KeyValuePair<string, IRoom> room in _rooms)
+            {
+                Thread t = new Thread(delegate()
+                {
+                    room.Value.ChangeLanguage(language);
+                });
+                t.Start();
+            }
+        }
+
         public void ToggleAudioStatus(string identity)
         {
             string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);

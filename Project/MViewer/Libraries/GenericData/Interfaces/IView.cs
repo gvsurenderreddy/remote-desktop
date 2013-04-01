@@ -10,6 +10,7 @@ namespace GenericObjects
 {
     public interface IView
     {
+        void ChangeLanguage(string language);
         void SetResultText(string text);
         void NotifyContactsObserver();
         void NotifyIdentityObserver();

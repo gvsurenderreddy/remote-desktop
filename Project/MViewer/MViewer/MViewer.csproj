@@ -114,6 +114,9 @@
     <EmbeddedResource Include="Forms\FormAudioRoom.resx">
       <DependentUpon>FormAudioRoom.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAudioRoom.ro-RO.resx">
+      <DependentUpon>FormAudioRoom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

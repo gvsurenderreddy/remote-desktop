@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActionsControl));
             this.btnVideo = new System.Windows.Forms.Button();
             this.btnAudio = new System.Windows.Forms.Button();
             this.btnRemote = new System.Windows.Forms.Button();
@@ -45,121 +46,76 @@
             // 
             // btnVideo
             // 
-            this.btnVideo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVideo.Location = new System.Drawing.Point(6, 21);
+            resources.ApplyResources(this.btnVideo, "btnVideo");
             this.btnVideo.Name = "btnVideo";
-            this.btnVideo.Size = new System.Drawing.Size(66, 23);
-            this.btnVideo.TabIndex = 0;
-            this.btnVideo.Text = "Start";
             this.btnVideo.UseVisualStyleBackColor = true;
             this.btnVideo.Click += new System.EventHandler(this.BtnAction_Click);
             // 
             // btnAudio
             // 
-            this.btnAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAudio.Location = new System.Drawing.Point(78, 21);
+            resources.ApplyResources(this.btnAudio, "btnAudio");
             this.btnAudio.Name = "btnAudio";
-            this.btnAudio.Size = new System.Drawing.Size(66, 23);
-            this.btnAudio.TabIndex = 1;
-            this.btnAudio.Text = "Start";
             this.btnAudio.UseVisualStyleBackColor = true;
             this.btnAudio.Click += new System.EventHandler(this.BtnAction_Click);
             // 
             // btnRemote
             // 
-            this.btnRemote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemote.Location = new System.Drawing.Point(150, 21);
+            resources.ApplyResources(this.btnRemote, "btnRemote");
             this.btnRemote.Name = "btnRemote";
-            this.btnRemote.Size = new System.Drawing.Size(66, 23);
-            this.btnRemote.TabIndex = 2;
-            this.btnRemote.Text = "Start";
             this.btnRemote.UseVisualStyleBackColor = true;
             this.btnRemote.Click += new System.EventHandler(this.BtnAction_Click);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label1, "label1");
             this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.Location = new System.Drawing.Point(23, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Video";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label2, "label2");
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(93, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Audio";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label3, "label3");
             this.label3.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label3.Location = new System.Drawing.Point(159, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Remote";
             // 
             // btnMuteAudio
             // 
-            this.btnMuteAudio.Location = new System.Drawing.Point(78, 50);
+            resources.ApplyResources(this.btnMuteAudio, "btnMuteAudio");
             this.btnMuteAudio.Name = "btnMuteAudio";
-            this.btnMuteAudio.Size = new System.Drawing.Size(66, 23);
-            this.btnMuteAudio.TabIndex = 6;
-            this.btnMuteAudio.Text = "Pause";
             this.btnMuteAudio.UseVisualStyleBackColor = true;
             this.btnMuteAudio.Click += new System.EventHandler(this.BtnAction_Click);
             // 
             // btnPauseVideo
             // 
-            this.btnPauseVideo.Location = new System.Drawing.Point(6, 50);
+            resources.ApplyResources(this.btnPauseVideo, "btnPauseVideo");
             this.btnPauseVideo.Name = "btnPauseVideo";
-            this.btnPauseVideo.Size = new System.Drawing.Size(66, 23);
-            this.btnPauseVideo.TabIndex = 7;
-            this.btnPauseVideo.Text = "Pause";
             this.btnPauseVideo.UseVisualStyleBackColor = true;
             this.btnPauseVideo.Click += new System.EventHandler(this.BtnAction_Click);
             // 
             // btnPauseRemote
             // 
-            this.btnPauseRemote.Location = new System.Drawing.Point(150, 50);
+            resources.ApplyResources(this.btnPauseRemote, "btnPauseRemote");
             this.btnPauseRemote.Name = "btnPauseRemote";
-            this.btnPauseRemote.Size = new System.Drawing.Size(66, 23);
-            this.btnPauseRemote.TabIndex = 8;
-            this.btnPauseRemote.Text = "Pause";
             this.btnPauseRemote.UseVisualStyleBackColor = true;
             this.btnPauseRemote.Click += new System.EventHandler(this.BtnAction_Click);
             // 
             // btnSend
             // 
-            this.btnSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSend.Location = new System.Drawing.Point(227, 21);
+            resources.ApplyResources(this.btnSend, "btnSend");
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(66, 23);
-            this.btnSend.TabIndex = 9;
-            this.btnSend.Text = "Send file";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.label4, "label4");
             this.label4.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label4.Location = new System.Drawing.Point(236, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Transfer";
             // 
             // pnlControls
             // 
@@ -175,19 +131,16 @@
             this.pnlControls.Controls.Add(this.btnPauseVideo);
             this.pnlControls.Controls.Add(this.label3);
             this.pnlControls.Controls.Add(this.btnMuteAudio);
-            this.pnlControls.Location = new System.Drawing.Point(7, 7);
+            resources.ApplyResources(this.pnlControls, "pnlControls");
             this.pnlControls.Name = "pnlControls";
-            this.pnlControls.Size = new System.Drawing.Size(300, 78);
-            this.pnlControls.TabIndex = 12;
             // 
             // ActionsControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Controls.Add(this.pnlControls);
             this.Name = "ActionsControl";
-            this.Size = new System.Drawing.Size(314, 91);
             this.pnlControls.ResumeLayout(false);
             this.pnlControls.PerformLayout();
             this.ResumeLayout(false);

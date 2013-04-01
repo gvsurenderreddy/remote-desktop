@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoControl));
             this.txtPartner = new System.Windows.Forms.TextBox();
             this.lblUser = new System.Windows.Forms.Label();
             this.pnlVideo = new System.Windows.Forms.Panel();
@@ -38,51 +39,38 @@
             // 
             // txtPartner
             // 
-            this.txtPartner.Enabled = false;
-            this.txtPartner.Location = new System.Drawing.Point(84, 9);
+            resources.ApplyResources(this.txtPartner, "txtPartner");
             this.txtPartner.Name = "txtPartner";
-            this.txtPartner.Size = new System.Drawing.Size(112, 20);
-            this.txtPartner.TabIndex = 6;
             // 
             // lblUser
             // 
-            this.lblUser.AutoSize = true;
-            this.lblUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lblUser, "lblUser");
             this.lblUser.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblUser.Location = new System.Drawing.Point(12, 13);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(66, 16);
-            this.lblUser.TabIndex = 5;
-            this.lblUser.Text = "Partner: ";
             // 
             // pnlVideo
             // 
             this.pnlVideo.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pnlVideo.Controls.Add(this.pbVideo);
-            this.pnlVideo.Location = new System.Drawing.Point(3, 38);
+            resources.ApplyResources(this.pnlVideo, "pnlVideo");
             this.pnlVideo.Name = "pnlVideo";
-            this.pnlVideo.Size = new System.Drawing.Size(382, 346);
-            this.pnlVideo.TabIndex = 7;
             // 
             // pbVideo
             // 
             this.pbVideo.BackColor = System.Drawing.SystemColors.Control;
-            this.pbVideo.Location = new System.Drawing.Point(10, 12);
+            resources.ApplyResources(this.pbVideo, "pbVideo");
             this.pbVideo.Name = "pbVideo";
-            this.pbVideo.Size = new System.Drawing.Size(360, 323);
-            this.pbVideo.TabIndex = 0;
             this.pbVideo.TabStop = false;
             // 
             // VideoControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Controls.Add(this.pnlVideo);
             this.Controls.Add(this.txtPartner);
             this.Controls.Add(this.lblUser);
             this.Name = "VideoControl";
-            this.Size = new System.Drawing.Size(388, 384);
             this.Resize += new System.EventHandler(this.VideoControl_Resize);
             this.pnlVideo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbVideo)).EndInit();
