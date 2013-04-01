@@ -8,6 +8,6 @@ namespace GenericObjects
 {
     public class LanguageEventArgs : EventArgs
     {
-        public GenericEnums.Language Language {get; set;}
+        public string Language {get; set;}
     }
 }

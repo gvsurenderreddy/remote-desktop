@@ -12,6 +12,7 @@ namespace Utils
         ImageConverter _imageConverter;
         RemotingUtils _desktopViewerUtils;
         Cryptography _cryptography;
+        GenericMethods _genericMethods;
 
         static Tools _instance = new Tools();
         static readonly object _syncInstance = new object();
@@ -21,6 +22,7 @@ namespace Utils
             _imageConverter = new ImageConverter();
             _desktopViewerUtils = new RemotingUtils();
             _cryptography = new Cryptography();
+            _genericMethods = new GenericMethods();
         }
 
         public static Tools Instance
@@ -50,9 +52,15 @@ namespace Utils
         {
             get { return _desktopViewerUtils; }
         }
+
         public Cryptography Cryptography
         {
             get { return _cryptography; }
+        }
+
+        public GenericMethods GenericMethods
+        {
+            get { return _genericMethods; }
         }
     }
 }

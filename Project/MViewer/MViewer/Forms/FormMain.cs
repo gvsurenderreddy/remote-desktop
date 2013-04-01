@@ -90,6 +90,8 @@ namespace MViewer
         private void OnLanguageUpdated(object sender, EventArgs e)
         {
             // todo: implement LanguageUpdated
+            LanguageEventArgs args = (LanguageEventArgs)e;
+
         }
 
         private void OnIdentityUpdated(object sender, EventArgs e)

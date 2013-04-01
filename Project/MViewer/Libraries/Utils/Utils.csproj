@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cryptography.cs" />
+    <Compile Include="GenericMethods.cs" />
     <Compile Include="RemotingUtils.cs" />
     <Compile Include="Enum\ButtonStatuses.cs" />
     <Compile Include="Enum\GenericEnums.cs" />
