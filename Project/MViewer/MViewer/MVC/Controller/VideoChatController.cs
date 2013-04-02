@@ -242,6 +242,7 @@ namespace MViewer
             // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
             _view.ShowMyWebcamForm(true);
 
+            Thread.Sleep(1000);
             this.StartAudio(this, new RoomActionEventArgs()
             {
                 Identity = args.Identity,
