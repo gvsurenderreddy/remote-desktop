@@ -15,10 +15,28 @@ namespace Utils
             foreach (Control c in controls)
             {
                 ComponentResourceManager resources = new ComponentResourceManager(controlType);
-                resources.ApplyResources(c, c.Name, new CultureInfo(lang));
-                if (c.Controls != null && c.Controls.Count > 0)
+                CultureInfo cultureInfo = new CultureInfo(lang);
+                if (c.InvokeRequired)
                 {
-                    ChangeLanguage(lang, c.Controls, c.GetType());
+                    c.Invoke(new MethodInvoker(delegate()
+                    {
+                        resources.ApplyResources(c, c.Name, cultureInfo);
+                    }));
+                }
+                else
+                {
+                    resources.ApplyResources(c, c.Name, cultureInfo);
+                }
+                try
+                {
+                    if (c.Controls != null && c.Controls.Count > 0)
+                    {
+                        ChangeLanguage(lang, c.Controls, controlType);
+                    }
+                }
+                catch (Exception ex)
+                {
+
                 }
             }
         }

@@ -38,6 +38,11 @@ namespace UIControls
 
         #region public methods
 
+        public void ChangeLanguage(string language)
+        {
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(ActionsControl));
+        }
+
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {
             switch (roomType)

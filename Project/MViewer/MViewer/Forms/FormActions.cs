@@ -64,7 +64,7 @@ namespace MViewer
 
         public void ChangeLanguage(string language)
         {
-            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormActions));
+            actionsControl.ChangeLanguage(language);
         }
 
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
