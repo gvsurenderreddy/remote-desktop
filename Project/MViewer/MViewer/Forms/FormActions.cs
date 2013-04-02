@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using UIControls;
 using Utils;
 using GenericObjects;
+using System.Threading;
 
 namespace MViewer
 {
@@ -69,7 +70,15 @@ namespace MViewer
 
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {
-            this.Invoke(myDelegate, start, pause, roomType);
+            try
+            {
+                this.Invoke(myDelegate, start, pause, roomType);
+            }
+            catch (Exception ex)
+            {
+                Thread.Sleep(1000);
+                this.Invoke(myDelegate, start, pause, roomType);
+            }
         }
 
         #endregion
