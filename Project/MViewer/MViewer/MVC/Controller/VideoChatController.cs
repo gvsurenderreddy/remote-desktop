@@ -226,6 +226,12 @@ namespace MViewer
 
             // open new Video  form to receive the captures
             OpenVideoForm(args.Identity);
+            this.StartAudio(this, new RoomActionEventArgs()
+            {
+                Identity = args.Identity,
+                RoomType = GenericEnums.RoomType.Audio,
+                SignalType = GenericEnums.SignalType.Start
+            });
 
             // I am going to send my captures by using the below client
             _model.ClientController.AddClient(args.Identity);
@@ -304,13 +310,6 @@ namespace MViewer
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.VideoSessionState = GenericEnums.SessionState.Opened;
-
-                    this.StartAudio(this, new RoomActionEventArgs()
-                    {
-                        Identity = identity,
-                        RoomType = GenericEnums.RoomType.Audio,
-                        SignalType = GenericEnums.SignalType.Start
-                    });
 
                     Contact contact = _model.GetContact(identity);
                     // get friendly name from contacts list
