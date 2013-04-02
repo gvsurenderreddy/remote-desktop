@@ -271,7 +271,7 @@ namespace MViewer
             }
             if (args != null) // check if there is a selected contact or active  room
             {
-                Program.Controller.RoomButtonAction(sender, args);
+                Program.Controller.OnRoomButtonActionTriggered(sender, args);
             }
 
             if (args.RoomType == GenericEnums.RoomType.Video && _formWebCapture != null)

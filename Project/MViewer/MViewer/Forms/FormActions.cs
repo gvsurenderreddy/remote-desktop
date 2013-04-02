@@ -35,7 +35,7 @@ namespace MViewer
         {
             InitializeComponent();
             _roomActionEventHandler = roomActionEventHandler;
-            ActionsObserver = new Delegates.ActionsEventHandler(ActionTriggered);
+            ActionsObserver = new Delegates.ActionsEventHandler(OnActionTriggered);
             myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
         }
 
@@ -52,7 +52,7 @@ namespace MViewer
             }
         }
 
-        private void ActionTriggered(object sender, EventArgs e)
+        private void OnActionTriggered(object sender, EventArgs e)
         {
             // use the Controller and take specific action when event has been triggered using the Actions control
             _roomActionEventHandler.Invoke(sender, e);

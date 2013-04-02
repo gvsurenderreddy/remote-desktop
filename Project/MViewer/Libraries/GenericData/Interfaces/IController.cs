@@ -33,7 +33,7 @@ namespace GenericObjects
 
         void ChangeLanguage(string language);
         void IdentityObserver(object sender, IdentityEventArgs e);
-        void RoomButtonAction(object sender, EventArgs e);
+        void OnRoomButtonActionTriggered(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideo(WebcamCapture webcamControl);
         void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);

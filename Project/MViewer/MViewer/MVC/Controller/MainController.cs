@@ -55,7 +55,7 @@ namespace MViewer
                 VideoCaptureObserver = this.VideoCaptureObserver,
                 AudioCaptureObserver = this.OnAudioCaptureReceived,
                 ContactsObserver = this.ContactRequestObserver,
-                RoomButtonObserver = this.RoomButtonAction,
+                RoomButtonObserver = this.OnRoomButtonActionTriggered,
                 WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                 FileTransferObserver = this.FileTransferObserver,
                 FilePermissionObserver = this.FileTransferPermission,
@@ -100,7 +100,7 @@ namespace MViewer
         }
 
         // todo: convert this to an event handler , use it in the View as observer
-        public void RoomButtonAction(object sender, EventArgs e)
+        public void OnRoomButtonActionTriggered(object sender, EventArgs e)
         {
             RoomActionEventArgs args = (RoomActionEventArgs)e;
             bool isContactOnline = _model.ClientController.IsContactOnline(args.Identity);
