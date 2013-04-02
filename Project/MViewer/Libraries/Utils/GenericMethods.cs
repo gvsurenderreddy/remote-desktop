@@ -15,7 +15,7 @@ namespace Utils
             foreach (Control c in controls)
             {
                 ComponentResourceManager resources = new ComponentResourceManager(controlType);
-                CultureInfo cultureInfo = new CultureInfo(lang);
+                CultureInfo cultureInfo = new CultureInfo(string.IsNullOrEmpty(lang) ? "en-US" : lang);
                 if (c.InvokeRequired)
                 {
                     c.Invoke(new MethodInvoker(delegate()
