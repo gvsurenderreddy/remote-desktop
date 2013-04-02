@@ -49,6 +49,10 @@ namespace GenericObjects
 
         public void StartVideoPresentation()
         {
+            if (_videoCapture == null)
+            {
+                _videoCapture = _presenterSettings.VideoCaptureControl;
+            }
             // start the video capturing
             _videoCapture.StartCapturing(_firstTimeCapturing);
             _firstTimeCapturing = false;
