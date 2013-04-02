@@ -170,14 +170,21 @@ namespace BusinessLogicLayer
 
         public void CloseRoom(string identity, GenericEnums.RoomType roomType)
         {
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, roomType);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                lock (_syncRooms)
                 {
-                    _rooms[roomID].SyncClosing.Reset();
-                    ((Form)_rooms[roomID]).Invoke(new Delegates.CloseDelegate(((Form)_rooms[roomID]).Close));
+                    string roomID = GenerateRoomID(identity, roomType);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        _rooms[roomID].SyncClosing.Reset();
+                        ((Form)_rooms[roomID]).Invoke(new Delegates.CloseDelegate(((Form)_rooms[roomID]).Close));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                // todo: log exception
             }
         }
 
