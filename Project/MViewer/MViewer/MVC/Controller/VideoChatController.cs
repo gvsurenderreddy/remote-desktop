@@ -226,12 +226,6 @@ namespace MViewer
 
             // open new Video  form to receive the captures
             OpenVideoForm(args.Identity);
-            this.StartAudio(this, new RoomActionEventArgs()
-            {
-                Identity = args.Identity,
-                RoomType = GenericEnums.RoomType.Audio,
-                SignalType = GenericEnums.SignalType.Start
-            });
 
             // I am going to send my captures by using the below client
             _model.ClientController.AddClient(args.Identity);
@@ -240,6 +234,13 @@ namespace MViewer
             // initialize the webcamCapture form
             // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
             _view.ShowMyWebcamForm(true);
+
+            this.StartAudio(this, new RoomActionEventArgs()
+            {
+                Identity = args.Identity,
+                RoomType = GenericEnums.RoomType.Audio,
+                SignalType = GenericEnums.SignalType.Start
+            });
         }
 
         #endregion
