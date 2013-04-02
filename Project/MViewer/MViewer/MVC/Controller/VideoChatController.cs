@@ -243,7 +243,7 @@ namespace MViewer
             _view.ShowMyWebcamForm(true);
 
             Thread.Sleep(1000);
-            this.StartAudio(this, new RoomActionEventArgs()
+            this.StopAudio(this, new RoomActionEventArgs()
             {
                 Identity = args.Identity,
                 RoomType = GenericEnums.RoomType.Audio,
