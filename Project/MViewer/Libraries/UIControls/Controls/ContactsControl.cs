@@ -52,6 +52,7 @@ namespace UIControls
         public void ChangeLanguage(string language)
         {
             _language = language;
+            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(ContactsControl));
         }
 
         public void SetContacts(DataView dvContacts)
