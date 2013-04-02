@@ -181,6 +181,7 @@ namespace MViewer
             transfer.IsVideoUpdating = false;
             _syncVideoCaptureActivity.Set();
 
+            Thread.Sleep(1000);
             this.StopAudio(this, new RoomActionEventArgs()
             {
                 Identity = args.Identity,
@@ -243,7 +244,7 @@ namespace MViewer
             _view.ShowMyWebcamForm(true);
 
             Thread.Sleep(1000);
-            this.StopAudio(this, new RoomActionEventArgs()
+            this.StartAudio(this, new RoomActionEventArgs()
             {
                 Identity = args.Identity,
                 RoomType = GenericEnums.RoomType.Audio,
