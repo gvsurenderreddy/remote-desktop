@@ -24,6 +24,7 @@ namespace GenericObjects
             _contactNo = contactNo;
             _friendlyName = friendlyName;
             _identity = identity;
+            _status = GenericEnums.ContactStatus.Offline;
         }
 
         public Contact(int contactNo, string identity, GenericEnums.ContactStatus newStatus)
@@ -31,6 +32,7 @@ namespace GenericObjects
             _contactNo = contactNo;
             _identity = identity;
             _status = newStatus;
+            _status = GenericEnums.ContactStatus.Offline;
         }
 
         #endregion
@@ -45,15 +47,6 @@ namespace GenericObjects
         public int ContactNo
         {
             get { return _contactNo; }
-        }
-
-        public GenericEnums.ContactStatus Status
-        {
-            get { return _status; }
-            set 
-            {
-                _status = value; 
-            }
         }
 
         public string FriendlyName
