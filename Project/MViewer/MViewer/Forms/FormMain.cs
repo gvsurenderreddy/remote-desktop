@@ -125,6 +125,7 @@ namespace MViewer
         public void ChangeLanguage(string language)
         {
             Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormMain));
+            contactsControl.ChangeLanguage(language);
         }
 
         public void SetResultText(string text)

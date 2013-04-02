@@ -25,12 +25,15 @@ namespace MViewer
         IView _view;
         IModel _model;
 
+        string _language;
+
         #endregion
 
         #region c-tor
 
         public Controller()
         {
+            _language = "en-US";
             // initialize the model
             _model = new Model();
             // initalize the view and bind it to the model
@@ -69,6 +72,7 @@ namespace MViewer
 
         public void ChangeLanguage(string language)
         {
+            _language = language;
             _view.ChangeLanguage(language);
         }
 

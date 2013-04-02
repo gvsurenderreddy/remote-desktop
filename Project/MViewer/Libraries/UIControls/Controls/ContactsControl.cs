@@ -22,6 +22,7 @@ namespace UIControls
         EventHandler _onContactsUpdated;
         EventHandler _onSelectedContactChanged;
         Label _notification;
+        string _language;
 
         #endregion
 
@@ -29,6 +30,7 @@ namespace UIControls
 
         public ContactsControl()
         {
+            _language = "en-US";
             InitializeComponent();
 
             InitializeNotificationLabel();
@@ -46,6 +48,11 @@ namespace UIControls
         #endregion
 
         #region public methods
+
+        public void ChangeLanguage(string language)
+        {
+            _language = language;
+        }
 
         public void SetContacts(DataView dvContacts)
         {
@@ -93,6 +100,7 @@ namespace UIControls
         private void btnAdd_Click(object sender, EventArgs e)
         {
             FormContact formContact = new FormContact(GenericEnums.FormMode.Add, _onContactsUpdated);
+            formContact.ChangeLanguage(this._language);
             formContact.ShowDialog(this);
         }
 

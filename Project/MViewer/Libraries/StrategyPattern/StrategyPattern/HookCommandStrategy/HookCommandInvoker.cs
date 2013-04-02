@@ -8,8 +8,6 @@ using Utils;
 
 namespace StrategyPattern
 {
-    // todo: remove HookCommandInvoker if not used
-
     public class HookCommandInvoker : IHookCommandInvoker
     {
         Dictionary<GenericEnums.RemotingCommandType, IHookCommands> commands;

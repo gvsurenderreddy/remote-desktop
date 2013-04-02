@@ -36,7 +36,7 @@ namespace MViewer
                         {
                             fileProgressFrom = new FormFileProgress(
                                 Path.GetFileName(filePath), contact.FriendlyName);
-
+                            fileProgressFrom.ChangeLanguage(_language);
                             Application.Run(fileProgressFrom);
 
                         });
@@ -106,7 +106,7 @@ namespace MViewer
                     {
                         fileProgressFrom = new FormFileProgress(
                             Path.GetFileName(saveFileDialog1.FileName), contact.FriendlyName);
-
+                        fileProgressFrom.ChangeLanguage(_language);
                         Application.Run(fileProgressFrom);
 
                     });

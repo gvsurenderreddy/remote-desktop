@@ -43,7 +43,7 @@ namespace BusinessLogicLayer
             X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
             X509Certificate2 clientCert = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
 
-            // todo: decide if to keep the custome validator
+            // todo: decide if to keep the custom validator
             authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
             authentication.CustomCertificateValidator = new GenericObjects.CustomCertificateValidator("CN=Mihai-PC", clientCert);
             

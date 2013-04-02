@@ -9,7 +9,6 @@ namespace StrategyPattern
 {
     public interface IHookCommands
     {
-        // todo: implement IHookCommands
         void Execute(object sender, RemotingCommandEventArgs args);
     }
 }

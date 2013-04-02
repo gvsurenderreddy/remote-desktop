@@ -21,7 +21,6 @@ namespace Utils
 
         #region static methods
 
-        //todo: use the below methods if necessary
         public double ConvertXToRemote(double local_x, double local_width)
         {
             //local_x * remote_width / local_width
@@ -37,7 +36,6 @@ namespace Utils
             return remote_y;
         }
 
-        ////todo: use the below methods if necessary
         public double ConvertXToAbsolute(double remote_x)
         {
             //local_x * remote_width / local_width

@@ -14,7 +14,7 @@ namespace StrategyPattern
 
         public RoomCommandInvoker(ControllerRoomHandlers roomHandlers)
         {
-            // todo: provide the video/audio/remoting event handlers from the controller
+            // provide the video/audio/remoting event handlers from the controller
 
             VideoCommands videoCommands = new VideoCommands()
             {
