@@ -181,6 +181,13 @@ namespace MViewer
             transfer.IsVideoUpdating = false;
             _syncVideoCaptureActivity.Set();
 
+            this.StopAudio(this, new RoomActionEventArgs()
+            {
+                Identity = args.Identity,
+                RoomType = GenericEnums.RoomType.Audio,
+                SignalType = GenericEnums.SignalType.Stop
+            });
+
         }
 
         public void PauseVideo(object sender, RoomActionEventArgs args)
