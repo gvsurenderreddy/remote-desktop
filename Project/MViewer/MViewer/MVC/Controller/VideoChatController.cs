@@ -25,6 +25,7 @@ namespace MViewer
         /// object used to synchronize the capture sent to partners
         /// </summary>
         readonly object _syncVideoCaptureSending = new object();
+        readonly object _syncVideoStartStop = new object();
 
         ManualResetEvent _syncVideoCaptureActivity = new ManualResetEvent(true);
 
@@ -122,73 +123,74 @@ namespace MViewer
 
         public void StopVideo(object sender, RoomActionEventArgs args)
         {
-            _syncVideoCaptureActivity.Reset();
-
-            bool sendStopSignal = true;
-            if (sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
+            lock (_syncVideoStartStop)
             {
-                sendStopSignal = false;
-            }
-            string identity = args.Identity;
-            // tell the partner to pause capturing & sending while processing room Stop command
-
-            _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
-                true);
-
-            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
-            transfer.IsVideoUpdating = true;
-
-            // check if the webcapture is pending for being sent
-            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(identity);
-            while (transferStatus.Video)
-            {
-                // wait for it to finish and block the next sending
-                Thread.Sleep(200);
-            }
-
-            PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
-            // update the session status to closed
-            if (peers.VideoSessionState != GenericEnums.SessionState.Closed)
-            {
-                peers.AudioSessionState = GenericEnums.SessionState.Closed;
-                peers.VideoSessionState = GenericEnums.SessionState.Closed;
-
-                if (sendStopSignal)
+                _syncVideoCaptureActivity.Reset();
+            
+                bool sendStopSignal = true;
+                if (sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
                 {
-                    // send the stop signal to the server session
-                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity,
-                        GenericEnums.RoomType.Video, GenericEnums.SignalType.Stop);
+                    sendStopSignal = false;
+                }
+                string identity = args.Identity;
+                // tell the partner to pause capturing & sending while processing room Stop command
+
+                _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
+                    true);
+
+                TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
+                transfer.IsVideoUpdating = true;
+
+                // check if the webcapture is pending for being sent
+                PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(identity);
+                while (transferStatus.Video)
+                {
+                    // wait for it to finish and block the next sending
+                    Thread.Sleep(200);
                 }
 
-                // remove the connected client session
-                _model.SessionManager.RemoveSession(identity);
-                _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Video);
-                _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Video);
+                PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+                // update the session status to closed
+                if (peers.VideoSessionState != GenericEnums.SessionState.Closed)
+                {
+                    peers.AudioSessionState = GenericEnums.SessionState.Closed;
+                    peers.VideoSessionState = GenericEnums.SessionState.Closed;
 
-                _view.UpdateLabels(args.Identity, args.RoomType);
+                    if (sendStopSignal)
+                    {
+                        // send the stop signal to the server session
+                        _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity,
+                            GenericEnums.RoomType.Video, GenericEnums.SignalType.Stop);
+                    }
+
+                    // remove the connected client session
+                    _model.SessionManager.RemoveSession(identity);
+                    _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Video);
+                    _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Video);
+
+                    _view.UpdateLabels(args.Identity, args.RoomType);
+                }
+
+                _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
+                    false);
+
+                // close the webcapture form if there s no room left
+                if (!_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Video))
+                {
+                    _view.ResetLabels(args.RoomType);
+                    StopVideoCapturing();
+                }
+
+                transfer.IsVideoUpdating = false;
+                _syncVideoCaptureActivity.Set();
+
+                this.StopAudio(this, new RoomActionEventArgs()
+                {
+                    Identity = args.Identity,
+                    RoomType = GenericEnums.RoomType.Audio,
+                    SignalType = GenericEnums.SignalType.Stop
+                });
             }
-
-            _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
-                false);
-
-            // close the webcapture form if there s no room left
-            if (!_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Video))
-            {
-                _view.ResetLabels(args.RoomType);
-                StopVideoCapturing();
-            }
-
-            transfer.IsVideoUpdating = false;
-            _syncVideoCaptureActivity.Set();
-
-            Thread.Sleep(1000);
-            this.StopAudio(this, new RoomActionEventArgs()
-            {
-                Identity = args.Identity,
-                RoomType = GenericEnums.RoomType.Audio,
-                SignalType = GenericEnums.SignalType.Stop
-            });
-
         }
 
         public void PauseVideo(object sender, RoomActionEventArgs args)
@@ -227,29 +229,34 @@ namespace MViewer
 
         public void StartVideo(object sender, RoomActionEventArgs args)
         {
-            // create client session
-            Session clientSession = new ClientSession(args.Identity, args.RoomType);
-            // save the proxy to which we are sending the webcam captures
-            _model.SessionManager.AddSession(clientSession);
-
-            // open new Video  form to receive the captures
-            OpenVideoForm(args.Identity);
-
-            // I am going to send my captures by using the below client
-            _model.ClientController.AddClient(args.Identity);
-            _model.ClientController.StartClient(args.Identity);
-
-            // initialize the webcamCapture form
-            // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
-            _view.ShowMyWebcamForm(true);
-
-            Thread.Sleep(1000);
-            this.StartAudio(this, new RoomActionEventArgs()
+            lock (_syncVideoStartStop)
             {
-                Identity = args.Identity,
-                RoomType = GenericEnums.RoomType.Audio,
-                SignalType = GenericEnums.SignalType.Start
-            });
+                // create client session
+                Session clientSession = new ClientSession(args.Identity, args.RoomType);
+                // save the proxy to which we are sending the webcam captures
+                _model.SessionManager.AddSession(clientSession);
+
+                // open new Video  form to receive the captures
+                OpenVideoForm(args.Identity);
+
+                // I am going to send my captures by using the below client
+                _model.ClientController.AddClient(args.Identity);
+                _model.ClientController.StartClient(args.Identity);
+
+                // initialize the webcamCapture form
+                // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
+                _view.ShowMyWebcamForm(true);
+
+                // todo: add manual reset event and wait for the video 
+                Thread.Sleep(1000);
+
+                this.StartAudio(this, new RoomActionEventArgs()
+                {
+                    Identity = args.Identity,
+                    RoomType = GenericEnums.RoomType.Audio,
+                    SignalType = GenericEnums.SignalType.Start
+                });
+            }
         }
 
         #endregion

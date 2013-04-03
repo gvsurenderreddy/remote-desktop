@@ -37,6 +37,7 @@ namespace MViewer
             _webcamCapture.ParentForm = this;
             Program.Controller.StartVideo(_webcamCapture);
 
+            // todo: signal the manual reset event from StartVideo (that will signal the audio communication)
         }
 
         #region public methods

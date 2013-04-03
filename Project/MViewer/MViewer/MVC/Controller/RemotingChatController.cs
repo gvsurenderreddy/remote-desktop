@@ -17,6 +17,7 @@ namespace MViewer
     {
         #region private members
 
+        readonly object _syncRemotingStartStop = new object();
         readonly object _syncRemotingCaptureSending = new object();
         ManualResetEvent _syncRemotingCaptureActivity = new ManualResetEvent(true);
         KeyCodeParser _keyCodeParser = new KeyCodeParser();
@@ -253,67 +254,73 @@ namespace MViewer
 
         public void StartRemoting(object sender, RoomActionEventArgs args)
         {
-            _syncRemotingCaptureActivity.Reset();
+            lock (_syncRemotingStartStop)
+            {
+                _syncRemotingCaptureActivity.Reset();
 
-            // I am going to send my captures by using the below client
-            _model.ClientController.AddClient(args.Identity);
-            _model.ClientController.StartClient(args.Identity);
+                // I am going to send my captures by using the below client
+                _model.ClientController.AddClient(args.Identity);
+                _model.ClientController.StartClient(args.Identity);
 
-            // create client session
-            Session clientSession = new ClientSession(args.Identity, args.RoomType);
-            // save the proxy to which we are sending the remoting captures
-            _model.SessionManager.AddSession(clientSession);
+                // create client session
+                Session clientSession = new ClientSession(args.Identity, args.RoomType);
+                // save the proxy to which we are sending the remoting captures
+                _model.SessionManager.AddSession(clientSession);
 
-            // initialize the remoting tool and start it's timer
-            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
-            clientSession.Peers.RemotingSessionState = GenericEnums.SessionState.Opened;
-            _syncRemotingCaptureActivity.Set();
+                // initialize the remoting tool and start it's timer
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
+                clientSession.Peers.RemotingSessionState = GenericEnums.SessionState.Opened;
+                _syncRemotingCaptureActivity.Set();
+            }
         }
 
         public void StopRemoting(object sender, RoomActionEventArgs args)
         {
-            _syncRemotingCaptureActivity.Reset();
-
-            // todo: wait untill the peding capture is being sent to the partner
-            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(args.Identity);
-            transfer.IsRemotingUpdating = true;
-
-            // check if the screen capture is pending for being sent
-            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(args.Identity);
-            while (transferStatus.Remoting)
+            lock (_syncRemotingStartStop)
             {
-                // wait for it to finish and block the next sending
-                Thread.Sleep(200);
+                _syncRemotingCaptureActivity.Reset();
+
+                // todo: wait untill the peding capture is being sent to the partner
+                TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(args.Identity);
+                transfer.IsRemotingUpdating = true;
+
+                // check if the screen capture is pending for being sent
+                PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(args.Identity);
+                while (transferStatus.Remoting)
+                {
+                    // wait for it to finish and block the next sending
+                    Thread.Sleep(200);
+                }
+
+                if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                {
+                    // send the stop command to the partner
+                    _model.ClientController.SendRoomCommand(MyIdentity(), args.Identity, args.RoomType, args.SignalType);
+                }
+
+                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                peers.RemotingSessionState = GenericEnums.SessionState.Closed;
+                _model.SessionManager.RemoveSession(args.Identity);
+
+                _model.RemoveClient(args.Identity);
+
+                _view.RoomManager.CloseRoom(args.Identity, GenericEnums.RoomType.Remoting);
+                _view.RoomManager.RemoveRoom(args.Identity, GenericEnums.RoomType.Remoting);
+
+                if (!_model.SessionManager.RemotingRoomsLeft())
+                {
+                    // check if any remoting session is still active
+                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                    _view.ResetLabels(args.RoomType);
+                }
+
+                // unblock the capture sending
+                transfer.IsRemotingUpdating = false;
+
+                OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
+
+                _syncRemotingCaptureActivity.Set();
             }
-
-            if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
-            {
-                // send the stop command to the partner
-                _model.ClientController.SendRoomCommand(MyIdentity(), args.Identity, args.RoomType, args.SignalType);
-            }
-
-            PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
-            peers.RemotingSessionState = GenericEnums.SessionState.Closed;
-            _model.SessionManager.RemoveSession(args.Identity);
-
-            _model.RemoveClient(args.Identity);
-
-            _view.RoomManager.CloseRoom(args.Identity, GenericEnums.RoomType.Remoting);
-            _view.RoomManager.RemoveRoom(args.Identity, GenericEnums.RoomType.Remoting);
-
-            if (!_model.SessionManager.RemotingRoomsLeft())
-            {
-                // check if any remoting session is still active
-                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
-                _view.ResetLabels(args.RoomType);
-            }
-
-            // unblock the capture sending
-            transfer.IsRemotingUpdating = false;
-
-            OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
-
-            _syncRemotingCaptureActivity.Set();
         }
 
         public void ResumeRemoting(object sender, RoomActionEventArgs args)
