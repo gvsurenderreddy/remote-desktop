@@ -116,7 +116,11 @@ namespace BusinessLogicLayer
                     MViewerClient client = _clients[partnerIdentity];
                     if (client != null)
                     {
-                        client.WaitRoomButtonAction(myIdentity, roomType, wait);
+                        try
+                        {
+                            client.WaitRoomButtonAction(myIdentity, roomType, wait);
+                        }
+                        catch { }
                     }
                 }
             }

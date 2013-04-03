@@ -70,14 +70,19 @@ namespace MViewer
 
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {
-            try
+            bool retry = true;
+            while (retry)
             {
-                this.Invoke(myDelegate, start, pause, roomType);
-            }
-            catch (Exception ex)
-            {
-                Thread.Sleep(1000);
-                this.Invoke(myDelegate, start, pause, roomType);
+                try
+                {
+                    this.Invoke(myDelegate, start, pause, roomType);
+                    retry = false;
+                }
+                catch (Exception ex)
+                {
+                    retry = true;
+                    Thread.Sleep(2000);
+                }
             }
         }
 
