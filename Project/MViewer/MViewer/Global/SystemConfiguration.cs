@@ -84,8 +84,6 @@ namespace MViewer
             keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyUp, Program.Controller.KeyUp);
 
             IDictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate> mouseDelegates = new Dictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate>();
-            mouseDelegates.Add(GenericEnums.MouseCommandType.LeftClick, Program.Controller.LeftClickCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.RightClick, Program.Controller.RightClickCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleRightClick, Program.Controller.DoubleRightClickCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleLeftClick, Program.Controller.DoubleLeftClickCommand);
             mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleClick, Program.Controller.MiddleClickCommand);

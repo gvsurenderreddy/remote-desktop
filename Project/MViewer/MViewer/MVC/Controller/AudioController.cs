@@ -30,25 +30,31 @@ namespace MViewer
             {
                 Thread t = new Thread(delegate()
                 {
-                    Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Audio);
-                    _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Audio);
+                    try
+                    {
+                        Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Audio);
+                        _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Audio);
 
-                    //IntPtr handle = IntPtr.Zero;
-                    FormAudioRoom audioRoom = new FormAudioRoom(identity, this.PlayAudioCapture);
-                    _view.RoomManager.AddRoom(identity, audioRoom);
-                    // initialize new Audio  form
+                        //IntPtr handle = IntPtr.Zero;
+                        FormAudioRoom audioRoom = new FormAudioRoom(identity, this.PlayAudioCapture);
+                        _view.RoomManager.AddRoom(identity, audioRoom);
+                        // initialize new Audio  form
 
-                    PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
-                    peers.AudioSessionState = GenericEnums.SessionState.Opened;
+                        PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
+                        peers.AudioSessionState = GenericEnums.SessionState.Opened;
 
-                    audioRoom.ToggleAudioStatus();
+                        audioRoom.ToggleAudioStatus();
 
-                    Contact contact = _model.GetContact(identity);
-                    // get friendly name from contacts list
-                    _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Audio, contact.FriendlyName);
-                    // finally, show the Audio  form where we'll see the webcam captures
-                    _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Audio);
-
+                        Contact contact = _model.GetContact(identity);
+                        // get friendly name from contacts list
+                        _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Audio, contact.FriendlyName);
+                        // finally, show the Audio  form where we'll see the webcam captures
+                        _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Audio);
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.Instance.Logger.LogError(ex.ToString());
+                    }
                 }
                 );
                 t.IsBackground = true;

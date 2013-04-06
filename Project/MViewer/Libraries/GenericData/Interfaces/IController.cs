@@ -49,8 +49,6 @@ namespace GenericObjects
         void KeyDown(object sender, RemotingCommandEventArgs args);
         void KeyPress(object sender, RemotingCommandEventArgs args);
         void KeyUp(object sender, RemotingCommandEventArgs args);
-        void LeftClickCommand(object sender, RemotingCommandEventArgs args);
-        void RightClickCommand(object sender, RemotingCommandEventArgs args);
         void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args);
         void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args);
         void MiddleClickCommand(object sender, RemotingCommandEventArgs args);
