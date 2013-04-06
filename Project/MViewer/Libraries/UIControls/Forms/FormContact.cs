@@ -26,35 +26,47 @@ namespace UIControls
 
         public FormContact(GenericEnums.FormMode formMode, EventHandler contactsUpdated)
         {
-            _formMode = formMode;
-            _contactsUpdated = contactsUpdated;
+            try
+            {
+                _formMode = formMode;
+                _contactsUpdated = contactsUpdated;
 
-            InitializeComponent();
+                InitializeComponent();
 
-            SetFormMode();
-
+                SetFormMode();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public FormContact(GenericEnums.FormMode formMode, int contactNo, EventHandler contactsUpdated)
         {
-            _formMode = formMode;
-            _contactsUpdated = contactsUpdated;
-            _contactNo = contactNo;
+            try
+            {
+                _formMode = formMode;
+                _contactsUpdated = contactsUpdated;
+                _contactNo = contactNo;
 
-            InitializeComponent();
-            Contact contact = new Contact(contactNo, string.Empty, string.Empty);
-            ContactsEventArgs eventArgs = new ContactsEventArgs()
-                {
-                    Operation = GenericEnums.ContactsOperation.Get,
-                    UpdatedContact = contact
-                };
-            contactsUpdated.Invoke(this, eventArgs);
-            // retrieve contact info
-            txtFriendlyName.Text = eventArgs.UpdatedContact.FriendlyName;
-            txtIdentity.Text = eventArgs.UpdatedContact.Identity;
+                InitializeComponent();
+                Contact contact = new Contact(contactNo, string.Empty, string.Empty);
+                ContactsEventArgs eventArgs = new ContactsEventArgs()
+                    {
+                        Operation = GenericEnums.ContactsOperation.Get,
+                        UpdatedContact = contact
+                    };
+                contactsUpdated.Invoke(this, eventArgs);
+                // retrieve contact info
+                txtFriendlyName.Text = eventArgs.UpdatedContact.FriendlyName;
+                txtIdentity.Text = eventArgs.UpdatedContact.Identity;
 
-            SetFormMode();
-
+                SetFormMode();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion

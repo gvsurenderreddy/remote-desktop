@@ -12,32 +12,39 @@ namespace Utils
     {
         public void ChangeLanguage(string lang, Control.ControlCollection controls, Type controlType)
         {
-            foreach (Control c in controls)
+            try
             {
-                ComponentResourceManager resources = new ComponentResourceManager(controlType);
-                CultureInfo cultureInfo = new CultureInfo(string.IsNullOrEmpty(lang) ? "en-US" : lang);
-                if (c.InvokeRequired)
+                foreach (Control c in controls)
                 {
-                    c.Invoke(new MethodInvoker(delegate()
+                    ComponentResourceManager resources = new ComponentResourceManager(controlType);
+                    CultureInfo cultureInfo = new CultureInfo(string.IsNullOrEmpty(lang) ? "en-US" : lang);
+                    if (c.InvokeRequired)
+                    {
+                        c.Invoke(new MethodInvoker(delegate()
+                        {
+                            resources.ApplyResources(c, c.Name, cultureInfo);
+                        }));
+                    }
+                    else
                     {
                         resources.ApplyResources(c, c.Name, cultureInfo);
-                    }));
-                }
-                else
-                {
-                    resources.ApplyResources(c, c.Name, cultureInfo);
-                }
-                try
-                {
-                    if (c.Controls != null && c.Controls.Count > 0)
+                    }
+                    try
                     {
-                        ChangeLanguage(lang, c.Controls, controlType);
+                        if (c.Controls != null && c.Controls.Count > 0)
+                        {
+                            ChangeLanguage(lang, c.Controls, controlType);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Tools.Instance.Logger.LogError(ex.ToString());
                     }
                 }
-                catch (Exception ex)
-                {
-
-                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
     }

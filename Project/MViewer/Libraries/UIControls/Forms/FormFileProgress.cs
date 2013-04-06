@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-//using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utils;
 
@@ -15,31 +14,42 @@ namespace UIControls
 {
     public partial class FormFileProgress : Form
     {
+        #region private members
+
         bool _isRunning;
         readonly object _syncProgress = new object();
 
+        #endregion
+
+        #region c-tor
+
         public FormFileProgress(string fileName, string partner)
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
 
-            this.Text = this.Text + ": " + fileName + " to " + partner;
-            txtFilename.Text = fileName;
-            txtPartner.Text = partner;
+                this.Text = this.Text + ": " + fileName + " to " + partner;
+                txtFilename.Text = fileName;
+                txtPartner.Text = partner;
 
-            // Display the ProgressBar control.
-            pbFileProgress.Visible = true;
-            // Set Minimum to 1 to represent the first file being copied.
-            pbFileProgress.Minimum = 1;
-            // Set Maximum to the total number of files to copy.
-            pbFileProgress.Maximum = 50;
-            // Set the initial value of the ProgressBar.
-            pbFileProgress.Value = 1;
-            // Set the Step property to a value of 1 to represent each file being copied.
-            pbFileProgress.Step = 1;
-
+                // Display the ProgressBar control.
+                pbFileProgress.Visible = true;
+                // Set Minimum to 1 to represent the first file being copied.
+                pbFileProgress.Minimum = 1;
+                // Set Maximum to the total number of files to copy.
+                pbFileProgress.Maximum = 50;
+                // Set the initial value of the ProgressBar.
+                pbFileProgress.Value = 1;
+                // Set the Step property to a value of 1 to represent each file being copied.
+                pbFileProgress.Step = 1;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
-        // todo: use ChangeLanguage from FormFileProgress
         public void ChangeLanguage(string language)
         {
             Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormFileProgress));
@@ -47,32 +57,39 @@ namespace UIControls
 
         public void StartPB()
         {
-            _isRunning = true;
-            while (_isRunning)
+            try
             {
-                if (pbFileProgress.Value < pbFileProgress.Maximum)
+                _isRunning = true;
+                while (_isRunning)
                 {
-                    Thread.Sleep(500);
-                    UpdatePB();
-                }
-                else
-                {
-                    //pbFileProgress.Value = 1;
-                    if (pbFileProgress.InvokeRequired)
+                    if (pbFileProgress.Value < pbFileProgress.Maximum)
                     {
-                        pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.Value = 1; }));
+                        Thread.Sleep(500);
+                        UpdatePB();
                     }
-                }
+                    else
+                    {
+                        //pbFileProgress.Value = 1;
+                        if (pbFileProgress.InvokeRequired)
+                        {
+                            pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.Value = 1; }));
+                        }
+                    }
 
-                lock (_syncProgress)
-                {
-                    if (!_isRunning)
+                    lock (_syncProgress)
                     {
-                        break;
+                        if (!_isRunning)
+                        {
+                            break;
+                        }
                     }
                 }
+                this.Invoke(new MethodInvoker(delegate() { this.Close(); }));
             }
-            this.Invoke(new MethodInvoker(delegate() { this.Close(); }));
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void StopProgress()
@@ -82,17 +99,26 @@ namespace UIControls
                 _isRunning = false;
             }
         }
-        delegate void MyHandlerDelegate();
+
+        #endregion
+
+        #region private methods
 
         void UpdatePB()
         {
-            //pbFileProgress.PerformStep();
-            if (pbFileProgress.InvokeRequired)
+            try
             {
-                pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.PerformStep(); }));
+                if (pbFileProgress.InvokeRequired)
+                {
+                    pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.PerformStep(); }));
+                }
             }
-
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
+        #endregion
     }
 }
