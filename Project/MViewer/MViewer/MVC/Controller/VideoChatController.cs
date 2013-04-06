@@ -151,9 +151,9 @@ namespace MViewer
 
                 PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                 // update the session status to closed
-                if (peers.VideoSessionState != GenericEnums.SessionState.Closed)
+                if (peers.VideoSessionState != GenericEnums.SessionState.Closed
+                    && peers.VideoSessionState != GenericEnums.SessionState.Undefined)
                 {
-                    peers.AudioSessionState = GenericEnums.SessionState.Closed;
                     peers.VideoSessionState = GenericEnums.SessionState.Closed;
 
                     if (sendStopSignal)
