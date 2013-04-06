@@ -95,11 +95,11 @@ namespace GenericObjects
             _threadAborted = false;
 
             // wait for the web cam capture form to be visible
-            Form myWebcamForm = this.ParentForm;
-            while (!firstTimeCapturing && myWebcamForm.Visible == false)
-            {
-                Thread.Sleep(1000);
-            }
+            //Form myWebcamForm = this.ParentForm;
+            //while (!firstTimeCapturing && myWebcamForm.Visible == false)
+            //{
+            //    Thread.Sleep(1000);
+            //}
 
             // set the timer information
             _timerRunning = true;
