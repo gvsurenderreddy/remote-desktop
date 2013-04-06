@@ -27,13 +27,20 @@ namespace MViewer
 
         #region c-tor
 
-        private SystemConfiguration() 
+        private SystemConfiguration()
         {
-            InitializePresenterSettings();
+            try
+            {
+                InitializePresenterSettings();
 
-            // handlers initialization 
-            InitializeRoomActionHandlers();
-            InitializeRemotingCommandHandlers();
+                // handlers initialization 
+                InitializeRoomActionHandlers();
+                InitializeRemotingCommandHandlers();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -42,88 +49,109 @@ namespace MViewer
 
         void InitializeRoomActionHandlers()
         {
-            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideo);
-            videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideo);
-            videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideo);
-            videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideo);
-
-            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            transferDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.SendFileHandler);
-
-            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            remotingDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartRemoting);
-            remotingDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopRemoting);
-            remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemoting);
-            remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemoting);
-
-            Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> audioDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
-            audioDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartAudio);
-            audioDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopAudio);
-            audioDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseAudio);
-            audioDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeAudio);
-
-            _roomHandlers = new ControllerRoomHandlers()
+            try
             {
-                // add video & audio & remoting handlers by signal type
-                Video = videoDelegates,
-                Transfer = transferDelegates,
-                Remoting = remotingDelegates,
-                Audio = audioDelegates
-            };
+                Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> videoDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
+                videoDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartVideo);
+                videoDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopVideo);
+                videoDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseVideo);
+                videoDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeVideo);
+
+                Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> transferDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
+                transferDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.SendFileHandler);
+
+                Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> remotingDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
+                remotingDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartRemoting);
+                remotingDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopRemoting);
+                remotingDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseRemoting);
+                remotingDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeRemoting);
+
+                Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate> audioDelegates = new Dictionary<GenericEnums.SignalType, Delegates.RoomCommandDelegate>();
+                audioDelegates.Add(GenericEnums.SignalType.Start, Program.Controller.StartAudio);
+                audioDelegates.Add(GenericEnums.SignalType.Stop, Program.Controller.StopAudio);
+                audioDelegates.Add(GenericEnums.SignalType.Pause, Program.Controller.PauseAudio);
+                audioDelegates.Add(GenericEnums.SignalType.Resume, Program.Controller.ResumeAudio);
+
+                _roomHandlers = new ControllerRoomHandlers()
+                {
+                    // add video & audio & remoting handlers by signal type
+                    Video = videoDelegates,
+                    Transfer = transferDelegates,
+                    Remoting = remotingDelegates,
+                    Audio = audioDelegates
+                };
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         void InitializeRemotingCommandHandlers()
         {
-            // add mouse & keyboard delegate from the controller
-            RemotingCommand = Program.Controller.SendRemotingCommand;
-
-            Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate> keyboardDelegates = new Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate>();
-            keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyDown, Program.Controller.KeyDown);
-            keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyPress, Program.Controller.KeyPress);
-            keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyUp, Program.Controller.KeyUp);
-
-            IDictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate> mouseDelegates = new Dictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate>();
-            mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleRightClick, Program.Controller.DoubleRightClickCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleLeftClick, Program.Controller.DoubleLeftClickCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleClick, Program.Controller.MiddleClickCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleMiddleClick, Program.Controller.DoubleMiddleClickCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.LeftMouseDown, Program.Controller.LeftMouseDownCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.LeftMouseUp, Program.Controller.LeftMouseUpCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseDown, Program.Controller.RightMouseDownCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseUp, Program.Controller.RightMouseUpCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseDown, Program.Controller.MiddleMouseDownCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseUp, Program.Controller.MiddleMouseUpCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.Move, Program.Controller.MouseMoveCommand);
-            mouseDelegates.Add(GenericEnums.MouseCommandType.Wheel, Program.Controller.MouseWheelCommand);
-
-            _remotingCommandHandlers = new ControllerRemotingHandlers()
+            try
             {
-                KeyboardCommands = keyboardDelegates,
-                MouseCommands = mouseDelegates
-            };
+                // add mouse & keyboard delegate from the controller
+                RemotingCommand = Program.Controller.SendRemotingCommand;
+
+                Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate> keyboardDelegates = new Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate>();
+                keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyDown, Program.Controller.KeyDown);
+                keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyPress, Program.Controller.KeyPress);
+                keyboardDelegates.Add(GenericEnums.KeyboardCommandType.KeyUp, Program.Controller.KeyUp);
+
+                IDictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate> mouseDelegates = new Dictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate>();
+                mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleRightClick, Program.Controller.DoubleRightClickCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleLeftClick, Program.Controller.DoubleLeftClickCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleClick, Program.Controller.MiddleClickCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.DoubleMiddleClick, Program.Controller.DoubleMiddleClickCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.LeftMouseDown, Program.Controller.LeftMouseDownCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.LeftMouseUp, Program.Controller.LeftMouseUpCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseDown, Program.Controller.RightMouseDownCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.RightMouseUp, Program.Controller.RightMouseUpCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseDown, Program.Controller.MiddleMouseDownCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.MiddleMouseUp, Program.Controller.MiddleMouseUpCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.Move, Program.Controller.MouseMoveCommand);
+                mouseDelegates.Add(GenericEnums.MouseCommandType.Wheel, Program.Controller.MouseWheelCommand);
+
+                _remotingCommandHandlers = new ControllerRemotingHandlers()
+                {
+                    KeyboardCommands = keyboardDelegates,
+                    MouseCommands = mouseDelegates
+                };
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void InitializePresenterSettings()
         {
-            int videoTimerInterval = int.Parse(ConfigurationManager.AppSettings["videoTimerInterval"].ToString());
-            int height = 354, width = 360;
-            _presenterSettings = new PresenterSettings()
+            try
             {
-                Identity = FriendlyName,
-                VideoTimerInterval = videoTimerInterval,
-                VideoScreenSize =
-                    new Structures.ScreenSize()
-                    {
-                        Height = height,
-                        Width = width
-                    },
-                OnVideoImageCaptured = new EventHandler(Program.Controller.OnVideoImageCaptured),
-                RemotingTimerInterval = int.Parse(ConfigurationManager.AppSettings["remotingTimerInterval"].ToString()),
-                OnRemotingImageCaptured = new EventHandler(Program.Controller.OnRemotingImageCaptured),
-                OnAudioCaptureAvailable = new EventHandler(Program.Controller.OnAudioCaptured),
-                AudioTimerInterval = int.Parse(ConfigurationManager.AppSettings["audioTimerInterval"].ToString())
-            };
+                int videoTimerInterval = int.Parse(ConfigurationManager.AppSettings["videoTimerInterval"].ToString());
+                int height = 354, width = 360;
+                _presenterSettings = new PresenterSettings()
+                {
+                    Identity = FriendlyName,
+                    VideoTimerInterval = videoTimerInterval,
+                    VideoScreenSize =
+                        new Structures.ScreenSize()
+                        {
+                            Height = height,
+                            Width = width
+                        },
+                    OnVideoImageCaptured = new EventHandler(Program.Controller.OnVideoImageCaptured),
+                    RemotingTimerInterval = int.Parse(ConfigurationManager.AppSettings["remotingTimerInterval"].ToString()),
+                    OnRemotingImageCaptured = new EventHandler(Program.Controller.OnRemotingImageCaptured),
+                    OnAudioCaptureAvailable = new EventHandler(Program.Controller.OnAudioCaptured),
+                    AudioTimerInterval = int.Parse(ConfigurationManager.AppSettings["audioTimerInterval"].ToString())
+                };
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -135,7 +163,6 @@ namespace MViewer
         public readonly string ServicePath = ConfigurationManager.AppSettings["ServicePath"];
         public readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
         public readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
-
 
         public Delegates.HookCommandDelegate RemotingCommand
         {
