@@ -234,7 +234,7 @@ namespace MViewer
                 // create client session
                 Session clientSession = new ClientSession(args.Identity, args.RoomType);
                 // save the proxy to which we are sending the webcam captures
-                _model.SessionManager.AddSession(clientSession);
+                _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Video);
 
                 // open new Video  form to receive the captures
                 OpenVideoForm(args.Identity);

@@ -38,7 +38,7 @@ namespace BusinessLogicLayer
             return left;
         }
 
-        public void AddSession(Session session)
+        public void AddSession(Session session, GenericEnums.RoomType scope)
         {
             lock (_syncSessions)
             {
@@ -49,6 +49,21 @@ namespace BusinessLogicLayer
                 if (_clientSessions.ContainsKey(session.Identity) == false)
                 {
                     _clientSessions.Add(session.Identity, session);
+                }
+                else
+                {
+                    switch (scope)
+                    {
+                        case GenericEnums.RoomType.Audio:
+                            _clientSessions[session.Identity].AudioSessionState = session.Peers.AudioSessionState;
+                            break;
+                        case GenericEnums.RoomType.Remoting:
+                            _clientSessions[session.Identity].RemotingSessionState = session.Peers.RemotingSessionState;
+                            break;
+                        case GenericEnums.RoomType.Video:
+                            _clientSessions[session.Identity].VideoSessionState = session.Peers.VideoSessionState;
+                            break;
+                    }
                 }
             }
         }

@@ -8,7 +8,7 @@ namespace GenericObjects
 {
     public interface ISessionManager
     {
-        void AddSession(Session session);
+        void AddSession(Session session, GenericEnums.RoomType scope);
         void RemoveSession(string identity);
         PeerStates GetPeerStatus(string identity);
 

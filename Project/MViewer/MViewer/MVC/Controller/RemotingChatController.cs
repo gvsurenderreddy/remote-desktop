@@ -265,7 +265,7 @@ namespace MViewer
                 // create client session
                 Session clientSession = new ClientSession(args.Identity, args.RoomType);
                 // save the proxy to which we are sending the remoting captures
-                _model.SessionManager.AddSession(clientSession);
+                _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Remoting);
 
                 // initialize the remoting tool and start it's timer
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
@@ -426,7 +426,7 @@ namespace MViewer
 
                     // create session
                     Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Remoting);
-                    _model.SessionManager.AddSession(clientSession);
+                    _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Remoting);
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     peers.RemotingSessionState = GenericEnums.SessionState.Opened;

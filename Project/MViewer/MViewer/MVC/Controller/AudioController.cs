@@ -122,7 +122,7 @@ namespace MViewer
                 Thread t = new Thread(delegate()
                 {
                     Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Audio);
-                    _model.SessionManager.AddSession(clientSession);
+                    _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Audio);
 
                     //IntPtr handle = IntPtr.Zero;
                     FormAudioRoom audioRoom = new FormAudioRoom(identity, this.PlayAudioCapture);
