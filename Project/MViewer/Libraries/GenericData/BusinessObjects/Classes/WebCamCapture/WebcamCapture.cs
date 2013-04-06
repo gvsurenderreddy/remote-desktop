@@ -85,7 +85,7 @@ namespace GenericObjects
 
             // connect this application to the capture device
             int connectAttempts = 0;
-            while (!SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 0, 0))
+            while (!SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 1, 0))
             {
                 connectAttempts++;
                 Thread.Sleep(1000);
@@ -93,13 +93,6 @@ namespace GenericObjects
             int x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
             _webcamClosed = false;
             _threadAborted = false;
-
-            // wait for the web cam capture form to be visible
-            //Form myWebcamForm = this.ParentForm;
-            //while (!firstTimeCapturing && myWebcamForm.Visible == false)
-            //{
-            //    Thread.Sleep(1000);
-            //}
 
             // set the timer information
             _timerRunning = true;
