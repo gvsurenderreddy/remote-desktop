@@ -205,6 +205,9 @@ namespace MViewer
             return contact;
         }
 
+        /// <summary>
+        /// method used to start app modules
+        /// </summary>
         public void StartApplication()
         {
             try
@@ -237,50 +240,60 @@ namespace MViewer
             }
         }
 
+        /// <summary>
+        /// method used to stop ongoing actions and app modules
+        /// </summary>
         public void StopApplication()
         {
-            // todo: update the StopApplication method with other actions
-
-            // check for running video/audio/remoting s
-            bool canExit = _view.ExitConfirmation();
-            if (canExit)
+            try
             {
-                _view.SetFormMainBackground("Images/closed.gif");
-                _view.SetResultText("Closing app...");
-                Thread t = new Thread(delegate()
+                // todo: update the StopApplication method with other actions
+
+                // check for running video/audio/remoting s
+                bool canExit = _view.ExitConfirmation();
+                if (canExit)
                 {
-                    // stop all active rooms
-                    IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
-                    foreach (string identity in partnerIdentities)
+                    _view.SetFormMainBackground("Images/closed.gif");
+                    _view.SetResultText("Closing app...");
+                    Thread t = new Thread(delegate()
                     {
-                        StopVideo(this, new RoomActionEventArgs()
-                            {
-                                Identity = identity,
-                                RoomType = GenericEnums.RoomType.Video,
-                                SignalType = GenericEnums.SignalType.Stop
-                            });
-                    }
-                    // stop my webcapture form
-                    StopVideoCapturing();
-                });
-                t.Start();
-                
-                // stop the audio rooms also
-                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
-            
-                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                        // stop all active rooms
+                        IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
+                        foreach (string identity in partnerIdentities)
+                        {
+                            StopVideo(this, new RoomActionEventArgs()
+                                {
+                                    Identity = identity,
+                                    RoomType = GenericEnums.RoomType.Video,
+                                    SignalType = GenericEnums.SignalType.Stop
+                                });
+                        }
+                        // stop my webcapture form
+                        StopVideoCapturing();
+                    });
+                    t.Start();
 
-                // unbind the observers
-                _view.BindObservers(false);
+                    // stop the audio rooms also
+                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
 
-                _model.ServerController.StopServer();
+                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
 
-                // notify all contacts that you exited the 
-                _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+                    // unbind the observers
+                    _view.BindObservers(false);
 
-                Tools.Instance.Logger.LogInfo("MViewer application stopped");
-                // exit the environment
-                Environment.Exit(0);
+                    _model.ServerController.StopServer();
+
+                    // notify all contacts that you exited the 
+                    _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+
+                    Tools.Instance.Logger.LogInfo("MViewer application stopped");
+                    // exit the environment
+                    Environment.Exit(0);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -296,19 +309,26 @@ namespace MViewer
 
         void WaitRoomButtonActionObserver(object sender, EventArgs e)
         {
-            // todo: complete implemention of WaitRoomButtonAction
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            switch (args.RoomType)
+            try
             {
-                case GenericEnums.RoomType.Video:
-                    bool freezeVideo = false;
-                    if (args.SignalType == GenericEnums.SignalType.Wait)
-                    {
-                        freezeVideo = true;
-                    }
-                    // send the freeze signal to the webcapture obj
-                    _view.WaitRoomButtonAction(freezeVideo);
-                    break;
+                // todo: complete implemention of WaitRoomButtonAction for audio signal
+                RoomActionEventArgs args = (RoomActionEventArgs)e;
+                switch (args.RoomType)
+                {
+                    case GenericEnums.RoomType.Video:
+                        bool freezeVideo = false;
+                        if (args.SignalType == GenericEnums.SignalType.Wait)
+                        {
+                            freezeVideo = true;
+                        }
+                        // send the freeze signal to the webcapture obj
+                        _view.WaitRoomButtonAction(freezeVideo);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
         
