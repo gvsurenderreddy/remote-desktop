@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Timers;
+using Utils;
 
 namespace GenericObjects
 {
@@ -37,27 +38,34 @@ namespace GenericObjects
 
         void OnAudioReady(object sender, ElapsedEventArgs e)
         {
-            _timer.Stop();
-
-            _syncAudioInstance.WaitOne();
-            Thread.Sleep(200);
-
-            _audioStream.SyncChunk.Reset();
-
-            byte[] capture =  _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
-            //_onCaptureAvailable.Invoke(this, AudioEventArgs
-            _audioStream.Stream = new MemoryStream();
-
-            if (capture != null && capture.Length > 0)
+            try
             {
-                _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
-                {
-                    Capture = capture
-                });
-            }
-            _audioStream.SyncChunk.Set();
+                _timer.Stop();
 
-            _timer.Start();
+                _syncAudioInstance.WaitOne();
+                Thread.Sleep(200);
+
+                _audioStream.SyncChunk.Reset();
+
+                byte[] capture = _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
+                //_onCaptureAvailable.Invoke(this, AudioEventArgs
+                _audioStream.Stream = new MemoryStream();
+
+                if (capture != null && capture.Length > 0)
+                {
+                    _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
+                    {
+                        Capture = capture
+                    });
+                }
+                _audioStream.SyncChunk.Set();
+
+                _timer.Start();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -66,57 +74,75 @@ namespace GenericObjects
 
         public void StartStreaming()
         {
-            if (_timer == null)
+            try
             {
-                _timer = new System.Timers.Timer(_timerInterval);
-                _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
-            }
-
-            if (_audioStream == null)
-            {
-                Thread t = new Thread(delegate()
+                if (_timer == null)
                 {
-                    _syncAudioInstance.Reset();
+                    _timer = new System.Timers.Timer(_timerInterval);
+                    _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
+                }
 
-                    _audioStream = new AudioStream();
+                if (_audioStream == null)
+                {
+                    Thread t = new Thread(delegate()
+                    {
+                        _syncAudioInstance.Reset();
 
-                    _syncAudioInstance.Set();
+                        _audioStream = new AudioStream();
 
-                    _audioStream.Run();
-                });
-                t.Start();
+                        _syncAudioInstance.Set();
+
+                        _audioStream.Run();
+                    });
+                    t.Start();
+                }
+                else
+                {
+                    _audioStream.StartAudio();
+                }
+                _timer.Start();
             }
-            else
+            catch (Exception ex)
             {
-                _audioStream.StartAudio();
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
-            _timer.Start();
         }
 
         public void StopStreaming()
         {
-            if (_timer != null)
+            try
             {
-                _timer.Stop();
+                if (_timer != null)
+                {
+                    _timer.Stop();
+                }
+                if (_audioStream != null)
+                {
+                    _audioStream.StopAudio();
+                }
             }
-            if (_audioStream != null)
+            catch (Exception ex)
             {
-                _audioStream.StopAudio();
-                
-                //_audioStream.SyncStop.WaitOne();
-                //_audioStream.Exit();
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void PlayAudioCapture(byte[] capture)
         {
-            if (capture == null || capture.Length == 0)
+            try
             {
-                return;
+                if (capture == null || capture.Length == 0)
+                {
+                    return;
+                }
+                var sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                SoundEffect.MasterVolume = 1f;
+                sound.Play();
             }
-            var sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
-            SoundEffect.MasterVolume = 1f;
-            sound.Play();
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion

@@ -5,6 +5,7 @@ using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Tokens;
 using System.IdentityModel.Selectors;
+using Utils;
 
 namespace GenericObjects
 {
@@ -15,13 +16,19 @@ namespace GenericObjects
 
         public CustomCertificateValidator(string allowedIssuerName, X509Certificate2 clientCertificate)
         {
-            if (allowedIssuerName == null)
+            try
             {
-                throw new ArgumentNullException("allowedIssuerName not provided");
+                if (allowedIssuerName == null)
+                {
+                    throw new ArgumentNullException("allowedIssuerName not provided");
+                }
+                _clientCertificate = clientCertificate;
+                _allowedIssuerName = allowedIssuerName;
             }
-
-            _clientCertificate = clientCertificate;
-            _allowedIssuerName = allowedIssuerName;
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public override void Validate(X509Certificate2 certificate)

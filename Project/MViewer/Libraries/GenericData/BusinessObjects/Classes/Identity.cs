@@ -30,12 +30,19 @@ namespace GenericObjects
 
         public void UpdateFriendlyName(string newFriendlyName)
         {
-            _friendlyName = newFriendlyName;
+            try
+            {
+                _friendlyName = newFriendlyName;
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(
-                           Assembly.GetEntryAssembly().Location);
-            config.AppSettings.Settings["FriendlyName"].Value = _friendlyName;
-            config.Save();
+                Configuration config = ConfigurationManager.OpenExeConfiguration(
+                               Assembly.GetEntryAssembly().Location);
+                config.AppSettings.Settings["FriendlyName"].Value = _friendlyName;
+                config.Save();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public string GenerateIdentity(string newAddress, int newPort, string newPath)

@@ -71,7 +71,7 @@
     <Compile Include="BusinessObjects\Classes\ClientSession.cs" />
     <Compile Include="BusinessObjects\Classes\Contact.cs" />
     <Compile Include="BusinessObjects\Classes\ContactEndpoint.cs" />
-    <Compile Include="BusinessObjects\Classes\Product.cs" />
+    <Compile Include="Abstract\Product.cs" />
     <Compile Include="BusinessObjects\Classes\WCFClient.cs" />
     <Compile Include="BusinessObjects\Classes\ScreenCaptureTool.cs" />
     <Compile Include="BusinessObjects\Classes\CustomCertificateValidator.cs" />

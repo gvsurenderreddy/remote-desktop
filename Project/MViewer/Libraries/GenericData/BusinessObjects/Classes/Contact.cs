@@ -37,11 +37,6 @@ namespace GenericObjects
 
         #endregion
 
-        #region public methods
-
-
-        #endregion
-
         #region proprieties
 
         public int ContactNo
