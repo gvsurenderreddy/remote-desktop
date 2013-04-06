@@ -80,6 +80,7 @@
     <Compile Include="BusinessObjects\Classes\MViewerServer.cs" />
     <Compile Include="BusinessObjects\Classes\Presenter.cs" />
     <Compile Include="BusinessObjects\Classes\PresenterSettings.cs" />
+    <Compile Include="BusinessObjects\Classes\WebCamCapture\TCamDevice.cs" />
     <Compile Include="BusinessObjects\Classes\WebCamCapture\WebcamCapture.cs">
       <SubType>UserControl</SubType>
     </Compile>

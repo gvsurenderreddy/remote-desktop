@@ -13,6 +13,7 @@ using GenericObjects;
 using System.Drawing.Imaging;
 using System.IO;
 using Utils;
+using System.Collections;
 
 namespace GenericObjects
 {
@@ -74,11 +75,47 @@ namespace GenericObjects
 
         #region public methods
 
+        [DllImport("avicap32.dll")]
+        protected  extern bool capGetDriverDescriptionA(short wDriverIndex,
+            [MarshalAs(UnmanagedType.VBByRefStr)]ref String lpszName,
+           int cbName, [MarshalAs(UnmanagedType.VBByRefStr)] ref String lpszVer, int cbVer);
+
+         ArrayList devices = new ArrayList();
+
+        public  TCamDevice[] GetAllDevices()
+        {
+            String dName = "".PadRight(100);
+            String dVersion = "".PadRight(100);
+
+            for (short i = 0; i < 10; i++)
+            {
+                if (capGetDriverDescriptionA(i, ref dName, 100, ref dVersion, 100))
+                {
+                    TCamDevice d = new TCamDevice(i);
+                    d.Name = dName.Trim();
+                    d.Version = dVersion.Trim();
+
+                    devices.Add(d);
+                }
+            }
+
+            return (TCamDevice[])devices.ToArray(typeof(TCamDevice));
+        }
+
+        public  TCamDevice GetDevice(int deviceIndex)
+        {
+            return (TCamDevice)devices[deviceIndex];
+        }
+
+
         void StartCaptureProcess(bool firstTimeCapturing)
         {
             InitializeTimer(_interval);
             // setup a capture window
             _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
+
+            TCamDevice[] alldevices = GetAllDevices();
+            alldevices.ElementAt(0).Init(_height, _width, _windowHandle);
 
             // connect this application to the capture device
             int connectAttempts = 0;
@@ -210,10 +247,6 @@ namespace GenericObjects
                             Thread.Sleep(1000);
                         }
                         _timerRunning = false;
-
-                        // wait for the clipboard to be unused
-                        //_mutex.WaitOne();
-                        //_pool.WaitOne();
 
                         // get the next image
                         Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, IntPtr.Zero, IntPtr.Zero);
