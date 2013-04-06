@@ -24,14 +24,19 @@ namespace UIControls
         public ActionsControl()
         {
             InitializeComponent();
-
         }
 
         public ActionsControl(EventHandler actionTriggered)
         {
-            InitializeComponent();
-
-            _roomActionTriggered = actionTriggered;
+            try
+            {
+                InitializeComponent();
+                _roomActionTriggered = actionTriggered;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -45,70 +50,77 @@ namespace UIControls
 
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {
-            switch (roomType)
+            try
             {
-                case GenericEnums.RoomType.Video:
-                    if (pause)
-                    {
-                        btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    }
-                    else
-                    {
-                        btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
-                    }
-                    if (start)
-                    {
+                switch (roomType)
+                {
+                    case GenericEnums.RoomType.Video:
+                        if (pause)
+                        {
+                            btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        }
+                        else
+                        {
+                            btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                        }
+                        if (start)
+                        {
+                            btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        }
+                        else
+                        {
+                            btnVideo.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                        }
+                        break;
+                    case GenericEnums.RoomType.Audio:
+                        if (pause)
+                        {
+                            btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        }
+                        else
+                        {
+                            btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                        }
+                        if (start)
+                        {
+                            btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        }
+                        else
+                        {
+                            btnAudio.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                        }
+                        break;
+                    case GenericEnums.RoomType.Remoting:
+                        if (pause)
+                        {
+                            btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        }
+                        else
+                        {
+                            btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                        }
+                        if (start)
+                        {
+                            btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        }
+                        else
+                        {
+                            btnRemote.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                        }
+                        break;
+                    case GenericEnums.RoomType.Undefined:
                         btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    }
-                    else
-                    {
-                        btnVideo.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
-                    }
-                    break;
-                case GenericEnums.RoomType.Audio:
-                    if (pause)
-                    {
-                        btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    }
-                    else
-                    {
-                        btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
-                    }
-                    if (start)
-                    {
-                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    }
-                    else
-                    {
-                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
-                    }
-                    break;
-                case GenericEnums.RoomType.Remoting:
-                    if (pause)
-                    {
-                        btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    }
-                    else
-                    {
-                        btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
-                    }
-                    if (start)
-                    {
+                        btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
                         btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    }
-                    else
-                    {
-                        btnRemote.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
-                    }
-                    break;
-                case GenericEnums.RoomType.Undefined:
-                    btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    break;
+                        btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -118,70 +130,83 @@ namespace UIControls
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            // send the file to the selected contact
-            // provide the file path to the File transfer module
-            _roomActionTriggered.Invoke(null, new RoomActionEventArgs()
+            try
             {
-                RoomType = GenericEnums.RoomType.Send,
-                SignalType= GenericEnums.SignalType.Start
-            });
-            
+                // send the file to the selected contact
+                // provide the file path to the File transfer module
+                _roomActionTriggered.Invoke(null, new RoomActionEventArgs()
+                {
+                    RoomType = GenericEnums.RoomType.Send,
+                    SignalType = GenericEnums.SignalType.Start
+                });
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void BtnAction_Click(object sender, EventArgs e)
         {
-            GenericEnums.SignalType signalType = GenericEnums.SignalType.Undefined;
-            // do specific action , check what button was clicked by looking at the sender
-            if (sender == btnAudio || sender == btnVideo || sender == btnRemote)
+            try
             {
-                if (((Button)sender).Text.ToLower().Equals(GenericEnums.SignalType.Start.ToString().ToLower()))
+                GenericEnums.SignalType signalType = GenericEnums.SignalType.Undefined;
+                // do specific action , check what button was clicked by looking at the sender
+                if (sender == btnAudio || sender == btnVideo || sender == btnRemote)
                 {
-                    signalType = GenericEnums.SignalType.Start;
+                    if (((Button)sender).Text.ToLower().Equals(GenericEnums.SignalType.Start.ToString().ToLower()))
+                    {
+                        signalType = GenericEnums.SignalType.Start;
+                    }
+                    else
+                    {
+                        signalType = GenericEnums.SignalType.Stop;
+                    }
                 }
                 else
                 {
-                    signalType = GenericEnums.SignalType.Stop;
+                    if (((Button)sender).Text.ToLower().Equals(GenericEnums.SignalType.Pause.ToString().ToLower()))
+                    {
+                        signalType = GenericEnums.SignalType.Pause;
+                    }
+                    else
+                    {
+                        signalType = GenericEnums.SignalType.Resume;
+                    }
                 }
-            }
-            else
-            {
-                if (((Button)sender).Text.ToLower().Equals(GenericEnums.SignalType.Pause.ToString().ToLower()))
+                GenericEnums.RoomType actionType = GenericEnums.RoomType.Undefined;
+                if (sender == btnAudio || sender == btnMuteAudio)
                 {
-                    signalType = GenericEnums.SignalType.Pause;
+                    actionType = GenericEnums.RoomType.Audio;
                 }
                 else
                 {
-                    signalType = GenericEnums.SignalType.Resume;
+                    if (sender == btnVideo || sender == btnPauseVideo)
+                    {
+                        actionType = GenericEnums.RoomType.Video;
+                    }
+                    else
+                    {
+                        actionType = GenericEnums.RoomType.Remoting;
+                    }
                 }
-            }
-            GenericEnums.RoomType actionType = GenericEnums.RoomType.Undefined;
-            if (sender == btnAudio || sender == btnMuteAudio)
-            {
-                actionType = GenericEnums.RoomType.Audio;
-            }
-            else
-            {
-                if (sender == btnVideo || sender == btnPauseVideo)
-                {
-                    actionType = GenericEnums.RoomType.Video;
-                }
-                else
-                {
-                    actionType = GenericEnums.RoomType.Remoting;
-                }
-            }
 
-            // finally, update the button text
-            ToggleStatusUpdate(signalType, (Button)sender);
+                // finally, update the button text
+                ToggleStatusUpdate(signalType, (Button)sender);
 
-            // trigger the event so that the Controller does specific action
-            // provide the action type as event arg
-            RoomActionEventArgs args = new RoomActionEventArgs()
+                // trigger the event so that the Controller does specific action
+                // provide the action type as event arg
+                RoomActionEventArgs args = new RoomActionEventArgs()
+                {
+                    RoomType = actionType,
+                    SignalType = signalType
+                };
+                _roomActionTriggered.BeginInvoke(this, args, null, null);
+            }
+            catch (Exception ex)
             {
-                RoomType = actionType,
-                SignalType = signalType
-            };
-            _roomActionTriggered.BeginInvoke(this, args, null,null);
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -190,48 +215,55 @@ namespace UIControls
 
         void ToggleStatusUpdate(GenericEnums.SignalType buttonType, Button button)
         {
-            switch (buttonType)
+            try
             {
-                case GenericEnums.SignalType.Start:
-                    if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
-                    {
-                        button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
-                    }
-                    else
-                    {
-                        button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    }
-                    break;
-                case GenericEnums.SignalType.Stop:
-                    if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
-                    {
-                        button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
-                    }
-                    else
-                    {
-                        button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                    }
-                    break;
-                case GenericEnums.SignalType.Pause:
-                    if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
-                    {
-                        button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
-                    }
-                    else
-                    {
-                        button.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    }
-                    break;
-                case GenericEnums.SignalType.Resume:
-                    if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
-                    {
-                        button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
-                    }
-                    else
-                    {
-                        button.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                    }
-                    break;
+                switch (buttonType)
+                {
+                    case GenericEnums.SignalType.Start:
+                        if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
+                        {
+                            button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                        }
+                        else
+                        {
+                            button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        }
+                        break;
+                    case GenericEnums.SignalType.Stop:
+                        if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
+                        {
+                            button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                        }
+                        else
+                        {
+                            button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                        }
+                        break;
+                    case GenericEnums.SignalType.Pause:
+                        if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
+                        {
+                            button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                        }
+                        else
+                        {
+                            button.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        }
+                        break;
+                    case GenericEnums.SignalType.Resume:
+                        if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
+                        {
+                            button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                        }
+                        else
+                        {
+                            button.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        }
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
