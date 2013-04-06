@@ -62,37 +62,51 @@ namespace MViewer
 
         void PlayAudioCapture(object sender, EventArgs e)
         {
-            AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
-            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).PlayAudioCapture(args.Capture);
+            try
+            {
+                AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).PlayAudioCapture(args.Capture);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         void OnAudioCaptureReceived(object sender, EventArgs e)
         {
-            AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
-            PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
-
-            if (peer.AudioSessionState == GenericEnums.SessionState.Undefined ||
-                peer.AudioSessionState == GenericEnums.SessionState.Pending)
+            try
             {
-                // receiving captures for the first time, have to initalize a form
-                ClientConnectedObserver(this,
-                       new RoomActionEventArgs()
-                       {
-                           RoomType = GenericEnums.RoomType.Audio,
-                           SignalType = GenericEnums.SignalType.Start,
-                           Identity = args.Identity
-                       });
-                while (peer.AudioSessionState != GenericEnums.SessionState.Opened)
+                AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
+                PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
+
+                if (peer.AudioSessionState == GenericEnums.SessionState.Undefined ||
+                    peer.AudioSessionState == GenericEnums.SessionState.Pending)
                 {
-                    Thread.Sleep(2000);
-                    peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
+                    // receiving captures for the first time, have to initalize a form
+                    ClientConnectedObserver(this,
+                           new RoomActionEventArgs()
+                           {
+                               RoomType = GenericEnums.RoomType.Audio,
+                               SignalType = GenericEnums.SignalType.Start,
+                               Identity = args.Identity
+                           });
+                    while (peer.AudioSessionState != GenericEnums.SessionState.Opened)
+                    {
+                        Thread.Sleep(2000);
+                        peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
+                    }
+                }
+
+                // check the Audio status before playing the sound
+                if (peer.AudioSessionState == GenericEnums.SessionState.Opened)
+                {
+                    _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture);
                 }
             }
-
-            // check the Audio status before playing the sound
-            if (peer.AudioSessionState == GenericEnums.SessionState.Opened)
+            catch (Exception ex)
             {
-                _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture);
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 

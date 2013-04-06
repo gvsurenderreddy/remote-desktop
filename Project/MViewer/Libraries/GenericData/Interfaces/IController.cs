@@ -32,7 +32,7 @@ namespace GenericObjects
         void ExecuteRemotingCommand(object sender, EventArgs e);
 
         void ChangeLanguage(string language);
-        void IdentityObserver(object sender, IdentityEventArgs e);
+        void FriendlyNameObserver(object sender, IdentityEventArgs e);
         void OnRoomButtonActionTriggered(object sender, EventArgs e);
         Contact PerformContactsOperation(object sender, ContactsEventArgs ee);
         void StartVideo(WebcamCapture webcamControl);

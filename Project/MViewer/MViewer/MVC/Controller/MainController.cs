@@ -33,47 +33,71 @@ namespace MViewer
 
         public Controller()
         {
-            _language = "en-US";
-            // initialize the model
-            _model = new Model();
-            // initalize the view and bind it to the model
-            _view = new View(_model);
-        }
-
-        #endregion
-
-        #region event handlers
-
-        public void InitializeSettings()
-        {
-            _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
-            _commandInvoker = new HookCommandInvoker(SystemConfiguration.Instance.RemotingCommandHandlers);
-
-            ControllerEventHandlers handlers = new ControllerEventHandlers()
+            try
             {
-                ClientConnectedObserver = this.ClientConnectedObserver,
-                VideoCaptureObserver = this.VideoCaptureObserver,
-                AudioCaptureObserver = this.OnAudioCaptureReceived,
-                ContactsObserver = this.ContactRequestObserver,
-                RoomButtonObserver = this.OnRoomButtonActionTriggered,
-                WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
-                FileTransferObserver = this.FileTransferObserver,
-                FilePermissionObserver = this.FileTransferPermission,
-                RemotingCommandHandler = this.ExecuteRemotingCommand,
-                RemotingCaptureObserver = this.RemotingCaptureObserver
-            };
-
-            _model.IntializeModel(handlers);
+                _language = "en-US";
+                // initialize the model
+                _model = new Model();
+                // initalize the view and bind it to the model
+                _view = new View(_model);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
 
         #region public methods
 
+        /// <summary>
+        /// method used to initialize app settings
+        /// </summary>
+        public void InitializeSettings()
+        {
+            try
+            {
+                _roomCommandInvoker = new RoomCommandInvoker(SystemConfiguration.Instance.RoomHandlers);
+                _commandInvoker = new HookCommandInvoker(SystemConfiguration.Instance.RemotingCommandHandlers);
+
+                ControllerEventHandlers handlers = new ControllerEventHandlers()
+                {
+                    ClientConnectedObserver = this.ClientConnectedObserver,
+                    VideoCaptureObserver = this.VideoCaptureObserver,
+                    AudioCaptureObserver = this.OnAudioCaptureReceived,
+                    ContactsObserver = this.ContactRequestObserver,
+                    RoomButtonObserver = this.OnRoomButtonActionTriggered,
+                    WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
+                    FileTransferObserver = this.FileTransferObserver,
+                    FilePermissionObserver = this.FileTransferPermission,
+                    RemotingCommandHandler = this.ExecuteRemotingCommand,
+                    RemotingCaptureObserver = this.RemotingCaptureObserver
+                };
+
+                _model.IntializeModel(handlers);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
+
+        /// <summary>
+        /// method used to change the language for the UI
+        /// </summary>
+        /// <param name="language"></param>
         public void ChangeLanguage(string language)
         {
-            _language = language;
-            _view.ChangeLanguage(language);
+            try
+            {
+                _language = language;
+                _view.ChangeLanguage(language);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void FocusActionsForm()
@@ -83,51 +107,100 @@ namespace MViewer
         }
 
         // todo: convert this to an event handler , use it in the Video Form as observer
+        /// <summary>
+        /// method used to update the active room and the actions form labels
+        /// </summary>
+        /// <param name="newIdentity"></param>
+        /// <param name="roomType"></param>
         public void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType)
         {
-            // update the active room identity
-            _view.RoomManager.ActiveRoom = newIdentity;
-            // update the actions form button labels
-            _view.UpdateLabels(newIdentity, roomType);
+            try
+            {
+                // update the active room identity
+                _view.RoomManager.ActiveRoom = newIdentity;
+                // update the actions form button labels
+                _view.UpdateLabels(newIdentity, roomType);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         // todo: convert this to an event handler , use it in the Main Form as observer
-        public void IdentityObserver(object sender, IdentityEventArgs e)
+        /// <summary>
+        /// method used to notify contacts of updated friendly name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void FriendlyNameObserver(object sender, IdentityEventArgs e)
         {
-            _model.Identity.UpdateFriendlyName(e.FriendlyName);
-            // notify online contacts of updated friendly name
-            _model.NotifyContacts(e.FriendlyName);
+            try
+            {
+                _model.Identity.UpdateFriendlyName(e.FriendlyName);
+                // notify online contacts of updated friendly name
+                _model.NotifyContacts(e.FriendlyName);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         // todo: convert this to an event handler , use it in the View as observer
+        /// <summary>
+        /// method used to handle room button action signaled via UI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnRoomButtonActionTriggered(object sender, EventArgs e)
         {
-            RoomActionEventArgs args = (RoomActionEventArgs)e;
-            bool isContactOnline = _model.ClientController.IsContactOnline(args.Identity);
-            if (isContactOnline)
+            try
             {
-                _roomCommandInvoker.PerformCommand(sender, args);
+                RoomActionEventArgs args = (RoomActionEventArgs)e;
+                bool isContactOnline = _model.ClientController.IsContactOnline(args.Identity);
+                if (isContactOnline)
+                {
+                    _roomCommandInvoker.PerformCommand(sender, args);
+                }
+                else
+                {
+                    _view.SetResultText("Partner isn't online...");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _view.SetResultText("Partner isn't online...");
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         // todo: convert this to an event handler , use it in the Main Form as observer
+        /// <summary>
+        /// method used to execute specific CRUD contacts operation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public Contact PerformContactsOperation(object sender, ContactsEventArgs e)
-        {
+        { 
             Contact contact = null;
-            if (e.Operation == GenericEnums.ContactsOperation.Load)
+            try
             {
-                // don't need to send signal to the Model
-                _view.NotifyContactsObserver();
+                if (e.Operation == GenericEnums.ContactsOperation.Load)
+                {
+                    // don't need to send signal to the Model
+                    _view.NotifyContactsObserver();
+                }
+                else
+                {
+                    // add/remove/get/status/name update
+                    contact = _model.PerformContactOperation(e);
+                    _view.NotifyContactsObserver();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // add/remove/get/status/name update
-                contact = _model.PerformContactOperation(e);
-                _view.NotifyContactsObserver();
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             return contact;
         }

@@ -97,7 +97,7 @@ namespace MViewer
         {
             IdentityEventArgs args = (IdentityEventArgs)e;
             // update the identity in the Model by using the Controller
-            Program.Controller.IdentityObserver(sender, args);
+            Program.Controller.FriendlyNameObserver(sender, args);
         }
 
         private void OnContactsControl_ClosePressed(object sender, EventArgs e)
