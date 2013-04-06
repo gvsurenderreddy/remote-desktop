@@ -224,7 +224,7 @@ namespace GenericObjects
                         const int WM_CAP_START = 0x0400;
                         const int WM_CAP_FILE_SAVEAS = WM_CAP_START + 23;
                         string filepath = "C:\\RecordedVideo.avi";
-                        IntPtr result = Win32APIMethods.SendMessage(_captureWindowHandler, WM_CAP_FILE_SAVEAS, IntPtr.Zero, ref filepath);
+                        IntPtr result = Win32APIMethods.SendMessage(_captureWindowHandler, WM_CAP_FILE_SAVEAS, IntPtr.Zero, filepath);
 
                         // push the image into the capture event args
                         if (ImageCaptured != null)
