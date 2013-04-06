@@ -28,7 +28,6 @@ namespace MViewer
             InitializeComponent();
             PartnerIdentity = identity;
             _formClosing = false;
-
         }
 
         #endregion

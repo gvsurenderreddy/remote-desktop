@@ -25,11 +25,18 @@ namespace MViewer
 
         public FormMyWebcam(int timerInterval)
         {
-            _timerInterval = timerInterval;
-            InitializeComponent();
-            _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
-            _webcamCapture.ParentForm = this;
-            Program.Controller.StartVideo(_webcamCapture);
+            try
+            {
+                _timerInterval = timerInterval;
+                InitializeComponent();
+                _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
+                _webcamCapture.ParentForm = this;
+                Program.Controller.StartVideo(_webcamCapture);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
