@@ -159,20 +159,27 @@ namespace AudioStreaming
 
         protected override void Update(GameTime gameTime)
         {
-            _syncStatus.WaitOne();
-            if (_microphone == null)
+            try
             {
-                _microphone = Microphone.Default;
+                _syncStatus.WaitOne();
+                if (_microphone == null)
+                {
+                    _microphone = Microphone.Default;
+                }
+                if (!_isRunning && _microphone.State == MicrophoneState.Started)
+                {
+                    _syncStop.Reset();
+
+                    _microphone.Stop();
+                }
+
+                base.Update(gameTime);
+                _syncStop.Set();
             }
-            if (!_isRunning && _microphone.State == MicrophoneState.Started)
+            catch (Exception ex)
             {
-                _syncStop.Reset();
 
-                _microphone.Stop();
             }
-
-            base.Update(gameTime);
-            _syncStop.Set();
         }
 
         #endregion
