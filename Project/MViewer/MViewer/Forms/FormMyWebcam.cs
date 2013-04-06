@@ -29,7 +29,7 @@ namespace MViewer
         {
             _timerInterval = timerInterval;
             InitializeComponent();
-            _webcamCapture = new WebcamCapture(_timerInterval, this.Handle.ToInt32());
+            _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
             _webcamCapture.ParentForm = this;
             Program.Controller.StartVideo(_webcamCapture);
         }
@@ -64,7 +64,7 @@ namespace MViewer
         {
             if (_webcamCapture == null)
             {
-                _webcamCapture = new WebcamCapture(_timerInterval, this.Handle.ToInt32());
+                _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
             }
             Program.Controller.StartVideo(_webcamCapture);
         }

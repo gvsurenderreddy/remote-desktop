@@ -9,10 +9,10 @@ namespace GenericObjects
     public static class Win32APIMethods
     {
         [DllImport("user32", EntryPoint = "SendMessage")]
-        public static extern int SendMessage(int hWnd, uint Msg, int wParam, int lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
 
         [DllImport("avicap32.dll", EntryPoint = "capCreateCaptureWindowA")]
-        public static extern int capCreateCaptureWindowA(string lpszWindowName, int dwStyle, int X, int Y, int nWidth, int nHeight, int hwndParent, int nID);
+        public static extern IntPtr capCreateCaptureWindowA(string lpszWindowName, int dwStyle, int X, int Y, int nWidth, int nHeight, IntPtr hwndParent, int nID);
 
         [DllImport("user32", EntryPoint = "OpenClipboard")]
         public static extern int OpenClipboard(int hWnd);

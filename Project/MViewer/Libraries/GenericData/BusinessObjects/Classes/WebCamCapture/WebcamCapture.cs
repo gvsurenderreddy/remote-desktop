@@ -31,8 +31,8 @@ namespace GenericObjects
         int _captureTimespan;
         int _width;
         int _height;
-        int _captureWindowHandler;
-        int _windowHandle;
+        IntPtr _captureWindowHandler;
+        IntPtr _windowHandle;
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
         bool _webcamClosed;
@@ -54,7 +54,7 @@ namespace GenericObjects
 
         #region c-tor & d-tor
 
-        public WebcamCapture(int interval, int windowHandle)
+        public WebcamCapture(int interval, IntPtr windowHandle)
         {
             //_closingEvent = closingEvent;
             _components = new Container();
@@ -74,9 +74,6 @@ namespace GenericObjects
 
         #region public methods
 
-        [DllImport("user32", EntryPoint = "SendMessage")]
-        static extern bool SendMessage(int hWnd, uint wMsg, int wParam, int lParam);
-
         void StartCaptureProcess(bool firstTimeCapturing)
         {
             InitializeTimer(_interval);
@@ -85,12 +82,12 @@ namespace GenericObjects
 
             // connect this application to the capture device
             int connectAttempts = 0;
-            while (!SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, 1, 0))
+            while (Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, IntPtr.Zero, IntPtr.Zero) == IntPtr.Zero)
             {
                 connectAttempts++;
                 Thread.Sleep(1000);
             }
-            int x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, 0, 0);
+            IntPtr x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, IntPtr.Zero, IntPtr.Zero);
             _webcamClosed = false;
             _threadAborted = false;
 
@@ -151,7 +148,7 @@ namespace GenericObjects
                     if (!_webcamClosed)
                     {
                         // disconnect from the video capturing device
-                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, 0, 0);
+                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_DISCONNECT, IntPtr.Zero, IntPtr.Zero);
                         _webcamClosed = true;
                     }
                 }
@@ -219,10 +216,10 @@ namespace GenericObjects
                         //_pool.WaitOne();
 
                         // get the next image
-                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, 0, 0);
+                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, IntPtr.Zero, IntPtr.Zero);
 
                         // copy the image to the clipboard
-                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, 0, 0);
+                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, IntPtr.Zero, IntPtr.Zero);
 
                         // push the image into the capture event args
                         if (ImageCaptured != null)
