@@ -1,4 +1,7 @@
-http://www.teamviewer.com/download/version_6x/teamviewer_manual.pdf
+desktop remoting
+http://blog.bobcravens.com/2009/05/multiple-remote-desktop-viewer-c-wcf/
+
+voice chat
 http://www.codeproject.com/Articles/19485/A-Voice-Chat-Application-in-C
 
 cryptography
@@ -16,12 +19,61 @@ http://stackoverflow.com/questions/249587/high-quality-image-scaling-c-sharp
 Windows API Code Pack 
 http://archive.msdn.microsoft.com/WindowsAPICodePack
 
+using video capture
+http://msdn.microsoft.com/en-us/library/dd757677(v=vs.85).aspx
+
 Webcam functionality using C#
 http://www.c-sharpcorner.com/uploadfile/yougerthen/integrate-the-web-webcam-functionality-using-C-Sharp-net-and-com-part-viii/
 
+windows forms interaction
+http://www.codeproject.com/Articles/2083/The-key-to-multi-threaded-Windows-Forms-UI-interac
 
-
-
+strategy pattern for switch-case refactoring
+http://go4answers.webhost4life.com/Example/switch-dictionary-improving-way-code-113606.aspx
 
 display library ? not used yet
 http://developer.amd.com/tools/graphics-development/display-library-adl-sdk/
+
+windows 7 firewall instructions
+http://msdn.microsoft.com/en-us/library/ms751530.aspx
+
+using progress bar
+http://msdn.microsoft.com/en-us/library/system.windows.forms.progressbar.aspx
+
+======================
+calculating remote mouse coordinate
+http://stackoverflow.com/questions/11152608/how-to-calculate-mouse-coordinate-based-on-resolution-c-sharp
+
+to see: simulating drag and drop and others
+http://social.msdn.microsoft.com/forums/en-US/vbgeneral/thread/e79d4501-b3d9-4e37-9b70-966105e09ab1
+
+input simulator C# 
+http://inputsimulator.codeplex.com/releases/view/37570
+http://danv74.wordpress.com/2013/02/15/simulating-mouse-events-from-c/
+http://www.codeproject.com/Articles/32556/Auto-Clicker-C
+http://stackoverflow.com/questions/8561755/attempting-to-simulate-mouse-click-drag
+http://alala666888.wordpress.com/2010/09/17/simulate-mouse-event-using-sendinput-and-setcursorpos/
+
+mouse event function:
+http://msdn.microsoft.com/en-us/library/windows/desktop/ms646260(v=vs.85).aspx
+
+mouse and keyboard hooks in C# 
+http://www.codeproject.com/Articles/7294/Processing-Global-Mouse-and-Keyboard-Hooks-in-C
+http://www.rqna.net/qna/kxyhvz-error-when-using-setwindowshookex-in-windows-xp-but-not-in-windows-7.html
+======================
+
+wrong password x509
+http://understandavinash.blogspot.ro/2009/03/keysetnotfoundoracessdenied.html
+
+keyboard scan codes 
+http://www.gamespp.com/directx/directInputKeyboardScanCodes.html
+
+microphone process flow 
+http://www.c-sharpcorner.com/uploadfile/iersoy/how-to-use-microphone-in-xna/
+
+form localize at runtime
+http://www.dotnetcurry.com/ShowArticle.aspx?ID=174
+
+
+
+

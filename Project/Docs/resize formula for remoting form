@@ -1,0 +1,26 @@
+
+form remote: 
+591, 483
+
+pnlMain (from form remote): 573, 442
+pnl main width = form width - (591 - 573) = form width - 18
+pnl main height = form height - (483 - 442) = form height - 41
+
+remote control:
+547, 416
+remote control width = pnl main width - (573 - 547) = pnl main width - 26
+remote control height = pnl main height - (442 - 416) = pnl main height - 26
+
+
+pnl remote (from remote control):
+539, 373
+
+pnl remote width = remote control width - (547 - 539) = remote control width - 8
+pnl remote height = remote control height - (416 - 373) = remote control height - 43
+
+picture box:
+514, 349
+
+picture box width = pnl remote width - (539 - 514) = pnl remote width - 25
+picture box height = pnl remote height - (373 - 349) = pnl remote height - 24
+
