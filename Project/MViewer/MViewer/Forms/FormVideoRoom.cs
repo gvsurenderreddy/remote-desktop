@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using GenericObjects;
 using Utils;
-using UIControls.CrossThreadOperations;
 using System.Threading;
 
 namespace MViewer
@@ -181,7 +180,7 @@ namespace MViewer
             get
             {
                 object value = null;
-                ControlCrossThreading.GetValue(this, "Handle", ref value);
+                Tools.Instance.CrossThreadingControl.GetValue(this, "Handle", ref value);
                 return (IntPtr)value;
             }
         }

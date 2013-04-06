@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using UIControls.CrossThreadOperations;
+using UIControls;
 using Utils;
 using GenericObjects;
 using System.Globalization;
@@ -88,13 +88,13 @@ namespace UIControls
 
         public void UpdateFriendlyName(string newFriendlyName)
         {
-            ControlCrossThreading.SetValue(txtFriendlyName, newFriendlyName, "Text");
+            Tools.Instance.CrossThreadingControl.SetValue(txtFriendlyName, newFriendlyName, "Text");
             _textChanged = false;
         }
 
         public void UpdateMyID(string newID)
         {
-            ControlCrossThreading.SetValue(txtMyID, newID, "Text");
+            Tools.Instance.CrossThreadingControl.SetValue(txtMyID, newID, "Text");
         }
 
         #endregion

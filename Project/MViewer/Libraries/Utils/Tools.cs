@@ -16,6 +16,7 @@ namespace Utils
         Cryptography _cryptography;
         GenericMethods _genericMethods;
         Logger _logger;
+        ControlCrossThreading _crossControl;
 
         static Tools _instance = new Tools();
         static readonly object _syncInstance = new object();
@@ -24,13 +25,14 @@ namespace Utils
 
         #region c-tor
 
-        private Tools() 
+        private Tools()
         {
+            _logger = new Logger();
+            _crossControl = new ControlCrossThreading();
             _imageConverter = new ImageConverter();
             _desktopViewerUtils = new RemotingUtils();
             _cryptography = new Cryptography();
             _genericMethods = new GenericMethods();
-            _logger = new Logger();
         }
 
         #endregion
@@ -53,6 +55,11 @@ namespace Utils
                 }
                 return _instance;
             }
+        }
+
+        public ControlCrossThreading CrossThreadingControl
+        {
+            get { return _crossControl; }
         }
 
         public Logger Logger

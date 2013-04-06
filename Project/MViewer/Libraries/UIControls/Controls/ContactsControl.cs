@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using GenericObjects;
 using System.Collections;
-using UIControls.CrossThreadOperations;
+using UIControls;
 using System.Threading;
 using Utils;
 
@@ -60,22 +60,22 @@ namespace UIControls
             Thread.Sleep(200);
             if (dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count > 0)
             {
-                ControlCrossThreading.SetValue(dgvContacts, true, "Visible");
+                Tools.Instance.CrossThreadingControl.SetValue(dgvContacts, true, "Visible");
                 ShowNotification(false);
-                ControlCrossThreading.SetValue(dgvContacts, dvContacts, "Datasource");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Identity", false, "Visible");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "ContactNo", false, "Visible");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width / 2 - 1, "Width");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Status", dgvContacts.Width / 2 - 1, "Width");
+                Tools.Instance.CrossThreadingControl.SetValue(dgvContacts, dvContacts, "Datasource");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Identity", false, "Visible");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "ContactNo", false, "Visible");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width / 2 - 1, "Width");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Status", dgvContacts.Width / 2 - 1, "Width");
 
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "FriendlyName", DataGridViewTriState.False, "Resizable");
-                ControlCrossThreading.SetGridViewColumnPropery(dgvContacts, "Status", DataGridViewTriState.False, "Resizable");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", DataGridViewTriState.False, "Resizable");
+                Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Status", DataGridViewTriState.False, "Resizable");
                 
             }
             else
             {
-                ControlCrossThreading.SetValue(dgvContacts, false, "Visible");
+                Tools.Instance.CrossThreadingControl.SetValue(dgvContacts, false, "Visible");
                 ShowNotification(true);
             }
         }

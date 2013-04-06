@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlCrossThreading.cs" />
     <Compile Include="Cryptography.cs" />
     <Compile Include="GenericMethods.cs" />
     <Compile Include="Logger.cs" />

@@ -76,7 +76,6 @@
     <Compile Include="Controls\IdentityControl.Designer.cs">
       <DependentUpon>IdentityControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CrossThreadOperations\ControlCrossThreading.cs" />
     <Compile Include="Forms\FormContact.cs">
       <SubType>Form</SubType>
     </Compile>
