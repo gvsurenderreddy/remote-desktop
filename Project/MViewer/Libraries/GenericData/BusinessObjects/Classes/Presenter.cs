@@ -52,6 +52,8 @@ namespace GenericObjects
             if (_videoCapture == null)
             {
                 _videoCapture = _presenterSettings.VideoCaptureControl; 
+                _videoCapture.ImageHeight = _presenterSettings.VideoScreenSize.Height;
+                _videoCapture.ImageWidth = _presenterSettings.VideoScreenSize.Width; 
                 // bind the image captured event
                 _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(_presenterSettings.OnVideoImageCaptured);
             }
