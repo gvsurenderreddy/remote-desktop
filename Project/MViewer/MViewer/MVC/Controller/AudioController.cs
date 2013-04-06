@@ -210,7 +210,7 @@ namespace MViewer
                 {
                     peers.AudioSessionState = GenericEnums.SessionState.Closed;
                     bool sendStopSignal = true;
-                    if (sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
+                    if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
                         sendStopSignal = false;
                     }
