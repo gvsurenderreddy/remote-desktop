@@ -15,7 +15,7 @@ namespace GenericObjects
         void NotifyContactsObserver();
         void NotifyIdentityObserver();
         void BindObservers(bool bind);
-
+        void SetFormMainBackground(string filePath);
         void ShowMainForm(bool close);
         void ShowMyWebcamForm(bool show);
 

@@ -128,6 +128,12 @@ namespace MViewer
             contactsControl.ChangeLanguage(language);
         }
 
+        public void SetFormMainBackground(string filePath)
+        {
+            System.IO.FileInfo fileInfo = new System.IO.FileInfo(filePath);
+            this.BackgroundImage = Image.FromFile(fileInfo.FullName);
+        }
+
         public void SetResultText(string text)
         {
             Label lblActionResult = new System.Windows.Forms.Label();

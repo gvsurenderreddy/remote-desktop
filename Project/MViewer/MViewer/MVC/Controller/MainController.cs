@@ -164,6 +164,7 @@ namespace MViewer
             bool canExit = _view.ExitConfirmation();
             if (canExit)
             {
+                _view.SetFormMainBackground("Images/closed.gif");
                 _view.SetResultText("Closing app...");
                 Thread t = new Thread(delegate()
                 {

@@ -65,6 +65,11 @@ namespace MViewer
             _formMain.SetResultText(text);
         }
 
+        public void SetFormMainBackground(string filePath)
+        {
+            _formMain.SetFormMainBackground(filePath);
+        }
+
         public bool RequestTransferPermission(string identity, string fileName, long fileSize)
         {
             bool canSend = false;

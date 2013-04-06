@@ -35,7 +35,6 @@ namespace MViewer
             this.identityControl = new UIControls.IdentityControl();
             this.contactsControl = new UIControls.ContactsControl(this.OnContactsControl_ClosePressed, this.OnContactsUpdated, this.OnSelectedContactChanged);
             this.identityControl = new UIControls.IdentityControl(this.OnIdentityUpdated, this.OnLanguageUpdated);
-
             this.SuspendLayout();
             // 
             // contactsControl
@@ -46,10 +45,10 @@ namespace MViewer
             this.contactsControl.Size = new System.Drawing.Size(223, 305);
             this.contactsControl.TabIndex = 1;
             // 
-            // identityControl1
+            // identityControl
             // 
             this.identityControl.Location = new System.Drawing.Point(3, 12);
-            this.identityControl.Name = "identityControl1";
+            this.identityControl.Name = "identityControl";
             this.identityControl.Size = new System.Drawing.Size(282, 51);
             this.identityControl.TabIndex = 2;
             // 
@@ -57,6 +56,7 @@ namespace MViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(510, 305);
