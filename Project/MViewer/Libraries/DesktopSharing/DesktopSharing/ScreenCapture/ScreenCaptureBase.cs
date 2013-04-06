@@ -40,7 +40,7 @@ namespace DesktopSharing
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             finally
             {
@@ -95,7 +95,7 @@ namespace DesktopSharing
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             return cursorCapture;
         }

@@ -5,6 +5,7 @@ using System.Text;
 using GenericObjects;
 using System.Data;
 using System.IO;
+using Utils;
 
 namespace DataAccessLayer
 {
@@ -65,27 +66,41 @@ namespace DataAccessLayer
 
         public static void RemoveContact(int contactNo)
         {
-            _contactsDataView.RowFilter = "ContactNo='" + contactNo + "'";
-            _contactsDataView.Sort = "ContactNo";
-            _contactsDataView.Delete(0);
-            _contactsDataView.RowFilter = "";
-            SaveContacts();
-            LoadContacts(_xmlFilePath);
+            try
+            {
+                _contactsDataView.RowFilter = "ContactNo='" + contactNo + "'";
+                _contactsDataView.Sort = "ContactNo";
+                _contactsDataView.Delete(0);
+                _contactsDataView.RowFilter = "";
+                SaveContacts();
+                LoadContacts(_xmlFilePath);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public static void UpdateContact(Contact contact)
         {
-            DataRow dr = GetContactByNo(contact.ContactNo);
-            if (dr == null)
+            try
             {
-                Contact toUpdate = GetContactByIdentity(contact.Identity);
-                dr = GetContactByNo(toUpdate.ContactNo);
+                DataRow dr = GetContactByNo(contact.ContactNo);
+                if (dr == null)
+                {
+                    Contact toUpdate = GetContactByIdentity(contact.Identity);
+                    dr = GetContactByNo(toUpdate.ContactNo);
+                }
+                if (dr != null)
+                {
+                    dr.SetField("FriendlyName", contact.FriendlyName);
+                    SaveContacts();
+                    LoadContacts(_xmlFilePath);
+                }
             }
-            if (dr != null)
+            catch (Exception ex)
             {
-                dr.SetField("FriendlyName", contact.FriendlyName);
-                SaveContacts();
-                LoadContacts(_xmlFilePath);
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -129,7 +144,14 @@ namespace DataAccessLayer
 
         public static void SaveContacts()
         {
-            _contactsDataSet.WriteXml(_xmlFilePath, XmlWriteMode.WriteSchema);
+            try
+            {
+                _contactsDataSet.WriteXml(_xmlFilePath, XmlWriteMode.WriteSchema);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
