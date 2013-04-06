@@ -128,7 +128,7 @@ namespace MViewer
                 _syncVideoCaptureActivity.Reset();
             
                 bool sendStopSignal = true;
-                if (sender.GetType().IsInstanceOfType(typeof(MViewerServer)))
+                if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                 {
                     sendStopSignal = false;
                 }
