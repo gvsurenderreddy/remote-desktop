@@ -35,6 +35,7 @@ namespace DesktopSharing
             lock (_newCapture)
             {
                 _newCapture = GetDesktopCapture();
+                screenCapture = _newCapture;
             }
             return screenCapture;
         }
