@@ -84,16 +84,23 @@ namespace UIControls
 
         void SetFormMode()
         {
-            switch (_formMode)
+            try
             {
-                case GenericEnums.FormMode.Add:
-                    btnAdd.Text = "Add";
-                    txtIdentity.Enabled = true;
-                    break;
-                case GenericEnums.FormMode.Update:
-                    btnAdd.Text = "Update";
-                    txtIdentity.Enabled = false;
-                    break;
+                switch (_formMode)
+                {
+                    case GenericEnums.FormMode.Add:
+                        btnAdd.Text = "Add";
+                        txtIdentity.Enabled = true;
+                        break;
+                    case GenericEnums.FormMode.Update:
+                        btnAdd.Text = "Update";
+                        txtIdentity.Enabled = false;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -103,46 +110,60 @@ namespace UIControls
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            // validate input data
-
-            if(string.IsNullOrEmpty(txtFriendlyName.Text.Trim()) || string.IsNullOrEmpty(txtIdentity.Text.Trim()))
+            try
             {
-                MessageBox.Show("Cannot insert empty text");
-                return;
-            }
+                // validate input data
 
-            switch (_formMode)
-            {
-                case GenericEnums.FormMode.Add:
-                    Contact contact = new Contact(0, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
-                    _contactsUpdated.BeginInvoke(sender, new ContactsEventArgs
+                if (string.IsNullOrEmpty(txtFriendlyName.Text.Trim()) || string.IsNullOrEmpty(txtIdentity.Text.Trim()))
+                {
+                    MessageBox.Show("Cannot insert empty text");
+                    return;
+                }
+
+                switch (_formMode)
+                {
+                    case GenericEnums.FormMode.Add:
+                        Contact contact = new Contact(0, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
+                        _contactsUpdated.BeginInvoke(sender, new ContactsEventArgs
+                        {
+                            UpdatedContact = contact,
+                            Operation = GenericEnums.ContactsOperation.Add
+                        }, null, null);
+
+                        break;
+                    case GenericEnums.FormMode.Update:
+                        Contact contact2 = new Contact(_contactNo, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
+                        _contactsUpdated.Invoke(sender, new ContactsEventArgs
+                        {
+                            UpdatedContact = contact2,
+                            Operation = GenericEnums.ContactsOperation.Update
+                        });
+
+                        break;
+                }
+                _contactsUpdated.BeginInvoke(this, new ContactsEventArgs()
                     {
-                        UpdatedContact = contact,
-                        Operation = GenericEnums.ContactsOperation.Add
+                        Operation = GenericEnums.ContactsOperation.Load
                     }, null, null);
 
-                    break;
-                case GenericEnums.FormMode.Update:
-                    Contact contact2 = new Contact(_contactNo, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
-                    _contactsUpdated.Invoke(sender, new ContactsEventArgs
-                    {
-                        UpdatedContact = contact2,
-                        Operation = GenericEnums.ContactsOperation.Update
-                    });
-
-                    break;
+                this.Close();
             }
-            _contactsUpdated.BeginInvoke(this, new ContactsEventArgs()
-                {
-                    Operation = GenericEnums.ContactsOperation.Load
-                }, null, null);
-
-            this.Close();
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
