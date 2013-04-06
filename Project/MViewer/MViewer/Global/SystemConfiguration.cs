@@ -108,12 +108,12 @@ namespace MViewer
 
         private void InitializePresenterSettings()
         {
-            int timerInterval = 100;
+            int videoTimerInterval = int.Parse(ConfigurationManager.AppSettings["videoTimerInterval"].ToString());
             int height = 354, width = 360;
             _presenterSettings = new PresenterSettings()
             {
                 Identity = FriendlyName,
-                VideoTimerInterval = timerInterval,
+                VideoTimerInterval = videoTimerInterval,
                 VideoScreenSize =
                     new Structures.ScreenSize()
                     {
@@ -121,9 +121,10 @@ namespace MViewer
                         Width = width
                     },
                 OnVideoImageCaptured = new EventHandler(Program.Controller.OnVideoImageCaptured),
-                RemotingTimerInterval = 50,
+                RemotingTimerInterval = int.Parse(ConfigurationManager.AppSettings["remotingTimerInterval"].ToString()),
                 OnRemotingImageCaptured = new EventHandler(Program.Controller.OnRemotingImageCaptured),
                 OnAudioCaptureAvailable = new EventHandler(Program.Controller.OnAudioCaptured),
+                AudioTimerInterval = int.Parse(ConfigurationManager.AppSettings["audioTimerInterval"].ToString())
             };
         }
 

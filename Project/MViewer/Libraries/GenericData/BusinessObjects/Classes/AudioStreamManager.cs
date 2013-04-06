@@ -19,13 +19,15 @@ namespace GenericObjects
         System.Timers.Timer _timer;
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
+        int _timerInterval;
 
         #endregion
 
         #region c-tor
 
-        public AudioStreamManager(EventHandler onCaptureAvailable)
+        public AudioStreamManager(int timerInterval, EventHandler onCaptureAvailable)
         {
+            _timerInterval = timerInterval;
             _onCaptureAvailable = onCaptureAvailable;
         }
 
@@ -66,7 +68,7 @@ namespace GenericObjects
         {
             if (_timer == null)
             {
-                _timer = new System.Timers.Timer(3 * 1000);
+                _timer = new System.Timers.Timer(_timerInterval);
                 _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
             }
 

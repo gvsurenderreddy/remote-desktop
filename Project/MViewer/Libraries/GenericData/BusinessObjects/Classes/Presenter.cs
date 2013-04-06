@@ -26,7 +26,7 @@ namespace GenericObjects
         {
             _presenterSettings = presenterSettings;
             _videoCapture = _presenterSettings.VideoCaptureControl;
-            _audioStreamManager = new AudioStreamManager(_presenterSettings.OnAudioCaptureAvailable);
+            _audioStreamManager = new AudioStreamManager(_presenterSettings.AudioTimerInterval, _presenterSettings.OnAudioCaptureAvailable);
 
             // initialize the image capture size
             if (_videoCapture != null)

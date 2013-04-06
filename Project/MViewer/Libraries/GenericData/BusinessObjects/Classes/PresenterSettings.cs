@@ -20,5 +20,6 @@ namespace GenericObjects
         public int RemotingTimerInterval { get; set; }
 
         public EventHandler OnAudioCaptureAvailable { get; set; }
+        public int AudioTimerInterval { get; set; }
     }
 }
