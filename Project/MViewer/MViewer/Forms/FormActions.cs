@@ -28,16 +28,30 @@ namespace MViewer
 
         public FormActions()
         {
-            InitializeComponent();
-            myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
+            try
+            {
+                InitializeComponent();
+                myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public FormActions(EventHandler roomActionEventHandler)
         {
-            InitializeComponent();
-            _roomActionEventHandler = roomActionEventHandler;
-            ActionsObserver = new Delegates.ActionsEventHandler(OnActionTriggered);
-            myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
+            try
+            {
+                InitializeComponent();
+                _roomActionEventHandler = roomActionEventHandler;
+                ActionsObserver = new Delegates.ActionsEventHandler(OnActionTriggered);
+                myDelegate = new UpdateLabelsDel(actionsControl.UpdateLabels);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -46,17 +60,31 @@ namespace MViewer
 
         private void FormActions_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // this form should not be closed while the app is running
-            if (e.CloseReason == CloseReason.UserClosing)
+            try
             {
-                e.Cancel = true;
+                // this form should not be closed while the app is running
+                if (e.CloseReason == CloseReason.UserClosing)
+                {
+                    e.Cancel = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         private void OnActionTriggered(object sender, EventArgs e)
         {
-            // use the Controller and take specific action when event has been triggered using the Actions control
-            _roomActionEventHandler.Invoke(sender, e);
+            try
+            {
+                // use the Controller and take specific action when event has been triggered using the Actions control
+                _roomActionEventHandler.Invoke(sender, e);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -65,24 +93,38 @@ namespace MViewer
 
         public void ChangeLanguage(string language)
         {
-            actionsControl.ChangeLanguage(language);
+            try
+            {
+                actionsControl.ChangeLanguage(language);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {
-            bool retry = true;
-            while (retry)
+            try
             {
-                try
+                bool retry = true;
+                while (retry)
                 {
-                    this.Invoke(myDelegate, start, pause, roomType);
-                    retry = false;
+                    try
+                    {
+                        this.Invoke(myDelegate, start, pause, roomType);
+                        retry = false;
+                    }
+                    catch (Exception)
+                    {
+                        retry = true;
+                        Thread.Sleep(2000);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    retry = true;
-                    Thread.Sleep(2000);
-                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 

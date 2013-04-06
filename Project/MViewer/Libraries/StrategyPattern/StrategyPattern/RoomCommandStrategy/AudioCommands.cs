@@ -22,6 +22,5 @@ namespace StrategyPattern
             _commands.Add(GenericEnums.SignalType.Pause, PauseAudio);
             _commands.Add(GenericEnums.SignalType.Resume, ResumeAudio);
         }
-
     }
 }

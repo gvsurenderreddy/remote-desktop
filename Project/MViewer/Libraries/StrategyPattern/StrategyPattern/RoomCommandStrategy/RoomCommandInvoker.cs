@@ -54,15 +54,11 @@ namespace StrategyPattern
             commands.Add(GenericEnums.RoomType.Video, videoCommands);
             commands.Add(GenericEnums.RoomType.Send, transferCommands);
             commands.Add(GenericEnums.RoomType.Remoting, remotingCommands);
-
-
         }
 
         public void PerformCommand(object sender, RoomActionEventArgs args)
         {
             commands[args.RoomType].Execute(sender, args);
         }
-
-
     }
 }

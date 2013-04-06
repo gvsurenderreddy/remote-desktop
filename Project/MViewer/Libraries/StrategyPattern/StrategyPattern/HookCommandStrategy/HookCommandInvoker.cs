@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
 using GenericObjects;
 using Utils;
 
@@ -15,7 +14,6 @@ namespace StrategyPattern
         public HookCommandInvoker(ControllerRemotingHandlers remotingCommandHandlers)
         {
             // provide the mouse/keyboard event handlers from the controller
-
             MouseHookCommand mouseCommands = new MouseHookCommand()
             {
                 LeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.LeftClick],
@@ -47,14 +45,11 @@ namespace StrategyPattern
             keyboardCommands.BindCommands();
 
             commands.Add(GenericEnums.RemotingCommandType.Keyboard, keyboardCommands);
-
         }
 
         public void PerformCommand(object sender, RemotingCommandEventArgs args)
         {
             commands[args.RemotingCommandType].Execute(sender, args);
         }
-
-
     }
 }

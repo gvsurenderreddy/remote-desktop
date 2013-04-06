@@ -25,9 +25,16 @@ namespace MViewer
 
         public FormAudioRoom(string identity, EventHandler onCaptureReceived)
         {
-            InitializeComponent();
-            PartnerIdentity = identity;
-            _onCaptureReceived = onCaptureReceived;
+            try
+            {
+                InitializeComponent();
+                PartnerIdentity = identity;
+                _onCaptureReceived = onCaptureReceived;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -41,16 +48,30 @@ namespace MViewer
 
         public void PlayAudioCapture(byte[] capture)
         {
-            _onCaptureReceived.BeginInvoke(this, new AudioCaptureEventArgs()
+            try
             {
-                Capture = capture,
-                Identity = this.PartnerIdentity
-            }, null, null);
+                _onCaptureReceived.BeginInvoke(this, new AudioCaptureEventArgs()
+                {
+                    Capture = capture,
+                    Identity = this.PartnerIdentity
+                }, null, null);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void SetPartnerName(string friendlyName)
         {
-            audioControl.SetPartnerName(friendlyName);
+            try
+            {
+                audioControl.SetPartnerName(friendlyName);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void ShowRoom()
@@ -76,14 +97,22 @@ namespace MViewer
                     this.Show();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void ToggleAudioStatus()
         {
-            audioControl.ToggleStatusUpdate();
+            try
+            {
+                audioControl.ToggleStatusUpdate();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -116,8 +145,15 @@ namespace MViewer
 
         private void FormAudioRoom_Activated(object sender, EventArgs e)
         {
-            // tell the controller to update the active form
-            Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
+            try
+            {
+                // tell the controller to update the active form
+                Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
     }
 }

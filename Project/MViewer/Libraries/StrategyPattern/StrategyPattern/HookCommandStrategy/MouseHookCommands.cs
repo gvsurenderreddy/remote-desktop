@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using System.Threading.Tasks;
 using GenericObjects;
 using Utils;
 
@@ -42,7 +41,6 @@ namespace StrategyPattern
             _commands.Add(GenericEnums.MouseCommandType.MiddleMouseUp, MiddleMouseUpCommand);
             _commands.Add(GenericEnums.MouseCommandType.Move, MoveCommand);
             _commands.Add(GenericEnums.MouseCommandType.Wheel, WheelCommand);
-
         }
     }
 }
