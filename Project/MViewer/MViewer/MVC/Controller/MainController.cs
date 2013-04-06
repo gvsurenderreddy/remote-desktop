@@ -165,7 +165,7 @@ namespace MViewer
                 }
                 else
                 {
-                    _view.SetResultText("Partner isn't online...");
+                    _view.SetMessageText("Partner isn't online...");
                 }
             }
             catch (Exception ex)
@@ -236,7 +236,7 @@ namespace MViewer
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
-                _view.SetResultText("Fatal error while starting app");
+                _view.SetMessageText("Fatal error while starting app");
             }
         }
 
@@ -253,8 +253,8 @@ namespace MViewer
                 bool canExit = _view.ExitConfirmation();
                 if (canExit)
                 {
-                    _view.SetFormMainBackground("Images/closed.gif");
-                    _view.SetResultText("Closing app...");
+                    _view.SetFormMainBackgroundImage("Images/closed.gif");
+                    _view.SetMessageText("Closing app...");
                     Thread t = new Thread(delegate()
                     {
                         // stop all active rooms

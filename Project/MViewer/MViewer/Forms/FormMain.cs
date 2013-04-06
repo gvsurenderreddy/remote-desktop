@@ -130,11 +130,18 @@ namespace MViewer
 
         public void SetFormMainBackground(string filePath)
         {
-            System.IO.FileInfo fileInfo = new System.IO.FileInfo(filePath);
-            this.BackgroundImage = Image.FromFile(fileInfo.FullName);
+            try
+            {
+                System.IO.FileInfo fileInfo = new System.IO.FileInfo(filePath);
+                this.BackgroundImage = Image.FromFile(fileInfo.FullName);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
-        public void SetResultText(string text)
+        public void SetMessageText(string text)
         {
             Label lblActionResult = new System.Windows.Forms.Label();
             // 

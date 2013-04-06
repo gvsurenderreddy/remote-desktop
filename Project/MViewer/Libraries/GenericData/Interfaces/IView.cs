@@ -11,11 +11,11 @@ namespace GenericObjects
     public interface IView
     {
         void ChangeLanguage(string language);
-        void SetResultText(string text);
+        void SetMessageText(string text);
         void NotifyContactsObserver();
         void NotifyIdentityObserver();
         void BindObservers(bool bind);
-        void SetFormMainBackground(string filePath);
+        void SetFormMainBackgroundImage(string filePath);
         void ShowMainForm(bool close);
         void ShowMyWebcamForm(bool show);
 
