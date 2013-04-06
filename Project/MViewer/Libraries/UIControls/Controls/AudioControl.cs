@@ -26,49 +26,51 @@ namespace UIControls
 
         #endregion
 
-        #region event callbacks
-
-        
-
-        #endregion
-
-        #region private methods
-
-        
-
-        #endregion
-
         #region public methods
 
         public void SetPartnerName(string friendlyName)
         {
-            txtPartner.Text = friendlyName;
+            try
+            {
+                txtPartner.Text = friendlyName;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void ToggleStatusUpdate()
         {
-            /// switch bewteen muted/unmuted status
-            if (txtStatus.Text.Trim() == "Muted")
+            try
             {
-                if (txtStatus.InvokeRequired)
+                /// switch bewteen muted/unmuted status
+                if (txtStatus.Text.Trim() == "Muted")
                 {
-                    txtStatus.Invoke(new MethodInvoker(delegate { txtStatus.Text = "Active"; }));
+                    if (txtStatus.InvokeRequired)
+                    {
+                        txtStatus.Invoke(new MethodInvoker(delegate { txtStatus.Text = "Active"; }));
+                    }
+                    else
+                    {
+                        txtStatus.Text = "Active";
+                    }
                 }
                 else
                 {
-                    txtStatus.Text = "Active";
+                    if (txtStatus.InvokeRequired)
+                    {
+                        txtStatus.Invoke(new MethodInvoker(delegate { txtStatus.Text = "Muted"; }));
+                    }
+                    else
+                    {
+                        txtStatus.Text = "Muted";
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (txtStatus.InvokeRequired)
-                {
-                    txtStatus.Invoke(new MethodInvoker(delegate { txtStatus.Text = "Muted"; }));
-                }
-                else
-                {
-                    txtStatus.Text = "Muted";
-                }
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
