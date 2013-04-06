@@ -8,8 +8,8 @@ namespace GenericObjects
 {
     public static class Win32APIMethods
     {
-        [DllImport("user32", EntryPoint = "SendMessage")]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, string lp);
+        //[DllImport("user32", EntryPoint = "SendMessage")]
+        //public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, string lp);
 
         [DllImport("user32", EntryPoint = "SendMessage")]
         public static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
