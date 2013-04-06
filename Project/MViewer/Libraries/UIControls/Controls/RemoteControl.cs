@@ -16,19 +16,29 @@ namespace UIControls
 {
     public partial class RemoteControl : UserControl
     {
+        #region private members
+
         Delegates.HookCommandDelegate _remotingCommand;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDoubleClick;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseClick;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDown;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseUp;
 
+        #endregion
 
         #region c-tor
 
         public RemoteControl()
         {
-            InitializeComponent();
-            InitializeCommandTypes();
+            try
+            {
+                InitializeComponent();
+                InitializeCommandTypes();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -180,48 +190,65 @@ namespace UIControls
 
         private new void KeyDown(object sender, KeyEventArgs e)
         {
-            _remotingCommand.Invoke(this,
-                new RemotingCommandEventArgs()
-                {
-                    RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
-                    KeyCode = e.KeyCode
-                });
-
+            try
+            {
+                _remotingCommand.Invoke(this,
+                    new RemotingCommandEventArgs()
+                    {
+                        RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
+                        KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
+                        KeyCode = e.KeyCode
+                    });
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private new void KeyUp(object sender, KeyEventArgs e)
         {
-            _remotingCommand.Invoke(this,
-                new RemotingCommandEventArgs()
-                {
-                    RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
-                    KeyCode = e.KeyCode
-                });
-
+            try
+            {
+                _remotingCommand.Invoke(this,
+                    new RemotingCommandEventArgs()
+                    {
+                        RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
+                        KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
+                        KeyCode = e.KeyCode
+                    });
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private new void KeyPress(object sender, KeyPressEventArgs e)
         {
-            _remotingCommand.Invoke(this,
-                new RemotingCommandEventArgs()
-                {
-                    RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
-                    KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
-                    KeyChar = e.KeyChar
-                });
-
+            try
+            {
+                _remotingCommand.Invoke(this,
+                    new RemotingCommandEventArgs()
+                    {
+                        RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
+                        KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
+                        KeyChar = e.KeyChar
+                    });
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private new void MouseMove(object sender, MouseEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
+            try
             {
-                HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
-
-                //Thread t = new Thread(delegate()
-                //{
+                if (InPictureBoxArea(e.X, e.Y))
+                {
+                    HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
                     double x = 0, y = 0;
                     GetRemotePosition(ref x, ref y, e.X, e.Y);
                     _remotingCommand.Invoke(this,
@@ -232,122 +259,153 @@ namespace UIControls
                            X = x,
                            Y = y
                        });
-                //});
-                //t.Start();
-
-                HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+                    HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         private new void MouseClick(object sender, MouseEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
+            try
             {
-                double x = 0, y = 0;
-                GetRemotePosition(ref x, ref y, e.X, e.Y);
-
-                _remotingCommand.Invoke(this,
-                      new RemotingCommandEventArgs()
-                      {
-                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = _mouseClick[e.Button], // send specific command
-                          X = x,
-                          Y = y
-                      });
-                //textBoxLog.AppendText(string.Format("MouseClick - {0}\n", e.Button));
-                //textBoxLog.ScrollToCaret();
+                if (InPictureBoxArea(e.X, e.Y))
+                {
+                    double x = 0, y = 0;
+                    GetRemotePosition(ref x, ref y, e.X, e.Y);
+                    _remotingCommand.Invoke(this,
+                          new RemotingCommandEventArgs()
+                          {
+                              RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                              MouseCommandType = _mouseClick[e.Button], // send specific command
+                              X = x,
+                              Y = y
+                          });
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-
 
         private new void MouseUp(object sender, MouseEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
+            try
             {
-                double x = 0, y = 0;
-                GetRemotePosition(ref x, ref y, e.X, e.Y);
-                _remotingCommand.Invoke(this,
-                      new RemotingCommandEventArgs()
-                      {
-                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = _mouseUp[e.Button], // send specific command
-                          X = x,
-                          Y = y
-                      });
-                //textBoxLog.AppendText(string.Format("MouseUp - {0}\n", e.Button));
-                //textBoxLog.ScrollToCaret();
+                if (InPictureBoxArea(e.X, e.Y))
+                {
+                    double x = 0, y = 0;
+                    GetRemotePosition(ref x, ref y, e.X, e.Y);
+                    _remotingCommand.Invoke(this,
+                          new RemotingCommandEventArgs()
+                          {
+                              RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                              MouseCommandType = _mouseUp[e.Button], // send specific command
+                              X = x,
+                              Y = y
+                          });
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
-
         private new void MouseDown(object sender, MouseEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
+            try
             {
-                double x = 0, y = 0;
-                GetRemotePosition(ref x, ref y, e.X, e.Y);
-                _remotingCommand.Invoke(this,
-                      new RemotingCommandEventArgs()
-                      {
-                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = _mouseDown[e.Button], // send specific command
-                          X = x,
-                          Y = y
-                      });
-                //textBoxLog.AppendText(string.Format("MouseDown - {0}\n", e.Button));
-                //textBoxLog.ScrollToCaret();
+                if (InPictureBoxArea(e.X, e.Y))
+                {
+                    double x = 0, y = 0;
+                    GetRemotePosition(ref x, ref y, e.X, e.Y);
+                    _remotingCommand.Invoke(this,
+                          new RemotingCommandEventArgs()
+                          {
+                              RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                              MouseCommandType = _mouseDown[e.Button], // send specific command
+                              X = x,
+                              Y = y
+                          });
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         private new void MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
+            try
             {
-                double x = 0, y = 0;
-                GetRemotePosition(ref x, ref y, e.X, e.Y);
-                _remotingCommand.Invoke(this,
-                      new RemotingCommandEventArgs()
-                      {
-                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = _mouseDoubleClick[e.Button], // send specific command
-                          X = x,
-                          Y = y
-                      });
-                //textBoxLog.AppendText(string.Format("MouseDoubleClick - {0}\n", e.Button));
-                //textBoxLog.ScrollToCaret();
+                if (InPictureBoxArea(e.X, e.Y))
+                {
+                    double x = 0, y = 0;
+                    GetRemotePosition(ref x, ref y, e.X, e.Y);
+                    _remotingCommand.Invoke(this,
+                          new RemotingCommandEventArgs()
+                          {
+                              RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                              MouseCommandType = _mouseDoubleClick[e.Button], // send specific command
+                              X = x,
+                              Y = y
+                          });
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
-
         private new void MouseWheel(object sender, MouseEventArgs e)
         {
-            if (InPictureBoxArea(e.X, e.Y))
+            try
             {
-                double x = 0, y = 0;
-                GetRemotePosition(ref x, ref y, e.X, e.Y);
-                _remotingCommand.Invoke(this,
-                      new RemotingCommandEventArgs()
-                      {
-                          RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                          MouseCommandType = GenericEnums.MouseCommandType.Wheel, // send specific command
-                          X = x,
-                          Y = y,
-                          Delta = e.Delta
-                      });
-                //labelWheel.Text = string.Format("Wheel={0:000}", e.Delta);
+                if (InPictureBoxArea(e.X, e.Y))
+                {
+                    double x = 0, y = 0;
+                    GetRemotePosition(ref x, ref y, e.X, e.Y);
+                    _remotingCommand.Invoke(this,
+                          new RemotingCommandEventArgs()
+                          {
+                              RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                              MouseCommandType = GenericEnums.MouseCommandType.Wheel, // send specific command
+                              X = x,
+                              Y = y,
+                              Delta = e.Delta
+                          });
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         void GetRemotePosition(ref double x, ref double y, int localX, int localY)
         {
-            var leftUpperCornerScreenPosition = pbRemote.PointToScreen(new Point(0, 0));
+            try
+            {
+                var leftUpperCornerScreenPosition = pbRemote.PointToScreen(new Point(0, 0));
 
-            x = Tools.Instance.RemotingUtils.ConvertXToRemote(
-                localX - leftUpperCornerScreenPosition.X,
-                pbRemote.Width);
-            y = Tools.Instance.RemotingUtils.ConvertYToRemote(
-                localY - leftUpperCornerScreenPosition.Y,
-                pbRemote.Height);
+                x = Tools.Instance.RemotingUtils.ConvertXToRemote(
+                    localX - leftUpperCornerScreenPosition.X,
+                    pbRemote.Width);
+                y = Tools.Instance.RemotingUtils.ConvertYToRemote(
+                    localY - leftUpperCornerScreenPosition.Y,
+                    pbRemote.Height);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
