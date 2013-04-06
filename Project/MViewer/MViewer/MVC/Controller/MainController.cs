@@ -134,26 +134,34 @@ namespace MViewer
 
         public void StartApplication()
         {
-            // bind the observers
-            _view.BindObservers(true);
+            try
+            {
+                // bind the observers
+                _view.BindObservers(true);
 
-            // open main form
-            _view.ShowMainForm(false);
-            _view.NotifyContactsObserver();
+                // open main form
+                _view.ShowMainForm(false);
+                _view.NotifyContactsObserver();
 
-            // todo: use manual reset event instead of thread.sleep(0)
-            Thread.Sleep(200);
+                // todo: use manual reset event instead of thread.sleep(0)
+                Thread.Sleep(200);
 
-            _view.NotifyIdentityObserver();
-            _model.ServerController.StartServer();
+                _view.NotifyIdentityObserver();
+                _model.ServerController.StartServer();
 
-            Thread.Sleep(200);
+                Thread.Sleep(200);
 
-            // ping every single contact in the list and update it's status
-            _model.PingContacts(null);
+                // ping every single contact in the list and update it's status
+                _model.PingContacts(null);
 
-            // notify all online contacts that you came on too
-            _model.NotifyContacts(GenericEnums.ContactStatus.Online);
+                // notify all online contacts that you came on too
+                _model.NotifyContacts(GenericEnums.ContactStatus.Online);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+                _view.SetResultText("Fatal error while starting app");
+            }
         }
 
         public void StopApplication()
