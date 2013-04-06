@@ -12,6 +12,7 @@ using System.IO.IsolatedStorage;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using Utils;
 
 namespace AudioStreaming
 {
@@ -76,61 +77,75 @@ namespace AudioStreaming
 
         void InitializeMicrophone()
         {
-            bool retry = true;
-            while (retry)
+            try
             {
-                try
+                bool retry = true;
+                while (retry)
                 {
-                    _microphone = Microphone.Default;
-
-                    _graphicsManager = new GraphicsDeviceManager(this);
-                    _graphicsManager.PreferredBackBufferHeight = 1;
-                    _graphicsManager.PreferredBackBufferWidth = 1;
-
-                    Form gameWindowForm = (Form)Form.FromHandle(this.Window.Handle);
-                    gameWindowForm.Hide();
-                    gameWindowForm.ShowInTaskbar = false;
-                    gameWindowForm.Opacity = 0;
-
-                    FrameworkDispatcher.Update();
-                    _microphone.BufferDuration = TimeSpan.FromSeconds(1);
-                    _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
-                    _microphone.BufferReady += OnBufferReady;
-                    _isRunning = true;
-                    _stream = new MemoryStream();
-                    retry = false;
-
-                }
-                catch (Exception)
-                {
-                    //MessageBox.Show("Cannot initialize the audio module. Please restart the app.",
-                    //    "Audio Failure", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    retry = true;
-                    if (_microphone != null)
+                    try
                     {
-                        _microphone.Stop();
+                        _microphone = Microphone.Default;
+
+                        _graphicsManager = new GraphicsDeviceManager(this);
+                        _graphicsManager.PreferredBackBufferHeight = 1;
+                        _graphicsManager.PreferredBackBufferWidth = 1;
+
+                        Form gameWindowForm = (Form)Form.FromHandle(this.Window.Handle);
+                        gameWindowForm.Hide();
+                        gameWindowForm.ShowInTaskbar = false;
+                        gameWindowForm.Opacity = 0;
+
+                        FrameworkDispatcher.Update();
+                        _microphone.BufferDuration = TimeSpan.FromSeconds(1);
+                        _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
+                        _microphone.BufferReady += OnBufferReady;
+                        _isRunning = true;
+                        _stream = new MemoryStream();
+                        retry = false;
+
+                    }
+
+                    catch (Exception ex)
+                    {
+                        Tools.Instance.Logger.LogError(ex.ToString());
+                        retry = true;
+                        if (_microphone != null)
+                        {
+                            _microphone.Stop();
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         private void OnBufferReady(object sender, EventArgs e)
         {
-            SyncChunk.WaitOne();
-            if (_isRunning)
+            try
             {
-                _microphone.GetData(_buffer);
-                if (_stream == null)
+                SyncChunk.WaitOne();
+                if (_isRunning)
                 {
-                    _stream = new MemoryStream();
+                    _microphone.GetData(_buffer);
+                    if (_stream == null)
+                    {
+                        _stream = new MemoryStream();
+                    }
+                    _stream.Write(_buffer, 0, _buffer.Length);
                 }
-                _stream.Write(_buffer, 0, _buffer.Length);
+                else
+                {
+                    _microphone = Microphone.Default;
+                    _microphone.Stop();
+                    _microphone.BufferReady -= this.OnBufferReady;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _microphone = Microphone.Default;
-                _microphone.Stop();
-                _microphone.BufferReady -= this.OnBufferReady;
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -143,18 +158,28 @@ namespace AudioStreaming
             try
             {
                 GraphicsDevice.Clear(Color.CornflowerBlue);
-                
+
                 base.Draw(gameTime);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         protected override void Initialize()
         {
-            base.Initialize();
-            _stream = new MemoryStream();
-            _microphone.Start();
-            _isRunning = true;
+            try
+            {
+                base.Initialize();
+                _stream = new MemoryStream();
+                _microphone.Start();
+                _isRunning = true;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         protected override void Update(GameTime gameTime)
@@ -178,7 +203,7 @@ namespace AudioStreaming
             }
             catch (Exception ex)
             {
-
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -188,24 +213,38 @@ namespace AudioStreaming
 
         public void StartAudio()
         {
-            _syncStatus.Reset();
-            if (_microphone == null)
+            try
             {
-                InitializeMicrophone();
+                _syncStatus.Reset();
+                if (_microphone == null)
+                {
+                    InitializeMicrophone();
+                }
+                _microphone.Start();
+                _isRunning = true;
+
+                _syncStatus.Set();
             }
-            _microphone.Start();
-            _isRunning = true;
-            
-            _syncStatus.Set();
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void StopAudio()
         {
-            _syncStatus.Reset();
-            _isRunning = false;
-            _syncStatus.Set();
+            try
+            {
+                _syncStatus.Reset();
+                _isRunning = false;
+                _syncStatus.Set();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
     }
-}   
+}

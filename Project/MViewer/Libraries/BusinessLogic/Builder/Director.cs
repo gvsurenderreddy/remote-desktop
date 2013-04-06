@@ -5,6 +5,7 @@ using System.Text;
 //using System.Threading.Tasks;
 using GenericObjects;
 using System.Windows.Forms;
+using Utils;
 
 namespace BusinessLogicLayer
 {
@@ -50,7 +51,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
     }
