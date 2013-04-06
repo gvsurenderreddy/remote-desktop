@@ -17,10 +17,21 @@ namespace MViewer
     {
         #region private members
 
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern bool SetCursorPos(int x, int y);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
         readonly object _syncRemotingStartStop = new object();
         readonly object _syncRemotingCaptureSending = new object();
         ManualResetEvent _syncRemotingCaptureActivity = new ManualResetEvent(true);
         KeyCodeParser _keyCodeParser = new KeyCodeParser();
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
+        private const int MOUSEEVENTF_RIGHTUP = 0x10;
+        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
+        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
+        private const int MOUSE_WHEEL = 0x800;
 
         #endregion
 
@@ -86,12 +97,6 @@ namespace MViewer
             });
             t.Start();
         }
-
-        //This is a replacement for Cursor.Position in WinForms
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        static extern bool SetCursorPos(int x, int y);
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
 
         public void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args)
         {
@@ -196,14 +201,6 @@ namespace MViewer
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-
-        private const int MOUSEEVENTF_RIGHTDOWN = 0x08;
-        private const int MOUSEEVENTF_RIGHTUP = 0x10;
-        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
-        private const int MOUSEEVENTF_LEFTUP = 0x04;
-        private const int MOUSEEVENTF_MIDDLEDOWN = 0x0020;
-        private const int MOUSEEVENTF_MIDDLEUP = 0x0040;
-        private const int MOUSE_WHEEL = 0x800;
 
         public void RightMouseDownCommand(object sender, RemotingCommandEventArgs args)
         {
