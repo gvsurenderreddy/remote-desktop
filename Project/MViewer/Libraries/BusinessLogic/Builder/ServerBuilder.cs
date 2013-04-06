@@ -7,6 +7,7 @@ using System.ServiceModel.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Description;
 using GenericObjects;
+using Utils;
 
 namespace BusinessLogicLayer
 {
@@ -27,9 +28,16 @@ namespace BusinessLogicLayer
 
         public ServerBuilder(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity)
         {
-            _httpsAddress = httpsAddress;
-            _controllerHandlers = controllerHandlers;
-            _identity = identity;
+            try
+            {
+                _httpsAddress = httpsAddress;
+                _controllerHandlers = controllerHandlers;
+                _identity = identity;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -38,29 +46,50 @@ namespace BusinessLogicLayer
 
         public override void BuildCertificate()
         {
-            X509Certificate2 severCert = new X509Certificate2("Server.pfx", "", X509KeyStorageFlags.MachineKeySet);
-            _svcHost.Credentials.ServiceCertificate.Certificate = severCert; //new X509Certificate2("Server.pfx");
-            X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
-            X509Certificate2 clientCert = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
+            try
+            {
+                X509Certificate2 severCert = new X509Certificate2("Server.pfx", "", X509KeyStorageFlags.MachineKeySet);
+                _svcHost.Credentials.ServiceCertificate.Certificate = severCert; //new X509Certificate2("Server.pfx");
+                X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
+                X509Certificate2 clientCert = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
 
-            // todo: decide if to keep the custom validator
-            authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-            authentication.CustomCertificateValidator = new GenericObjects.CustomCertificateValidator("CN=Mihai-PC", clientCert);
-            
-            _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
+                // todo: decide if to keep the custom validator
+                authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+                authentication.CustomCertificateValidator = new GenericObjects.CustomCertificateValidator("CN=Mihai-PC", clientCert);
+
+                _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public override void BuildBinding()
         {
-            _server.BuildServerBinding();
-            _svcHost.AddServiceEndpoint(typeof(IMViewerService), _server.Binding, _server.HttpURI);
+            try
+            {
+                _server.BuildServerBinding();
+                _svcHost.AddServiceEndpoint(typeof(IMViewerService), _server.Binding, _server.HttpURI);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public override void BuildUri()
         {
-            _server = new MViewerServer(_controllerHandlers, _identity);
-            _server.BuildUri(_httpsAddress, _controllerHandlers, _identity);
-            _svcHost = new ServiceHost(_server, _server.HttpURI);
+            try
+            {
+                _server = new MViewerServer(_controllerHandlers, _identity);
+                _server.BuildUri(_httpsAddress, _controllerHandlers, _identity);
+                _svcHost = new ServiceHost(_server, _server.HttpURI);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public override void BuildBehavior()
