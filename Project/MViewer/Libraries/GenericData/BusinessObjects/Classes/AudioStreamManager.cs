@@ -86,13 +86,20 @@ namespace GenericObjects
                 {
                     Thread t = new Thread(delegate()
                     {
-                        _syncAudioInstance.Reset();
+                        try
+                        {
+                            _syncAudioInstance.Reset();
 
-                        _audioStream = new AudioStream();
+                            _audioStream = new AudioStream();
 
-                        _syncAudioInstance.Set();
+                            _syncAudioInstance.Set();
 
-                        _audioStream.Run();
+                            _audioStream.Run();
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.Instance.Logger.LogError(ex.ToString());
+                        }
                     });
                     t.Start();
                 }

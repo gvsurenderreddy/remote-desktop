@@ -24,23 +24,30 @@ namespace GenericObjects
 
         public Presenter(PresenterSettings presenterSettings)
         {
-            _presenterSettings = presenterSettings;
-            _videoCapture = _presenterSettings.VideoCaptureControl;
-            _audioStreamManager = new AudioStreamManager(_presenterSettings.AudioTimerInterval, _presenterSettings.OnAudioCaptureAvailable);
-
-            // initialize the image capture size
-            if (_videoCapture != null)
+            try
             {
-                _videoCapture.ImageHeight = presenterSettings.VideoScreenSize.Height;
-                _videoCapture.ImageWidth = presenterSettings.VideoScreenSize.Width;
+                _presenterSettings = presenterSettings;
+                _videoCapture = _presenterSettings.VideoCaptureControl;
+                _audioStreamManager = new AudioStreamManager(_presenterSettings.AudioTimerInterval, _presenterSettings.OnAudioCaptureAvailable);
 
-                _firstTimeCapturing = true;
+                // initialize the image capture size
+                if (_videoCapture != null)
+                {
+                    _videoCapture.ImageHeight = presenterSettings.VideoScreenSize.Height;
+                    _videoCapture.ImageWidth = presenterSettings.VideoScreenSize.Width;
 
-                // bind the image captured event
-                _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.OnVideoImageCaptured);
+                    _firstTimeCapturing = true;
+
+                    // bind the image captured event
+                    _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.OnVideoImageCaptured);
+                }
+
+                _screenCapture = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.OnRemotingImageCaptured);
             }
-
-            _screenCapture = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.OnRemotingImageCaptured);
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -49,53 +56,102 @@ namespace GenericObjects
 
         public void StartVideoPresentation()
         {
-            if (_videoCapture == null)
+            try
             {
-                _videoCapture = _presenterSettings.VideoCaptureControl; 
-                _videoCapture.ImageHeight = _presenterSettings.VideoScreenSize.Height;
-                _videoCapture.ImageWidth = _presenterSettings.VideoScreenSize.Width; 
-                // bind the image captured event
-                _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(_presenterSettings.OnVideoImageCaptured);
+                if (_videoCapture == null)
+                {
+                    _videoCapture = _presenterSettings.VideoCaptureControl;
+                    _videoCapture.ImageHeight = _presenterSettings.VideoScreenSize.Height;
+                    _videoCapture.ImageWidth = _presenterSettings.VideoScreenSize.Width;
+                    // bind the image captured event
+                    _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(_presenterSettings.OnVideoImageCaptured);
+                }
+                // start the video capturing
+                _videoCapture.StartCapturing(_firstTimeCapturing);
+                _firstTimeCapturing = false;
             }
-            // start the video capturing
-            _videoCapture.StartCapturing(_firstTimeCapturing);
-            _firstTimeCapturing = false;
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void StopVideoPresentation()
         {
-            if (_videoCapture != null)
+            try
             {
-                _videoCapture.StopCapturing();
+                if (_videoCapture != null)
+                {
+                    _videoCapture.StopCapturing();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void StartAudioPresentation()
         {
-            if (_audioStreamManager.AudioCaptureClosed)
+            try
             {
-                _audioStreamManager.StartStreaming();
+                if (_audioStreamManager.AudioCaptureClosed)
+                {
+                    _audioStreamManager.StartStreaming();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void StopAudioPresentation()
         {
-            _audioStreamManager.StopStreaming();
+            try
+            {
+                _audioStreamManager.StopStreaming();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void StartRemotingPresentation()
         {
-            _screenCapture.TogglerTimer(true);
+            try
+            {
+                _screenCapture.TogglerTimer(true);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void StopRemotingPresentation()
         {
-            _screenCapture.TogglerTimer(false);
+            try
+            {
+                _screenCapture.TogglerTimer(false);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void PlayAudioCapture(byte[] capture)
         {
-            _audioStreamManager.PlayAudioCapture(capture);
+            try
+            {
+                _audioStreamManager.PlayAudioCapture(capture);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion

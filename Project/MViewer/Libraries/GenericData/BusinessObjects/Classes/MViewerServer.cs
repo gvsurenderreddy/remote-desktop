@@ -33,6 +33,8 @@ namespace GenericObjects
 
         #region c-tor
 
+        public MViewerServer() { }
+
         public MViewerServer(ControllerEventHandlers controllerHandlers, string identity)
         {
             _identity = identity;

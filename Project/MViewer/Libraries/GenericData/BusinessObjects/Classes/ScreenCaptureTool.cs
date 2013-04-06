@@ -29,10 +29,17 @@ namespace GenericObjects
 
         public ScreenCaptureTool(int timerInterval, EventHandler captureReady)
         {
-            _captureToolInstance = new ScreenCapture();
-            _captureReady = captureReady;
-            InitializeTimer(timerInterval);
-            _timerInterval = timerInterval;
+            try
+            {
+                _captureToolInstance = new ScreenCapture();
+                _captureReady = captureReady;
+                InitializeTimer(timerInterval);
+                _timerInterval = timerInterval;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -41,13 +48,19 @@ namespace GenericObjects
 
         void InitializeTimer(int timerInterval)
         {
-            _remotingTimer = new System.Timers.Timer(timerInterval);
-            _remotingTimer.Elapsed += new ElapsedEventHandler(TimerTick);
+            try
+            {
+                _remotingTimer = new System.Timers.Timer(timerInterval);
+                _remotingTimer.Elapsed += new ElapsedEventHandler(TimerTick);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         void TimerTick(object sender, ElapsedEventArgs e)
         {
-            // todo: implement TimerTick
             try
             {
                 _remotingTimer.Stop();
@@ -73,26 +86,31 @@ namespace GenericObjects
 
         }
 
-        //int testNo = 1;
-
         public void TogglerTimer(bool start)
         {
-            if (start)
+            try
             {
-                if (_remotingTimer == null)
+                if (start)
                 {
-                    InitializeTimer(_timerInterval);
+                    if (_remotingTimer == null)
+                    {
+                        InitializeTimer(_timerInterval);
+                    }
+                    _remotingClosed = false;
+                    _remotingTimer.Start();
                 }
-                _remotingClosed = false;
-                _remotingTimer.Start();
+                else
+                {
+                    if (_remotingTimer != null)
+                    {
+                        _remotingTimer.Stop();
+                    }
+                    _remotingClosed = true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                if (_remotingTimer != null)
-                {
-                    _remotingTimer.Stop();
-                }
-                _remotingClosed = true;
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -103,24 +121,25 @@ namespace GenericObjects
         byte[] CaptureDekstopImage()
         {
             byte[] serialized = null;
-            Rectangle rect = new Rectangle();
-            Bitmap screenCapture = _captureToolInstance.CaptureScreen(ref rect);
-
-            if (screenCapture != null)
+            try
             {
-                // something has changed on the screen
-                serialized = Tools.Instance.RemotingUtils.SerializeDesktopCapture(screenCapture, rect);
+                Rectangle rect = new Rectangle();
+                Bitmap screenCapture = _captureToolInstance.CaptureScreen(ref rect);
 
-                System.Drawing.Image partialDesktop;
-                System.Drawing.Rectangle rect2;
-                Guid id;
-                Tools.Instance.RemotingUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+                if (screenCapture != null)
+                {
+                    // something has changed on the screen
+                    serialized = Tools.Instance.RemotingUtils.SerializeDesktopCapture(screenCapture, rect);
 
+                    System.Drawing.Image partialDesktop;
+                    System.Drawing.Rectangle rect2;
+                    Guid id;
+                    Tools.Instance.RemotingUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // nothing has changed
-                // todo: display the trafic
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             return serialized;
         }
@@ -132,18 +151,20 @@ namespace GenericObjects
         byte[] CaptureMouseImage()
         {
             byte[] serialized = null;
-            int x = 0, y = 0;
-            Image cursorCapture = _captureToolInstance.GetCursorCapture(ref x, ref y);
-            if (cursorCapture != null)
+            try
             {
-                // something has changed
-                serialized = Tools.Instance.RemotingUtils.SerializeMouseCapture(cursorCapture, x, y);
-                // todo: display the trafic
+                int x = 0, y = 0;
+                Image cursorCapture = _captureToolInstance.GetCursorCapture(ref x, ref y);
+                if (cursorCapture != null)
+                {
+                    // something has changed
+                    serialized = Tools.Instance.RemotingUtils.SerializeMouseCapture(cursorCapture, x, y);
+                    // todo: display the trafic
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // nothing has changed to the cursor
-                // todo: display the trafic
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             return serialized;
         }

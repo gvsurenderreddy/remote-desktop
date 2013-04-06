@@ -184,7 +184,7 @@ namespace BusinessLogicLayer
             }
             catch (Exception ex)
             {
-                // todo: log exception
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
