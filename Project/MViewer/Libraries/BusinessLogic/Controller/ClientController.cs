@@ -30,149 +30,200 @@ namespace BusinessLogicLayer
 
         #endregion
 
-        #region private methods
-
-
-        #endregion
-
         #region public methods
 
         public void SendRemotingCommand(string receiverIdentity, RemotingCommandEventArgs commandArgs)
         {
-            if (_clients.ContainsKey(receiverIdentity))
+            try
             {
-                MViewerClient client = _clients[receiverIdentity];
-                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                if (_clients.ContainsKey(receiverIdentity))
                 {
-                    try
+                    MViewerClient client = _clients[receiverIdentity];
+                    if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
-                        client.SendRemotingCommand(commandArgs);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            client.SendRemotingCommand(commandArgs);
+                        }
+                        catch (Exception)
+                        {
 
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity)
         {
-            if (_clients.ContainsKey(receiverIdentity))
+            try
             {
-                MViewerClient client = _clients[receiverIdentity];
-                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                if (_clients.ContainsKey(receiverIdentity))
                 {
-                    try
+                    MViewerClient client = _clients[receiverIdentity];
+                    if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
-                        client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
+                        }
+                        catch (Exception)
+                        {
 
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public bool SendingPermission(string fileName, long fileSize, string partnerIdentity, string myIdentity)
         {
             bool canSend = false;
-            if (_clients != null)
+            try
             {
-                if (_clients.ContainsKey(partnerIdentity))
+                if (_clients != null)
                 {
-                    MViewerClient client = _clients[partnerIdentity];
-                    if (client != null)
+                    if (_clients.ContainsKey(partnerIdentity))
                     {
-                        canSend = client.SendingPermission(myIdentity, fileName, fileSize);
+                        MViewerClient client = _clients[partnerIdentity];
+                        if (client != null)
+                        {
+                            canSend = client.SendingPermission(myIdentity, fileName, fileSize);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             return canSend;
         }
 
         public void SendFile(byte[] fileBytes, string partnerIdentity, string fileName)
         {
-            if (_clients != null)
+            try
             {
-                if (_clients.ContainsKey(partnerIdentity))
+                if (_clients != null)
                 {
-                    MViewerClient client = _clients[partnerIdentity];
-                    if (client != null)
+                    if (_clients.ContainsKey(partnerIdentity))
                     {
-                        client.SendFile(fileBytes, fileName);
+                        MViewerClient client = _clients[partnerIdentity];
+                        if (client != null)
+                        {
+                            client.SendFile(fileBytes, fileName);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void WaitRoomButtonAction(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType, bool wait)
         {
-            if (_clients != null)
+            try
             {
-                if (_clients.ContainsKey(partnerIdentity))
+                if (_clients != null)
                 {
-                    MViewerClient client = _clients[partnerIdentity];
-                    if (client != null)
+                    if (_clients.ContainsKey(partnerIdentity))
                     {
-                        try
+                        MViewerClient client = _clients[partnerIdentity];
+                        if (client != null)
                         {
-                            client.WaitRoomButtonAction(myIdentity, roomType, wait);
+                            try
+                            {
+                                client.WaitRoomButtonAction(myIdentity, roomType, wait);
+                            }
+                            catch { }
                         }
-                        catch { }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus)
         {
-            if (_clients != null)
+            try
             {
-                if (_clients.ContainsKey(partnerIdentity))
+                if (_clients != null)
                 {
-                    MViewerClient client = _clients[partnerIdentity];
-                    if (client != null)
+                    if (_clients.ContainsKey(partnerIdentity))
                     {
-                        try
+                        MViewerClient client = _clients[partnerIdentity];
+                        if (client != null)
                         {
-                            client.UpdateContactStatus(myIdentity, newStatus);
-                        }
-                        catch 
-                        {
-                        
+                            try
+                            {
+                                client.UpdateContactStatus(myIdentity, newStatus);
+                            }
+                            catch
+                            {
+
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName)
         {
-            if (_clients != null)
+            try
             {
-                if (_clients.ContainsKey(partnerIdentity))
+                if (_clients != null)
                 {
-                    MViewerClient client = _clients[partnerIdentity];
-                    if (client != null)
+                    if (_clients.ContainsKey(partnerIdentity))
                     {
-                        client.UpdateFriendlyName(myIdentity, newFriendlyName);
+                        MViewerClient client = _clients[partnerIdentity];
+                        if (client != null)
+                        {
+                            client.UpdateFriendlyName(myIdentity, newFriendlyName);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType)
         {
-            if (_clients.ContainsKey(identity))
+            try
             {
-                MViewerClient client = _clients[identity];
-                try
+                if (_clients.ContainsKey(identity))
                 {
-                    client.SendRoomButtonAction(myIdentity, roomType, signalType);
+                    MViewerClient client = _clients[identity];
+                    try
+                    {
+                        client.SendRoomButtonAction(myIdentity, roomType, signalType);
+                    }
+                    catch { }
                 }
-                catch { }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
         
@@ -188,60 +239,88 @@ namespace BusinessLogicLayer
 
         public void AddClient(string identity)
         {
-            lock (_syncClients)
+            try
             {
-                if (_clients == null)
+                lock (_syncClients)
                 {
-                    _clients = new Dictionary<string, MViewerClient>();
-                }
-                if (_clients.ContainsKey(identity))
-                {
-                    _clients.Remove(identity);
-                } 
-                ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
+                    if (_clients == null)
+                    {
+                        _clients = new Dictionary<string, MViewerClient>();
+                    }
+                    if (_clients.ContainsKey(identity))
+                    {
+                        _clients.Remove(identity);
+                    }
+                    ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
 
-                Builder clientBuilder = new ClientBuilder(endpoint);
-                Director.Instance.Construct(clientBuilder);
-                MViewerClient client = (MViewerClient)clientBuilder.GetResult();
-                _clients.Add(identity, client);
+                    Builder clientBuilder = new ClientBuilder(endpoint);
+                    Director.Instance.Construct(clientBuilder);
+                    MViewerClient client = (MViewerClient)clientBuilder.GetResult();
+                    _clients.Add(identity, client);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void RemoveClient(string identity)
         {
-            lock (_syncClients)
+            try
             {
-                if (_clients.ContainsKey(identity))
+                lock (_syncClients)
                 {
-                    _clients.Remove(identity);
+                    if (_clients.ContainsKey(identity))
+                    {
+                        _clients.Remove(identity);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void StopClient(string identity)
         {
-            lock (_syncClients)
+            try
             {
-                if (_clients.ContainsKey(identity))
+                lock (_syncClients)
                 {
-                    _clients[identity].Close();
+                    if (_clients.ContainsKey(identity))
+                    {
+                        _clients[identity].Close();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void StartClient(string identity)
         {
-            lock (_syncClients)
+            try
             {
-                if (!_clients.ContainsKey(identity))
+                lock (_syncClients)
                 {
-                    AddClient(identity);
+                    if (!_clients.ContainsKey(identity))
+                    {
+                        AddClient(identity);
+                    }
+                    MViewerClient mviewerClient = _clients[identity];
+                    if (mviewerClient.State != System.ServiceModel.CommunicationState.Closed && mviewerClient.State != System.ServiceModel.CommunicationState.Opening && mviewerClient.State != System.ServiceModel.CommunicationState.Opened)
+                    {
+                        mviewerClient.Open();
+                    }
                 }
-                MViewerClient mviewerClient = _clients[identity];
-                if (mviewerClient.State != System.ServiceModel.CommunicationState.Closed && mviewerClient.State != System.ServiceModel.CommunicationState.Opening && mviewerClient.State != System.ServiceModel.CommunicationState.Opened)
-                {
-                    mviewerClient.Open();
-                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -265,44 +344,58 @@ namespace BusinessLogicLayer
 
         public void SendVideoCapture(byte[]capture, string receiverIdentity, string senderIdentity)
         {
-            if(_clients.ContainsKey(receiverIdentity))
+            try
             {
-                MViewerClient client = _clients[receiverIdentity];
-                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                if (_clients.ContainsKey(receiverIdentity))
                 {
-                    try
+                    MViewerClient client = _clients[receiverIdentity];
+                    if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
-                        client.SendWebcamCapture(capture, senderIdentity);
-                    }
-                    catch (Exception)
-                    {
-                        
+                        try
+                        {
+                            client.SendWebcamCapture(capture, senderIdentity);
+                        }
+                        catch (Exception)
+                        {
+
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void SendAudioCapture(byte[] capture, string receiverIdentity, string senderIdentity)
         {
-            if (!_clients.ContainsKey(receiverIdentity))
+            try
             {
-                AddClient(receiverIdentity);
-                StartClient(receiverIdentity);
-            }
-            if (_clients.ContainsKey(receiverIdentity))
-            {
-                MViewerClient client = _clients[receiverIdentity];
-                if (client.State == System.ServiceModel.CommunicationState.Opened)
+                if (!_clients.ContainsKey(receiverIdentity))
                 {
-                    try
+                    AddClient(receiverIdentity);
+                    StartClient(receiverIdentity);
+                }
+                if (_clients.ContainsKey(receiverIdentity))
+                {
+                    MViewerClient client = _clients[receiverIdentity];
+                    if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
-                        client.SendMicrophoneCapture(capture, senderIdentity);
-                    }
-                    catch (Exception)
-                    {
+                        try
+                        {
+                            client.SendMicrophoneCapture(capture, senderIdentity);
+                        }
+                        catch (Exception)
+                        {
 
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 

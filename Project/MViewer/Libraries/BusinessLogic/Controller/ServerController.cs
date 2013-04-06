@@ -6,6 +6,7 @@ using GenericObjects;
 using System.ServiceModel;
 using System.Threading;
 using System.Windows.Forms;
+using Utils;
 
 namespace BusinessLogicLayer
 {
@@ -22,23 +23,25 @@ namespace BusinessLogicLayer
 
         public ServerController(ContactEndpoint endpoint, string identity, ControllerEventHandlers handlers)
         {
-            if (endpoint.Port != 0)
+            try
             {
-                _address = "https://" + endpoint.Address + ":" + (endpoint.Port + 1).ToString() + endpoint.Path;
+                if (endpoint.Port != 0)
+                {
+                    _address = "https://" + endpoint.Address + ":" + (endpoint.Port + 1).ToString() + endpoint.Path;
+                }
+                else
+                {
+                    _address = "https://" + endpoint.Address + endpoint.Path;
+                }
+                Builder serverBuilder = new ServerBuilder(_address, handlers, identity);
+                Director.Instance.Construct(serverBuilder);
+                _server = (ServiceHost)serverBuilder.GetResult();
             }
-            else
+            catch (Exception ex)
             {
-                _address = "https://" + endpoint.Address + endpoint.Path;
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
-            Builder serverBuilder = new ServerBuilder(_address, handlers, identity);
-            Director.Instance.Construct(serverBuilder);
-            _server = (ServiceHost)serverBuilder.GetResult();
         }
-
-        #endregion
-
-        #region private methods
-
 
         #endregion
 
@@ -59,7 +62,7 @@ namespace BusinessLogicLayer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    Tools.Instance.Logger.LogError(ex.ToString());
                 }
             });
             t.IsBackground = true;
@@ -68,13 +71,15 @@ namespace BusinessLogicLayer
 
         public void StopServer()
         {
-            _server.Close();
+            try
+            {
+                _server.Close();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
-
-        #endregion
-
-        #region proprieties
-
 
         #endregion
     }
