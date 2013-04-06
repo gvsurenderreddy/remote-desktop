@@ -137,7 +137,7 @@ namespace MViewer
         public readonly string ServicePath = ConfigurationManager.AppSettings["ServicePath"];
         public readonly string DataBasePath = ConfigurationManager.AppSettings["dataBasePath"];
         public readonly string FriendlyName = ConfigurationManager.AppSettings["FriendlyName"];
-        public readonly int TimerInterval = int.Parse(ConfigurationManager.AppSettings["TimerInterval"]);
+
 
         public Delegates.HookCommandDelegate RemotingCommand
         {

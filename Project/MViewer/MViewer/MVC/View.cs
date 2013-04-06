@@ -163,7 +163,7 @@ namespace MViewer
                         // open my webcam form if no video  was previously started
                         _threadWebcaptureForm = new Thread(delegate()
                         {
-                            _formWebCapture = new FormMyWebcam();
+                            _formWebCapture = new FormMyWebcam(SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval);
                             _formWebCapture.ShowDialog();
                         });
                         _threadWebcaptureForm.IsBackground = true;

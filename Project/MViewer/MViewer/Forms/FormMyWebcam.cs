@@ -15,8 +15,7 @@ namespace MViewer
     public partial class FormMyWebcam : Form
     {
         WebcamCapture _webcamCapture;
-        // todo: remove visible timer if not used
-        System.Timers.Timer _visibleTimer;
+        int _timerInterval;
 
         /// <summary>
         /// flag used to tell the webcapturing thread to end it's activity
@@ -24,29 +23,18 @@ namespace MViewer
         public bool WebcaptureClosed
         {
             get { return _webcamCapture.WebcaptureClosed; }
-            //set { _webcamCapture.WebcaptureClosed = value; }
         }
 
-        public FormMyWebcam()
+        public FormMyWebcam(int timerInterval)
         {
-            _visibleTimer = new System.Timers.Timer(3000);
-            _visibleTimer.Elapsed += new ElapsedEventHandler(VisibleTimerCallback);
-            //_visibleTimer.Start();
-
+            _timerInterval = timerInterval;
             InitializeComponent();
-            _webcamCapture = new WebcamCapture(SystemConfiguration.Instance.TimerInterval, this.Handle.ToInt32());
+            _webcamCapture = new WebcamCapture(_timerInterval, this.Handle.ToInt32());
             _webcamCapture.ParentForm = this;
             Program.Controller.StartVideo(_webcamCapture);
-
-            // todo: signal the manual reset event from StartVideo (that will signal the audio communication)
         }
 
         #region public methods
-
-        //public void WebcaptureClosing(object sender, EventArgs args)
-        //{
-        //    _formClosingEvent.Invoke(null, null);
-        //}
 
         public void SetPicture(Image image)
         {
@@ -76,7 +64,7 @@ namespace MViewer
         {
             if (_webcamCapture == null)
             {
-                _webcamCapture = new WebcamCapture(SystemConfiguration.Instance.TimerInterval, this.Handle.ToInt32());
+                _webcamCapture = new WebcamCapture(_timerInterval, this.Handle.ToInt32());
             }
             Program.Controller.StartVideo(_webcamCapture);
         }
@@ -96,27 +84,6 @@ namespace MViewer
         #endregion
 
         #region callbacks
-
-        private void VisibleTimerCallback(object sender, ElapsedEventArgs e)
-        {
-            _visibleTimer.Stop();
-
-            if (_webcamCapture.WebcaptureClosed)
-            {
-                if (this.Visible == true)
-                {
-                    this.Hide();
-                }
-            }
-            else
-            {
-                if (this.Visible == false)
-                {
-                    this.Show();
-                }
-            }
-            _visibleTimer.Start();
-        }
 
         private void FormMyWebcam_Resize(object sender, EventArgs e)
         {
