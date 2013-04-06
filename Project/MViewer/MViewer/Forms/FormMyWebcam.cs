@@ -14,16 +14,14 @@ namespace MViewer
 {
     public partial class FormMyWebcam : Form
     {
+        #region private members
+
         WebcamCapture _webcamCapture;
         int _timerInterval;
 
-        /// <summary>
-        /// flag used to tell the webcapturing thread to end it's activity
-        /// </summary>
-        public bool WebcaptureClosed
-        {
-            get { return _webcamCapture.WebcaptureClosed; }
-        }
+        #endregion
+
+        #region c-tor
 
         public FormMyWebcam(int timerInterval)
         {
@@ -34,19 +32,36 @@ namespace MViewer
             Program.Controller.StartVideo(_webcamCapture);
         }
 
+        #endregion
+
+        /// <summary>
+        /// flag used to tell the webcapturing thread to end it's activity
+        /// </summary>
+        public bool WebcaptureClosed
+        {
+            get { return _webcamCapture.WebcaptureClosed; }
+        }
+
         #region public methods
 
         public void SetPicture(Image image)
         {
-            if (!_webcamCapture.ThreadAborted)
+            try
             {
-                Image resized = Tools.Instance.ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
-                pbWebcam.Image = resized;
+                if (!_webcamCapture.ThreadAborted)
+                {
+                    Image resized = Tools.Instance.ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
+                    pbWebcam.Image = resized;
+                }
+                else
+                {
+                    _webcamCapture.StopCapturing();
+                    this.Close();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _webcamCapture.StopCapturing();
-                this.Close();
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -62,11 +77,18 @@ namespace MViewer
 
         public void StartCapturing()
         {
-            if (_webcamCapture == null)
+            try
             {
-                _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
+                if (_webcamCapture == null)
+                {
+                    _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
+                }
+                Program.Controller.StartVideo(_webcamCapture);
             }
-            Program.Controller.StartVideo(_webcamCapture);
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -87,13 +109,20 @@ namespace MViewer
 
         private void FormMyWebcam_Resize(object sender, EventArgs e)
         {
-            pnlMain.Width = this.Width - 42 - 3;
-            pnlMain.Height = this.Height - 61 - 5;
+            try
+            {
+                pnlMain.Width = this.Width - 42 - 3;
+                pnlMain.Height = this.Height - 61 - 5;
 
-            pbWebcam.Width = pnlMain.Width - 22;
-            pbWebcam.Height = pnlMain.Height - 22;
+                pbWebcam.Width = pnlMain.Width - 22;
+                pbWebcam.Height = pnlMain.Height - 22;
 
-            pbWebcam.Image = Tools.Instance.ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
+                pbWebcam.Image = Tools.Instance.ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion

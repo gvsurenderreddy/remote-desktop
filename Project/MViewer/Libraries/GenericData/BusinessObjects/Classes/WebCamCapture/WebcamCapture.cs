@@ -17,7 +17,6 @@ using System.Collections;
 
 namespace GenericObjects
 {
-    [System.Drawing.ToolboxBitmap(typeof(WebcamCapture), "CAMERA.ICO")] // toolbox bitmap
     [Designer("Sytem.Windows.Forms.Design.ParentControlDesigner,System.Design", typeof(System.ComponentModel.Design.IDesigner))] // make composite
     public class WebcamCapture : System.Windows.Forms.UserControl
     {
@@ -25,9 +24,7 @@ namespace GenericObjects
 
         IContainer _components;
         System.Windows.Forms.Timer _timer;
-
-        delegate void StartPresenting(bool firstTimeCapturing);
-
+        Form _parentForm;
         bool _timerRunning;
         int _captureTimespan;
         int _width;
@@ -37,91 +34,109 @@ namespace GenericObjects
         VideoCaptureEventArgs _eventArgs;
         bool _threadAborted;
         bool _webcamClosed;
-
+        int _interval;
         ManualResetEvent _syncCaptures = new ManualResetEvent(false);
 
-        //Mutex _mutex = new Mutex(true, "WebCapture");
-
         #endregion
 
-        #region public members
-
-        public event Delegates.WebCamEventHandler ImageCaptured;
-
-        //EventHandler _closingEvent;
-        int _interval;
-
-        #endregion
-
-        #region c-tor & d-tor
+        #region c-tor 
 
         public WebcamCapture(int interval, IntPtr windowHandle)
         {
-            //_closingEvent = closingEvent;
-            _components = new Container();
-            // set the timer interval
-            _interval = interval;
-            InitializeTimer(interval);
+            try
+            {
+                _components = new Container();
+                // set the timer interval
+                _interval = interval;
+                InitializeTimer(interval);
 
-            _timerRunning = false;
-            _threadAborted = false;
-            _webcamClosed = false;
+                _timerRunning = false;
+                _threadAborted = false;
+                _webcamClosed = false;
 
-            _windowHandle = windowHandle;
+                _windowHandle = windowHandle;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
 
+        #endregion
+
+        #region private methods
+
+        void StartCaptureProcess(bool firstTimeCapturing)
+        {
+            try
+            {
+                InitializeTimer(_interval);
+                // setup a capture window
+                _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
+
+                // connect this application to the capture device
+                int connectAttempts = 0;
+                while (Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, IntPtr.Zero, IntPtr.Zero) == IntPtr.Zero)
+                {
+                    connectAttempts++;
+                    Thread.Sleep(1000);
+                }
+                IntPtr x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, IntPtr.Zero, IntPtr.Zero);
+                _webcamClosed = false;
+                _threadAborted = false;
+
+                // set the timer information
+                _timerRunning = true;
+                _timer.Start();
+                _timer.Enabled = true;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
 
         #region public methods
 
-        void StartCaptureProcess(bool firstTimeCapturing)
-        {
-            InitializeTimer(_interval);
-            // setup a capture window
-            _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
-
-            // connect this application to the capture device
-            int connectAttempts = 0;
-            while (Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_CONNECT, IntPtr.Zero, IntPtr.Zero) == IntPtr.Zero)
-            {
-                connectAttempts++;
-                Thread.Sleep(1000);
-            }
-            IntPtr x = Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_SET_PREVIEW, IntPtr.Zero, IntPtr.Zero);
-            _webcamClosed = false;
-            _threadAborted = false;
-
-            // set the timer information
-            _timerRunning = true;
-            _timer.Start();
-            _timer.Enabled = true;
-        }
-
         public void StartCapturing(bool firstTimeCapturing)
         {
-            // make sure that the capturing is stopped
-            StopCapturing();
-            if (firstTimeCapturing)
+            try
             {
-                StartCaptureProcess(firstTimeCapturing);
+                // make sure that the capturing is stopped
+                StopCapturing();
+                if (firstTimeCapturing)
+                {
+                    StartCaptureProcess(firstTimeCapturing);
+                }
+                else
+                {
+                    this.ParentForm.Invoke(new Delegates.StartPresenting(StartCaptureProcess), firstTimeCapturing);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.ParentForm.Invoke(new StartPresenting(StartCaptureProcess), firstTimeCapturing);
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
-
         }
 
         public void WaitRoomButtonAction(bool wait)
         {
-            if (wait)
+            try
             {
-                _syncCaptures.Reset();
+                if (wait)
+                {
+                    _syncCaptures.Reset();
+                }
+                else
+                {
+                    _syncCaptures.Set();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _syncCaptures.Set();
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -141,6 +156,10 @@ namespace GenericObjects
             catch (ThreadAbortException)
             {
                 _threadAborted = true;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             finally
             {
@@ -162,23 +181,27 @@ namespace GenericObjects
 
         #region private methods
 
-
         void InitializeTimer(int interval)
         {
-            if (_timer == null)
+            try
             {
-                _timer = new System.Windows.Forms.Timer(_components);
-                _timer.Interval = interval;
-                _timer.Tag = this;
-                _timer.Tick += new EventHandler(TimerTick);
+                if (_timer == null)
+                {
+                    _timer = new System.Windows.Forms.Timer(_components);
+                    _timer.Interval = interval;
+                    _timer.Tag = this;
+                    _timer.Tick += new EventHandler(TimerTick);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         private ImageCodecInfo GetEncoder(ImageFormat format)
         {
-
             ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-
             foreach (ImageCodecInfo codec in codecs)
             {
                 if (codec.FormatID == format.Guid)
@@ -218,12 +241,6 @@ namespace GenericObjects
                         // copy the image to the clipboard
                         Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, IntPtr.Zero, IntPtr.Zero);
                         
-                        //const int WM_CAP_START = 0x0400;
-                        //const int WM_CAP_FILE_SAVEAS = WM_CAP_START + 23;
-                        //string filepath = "C:\\RecordedVideo.avi";
-                        //IntPtr result = Win32APIMethods.SendMessage(_captureWindowHandler, WM_CAP_FILE_SAVEAS, IntPtr.Zero, filepath);
-                        //int error = System.Runtime.InteropServices.Marshal.GetLastWin32Error();
-
                         // push the image into the capture event args
                         if (ImageCaptured != null)
                         {
@@ -236,7 +253,7 @@ namespace GenericObjects
                                 _eventArgs = new VideoCaptureEventArgs();
                                 // resize the image to the required size (the API isn't doing that)
 
-                                // todo: add timestamp to be used for sinchron with audio
+                                // todo: add timestamp to be used for synchron with audio
 
                                 // todo: resize to lower resolution for bandwidth saving
                                 _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, this._width, this._height);
@@ -246,47 +263,32 @@ namespace GenericObjects
                             }
                         }
                     }
-                    
                 }
             }
-            catch (ThreadAbortException)
+            catch (ThreadAbortException taex)
             {
                 _threadAborted = true;
                 StopCapturing();
-                MessageBox.Show("capturing thread aborted");
+                Tools.Instance.Logger.LogError(taex.ToString());
             }
-            //catch (ThreadStateException tsex)
-            //{
-            //    _timer.Stop();
-            //    InitializeTimer(_interval);
-            //    StartCapturing(false);
-            //}
-            catch (Exception)
+            catch (Exception ex)
             {
-                //_timerRunning = true;
-                //MessageBox.Show("An error ocurred while capturing the video image. The video capture will now be terminated.\r\n\n" + excep.ToString());
-                //StopCapturing(); // stop the capturing process
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             finally
             {
-                // free the clipboard
-                //_mutex.ReleaseMutex();
-
-                // restart the timer
-                //Application.DoEvents();
-                if (_timerRunning == false && !_threadAborted && !_webcamClosed)// && error == false)
+                try
                 {
-                    _timerRunning = true;
-                    _timer.Start();
+                    if (_timerRunning == false && !_threadAborted && !_webcamClosed)
+                    {
+                        _timerRunning = true;
+                        _timer.Start();
+                    }
                 }
-                //else
-                //{
-                //    if (_threadAborted || _webcamClosed)
-                //    {
-                //        // todo: close/hide the parent web capture form
-                //        _closingEvent.Invoke(null, null);
-                //    }
-                //}
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
             }
         }
 
@@ -294,7 +296,7 @@ namespace GenericObjects
 
         #region proprieties
 
-        Form _parentForm;
+        public event Delegates.WebCamEventHandler ImageCaptured;
 
         public new Form ParentForm
         {

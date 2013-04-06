@@ -21,6 +21,8 @@ namespace GenericObjects
         public delegate void WebCamEventHandler(object source, VideoCaptureEventArgs e);
 
         public delegate void CloseDelegate();
-        
+       
+        public delegate void StartPresenting(bool firstTimeCapturing);
+
     }
 }
