@@ -37,26 +37,54 @@ namespace MViewer
 
         public void ChangeLanguage(string language)
         {
-            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormRemotingRoom));
+            try
+            {
+                Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormRemotingRoom));
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void BindCommandHandlers(Delegates.HookCommandDelegate remotingCommand)
         {
-            remoteControl.BindCommandHandler(remotingCommand);
+            try
+            {
+                remoteControl.BindCommandHandler(remotingCommand);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void ShowScreenCapture(byte[] screenCapture, byte[] mouseCapture)
         {
-            _syncClosing.WaitOne();
-            if (!_formClosing)
+            try
             {
-                remoteControl.UpdateScreen(screenCapture, mouseCapture);
+                _syncClosing.WaitOne();
+                if (!_formClosing)
+                {
+                    remoteControl.UpdateScreen(screenCapture, mouseCapture);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void SetPartnerName(string friendlyName)
         {
-            remoteControl.SetPartnerName(friendlyName);
+            try
+            {
+                remoteControl.SetPartnerName(friendlyName);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void ShowRoom()
@@ -82,8 +110,9 @@ namespace MViewer
                     this.Show();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -113,47 +142,80 @@ namespace MViewer
 
         private void FormRemotingRoom_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _formClosing = true;
-
-            // todo: later - perform other specific actions when the remoting  room is closing
-            _syncClosing.Set();
+            try
+            {
+                _formClosing = true;
+                // todo: later - perform other specific actions when the remoting  room is closing
+                _syncClosing.Set();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void FormRemotingRoom_Activated(object sender, EventArgs e)
         {
-            // tell the controller to update the active form
-            Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
-
-            remoteControl.WireUpEventProvider();
+            try
+            {
+                // tell the controller to update the active form
+                Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
+                remoteControl.WireUpEventProvider();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void FormRemotingRoom_Resize(object sender, EventArgs e)
         {
-            //pnl main width = form width - (591 - 573) = form width - 18
-            //pnl main height = form height - (483 - 442) = form height - 41
+            try
+            {
+                //pnl main width = form width - (591 - 573) = form width - 18
+                //pnl main height = form height - (483 - 442) = form height - 41
 
-            //remote control width = pnl main width - (573 - 547) = pnl main width - 26
-            //remote control height = pnl main height - (442 - 416) = pnl main height - 26
+                //remote control width = pnl main width - (573 - 547) = pnl main width - 26
+                //remote control height = pnl main height - (442 - 416) = pnl main height - 26
 
-            pnlMain.Width = this.Width - 18;
-            pnlMain.Height = this.Height - 41;
+                pnlMain.Width = this.Width - 18;
+                pnlMain.Height = this.Height - 41;
 
-            remoteControl.Width = pnlMain.Width - 26;
-            remoteControl.Height = pnlMain.Height - 26;
+                remoteControl.Width = pnlMain.Width - 26;
+                remoteControl.Height = pnlMain.Height - 26;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
         private void FormRemotingRoom_Load(object sender, EventArgs e)
         {
-            //force the form to double buffer repaints to reduce flickering
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.DoubleBuffer, true);
+            try
+            {
+                //force the form to double buffer repaints to reduce flickering
+                SetStyle(ControlStyles.UserPaint, true);
+                SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+                SetStyle(ControlStyles.DoubleBuffer, true);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void FormRemotingRoom_Deactivate(object sender, EventArgs e)
         {
-            // todo: find a better way to update the button labels
-            remoteControl.WireDownEventProvider();
-            //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
+            try
+            {
+                remoteControl.WireDownEventProvider();
+                // todo: find a better way to update the button labels
+                //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
         #endregion
 

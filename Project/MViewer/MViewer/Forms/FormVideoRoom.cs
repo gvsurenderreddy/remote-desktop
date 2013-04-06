@@ -43,25 +43,46 @@ namespace MViewer
 
         private void FormVideoRoom_Activated(object sender, EventArgs e)
         {
-            // tell the controller to update the active form
-            Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
+            try
+            {
+                // tell the controller to update the active form
+                Program.Controller.OnActiveRoomChanged(this.PartnerIdentity, this.RoomType);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void FormVideoRoom_Resize(object sender, EventArgs e)
         {
-            pnlMain.Width = this.Width - 20 - 1;
-            pnlMain.Height = this.Height - 20 - 1;
+            try
+            {
+                pnlMain.Width = this.Width - 20 - 1;
+                pnlMain.Height = this.Height - 20 - 1;
 
-            videoControl.Width = pnlMain.Width - 15 - 5;
-            videoControl.Height = pnlMain.Height - 38 - 5;
+                videoControl.Width = pnlMain.Width - 15 - 5;
+                videoControl.Height = pnlMain.Height - 38 - 5;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         private void FormVideoRoom_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _formClosing = true;
+            try
+            {
+                _formClosing = true;
 
-            // todo: later - perform other specific actions when the Video  room is closing
-            _syncClosing.Set();
+                // todo: later - perform other specific actions when the Video  room is closing
+                _syncClosing.Set();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion
@@ -70,20 +91,41 @@ namespace MViewer
 
         public void ChangeLanguage(string language)
         {
-            Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormVideoRoom));
+            try
+            {
+                Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormVideoRoom));
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void SetPartnerName(string friendlyName)
         {
-            videoControl.SetPartnerName(friendlyName);
+            try
+            {
+                videoControl.SetPartnerName(friendlyName);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void SetPicture(Image picture)
         {
-            _syncClosing.WaitOne();
-            if (!_formClosing)
+            try
             {
-                videoControl.SetPicture(picture);
+                _syncClosing.WaitOne();
+                if (!_formClosing)
+                {
+                    videoControl.SetPicture(picture);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -110,8 +152,9 @@ namespace MViewer
                     this.Show();
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
