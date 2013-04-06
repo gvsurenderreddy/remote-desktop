@@ -28,7 +28,7 @@ namespace Utils
             StringBuilder message = new StringBuilder();
             message.AppendLine(string.Format("{0} : --------------", DateTime.Now.ToString()));
             message.AppendLine(text);
-            message.AppendLine("END INFO ------------");
+            message.AppendLine("-------------- END INFO ------------");
             _logger.Info(message.ToString());
         }
 
