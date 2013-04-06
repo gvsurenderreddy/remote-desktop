@@ -160,7 +160,12 @@ namespace MViewer
             peers.AudioSessionState = GenericEnums.SessionState.Paused; // pause the Audio 
 
             _view.RoomManager.ToggleAudioStatus(args.Identity);
-
+            if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+            {
+                // send the stop signal to the server session
+                _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, args.Identity,
+                    GenericEnums.RoomType.Audio, GenericEnums.SignalType.Pause);
+            }
             _syncAudioCaptureActivity.Set();
         }
 
@@ -171,6 +176,13 @@ namespace MViewer
             PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
             peers.AudioSessionState = GenericEnums.SessionState.Opened; // resume the Audio 
             _view.RoomManager.ToggleAudioStatus(args.Identity);
+
+            if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+            {
+                // send the stop signal to the server session
+                _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, args.Identity,
+                    GenericEnums.RoomType.Audio, GenericEnums.SignalType.Resume);
+            }
             _syncAudioCaptureActivity.Set();
         }
 
