@@ -15,6 +15,7 @@ namespace MViewer
     public partial class FormMyWebcam : Form
     {
         WebcamCapture _webcamCapture;
+        // todo: remove visible timer if not used
         System.Timers.Timer _visibleTimer;
 
         /// <summary>
