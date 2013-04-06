@@ -197,6 +197,7 @@ namespace MViewer
                 // notify all contacts that you exited the 
                 _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
 
+                Tools.Instance.Logger.LogInfo("MViewer application stopped");
                 // exit the environment
                 Environment.Exit(0);
             }

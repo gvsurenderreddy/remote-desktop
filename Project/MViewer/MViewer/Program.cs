@@ -9,6 +9,7 @@ using System.ServiceModel.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using Utils;
 
 namespace MViewer
 {
@@ -35,6 +36,11 @@ namespace MViewer
 
                 _controller = new Controller();
                 _controller.InitializeSettings();
+
+                Tools.Instance.Logger.LoggerInitialize(SystemConfiguration.Instance.LoggerConfigFilePath);
+
+                Tools.Instance.Logger.LogInfo("MViewer application started");
+
                 _controller.StartApplication();
 
                 // todo: use manual reset event instead of thread.sleep(0)
@@ -43,6 +49,10 @@ namespace MViewer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                Tools.Instance.Logger.LogInfo("MViewer application stopped");
             }
         }
 

@@ -13,6 +13,7 @@ namespace Utils
         RemotingUtils _desktopViewerUtils;
         Cryptography _cryptography;
         GenericMethods _genericMethods;
+        Logger _logger;
 
         static Tools _instance = new Tools();
         static readonly object _syncInstance = new object();
@@ -23,6 +24,7 @@ namespace Utils
             _desktopViewerUtils = new RemotingUtils();
             _cryptography = new Cryptography();
             _genericMethods = new GenericMethods();
+            _logger = new Logger();
         }
 
         public static Tools Instance
@@ -41,6 +43,11 @@ namespace Utils
                 }
                 return _instance;
             }
+        }
+
+        public Logger Logger
+        {
+            get { return _logger; }
         }
 
         public ImageConverter ImageConverter

@@ -42,6 +42,10 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\DLLs\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -54,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Cryptography.cs" />
     <Compile Include="GenericMethods.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="RemotingUtils.cs" />
     <Compile Include="Enum\ButtonStatuses.cs" />
     <Compile Include="Enum\GenericEnums.cs" />

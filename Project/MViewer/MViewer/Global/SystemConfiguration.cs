@@ -16,6 +16,8 @@ namespace MViewer
         static readonly object _syncInstance = new object();
         static SystemConfiguration _instance;
 
+        string _loggerConfigFilePath;
+
         private PresenterSettings _presenterSettings;
 
         ControllerRoomHandlers _roomHandlers;
@@ -29,6 +31,7 @@ namespace MViewer
 
         private SystemConfiguration() 
         {
+            _loggerConfigFilePath = ConfigurationManager.AppSettings["loggerConfigFilePath"];
             InitializePresenterSettings();
 
             // handlers initialization 
@@ -131,6 +134,11 @@ namespace MViewer
         #endregion
 
         #region properties
+
+        public string LoggerConfigFilePath
+        {
+            get { return _loggerConfigFilePath; }
+        }
 
         public readonly string MyAddress = ConfigurationManager.AppSettings["MyAddress"];
         public readonly int Port = int.Parse(ConfigurationManager.AppSettings["port"]);
