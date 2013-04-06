@@ -36,22 +36,36 @@ namespace BusinessLogicLayer
 
         public void ChangeLanguage(string language)
         {
-            foreach (KeyValuePair<string, IRoom> room in _rooms)
+            try
             {
-                Thread t = new Thread(delegate()
+                foreach (KeyValuePair<string, IRoom> room in _rooms)
                 {
-                    room.Value.ChangeLanguage(language);
-                });
-                t.Start();
+                    Thread t = new Thread(delegate()
+                    {
+                        room.Value.ChangeLanguage(language);
+                    });
+                    t.Start();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void ToggleAudioStatus(string identity)
         {
-            string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
-            if (_rooms != null && _rooms.ContainsKey(roomID))
+            try
             {
-                ((IAudioRoom)_rooms[roomID]).ToggleAudioStatus();
+                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
+                if (_rooms != null && _rooms.ContainsKey(roomID))
+                {
+                    ((IAudioRoom)_rooms[roomID]).ToggleAudioStatus();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -64,107 +78,163 @@ namespace BusinessLogicLayer
         public bool IsRoomActivated(string identity, GenericEnums.RoomType roomType)
         {
             bool activated = false;
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, roomType);
-                bool roomExists = _rooms.ContainsKey(roomID);
-                if (roomExists)
+                lock (_syncRooms)
                 {
-                    activated = _rooms[roomID].RoomType == roomType;
+                    string roomID = GenerateRoomID(identity, roomType);
+                    bool roomExists = _rooms.ContainsKey(roomID);
+                    if (roomExists)
+                    {
+                        activated = _rooms[roomID].RoomType == roomType;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             return activated;
         }
 
         public void PlayAudioCapture(string identity, byte[] capture)
         {
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                lock (_syncRooms)
                 {
-                    IAudioRoom room = (IAudioRoom)_rooms[roomID];
-                    room.PlayAudioCapture(capture);
+                    string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        IAudioRoom room = (IAudioRoom)_rooms[roomID];
+                        room.PlayAudioCapture(capture);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture)
         {
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Remoting);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                lock (_syncRooms)
                 {
-                    IRemotingRoom room = (IRemotingRoom)_rooms[roomID];
-                    room.ShowScreenCapture(screenCapture, mouseCapture);
+                    string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Remoting);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        IRemotingRoom room = (IRemotingRoom)_rooms[roomID];
+                        room.ShowScreenCapture(screenCapture, mouseCapture);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void ShowVideoCapture(string identity, Image picture)
         {
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Video);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                lock (_syncRooms)
                 {
-                    IVideoRoom room = (IVideoRoom)_rooms[roomID];
-                    room.SetPicture(picture);
+                    string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Video);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        IVideoRoom room = (IVideoRoom)_rooms[roomID];
+                        room.SetPicture(picture);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void SetPartnerName(string identity, GenericEnums.RoomType roomType, string friendlyName)
         {
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, roomType);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                lock (_syncRooms)
                 {
-                    IRoom room = _rooms[roomID];
-                    room.SetPartnerName(friendlyName);
+                    string roomID = GenerateRoomID(identity, roomType);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        IRoom room = _rooms[roomID];
+                        room.SetPartnerName(friendlyName);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void AddRoom(string identity, IRoom room)
         {
-            lock (_syncRooms)
+            try
             {
-                if (_rooms == null)
+                lock (_syncRooms)
                 {
-                    _rooms = new Dictionary<string, IRoom>();
+                    if (_rooms == null)
+                    {
+                        _rooms = new Dictionary<string, IRoom>();
+                    }
+                    string roomID = GenerateRoomID(identity, room.RoomType);
+                    if (!_rooms.ContainsKey(roomID))
+                    {
+                        _rooms.Add(roomID, room);
+                    }
                 }
-                string roomID = GenerateRoomID(identity, room.RoomType);
-                if (!_rooms.ContainsKey(roomID))
-                {
-                    _rooms.Add(roomID, room);
-                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void RemoveRoom(string identity, GenericEnums.RoomType roomType)
         {
-            lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, roomType);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                lock (_syncRooms)
                 {
-                    _rooms.Remove(roomID);
+                    string roomID = GenerateRoomID(identity, roomType);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        _rooms.Remove(roomID);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void ShowRoom(string identity, GenericEnums.RoomType roomType)
         {
-            //lock (_syncRooms)
+            try
             {
-                string roomID = GenerateRoomID(identity, roomType);
-                if (_rooms != null && _rooms.ContainsKey(roomID))
+                //lock (_syncRooms)
                 {
-                    Application.Run((Form)_rooms[roomID]);
+                    string roomID = GenerateRoomID(identity, roomType);
+                    if (_rooms != null && _rooms.ContainsKey(roomID))
+                    {
+                        Application.Run((Form)_rooms[roomID]);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 

@@ -40,54 +40,68 @@ namespace BusinessLogicLayer
 
         public void AddSession(Session session, GenericEnums.RoomType scope)
         {
-            lock (_syncSessions)
+            try
             {
-                if (_clientSessions == null)
+                lock (_syncSessions)
                 {
-                    _clientSessions = new Dictionary<string, Session>();
-                }
-                if (_clientSessions.ContainsKey(session.Identity) == false)
-                {
-                    _clientSessions.Add(session.Identity, session);
-                }
-                else
-                {
-                    switch (scope)
+                    if (_clientSessions == null)
                     {
-                        case GenericEnums.RoomType.Audio:
-                            _clientSessions[session.Identity].AudioSessionState = session.Peers.AudioSessionState;
-                            break;
-                        case GenericEnums.RoomType.Remoting:
-                            _clientSessions[session.Identity].RemotingSessionState = session.Peers.RemotingSessionState;
-                            break;
-                        case GenericEnums.RoomType.Video:
-                            _clientSessions[session.Identity].VideoSessionState = session.Peers.VideoSessionState;
-                            break;
+                        _clientSessions = new Dictionary<string, Session>();
+                    }
+                    if (_clientSessions.ContainsKey(session.Identity) == false)
+                    {
+                        _clientSessions.Add(session.Identity, session);
+                    }
+                    else
+                    {
+                        switch (scope)
+                        {
+                            case GenericEnums.RoomType.Audio:
+                                _clientSessions[session.Identity].AudioSessionState = session.Peers.AudioSessionState;
+                                break;
+                            case GenericEnums.RoomType.Remoting:
+                                _clientSessions[session.Identity].RemotingSessionState = session.Peers.RemotingSessionState;
+                                break;
+                            case GenericEnums.RoomType.Video:
+                                _clientSessions[session.Identity].VideoSessionState = session.Peers.VideoSessionState;
+                                break;
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
         public void RemoveSession(string identity)
         {
-            lock (_syncSessions)
+            try
             {
-                if (_clientSessions != null && _clientSessions.ContainsKey(identity))
+                lock (_syncSessions)
                 {
-                    if (
-                        (_clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Closed
-                        || _clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Undefined)
-
-                        && (_clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Closed
-                        || _clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Undefined)
-
-                        && (_clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Closed
-                        || _clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Undefined)
-                        )
+                    if (_clientSessions != null && _clientSessions.ContainsKey(identity))
                     {
-                        _clientSessions.Remove(identity);
+                        if (
+                            (_clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Closed
+                            || _clientSessions[identity].AudioSessionState == GenericEnums.SessionState.Undefined)
+
+                            && (_clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Closed
+                            || _clientSessions[identity].VideoSessionState == GenericEnums.SessionState.Undefined)
+
+                            && (_clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Closed
+                            || _clientSessions[identity].RemotingSessionState == GenericEnums.SessionState.Undefined)
+                            )
+                        {
+                            _clientSessions.Remove(identity);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
