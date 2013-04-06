@@ -16,7 +16,9 @@ using System.Collections;
 	/// Description of ImageConverter.
 	/// </summary>
 	public class ImageConverter
-	{
+    {
+        #region public methods
+
         public string GetSize(long bytes)
         {
             string[] sizes = { "B", "KB", "MB", "GB" };
@@ -76,6 +78,7 @@ using System.Collections;
             Image returnImage = Image.FromStream(ms);
             return returnImage;
         }
-		
-	}
+
+        #endregion
+    }
 
