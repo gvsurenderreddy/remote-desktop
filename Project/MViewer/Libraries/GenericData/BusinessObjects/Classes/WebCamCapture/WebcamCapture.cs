@@ -75,10 +75,7 @@ namespace GenericObjects
 
         #region public methods
 
-        [DllImport("avicap32.dll")]
-        protected  extern bool capGetDriverDescriptionA(short wDriverIndex,
-            [MarshalAs(UnmanagedType.VBByRefStr)]ref String lpszName,
-           int cbName, [MarshalAs(UnmanagedType.VBByRefStr)] ref String lpszVer, int cbVer);
+
 
          ArrayList devices = new ArrayList();
 
@@ -89,7 +86,7 @@ namespace GenericObjects
 
             for (short i = 0; i < 10; i++)
             {
-                if (capGetDriverDescriptionA(i, ref dName, 100, ref dVersion, 100))
+                if (Win32APIMethods.capGetDriverDescriptionA(i, ref dName, 100, ref dVersion, 100))
                 {
                     TCamDevice d = new TCamDevice(i);
                     d.Name = dName.Trim();
@@ -112,7 +109,7 @@ namespace GenericObjects
         {
             InitializeTimer(_interval);
             // setup a capture window
-            _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
+            //_captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
 
             TCamDevice[] alldevices = GetAllDevices();
             alldevices.ElementAt(0).Init(_height, _width, _windowHandle);
