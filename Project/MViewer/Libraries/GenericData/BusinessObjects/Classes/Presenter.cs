@@ -51,7 +51,9 @@ namespace GenericObjects
         {
             if (_videoCapture == null)
             {
-                _videoCapture = _presenterSettings.VideoCaptureControl;
+                _videoCapture = _presenterSettings.VideoCaptureControl; 
+                // bind the image captured event
+                _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(_presenterSettings.OnVideoImageCaptured);
             }
             // start the video capturing
             _videoCapture.StartCapturing(_firstTimeCapturing);
