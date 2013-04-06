@@ -37,7 +37,7 @@ namespace MViewer
                 _controller = new Controller();
                 _controller.InitializeSettings();
 
-                Tools.Instance.Logger.LoggerInitialize(SystemConfiguration.Instance.LoggerConfigFilePath);
+                Tools.Instance.Logger.LoggerInitialize();
 
                 Tools.Instance.Logger.LogInfo("MViewer application started");
 
