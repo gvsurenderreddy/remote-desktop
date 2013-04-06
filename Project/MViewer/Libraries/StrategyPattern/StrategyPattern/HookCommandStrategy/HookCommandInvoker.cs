@@ -16,8 +16,8 @@ namespace StrategyPattern
             // provide the mouse/keyboard event handlers from the controller
             MouseHookCommand mouseCommands = new MouseHookCommand()
             {
-                LeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.LeftClick],
-                RightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.RightClick],
+                //LeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.LeftClick],
+                //RightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.RightClick],
                 DoubleLeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleLeftClick],
                 DoubleRightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleRightClick],
                 MiddleClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.MiddleClick],
