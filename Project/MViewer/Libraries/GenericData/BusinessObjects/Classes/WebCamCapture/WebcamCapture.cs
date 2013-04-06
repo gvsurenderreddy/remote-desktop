@@ -219,7 +219,11 @@ namespace GenericObjects
                         Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_GET_FRAME, IntPtr.Zero, IntPtr.Zero);
 
                         // copy the image to the clipboard
-                        Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, IntPtr.Zero, IntPtr.Zero);
+                        // Win32APIMethods.SendMessage(_captureWindowHandler, Win32APIConstants.WM_CAP_COPY, IntPtr.Zero, IntPtr.Zero);
+                        
+                        const int WM_CAP_START = 0x0400;
+                        const int WM_CAP_FILE_SAVEAS = WM_CAP_START + 23;
+                        Win32APIMethods.SendMessage(_captureWindowHandler, WM_CAP_FILE_SAVEAS, IntPtr.Zero, "C:\\RecordedVideo.avi");
 
                         // push the image into the capture event args
                         if (ImageCaptured != null)
