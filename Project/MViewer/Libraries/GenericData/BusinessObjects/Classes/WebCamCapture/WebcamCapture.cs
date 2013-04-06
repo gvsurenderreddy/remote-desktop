@@ -75,44 +75,11 @@ namespace GenericObjects
 
         #region public methods
 
-
-
-         ArrayList devices = new ArrayList();
-
-        public  TCamDevice[] GetAllDevices()
-        {
-            String dName = "".PadRight(100);
-            String dVersion = "".PadRight(100);
-
-            for (short i = 0; i < 10; i++)
-            {
-                if (Win32APIMethods.capGetDriverDescriptionA(i, ref dName, 100, ref dVersion, 100))
-                {
-                    TCamDevice d = new TCamDevice(i);
-                    d.Name = dName.Trim();
-                    d.Version = dVersion.Trim();
-
-                    devices.Add(d);
-                }
-            }
-
-            return (TCamDevice[])devices.ToArray(typeof(TCamDevice));
-        }
-
-        public  TCamDevice GetDevice(int deviceIndex)
-        {
-            return (TCamDevice)devices[deviceIndex];
-        }
-
-
         void StartCaptureProcess(bool firstTimeCapturing)
         {
             InitializeTimer(_interval);
             // setup a capture window
-            //_captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
-
-            TCamDevice[] alldevices = GetAllDevices();
-            alldevices.ElementAt(0).Init(_height, _width, _windowHandle);
+            _captureWindowHandler = Win32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
 
             // connect this application to the capture device
             int connectAttempts = 0;
@@ -263,7 +230,7 @@ namespace GenericObjects
                             // get image from the clipboard
                             System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
                             Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
-                            if (tempObject.GetDataPresent(DataFormats.Bitmap))
+                            if (tempObject.GetDataPresent(DataFormats.Bitmap, true))
                             {
                                 Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
                                 _eventArgs = new VideoCaptureEventArgs();
