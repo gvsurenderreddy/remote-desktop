@@ -35,10 +35,10 @@ namespace Utils
         public void LogError(string text)
         {
             StringBuilder message = new StringBuilder();
-            message.AppendLine("--------------");
+            message.AppendLine(string.Format("{0} -----------------", DateTime.Now.ToString()));
             message.AppendLine(text);
-            message.AppendLine("END ERROR -------");
-            _logger.Info(message.ToString());
+            message.AppendLine("END ERROR -----------------------------------");
+            _logger.Error(message.ToString());
         }
 
         #endregion
