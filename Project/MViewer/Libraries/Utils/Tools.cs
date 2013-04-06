@@ -9,6 +9,8 @@ namespace Utils
 {
     public class Tools
     {
+        #region private members
+
         ImageConverter _imageConverter;
         RemotingUtils _desktopViewerUtils;
         Cryptography _cryptography;
@@ -18,6 +20,10 @@ namespace Utils
         static Tools _instance = new Tools();
         static readonly object _syncInstance = new object();
 
+        #endregion
+
+        #region c-tor
+
         private Tools() 
         {
             _imageConverter = new ImageConverter();
@@ -26,6 +32,10 @@ namespace Utils
             _genericMethods = new GenericMethods();
             _logger = new Logger();
         }
+
+        #endregion
+
+        #region public methods
 
         public static Tools Instance
         {
@@ -69,5 +79,7 @@ namespace Utils
         {
             get { return _genericMethods; }
         }
+
+        #endregion
     }
 }
