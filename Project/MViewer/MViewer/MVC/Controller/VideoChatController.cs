@@ -184,12 +184,15 @@ namespace MViewer
                 transfer.IsVideoUpdating = false;
                 _syncVideoCaptureActivity.Set();
 
-                this.StopAudio(this, new RoomActionEventArgs()
+                if (sender.GetType().IsEquivalentTo(typeof(UIControls.ActionsControl)))
                 {
-                    Identity = args.Identity,
-                    RoomType = GenericEnums.RoomType.Audio,
-                    SignalType = GenericEnums.SignalType.Stop
-                });
+                    this.StopAudio(this, new RoomActionEventArgs()
+                    {
+                        Identity = args.Identity,
+                        RoomType = GenericEnums.RoomType.Audio,
+                        SignalType = GenericEnums.SignalType.Stop
+                    });
+                }
             }
         }
 
