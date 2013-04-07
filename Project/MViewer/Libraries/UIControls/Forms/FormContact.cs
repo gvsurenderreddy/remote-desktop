@@ -113,13 +113,11 @@ namespace UIControls
             try
             {
                 // validate input data
-
                 if (string.IsNullOrEmpty(txtFriendlyName.Text.Trim()) || string.IsNullOrEmpty(txtIdentity.Text.Trim()))
                 {
                     MessageBox.Show("Cannot insert empty text");
                     return;
                 }
-
                 switch (_formMode)
                 {
                     case GenericEnums.FormMode.Add:

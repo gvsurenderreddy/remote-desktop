@@ -394,7 +394,6 @@ namespace UIControls
             try
             {
                 var leftUpperCornerScreenPosition = pbRemote.PointToScreen(new Point(0, 0));
-
                 x = Tools.Instance.RemotingUtils.ConvertXToRemote(
                     localX - leftUpperCornerScreenPosition.X,
                     pbRemote.Width);
@@ -409,7 +408,5 @@ namespace UIControls
         }
 
         #endregion
-
-
     }
 }

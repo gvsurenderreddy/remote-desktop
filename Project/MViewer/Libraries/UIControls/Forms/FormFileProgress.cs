@@ -69,13 +69,11 @@ namespace UIControls
                     }
                     else
                     {
-                        //pbFileProgress.Value = 1;
                         if (pbFileProgress.InvokeRequired)
                         {
                             pbFileProgress.Invoke(new MethodInvoker(delegate { pbFileProgress.Value = 1; }));
                         }
                     }
-
                     lock (_syncProgress)
                     {
                         if (!_isRunning)

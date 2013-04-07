@@ -91,10 +91,8 @@ namespace UIControls
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", dgvContacts.Width / 2 - 1, "Width");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Status", dgvContacts.Width / 2 - 1, "Width");
-
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", DataGridViewTriState.False, "Resizable");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Status", DataGridViewTriState.False, "Resizable");
-
                 }
                 else
                 {
