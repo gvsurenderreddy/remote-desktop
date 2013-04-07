@@ -155,6 +155,13 @@
       <SubType>Content</SubType>
       <DependentUpon>MViewer.classdiagram</DependentUpon>
     </Content>
+    <Content Include="UMLComponentDiagram.componentdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UMLComponentDiagram.componentdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>UMLComponentDiagram.componentdiagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\ModelingProject.uml">
       <SubType>Content</SubType>
