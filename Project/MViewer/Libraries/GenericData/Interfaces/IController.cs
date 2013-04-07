@@ -39,7 +39,6 @@ namespace GenericObjects
         void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
         void FocusActionsForm();
 
-        string MyIdentity();
         void OnVideoImageCaptured(object source, EventArgs e);
 
         void OnRemotingImageCaptured(object source, EventArgs e);
