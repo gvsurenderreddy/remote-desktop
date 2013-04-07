@@ -18,6 +18,7 @@ namespace Utils
         [StructLayout(LayoutKind.Sequential)]
         public struct IconInfo
         {
+            // http://msdn.microsoft.com/en-us/library/ms929934.aspx
             public bool IsIcon;         // Specifies whether this structure defines an icon or a cursor. A value of TRUE specifies 
             public Int32 Xcoord;     // Specifies the x-coordinate of a cursor's hot spot. If this structure defines an icon, the hot 
             public Int32 Ycoord;     // Specifies the y-coordinate of the cursor's hot spot. If this structure defines an icon, the hot 
@@ -28,6 +29,7 @@ namespace Utils
         [StructLayout(LayoutKind.Sequential)]
         public struct Point
         {
+            // http://msdn.microsoft.com/en-us/library/aa932879.aspx
             public Int32 X;
             public Int32 Y;
         }
@@ -35,6 +37,7 @@ namespace Utils
         [StructLayout(LayoutKind.Sequential)]
         public struct CursorInfo
         {
+            // http://msdn.microsoft.com/en-us/library/windows/desktop/ms648381(v=vs.85).aspx
             public Int32 Size;        // Specifies the size, in bytes, of the structure. 
             public Int32 State;         // Specifies the cursor state. This parameter can be one of the following values:
             public IntPtr Handle;          // Handle to the cursor. 

@@ -134,7 +134,7 @@ namespace GenericObjects
                     System.Drawing.Image partialDesktop;
                     System.Drawing.Rectangle rect2;
                     Guid id;
-                    Tools.Instance.RemotingUtils.Deserialize(serialized, out partialDesktop, out rect2, out id);
+                    Tools.Instance.RemotingUtils.DeserializeDesktopCapture(serialized, out partialDesktop, out rect2, out id);
                 }
             }
             catch (Exception ex)

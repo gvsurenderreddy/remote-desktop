@@ -19,161 +19,150 @@ namespace Utils
 
         #region public methods
 
-        public double ConvertXToRemote(double local_x, double local_width)
+        public double ConvertXToRemote(double localX, double localWidth)
         {
             //local_x * remote_width / local_width
 
-            double remote_x = local_x / local_width;
+            double remote_x = localX / localWidth;
             return remote_x;
         }
 
-        public double ConvertYToRemote(double local_y, double local_height)
+        public double ConvertYToRemote(double localY, double localHeight)
         {
             //local_y * remote_height / local_height
-            double remote_y = local_y / local_height;
+            double remote_y = localY / localHeight;
             return remote_y;
         }
 
-        public double ConvertXToAbsolute(double remote_x)
+        public double ConvertXToAbsolute(double remoteX)
         {
             //local_x * remote_width / local_width
 
-            double absolute_x = remote_x * Screen.PrimaryScreen.Bounds.Size.Width;
+            double absolute_x = remoteX * Screen.PrimaryScreen.Bounds.Size.Width;
             return absolute_x;
         }
 
-        public double ConvertYToAbsolute(double remote_y)
+        public double ConvertYToAbsolute(double remoteY)
         {
             //local_y * remote_height / local_height
-            double absolute_y = remote_y * Screen.PrimaryScreen.Bounds.Size.Height;
+            double absolute_y = remoteY * Screen.PrimaryScreen.Bounds.Size.Height;
             return absolute_y;
         }
 
-        public byte[] SerializeDesktopCapture(Image capture, Rectangle rect)
+        public byte[] SerializeDesktopCapture(Image capture, Rectangle rectBounds)
         {
             byte[] data = _id.ToByteArray();
-            byte[] temp;
+            byte[] Buffer;
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 capture.Save(memoryStream, ImageFormat.Jpeg);
-                temp = memoryStream.ToArray();
+                Buffer = memoryStream.ToArray();
             }
             // get the bounds
-            byte[] rectTop = BitConverter.GetBytes(rect.Top);
-            byte[] rectBottom = BitConverter.GetBytes(rect.Bottom);
-            byte[] rectLeft = BitConverter.GetBytes(rect.Left);
-            byte[] rectRight = BitConverter.GetBytes(rect.Right);
+            byte[] rectTopBound = BitConverter.GetBytes(rectBounds.Top);
+            byte[] rectBottomBound = BitConverter.GetBytes(rectBounds.Bottom);
+            byte[] rectLeftBound = BitConverter.GetBytes(rectBounds.Left);
+            byte[] rectRightBound = BitConverter.GetBytes(rectBounds.Right);
 
             // create final bytes
-            int size = rectTop.Length;
-            byte[] serialized = new byte[temp.Length + 4 * size + data.Length];
-            Array.Copy(rectTop, 0, serialized, 0, rectTop.Length);
-            Array.Copy(rectBottom, 0, serialized, size, rectBottom.Length);
-            Array.Copy(rectLeft, 0, serialized, 2 * size, rectLeft.Length);
-            Array.Copy(rectRight, 0, serialized, 3 * size, rectRight.Length);
-            Array.Copy(temp, 0, serialized, 4 * size, temp.Length);
-            Array.Copy(data, 0, serialized, 4 * size + temp.Length, data.Length);
-            return serialized;
+            int size = rectTopBound.Length;
+            byte[] serializedScreen = new byte[Buffer.Length + 4 * size + data.Length];
+            Array.Copy(rectTopBound, 0, serializedScreen, 0, rectTopBound.Length);
+            Array.Copy(rectBottomBound, 0, serializedScreen, size, rectBottomBound.Length);
+            Array.Copy(rectLeftBound, 0, serializedScreen, 2 * size, rectLeftBound.Length);
+            Array.Copy(rectRightBound, 0, serializedScreen, 3 * size, rectRightBound.Length);
+            Array.Copy(Buffer, 0, serializedScreen, 4 * size, Buffer.Length);
+            Array.Copy(data, 0, serializedScreen, 4 * size + Buffer.Length, data.Length);
+            return serializedScreen;
         }
 
         public byte[] SerializeMouseCapture(Image capture, int x, int y)
         {
             byte[] data = _id.ToByteArray();
-            byte[] temp;
+            byte[] tempBuffer;
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 capture.Save(memoryStream, ImageFormat.Png);
-                temp = memoryStream.ToArray();
+                tempBuffer = memoryStream.ToArray();
             }
             byte[] x1 = BitConverter.GetBytes(x);
             byte[] y1 = BitConverter.GetBytes(y);
-            byte[] serialized = new byte[temp.Length + x1.Length + y1.Length + data.Length];
-            Array.Copy(x1, 0, serialized, 0, x1.Length);
-            Array.Copy(y1, 0, serialized, x1.Length, y1.Length);
-            Array.Copy(temp, 0, serialized, x1.Length + y1.Length, temp.Length);
-            Array.Copy(data, 0, serialized, x1.Length + y1.Length + temp.Length, data.Length);
-            return serialized;
+            byte[] serializedCapture = new byte[tempBuffer.Length + x1.Length + y1.Length + data.Length];
+            Array.Copy(x1, 0, serializedCapture, 0, x1.Length);
+            Array.Copy(y1, 0, serializedCapture, x1.Length, y1.Length);
+            Array.Copy(tempBuffer, 0, serializedCapture, x1.Length + y1.Length, tempBuffer.Length);
+            Array.Copy(data, 0, serializedCapture, x1.Length + y1.Length + tempBuffer.Length, data.Length);
+            return serializedCapture;
         }
 
-        public Image AppendMouseToDesktop(Image screen, Image cursor, int cursorX, int cursorY)
+        public Image AppendMouseToDesktop(Image screenCapture, Image cursor, int cursorX, int cursorY)
         {
-            Image mergedImage = null;
-            Graphics g = null;
+            Image mergedCapture = null;
+            Graphics graphics = null;
             try
             {
-                lock (screen)
+                lock (screenCapture)
                 {
-                    mergedImage = (Image)screen.Clone();
+                    mergedCapture = (Image)screenCapture.Clone();
                 }
-                Rectangle r;
+                Rectangle bounds;
                 lock (cursor)
                 {
-                    r = new Rectangle(cursorX, cursorY, cursor.Width, cursor.Height);
+                    bounds = new Rectangle(cursorX, cursorY, cursor.Width, cursor.Height);
                 }
-                g = Graphics.FromImage(mergedImage);
-                g.DrawImage(cursor, r);
-                g.Flush();
+                graphics = Graphics.FromImage(mergedCapture);
+                graphics.DrawImage(cursor, bounds);
+                graphics.Flush();
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message, ex);
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             finally
             {
-                if (g != null)
+                if (graphics != null)
                 {
-                    g.Dispose();
+                    graphics.Dispose();
                 }
             }
-
-            return mergedImage;
+            return mergedCapture;
         }
 
-        public void Deserialize(byte[] data, out Image image, out int cursorX, out int cursorY, out Guid id)
+        public void DeserializeMouseCapture(byte[] serializedCapture, out Image image, out int cursorX, out int cursorY, out Guid id)
         {
-            // Unpack the data that is transferred over the wire.
-            //
-
-            // Create byte arrays to hold the unpacked parts.
-            //
+            // unpack the received data 
+            // create buffers to hold the unpacked parts
             const int numBytesInInt = sizeof(int);
             int idLength = Guid.NewGuid().ToByteArray().Length;
-            int imgLength = data.Length - 2 * numBytesInInt - idLength;
+            int imgLength = serializedCapture.Length - 2 * numBytesInInt - idLength;
             byte[] xPosData = new byte[numBytesInInt];
             byte[] yPosData = new byte[numBytesInInt];
             byte[] imgData = new byte[imgLength];
             byte[] idData = new byte[idLength];
 
-            // Fill the byte arrays.
-            //
-            Array.Copy(data, 0, xPosData, 0, numBytesInInt);
-            Array.Copy(data, numBytesInInt, yPosData, 0, numBytesInInt);
-            Array.Copy(data, 2 * numBytesInInt, imgData, 0, imgLength);
-            Array.Copy(data, 2 * numBytesInInt + imgLength, idData, 0, idLength);
+            // fill the buffers
+            Array.Copy(serializedCapture, 0, xPosData, 0, numBytesInInt);
+            Array.Copy(serializedCapture, numBytesInInt, yPosData, 0, numBytesInInt);
+            Array.Copy(serializedCapture, 2 * numBytesInInt, imgData, 0, imgLength);
+            Array.Copy(serializedCapture, 2 * numBytesInInt + imgLength, idData, 0, idLength);
 
-            // Create the cursor position x,y values.
-            //
+            // create the cursor coordinates x,y 
             cursorX = BitConverter.ToInt32(xPosData, 0);
             cursorY = BitConverter.ToInt32(yPosData, 0);
 
-            // Create the bitmap from the byte array.
-            //
-            MemoryStream ms = new MemoryStream(imgData, 0, imgData.Length);
-            ms.Write(imgData, 0, imgData.Length);
-            image = Image.FromStream(ms, true);
+            // obtain the bitmap from the buffer
+            MemoryStream memoryStream = new MemoryStream(imgData, 0, imgData.Length);
+            memoryStream.Write(imgData, 0, imgData.Length);
+            image = Image.FromStream(memoryStream, true);
 
-            // Create a Guid
-            //
+            // create a Guid
             id = new Guid(idData);
         }
 
-        public void Deserialize(byte[] data, out Image image, out Rectangle bounds, out Guid id)
+        public void DeserializeDesktopCapture(byte[] data, out Image image, out Rectangle bounds, out Guid id)
         {
-            // Unpack the data that is transferred over the wire.
-            //
-
-            // Create byte arrays to hold the unpacked parts.
-            //
+            // unpack the received data 
+            // create buffers to hold the unpacked parts
             const int numBytesInInt = sizeof(int);
             int idLength = Guid.NewGuid().ToByteArray().Length;
             int imgLength = data.Length - 4 * numBytesInInt - idLength;
@@ -184,8 +173,7 @@ namespace Utils
             byte[] imgData = new byte[imgLength];
             byte[] idData = new byte[idLength];
 
-            // Fill the byte arrays.
-            //
+            // fill the buffers
             Array.Copy(data, 0, topPosData, 0, numBytesInInt);
             Array.Copy(data, numBytesInInt, botPosData, 0, numBytesInInt);
             Array.Copy(data, 2 * numBytesInInt, leftPosData, 0, numBytesInInt);
@@ -193,14 +181,12 @@ namespace Utils
             Array.Copy(data, 4 * numBytesInInt, imgData, 0, imgLength);
             Array.Copy(data, 4 * numBytesInInt + imgLength, idData, 0, idLength);
 
-            // Create the bitmap from the byte array.
-            //
+            // obtain the bitmap from the buffer
             MemoryStream memoryStream = new MemoryStream(imgData, 0, imgData.Length);
             memoryStream.Write(imgData, 0, imgData.Length);
             image = Image.FromStream(memoryStream, true);
 
-            // Create the bound rectangle.
-            //
+            // create the rectangle bounds
             int top = BitConverter.ToInt32(topPosData, 0);
             int bot = BitConverter.ToInt32(botPosData, 0);
             int left = BitConverter.ToInt32(leftPosData, 0);
@@ -209,8 +195,7 @@ namespace Utils
             int height = bot - top + 1;
             bounds = new Rectangle(left, top, width, height);
 
-            // Create a Guid
-            //
+            // create Guid
             id = new Guid(idData);
         }
 

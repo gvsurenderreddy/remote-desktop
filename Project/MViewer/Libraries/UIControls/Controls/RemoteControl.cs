@@ -103,7 +103,7 @@ namespace UIControls
             {
                 Rectangle screenBounds = new Rectangle();
                 Guid screenID = new Guid();
-                Tools.Instance.RemotingUtils.Deserialize(screenCapture, out screenImage, out screenBounds, out screenID);
+                Tools.Instance.RemotingUtils.DeserializeDesktopCapture(screenCapture, out screenImage, out screenBounds, out screenID);
 
             }
             Image finalDisplay = null;
@@ -114,7 +114,7 @@ namespace UIControls
                 Image cursor;
                 int cursorX, cursorY;
                 Guid id;
-                Tools.Instance.RemotingUtils.Deserialize(mouseCapture, out cursor, out cursorX, out cursorY, out id);
+                Tools.Instance.RemotingUtils.DeserializeMouseCapture(mouseCapture, out cursor, out cursorX, out cursorY, out id);
 
                 finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
                         cursor, cursorX, cursorY);
