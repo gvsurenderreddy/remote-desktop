@@ -10,6 +10,7 @@ using System.Threading;
 using GenericObjects;
 using UIControls;
 using Utils;
+using Abstraction;
 
 namespace MViewer
 {
@@ -105,7 +106,7 @@ namespace MViewer
                 }
                 else
                 {
-                    Contact contact = Program.Controller.PerformContactsOperation(sender, (ContactsEventArgs)e);
+                    ContactBase contact = Program.Controller.PerformContactsOperation(sender, (ContactsEventArgs)e);
                     ((ContactsEventArgs)e).UpdatedContact = contact;
                 }
             }

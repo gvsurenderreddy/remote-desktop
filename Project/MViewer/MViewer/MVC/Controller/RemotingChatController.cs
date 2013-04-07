@@ -10,6 +10,7 @@ using GenericObjects;
 using StrategyPattern;
 using Utils;
 using WindowsInput;
+using Abstraction;
 
 namespace MViewer
 {
@@ -38,11 +39,12 @@ namespace MViewer
 
         #region public methods
 
-        public void KeyDown(object sender, RemotingCommandEventArgs args)
+        public void KeyDown(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                VirtualKeyCode virtualKeyCode = _keyCodeParser.ParseKeyCode(args.KeyCode);
+                VirtualKeyCode virtualKeyCode = _keyCodeParser.ParseKeyCode(e.KeyCode);
                 WindowsInput.InputSimulator.SimulateKeyDown(virtualKeyCode);
             }
             catch (Exception ex)
@@ -51,11 +53,12 @@ namespace MViewer
             }
         }
 
-        public void KeyPress(object sender, RemotingCommandEventArgs args)
+        public void KeyPress(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                VirtualKeyCode virtualKeyCode = _keyCodeParser.ParseKeyCode(args.KeyCode);
+                VirtualKeyCode virtualKeyCode = _keyCodeParser.ParseKeyCode(e.KeyCode);
                 WindowsInput.InputSimulator.SimulateKeyPress(virtualKeyCode);
             }
             catch (Exception ex)
@@ -64,11 +67,12 @@ namespace MViewer
             }
         }
 
-        public void KeyUp(object sender, RemotingCommandEventArgs args)
+        public void KeyUp(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                VirtualKeyCode virtualKeyCode = _keyCodeParser.ParseKeyCode(args.KeyCode);
+                VirtualKeyCode virtualKeyCode = _keyCodeParser.ParseKeyCode(e.KeyCode);
                 WindowsInput.InputSimulator.SimulateKeyUp(virtualKeyCode);
             }
             catch (Exception ex)
@@ -77,14 +81,15 @@ namespace MViewer
             }
         }
 
-        public void LeftClickCommand(object sender, RemotingCommandEventArgs args)
+        public void LeftClickCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                     SetCursorPos((int)x, (int)y);
                     //  perform right click
@@ -99,12 +104,13 @@ namespace MViewer
             t.Start();
         }
 
-        public void DoubleRightClickCommand(object sender, RemotingCommandEventArgs args)
+        public void DoubleRightClickCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                 SetCursorPos((int)x, (int)y);
                 mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
@@ -118,12 +124,13 @@ namespace MViewer
             }
         }
 
-        public void DoubleLeftClickCommand(object sender, RemotingCommandEventArgs args)
+        public void DoubleLeftClickCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                 SetCursorPos((int)x, (int)y);
                 mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
@@ -137,12 +144,13 @@ namespace MViewer
             }
         }
 
-        public void MiddleClickCommand(object sender, RemotingCommandEventArgs args)
+        public void MiddleClickCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                 SetCursorPos((int)x, (int)y);
                 mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
@@ -154,12 +162,13 @@ namespace MViewer
             }
         }
 
-        public void DoubleMiddleClickCommand(object sender, RemotingCommandEventArgs args)
+        public void DoubleMiddleClickCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                 SetCursorPos((int)x, (int)y);
                 mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
@@ -173,15 +182,16 @@ namespace MViewer
             }
         }
 
-        public void MouseWheelCommand(object sender, RemotingCommandEventArgs args)
+        public void MouseWheelCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                 SetCursorPos((int)x, (int)y);
-                mouse_event(MOUSE_WHEEL, x, y, args.Delta, 0);
+                mouse_event(MOUSE_WHEEL, x, y, e.Delta, 0);
             }
             catch (Exception ex)
             {
@@ -189,12 +199,13 @@ namespace MViewer
             }
         }
 
-        public void MouseMoveCommand(object sender, RemotingCommandEventArgs args)
+        public void MouseMoveCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
                 SetCursorPos((int)x, (int)y);
             }
             catch (Exception ex)
@@ -203,14 +214,15 @@ namespace MViewer
             }
         }
 
-        public void RightMouseDownCommand(object sender, RemotingCommandEventArgs args)
+        public void RightMouseDownCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                     SetCursorPos((int)x, (int)y);
                     mouse_event(MOUSEEVENTF_RIGHTDOWN, x, y, 0, 0);
@@ -223,14 +235,15 @@ namespace MViewer
             t.Start();
         }
 
-        public void RightMouseUpCommand(object sender, RemotingCommandEventArgs args)
+        public void RightMouseUpCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
                     SetCursorPos((int)x, (int)y);
                     mouse_event(MOUSEEVENTF_RIGHTUP, x, y, 0, 0);
                 }
@@ -242,14 +255,15 @@ namespace MViewer
             t.Start();
         }
 
-        public void MiddleMouseDownCommand(object sender, RemotingCommandEventArgs args)
+        public void MiddleMouseDownCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
 
                     SetCursorPos((int)x, (int)y);
                     mouse_event(MOUSEEVENTF_MIDDLEDOWN, x, y, 0, 0);
@@ -262,14 +276,15 @@ namespace MViewer
             t.Start();
         }
 
-        public void MiddleMouseUpCommand(object sender, RemotingCommandEventArgs args)
+        public void MiddleMouseUpCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
                     SetCursorPos((int)x, (int)y);
                     mouse_event(MOUSEEVENTF_MIDDLEUP, x, y, 0, 0);
                 }
@@ -281,14 +296,15 @@ namespace MViewer
             t.Start();
         }
 
-        public void LeftMouseDownCommand(object sender, RemotingCommandEventArgs args)
+        public void LeftMouseDownCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
                     SetCursorPos((int)x, (int)y);
                     mouse_event(MOUSEEVENTF_LEFTDOWN, x, y, 0, 0);
                 }
@@ -300,14 +316,15 @@ namespace MViewer
             t.Start();
         }
 
-        public void LeftMouseUpCommand(object sender, RemotingCommandEventArgs args)
+        public void LeftMouseUpCommand(object sender, EventArgs args)
         {
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             Thread t = new Thread(delegate()
             {
                 try
                 {
-                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(args.X);
-                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(args.Y);
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
                     SetCursorPos((int)x, (int)y);
                     mouse_event(MOUSEEVENTF_LEFTUP, x, y, 0, 0);
                 }
@@ -335,7 +352,7 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void SendRemotingCommand(object sender, RemotingCommandEventArgs args)
+        public void SendRemotingCommand(object sender, EventArgs args)
         {
             try
             {
@@ -355,20 +372,21 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void StartRemoting(object sender, RoomActionEventArgs args)
+        public void StartRemoting(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncRemotingStartStop)
                 {
                     _syncRemotingCaptureActivity.Reset();
 
                     // I am going to send my captures by using the below client
-                    _model.ClientController.AddClient(args.Identity);
-                    _model.ClientController.StartClient(args.Identity);
+                    _model.ClientController.AddClient(e.Identity);
+                    _model.ClientController.StartClient(e.Identity);
 
                     // create client session
-                    Session clientSession = new ClientSession(args.Identity, args.RoomType);
+                    Session clientSession = new ClientSession(e.Identity, e.RoomType);
                     // save the proxy to which we are sending the remoting captures
                     _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Remoting);
 
@@ -389,47 +407,48 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void StopRemoting(object sender, RoomActionEventArgs args)
+        public void StopRemoting(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncRemotingStartStop)
                 {
                     _syncRemotingCaptureActivity.Reset();
 
                     // todo: wait untill the peding capture is being sent to the partner
-                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(args.Identity);
+                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(e.Identity);
                     transfer.IsRemotingUpdating = true;
 
                     // check if the screen capture is pending for being sent
-                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(args.Identity);
+                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(e.Identity);
                     while (transferStatus.Remoting)
                     {
                         // wait for it to finish and block the next sending
                         Thread.Sleep(200);
                     }
 
-                    if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                    if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                     {
                         // send the stop command to the partner
                         _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, 
-                            args.Identity, args.RoomType, args.SignalType);
+                            e.Identity, e.RoomType, e.SignalType);
                     }
 
-                    PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                    PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                     peers.RemotingSessionState = GenericEnums.SessionState.Closed;
-                    _model.SessionManager.RemoveSession(args.Identity);
+                    _model.SessionManager.RemoveSession(e.Identity);
 
-                    _model.RemoveClient(args.Identity);
+                    _model.RemoveClient(e.Identity);
 
-                    _view.RoomManager.CloseRoom(args.Identity, GenericEnums.RoomType.Remoting);
-                    _view.RoomManager.RemoveRoom(args.Identity, GenericEnums.RoomType.Remoting);
+                    _view.RoomManager.CloseRoom(e.Identity, GenericEnums.RoomType.Remoting);
+                    _view.RoomManager.RemoveRoom(e.Identity, GenericEnums.RoomType.Remoting);
 
                     if (!_model.SessionManager.RemotingRoomsLeft())
                     {
                         // check if any remoting session is still active
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
-                        _view.ResetLabels(args.RoomType);
+                        _view.ResetLabels(e.RoomType);
                     }
 
                     // unblock the capture sending
@@ -451,11 +470,12 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void ResumeRemoting(object sender, RoomActionEventArgs args)
+        public void ResumeRemoting(object sender, EventArgs args)
         {
             try
             {
-                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
+                PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.RemotingSessionState = GenericEnums.SessionState.Opened; // resume the remoting
             }
             catch (Exception ex)
@@ -469,12 +489,13 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void PauseRemoting(object sender, RoomActionEventArgs args)
+        public void PauseRemoting(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 // use the peer status of the selected room
-                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.RemotingSessionState = GenericEnums.SessionState.Paused; // pause the remoting
             }
             catch (Exception ex)
@@ -568,7 +589,7 @@ namespace MViewer
                         remotingRoom.BindCommandHandlers(SystemConfiguration.Instance.RemotingCommand);
                         // initialize new remoting  form
 
-                        Contact contact = _model.GetContact(identity);
+                        ContactBase contact = _model.GetContact(identity);
                         // get friendly name from contacts list
                         if (contact != null)
                         {

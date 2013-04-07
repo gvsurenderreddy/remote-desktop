@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using BusinessLogicLayer;
 using GenericObjects;
 using Utils;
+using Abstraction;
 
 namespace MViewer
 {
@@ -119,20 +120,21 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void StopVideo(object sender, RoomActionEventArgs args)
+        public void StopVideo(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncVideoStartStop)
                 {
                     _syncVideoCaptureActivity.Reset();
 
                     bool sendStopSignal = true;
-                    if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                    if (sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                     {
                         sendStopSignal = false;
                     }
-                    string identity = args.Identity;
+                    string identity = e.Identity;
                     // tell the partner to pause capturing & sending while processing room Stop command
 
                     _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
@@ -168,7 +170,7 @@ namespace MViewer
                         _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Video);
                         _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Video);
 
-                        _view.UpdateLabels(args.Identity, args.RoomType);
+                        _view.UpdateLabels(e.Identity, e.RoomType);
                     }
 
                     _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
@@ -177,7 +179,7 @@ namespace MViewer
                     // close the webcapture form if there s no room left
                     if (!_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Video))
                     {
-                        _view.ResetLabels(args.RoomType);
+                        _view.ResetLabels(e.RoomType);
                         StopVideoCapturing();
                     }
 
@@ -188,7 +190,7 @@ namespace MViewer
                     {
                         this.StopAudio(this, new RoomActionEventArgs()
                         {
-                            Identity = args.Identity,
+                            Identity = e.Identity,
                             RoomType = GenericEnums.RoomType.Audio,
                             SignalType = GenericEnums.SignalType.Stop
                         });
@@ -206,14 +208,15 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void PauseVideo(object sender, RoomActionEventArgs args)
+        public void PauseVideo(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 _syncVideoCaptureActivity.Reset();
 
                 // use the peer status of the selected room
-                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.VideoSessionState = GenericEnums.SessionState.Paused; // pause the video 
 
                 _syncVideoCaptureActivity.Set();
@@ -229,13 +232,14 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void ResumeVideo(object sender, RoomActionEventArgs args)
+        public void ResumeVideo(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 _syncVideoCaptureActivity.Reset();
 
-                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.VideoSessionState = GenericEnums.SessionState.Opened; // resume the video 
 
                 _syncVideoCaptureActivity.Set();
@@ -251,7 +255,7 @@ namespace MViewer
         /// method used to trigger video capture control start
         /// </summary>
         /// <param name="webcamControl"></param>
-        public void StartVideo(WebcamCapture webcamControl)
+        public void StartVideo(IWebcamCapture webcamControl)
         {
             try
             {
@@ -271,23 +275,24 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void StartVideo(object sender, RoomActionEventArgs args)
+        public void StartVideo(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncVideoStartStop)
                 {
                     // create client session
-                    Session clientSession = new ClientSession(args.Identity, args.RoomType);
+                    Session clientSession = new ClientSession(e.Identity, e.RoomType);
                     // save the proxy to which we are sending the webcam captures
                     _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Video);
 
                     // open new Video  form to receive the captures
-                    OpenVideoForm(args.Identity);
+                    OpenVideoForm(e.Identity);
 
                     // I am going to send my captures by using the below client
-                    _model.ClientController.AddClient(args.Identity);
-                    _model.ClientController.StartClient(args.Identity);
+                    _model.ClientController.AddClient(e.Identity);
+                    _model.ClientController.StartClient(e.Identity);
 
                     // initialize the webcamCapture form
                     // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
@@ -298,7 +303,7 @@ namespace MViewer
 
                     this.StartAudio(this, new RoomActionEventArgs()
                     {
-                        Identity = args.Identity,
+                        Identity = e.Identity,
                         RoomType = GenericEnums.RoomType.Audio,
                         SignalType = GenericEnums.SignalType.Start
                     });
@@ -395,7 +400,7 @@ namespace MViewer
                             PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                             peers.VideoSessionState = GenericEnums.SessionState.Opened;
 
-                            Contact contact = _model.GetContact(identity);
+                            ContactBase contact = _model.GetContact(identity);
                             // get friendly name from contacts list
                             _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Video, contact.FriendlyName);
                             // finally, show the video  form where we'll see the webcam captures

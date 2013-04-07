@@ -58,6 +58,10 @@
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
       <Name>GenericObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Abstraction.csproj">
+      <Project>{9e8d07be-e021-4991-9406-71a1668d99a8}</Project>
+      <Name>Abstraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{d5b65f88-df4b-4a9a-af3c-d3328ca0b364}</Project>
       <Name>Utils</Name>

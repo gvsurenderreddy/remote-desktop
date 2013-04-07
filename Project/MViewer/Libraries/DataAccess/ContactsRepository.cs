@@ -6,6 +6,7 @@ using GenericObjects;
 using System.Data;
 using System.IO;
 using Utils;
+using Abstraction;
 
 namespace DataAccessLayer
 {
@@ -52,7 +53,7 @@ namespace DataAccessLayer
             return _contactsDataView;
         }
 
-        public static int AddContact(Contact contact)
+        public static int AddContact(ContactBase contact)
         {
             DataRow dr = _contactsDataView.Table.NewRow();
             dr["ContactNo"] = dr.Table.Rows.Count;
@@ -81,7 +82,7 @@ namespace DataAccessLayer
             }
         }
 
-        public static void UpdateContact(Contact contact)
+        public static void UpdateContact(ContactBase contact)
         {
             try
             {

@@ -42,6 +42,14 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Game.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -61,16 +69,42 @@
     <Compile Include="Controller\ClientController.cs" />
     <Compile Include="Controller\ServerController.cs" />
     <Compile Include="IdentityResolver.cs" />
+    <Compile Include="Manager\AudioStreamManager.cs" />
     <Compile Include="Manager\PresenterManager.cs" />
     <Compile Include="Manager\RoomManager.cs" />
     <Compile Include="Manager\SessionManager.cs" />
+    <Compile Include="Presenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Builder\ServerBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AudioStreaming\AudioStreaming.csproj">
+      <Project>{3195debd-9eef-410e-8fb6-cf804c541fd7}</Project>
+      <Name>AudioStreaming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Communicator\Communicator.csproj">
+      <Project>{9249e167-8f34-45c7-b1be-9fe5c86458dd}</Project>
+      <Name>Communicator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomEventArgs\CustomEventArgs.csproj">
+      <Project>{7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3}</Project>
+      <Name>CustomEventArgs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DesktopSharing\DesktopSharing\DesktopSharingCore.csproj">
+      <Project>{4a68a730-8d2c-485d-b9c9-91ea2cec5a3a}</Project>
+      <Name>DesktopSharingCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenericData\GenericObjects.csproj">
-      <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
+      <Project>{f04c343c-9057-45be-b8e0-a6bb4cbd3e12}</Project>
       <Name>GenericObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Abstraction.csproj">
+      <Project>{9e8d07be-e021-4991-9406-71a1668d99a8}</Project>
+      <Name>Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Structures\Structures.csproj">
+      <Project>{317b6f1f-6ed8-4f63-973e-4504d232e94b}</Project>
+      <Name>Structures</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>

@@ -170,9 +170,17 @@
       <Project>{249C2004-757F-44B9-BE01-B280727B98DC}</Project>
       <Name>BusinessLogicLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\CustomEventArgs\CustomEventArgs.csproj">
+      <Project>{7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3}</Project>
+      <Name>CustomEventArgs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\DataAccess\DataAccessLayer.csproj">
       <Project>{B0788A7C-1297-4B64-BE84-10799BD6BE66}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\DesktopSharing\DesktopSharing\DesktopSharingCore.csproj">
+      <Project>{4a68a730-8d2c-485d-b9c9-91ea2cec5a3a}</Project>
+      <Name>DesktopSharingCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\GenericData\GenericObjects.csproj">
       <Project>{F04C343C-9057-45BE-B8E0-A6BB4CBD3E12}</Project>
@@ -182,9 +190,17 @@
       <Project>{3549cd6f-80f8-450f-b99e-cf0a736b1f2a}</Project>
       <Name>InputSimulator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\Interfaces\Abstraction.csproj">
+      <Project>{9e8d07be-e021-4991-9406-71a1668d99a8}</Project>
+      <Name>Abstraction</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\StrategyPattern\StrategyPattern.csproj">
       <Project>{bfca88dd-1daf-4447-96a4-a112c03b1570}</Project>
       <Name>StrategyPattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\Structures\Structures.csproj">
+      <Project>{317b6f1f-6ed8-4f63-973e-4504d232e94b}</Project>
+      <Name>Structures</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\UIControls\UIControls.csproj">
       <Project>{37D78FE4-C863-4E19-BF23-C5A6253CC734}</Project>

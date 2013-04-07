@@ -9,6 +9,7 @@ using System.Timers;
 using System.Windows.Forms;
 using GenericObjects;
 using Utils;
+using Abstraction;
 
 namespace MViewer
 {
@@ -16,7 +17,7 @@ namespace MViewer
     {
         #region private members
 
-        WebcamCapture _webcamCapture;
+        IWebcamCapture _webcamCapture;
         int _timerInterval;
 
         #endregion
@@ -102,7 +103,7 @@ namespace MViewer
 
         #region prorieties
 
-        public WebcamCapture CaptureControl
+        public IWebcamCapture CaptureControl
         {
             get
             {

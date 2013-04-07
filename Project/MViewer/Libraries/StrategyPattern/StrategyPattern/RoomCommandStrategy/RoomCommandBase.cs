@@ -18,16 +18,17 @@ namespace StrategyPattern
             _command = PerformCommand;
         }
 
-        public void Execute(object sender, RoomActionEventArgs args)
+        public void Execute(object sender, EventArgs args)
         {
             _command.Invoke(sender, args);
         }
 
         public abstract void BindCommands();
 
-        public void PerformCommand(object sender, RoomActionEventArgs args)
+        public void PerformCommand(object sender, EventArgs args)
         {
-            _commands[args.SignalType].Invoke(sender, args);
+            RoomActionEventArgs e = (RoomActionEventArgs)args;
+            _commands[e.SignalType].Invoke(sender, args);
         }
     }
 }

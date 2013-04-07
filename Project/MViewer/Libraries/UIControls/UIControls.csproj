@@ -157,9 +157,17 @@
       <Project>{f52aa97e-180a-40ed-8f2b-09080171d6c7}</Project>
       <Name>CommandHookMonitor</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CustomEventArgs\CustomEventArgs.csproj">
+      <Project>{7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3}</Project>
+      <Name>CustomEventArgs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenericData\GenericObjects.csproj">
       <Project>{f04c343c-9057-45be-b8e0-a6bb4cbd3e12}</Project>
       <Name>GenericObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Abstraction.csproj">
+      <Project>{9e8d07be-e021-4991-9406-71a1668d99a8}</Project>
+      <Name>Abstraction</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{D5B65F88-DF4B-4A9A-AF3C-D3328CA0B364}</Project>

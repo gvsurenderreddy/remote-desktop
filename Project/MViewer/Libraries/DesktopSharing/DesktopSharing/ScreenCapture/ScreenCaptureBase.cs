@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using Utils;
+using GenericObjects;
 
 namespace DesktopSharing
 {
@@ -21,11 +22,11 @@ namespace DesktopSharing
             Bitmap screenImage = null;
             try
             {
-                desktopContextHeight = Win32Imports.GetDesktopContext(Win32Imports.GetDesktopWindow());
+                desktopContextHeight = WebcamWin32APIMethods.GetDesktopContext(WebcamWin32APIMethods.GetDesktopWindow());
                 IntPtr gdiDesktopContext = GraphicDeviceInterfaceImports.CreateCompatibleDesktopContext(desktopContextHeight);
                 Structures.ScreenSize screenSize;
-                screenSize.Width = Win32Imports.GetSystemMetrics(Win32Imports.Width);
-                screenSize.Height = Win32Imports.GetSystemMetrics(Win32Imports.Height);
+                screenSize.Width = WebcamWin32APIMethods.GetSystemMetrics(WebcamWin32APIMethods.Width);
+                screenSize.Height = WebcamWin32APIMethods.GetSystemMetrics(WebcamWin32APIMethods.Height);
                 IntPtr gdiBitmap = GraphicDeviceInterfaceImports.CreateCompatibleBitmap(desktopContextHeight, screenSize.Width, screenSize.Height);
                 if (gdiBitmap != IntPtr.Zero)
                 {
@@ -46,7 +47,7 @@ namespace DesktopSharing
             {
                 if (desktopContextHeight != IntPtr.Zero)
                 {
-                    Win32Imports.ReleaseDesktopContext(Win32Imports.GetDesktopWindow(), desktopContextHeight);
+                    WebcamWin32APIMethods.ReleaseDesktopContext(WebcamWin32APIMethods.GetDesktopWindow(), desktopContextHeight);
                 }
             }
             return screenImage;
@@ -66,12 +67,12 @@ namespace DesktopSharing
                 Structures.CursorInfo cursorInfo = new Structures.CursorInfo();
                 Structures.IconInfo iconInfo = new Structures.IconInfo();
                 cursorInfo.Size = Marshal.SizeOf(cursorInfo);
-                if (Win32Imports.GetCursorInfo(out cursorInfo))
+                if (WebcamWin32APIMethods.GetCursorInfo(out cursorInfo))
                 {
-                    if (cursorInfo.State == Win32Imports.CURSOR_SHOWING)
+                    if (cursorInfo.State == WebcamWin32APIMethods.CURSOR_SHOWING)
                     {
-                        IntPtr iconHandle = Win32Imports.CopyIcon(cursorInfo.Handle);
-                        if (Win32Imports.GetIconInfo(iconHandle, out iconInfo))
+                        IntPtr iconHandle = WebcamWin32APIMethods.CopyIcon(cursorInfo.Handle);
+                        if (WebcamWin32APIMethods.GetIconInfo(iconHandle, out iconInfo))
                         {
                             if (iconInfo.Bitmask != IntPtr.Zero)
                             {
@@ -88,7 +89,7 @@ namespace DesktopSharing
                             {
                                 cursorCapture = newIcon.ToBitmap();
                             }
-                            Win32Imports.DestroyIcon(iconHandle);
+                            WebcamWin32APIMethods.DestroyIcon(iconHandle);
                         }
                     }
                 }

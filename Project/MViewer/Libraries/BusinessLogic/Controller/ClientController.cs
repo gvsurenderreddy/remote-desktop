@@ -13,7 +13,7 @@ namespace BusinessLogicLayer
     {
         #region private members
 
-        IDictionary<string, MViewerClient> _clients;
+        IDictionary<string, IMviewerChannel> _clients;
         readonly object _syncClients = new object();
 
         #endregion
@@ -24,7 +24,7 @@ namespace BusinessLogicLayer
         {
             lock (_syncClients)
             {
-                _clients = new Dictionary<string, MViewerClient>();
+                _clients = new Dictionary<string, IMviewerChannel>();
             }
         }
 
@@ -32,13 +32,13 @@ namespace BusinessLogicLayer
 
         #region public methods
 
-        public void SendRemotingCommand(string receiverIdentity, RemotingCommandEventArgs commandArgs)
+        public void SendRemotingCommand(string receiverIdentity, EventArgs commandArgs)
         {
             try
             {
                 if (_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = _clients[receiverIdentity];
+                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
                     if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
                         try
@@ -64,7 +64,7 @@ namespace BusinessLogicLayer
             {
                 if (_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = _clients[receiverIdentity];
+                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
                     if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
                         try
@@ -93,7 +93,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients.ContainsKey(partnerIdentity))
                     {
-                        MViewerClient client = _clients[partnerIdentity];
+                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                         if (client != null)
                         {
                             canSend = client.SendingPermission(myIdentity, fileName, fileSize);
@@ -116,7 +116,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients.ContainsKey(partnerIdentity))
                     {
-                        MViewerClient client = _clients[partnerIdentity];
+                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                         if (client != null)
                         {
                             client.SendFile(fileBytes, fileName);
@@ -138,7 +138,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients.ContainsKey(partnerIdentity))
                     {
-                        MViewerClient client = _clients[partnerIdentity];
+                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                         if (client != null)
                         {
                             try
@@ -164,7 +164,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients.ContainsKey(partnerIdentity))
                     {
-                        MViewerClient client = _clients[partnerIdentity];
+                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                         if (client != null)
                         {
                             try
@@ -193,7 +193,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients.ContainsKey(partnerIdentity))
                     {
-                        MViewerClient client = _clients[partnerIdentity];
+                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                         if (client != null)
                         {
                             client.UpdateFriendlyName(myIdentity, newFriendlyName);
@@ -213,7 +213,7 @@ namespace BusinessLogicLayer
             {
                 if (_clients.ContainsKey(identity))
                 {
-                    MViewerClient client = _clients[identity];
+                    MViewerClient client = (MViewerClient)_clients[identity];
                     try
                     {
                         client.SendRoomButtonAction(myIdentity, roomType, signalType);
@@ -226,10 +226,10 @@ namespace BusinessLogicLayer
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-        
-        public MViewerClient GetClient(string identity)
+
+        public IMviewerChannel GetClient(string identity)
         {
-            MViewerClient client = null;
+            IMviewerChannel client = null;
             if (_clients != null && _clients.ContainsKey(identity))
             {
                 client = _clients[identity];
@@ -245,7 +245,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients == null)
                     {
-                        _clients = new Dictionary<string, MViewerClient>();
+                        _clients = new Dictionary<string, IMviewerChannel>();
                     }
                     if (_clients.ContainsKey(identity))
                     {
@@ -255,7 +255,7 @@ namespace BusinessLogicLayer
 
                     Builder clientBuilder = new ClientBuilder(endpoint);
                     Director.Instance.Construct(clientBuilder);
-                    MViewerClient client = (MViewerClient)clientBuilder.GetResult();
+                    IMviewerChannel client = (IMviewerChannel)clientBuilder.GetResult();
                     _clients.Add(identity, client);
                 }
             }
@@ -291,7 +291,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients.ContainsKey(identity))
                     {
-                        _clients[identity].Close();
+                        ((MViewerClient)_clients[identity]).Close();
                     }
                 }
             }
@@ -311,7 +311,7 @@ namespace BusinessLogicLayer
                     {
                         AddClient(identity);
                     }
-                    MViewerClient mviewerClient = _clients[identity];
+                    MViewerClient mviewerClient = (MViewerClient)_clients[identity];
                     if (mviewerClient.State != System.ServiceModel.CommunicationState.Closed && mviewerClient.State != System.ServiceModel.CommunicationState.Opening && mviewerClient.State != System.ServiceModel.CommunicationState.Opened)
                     {
                         mviewerClient.Open();
@@ -348,7 +348,7 @@ namespace BusinessLogicLayer
             {
                 if (_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = _clients[receiverIdentity];
+                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
                     if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
                         try
@@ -379,7 +379,7 @@ namespace BusinessLogicLayer
                 }
                 if (_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = _clients[receiverIdentity];
+                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
                     if (client.State == System.ServiceModel.CommunicationState.Opened)
                     {
                         try

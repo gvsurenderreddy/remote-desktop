@@ -11,6 +11,7 @@ using BusinessLogicLayer;
 using System.IO;
 using System.Windows.Forms;
 using System.Threading;
+using Abstraction;
 
 namespace MViewer
 {
@@ -185,7 +186,7 @@ namespace MViewer
         /// </summary>
         /// <param name="identity"></param>
         /// <returns></returns>
-        public Contact GetContact(string identity)
+        public ContactBase GetContact(string identity)
         {
             return ContactsRepository.GetContactByIdentity(identity);
         }
@@ -228,60 +229,68 @@ namespace MViewer
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        public Contact PerformContactOperation(ContactsEventArgs e)
+        public ContactBase PerformContactOperation(EventArgs e)
         {
+            ContactsEventArgs args = (ContactsEventArgs)e;
             Contact contact = null;
             try
             {
-                switch (e.Operation)
+                switch (args.Operation)
                 {
                     case GenericEnums.ContactsOperation.Status:
-                        PingContacts(e.UpdatedContact.Identity);
+                        PingContacts(args.UpdatedContact.Identity);
                         break;
                     case GenericEnums.ContactsOperation.Add:
-                        int contactNo = ContactsRepository.AddContact(e.UpdatedContact);
+                        int contactNo = ContactsRepository.AddContact(args.UpdatedContact);
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
-                        if (e.UpdatedContact.ContactNo != -1)
+                        contact = ContactsRepository.GetContactByIdentity(args.UpdatedContact.Identity);
+                        if (args.UpdatedContact.ContactNo != -1)
                         {
                             // notify other contact of performed operation (ADD/REMOVE)
                             ClientController.AddClient(contact.Identity);
-                            MViewerClient client = ClientController.GetClient(contact.Identity);
+                            IMviewerChannel client = ClientController.GetClient(contact.Identity);
                             client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
                         }
                         PingContacts(null);
                         break;
                     case GenericEnums.ContactsOperation.Update:
-                        ContactsRepository.UpdateContact(e.UpdatedContact);
+                        ContactsRepository.UpdateContact(args.UpdatedContact);
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = ContactsRepository.GetContactByNumber(e.UpdatedContact.ContactNo);
+                        contact = ContactsRepository.GetContactByNumber(args.UpdatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Remove:
-                        contact = ContactsRepository.GetContactByIdentity(e.UpdatedContact.Identity);
+                        contact = ContactsRepository.GetContactByIdentity(args.UpdatedContact.Identity);
                         ContactsRepository.RemoveContact(contact.ContactNo);
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
 
-                        if (e.UpdatedContact.ContactNo != -1)
+                        if (args.UpdatedContact.ContactNo != -1)
                         {
                             ClientController.AddClient(contact.Identity);
-                            MViewerClient client2 = ClientController.GetClient(contact.Identity);
+                            IMviewerChannel client2 = ClientController.GetClient(contact.Identity);
                             Thread t = new Thread(delegate()
                             {
-                                bool isOnline = ClientController.IsContactOnline(contact.Identity);
-                                if (isOnline)
+                                try
                                 {
-                                    client2.RemoveContact(_identity.MyIdentity);
+                                    bool isOnline = ClientController.IsContactOnline(contact.Identity);
+                                    if (isOnline)
+                                    {
+                                        client2.RemoveContact(_identity.MyIdentity);
+                                    }
+                                    else
+                                    {
+                                        //todo: create a message queue so that the partner will be notified of removal
+                                    }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    //todo: create a message queue so that the partner will be notified of removal
+                                    Tools.Instance.Logger.LogError(ex.ToString());
                                 }
                             });
                             t.Start();
                         }
                         break;
                     case GenericEnums.ContactsOperation.Get:
-                        contact = ContactsRepository.GetContactByNumber(e.UpdatedContact.ContactNo);
+                        contact = ContactsRepository.GetContactByNumber(args.UpdatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Load:
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
@@ -345,7 +354,7 @@ namespace MViewer
             get { return _identity.FriendlyName; }
         }
 
-        public Identity Identity
+        public IdentityBase Identity
         {
             get { return _identity; }
         }

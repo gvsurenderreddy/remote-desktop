@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GenericObjects;
 using UIControls;
 using Utils;
+using Abstraction;
 
 namespace MViewer
 {
@@ -21,13 +22,14 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void SendFileHandler(object sender, RoomActionEventArgs args)
+        public void SendFileHandler(object sender, EventArgs args)
         {
             try
             {
-                if (_model.ClientController.IsContactOnline(args.Identity))
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
+                if (_model.ClientController.IsContactOnline(e.Identity))
                 {
-                    Contact contact = _model.GetContact(args.Identity);
+                    ContactBase contact = _model.GetContact(e.Identity);
                     string filePath = string.Empty;
                     FileDialog fileDialog = new OpenFileDialog();
                     if (fileDialog.ShowDialog() == DialogResult.OK)
@@ -61,7 +63,7 @@ namespace MViewer
                                 fileProgressFrom.StartPB();
                             });
                             t2.Start();
-                            _model.SendFile(filePath, args.Identity);
+                            _model.SendFile(filePath, e.Identity);
 
                             if (fileProgressFrom != null)
                             {
@@ -121,7 +123,7 @@ namespace MViewer
 
                         // add a progress bar (into a TransfersForm)
                         FormFileProgress fileProgressFrom = null;
-                        Contact contact = _model.GetContact(args.Identity);
+                        ContactBase contact = _model.GetContact(args.Identity);
                         Thread t3 = new Thread(delegate()
                         {
                             try

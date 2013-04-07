@@ -12,6 +12,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using UIControls;
 using StrategyPattern;
+using Abstraction;
 
 namespace MViewer
 {
@@ -133,13 +134,14 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void FriendlyNameObserver(object sender, IdentityEventArgs e)
+        public void FriendlyNameObserver(object sender, EventArgs e)
         {
             try
             {
-                _model.Identity.UpdateFriendlyName(e.FriendlyName);
+                IdentityEventArgs args = (IdentityEventArgs)e;
+                _model.Identity.UpdateFriendlyName(args.FriendlyName);
                 // notify online contacts of updated friendly name
-                _model.NotifyContacts(e.FriendlyName);
+                _model.NotifyContacts(args.FriendlyName);
             }
             catch (Exception ex)
             {
@@ -181,12 +183,13 @@ namespace MViewer
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        public Contact PerformContactsOperation(object sender, ContactsEventArgs e)
-        { 
-            Contact contact = null;
+        public ContactBase PerformContactsOperation(object sender, EventArgs e)
+        {
+            ContactsEventArgs args = (ContactsEventArgs)e;
+            ContactBase contact = null;
             try
             {
-                if (e.Operation == GenericEnums.ContactsOperation.Load)
+                if (args.Operation == GenericEnums.ContactsOperation.Load)
                 {
                     // don't need to send signal to the Model
                     _view.NotifyContactsObserver();

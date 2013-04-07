@@ -18,16 +18,17 @@ namespace StrategyPattern
             _command = PerformCommand;
         }
 
-        public void Execute(object sender, RemotingCommandEventArgs args)
+        public void Execute(object sender, EventArgs args)
         {
             _command.Invoke(sender, args);
         }
 
         public abstract void BindCommands();
 
-        public void PerformCommand(object sender, RemotingCommandEventArgs args)
+        public void PerformCommand(object sender, EventArgs args)
         {
-            _commands[args.MouseCommandType].Invoke(sender, args);
+            RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
+            _commands[e.MouseCommandType].Invoke(sender, args);
         }
     }
 }

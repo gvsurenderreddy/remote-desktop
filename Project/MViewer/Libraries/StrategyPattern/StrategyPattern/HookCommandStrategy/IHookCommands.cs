@@ -8,6 +8,6 @@ namespace StrategyPattern
 {
     public interface IHookCommands
     {
-        void Execute(object sender, RemotingCommandEventArgs args);
+        void Execute(object sender, EventArgs args);
     }
 }

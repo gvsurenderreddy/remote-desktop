@@ -68,6 +68,10 @@
     <Compile Include="StrategyPattern\RoomCommandStrategy\VideoCommands.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CustomEventArgs\CustomEventArgs.csproj">
+      <Project>{7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3}</Project>
+      <Name>CustomEventArgs</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenericData\GenericObjects.csproj">
       <Project>{f04c343c-9057-45be-b8e0-a6bb4cbd3e12}</Project>
       <Name>GenericObjects</Name>

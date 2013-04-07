@@ -1,4 +1,5 @@
-﻿using BusinessLogicLayer;
+﻿using Abstraction;
+using BusinessLogicLayer;
 using GenericObjects;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace MViewer
 
                         audioRoom.ToggleAudioStatus();
 
-                        Contact contact = _model.GetContact(identity);
+                        ContactBase contact = _model.GetContact(identity);
                         // get friendly name from contacts list
                         _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Audio, contact.FriendlyName);
                         // finally, show the Audio  form where we'll see the webcam captures
@@ -191,21 +192,22 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void PauseAudio(object sender, RoomActionEventArgs args)
+        public void PauseAudio(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 _syncAudioCaptureActivity.Reset();
 
                 // use the peer status of the selected room
-                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.AudioSessionState = GenericEnums.SessionState.Paused; // pause the Audio 
 
-                _view.RoomManager.ToggleAudioStatus(args.Identity);
-                if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                _view.RoomManager.ToggleAudioStatus(e.Identity);
+                if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                 {
                     // send the stop signal to the server session
-                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, args.Identity,
+                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, e.Identity,
                         GenericEnums.RoomType.Audio, GenericEnums.SignalType.Pause);
                 }
                 _syncAudioCaptureActivity.Set();
@@ -221,20 +223,21 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void ResumeAudio(object sender, RoomActionEventArgs args)
+        public void ResumeAudio(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 _syncAudioCaptureActivity.Reset();
 
-                PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);
+                PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.AudioSessionState = GenericEnums.SessionState.Opened; // resume the Audio 
-                _view.RoomManager.ToggleAudioStatus(args.Identity);
+                _view.RoomManager.ToggleAudioStatus(e.Identity);
 
-                if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                 {
                     // send the stop signal to the server session
-                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, args.Identity,
+                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, e.Identity,
                         GenericEnums.RoomType.Audio, GenericEnums.SignalType.Resume);
                 }
                 _syncAudioCaptureActivity.Set();
@@ -250,14 +253,14 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void StartAudio(object sender, RoomActionEventArgs args)
+        public void StartAudio(object sender, EventArgs args)
         {
             try
             {
                 lock (_syncAudioStartStop)
                 {
                     // add client session
-                    OpenAudioForm(args.Identity);
+                    OpenAudioForm(((RoomActionEventArgs)args).Identity);
                     PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
                 }
             }
@@ -272,15 +275,16 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public void StopAudio(object sender, RoomActionEventArgs args)
+        public void StopAudio(object sender, EventArgs args)
         {
             try
             {
+                RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncAudioStartStop)
                 {
                     _syncAudioCaptureActivity.Reset();
 
-                    string identity = args.Identity;
+                    string identity = e.Identity;
 
                     TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
                     transfer.IsAudioUpdating = true;
@@ -300,7 +304,7 @@ namespace MViewer
                     {
                         peers.AudioSessionState = GenericEnums.SessionState.Closed;
                         bool sendStopSignal = true;
-                        if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                        if (sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                         {
                             sendStopSignal = false;
                         }
@@ -316,13 +320,13 @@ namespace MViewer
                         _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
                         _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
 
-                        _view.UpdateLabels(args.Identity, args.RoomType);
+                        _view.UpdateLabels(e.Identity, e.RoomType);
                     }
 
                     if (_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Audio) == false)
                     {
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
-                        _view.ResetLabels(args.RoomType);
+                        _view.ResetLabels(e.RoomType);
                     }
 
                     OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);

@@ -8,7 +8,7 @@ namespace StrategyPattern
 {
     public interface IRoomCommands
     {
-        void Execute(object sender, RoomActionEventArgs args);
+        void Execute(object sender, EventArgs args);
         void BindCommands();
     }
 }

@@ -42,6 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <PlatformTarget>x86</PlatformTarget>
     <OutputPath>bin\x86\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,13 +55,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScreenCapture\ScreenCaptureTool.cs" />
+    <Compile Include="WebCamCapture\WebcamCapture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Win32\WebcamWin32APIConstants.cs" />
+    <Compile Include="Win32\WebcamWin32APIMethods.cs" />
     <Compile Include="Win32\GraphicDeviceInterfaceImports.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenCapture\ScreenCapture.cs" />
     <Compile Include="ScreenCapture\ScreenCaptureBase.cs" />
-    <Compile Include="Win32\Win32Imports.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CustomEventArgs\CustomEventArgs.csproj">
+      <Project>{7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3}</Project>
+      <Name>CustomEventArgs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Interfaces\Abstraction.csproj">
+      <Project>{9e8d07be-e021-4991-9406-71a1668d99a8}</Project>
+      <Name>Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Structures\Structures.csproj">
+      <Project>{317b6f1f-6ed8-4f63-973e-4504d232e94b}</Project>
+      <Name>Structures</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Utils\Utils.csproj">
       <Project>{d5b65f88-df4b-4a9a-af3c-d3328ca0b364}</Project>
       <Name>Utils</Name>
