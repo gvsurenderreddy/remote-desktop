@@ -1,0 +1,2304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="293465f6-9603-4ea5-8aa5-32c47c2a7b02"
+  name="DesktopSharing"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="45bdf14e-6795-4133-bac9-a888da4eeb5e"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DDesktopSharing"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="7f162b8c-9c0f-4905-a6e5-b7645088180b"
+        name="GraphicDeviceInterfaceImports"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="82ca90f2-1dff-4194-895f-466198324661"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="357c0e05-033a-4087-85e1-6979e4381b6b"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="939e051c-730e-4682-8e7a-b63e94f1cb2d">
+                <propertyInstance
+                  Id="59531f71-d653-4cbe-962c-bf219ac66f37"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="251ebe90-a974-4586-b045-428ea0fc66b5">
+                <propertyInstance
+                  Id="b649184b-f45c-413c-a592-1b9aed84f9a9"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="75e63925-2d12-473f-8622-e0b9f54c536a">
+                <propertyInstance
+                  Id="ba17ab4e-04cf-4ff1-8eab-c317472e6d55"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="49a7c0f3-6a0b-4a76-8c66-f27e0836ac64">
+                <propertyInstance
+                  Id="5f49b087-94f2-451b-8985-05517a4f7752"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="88e0d876-1ea6-41e1-85f6-87e456b46c25">
+                <propertyInstance
+                  Id="c3795938-6d4a-4fe3-8786-b3718b379a1f"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="915bb3ef-f4d2-4701-aee3-865065658902"
+            name="SRCCOPY"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="bebead37-e1ed-457c-8ca1-b50b62c38f69"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3DSRCCOPY"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0af387a7-3bd2-40be-b3eb-939b628e8f15"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="620d21ed-f0da-4612-ac28-4bffba75cc9f">
+                    <propertyInstance
+                      Id="ec7df143-93b1-4f92-a391-0c65b22d72a8"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3cff0d8e-f172-44b1-9adc-deff23fd2a56">
+                    <propertyInstance
+                      Id="07c0fcd0-af6e-4b06-8734-68915b2e27f3"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="24831438-8122-4c9c-a6ac-7bf48d53c1f7">
+                    <propertyInstance
+                      Id="b3023198-a407-461b-aa63-ee8322554ad4"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a8958756-12f1-4389-acd3-fa29645a4f1e">
+                    <propertyInstance
+                      Id="646a4afa-f4a2-4f55-99d2-640b30c8237e"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9b9fa848-47f2-4509-bf44-34ae38bea23e">
+                    <propertyInstance
+                      Id="e1e927a8-36d2-4917-ab06-e0c6e2c05838"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="630bc27c-d007-4bc8-a135-2fe0f7bb1a04"
+            name="GraphicDeviceInterfaceImports"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="560d5c37-b560-4afa-b667-12474582433e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="233aef60-e47c-4fde-9222-1f36684a5e50"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5d211647-dfcf-44c3-8086-911fe4a84bfc">
+                    <propertyInstance
+                      Id="3b67b2a3-37c3-4e06-a83e-c57ec5c5e995"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fdbb275e-01fe-41ae-9335-cefc886aeed3">
+                    <propertyInstance
+                      Id="2c5c0eb8-9e4f-4049-ad7e-7c8416649027"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b83e7dc4-cf35-4bed-86ad-244326853bc5">
+                    <propertyInstance
+                      Id="9064e23f-8cd8-4191-bfc1-ba2184ae8c07"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="08789669-05fa-4358-806a-ec13f1b748b4">
+                    <propertyInstance
+                      Id="c32b2eda-0d43-40c4-a6ff-c4f84b9fe9f0"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f70293d5-e716-459b-b4cb-c39c3a3d6fc4">
+                    <propertyInstance
+                      Id="bf64d508-caae-4691-93f5-00694e718b59"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0230c9e2-1f9f-48fa-9ffc-61f2ad1dbb11">
+                    <propertyInstance
+                      Id="be1c67bd-687d-4c7e-837b-dc659ac0dfaf"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="783b15ea-800a-43ac-a10f-2e1a169ead21"
+            name="BitBlt"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="b4ed555b-3254-4909-8d23-b8aba11084a0"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="609654c1-21b9-4bc7-9469-4c1841b7ec10"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="81b1b919-5413-4034-acd6-4abe51f0359b">
+                    <propertyInstance
+                      Id="97ddea63-d0de-4e41-8d07-cbab70213032"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d5ea711c-8081-46a0-ae4d-31c37ef8d211">
+                    <propertyInstance
+                      Id="eefa3dbd-40f8-4b70-9340-930c85adcfd5"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bd07e0a4-04c9-4a31-bcce-d37d20051034">
+                    <propertyInstance
+                      Id="1165b211-5824-4fd6-afcd-8101cb94fc31"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8a0acef9-06a2-4a53-ba21-6372fd7115fa">
+                    <propertyInstance
+                      Id="534e40ff-8826-46f9-a084-7992fa2d4ad0"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ef908dc8-db4a-4560-a74f-81fd40bf097b">
+                    <propertyInstance
+                      Id="f777f11f-6b7f-4f36-9668-f39c3e9f4d0e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f9e1e874-f23e-4bc9-bb86-dc6cda60cfbf">
+                    <propertyInstance
+                      Id="70aefaf9-1783-4a92-a840-dff24817b445"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cc00e059-b4b2-488c-be10-2f8a3ddc1eae"
+                  direction="Return">
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                      LastKnownName="Boolean"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7adbc1de-80d3-4996-bb71-0e6699407cc6"
+                  name="hdcDest"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="70421b85-db0d-4e62-ab6f-1a60c579b161"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DhdcDest"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8f5dcbe4-46ed-4adb-bf40-93bb6a146a6d"
+                  name="xDest"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="1673e977-a32e-4845-8201-48df7b470da8"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DxDest"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="57f4ea0a-86c0-4484-a970-c95cb48a6640"
+                  name="yDest"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="0b8f5763-b23a-40fb-b669-abb2f2c65d4b"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DyDest"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c0d9c019-5361-4dc7-acc3-9f650da641f8"
+                  name="wDest"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="13d9fe6d-aa07-4282-8fb2-b42089b10d7e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DwDest"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e85bfe75-b16b-438b-9aa7-611bd282076a"
+                  name="hDest"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="2bac1e7e-c25a-4eed-af14-84be6f1438c3"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DhDest"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="dc7a4d0a-df34-44f9-9d90-a749d7bb8b49"
+                  name="hdcSource"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="e12de20d-a759-4690-a359-19c61b6d0753"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DhdcSource"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3a3b4cc8-fb4c-4f2c-b2ce-cf62fc4354e7"
+                  name="xSrc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="3db868e0-0500-4acc-9075-a79ba128027e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DxSrc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="aab7d3e0-a0e2-462d-87ef-305358ed889e"
+                  name="ySrc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="7b3ec7e5-a6e3-46e0-8890-b52d6a703cb8"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DySrc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6c19c667-a618-44a2-a385-9573fe9a67ea"
+                  name="rasterOp"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="c5b98e72-8ae5-47a4-9f9c-88b88e9427cb"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DBitBlt OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DrasterOp"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="55a2b2a6-ca4c-4582-adad-b932b1401a50"
+            name="CreateCompatibleBitmap"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="2ffcadc0-d762-4035-9e04-048e61a38ef2"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateCompatibleBitmap OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="272b827d-6b21-4be1-a9d0-c0b6aaa4ddf3"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b6c7bdf6-9a29-45d1-b689-082e3716ca8f">
+                    <propertyInstance
+                      Id="d4325722-e6fe-402b-8ff4-d08a556deded"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="093373a6-9fdd-41e0-8a0b-18d8eacf664d">
+                    <propertyInstance
+                      Id="c2109ffd-7ce0-4569-9c9c-78490df44df4"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="95332a07-8a32-4b42-9a8c-c5ec1958e7b2">
+                    <propertyInstance
+                      Id="39dababd-74c9-4dc9-a1b0-4aa47e94c410"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5a48208d-2d04-473c-aa23-5bed9b5e7507">
+                    <propertyInstance
+                      Id="babb9245-4ebd-4d04-a7e1-42078e21fc85"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fd223b8d-8724-4a37-8c21-bc0803f90f10">
+                    <propertyInstance
+                      Id="1133a8e7-020f-4962-b66f-de37252ade26"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c8ef2ac2-aa28-48db-883e-3abfbc705912">
+                    <propertyInstance
+                      Id="550eb0fb-76bf-4333-8813-fede87d021c3"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9ea42186-ce80-40d7-ad67-2a99fa6574de"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e5ddd482-286f-4564-8d19-0641ad468c37"
+                  name="hdc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="47fbcc56-b293-4a6b-9832-660579614e8d"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateCompatibleBitmap OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3Dhdc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5ef64e7f-774e-45c5-ab55-dc9a8cb885f2"
+                  name="nWidth"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="0f121770-2685-4f2c-979b-de529505079b"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateCompatibleBitmap OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DnWidth"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c2fae367-ea76-4b79-a5d7-ba2a67f580d6"
+                  name="nHeight"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="336033bd-dbe0-41e7-8da7-0c40e88db95b"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateCompatibleBitmap OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DnHeight"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="867fff25-53a0-4c9b-b145-db274e474beb"
+            name="CreateCompatibleDesktopContext"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="566bd82a-4a6f-4d11-b4a3-5478fd30c510"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateCompatibleDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="1303ed79-3127-43c8-8f13-d6d756ffb3af"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b9c2eabc-6028-452c-b0a5-d79813da6255">
+                    <propertyInstance
+                      Id="c45ff6d4-c2f0-47dd-81db-702c60285192"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="df2af193-17cd-4b0f-a6ed-49520df7a3f3">
+                    <propertyInstance
+                      Id="17678393-06c9-4604-99e5-ed01cbc9af19"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="de899d43-4487-4718-bd69-c78c18d7b753">
+                    <propertyInstance
+                      Id="2ab0bc4c-f67f-4324-8827-cd497fb9f55e"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9decd5a3-dfcf-41e0-b8ef-464464662fd4">
+                    <propertyInstance
+                      Id="06ce660a-d972-46c5-96a6-d18f75a59a69"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="13c6ba5c-764d-499b-af4c-0ea88eb62f75">
+                    <propertyInstance
+                      Id="e1540baf-4ac7-4939-8794-9def3781dfe5"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a2203e98-ef6c-4f53-ab36-3a9f6d77d791">
+                    <propertyInstance
+                      Id="801959cb-4150-4e4c-8aff-d9a0cccbdc3c"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b52d136c-892d-4b57-9a29-02cced9dc4f3"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f7264ef7-f752-4312-a998-4e6979c88259"
+                  name="hdc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="f7210ee0-536c-48da-9437-eb3a7ddf6bb3"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateCompatibleDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3Dhdc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f7da675c-7277-4852-bffd-56ee5f281267"
+            name="CreateDesktopContext"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="61b3b492-0a7c-48f7-801d-ebaa1bcd68af"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="5ee011c5-85fe-4f3c-984c-ac351dc1f398"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="578ca548-aed8-44f5-a4e8-5cd8bfe98313">
+                    <propertyInstance
+                      Id="c616458c-fa31-4e13-aef9-372e38727678"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ee5fe5bd-656e-4a53-ab1a-0a8843b0243f">
+                    <propertyInstance
+                      Id="ac8dc14e-fa6a-4484-a2ee-692f06ac3734"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ecb8a78a-1c50-4ee1-9a8c-40ad0a609251">
+                    <propertyInstance
+                      Id="ac89d027-d88b-4682-ab38-f8d3d7bab699"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ae4445f2-d0cd-4f7e-966a-6655b2ac639a">
+                    <propertyInstance
+                      Id="9e5da311-9ab4-4e67-868a-27ade1bdae2b"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0cd36704-26c4-4289-bba9-8c868f90ecbc">
+                    <propertyInstance
+                      Id="6166b635-06c0-4de4-be85-fe2434a1a05f"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a6b548f6-eaae-433d-8628-61150ef7fb82">
+                    <propertyInstance
+                      Id="65a1867c-9122-4677-9ced-b2c188845f14"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4e0839f6-48d4-4a83-82d4-3189a1413c59"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4a4c5082-5b86-42e0-bbdf-73ae64d5f6aa"
+                  name="lpszDriver"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="1fd8c879-121c-46fb-bc56-304046b94c43"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3DlpszDriver"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3de5d57d-586c-49d1-a115-33589fb344ea"
+                  name="lpszDevice"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="81ffe5cb-21ed-4c18-a505-29f01ab07c70"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3DlpszDevice"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2461e028-213c-4e2a-99f6-1cfcd6930f98"
+                  name="lpszOutput"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="ad77b91b-9ee1-4749-9946-2c6542ed63e1"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3DlpszOutput"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="981ca751-65c2-4919-9c99-c2a64b5bfed6"
+                  name="lpInitData"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="88405b3e-7698-45d4-acd0-cff6c2b49cae"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DCreateDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3DlpInitData"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="0207e32a-91e5-46c3-96bb-7bd3950a3f96"
+            name="DeleteDesktopContext"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="b013ae72-7a45-423d-81e8-0f8e0bc34f77"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DDeleteDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="3400e53b-6a75-4703-8904-93169426db45"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2ea93742-2b1b-4591-854a-74535d6189b9">
+                    <propertyInstance
+                      Id="4ad4affd-3a25-490b-a84a-ff397f707e3f"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a0548d71-5009-474b-b3a3-da74e7cb3520">
+                    <propertyInstance
+                      Id="6e8123ed-8e82-48c9-bc2a-2b5f8b060e8c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3c33109b-46bd-4104-9276-fc4ca5c9fd21">
+                    <propertyInstance
+                      Id="c06186b0-9f5c-4db4-ade9-0a80bed87576"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8025473a-49d5-4dac-93db-9435d2664031">
+                    <propertyInstance
+                      Id="bf548868-23de-400c-aa35-ba9148bb1fe0"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8179e758-2e3b-4acb-bf2c-04ef711e9ac8">
+                    <propertyInstance
+                      Id="db2ae8c0-de74-494b-b2c1-29b3e41f68aa"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b826dc8a-3afe-40a6-9e18-9b91186e15bf">
+                    <propertyInstance
+                      Id="590bdf41-da8e-47f8-8c24-e431c97cc999"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="548a63ab-39e5-41e5-895d-e5087e47938f"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4e2ba1a6-c62e-4eaa-8763-eb20dc28d641"
+                  name="hDc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="bb110bad-0ab0-4503-9156-aa55b0344d48"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DDeleteDesktopContext OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3DhDc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="719916f2-fd52-46dd-bd31-9f195fd0036d"
+            name="DeleteObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="8646e3e5-39a6-4312-bb44-8757572931bd"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DDeleteObject OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6664bb5d-90d2-4758-8734-2e75b1a94ec2"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="21a9287b-9e8a-4bb5-b6b4-68416170cfde">
+                    <propertyInstance
+                      Id="4950f9bd-12a4-4491-bc1d-273d715c6a1a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b42ee6cd-682f-4deb-b421-53b6ded7dad7">
+                    <propertyInstance
+                      Id="87b82ece-96f1-454a-9cec-da526d83d567"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c2b3540d-e437-46c9-8085-a5c95fc48bf3">
+                    <propertyInstance
+                      Id="51560808-2735-413f-a731-57ec562cf95a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ee6f373b-b35d-44cc-a486-340daed2c653">
+                    <propertyInstance
+                      Id="6c845503-ab5b-48e8-926e-b51c6fa77010"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e4294b92-5065-4d01-a983-e47b7eb7b4e6">
+                    <propertyInstance
+                      Id="5fbc7b98-d226-4083-9412-a9a3f63dcb79"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="70e337db-93de-4d0e-ad1b-5f7e4d963349">
+                    <propertyInstance
+                      Id="8ea26664-fed6-4b65-b07f-af8daaefc050"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="35310e71-1b80-4a86-8009-5af83d5a4b48"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="30d40654-9053-4011-bf3a-0a142efcc712"
+                  name="hDc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="e266a558-d8e1-420d-b16e-c37564266ac4"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DDeleteObject OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3DhDc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="93837fb1-ea8c-4776-a61b-cb705a4f713c"
+            name="SelectObject"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="21cb9d1d-7142-4687-b701-3dc91c128ce3"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DSelectObject OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="810f226d-982d-4dc0-9d0b-9e521e081f2e"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8f38248f-1258-425e-a45e-c9d9ad360ebe">
+                    <propertyInstance
+                      Id="3e76c421-e128-4bb1-b3fa-ccaa485f560b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cc73440e-a294-449f-9616-8b7d426429a4">
+                    <propertyInstance
+                      Id="47d87e16-dac6-44b6-a4e4-de9d68c118c3"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="634c686d-c94a-4905-8481-139ab1ceeccb">
+                    <propertyInstance
+                      Id="694ab68c-1e17-4737-9e7b-9d52576f9e55"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b84f21d2-6091-4d37-9f28-d682183597fe">
+                    <propertyInstance
+                      Id="61697a44-03e1-4962-93f8-eed5e2b43f14"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d646d712-0086-43e1-a8b1-87fe00c8e91d">
+                    <propertyInstance
+                      Id="5ac31526-12e2-4905-8a2f-3a3fc04dcd56"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="86ba1c3d-3515-47cf-8d8d-b94d773edd78">
+                    <propertyInstance
+                      Id="f1d6f0da-cacf-4d58-824e-b1d6be9a006d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3e793286-5eb1-42f0-b5f6-423a2ff94a24"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="db501c83-2dac-4bb3-b005-c894677ef1e2"
+                  name="hdc"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="0c2ab279-ec2e-4ec6-abbd-c03b67da60af"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DSelectObject OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3Dhdc"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b37495b3-f04d-4c83-810d-e8baa6073745"
+                  name="bmp"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="aaffff15-a900-424c-b551-810f9a5334a5"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DGraphicDeviceInterfaceImports Member%3D(Name%3DSelectObject OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DIntPtr)]) ParameterIdentifier%3Dbmp"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="73c45fc3-5978-46e5-9580-651be3e3a5d9"
+                      LastKnownName="IntPtr"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="11fe5f5c-ab51-4ab1-8f97-47e8c4d0e83d"
+        name="IScreenCaptureTool"
+        isAbstract="false"
+        isLeaf="false">
+        <referencesInternal>
+          <reference
+            Id="f35e03e3-a4fb-4690-9893-6bd5b3fb60d1"
+            handle="viewcode://./CodeSchema_Interface?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DDesktopSharing Type%3DIScreenCaptureTool"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="4050eea7-46e9-4efa-a619-ccf8170393f4"
+            name="interface"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a18e2509-8b3b-4627-8250-97201f7b8b93">
+                <propertyInstance
+                  Id="92ac96e6-d272-4504-b0f5-746f55ea861b"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2e9a8dea-8373-421b-86a8-f4ff6d3902e3">
+                <propertyInstance
+                  Id="3c8be0d1-a8dd-455f-9dfb-30a1635c2868"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9d06b2f1-2a06-4392-a25e-a1927a2327dd">
+                <propertyInstance
+                  Id="ee60216a-45d3-46ab-ba4d-13380bad07eb"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="31cedcf5-746c-4ac3-9c8e-eaf56cd200eb">
+                <propertyInstance
+                  Id="d48e5fd1-1e89-4d0d-b72d-0387e8146ee6"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperations>
+          <operation
+            Id="0c2120c1-afd0-4edd-8d4f-1749a59f97e4"
+            name="TogglerTimer"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="3a954808-7f77-4816-920a-86198d16c94b"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DDesktopSharing Type%3DIScreenCaptureTool Member%3D(Name%3DTogglerTimer OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DBoolean)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="2556e000-f3db-4d04-b2d3-a2eb5eea2259"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6f57ecad-02c2-4cb3-a129-c3949107e624">
+                    <propertyInstance
+                      Id="a5fb96ac-d52a-4528-bef9-5f97effa02d7"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fd77f247-72de-46b3-be33-7d10ab652b8e">
+                    <propertyInstance
+                      Id="a6bc9cb6-86ee-4a64-9fb8-8e1616ea4ab1"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9e75b3a4-c72b-4af7-89c4-1cac4b126bef">
+                    <propertyInstance
+                      Id="12a1158a-6ac7-45cd-b608-5c21612429e2"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d562a393-29a5-4f73-9f9f-57c1def6aeb8">
+                    <propertyInstance
+                      Id="6f90e196-a555-4fa5-b655-61615d9ac669"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bc2b2f1a-8228-47a5-8197-daafafb1af5f">
+                    <propertyInstance
+                      Id="9b275fe0-1808-402c-920a-8446a59ac975"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="968631b1-a004-4849-8db8-cbed636f04ec">
+                    <propertyInstance
+                      Id="0d5b82c1-72cb-4405-a6f1-333d00488216"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8b2f2e63-ce49-4dce-ba86-06268a809da2"
+                  name="start"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="9b0a7b5b-7bb9-46e1-815d-d2f66a87f4a2"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DDesktopSharing Type%3DIScreenCaptureTool Member%3D(Name%3DTogglerTimer OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DBoolean)]) ParameterIdentifier%3Dstart"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                      LastKnownName="Boolean"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f2c2b131-57a0-4d79-b9cc-07d91217c645"
+        name="ScreenCapture"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="46cf4427-dc26-4adc-802b-6353a106c025"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="815350c9-ab35-4851-885e-ab1eff010ca2"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9045c722-53c5-48ff-bb60-636436b2a5ef">
+                <propertyInstance
+                  Id="8fbec2fb-7b5a-488a-80b5-d320d4fa3e60"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="420c818f-f0d1-4e36-9a8e-2c3f92d1dbd7">
+                <propertyInstance
+                  Id="075dc659-3ea3-4931-81fa-dece983f2117"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="693507eb-8e12-4b8d-be1a-dcb75507a662">
+                <propertyInstance
+                  Id="8669e656-30ba-4f09-a9f6-5ca3bb92c1c4"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="32980f12-decb-47a6-b95c-0efff1a9cc86">
+                <propertyInstance
+                  Id="a1700135-613e-495f-8555-a470bb46999c"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="cbdd5df2-b9bf-4ebe-b784-8a4728f3ac05">
+                <propertyInstance
+                  Id="d2cb94eb-d3bc-4a39-803f-74b315d129b5"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="0228d362-1c84-4a4b-89ed-3ee7b5cb66ad"
+            isSubstitutable="false">
+            <classMoniker
+              Id="4b8bad4b-24af-4269-a768-b1c79437ab34"
+              LastKnownName="ScreenCaptureBase"
+              LastKnownLocation="Package33_1731.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="fffe1b94-6109-41c1-9994-f94929ffe8e3"
+            name="_graphics"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="3588eb51-6c3d-48a3-8c76-d456d42ff5b9"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D_graphics"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="76565b15-4f52-42e6-b81b-a99cee9f4dc3"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="84026a14-b7f1-473d-b6fe-35add0fc6587">
+                    <propertyInstance
+                      Id="f1f2f4c2-fce1-4dd1-b656-34c275f10055"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d31c9688-dabc-4f0d-9541-9c94040d7e0d">
+                    <propertyInstance
+                      Id="68742923-7952-4ac5-b2c2-4199e0d4320c"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b7f8bc15-ead7-4a95-a764-a6b44ea60747">
+                    <propertyInstance
+                      Id="540f91ba-bf9d-4c84-b090-b881f34de832"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="93e5bb5c-00d4-4a55-adee-9d43df1831a5">
+                    <propertyInstance
+                      Id="01016b78-5914-49d3-8587-9f396ba33c8f"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="064b1917-0b45-4aac-a8c7-2fb8c24f7175">
+                    <propertyInstance
+                      Id="99ebe39d-618d-437f-8b9f-0a9bb6809874"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="14f6de18-9d8b-499b-9a9c-3963edd9e96a"
+                LastKnownName="Graphics"
+                LastKnownLocation="Package1_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="764297d2-0848-4779-b7a9-3ef360863b9d"
+            name="_newCapture"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="5b49ec0d-2339-437b-bbde-758a7595ea88"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D_newCapture"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c3ab69b5-dbd8-41f7-a77f-c5f756cd5bac"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9b16e4cb-5d8b-48ac-a7a4-0033505b36a5">
+                    <propertyInstance
+                      Id="84bc50fa-0643-4126-899e-a9d54b666699"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b5eb2916-c8ea-4ddf-8afd-0d28bde7f046">
+                    <propertyInstance
+                      Id="5f088266-4b96-4e10-8c1c-a97cc1062143"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="03be63ec-9c7b-4a7a-a27e-166d4e178016">
+                    <propertyInstance
+                      Id="d7040ef1-c690-42de-84c2-700b32f0cae6"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6dfd4caa-6259-4f87-898b-c596b444cfc8">
+                    <propertyInstance
+                      Id="0768fa16-1d3b-4e66-b7ef-926a5c5764f3"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="11d8799d-845c-4279-ab30-48c54d64e37c">
+                    <propertyInstance
+                      Id="d42dbda6-6275-4dd7-927e-d925966e8cf0"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="66ac1c59-4f25-4755-97d9-c7ec8b87f114"
+                LastKnownName="Bitmap"
+                LastKnownLocation="Package1_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="9c66aae1-248e-4026-8b78-0fb7ae5bf42a"
+            name="_numBytesPerPixel"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="54a06569-0df4-4398-bdbf-be7cc4cb6d8c"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D_numBytesPerPixel"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e4c9be9c-f909-4bbd-999e-86f49558ac39"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="23f34cd5-5c46-42c6-81a2-d93a06c1a112">
+                    <propertyInstance
+                      Id="016328b5-617d-4d1f-91c7-06e0abeab9e4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c7e8c399-b096-4271-8bd9-6d46fd634975">
+                    <propertyInstance
+                      Id="cb530987-18da-4882-be3b-9b734f69e714"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d632f1a7-46ea-43a4-9667-0f268b8f0d2d">
+                    <propertyInstance
+                      Id="767096c6-2664-4394-bce7-51c9930dbaa2"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6b4b6b71-47d8-4019-b1df-9dff59e7c9b0">
+                    <propertyInstance
+                      Id="32425ac0-c623-4964-9e23-b8248425614d"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="44a6a0f5-010a-41ff-a537-426caca48348">
+                    <propertyInstance
+                      Id="b55c23f4-5872-4e32-850e-cf29a8348e76"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="a440a430-8f45-4225-a949-6a96dd8dc3ee"
+            name="ScreenCapture"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="6a15de61-5f35-48d6-932f-30a9148415ac"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="18d2389c-84ba-4f01-9b4a-2b4ae6de7d27"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8978de4d-1c99-48c8-b51f-d155e867092e">
+                    <propertyInstance
+                      Id="1f19180b-94d2-4b12-a788-b618a843409a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="aae82b3c-270e-47ac-9644-b77c9a643e8d">
+                    <propertyInstance
+                      Id="5f88945e-b26d-45bf-ac45-f2ec2445d10e"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="914fa145-54b9-4d17-857f-0e9ef04db550">
+                    <propertyInstance
+                      Id="9208c1ef-fd00-43aa-809d-d1a1af6907b1"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="38c24aad-8b97-4e6a-9d7d-cdf644e38425">
+                    <propertyInstance
+                      Id="d78ebc4e-9519-43de-aaff-1aa459e2493e"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ad7c134a-f2a3-417d-9b8a-d9d1ded6cbee">
+                    <propertyInstance
+                      Id="9b2bbf5e-f325-42c3-8ef7-a4eb88b007c0"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="62c58254-9efb-44bf-9d6f-3c4777ac7da0">
+                    <propertyInstance
+                      Id="5e1f6d4c-081b-40e4-984c-ccf9ecfd0194"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="bccff4e0-a59c-4e93-a691-7d14006c33bc"
+            name="CaptureMouse"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="2d38d663-7e23-4280-93d8-687a7a687b49"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D(Name%3DCaptureMouse OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="62bc74be-848c-43a8-978e-5ba0e7a9a536"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="970d12c0-ebff-493f-8980-d24882ede012">
+                    <propertyInstance
+                      Id="f1d8086b-90ea-47d9-938c-edb42c1e8610"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9ad12bed-416d-4aa2-86dc-ff9ae6c647b0">
+                    <propertyInstance
+                      Id="9033f201-17ba-4cc0-9c48-858c7012b2e7"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3d1b4d59-b7d8-4f0c-bb3f-528d2fef6ec0">
+                    <propertyInstance
+                      Id="fb182bb6-67a3-4d2d-a3a0-dc4fefe559e4"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d3dce5c9-77e2-4912-a414-db9934ec3b89">
+                    <propertyInstance
+                      Id="7b2f9b33-7981-468f-abbc-d6dcff6d90ba"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d59ec984-6e46-4f79-bb4c-8276b60cab81">
+                    <propertyInstance
+                      Id="79f0ad3c-2484-46d3-badc-4a8dc781b0c6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c67d4cf7-c67e-41df-90ec-cd081676cfb0">
+                    <propertyInstance
+                      Id="e7ccc9de-f255-427d-9eda-67cc08075251"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="dc27e28b-c5de-404a-9023-82589b242077"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="66ac1c59-4f25-4755-97d9-c7ec8b87f114"
+                      LastKnownName="Bitmap"
+                      LastKnownLocation="Package1_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b78add54-fd92-4c62-892d-77578d8c73e2"
+                  name="x"
+                  direction="InOut">
+                  <referencesInternal>
+                    <reference
+                      Id="21143fc0-3107-4aa8-ae7f-a385aa46a905"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D(Name%3DCaptureMouse OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)]) ParameterIdentifier%3Dx"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="bb776fc6-454a-44da-9d52-3d4237a7afcf"
+                  name="y"
+                  direction="InOut">
+                  <referencesInternal>
+                    <reference
+                      Id="c276f3e0-60df-491d-aa04-dce6bb2d0e70"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D(Name%3DCaptureMouse OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)]) ParameterIdentifier%3Dy"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="6859c76a-d878-482b-8fbb-d77d19ed89d0"
+            name="CaptureScreen"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="fd9d2049-b02a-4a06-a11f-5558c9281f76"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D(Name%3DCaptureScreen OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2FSystem.Drawing.dll&quot; Namespace%3DSystem.Drawing Type%3DRectangle ParamKind%3DRef)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b7183cbe-9845-46f4-ae48-7a4425f82bf8"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="46d6b85b-cca8-4748-9a6f-ef017fb86b45">
+                    <propertyInstance
+                      Id="ae712c24-e507-4b72-a92f-722c325944ce"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="94e442a3-6de3-4fe4-ad25-20eec7897a97">
+                    <propertyInstance
+                      Id="9d1e0662-671b-4f83-9613-1f9d7676a2c6"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bee6b9b1-164d-4932-a66c-d72d4772d58d">
+                    <propertyInstance
+                      Id="59789baf-3d5e-4a98-84df-9af9a9bbb449"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dbf04646-2ca5-400f-a50a-2c0e8ee111f3">
+                    <propertyInstance
+                      Id="3c10a741-f801-4ba8-b389-d966e56a70df"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="37c6ff6a-86ac-4939-b242-f680cdf92904">
+                    <propertyInstance
+                      Id="f99b60ba-7ccf-4e25-9843-c756deeb0806"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="77b9d612-2ab3-4429-a18f-859f9ecb98e9">
+                    <propertyInstance
+                      Id="68452b41-e75b-41c1-aa3a-43980df3d78d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7b7932de-8705-4a65-8878-27a20d303a3b"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="66ac1c59-4f25-4755-97d9-c7ec8b87f114"
+                      LastKnownName="Bitmap"
+                      LastKnownLocation="Package1_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0f399fc2-53bd-451b-82c7-9dbaee176ad2"
+                  name="rect"
+                  direction="InOut">
+                  <referencesInternal>
+                    <reference
+                      Id="9e9fddc1-4e14-4289-b802-cdcb47f9f786"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3D(Name%3DCaptureScreen OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2FSystem.Drawing.dll&quot; Namespace%3DSystem.Drawing Type%3DRectangle ParamKind%3DRef)]) ParameterIdentifier%3Drect"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="50fbb43b-c75a-4b46-b25c-dc62f8ffa4b1"
+                      LastKnownName="Rectangle"
+                      LastKnownLocation="Package1_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="92464c77-9893-4d35-a6ba-a2d24c3afd10"
+            name="ResetCaptures"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="72d69013-1924-41f7-aa4f-9323f403551e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCapture Member%3DResetCaptures"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="40b41b60-40dd-4406-b4ce-0f61c301e979"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1f233417-8e9b-4a7e-947f-f3a51da2b6e0">
+                    <propertyInstance
+                      Id="0ca0ec11-25a8-4e95-9552-819e424d193f"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="72d671ac-a053-4a62-880f-f63f5f44d2d0">
+                    <propertyInstance
+                      Id="a73ec5af-4187-4f8a-af15-c9d02e23e346"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ec50978f-8fbe-4213-bceb-301ae69a1356">
+                    <propertyInstance
+                      Id="97a11106-e17d-4a67-a57c-4b6685f06338"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8205feb4-8da9-4fbd-8d6d-9ae98e3570d4">
+                    <propertyInstance
+                      Id="e42436c8-64c1-4fc5-a671-9622c0a2ee26"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0430cb80-6549-4f3e-8f78-7bf930e9a3a8">
+                    <propertyInstance
+                      Id="2239b676-5a23-468a-bcab-ffd9b1518111"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1a35a3b0-24b1-4802-b6e5-0c2bb2e5f2c9">
+                    <propertyInstance
+                      Id="25be08dc-d2d1-478d-a171-8ac8091ae92d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4b8bad4b-24af-4269-a768-b1c79437ab34"
+        name="ScreenCaptureBase"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="bcc7c1af-8eb4-44c5-abe4-fe03c453e927"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="836ee04a-c622-4957-a7f8-26ae20ceafc2"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="db768734-1743-494f-a860-bfd5c7405675">
+                <propertyInstance
+                  Id="b6f4a8ca-3e9b-4cbb-b078-491032a15db1"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ad961692-98b9-425e-a96b-2c03fffe9392">
+                <propertyInstance
+                  Id="c4b09451-c345-492b-be2a-08ee7e0b6db6"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a4500d4d-d120-4632-8b81-34e0379ab9ba">
+                <propertyInstance
+                  Id="0610cc60-4635-4461-a848-2da8197752c3"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="af44923d-4200-42ed-a2aa-d6a3ac2bc6be">
+                <propertyInstance
+                  Id="97c7f9ec-35d2-444f-a76b-9965e687fdb8"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="eb13b7eb-85cb-4ca9-a912-1041b7058c51">
+                <propertyInstance
+                  Id="d331e488-b950-4aae-8e3e-7829e02dbdac"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="74a578d5-c0e9-42e5-9943-54f207777349"
+            name="ScreenCaptureBase"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="52e24d23-392e-453c-9374-3a777a78bfec"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="071315c2-23c5-46ae-a961-ff3e8e796581"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="655dd2f0-ba96-4732-ae9a-4a739f6d25a0">
+                    <propertyInstance
+                      Id="4e03e811-b82b-4761-ba68-90796e91cad0"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5c20641e-e69e-45e2-b6cc-266df86bf94a">
+                    <propertyInstance
+                      Id="1458a5c2-7c00-406c-acde-d94c979b003e"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c42ca076-31f8-4a34-9332-7bad30f327f4">
+                    <propertyInstance
+                      Id="598179fa-654f-4743-aebb-575cfab7cd7c"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3fa5a78c-7948-460e-9394-b28b9e8a1a6e">
+                    <propertyInstance
+                      Id="a59081c3-0f45-4942-bee0-d8e116ca5a0d"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="03f9c6fc-a660-4f23-9057-14a8c018fdf4">
+                    <propertyInstance
+                      Id="290fe584-6cdf-44a9-9309-af9e76c0b2c8"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="594f6280-b1ad-4a66-912c-2e5765291d60">
+                    <propertyInstance
+                      Id="a696606e-5c0b-44e8-9c0c-7c9bf976c211"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="7d007344-11ae-425b-bad3-00692a34d34b"
+            name="GetCursorCapture"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="ad9797be-a245-4ca2-a3c8-b4dbe885f2b1"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase Member%3D(Name%3DGetCursorCapture OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b12bf8d7-47fd-4268-9f5a-279655454380"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="51a867d7-91b7-48d4-90b6-23c3336f9a78">
+                    <propertyInstance
+                      Id="6d86abe3-cefa-4d13-8547-762637d892e4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="61965329-690c-4d83-a22d-f8177c800cf6">
+                    <propertyInstance
+                      Id="0b928e4d-81fa-47f7-904e-d4e06b418fc7"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6513bc73-385c-4430-941f-bd812b492059">
+                    <propertyInstance
+                      Id="677e47a2-ebc5-4ba0-b649-0e5b0ae6d390"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ae8b4387-2fd2-48f9-b4ed-ef8bb10b2d8e">
+                    <propertyInstance
+                      Id="5d59036e-b009-4e66-8407-a948e344d592"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0c87f1e3-7577-4463-b802-275ab3be307d">
+                    <propertyInstance
+                      Id="12a554d6-e886-49b1-9c79-7585c3158b6b"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="787bd798-5a81-430b-823c-d7afc567af15">
+                    <propertyInstance
+                      Id="9f79c45e-67a8-44d4-8773-b08655b6fe11"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e2503942-dddf-46b0-87f6-1cc3c7377085"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="66ac1c59-4f25-4755-97d9-c7ec8b87f114"
+                      LastKnownName="Bitmap"
+                      LastKnownLocation="Package1_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="98ae7cc3-58db-4ed2-9cc6-6010a6535933"
+                  name="newX"
+                  direction="InOut">
+                  <referencesInternal>
+                    <reference
+                      Id="cfd8f949-7f5e-4de4-8724-3574a9697837"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase Member%3D(Name%3DGetCursorCapture OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)]) ParameterIdentifier%3DnewX"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8b04ab2e-1566-4e5d-91da-bcea20566bd8"
+                  name="newY"
+                  direction="InOut">
+                  <referencesInternal>
+                    <reference
+                      Id="cfbd30b0-a689-427d-ac3d-0f693ca9f9df"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase Member%3D(Name%3DGetCursorCapture OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32 ParamKind%3DRef)]) ParameterIdentifier%3DnewY"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="5589685c-da86-4819-8b17-e50af51d89dd"
+            name="GetDesktopAndCursorCapture"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="41c35559-1a4a-4f19-b354-6850379e1de4"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase Member%3DGetDesktopAndCursorCapture"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="03b0d06b-57f7-40ef-aef7-c762e5e49a49"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c2fda090-cbdf-4fe8-9c33-5da9f27c4287">
+                    <propertyInstance
+                      Id="aa02f01c-387b-40d1-9d27-2a7c3535a3cf"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e4c90de0-91e6-4bbc-99b8-9879e1a20fb9">
+                    <propertyInstance
+                      Id="dc034b2a-7b9a-4a0d-a8ab-97b72f86ee3b"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="947ad372-6524-41a7-98df-2ec583124948">
+                    <propertyInstance
+                      Id="96859eb1-af2a-49e8-b1e1-10a9fd820764"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cbe81e94-4e0f-4dc0-87bc-e5604bd4aed6">
+                    <propertyInstance
+                      Id="b168b093-3e94-413f-90c0-f6f5e915aec8"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="374fbe2e-da6f-4af5-a0f4-6ddcd7f516fb">
+                    <propertyInstance
+                      Id="0e17b976-102d-4660-b528-5ae7585a4a8c"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="227655a5-48f0-4145-ac04-d109f1446f1c">
+                    <propertyInstance
+                      Id="6dd445a5-be20-4093-b20a-8907c0a748dd"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8e51f9cf-1e2f-43d3-aa07-b4e875b9879a"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="66ac1c59-4f25-4755-97d9-c7ec8b87f114"
+                      LastKnownName="Bitmap"
+                      LastKnownLocation="Package1_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="5d0da14d-d49d-43be-a6ab-528cc599d5ce"
+            name="GetDesktopCapture"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="b1810122-9d7c-46c8-9774-98b39bdfcdc3"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDesktopSharing%2FDesktopSharing%2Fbin%2Fx86%2FDebug%2FDesktopSharing.dll Namespace%3DDesktopSharing Type%3DScreenCaptureBase Member%3DGetDesktopCapture"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="509d02ce-0eb5-4535-b898-72e8d65ed30a"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="77560e2f-190c-4b75-94e8-c68a92957b6c">
+                    <propertyInstance
+                      Id="5b2ab6fd-2ee1-468d-b66f-8d7ddc92b451"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ae8d300c-3d9b-445a-ad21-72d60a545785">
+                    <propertyInstance
+                      Id="dcf910c2-bb96-4f22-ac42-041835f18d2f"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dd67cbeb-2631-416a-a0bc-fbc09b661b2c">
+                    <propertyInstance
+                      Id="2c2549a4-504b-4902-8541-22002054aebe"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d782c0c3-d2d0-4418-b119-2b61c2d90dc8">
+                    <propertyInstance
+                      Id="e85303e6-0450-459c-833b-26a5e68800a5"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="21f36355-66f3-4a29-ab14-446f76b090f4">
+                    <propertyInstance
+                      Id="7e4ea22f-f767-4ec8-af74-83a73c52dc0e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5a1113cd-5e41-43a2-aeb5-6c0966cd452f">
+                    <propertyInstance
+                      Id="578a6095-b865-4115-bf4b-31ae10f2dd78"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="bb045d8e-ec81-4fb6-80fe-bf108de4a56e"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="66ac1c59-4f25-4755-97d9-c7ec8b87f114"
+                      LastKnownName="Bitmap"
+                      LastKnownLocation="Package1_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

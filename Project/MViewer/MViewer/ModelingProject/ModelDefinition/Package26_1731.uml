@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="034e8ce8-4878-4d13-8be9-83096ed0907d"
+  name="DataAccessLayer"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="4bd8cbe6-579b-4710-8820-ae135197ecc7"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DDataAccessLayer"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="6b2c3f5b-7e2c-40b9-aa9a-e50a1c787374"
+        name="ContactsRepository"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="e3e827d2-f5b1-47cc-8551-fd9a32919f0d"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="0f3bafa2-dfcd-402a-bc4b-c33e93cf0495"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1fee5de0-0545-4fab-bbd9-464d6083f561">
+                <propertyInstance
+                  Id="08aed454-d9f9-4d55-a25a-f446d1d21f8f"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="2ebd555b-9eea-46af-9d68-92c2f0a06f94">
+                <propertyInstance
+                  Id="b9541302-adb7-400e-b5a0-99bbf76ca1a8"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9600814e-9eec-45f3-8255-578d5f5693b6">
+                <propertyInstance
+                  Id="e54235e1-75a6-44c5-ba1d-8d8056c59c73"
+                  name="IsStatic"
+                  value="True" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="c82fdb8a-814f-4bb2-87c5-449cf21aae35">
+                <propertyInstance
+                  Id="ffa34d0f-0221-4652-9265-e7a44426c762"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bcaf50dd-5c6b-4b1f-98f8-9c66767459a3">
+                <propertyInstance
+                  Id="8df7c182-8fd0-4ad2-bb06-dd09ac485da7"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="bb4d0a06-2660-487b-a988-92de59ebe007"
+            name="_contactsDataSet"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="2810c0b5-86e1-40de-8da5-2a652e570819"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D_contactsDataSet"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="7a3e468e-1137-41f3-a3d7-3a737dadf508"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="aa5a6b3a-4d02-4690-b701-617749398efa">
+                    <propertyInstance
+                      Id="dd65aae6-8ba5-44ec-b49f-d0c60bf29e57"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6fc6ba28-31cb-4c26-b6b2-f618081fdb4a">
+                    <propertyInstance
+                      Id="6a53ddab-241b-4c2c-8aa1-ea93ae213a62"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="76345257-1668-4b58-a6b0-258ff8df4203">
+                    <propertyInstance
+                      Id="8057a9ce-6b39-4cec-afe6-1f6a651800b3"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f9f51e95-3ee6-4692-ac8e-dfb8331c0d05">
+                    <propertyInstance
+                      Id="3563141a-f393-4039-9dc0-9d5a05fb520b"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a2d5b703-6ece-4ee2-8e30-736a89fd8166">
+                    <propertyInstance
+                      Id="2e5ed13c-0169-4fb2-b832-ecf95fe43976"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="4b18b112-c593-4e6e-8fdf-a351f931ada3"
+                LastKnownName="DataSet"
+                LastKnownLocation="Package25_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="7b505d00-867b-431e-a61e-8891e295ad53"
+            name="_contactsDataView"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="f0368469-0443-4f3e-9f6e-b886318ab0f9"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D_contactsDataView"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="95fb11b1-efee-4c26-84bf-02dfb3199fbe"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="20e4cd54-28ca-46f5-bffc-9515e8706299">
+                    <propertyInstance
+                      Id="cae59337-c4ff-4641-b61d-d60e84bd7a53"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c96171a1-8f4c-4b37-a768-d3720fd58c80">
+                    <propertyInstance
+                      Id="85f5a237-fd84-4070-a996-c9f61a14e0ea"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8b86294d-9264-4cda-bfeb-6d3f2cb06817">
+                    <propertyInstance
+                      Id="5e0289d4-25f4-4fb2-a414-e70cae529052"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="07caa79c-22f2-401d-a9ca-f1a44b7c2088">
+                    <propertyInstance
+                      Id="826b3120-dc0e-4ddd-a1eb-728efb74c3d6"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4c3c2594-9169-48c2-94cb-5b758575ed24">
+                    <propertyInstance
+                      Id="d8d86870-f40e-4b02-883b-4cf09bb0f1e9"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="2e9c0883-2893-4ce2-b8dd-d70142c19558"
+                LastKnownName="DataView"
+                LastKnownLocation="Package25_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="18efbcbb-7eef-44e2-856b-9bb37b2e9f94"
+            name="_xmlFilePath"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="3f567888-525f-400c-b398-ed679f61f570"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D_xmlFilePath"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="94f42572-8c52-4ad9-b404-12de227ea555"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="894de6bc-f307-40af-b3a2-a12819cc76ef">
+                    <propertyInstance
+                      Id="c69c6176-eb95-4700-9b6a-ee4559927ba4"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="183bdf56-99f6-49df-a49a-002c28d2c196">
+                    <propertyInstance
+                      Id="8b5aa65e-c6ab-44f5-b68b-265c7a6e760d"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cccdbf67-47ae-4194-946f-9bc52658e848">
+                    <propertyInstance
+                      Id="1a71c8ef-1b10-4495-8e9b-f8849e6cfa6b"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e16bb5fe-7389-4ff3-abe4-0585a0e96ccd">
+                    <propertyInstance
+                      Id="4d497340-9656-4795-86e0-19530841a632"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fbaaf558-5348-42ad-84c0-3f4a2928d23c">
+                    <propertyInstance
+                      Id="322feb77-355d-4a1f-857a-3575da11e33a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                LastKnownName="String"
+                LastKnownLocation="ModelingProject.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="e2221e21-4fb0-4387-9906-5799106474c0"
+            name="AddContact"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="a3927749-5e4d-49f7-b776-4a473356d8f5"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DAddContact OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DAbstraction Type%3DContactBase)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="7161e92e-a566-43bd-a8e5-199ac900244d"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="871bd245-e79a-47f6-9f12-5e65372131c9">
+                    <propertyInstance
+                      Id="03175ae5-f8f7-4c25-b7d7-f1001f3db5ac"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b98c1e6f-ba77-4a72-9bec-eb426d0a5f3d">
+                    <propertyInstance
+                      Id="d3b080e2-b089-4218-940a-a460d752b1f2"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="020712a6-09d0-4e5f-a559-72a2686d575d">
+                    <propertyInstance
+                      Id="4d32d806-4d5f-43cb-bca2-124c461e8dab"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="45faebc7-eb6f-434f-96d1-2f780bcf5de8">
+                    <propertyInstance
+                      Id="ea51cd0e-238f-4520-af58-4127eae96938"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3a520a05-7f5e-40f5-9074-a3bcc9e99b12">
+                    <propertyInstance
+                      Id="6a5756d0-6a4d-46b6-988a-0e08e0624b56"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="39c2094b-a368-4c1b-9313-d1c48f8e9e30">
+                    <propertyInstance
+                      Id="3959bc0e-2857-4807-a50a-d9813884b84d"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b56a9558-2a7d-4e27-b902-4a71f28f8417"
+                  direction="Return">
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cf1faecd-ffe7-4c6a-8e38-0e5676f30e32"
+                  name="contact"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="6921c14f-b647-4ce2-b736-b4abb900c26e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DAddContact OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DAbstraction Type%3DContactBase)]) ParameterIdentifier%3Dcontact"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="4e1b8678-b9a0-45e4-bcb2-649ae0ccac47"
+                      LastKnownName="ContactBase"
+                      LastKnownLocation="Package24_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="b333908f-1022-4963-9811-b4661301e94b"
+            name="GetContactByIdentity"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="413e2f32-2e5d-4147-a70f-79d5086f2df4"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DGetContactByIdentity OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="8dafafff-840d-40c3-b64f-84957f7be61a"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="53e6589c-16d4-4c89-8305-832839fb1f01">
+                    <propertyInstance
+                      Id="9c613446-4f1f-4003-9ddf-8d0a64f33b7a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0199e6b7-d5a6-4e49-b913-40e21f2f1487">
+                    <propertyInstance
+                      Id="8727bdb7-4585-4d7a-ab3d-8d5db7708cee"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="235c3985-6d86-4fc1-a8c6-c6cd052ff5c2">
+                    <propertyInstance
+                      Id="1e8838ab-29ad-4a45-b0d0-6581bff272b3"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="06111ada-ec4c-4b4b-8c02-b2b2d668db0a">
+                    <propertyInstance
+                      Id="ace2aa81-31c9-4be2-a84c-cbeca7b57669"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0348d788-b773-482d-aca0-2943b38c4d86">
+                    <propertyInstance
+                      Id="ca27eee7-25de-4595-b2b8-33868ba7eed5"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="86c8648d-fd2e-4d97-a20b-cee9c7ac26b4">
+                    <propertyInstance
+                      Id="9279d2ca-a589-47d8-b030-9951984be1b8"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9ed8f621-979d-4674-a0a1-c8f3dc170846"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0d4484d7-a1d3-41bd-9dac-6f6c41f39f71"
+                      LastKnownName="Contact"
+                      LastKnownLocation="Package5_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0c237a1c-db9e-4f07-bdef-343af314925b"
+                  name="identity"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="1bf6ca99-5560-41eb-9e4f-9069fef76232"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DGetContactByIdentity OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)]) ParameterIdentifier%3Didentity"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="e49257f2-e018-4f43-a994-e5383a5a65d0"
+            name="GetContactByNo"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="d07c491e-cdfb-4921-a2a1-1cc81728f55b"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DGetContactByNo OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="547d4d89-08f7-4cec-a141-dde6b8f9c800"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7d36e027-6c7d-48d0-8065-ab39c65f44cc">
+                    <propertyInstance
+                      Id="a960e34e-e9d7-4c96-9014-1afb0aeec4c2"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="93504e6a-be48-4d2e-a5f2-01a70901e4c7">
+                    <propertyInstance
+                      Id="74b3b35c-1ba3-4b4e-a15f-81ca70a29cd5"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="70383c93-d445-4820-a02a-67b1d4cb1732">
+                    <propertyInstance
+                      Id="39a871af-e505-45b0-8bbb-5401086f78b8"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f5673429-890a-44e7-8882-99e3f3a4c1a0">
+                    <propertyInstance
+                      Id="ee0df54a-e4a3-4098-83c0-90ae78082a4a"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f5d4d6b3-6248-4b36-8901-270a8fe0df43">
+                    <propertyInstance
+                      Id="cdde389b-928c-4ca2-91f8-aa697dc3171a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="71710205-aed8-40af-89b3-9d15fee0fae4">
+                    <propertyInstance
+                      Id="f3591ecf-f296-4059-960c-68c118522275"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0fd3844e-a140-4231-bfb8-ec644c6f0f85"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="32e1278b-2662-44df-a0a8-5065eba9db37"
+                      LastKnownName="DataRow"
+                      LastKnownLocation="Package25_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5820f0f2-77aa-4663-9fe1-fbb3ffa7b25f"
+                  name="contactNo"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="83e2b953-e33b-4764-803f-aa1fa3f180b5"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DGetContactByNo OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DcontactNo"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="dae69e12-63c3-44d5-aa60-af49e4a90b5b"
+            name="GetContactByNumber"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="3390a74d-a88e-4153-94f0-1ed07a2e338a"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DGetContactByNumber OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="5a318e2b-0e9b-4fd6-b16c-daa20679f2a3"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9783dd90-0646-4512-8d22-dde2fd5906cf">
+                    <propertyInstance
+                      Id="e5889089-2753-4b02-ae81-4acd9faeaeed"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d978310e-52b3-4df3-ad62-29af5cd82e80">
+                    <propertyInstance
+                      Id="cc67c4e9-3c3c-483a-a3ef-6048c87856d6"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d7758c77-4b9f-4b08-ba1f-621de9c75a83">
+                    <propertyInstance
+                      Id="084a4918-2bbb-4faa-a9a6-c1697aec3e19"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="10d85c1b-6ace-44f9-b0b4-1ba8d67bd605">
+                    <propertyInstance
+                      Id="ab7ab271-aeb7-4d25-8484-dcf35706988b"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="35987174-dafa-4aa0-a507-5f74f783e632">
+                    <propertyInstance
+                      Id="9594d3d0-ee5d-460d-81a8-98354baa2e13"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8bd07149-f5a7-4aeb-9b6b-c329c296f190">
+                    <propertyInstance
+                      Id="2ad56261-7410-4961-a36a-8910ac17b512"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="52887fe5-f900-4ee8-89bd-873b5377bb4c"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="0d4484d7-a1d3-41bd-9dac-6f6c41f39f71"
+                      LastKnownName="Contact"
+                      LastKnownLocation="Package5_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="63aabb28-e347-4dad-b90e-7f613f479a15"
+                  name="contactNo"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="f20f549b-cfe7-4281-91fe-cee98453bbe6"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DGetContactByNumber OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DcontactNo"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="54ca2ef4-7185-41e1-9493-73d8144bda63"
+            name="LoadContacts"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="df714826-7de3-48d2-a339-da7c330d5b93"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DLoadContacts OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="53cdde2b-d76b-4019-be39-0ff1a04d45e0"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="270c1694-8efa-4e27-b327-d304a52c2112">
+                    <propertyInstance
+                      Id="0a123203-ecee-4cd8-ab3d-015793900d93"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="94060983-3e3a-4ee7-bcac-14f88f839bb7">
+                    <propertyInstance
+                      Id="f007688b-fd0c-4720-aef5-4c4e021fc77f"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eec05f00-cec2-4371-a549-fcd36d896742">
+                    <propertyInstance
+                      Id="31105e49-966b-46f2-9396-cff144414a08"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="699e8a41-db0e-47b0-8549-08ac5128d0fa">
+                    <propertyInstance
+                      Id="f029d8d3-fb58-45ca-a4b4-cd423e238398"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3db6f190-aac1-4f9d-8ef9-ede79a5cb425">
+                    <propertyInstance
+                      Id="e16175e6-bda3-46bc-84ed-2c80eccf3e21"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1dcdf855-63a4-490c-9c2f-9c5c32317012">
+                    <propertyInstance
+                      Id="6cd9ca9f-c7a3-4d62-bc1d-64422c4e2a6b"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7d26a49b-a3e1-433c-b5ba-c39de97fd3a7"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="2e9c0883-2893-4ce2-b8dd-d70142c19558"
+                      LastKnownName="DataView"
+                      LastKnownLocation="Package25_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fcc01d03-cf9d-4e5b-a04c-a0e0c161458d"
+                  name="xmlFilePath"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="bcf1acaa-30fc-4bd5-9def-415c4389e95b"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DLoadContacts OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DString)]) ParameterIdentifier%3DxmlFilePath"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="9e822143-f41a-414c-8c2a-633287784a65"
+            name="RemoveContact"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="315eb747-6d86-4f6e-a353-5bac0dee92d8"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DRemoveContact OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0506e5ec-f982-4f88-9ff5-423ef941f25c"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a7fc79cf-2d0f-4803-800b-31fc806d8319">
+                    <propertyInstance
+                      Id="4d1dba9c-79f0-4b4f-83d0-bc475638cfdd"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="be2713bd-4587-4810-ae2a-ba6e601f9625">
+                    <propertyInstance
+                      Id="fd1388ae-c82b-4985-b820-8ea4879e06db"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4af392b4-7649-4fe2-8987-792713592501">
+                    <propertyInstance
+                      Id="a05504cf-6a7a-4b0a-b8b6-f4adf2596d8a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1f4a2de1-ea7a-450a-be89-b5fc9a477234">
+                    <propertyInstance
+                      Id="4c7e0a54-4833-4711-88bc-cddf9de74051"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3ee79ff5-5503-4f1f-96b4-dd18811ffe6c">
+                    <propertyInstance
+                      Id="91b7e26a-1bd9-4813-b8bb-b8c037231dd6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2f2e068f-8655-4557-b170-a0972baf0762">
+                    <propertyInstance
+                      Id="4cd3f1a8-7138-45a3-b0f1-06cff957d932"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="397aeb77-9d47-4b5f-a092-05d7bd053b2d"
+                  name="contactNo"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="b2dd1698-4df4-421e-8cd3-e3f279dbfd00"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DRemoveContact OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DInt32)]) ParameterIdentifier%3DcontactNo"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="220a3521-e091-4221-bae9-3ef9018e845c"
+                      LastKnownName="Integer"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="b6f0123d-2abe-4ec9-a7ff-6ff96e918dce"
+            name="UpdateContact"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="ec24a1d4-e63a-4b25-8721-69ad6fea7689"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DUpdateContact OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DAbstraction Type%3DContactBase)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="e6e1658d-5faa-4cdb-b755-ae862a4f9b64"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="31dfadb2-6dbb-4e7f-9ee5-a013b19d97f9">
+                    <propertyInstance
+                      Id="6cb980e4-8a1e-4e0b-b7e3-06cccc7c0c2e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="42966163-ba82-4568-ad6c-8c100ce799c6">
+                    <propertyInstance
+                      Id="e083708e-35fd-4457-8985-994de9bbacc4"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f7b94605-33a2-4a55-bff9-a1e6a803a646">
+                    <propertyInstance
+                      Id="d066aa66-b3c2-46c8-bab6-6908134a610b"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4594e07b-6bc7-4734-b946-26f3074d0796">
+                    <propertyInstance
+                      Id="71e62d7f-d0cd-4e96-a763-87c1d0eb49e3"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eb9c86fd-881f-455d-9002-aa46f473c72b">
+                    <propertyInstance
+                      Id="cc6fa447-f589-4e3a-a222-fc6355264b13"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b012657c-80ca-413f-85ae-651119004023">
+                    <propertyInstance
+                      Id="0597ded8-01c2-47be-9a93-d1c3724cde55"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5ae56b83-f312-438d-b263-a3930d7cc19b"
+                  name="contact"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="3736a57a-bdbb-4381-b001-a8419448a931"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3D(Name%3DUpdateContact OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FInterfaces%2Fbin%2Fx86%2FDebug%2FAbstraction.dll Namespace%3DAbstraction Type%3DContactBase)]) ParameterIdentifier%3Dcontact"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="4e1b8678-b9a0-45e4-bcb2-649ae0ccac47"
+                      LastKnownName="ContactBase"
+                      LastKnownLocation="Package24_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="7d134dc5-4977-4c0b-9976-67556d85d097"
+            name="GetContactIdentities"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="500e7eee-ac24-4f3d-8256-194fff938c40"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3DGetContactIdentities"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="a29bd244-c680-42f5-ab11-a93fc5bcd59f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2dca10d8-de20-42d4-83ed-910ac157cb2b">
+                    <propertyInstance
+                      Id="cb7d29ae-b6e0-493a-8d22-bf90507e4b82"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a45e2426-77d1-4544-83ad-8e66b9232d74">
+                    <propertyInstance
+                      Id="c66bd608-82ce-44a3-a2c7-ef4759d92046"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="51d556b4-dcdb-4608-bfe0-135d6222bab5">
+                    <propertyInstance
+                      Id="faed887a-be71-4a74-a5b8-ffc2db859a49"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7a6dd01d-7099-4e79-95f2-0e26712fd3ad">
+                    <propertyInstance
+                      Id="7bb81730-45ea-47c6-a72b-0bd0ec2d1777"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dcff5ee3-9520-49f2-9e1a-ac56c8b50b57">
+                    <propertyInstance
+                      Id="119c5c93-2fbb-4ea2-970e-85b4be20715d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7861e172-4d83-4453-b93d-c8cab63bbb7f">
+                    <propertyInstance
+                      Id="0e666c01-96b1-4962-bc01-63ea0ad6a533"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="eb797a3e-9372-4fcf-b74c-e7ac125a08c2"
+                  direction="Return"
+                  isOrdered="true">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="cb18d226-2aea-4c4c-bcc1-dae59c0d11b8"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="d37be643-a3ec-40f4-b606-4519ffbead63"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="ModelingProject.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="bdd9f9e5-d064-4f71-9673-7115fb1458fc"
+            name="SaveContacts"
+            isLeaf="false"
+            isStatic="true"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="ed0d44f1-0e29-4adf-9f8e-343b0c98628a"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FDataAccess%2Fbin%2Fx86%2FDebug%2FDataAccessLayer.dll Namespace%3DDataAccessLayer Type%3DContactsRepository Member%3DSaveContacts"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="b3ddb87a-7678-484b-a3c2-36005f700347"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="80fe7825-363e-43f1-9b57-62588df66bf4">
+                    <propertyInstance
+                      Id="c8d6d48e-1d4a-4259-a91a-11085354c696"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b2201a42-1854-49c4-8ce2-86d9b6e23449">
+                    <propertyInstance
+                      Id="28b3eef2-28dd-4b94-b740-ec16253edfad"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3871c00d-eebc-4fdb-ac8e-56aa6bc9794f">
+                    <propertyInstance
+                      Id="2f8288df-f875-49a6-9e6f-027f3b3a6f2f"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="64eb0303-9932-4c31-9364-9b57a321afbf">
+                    <propertyInstance
+                      Id="5ea51c54-fb15-4b23-bfee-01e0dd1baa1b"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="883af058-4e49-4560-9079-039411413821">
+                    <propertyInstance
+                      Id="8c9a3a40-4daf-4d8a-90fa-f285330f0e55"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ca9db7ca-a9e5-407f-a0c0-4c76f7ab1820">
+                    <propertyInstance
+                      Id="67f34f6e-416a-4ed7-809f-1c065eb87008"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

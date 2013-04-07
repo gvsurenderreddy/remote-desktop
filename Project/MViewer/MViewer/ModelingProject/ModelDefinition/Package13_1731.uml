@@ -1,0 +1,1763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="26d05a8a-3dc9-4480-b4ea-4e088f667aab"
+  name="AudioStreaming"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="e28bc5f3-c6c3-4b5c-8c16-2c9f18f4b8d9"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DAudioStreaming"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="83a655e8-2c00-4761-880b-ae65dde46213"
+        name="AudioStream"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="f2db3e26-37a8-4f92-8ea2-8175f2607aa9"
+            handle="viewcode://./CodeSchema_Class?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="b7f1e7c8-220a-4bff-85f1-17fbfc386a89"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5b4ca379-6f8c-4791-b875-bd4b93aa3705">
+                <propertyInstance
+                  Id="cda459e7-f5e7-4cda-b5d2-c1b0df7167fb"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="afdf7682-c7aa-425a-85b0-7620a1782697">
+                <propertyInstance
+                  Id="d4a1cee5-61b6-4530-8955-40ebbcdc99fe"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5cb26f1e-d5dd-4561-af83-0f3e15c04ccd">
+                <propertyInstance
+                  Id="96d3c5e7-d309-4fa2-9731-36403a463c97"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="02f212ec-dd4c-4747-addf-6e1b56e5c52d">
+                <propertyInstance
+                  Id="d50a8c4a-6c73-4848-a37f-1ff4abc7273f"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0f2886c0-b546-4f48-b3e3-a83653ff96ff">
+                <propertyInstance
+                  Id="d329c427-c1d1-47c6-a9f2-137ce20d1dce"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="a24f1d7b-5824-4449-a9d7-053a5c8379bb"
+            isSubstitutable="false">
+            <classMoniker
+              Id="86389ef8-b42d-4771-9715-79e113546dfd"
+              LastKnownName="Game"
+              LastKnownLocation="Package16_1731.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="ecf1b037-a5dd-4619-bb90-0f8becf952a6"
+            isDerived="false"
+            sourceEndRoleName="AudioStream"
+            targetEndRoleName="Stream"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6e206ff9-93f3-41e8-b6c0-c0cc22275476"
+              LastKnownName="MemoryStream"
+              LastKnownLocation="Package17_1731.uml" />
+            <description>Property Stream references type MemoryStream.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="41bb9d52-f406-4487-8174-1d04627dab37"
+                  name="AudioStream"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="32c7caaf-7e9e-4311-b0f2-4de5b70fe2e3"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="14f3aaff-abe6-455f-8141-2798de9f4819"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="34467eef-0721-4772-b71f-4a46dd974679"
+                  name="Stream"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7c392043-a4e4-4e69-9f9e-9436464385e9"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="5a03b642-29a1-4e28-b66e-dd023152a2e4"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="08f6bcd5-1eeb-4df1-9187-51628fcd539a"
+            isDerived="false"
+            sourceEndRoleName="AudioStream"
+            targetEndRoleName="SyncChunk"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+              LastKnownName="ManualResetEvent"
+              LastKnownLocation="Package18_1731.uml" />
+            <description>Property SyncChunk references type ManualResetEvent.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="956600ee-f80e-4125-8d87-954e26a45d35"
+                  name="AudioStream"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="fee710d9-a4c9-4e74-8e40-9abf91e870d9"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="4e64a570-e2d0-4def-ac0c-fc567e3fcf36"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="21953cdd-7a0a-445e-bdb9-d6f6b8680e39"
+                  name="SyncChunk"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7f9ceb4c-f827-4804-adad-043aef934e65"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="d1bdfcb5-6311-497d-be4a-061b92ff4490"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="5ac5c057-57e1-4d90-a407-3e838f46947f"
+            isDerived="false"
+            sourceEndRoleName="AudioStream"
+            targetEndRoleName="SyncStop"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+              LastKnownName="ManualResetEvent"
+              LastKnownLocation="Package18_1731.uml" />
+            <description>Property SyncStop references type ManualResetEvent.</description>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d2d738fe-a483-4809-89e1-ce98b3edd450"
+                  name="AudioStream"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="3331f3ec-3ccf-44d7-9cf6-6cc0e74ac7d7"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="16ef2459-e40e-484f-8e33-9dfdea2f3966"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="3ff6bdaa-9338-4f21-9bf7-dda61e206799"
+                  name="SyncStop"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="fa2f628f-a232-462d-813a-6da9766451a0"
+                      name="Lower"
+                      value="1" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="a9837f86-e3d2-4529-a550-9828b6ba4412"
+                      name="Upper"
+                      value="1" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="207d77fa-0ef2-4da2-a74b-a01077429e3e"
+            name="IsRunning"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="82f87733-77ab-467f-a142-bd0129d4bad4"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DIsRunning"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="c3f002fb-3c25-441e-99e0-09fc57e0b9bc"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7c9272b3-8d4a-489b-a191-c998b511f693">
+                    <propertyInstance
+                      Id="e206f99d-cf4b-485f-b402-2facc3826215"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="fe7e4a5f-dbd4-423b-91e1-78a65a09a7b7">
+                    <propertyInstance
+                      Id="1a0f4ad6-fe0f-4310-8d89-4564744aa8d2"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="29e036db-465f-46f2-8cbb-8b90ca6c9329">
+                    <propertyInstance
+                      Id="31e2fcf0-5a13-429c-afba-7276654e20fc"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a8e614d0-bcb4-4673-835e-b0eee21d098e">
+                    <propertyInstance
+                      Id="84518e8b-4ee2-4d80-ac4f-55a6600ac6ca"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="35caf0dd-edcb-417a-b5c6-4bb95627fbb8">
+                    <propertyInstance
+                      Id="259c6e5d-e4c9-4836-99a0-fe9ad52e867a"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b93957f6-494c-4fc4-b3c1-a35bdbffdcf8">
+                    <propertyInstance
+                      Id="85a92176-f0d2-490f-ab8b-3a76bdc88745"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="caaead0a-86ff-494c-9fad-f79aa32e706f">
+                    <propertyInstance
+                      Id="d105c32c-6455-41c9-9f5e-cbbbd9bd28a5"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                LastKnownName="Boolean"
+                LastKnownLocation="ModelingProject.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="9931156f-05de-4c51-935e-29b74ced1cc7"
+            name="Stream"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="63282119-fe45-4528-bd15-38235b75fdd5"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DStream"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="9dec6f89-bd2f-4393-befa-4fff49f2317b"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="24e5d826-6a32-4bcf-bdf1-221bcd2adb75">
+                    <propertyInstance
+                      Id="2c12174e-0ba7-48a0-a9a3-ccfae3f75f9b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d6a7a5e2-b9fe-474c-9547-3fac591e0920">
+                    <propertyInstance
+                      Id="33d4b96b-410c-464d-aee2-8c721fe81a71"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c442cfdd-2cf6-4f46-8781-a9e0582aa2e3">
+                    <propertyInstance
+                      Id="edd46364-da1e-4eb2-8087-d5b87b877417"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="770ee004-6a7f-4185-a3ac-41af09ea7792">
+                    <propertyInstance
+                      Id="7a293de1-b15a-4dfe-9414-c7031066cc12"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bc5965e4-ff00-4015-a63d-1c8426b57bf5">
+                    <propertyInstance
+                      Id="f4862542-88c6-43da-8a25-66d6c3ae9b71"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7835a442-84b4-4883-98dc-52833a693cad">
+                    <propertyInstance
+                      Id="591546b5-6343-4f84-8996-d96d325fa103"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0ac7659c-a4a2-4f31-888e-9f3fdfa11390">
+                    <propertyInstance
+                      Id="59830e20-e05f-4491-8e57-91e16e0b8118"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="6e206ff9-93f3-41e8-b6c0-c0cc22275476"
+                LastKnownName="MemoryStream"
+                LastKnownLocation="Package17_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="56c9b738-6bd7-49fc-8a97-e52acdec189b"
+            name="SyncChunk"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="af9ac3b6-36c6-45d8-8b4f-2a13b1c40df7"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DSyncChunk"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="4245b452-ff76-49fb-a649-6affad7ca950"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cddd8ebe-3504-42a4-9dbe-5889d059d999">
+                    <propertyInstance
+                      Id="125ee859-2e69-49f4-957c-2d3e1518bd08"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="86cb989d-3835-46ba-92bd-a5eceaa7c917">
+                    <propertyInstance
+                      Id="15207029-413d-478e-979d-26d5fa19ecf5"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b8d2568f-c51e-4d3a-953f-91d0698f51c6">
+                    <propertyInstance
+                      Id="52293f45-9285-4656-8c1e-2b15248ae741"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dff74001-4ca4-46d6-b147-7d033dc0e539">
+                    <propertyInstance
+                      Id="064727e7-b441-48b2-9d6b-3bb812f42fe2"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7b6a2fb4-0e2b-4e14-8aca-e92c8e7b6ee8">
+                    <propertyInstance
+                      Id="340e8d81-d657-4aa4-91b5-a51fde098636"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a0e1cc8e-af05-4b73-9829-13921a8a4d4b">
+                    <propertyInstance
+                      Id="6d766c53-66b4-47f6-8973-4b2f021696ab"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c9110dff-4d59-4f73-ae4a-0f051713590e">
+                    <propertyInstance
+                      Id="4691c414-9150-4ff1-9c26-cc937b452a57"
+                      name="Set"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+                LastKnownName="ManualResetEvent"
+                LastKnownLocation="Package18_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="314e5ae1-6010-46d4-98f1-d2e1567f680e"
+            name="SyncStop"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="b16acfeb-c1d9-499b-864b-0eda5d5b3068"
+                handle="viewcode://./CodeSchema_Property?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DSyncStop"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="31c949d0-5bca-4b1a-b3e1-71b1f417b2b7"
+                name="property"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c294a3e7-cb1b-4fca-a294-f8a17be238e3">
+                    <propertyInstance
+                      Id="ac9855d1-6273-4342-8b39-7051d00a77bc"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="96d9ea7e-6433-4d0b-920a-972c1fe29328">
+                    <propertyInstance
+                      Id="249412fc-05bf-401f-bd83-614d62fb6891"
+                      name="Get"
+                      value="public" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cd54bbbd-36bb-4994-bdde-14295aa411bb">
+                    <propertyInstance
+                      Id="6d5907a4-4e71-4f7f-a4e3-309f469b8a63"
+                      name="HasBody"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9a385909-5d5e-4ec0-9ce5-42ed9000d997">
+                    <propertyInstance
+                      Id="c7ed2fbf-6535-4409-9b70-db2c2da4426e"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5b4a8342-7947-4650-89f6-2801a48141c9">
+                    <propertyInstance
+                      Id="8393dad5-0fb1-45ee-a75f-2314ac3d9ecf"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a5e8a7f0-2e01-4ea7-83ee-4ea51c1d1a54">
+                    <propertyInstance
+                      Id="8970b0db-7bb7-419a-bd20-ca9d6f57efce"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5afd83bc-47f8-454c-b3ec-c7fbbe0d63c1">
+                    <propertyInstance
+                      Id="1d8e3f66-306f-4954-8306-c33a52782c31"
+                      name="Set"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+                LastKnownName="ManualResetEvent"
+                LastKnownLocation="Package18_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="375c4f70-db06-4814-9af8-bbddddf1aa5d"
+            name="_buffer"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isOrdered="true"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="9821703d-e3bf-4432-8367-65437e692d32"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_buffer"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="71a80f4c-5672-4498-a1c1-b43a5059385c"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7ad204f8-dcbe-4d05-9561-25a4a2f5913e">
+                    <propertyInstance
+                      Id="0eec3c55-57b4-4851-8c6b-6cf7d782344c"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7ed6f31d-04e5-4715-9879-6ed335b0ec42">
+                    <propertyInstance
+                      Id="f27833c5-bd32-43a3-b897-185bde28a47d"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="40786f16-3f74-4107-9a44-80eaca68a5a3">
+                    <propertyInstance
+                      Id="30de21a5-6996-4efa-b1bd-43f288cd7a07"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9c698ae5-e6a4-4604-8711-f91c75b3ea66">
+                    <propertyInstance
+                      Id="54aeabf7-e257-4463-85a0-46e7faca1fd9"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="22787ec5-fd85-464e-8bd4-ff177a53fa8e">
+                    <propertyInstance
+                      Id="c2f38e2d-d0a6-4525-aebf-ac28bb40f1f9"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <lowerValueInternal>
+              <literalString
+                Id="f8491055-131f-4c17-813b-91d5a6cb17e9"
+                name="Lower"
+                value="*" />
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString
+                Id="db3e30ef-8325-44ee-8dc0-51a24c0761b5"
+                name="Upper"
+                value="*" />
+            </upperValueInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="5b79f13b-d95a-4173-9f6e-e4ce3163c53f"
+                LastKnownName="Byte"
+                LastKnownLocation="Package_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="b68eddf6-41e5-467a-a24a-2ed7d7652602"
+            name="_graphicsManager"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="476b6a8c-766e-4d2b-9673-b4fa00dae011"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_graphicsManager"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="2d17bdf8-fe53-41a4-9968-3f6af43e76a0"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b21793e0-be2b-4c25-af53-2bc494f39bcc">
+                    <propertyInstance
+                      Id="d8ac0ae1-249f-413d-a748-944e03ad380a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e8b2386b-3807-48b9-83e5-d010c40badbe">
+                    <propertyInstance
+                      Id="94cc6637-c5d8-4763-becf-5977fd4c434a"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="58069a77-d3e2-4746-b615-6bd4947588ec">
+                    <propertyInstance
+                      Id="bba1cf02-85bc-4a46-b7d9-e4804e4626c1"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="43aa2483-85d7-4512-ac34-7b00df15bf70">
+                    <propertyInstance
+                      Id="199cd2f6-7c6a-46a9-9d27-c80a3e868574"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="14c5a871-10b4-409b-b882-d0fd43a2a9df">
+                    <propertyInstance
+                      Id="0112df3a-07da-4975-b625-448f502c53be"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="8faf3a6e-9121-4ec7-a60f-d69533eb414f"
+                LastKnownName="GraphicsDeviceManager"
+                LastKnownLocation="Package16_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="242bf316-a7fb-405f-9fa3-36b4a14ee9ff"
+            name="_isRunning"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="768141d2-1b18-4292-8469-7918a781f90e"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_isRunning"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="2d1cbcb9-cff7-48ad-bcc6-50491483121f"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ee8449c1-0e99-48b4-82c5-7f86b94f4da5">
+                    <propertyInstance
+                      Id="466c0966-6974-40fe-b62b-26e881e6366d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0c41314a-6694-4bf9-a450-ca7719682c7c">
+                    <propertyInstance
+                      Id="8a6fcfbf-0fd9-411b-afe3-c4165a094f84"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ac8fd15a-d3cc-4d97-a8fa-b2066ed27f98">
+                    <propertyInstance
+                      Id="4c31eac6-bccd-4280-8c83-8e4cd0980503"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a11cbace-a09f-42a3-8196-9932222ebb51">
+                    <propertyInstance
+                      Id="913de8eb-6f58-497a-ad51-0c8d8d6ce6e3"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0c0b5042-18ac-4ff0-8877-fac5afb04f1e">
+                    <propertyInstance
+                      Id="e3696650-5de7-4232-8cae-2b002653572e"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <primitiveTypeMoniker
+                Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+                LastKnownName="Boolean"
+                LastKnownLocation="ModelingProject.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="51bff79b-24d1-4305-ab38-2f749bf8b483"
+            name="_microphone"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="65246ede-764d-4751-a578-f25749ea1e5c"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_microphone"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="49a879ce-1f7d-4f77-87a2-840c21253aa0"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="69b15a0f-a7ce-474b-8fc3-04f6f4e4aafc">
+                    <propertyInstance
+                      Id="6d81c01c-d0f6-4034-9e0f-d989a1586e96"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="00309a49-69db-4f88-b17d-44c37050eef4">
+                    <propertyInstance
+                      Id="5a7aa6b1-f254-43f1-98bd-f39bc6d4e3bf"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1e57ccad-73d8-4c26-b5a6-6d6d570a102e">
+                    <propertyInstance
+                      Id="bb4f576e-89a0-4d7e-b749-0ff77e4ddd76"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="344b7cb8-034e-48cd-af42-5f9ce4eb1499">
+                    <propertyInstance
+                      Id="228b5888-824b-4d26-a2df-057c4ce3b39f"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1d7b5e9e-732b-47ff-b137-e353a77ff620">
+                    <propertyInstance
+                      Id="eb846cee-284d-4e9b-b5a7-d2c2a43feb73"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="f75918c7-a8f6-402d-9aa0-099a1a7eb077"
+                LastKnownName="Microphone"
+                LastKnownLocation="Package19_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="13fb90d5-b9a3-4517-be68-1fdea3924a46"
+            name="_stream"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="85623f7d-b7bd-4150-bf77-aa531b3783ba"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_stream"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="0b7bfbea-392c-4e51-a45c-dfd4a038cfb0"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="035c0799-0c36-4bbb-8110-702d8c9d8546">
+                    <propertyInstance
+                      Id="6392e615-4b2e-4386-9f4f-dbd30cbf20ea"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="be3606b5-e4fa-48a9-bff8-a412e0c48ceb">
+                    <propertyInstance
+                      Id="f5b6c7bf-4ee8-4e84-9cf8-2428275c2d3c"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4bd3a745-f96a-4cf1-a55a-cd3bdf781f36">
+                    <propertyInstance
+                      Id="33e3f402-aeb1-490a-8323-032e03327755"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5bb63a3b-6e41-41f0-9150-2533ad3f4b72">
+                    <propertyInstance
+                      Id="4e02da9f-08d8-4610-8c78-24c2607e705c"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8c441118-4a46-4b87-965c-d8c68a149a8b">
+                    <propertyInstance
+                      Id="8507970d-b5c7-42ca-9512-d3398229a1ca"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="6e206ff9-93f3-41e8-b6c0-c0cc22275476"
+                LastKnownName="MemoryStream"
+                LastKnownLocation="Package17_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="2e4bbd51-6fcd-4583-b532-76f5ea53a719"
+            name="_syncChunk"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="0230d72e-2ea2-4342-959d-396b3218e961"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_syncChunk"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="030331a9-df36-487a-991d-d7150525e654"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="90d2640a-b5c5-43c7-9fec-17eadd288f5e">
+                    <propertyInstance
+                      Id="6545e7ef-077d-40b9-9e02-aa48c90194c3"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="73a8a920-e36c-4182-a5a4-1a637f069fb1">
+                    <propertyInstance
+                      Id="414fa608-d3d3-44db-88a4-a832147642c1"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="f4273f45-c0cf-406c-a2eb-1d7674bc9502">
+                    <propertyInstance
+                      Id="6f7b6dd9-a1fe-4ae8-b1c3-3447097b0022"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b7ec0291-92f9-44c8-8733-a1d709f8017d">
+                    <propertyInstance
+                      Id="e77a9fe8-45d4-4fd4-a2fb-7d1bd60740bc"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7b60d39c-f94e-43af-830b-8e6adb0afa4c">
+                    <propertyInstance
+                      Id="66a02954-b48a-4736-80ad-42124b70a0f6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+                LastKnownName="ManualResetEvent"
+                LastKnownLocation="Package18_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="7b641c38-91a0-4d58-9f95-f2d49b061db5"
+            name="_syncStatus"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="5150c9a7-44c3-4482-9572-7df097003a5b"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_syncStatus"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="3155fa95-6294-49e8-b85a-40a35936d81c"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="873de8ac-cc7b-40ba-aa7c-66a47176e2ab">
+                    <propertyInstance
+                      Id="75c1a7d4-349a-40ef-8e1e-0c6402b42d1e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="eaa4e537-06ae-415d-ab89-c51fd8a342d4">
+                    <propertyInstance
+                      Id="e0c0e466-3a09-4714-9dce-fabaa5652130"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="5cc94108-b42d-4f9a-9c21-57f505bc2265">
+                    <propertyInstance
+                      Id="d4c6b3b0-c835-4677-9eb1-05cb41dc7846"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b6e9774a-682e-482d-bb64-643df4e413e4">
+                    <propertyInstance
+                      Id="7912d5f7-306f-4653-ab5a-2965acdf6dd1"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2f2d2ecc-deea-454c-af1e-638ae7a573d6">
+                    <propertyInstance
+                      Id="a7f894ac-00a6-43cb-ad31-ebe51f186028"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+                LastKnownName="ManualResetEvent"
+                LastKnownLocation="Package18_1731.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="9da19b81-0301-4bb3-9c0c-f9c343a3b3c8"
+            name="_syncStop"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <referencesInternal>
+              <reference
+                Id="03e6572d-8af8-4344-92b7-7c0ce99d70e2"
+                handle="viewcode://./CodeSchema_Field?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D_syncStop"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="f4ccc87d-0aa0-4ef9-a89d-242195367ef4"
+                name="field"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4eaa2ca6-5f82-48c0-a1d3-f15383029b93">
+                    <propertyInstance
+                      Id="9f3e75c8-29be-4603-8441-5828da2db089"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="879cbd81-db73-48a7-b4bd-9827f0707322">
+                    <propertyInstance
+                      Id="91aeae83-6522-4094-917d-624509232a65"
+                      name="IsConst"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="13dbec73-66aa-419d-89c8-dbcdc6aa47f1">
+                    <propertyInstance
+                      Id="35b34096-bcad-43e1-851c-49754de4edfd"
+                      name="IsNullable"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c12b4215-66e4-450f-b4af-7fd532e89457">
+                    <propertyInstance
+                      Id="4173a9d9-24f3-4997-9b92-037c75fb68b2"
+                      name="IsVolatile"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d9ef4bef-199b-479c-a5a8-262d685cb72e">
+                    <propertyInstance
+                      Id="9436cf13-8435-465b-8465-71072681434a"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <type_NamedElement>
+              <classMoniker
+                Id="c49134af-a3d8-45fd-8698-2777f3826ee2"
+                LastKnownName="ManualResetEvent"
+                LastKnownLocation="Package18_1731.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="11e17e8b-7014-4344-9c94-f4c926aead66"
+            name="AudioStream"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="f32bf14a-5551-4a52-ad27-fb9d2918c7a9"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="cbe96e4f-ca3c-4b91-bb62-a3fbd7ea0729"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c47ac4d7-1df3-4ef6-bfa9-9ca0028a090b">
+                    <propertyInstance
+                      Id="bc071ca2-e5c2-42dd-8e5f-caf188e68b1d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="99e5cbb5-f552-4baa-8b59-6a3ba2113113">
+                    <propertyInstance
+                      Id="df564969-cf37-48f0-b802-08fc7d04f302"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bb98fd99-b619-4169-82b6-785c874ab394">
+                    <propertyInstance
+                      Id="330e7589-6776-4c5a-8f84-5c03cf88f384"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="59c16e39-4e52-42a2-955b-2f5183df3ebd">
+                    <propertyInstance
+                      Id="71d9406d-ade4-453e-be73-d33b2c594396"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c60b5a7f-2b66-4cb7-9b87-23d02dc76cc0">
+                    <propertyInstance
+                      Id="90bbbcd7-eec7-4334-8f4f-217137e0ffd5"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7e50af73-26fe-4fac-9090-c82cbeffa3c3">
+                    <propertyInstance
+                      Id="8a935c5e-0df1-4559-8468-3d736b0b4d60"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="6552f527-fd18-4fbf-91c6-d187c1e20814"
+            name="Draw"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="ecb7a870-17c8-4964-8c77-e53618984d0e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DDraw OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FMicrosoft XNA%2FXNA Game Studio%2Fv4.0%2FReferences%2FWindows%2Fx86%2FMicrosoft.Xna.Framework.Game.dll&quot; Namespace%3DMicrosoft.Xna.Framework Type%3DGameTime)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="6b4264db-a050-480b-b0ec-0b464cbb2a8e"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="9f6ab43e-ba61-44b5-9e2f-6bc428dfa98f">
+                    <propertyInstance
+                      Id="9b45232b-48c4-400c-a0ac-96b350fed24a"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1091d1e5-519b-4e06-ae59-98db0888aca4">
+                    <propertyInstance
+                      Id="f40d8214-f741-4f94-bfdf-3c92c0e11fcd"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="92409004-666e-4600-a1a1-47d1ad7b313b">
+                    <propertyInstance
+                      Id="c6db0e96-db6d-4b69-947e-35e3fec8212a"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c2cfac7e-ec71-43b2-b53e-b31cd089f7fb">
+                    <propertyInstance
+                      Id="c2da0acb-f4f1-4fe4-a050-88dd3b785c98"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cefc1eb7-ec60-43e7-a5cf-9734bb62cb7e">
+                    <propertyInstance
+                      Id="2baad619-6480-4f15-9438-c10ec28b1e46"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6e50528c-a788-42c1-8694-a673202b5f6a">
+                    <propertyInstance
+                      Id="bb1cda1b-0c30-4020-8edb-c234379e2449"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0ea4e36d-7bda-46b5-93f7-6f07d758adc7"
+                  name="gameTime"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="75d5745f-88f8-4245-83ac-d6eeb4022a29"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DDraw OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FMicrosoft XNA%2FXNA Game Studio%2Fv4.0%2FReferences%2FWindows%2Fx86%2FMicrosoft.Xna.Framework.Game.dll&quot; Namespace%3DMicrosoft.Xna.Framework Type%3DGameTime)]) ParameterIdentifier%3DgameTime"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="508c111e-7d48-40f9-9f54-19e4ec195b7a"
+                      LastKnownName="GameTime"
+                      LastKnownLocation="Package16_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="270b35a4-d046-46f5-be2e-400753060e28"
+            name="OnBufferReady"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="95dceb7d-0ff1-4c89-b54e-2131afa3ff7c"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DOnBufferReady OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DObject)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DEventArgs)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="374a7584-79b3-4820-99b6-ddd08ec3e2b7"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="87e8412c-d1f3-4cd5-9026-ad50c7b9a3c3">
+                    <propertyInstance
+                      Id="40b6ad85-142a-4103-9f52-1bdec17bd34e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6113d1a0-331c-483f-a2c3-33acc593d8b3">
+                    <propertyInstance
+                      Id="23ce8bdc-6ee3-4fa6-8570-d2a0ec6861f4"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b99d9efa-6648-4604-a4cd-9e4639e91816">
+                    <propertyInstance
+                      Id="fe0b7081-658f-4be9-9f38-4e66e311a3c8"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b272c0d7-d720-421a-83bb-3d9f5f2bd49c">
+                    <propertyInstance
+                      Id="18d55ae7-3d95-45fe-910b-021c5e571225"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="834777f9-3256-4ce4-9b14-43471af32fd4">
+                    <propertyInstance
+                      Id="11a2f2d7-5756-4f1c-a4cd-34fa569708b6"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="1d5c593a-7706-4b7a-bdbf-4a81022c844e">
+                    <propertyInstance
+                      Id="639474e6-512c-471d-af42-a18d4ea579d1"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0eca0a7e-a7ca-4eef-93ec-496c4df7da6f"
+                  name="sender"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="d8e499f1-6791-47e2-ba56-0a27d4f34214"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DOnBufferReady OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DObject)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DEventArgs)]) ParameterIdentifier%3Dsender"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="dfea16c0-65b1-487c-9145-b959052a8f68"
+                      LastKnownName="Object"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3d78c49b-b46d-4369-b421-3db3bfbdd6e2"
+                  name="e"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="276a1cfb-2ab4-4404-b113-abc36849c09a"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DOnBufferReady OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DObject)%2C(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FReference Assemblies%2FMicrosoft%2FFramework%2F.NETFramework%2Fv4.0%2Fmscorlib.dll&quot; Namespace%3DSystem Type%3DEventArgs)]) ParameterIdentifier%3De"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="683962f3-76f2-4210-8cd5-775294095e48"
+                      LastKnownName="EventArgs"
+                      LastKnownLocation="Package_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="173b6fb9-3507-400e-bb19-f8a082762b83"
+            name="Update"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="edb5e293-545b-4ef9-ab36-dbdf5f3c3884"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FMicrosoft XNA%2FXNA Game Studio%2Fv4.0%2FReferences%2FWindows%2Fx86%2FMicrosoft.Xna.Framework.Game.dll&quot; Namespace%3DMicrosoft.Xna.Framework Type%3DGameTime)])"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="27cf3a73-a29d-4432-a31d-07763044e772"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cc169574-b76b-4292-b4f1-904fc682bf01">
+                    <propertyInstance
+                      Id="7e3150aa-ed95-439d-bdcb-bdb0b186af7e"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6739a35e-759a-48e2-a238-9498f6110e27">
+                    <propertyInstance
+                      Id="d99c1d11-7872-4f4c-99d7-f82e90cae1b9"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e85aab38-e841-4de2-92ca-af1526f89048">
+                    <propertyInstance
+                      Id="0aa8300b-9dba-4f00-8434-35c0325dc1e0"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="df47d675-0f5a-44d7-91a9-569c1bc2298a">
+                    <propertyInstance
+                      Id="dfa1e759-ff60-45d6-a03f-beab9f22000a"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="182e4abf-e462-412a-a1d1-f1775d019788">
+                    <propertyInstance
+                      Id="f590b91a-a08d-4cd5-b521-6e70c0eb6e53"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="3a4491fe-d3cf-4545-9583-b277acc592dc">
+                    <propertyInstance
+                      Id="d20348ee-5a2c-48c4-a564-a7139ad6f0ff"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c601d557-d092-4ac2-82ae-414077fd9b60"
+                  name="gameTime"
+                  direction="In">
+                  <referencesInternal>
+                    <reference
+                      Id="a4d8daef-3ee8-4558-bc7a-1e93fdd1746e"
+                      handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3D(Name%3DUpdate OverloadingParameters%3D[(Assembly%3D&quot;file:%2F%2F%2FC:%2FProgram Files%2FMicrosoft XNA%2FXNA Game Studio%2Fv4.0%2FReferences%2FWindows%2Fx86%2FMicrosoft.Xna.Framework.Game.dll&quot; Namespace%3DMicrosoft.Xna.Framework Type%3DGameTime)]) ParameterIdentifier%3DgameTime"
+                      tag="ViewCode" />
+                  </referencesInternal>
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="508c111e-7d48-40f9-9f54-19e4ec195b7a"
+                      LastKnownName="GameTime"
+                      LastKnownLocation="Package16_1731.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="418f6b1b-d486-4e33-9683-970d53198f4b"
+            name="Initialize"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="09aa63ef-714a-48a4-8cfa-d5b454f195b4"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DInitialize"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="04126555-9bdf-43e2-878d-a236b8f64d65"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="119b8979-d57e-4102-b5e3-32ae209466c2">
+                    <propertyInstance
+                      Id="88e19330-2f9d-4b2f-8225-6281286c8f13"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="de318052-97b4-4550-8e5b-db3847c8c699">
+                    <propertyInstance
+                      Id="524deb5b-a019-4c26-8c23-30530a102927"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7d338de3-b956-4e13-8f2d-184c94be9f5e">
+                    <propertyInstance
+                      Id="abf0aacd-07a8-4709-aef2-54a484743d93"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a0191428-65d9-4290-bbb2-3427b211d86c">
+                    <propertyInstance
+                      Id="19188d95-0c28-440d-99b9-9611842f6798"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="511567db-f93e-40be-8e5b-53191c57cc5a">
+                    <propertyInstance
+                      Id="8868bd13-405e-4b5e-b6f7-d0ce3f2fd5fd"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="8604a180-3831-4af2-92fa-23a60f163fa5">
+                    <propertyInstance
+                      Id="53f72b60-a7e2-4c73-8add-80f037442b69"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="fb77cf17-92f6-4502-9665-f6882c3834f0"
+            name="InitializeMicrophone"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="de82511c-e5ce-4115-bc98-74b044fd8682"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DInitializeMicrophone"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="a09d71c9-fc1d-473d-b345-6fcb81d13fdd"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="750b9a05-e6de-4db2-b922-5fd145d5023f">
+                    <propertyInstance
+                      Id="8840469c-c837-4678-b04b-bf88bdfc1714"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="672dc310-be80-4f0c-8b4f-97dd4d4a282b">
+                    <propertyInstance
+                      Id="1273a0e8-84ef-412c-a350-6424a76ab496"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="10e7c30d-bf14-4a35-8724-1d14531b66eb">
+                    <propertyInstance
+                      Id="e5535fc9-0146-4a2c-aa31-e00f4f0e6ac6"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="63d60fed-6cbb-4070-80ff-fb22ba118cec">
+                    <propertyInstance
+                      Id="b36defdb-d831-4fd1-b887-d515dcabbd78"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e9269bb9-5650-459b-9248-81fdd6550095">
+                    <propertyInstance
+                      Id="af7608c2-4f04-453b-856d-5bf5102bb598"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="cd0dc4d6-0122-49f4-8ec3-5aa2960c1453">
+                    <propertyInstance
+                      Id="c4419480-6e94-46f5-8e96-756bb3ed5aff"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="dddd8e2f-c758-4532-93d9-c3547f83bfff"
+            name="StartAudio"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="eae64ba6-e9fd-4cf8-befe-dda7c3267f5f"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DStartAudio"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="7a7ab21c-03ae-4842-b3a1-d94c225f9406"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="c933b4a1-7670-4e53-8659-90186f671635">
+                    <propertyInstance
+                      Id="92787635-6f9d-42b8-aa09-2d63b517de08"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="617a988f-92bc-4820-9513-8e7e7189f961">
+                    <propertyInstance
+                      Id="7881e351-3bbe-40c6-997e-46fbaa22ff80"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2aeadf5b-adff-4b0d-9f80-570f23ce8cbf">
+                    <propertyInstance
+                      Id="9de27bec-e090-4e02-abe4-7f230dd8c164"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="68c17a80-d358-4a3e-945a-6ee7d22eb4a5">
+                    <propertyInstance
+                      Id="a4b003b7-f84a-4cd1-b4e8-3f6f3bb3f727"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ab34295a-0d6c-4703-9ba6-8cf1c5196557">
+                    <propertyInstance
+                      Id="c6be13e0-4dcf-4371-bcf0-38cf5db808d0"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="152e8fc4-2617-4610-9332-9aa479199a9c">
+                    <propertyInstance
+                      Id="3fd42987-0940-47d1-8bdb-7a6e71b1fca8"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+          <operation
+            Id="d4520011-ca10-416d-9314-026f2e7a7183"
+            name="StopAudio"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="8ff53fa6-c418-4c49-8d48-b6521d1d363e"
+                handle="viewcode://./CodeSchema_Method?Assembly%3Dfile:%2F%2F%2FF:%2Ffacultate%2Fmaster%2Fdizertatie%2FbackupProject%2FMViewer%2FLibraries%2FAudioStreaming%2Fbin%2Fx86%2FDebug%2FAudioStreaming.dll Namespace%3DAudioStreaming Type%3DAudioStream Member%3DStopAudio"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="f06f61f4-873c-48dd-875a-335f888f9b94"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="afe4e483-b2b4-4ae3-a2b2-234d951d8b6a">
+                    <propertyInstance
+                      Id="0dbd1ada-eff5-4d97-a7a9-1a03a7500414"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="4491e375-e01e-404d-a8e0-679adb2e1ff1">
+                    <propertyInstance
+                      Id="60bbc69d-d839-4107-a5e4-fb32992eec17"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="622c3a6f-3099-40f5-9f87-ef36a2654cb4">
+                    <propertyInstance
+                      Id="cae05c56-b902-465b-b272-a1b3ca6b8e39"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="ad0f3ef3-5647-4e67-8361-ea1284332a7e">
+                    <propertyInstance
+                      Id="b8e2ca42-6511-4c67-87e2-08a43876ea3d"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b93018c8-0dc4-4049-b810-87ab62aa8b74">
+                    <propertyInstance
+                      Id="b34b22cb-8a2a-4935-853c-5425a0d6441d"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="06983e41-499e-4dd4-ad94-4d534bbb507f">
+                    <propertyInstance
+                      Id="fbfaa7de-6bff-4a64-8d3d-76314d7f2a7a"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
