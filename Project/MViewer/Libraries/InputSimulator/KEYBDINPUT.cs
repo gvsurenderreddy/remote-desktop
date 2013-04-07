@@ -19,7 +19,7 @@ namespace WindowsInput
         /// <summary>
         /// Specifies a virtual-key code. The code must be a value in the range 1 to 254. The Winuser.h header file provides macro definitions (VK_*) for each value. If the dwFlags member specifies KEYEVENTF_UNICODE, wVk must be 0. 
         /// </summary>
-        public UInt16 Vk;
+        public UInt16 VirtualKey;
 
         /// <summary>
         /// Specifies a hardware scan code for the key. If dwFlags specifies KEYEVENTF_UNICODE, wScan specifies a Unicode character which is to be sent to the foreground application. 

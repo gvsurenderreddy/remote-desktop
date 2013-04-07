@@ -105,7 +105,7 @@ namespace WindowsInput
 
         #endregion
 
-        #region Methods
+        #region public Methods
 
         /// <summary>
         /// Determines whether a key is up or down at the time the function is called by calling the GetAsyncKeyState function. (See: http://msdn.microsoft.com/en-us/library/ms646293(VS.85).aspx)
@@ -203,7 +203,7 @@ namespace WindowsInput
             var down = new INPUT();
             down.Type = (UInt32)InputType.KEYBOARD;
             down.Data.Keyboard = new KEYBDINPUT();
-            down.Data.Keyboard.Vk = (UInt16)keyCode;
+            down.Data.Keyboard.VirtualKey = (UInt16)keyCode;
             down.Data.Keyboard.Scan = 0;
             down.Data.Keyboard.Flags = 0;
             down.Data.Keyboard.Time = 0;
@@ -225,7 +225,7 @@ namespace WindowsInput
             var up = new INPUT();
             up.Type = (UInt32)InputType.KEYBOARD;
             up.Data.Keyboard = new KEYBDINPUT();
-            up.Data.Keyboard.Vk = (UInt16)keyCode;
+            up.Data.Keyboard.VirtualKey = (UInt16)keyCode;
             up.Data.Keyboard.Scan = 0;
             up.Data.Keyboard.Flags = (UInt32)KeyboardFlag.KEYUP;
             up.Data.Keyboard.Time = 0;
@@ -247,7 +247,7 @@ namespace WindowsInput
             var down = new INPUT();
             down.Type = (UInt32)InputType.KEYBOARD;
             down.Data.Keyboard = new KEYBDINPUT();
-            down.Data.Keyboard.Vk = (UInt16)keyCode;
+            down.Data.Keyboard.VirtualKey = (UInt16)keyCode;
             down.Data.Keyboard.Scan = 0;
             down.Data.Keyboard.Flags = 0;
             down.Data.Keyboard.Time = 0;
@@ -256,7 +256,7 @@ namespace WindowsInput
             var up = new INPUT();
             up.Type = (UInt32)InputType.KEYBOARD;
             up.Data.Keyboard = new KEYBDINPUT();
-            up.Data.Keyboard.Vk = (UInt16)keyCode;
+            up.Data.Keyboard.VirtualKey = (UInt16)keyCode;
             up.Data.Keyboard.Scan = 0;
             up.Data.Keyboard.Flags = (UInt32)KeyboardFlag.KEYUP;
             up.Data.Keyboard.Time = 0;
@@ -288,7 +288,7 @@ namespace WindowsInput
                 var down = new INPUT();
                 down.Type = (UInt32)InputType.KEYBOARD;
                 down.Data.Keyboard = new KEYBDINPUT();
-                down.Data.Keyboard.Vk = 0;
+                down.Data.Keyboard.VirtualKey = 0;
                 down.Data.Keyboard.Scan = scanCode;
                 down.Data.Keyboard.Flags = (UInt32)KeyboardFlag.UNICODE;
                 down.Data.Keyboard.Time = 0;
@@ -297,7 +297,7 @@ namespace WindowsInput
                 var up = new INPUT();
                 up.Type = (UInt32)InputType.KEYBOARD;
                 up.Data.Keyboard = new KEYBDINPUT();
-                up.Data.Keyboard.Vk = 0;
+                up.Data.Keyboard.VirtualKey = 0;
                 up.Data.Keyboard.Scan = scanCode;
                 up.Data.Keyboard.Flags = (UInt32)(KeyboardFlag.KEYUP | KeyboardFlag.UNICODE);
                 up.Data.Keyboard.Time = 0;

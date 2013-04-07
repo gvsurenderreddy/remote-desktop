@@ -8,10 +8,14 @@ namespace WindowsInput
 {
     public class KeyCodeParser
     {
+        /// <summary>
+        /// method used to convert keycode to virtual keycode
+        /// </summary>
+        /// <param name="keyCode"></param>
+        /// <returns></returns>
         public VirtualKeyCode ParseKeyCode(Keys keyCode)
         {
             VirtualKeyCode virtualKeyCode = VirtualKeyCode.Undefined;
-
             switch (keyCode)
             {
                 case Keys.LButton:
@@ -77,9 +81,6 @@ namespace WindowsInput
                 case Keys.KanjiMode:
                     virtualKeyCode = VirtualKeyCode.KANJI;
                     break;
-                //case Keys.HanjaMode:
-                //virtualKeyCode = VirtualKeyCode.HANJA;
-                //break;
                 case Keys.Escape:
                     virtualKeyCode = VirtualKeyCode.ESCAPE;
                     break;
@@ -98,15 +99,9 @@ namespace WindowsInput
                 case Keys.Space:
                     virtualKeyCode = VirtualKeyCode.SPACE;
                     break;
-                //case Keys.Prior:
-                //virtualKeyCode = VirtualKeyCode.PageUp;
-                //break;
                 case Keys.PageUp:
                     virtualKeyCode = VirtualKeyCode.PageUp;
                     break;
-                //case Keys.Next:
-                //virtualKeyCode = VirtualKeyCode.PageDOWN;
-                //break;
                 case Keys.PageDown:
                     virtualKeyCode = VirtualKeyCode.PageDOWN;
                     break;
@@ -140,8 +135,6 @@ namespace WindowsInput
                 case Keys.Snapshot:
                     virtualKeyCode = VirtualKeyCode.SNAPSHOT;
                     break;
-
-
                 case Keys.Insert:
                     virtualKeyCode = VirtualKeyCode.INSERT;
                     break;
@@ -561,9 +554,9 @@ namespace WindowsInput
     }
 
     /// <summary>
-    /// The list of VirtualKeyCodes (see: http://msdn.microsoft.com/en-us/library/ms645540(VS.85).aspx)
+    /// list of VirtualKeyCodes: http://msdn.microsoft.com/en-us/library/ms645540(VS.85).aspx
     /// </summary>
-    public enum VirtualKeyCode : ushort // UInt16
+    public enum VirtualKeyCode : ushort 
     {
         Undefined = 42634,
 
@@ -649,11 +642,6 @@ namespace WindowsInput
         /// CAPS LOCK key
         /// </summary>
         CapsLock = 0x14,
-
-        ///// <summary>
-        ///// Input Method Editor (IME) Kana mode
-        ///// </summary>
-        //KanaMode = 0x15,
 
         /// <summary>
         /// IME Hanguel mode (maintained for compatibility; use HANGUL)
