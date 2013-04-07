@@ -11,7 +11,7 @@ namespace Utils
     {
         string _key = "MViewer";
 
-        #region public static methods
+        #region public methods
 
         public string TrippleDESEncrypt(string toEncrypt, bool useHash)
         {

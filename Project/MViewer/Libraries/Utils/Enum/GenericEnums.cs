@@ -106,7 +106,5 @@ namespace Utils
             Mouse = 1, 
             Keyboard = 2 
         };
-
-   
     }
 }

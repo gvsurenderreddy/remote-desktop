@@ -110,7 +110,7 @@ namespace MViewer
             try
             {
                 string friendlyName = _model.GetContact(identity).FriendlyName;
-                string fileSize2 = Tools.Instance.ImageConverter.GetSize(fileSize);
+                string fileSize2 = Tools.Instance.GenericMethods.GetSize(fileSize);
 
                 DialogResult dialogResult = MessageBox.Show(
                     string.Format("{0} is sending you the file {1} of {2} long. Permit transfer?",
