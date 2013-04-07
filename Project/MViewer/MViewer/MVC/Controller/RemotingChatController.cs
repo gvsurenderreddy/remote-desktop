@@ -21,6 +21,7 @@ namespace MViewer
         static extern bool SetCursorPos(int x, int y);
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         static extern void mouse_event(int dwFlags, int dx, int dy, int cButtons, int dwExtraInfo);
+
         readonly object _syncRemotingStartStop = new object();
         readonly object _syncRemotingCaptureSending = new object();
         ManualResetEvent _syncRemotingCaptureActivity = new ManualResetEvent(true);
@@ -411,7 +412,8 @@ namespace MViewer
                     if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
                         // send the stop command to the partner
-                        _model.ClientController.SendRoomCommand(MyIdentity(), args.Identity, args.RoomType, args.SignalType);
+                        _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, 
+                            args.Identity, args.RoomType, args.SignalType);
                     }
 
                     PeerStates peers = _model.SessionManager.GetPeerStatus(args.Identity);

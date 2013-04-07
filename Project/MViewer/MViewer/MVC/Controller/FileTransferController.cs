@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-//using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using GenericObjects;
 using UIControls;
@@ -42,11 +42,17 @@ namespace MViewer
 
                             Thread t = new Thread(delegate()
                             {
-                                fileProgressFrom = new FormFileProgress(
-                                    Path.GetFileName(filePath), contact.FriendlyName);
-                                fileProgressFrom.ChangeLanguage(_language);
-                                Application.Run(fileProgressFrom);
-
+                                try
+                                {
+                                    fileProgressFrom = new FormFileProgress(
+                                        Path.GetFileName(filePath), contact.FriendlyName);
+                                    fileProgressFrom.ChangeLanguage(_language);
+                                    Application.Run(fileProgressFrom);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Tools.Instance.Logger.LogError(ex.ToString());
+                                }
                             });
                             t.Start();
                             Thread.Sleep(500);
@@ -66,7 +72,6 @@ namespace MViewer
                         {
                             MessageBox.Show("Sorry, cannot transfer files larger than 10 MB in MViewer-lite", "Transfer not possible", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
-
                     }
                 }
                 else
@@ -119,11 +124,17 @@ namespace MViewer
                         Contact contact = _model.GetContact(args.Identity);
                         Thread t3 = new Thread(delegate()
                         {
-                            fileProgressFrom = new FormFileProgress(
-                                Path.GetFileName(saveFileDialog1.FileName), contact.FriendlyName);
-                            fileProgressFrom.ChangeLanguage(_language);
-                            Application.Run(fileProgressFrom);
-
+                            try
+                            {
+                                fileProgressFrom = new FormFileProgress(
+                                    Path.GetFileName(saveFileDialog1.FileName), contact.FriendlyName);
+                                fileProgressFrom.ChangeLanguage(_language);
+                                Application.Run(fileProgressFrom);
+                            }
+                            catch (Exception ex)
+                            {
+                                Tools.Instance.Logger.LogError(ex.ToString());
+                            }
                         });
                         t3.Start();
                         Thread.Sleep(500);
@@ -136,9 +147,7 @@ namespace MViewer
                         // Saves the Image via a FileStream created by the OpenFile method.
                         System.IO.FileStream fs =
                            (System.IO.FileStream)saveFileDialog1.OpenFile();
-
                         fs.Write(buffer, 0, buffer.Length);
-
                         fs.Close();
 
                         if (fileProgressFrom != null)

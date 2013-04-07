@@ -339,14 +339,5 @@ namespace MViewer
         }
 
         #endregion
-
-        #region proprieties
-
-        public string MyIdentity()
-        {
-            return _model.Identity.MyIdentity;
-        }
-
-        #endregion
     }
 }

@@ -144,7 +144,6 @@ namespace MViewer
             try
             {
                 _formClosing = true;
-                // todo: later - perform other specific actions when the remoting  room is closing
                 _syncClosing.Set();
             }
             catch (Exception ex)

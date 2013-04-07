@@ -43,7 +43,6 @@ namespace MViewer
 
                 _controller.StartApplication();
 
-                // todo: use manual reset event instead of thread.sleep(0)
                 Thread.Sleep(Timeout.Infinite);
             }
             catch (Exception ex)
@@ -60,6 +59,7 @@ namespace MViewer
 
         #region proprieties
 
+        // todo: remove the static Controller and use event handlers
         public static IController Controller
         {
             get { return Program._controller; }

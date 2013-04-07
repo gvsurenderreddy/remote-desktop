@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-//using System.Threading.Tasks;
+
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using GenericObjects;
@@ -53,15 +53,13 @@ namespace MViewer
                         // display the captured picture
                         _view.UpdateWebcapture(args.CapturedImage);
 
-                        //we want to get a byte[] representation ... a MemoryStreams buffer will do
-                        MemoryStream ms = new MemoryStream();
-                        //save image to stream ... the stream will write it into the buffer
-                        args.CapturedImage.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                        MemoryStream memoryStream = new MemoryStream();
+                        args.CapturedImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
 
                         //get the buffer 
-                        byte[] bitmapBytes = ms.GetBuffer();
+                        byte[] buffer = memoryStream.GetBuffer();
 
-                        // broadcast the webcaptures to all connected peers
+                        // todo: send the webcaptures to active video room
 
                         IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
                         if (connectedSessions.Count == 0)
@@ -92,21 +90,11 @@ namespace MViewer
 
                                     // todo: enforce web timer start for partner side
 
-                                    _model.ClientController.SendVideoCapture(bitmapBytes, receiverIdentity,
+                                    _model.ClientController.SendVideoCapture(buffer, receiverIdentity,
                                         _model.Identity.MyIdentity);
                                 }
 
                                 transferStatus.Video = false;
-                                if (peers.AudioSessionState == GenericEnums.SessionState.Opened
-                                    || peers.AudioSessionState == GenericEnums.SessionState.Pending)
-                                {
-                                    transferStatus.Audio = true;
-
-                                    // todo: send audio capture
-
-                                    transferStatus.Audio = false;
-                                }
-
                             }
                         }
                     }
@@ -375,7 +363,6 @@ namespace MViewer
             try
             {
                 PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
-
                 while (_videoCapturePending)
                 {
                     Thread.Sleep(200);
@@ -393,7 +380,6 @@ namespace MViewer
             try
             {
                 _syncVideoCaptureActivity.Reset();
-
                 if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Video))
                 {
                     bool formOpened = false;

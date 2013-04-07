@@ -264,7 +264,6 @@ namespace MViewer
             }
         }
 
-
         // todo: remove the focus actions method if not necessary
         /// <summary>
         /// method used to set focus to the actions form
@@ -531,7 +530,8 @@ namespace MViewer
                 {
                     _formActions.StartPosition = FormStartPosition.Manual;
                     // position the Actions form at the right bottom of the screen
-                    _formActions.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - _formActions.Width, Screen.PrimaryScreen.WorkingArea.Height - _formActions.Height);
+                    _formActions.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - _formActions.Width, 
+                        Screen.PrimaryScreen.WorkingArea.Height - _formActions.Height);
                     _formActions.ShowDialog();
                 }
                 catch (Exception ex)
