@@ -40,6 +40,18 @@ http://msdn.microsoft.com/en-us/library/ms751530.aspx
 using progress bar
 http://msdn.microsoft.com/en-us/library/system.windows.forms.progressbar.aspx
 
+Logger library
+http://logging.apache.org/log4net/index.html
+
+generating class diagram from code
+http://msdn.microsoft.com/en-us/library/vstudio/ff657806.aspx
+
+components diagram
+http://msdn.microsoft.com/en-us/library/vstudio/dd409390.aspx
+
+class diagram addin for VS2012
+http://blog.ondrejsv.com/post/Modeling-Power-Toys-for-Visual-Studio-2012.aspx
+
 ======================
 calculating remote mouse coordinate
 http://stackoverflow.com/questions/11152608/how-to-calculate-mouse-coordinate-based-on-resolution-c-sharp
@@ -76,4 +88,16 @@ http://www.dotnetcurry.com/ShowArticle.aspx?ID=174
 
 
 
+
+
+
+----------------------------------
+bootstrapper
+http://bootstrapper.codeplex.com/
+
+dep inj
+http://de.wikipedia.org/wiki/Dependency_Injection
+
+structure map
+http://www.c-sharpcorner.com/uploadfile/dhanaid/introduction-to-structure-map/
 
