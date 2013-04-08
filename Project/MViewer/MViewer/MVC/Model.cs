@@ -248,7 +248,7 @@ namespace MViewer
                         {
                             // notify other contact of performed operation (ADD/REMOVE)
                             ClientController.AddClient(contact.Identity);
-                            IMviewerChannel client = ClientController.GetClient(contact.Identity);
+                            IMViewerService client = ClientController.GetClient(contact.Identity);
                             client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
                         }
                         PingContacts(null);
@@ -266,7 +266,7 @@ namespace MViewer
                         if (args.UpdatedContact.ContactNo != -1)
                         {
                             ClientController.AddClient(contact.Identity);
-                            IMviewerChannel client2 = ClientController.GetClient(contact.Identity);
+                            IMViewerService client2 = ClientController.GetClient(contact.Identity);
                             Thread t = new Thread(delegate()
                             {
                                 try

@@ -13,7 +13,7 @@ namespace BusinessLogicLayer
     {
         #region private members
 
-        IDictionary<string, IMviewerChannel> _clients;
+        IDictionary<string, IMViewerService> _clients;
         readonly object _syncClients = new object();
 
         #endregion
@@ -24,7 +24,7 @@ namespace BusinessLogicLayer
         {
             lock (_syncClients)
             {
-                _clients = new Dictionary<string, IMviewerChannel>();
+                _clients = new Dictionary<string, IMViewerService>();
             }
         }
 
@@ -227,9 +227,9 @@ namespace BusinessLogicLayer
             }
         }
 
-        public IMviewerChannel GetClient(string identity)
+        public IMViewerService GetClient(string identity)
         {
-            IMviewerChannel client = null;
+            IMViewerService client = null;
             if (_clients != null && _clients.ContainsKey(identity))
             {
                 client = _clients[identity];
@@ -245,7 +245,7 @@ namespace BusinessLogicLayer
                 {
                     if (_clients == null)
                     {
-                        _clients = new Dictionary<string, IMviewerChannel>();
+                        _clients = new Dictionary<string, IMViewerService>();
                     }
                     if (_clients.ContainsKey(identity))
                     {
@@ -255,7 +255,7 @@ namespace BusinessLogicLayer
 
                     Builder clientBuilder = new ClientBuilder(endpoint);
                     Director.Instance.Construct(clientBuilder);
-                    IMviewerChannel client = (IMviewerChannel)clientBuilder.GetResult();
+                    IMViewerService client = (IMViewerService)clientBuilder.GetResult();
                     _clients.Add(identity, client);
                 }
             }

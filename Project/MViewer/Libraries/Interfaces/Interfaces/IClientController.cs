@@ -13,7 +13,7 @@ namespace GenericObjects
         void StartClient(string identity);
         void RemoveClient(string identity);
         void AddClient(string identity);
-        IMviewerChannel GetClient(string identity);
+        IMViewerService GetClient(string identity);
         bool IsContactOnline(string identity);
         void SendAudioCapture(byte[] capture, string receiverIdentity, string senderIdentity);
         void SendVideoCapture(byte[] capture, string receiverIdentity, string senderIdentity);
