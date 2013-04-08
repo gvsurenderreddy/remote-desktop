@@ -33,9 +33,6 @@ namespace GenericObjects
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/Ping", ReplyAction = "http://tempuri.org/IVideoRoom/PingResponse")]
         bool Ping();
 
-        //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/InitializeRoom", ReplyAction = "http://tempuri.org/IVideoRoom/InitializeRoomResponse")]
-        //void InitializeRoom(string identity, GenericEnums.RoomButtonActionType roomType);
-
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendRoomButtonAction", ReplyAction = "http://tempuri.org/IVideoRoom/SendRoomButtonActionResponse")]
         void SendRoomButtonAction(string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType);
 
@@ -51,12 +48,8 @@ namespace GenericObjects
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendFile", ReplyAction = "http://tempuri.org/IVideoRoom/SendFileResponse")]
         void SendFile(byte[] fileBytes, string fileName);
 
-        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendMouseCommand", ReplyAction = "http://tempuri.org/IVideoRoom/SendMouseCommandResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendRemotingCommand", ReplyAction = "http://tempuri.org/IVideoRoom/SendRemotingCommandResponse")]
         void SendRemotingCommand(EventArgs commandArgs);
-
-        //[System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/CloseRoom", ReplyAction = "http://tempuri.org/IVideoRoom/CloseRoomResponse")]
-        //void CloseRoom(string identity, GenericEnums.RoomButtonActionType roomType);
-
 
     }
 }
