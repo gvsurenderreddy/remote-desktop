@@ -136,7 +136,7 @@ namespace GenericObjects
         {
             try
             {
-                MemoryStream stream1 = new MemoryStream();
+                MemoryStream stream1 = new MemoryStream(commandArgs);
                 stream1.Position = 0;
                 //Deserialize the Record object back into a new record object.
                 DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
