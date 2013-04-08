@@ -10,6 +10,7 @@ using Utils;
 namespace GenericObjects
 {
     [Serializable]
+    [DataContract]
     [KnownType(typeof(RemotingCommandEventArgs))]
     public class RemotingCommandEventArgs : EventArgs
     {

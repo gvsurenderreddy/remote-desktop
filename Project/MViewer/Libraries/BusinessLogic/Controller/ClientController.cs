@@ -6,6 +6,7 @@ using GenericObjects;
 using System.Drawing;
 using Utils;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace BusinessLogicLayer
 {
@@ -43,7 +44,11 @@ namespace BusinessLogicLayer
                     {
                         try
                         {
-                            client.SendRemotingCommand(commandArgs);
+                            MemoryStream stream1 = new MemoryStream();
+                            //Serialize the Record object to a memory stream using DataContractSerializer.
+                            DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
+                            serializer.WriteObject(stream1, commandArgs);
+                            client.SendRemotingCommand(stream1.GetBuffer());
                         }
                         catch (Exception)
                         {

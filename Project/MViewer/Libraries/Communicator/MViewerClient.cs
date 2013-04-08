@@ -54,7 +54,7 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.UpdateFriendlyName(senderIdentity, newFriendlyName);
     }
 
-    public void SendRemotingCommand(EventArgs commandArgs)
+    public void SendRemotingCommand(byte[] commandArgs)
     {
         base.Channel.SendRemotingCommand(commandArgs);
     }
