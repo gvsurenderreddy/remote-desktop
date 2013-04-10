@@ -52,6 +52,7 @@
     <Compile Include="Descriptor\ConnectedPeers.cs" />
     <Compile Include="Descriptor\PendingTransfer.cs" />
     <Compile Include="Descriptor\TransferUptading.cs" />
+    <Compile Include="MouseMoveArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ControllerEventHandlers.cs" />
     <Compile Include="Structures.cs" />

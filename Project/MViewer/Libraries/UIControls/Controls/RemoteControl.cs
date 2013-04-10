@@ -11,6 +11,8 @@ using UIControls;
 using GenericObjects;
 using CommandHookMonitor;
 using System.Threading;
+using System.Timers;
+using Structures;
 
 namespace UIControls
 {
@@ -23,6 +25,8 @@ namespace UIControls
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseClick;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseDown;
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseUp;
+        System.Timers.Timer _timer;
+        IList<MouseMoveArgs> _commands;
 
         #endregion
 
@@ -34,6 +38,10 @@ namespace UIControls
             {
                 InitializeComponent();
                 InitializeCommandTypes();
+                _timer = new System.Timers.Timer(3000);
+                _timer.Elapsed += new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick);
+                _commands = new List<MouseMoveArgs>();
+                _timer.Start();
             }
             catch (Exception ex)
             {
@@ -127,6 +135,17 @@ namespace UIControls
         #endregion
 
         #region private methods
+
+        void MouseMoveTimerTick(object sender, ElapsedEventArgs args)
+        {
+            _timer.Stop();
+
+            // todo: send serialized mouse move commands
+
+
+            _commands.Clear();
+            _timer.Start();
+        }
 
         void InitializeCommandTypes()
         {
@@ -251,14 +270,15 @@ namespace UIControls
                     HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
                     double x = 0, y = 0;
                     GetRemotePosition(ref x, ref y, e.X, e.Y);
-                    _remotingCommand.Invoke(this,
-                       new RemotingCommandEventArgs()
-                       {
-                           RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                           MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
-                           X = x,
-                           Y = y
-                       });
+                    //_remotingCommand.Invoke(this,
+                    //   new RemotingCommandEventArgs()
+                    //   {
+                    //       RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                    //       MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
+                    //       X = x,
+                    //       Y = y
+                    //   });
+                    _commands.Add(new MouseMoveArgs() { X= x, Y = y});
                     HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
                 }
             }
