@@ -11,6 +11,9 @@ using StrategyPattern;
 using Utils;
 using WindowsInput;
 using Abstraction;
+using System.IO;
+using System.Runtime.Serialization;
+using Structures;
 
 namespace MViewer
 {
@@ -204,9 +207,16 @@ namespace MViewer
             RemotingCommandEventArgs e = (RemotingCommandEventArgs)args;
             try
             {
-                int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(e.X);
-                int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(e.Y);
-                SetCursorPos((int)x, (int)y);
+                MemoryStream stream = new MemoryStream(e.MouseMoves);
+                stream.Position = 0;
+                DataContractSerializer serializer = new DataContractSerializer(typeof(IList<MouseMoveArgs>));
+                IList<MouseMoveArgs> mouseMoves = (IList<MouseMoveArgs>)serializer.ReadObject(stream);
+                foreach (MouseMoveArgs move in mouseMoves)
+                {
+                    int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(move.X);
+                    int y = (int)Tools.Instance.RemotingUtils.ConvertYToAbsolute(move.Y);
+                    SetCursorPos((int)x, (int)y);
+                }
             }
             catch (Exception ex)
             {

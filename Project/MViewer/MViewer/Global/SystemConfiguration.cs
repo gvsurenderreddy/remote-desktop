@@ -136,7 +136,7 @@ namespace MViewer
                     Identity = FriendlyName,
                     VideoTimerInterval = videoTimerInterval,
                     VideoScreenSize =
-                        new Structures.ScreenSize()
+                        new DescriptorUtils.Structures.ScreenSize()
                         {
                             Height = height,
                             Width = width

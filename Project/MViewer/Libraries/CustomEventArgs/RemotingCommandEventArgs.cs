@@ -34,5 +34,7 @@ namespace GenericObjects
 
         [DataMember]
         public char KeyChar { get; set; }
+
+        public byte[] MouseMoves { get; set; }
     }
 }

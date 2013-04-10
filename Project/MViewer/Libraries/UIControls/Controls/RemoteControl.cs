@@ -13,6 +13,8 @@ using CommandHookMonitor;
 using System.Threading;
 using System.Timers;
 using Structures;
+using System.IO;
+using System.Runtime.Serialization;
 
 namespace UIControls
 {
@@ -27,6 +29,7 @@ namespace UIControls
         Dictionary<MouseButtons, GenericEnums.MouseCommandType> _mouseUp;
         System.Timers.Timer _timer;
         IList<MouseMoveArgs> _commands;
+        ManualResetEvent _syncCommands;
 
         #endregion
 
@@ -41,6 +44,7 @@ namespace UIControls
                 _timer = new System.Timers.Timer(3000);
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick);
                 _commands = new List<MouseMoveArgs>();
+                _syncCommands = new ManualResetEvent(true);
                 _timer.Start();
             }
             catch (Exception ex)
@@ -139,11 +143,21 @@ namespace UIControls
         void MouseMoveTimerTick(object sender, ElapsedEventArgs args)
         {
             _timer.Stop();
-
-            // todo: send serialized mouse move commands
-
+            _syncCommands.Reset();
+            // send serialized mouse move commands
+            MemoryStream stream = new MemoryStream();
+            DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
+            serializer.WriteObject(stream, _commands);
+            byte[] mouseMoves = stream.GetBuffer();
+            _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
+            {
+                RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                MouseMoves = mouseMoves,
+                MouseCommandType = GenericEnums.MouseCommandType.Move
+            });
 
             _commands.Clear();
+            _syncCommands.Set();
             _timer.Start();
         }
 
@@ -267,6 +281,7 @@ namespace UIControls
             {
                 if (InPictureBoxArea(e.X, e.Y))
                 {
+                    _syncCommands.WaitOne();
                     HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
                     double x = 0, y = 0;
                     GetRemotePosition(ref x, ref y, e.X, e.Y);

@@ -24,7 +24,7 @@ namespace DesktopSharing
             {
                 desktopContextHeight = WebcamWin32APIMethods.GetDesktopContext(WebcamWin32APIMethods.GetDesktopWindow());
                 IntPtr gdiDesktopContext = GraphicDeviceInterfaceImports.CreateCompatibleDesktopContext(desktopContextHeight);
-                Structures.ScreenSize screenSize;
+                DescriptorUtils.Structures.ScreenSize screenSize;
                 screenSize.Width = WebcamWin32APIMethods.GetSystemMetrics(WebcamWin32APIMethods.Width);
                 screenSize.Height = WebcamWin32APIMethods.GetSystemMetrics(WebcamWin32APIMethods.Height);
                 IntPtr gdiBitmap = GraphicDeviceInterfaceImports.CreateCompatibleBitmap(desktopContextHeight, screenSize.Width, screenSize.Height);
@@ -64,8 +64,8 @@ namespace DesktopSharing
             Bitmap cursorCapture = null;
             try
             {
-                Structures.CursorInfo cursorInfo = new Structures.CursorInfo();
-                Structures.IconInfo iconInfo = new Structures.IconInfo();
+                DescriptorUtils.Structures.CursorInfo cursorInfo = new DescriptorUtils.Structures.CursorInfo();
+                DescriptorUtils.Structures.IconInfo iconInfo = new DescriptorUtils.Structures.IconInfo();
                 cursorInfo.Size = Marshal.SizeOf(cursorInfo);
                 if (WebcamWin32APIMethods.GetCursorInfo(out cursorInfo))
                 {

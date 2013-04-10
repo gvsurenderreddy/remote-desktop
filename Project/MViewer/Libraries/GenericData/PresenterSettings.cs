@@ -13,7 +13,7 @@ namespace GenericObjects
         public override string Identity { get; set; }
 
         public override int VideoTimerInterval { get; set; }
-        public override Structures.ScreenSize VideoScreenSize { get; set; }
+        public override DescriptorUtils.Structures.ScreenSize VideoScreenSize { get; set; }
         public override EventHandler OnVideoImageCaptured { get; set; }
 
         public override EventHandler OnRemotingImageCaptured { get; set; }

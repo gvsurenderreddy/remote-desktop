@@ -30,13 +30,13 @@ namespace GenericObjects
         public static extern IntPtr ReleaseDesktopContext(IntPtr hWnd, IntPtr hDc);
 
         [DllImport("user32.dll", EntryPoint = "GetCursorInfo")]
-        public static extern bool GetCursorInfo(out Structures.CursorInfo pci);
+        public static extern bool GetCursorInfo(out DescriptorUtils.Structures.CursorInfo pci);
 
         [DllImport("user32.dll", EntryPoint = "CopyIcon")]
         public static extern IntPtr CopyIcon(IntPtr hIcon);
 
         [DllImport("user32.dll", EntryPoint = "GetIconInfo")]
-        public static extern bool GetIconInfo(IntPtr hIcon, out Structures.IconInfo piconinfo);
+        public static extern bool GetIconInfo(IntPtr hIcon, out DescriptorUtils.Structures.IconInfo piconinfo);
 
         [DllImport("user32.dll", EntryPoint = "DestroyIcon")]
         public static extern bool DestroyIcon(IntPtr hIcon);

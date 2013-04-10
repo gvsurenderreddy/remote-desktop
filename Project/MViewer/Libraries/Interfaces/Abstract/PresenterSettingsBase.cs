@@ -12,7 +12,7 @@ namespace Abstraction
         public abstract string Identity { get; set; }
 
         public abstract int VideoTimerInterval { get; set; }
-        public abstract Structures.ScreenSize VideoScreenSize { get; set; }
+        public abstract DescriptorUtils.Structures.ScreenSize VideoScreenSize { get; set; }
         public abstract EventHandler OnVideoImageCaptured { get; set; }
 
         public abstract EventHandler OnRemotingImageCaptured { get; set; }
