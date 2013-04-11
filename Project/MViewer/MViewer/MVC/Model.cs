@@ -327,11 +327,15 @@ namespace MViewer
         {
             try
             {
-                DataRow contact = _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
-                    Where(s => s.Field<string>("Identity") == identity).ElementAt(0);
-                if (contact != null)
+                IEnumerable<DataRow> enumerable = _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
+                    Where(s => s.Field<string>("Identity").Equals(identity));
+                if (enumerable.Count() > 0)
                 {
-                    contact["Status"] = newStatus.ToString();
+                    DataRow contact = enumerable.ElementAt(0);
+                    if (contact != null)
+                    {
+                        contact["Status"] = newStatus.ToString();
+                    }
                 }
             }
             catch (Exception ex)
