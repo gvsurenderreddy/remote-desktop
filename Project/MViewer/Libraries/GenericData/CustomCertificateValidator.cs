@@ -16,12 +16,12 @@ namespace GenericObjects
 
         public CustomCertificateValidator(string allowedIssuerName, X509Certificate2 clientCertificate)
         {
+            if (allowedIssuerName == null)
+            {
+                throw new ArgumentNullException("allowedIssuerName not provided");
+            }
             try
             {
-                if (allowedIssuerName == null)
-                {
-                    throw new ArgumentNullException("allowedIssuerName not provided");
-                }
                 _clientCertificate = clientCertificate;
                 _allowedIssuerName = allowedIssuerName;
             }
@@ -31,22 +31,26 @@ namespace GenericObjects
             }
         }
 
-        public override void Validate(X509Certificate2 certificate)
+        public override void Validate(X509Certificate2 clientCertificate)
         {
             // Check that there is a certificate.
-            if (certificate == null)
+            if (clientCertificate == null)
             {
                 throw new ArgumentNullException("missing certificate");
             }
 
             // Check that the certificate issuer matches the configured issuer.
-            if (_allowedIssuerName != certificate.IssuerName.Name)
+            if (_allowedIssuerName != clientCertificate.IssuerName.Name)
             {
                 throw new SecurityTokenValidationException
                   ("Certificate was not issued by a trusted issuer");
             }
 
-            // todo: check expiration date also
+            if (DateTime.Parse(clientCertificate.GetExpirationDateString()) < DateTime.Now)
+            {
+                throw new IdentityValidationException("Certificate Expired");
+            }
+
             // todo: check the _clientCertificate against the provided certificate
         }
     }
