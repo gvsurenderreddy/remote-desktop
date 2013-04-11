@@ -328,7 +328,7 @@ namespace MViewer
             try
             {
                 DataRow contact = _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
-                    Where(s => s.Field<string>("Identity") == identity).First();
+                    Where(s => s.Field<string>("Identity") == identity).ElementAt(0);
                 if (contact != null)
                 {
                     contact["Status"] = newStatus.ToString();
