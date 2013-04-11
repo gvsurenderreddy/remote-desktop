@@ -25,9 +25,9 @@ namespace MViewer
 
         public FormRemotingRoom(string identity)
         {
-            InitializeComponent();
             PartnerIdentity = identity;
             _formClosing = false;
+            InitializeComponent();
         }
 
         #endregion

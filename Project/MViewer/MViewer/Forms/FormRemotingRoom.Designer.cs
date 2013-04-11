@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRemotingRoom));
             this.pnlMain = new System.Windows.Forms.Panel();
             this.remoteControl = new UIControls.RemoteControl();
+            this.remoteControl = new UIControls.RemoteControl(this.PartnerIdentity);
             this.pnlMain.SuspendLayout();
             this.SuspendLayout();
             // 
