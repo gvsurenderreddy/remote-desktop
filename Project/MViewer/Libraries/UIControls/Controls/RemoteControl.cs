@@ -71,7 +71,7 @@ namespace UIControls
         {
             try
             {
-                //HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+                HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
                 //HookManager.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MouseClick);
                 HookManager.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPress);
                 HookManager.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDown);
