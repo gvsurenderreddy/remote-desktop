@@ -15,6 +15,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Security;
 using Abstraction;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace GenericObjects
 {
@@ -136,11 +137,15 @@ namespace GenericObjects
         {
             try
             {
-                MemoryStream stream1 = new MemoryStream(commandArgs);
-                stream1.Position = 0;
+                MemoryStream stream = new MemoryStream(commandArgs);
+                stream.Position = 0;
                 //Deserialize the Record object back into a new record object.
-                DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
-                RemotingCommandEventArgs record2 = (RemotingCommandEventArgs)serializer.ReadObject(stream1);
+                //DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
+
+                //object obj = serializer.ReadObject(stream); ;
+                
+                BinaryFormatter formatter = new BinaryFormatter();
+                RemotingCommandEventArgs record2 = (RemotingCommandEventArgs)formatter.Deserialize(stream);
                 // send command to controller handler
                 _controllerHandlers.RemotingCommandHandler.Invoke(this, record2);
             }
