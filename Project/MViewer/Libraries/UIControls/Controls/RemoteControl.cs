@@ -147,31 +147,38 @@ namespace UIControls
 
         void MouseMoveTimerTick(object sender, ElapsedEventArgs args)
         {
-            _timer.Stop();
-            _syncCommands.Reset();
-            if (_commands != null && _commands.Count > 0)
+            try
             {
-                // send serialized mouse move commands
-                MemoryStream stream = new MemoryStream();
-                //DataContractSerializer serializer = new DataContractSerializer(typeof(IList<MouseMoveArgs>));
-                //serializer.WriteObject(stream, _commands);
-
-                BinaryFormatter formatter = new BinaryFormatter();
-                formatter.Serialize(stream, _commands);
-
-                byte[] mouseMoves = stream.GetBuffer();
-                _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
+                _timer.Stop();
+                _syncCommands.Reset();
+                if (_commands != null && _commands.Count > 0)
                 {
-                    RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                    MouseMoves = mouseMoves,
-                    MouseCommandType = GenericEnums.MouseCommandType.Move,
-                    Identity = this._partnerIdentity
-                });
+                    // send serialized mouse move commands
+                    MemoryStream stream = new MemoryStream();
+                    //DataContractSerializer serializer = new DataContractSerializer(typeof(IList<MouseMoveArgs>));
+                    //serializer.WriteObject(stream, _commands);
 
-                _commands.Clear();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, _commands);
+
+                    byte[] mouseMoves = stream.GetBuffer();
+                    _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
+                    {
+                        RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                        MouseMoves = mouseMoves,
+                        MouseCommandType = GenericEnums.MouseCommandType.Move,
+                        Identity = this._partnerIdentity
+                    });
+
+                    _commands.Clear();
+                }
+                _syncCommands.Set();
+                _timer.Start();
             }
-            _syncCommands.Set();
-            _timer.Start();
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         void InitializeCommandTypes()

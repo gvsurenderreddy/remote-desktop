@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Structures
 {
+    [Serializable]
     public struct MouseMoveArgs
     {
         public double X { get; set; }
