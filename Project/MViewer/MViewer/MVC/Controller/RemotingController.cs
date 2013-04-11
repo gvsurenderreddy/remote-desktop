@@ -14,6 +14,7 @@ using Abstraction;
 using System.IO;
 using System.Runtime.Serialization;
 using Structures;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace MViewer
 {
@@ -208,9 +209,9 @@ namespace MViewer
             try
             {
                 MemoryStream stream = new MemoryStream(e.MouseMoves);
-                stream.Position = 0;
-                DataContractSerializer serializer = new DataContractSerializer(typeof(IList<MouseMoveArgs>));
-                IList<MouseMoveArgs> mouseMoves = (IList<MouseMoveArgs>)serializer.ReadObject(stream);
+                BinaryFormatter formatter = new BinaryFormatter();
+
+                IList<MouseMoveArgs> mouseMoves = (IList<MouseMoveArgs>)formatter.Deserialize(stream);
                 foreach (MouseMoveArgs move in mouseMoves)
                 {
                     int x = (int)Tools.Instance.RemotingUtils.ConvertXToAbsolute(move.X);

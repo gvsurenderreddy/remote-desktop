@@ -138,12 +138,7 @@ namespace GenericObjects
             try
             {
                 MemoryStream stream = new MemoryStream(commandArgs);
-                stream.Position = 0;
-                //Deserialize the Record object back into a new record object.
-                //DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
 
-                //object obj = serializer.ReadObject(stream); ;
-                
                 BinaryFormatter formatter = new BinaryFormatter();
                 RemotingCommandEventArgs record2 = (RemotingCommandEventArgs)formatter.Deserialize(stream);
                 // send command to controller handler
