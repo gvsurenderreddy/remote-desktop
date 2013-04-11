@@ -7,6 +7,7 @@ using System.Drawing;
 using Utils;
 using System.IO;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BusinessLogicLayer
 {
@@ -47,11 +48,10 @@ namespace BusinessLogicLayer
                     {
                         try
                         {
-                            MemoryStream stream1 = new MemoryStream();
-                            //Serialize the Record object to a memory stream using DataContractSerializer.
-                            DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
-                            serializer.WriteObject(stream1, commandArgs);
-                            client.SendRemotingCommand(stream1.GetBuffer());
+                            MemoryStream stream = new MemoryStream();
+                            BinaryFormatter formatter = new BinaryFormatter();
+                            formatter.Serialize(stream, commandArgs);
+                            client.SendRemotingCommand(stream.GetBuffer());
                         }
                         catch (Exception)
                         {
