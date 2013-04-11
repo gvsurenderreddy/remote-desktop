@@ -144,19 +144,22 @@ namespace UIControls
         {
             _timer.Stop();
             _syncCommands.Reset();
-            // send serialized mouse move commands
-            MemoryStream stream = new MemoryStream();
-            DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
-            serializer.WriteObject(stream, _commands);
-            byte[] mouseMoves = stream.GetBuffer();
-            _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
+            if (_commands != null && _commands.Count > 0)
             {
-                RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                MouseMoves = mouseMoves,
-                MouseCommandType = GenericEnums.MouseCommandType.Move
-            });
+                // send serialized mouse move commands
+                MemoryStream stream = new MemoryStream();
+                DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
+                serializer.WriteObject(stream, _commands);
+                byte[] mouseMoves = stream.GetBuffer();
+                _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
+                {
+                    RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
+                    MouseMoves = mouseMoves,
+                    MouseCommandType = GenericEnums.MouseCommandType.Move
+                });
 
-            _commands.Clear();
+                _commands.Clear();
+            }
             _syncCommands.Set();
             _timer.Start();
         }
