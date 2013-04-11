@@ -30,17 +30,21 @@ namespace UIControls
         System.Timers.Timer _timer;
         IList<MouseMoveArgs> _commands;
         ManualResetEvent _syncCommands;
+        string _partnerIdentity;
 
         #endregion
 
         #region c-tor
 
-        public RemoteControl()
+        public RemoteControl() { }
+
+        public RemoteControl(string partnerIdentity)
         {
             try
             {
                 InitializeComponent();
                 InitializeCommandTypes();
+                _partnerIdentity = partnerIdentity;
                 _timer = new System.Timers.Timer(1500);
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick);
                 _commands = new List<MouseMoveArgs>();
@@ -155,7 +159,8 @@ namespace UIControls
                 {
                     RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                     MouseMoves = mouseMoves,
-                    MouseCommandType = GenericEnums.MouseCommandType.Move
+                    MouseCommandType = GenericEnums.MouseCommandType.Move,
+                    Identity = this._partnerIdentity
                 });
 
                 _commands.Clear();
@@ -233,7 +238,8 @@ namespace UIControls
                     {
                         RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
                         KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyDown, // send specific command
-                        KeyCode = e.KeyCode
+                        KeyCode = e.KeyCode,
+                        Identity = this._partnerIdentity
                     });
             }
             catch (Exception ex)
@@ -251,7 +257,8 @@ namespace UIControls
                     {
                         RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
                         KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyUp, // send specific command
-                        KeyCode = e.KeyCode
+                        KeyCode = e.KeyCode,
+                        Identity = this._partnerIdentity
                     });
             }
             catch (Exception ex)
@@ -269,7 +276,8 @@ namespace UIControls
                     {
                         RemotingCommandType = GenericEnums.RemotingCommandType.Keyboard,
                         KeyboardCommandType = GenericEnums.KeyboardCommandType.KeyPress, // send specific command
-                        KeyChar = e.KeyChar
+                        KeyChar = e.KeyChar,
+                        Identity = this._partnerIdentity
                     });
             }
             catch (Exception ex)
@@ -320,7 +328,8 @@ namespace UIControls
                               RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                               MouseCommandType = _mouseClick[e.Button], // send specific command
                               X = x,
-                              Y = y
+                              Y = y,
+                              Identity = this._partnerIdentity
                           });
                 }
             }
@@ -344,7 +353,8 @@ namespace UIControls
                               RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                               MouseCommandType = _mouseUp[e.Button], // send specific command
                               X = x,
-                              Y = y
+                              Y = y,
+                              Identity = this._partnerIdentity
                           });
                 }
             }
@@ -368,7 +378,8 @@ namespace UIControls
                               RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                               MouseCommandType = _mouseDown[e.Button], // send specific command
                               X = x,
-                              Y = y
+                              Y = y,
+                              Identity = this._partnerIdentity
                           });
                 }
             }
@@ -392,7 +403,8 @@ namespace UIControls
                               RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                               MouseCommandType = _mouseDoubleClick[e.Button], // send specific command
                               X = x,
-                              Y = y
+                              Y = y,
+                              Identity = this._partnerIdentity
                           });
                 }
             }
@@ -417,7 +429,8 @@ namespace UIControls
                               MouseCommandType = GenericEnums.MouseCommandType.Wheel, // send specific command
                               X = x,
                               Y = y,
-                              Delta = e.Delta
+                              Delta = e.Delta,
+                              Identity = this._partnerIdentity
                           });
                 }
             }

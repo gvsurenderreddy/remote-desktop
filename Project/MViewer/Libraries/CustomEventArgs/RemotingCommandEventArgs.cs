@@ -35,6 +35,10 @@ namespace GenericObjects
         [DataMember]
         public char KeyChar { get; set; }
 
+        [DataMember]
         public byte[] MouseMoves { get; set; }
+
+        [DataMember]
+        public string Identity { get; set; }
     }
 }
