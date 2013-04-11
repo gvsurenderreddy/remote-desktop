@@ -40,7 +40,10 @@ namespace BusinessLogicLayer
                 if (_clients.ContainsKey(receiverIdentity))
                 {
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State == System.ServiceModel.CommunicationState.Opened)
+                    if (client.State != System.ServiceModel.CommunicationState.Opened)
+                    {
+                        client.Open();
+                    }
                     {
                         try
                         {
@@ -70,17 +73,19 @@ namespace BusinessLogicLayer
                 if (_clients.ContainsKey(receiverIdentity))
                 {
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State == System.ServiceModel.CommunicationState.Opened)
+                    if (client.State != System.ServiceModel.CommunicationState.Opened)
                     {
-                        try
-                        {
-                            client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
-                        }
-                        catch (Exception)
-                        {
-
-                        }
+                        client.Open();
                     }
+                    try
+                    {
+                        client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -347,24 +352,26 @@ namespace BusinessLogicLayer
             return isOnline;
         }
 
-        public void SendVideoCapture(byte[]capture, string receiverIdentity, string senderIdentity)
+        public void SendVideoCapture(byte[] capture, string receiverIdentity, string senderIdentity)
         {
             try
             {
                 if (_clients.ContainsKey(receiverIdentity))
                 {
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State == System.ServiceModel.CommunicationState.Opened)
+                    if (client.State != System.ServiceModel.CommunicationState.Opened)
                     {
-                        try
-                        {
-                            client.SendWebcamCapture(capture, senderIdentity);
-                        }
-                        catch (Exception)
-                        {
-
-                        }
+                        client.Open();
                     }
+                    try
+                    {
+                        client.SendWebcamCapture(capture, senderIdentity);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -385,17 +392,19 @@ namespace BusinessLogicLayer
                 if (_clients.ContainsKey(receiverIdentity))
                 {
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State == System.ServiceModel.CommunicationState.Opened)
+                    if (client.State != System.ServiceModel.CommunicationState.Opened)
                     {
-                        try
-                        {
-                            client.SendMicrophoneCapture(capture, senderIdentity);
-                        }
-                        catch (Exception)
-                        {
-
-                        }
+                        client.Open();
                     }
+                    try
+                    {
+                        client.SendMicrophoneCapture(capture, senderIdentity);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
                 }
             }
             catch (Exception ex)

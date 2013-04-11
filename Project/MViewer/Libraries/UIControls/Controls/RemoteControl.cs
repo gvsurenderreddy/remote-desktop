@@ -148,7 +148,7 @@ namespace UIControls
             {
                 // send serialized mouse move commands
                 MemoryStream stream = new MemoryStream();
-                DataContractSerializer serializer = new DataContractSerializer(typeof(RemotingCommandEventArgs));
+                DataContractSerializer serializer = new DataContractSerializer(typeof(IList<MouseMoveArgs>));
                 serializer.WriteObject(stream, _commands);
                 byte[] mouseMoves = stream.GetBuffer();
                 _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
