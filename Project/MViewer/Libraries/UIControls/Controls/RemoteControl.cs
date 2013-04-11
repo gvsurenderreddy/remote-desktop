@@ -46,7 +46,7 @@ namespace UIControls
                 InitializeComponent();
                 InitializeCommandTypes();
                 _partnerIdentity = partnerIdentity;
-                _timer = new System.Timers.Timer(1500);
+                _timer = new System.Timers.Timer(1000);
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick);
                 _commands = new List<MouseMoveArgs>();
                 _syncCommands = new ManualResetEvent(true);
