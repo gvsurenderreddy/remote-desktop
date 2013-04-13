@@ -59,6 +59,14 @@ namespace GenericObjects
                         CaptureTimestamp = DateTime.Now
                     });
                 }
+                else
+                {
+                    //if (_audioStream.IsRunning)
+                    //{
+                    //    _audioStream.StopAudio();
+                    //    _audioStream.StartAudio();
+                    //}
+                }
                 _audioStream.SyncChunk.Set();
 
                 _timer.Start();
