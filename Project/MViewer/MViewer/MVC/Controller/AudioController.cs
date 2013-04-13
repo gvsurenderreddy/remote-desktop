@@ -108,7 +108,7 @@ namespace MViewer
                 // check the Audio status before playing the sound
                 if (peer.AudioSessionState == GenericEnums.SessionState.Opened)
                 {
-                    _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture);
+                    _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture, args.CaptureTimestamp);
                 }
             }
             catch (Exception ex)

@@ -340,7 +340,7 @@ namespace MViewer
                 // check the video status before displaying the picture
                 if (peer.VideoSessionState == GenericEnums.SessionState.Opened)
                 {
-                    _view.RoomManager.ShowVideoCapture(args.Identity, args.CapturedImage);
+                    _view.RoomManager.ShowVideoCapture(args.Identity, args.CapturedImage, args.CaptureTimestamp);
                 }
             }
             catch (Exception ex)

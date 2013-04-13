@@ -18,11 +18,7 @@ namespace MViewer
 
         bool _formClosing;
         ManualResetEvent _syncClosing = new ManualResetEvent(true);
-
-        public ManualResetEvent SyncClosing
-        {
-            get { return _syncClosing; }
-        }
+        DateTime _lastAudioTimestamp;
 
         #endregion
 
@@ -110,13 +106,17 @@ namespace MViewer
             }
         }
 
-        public void SetPicture(Image picture)
+        public void SetPicture(Image picture, DateTime timestamp)
         {
             try
             {
                 _syncClosing.WaitOne();
                 if (!_formClosing)
                 {
+                    // todo: check for outdated images based on last played audio capture timestamp
+
+
+
                     videoControl.SetPicture(picture);
                 }
             }
@@ -158,6 +158,17 @@ namespace MViewer
         #endregion
 
         #region proprieties
+
+        public DateTime LastAudioTimestamp
+        {
+            get { return _lastAudioTimestamp; }
+            set { _lastAudioTimestamp = value; }
+        }
+
+        public ManualResetEvent SyncClosing
+        {
+            get { return _syncClosing; }
+        }
 
         public string PartnerIdentity
         {

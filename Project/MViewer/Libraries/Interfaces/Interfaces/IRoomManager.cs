@@ -16,8 +16,8 @@ namespace GenericObjects
         void ShowRoom(string identity, GenericEnums.RoomType roomType);
         void CloseRoom(string identity, GenericEnums.RoomType roomType);
 
-        void PlayAudioCapture(string identity, byte[] capture);
-        void ShowVideoCapture(string identity, Image picture);
+        void PlayAudioCapture(string identity, byte[] capture, DateTime timestamp);
+        void ShowVideoCapture(string identity, Image picture, DateTime timestamp);
         void ShowRemotingCapture(string identity, byte[] screenCapture, byte[] mouseCapture);
         void SetPartnerName(string identity, GenericEnums.RoomType roomType, string friendlyName);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);

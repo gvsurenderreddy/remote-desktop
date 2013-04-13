@@ -98,7 +98,7 @@ namespace BusinessLogicLayer
             return activated;
         }
 
-        public void PlayAudioCapture(string identity, byte[] capture)
+        public void PlayAudioCapture(string identity, byte[] capture, DateTime timestamp)
         {
             try
             {
@@ -109,6 +109,12 @@ namespace BusinessLogicLayer
                     {
                         IAudioRoom room = (IAudioRoom)_rooms[roomID];
                         room.PlayAudioCapture(capture);
+                        string videoRoomID = GenerateRoomID(identity, GenericEnums.RoomType.Video);
+                        if(_rooms.ContainsKey(videoRoomID))
+                        {
+                            IVideoRoom videoRoom = (IVideoRoom)_rooms[videoRoomID];
+                            videoRoom.LastAudioTimestamp = timestamp;
+                        }
                     }
                 }
             }
@@ -138,7 +144,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public void ShowVideoCapture(string identity, Image picture)
+        public void ShowVideoCapture(string identity, Image picture, DateTime timestamp)
         {
             try
             {
@@ -148,7 +154,7 @@ namespace BusinessLogicLayer
                     if (_rooms != null && _rooms.ContainsKey(roomID))
                     {
                         IVideoRoom room = (IVideoRoom)_rooms[roomID];
-                        room.SetPicture(picture);
+                        room.SetPicture(picture, timestamp);
                     }
                 }
             }
