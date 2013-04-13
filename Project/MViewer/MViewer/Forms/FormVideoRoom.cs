@@ -113,11 +113,12 @@ namespace MViewer
                 _syncClosing.WaitOne();
                 if (!_formClosing)
                 {
-                    // todo: check for outdated images based on last played audio capture timestamp
-
-
-
-                    videoControl.SetPicture(picture);
+                    // check for outdated images based on last played audio capture timestamp
+                    bool canDisplay = CanDisplayVideo(timestamp);
+                    if (canDisplay)
+                    {
+                        videoControl.SetPicture(picture);
+                    }
                 }
             }
             catch (Exception ex)
@@ -196,10 +197,28 @@ namespace MViewer
 
         #endregion
 
+        #region private methods
+
+        // todo: remove FormVideoRoom_Deactivate
         private void FormVideoRoom_Deactivate(object sender, EventArgs e)
         {
             // optional - todo: find a better way to update the button labels
             //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
+
+        bool CanDisplayVideo(DateTime videoTimestamp)
+        {
+            if (_lastAudioTimestamp != null && _lastAudioTimestamp < videoTimestamp)
+            {
+                TimeSpan diffResult = videoTimestamp.Subtract(_lastAudioTimestamp);
+                if (diffResult.TotalMilliseconds < 2000)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        #endregion
     }
 }
