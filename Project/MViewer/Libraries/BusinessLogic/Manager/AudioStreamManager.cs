@@ -145,7 +145,7 @@ namespace GenericObjects
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-
+        SoundEffect sound;
         public void PlayAudioCapture(byte[] capture)
         {
             try
@@ -154,13 +154,17 @@ namespace GenericObjects
                 {
                     return;
                 }
-                var sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
                 SoundEffect.MasterVolume = 1f;
                 sound.Play();
             }
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally 
+            {
+                GC.Collect();
             }
         }
 
