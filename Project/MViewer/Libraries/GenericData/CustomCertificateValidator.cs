@@ -56,10 +56,16 @@ namespace GenericObjects
                 {
                     throw new IdentityValidationException("Certificate Expired");
                 }
+                if (_clientCertificate.Equals(clientCertificate) == false)
+                {
+                    throw new SecurityTokenValidationException
+                      ("Untrusted client Certificate");
+                }
             }
- 
-            throw new SecurityTokenValidationException();
-
+            else
+            {
+                throw new SecurityTokenValidationException("X509 Validation failure. Invalid X509 Client Certificate");
+            }
         }
     }
 }
