@@ -13,8 +13,6 @@ namespace GenericObjects
         PeerStates GetPeerStatus(string identity);
 
         bool RemotingRoomsLeft();
-        // todo: remove GetConnectedSessions
-        //IList<string> GetConnectedSessions(GenericEnums.RoomType actionType);
         GenericEnums.SessionState GetSessionState(string identity, GenericEnums.RoomType roomType);
         PendingTransfer GetTransferStatus(string identity);
         TransferStatusUptading GetTransferActivity(string identity);
