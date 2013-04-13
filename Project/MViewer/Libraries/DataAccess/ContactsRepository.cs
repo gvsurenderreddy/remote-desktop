@@ -53,7 +53,7 @@ namespace DataAccessLayer
             return _contactsDataView;
         }
 
-        public static int AddContact(ContactBase contact)
+        public static int AddContact(Contact contact)
         {
             DataRow dr = _contactsDataView.Table.NewRow();
             dr["ContactNo"] = dr.Table.Rows.Count;
@@ -82,7 +82,7 @@ namespace DataAccessLayer
             }
         }
 
-        public static void UpdateContact(ContactBase contact)
+        public static void UpdateContact(Contact contact)
         {
             try
             {

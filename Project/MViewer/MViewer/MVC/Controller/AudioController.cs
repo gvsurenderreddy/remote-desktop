@@ -48,7 +48,7 @@ namespace MViewer
 
                         ContactBase contact = _model.GetContact(identity);
                         // get friendly name from contacts list
-                        _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Audio, contact.FriendlyName);
+                        _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Audio, ((Contact)contact).FriendlyName);
                         // finally, show the Audio  form where we'll see the webcam captures
                         _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Audio);
                     }
@@ -170,7 +170,7 @@ namespace MViewer
                                     transferStatus.Audio = true;
 
                                     _model.ClientController.SendAudioCapture(args.Capture, receiverIdentity,
-                                        _model.Identity.MyIdentity);
+                                        ((Identity)_model.Identity).MyIdentity);
                                 }
 
                                 transferStatus.Audio = false;
@@ -210,7 +210,7 @@ namespace MViewer
                 if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                 {
                     // send the stop signal to the server session
-                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, e.Identity,
+                    _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, e.Identity,
                         GenericEnums.RoomType.Audio, GenericEnums.SignalType.Pause);
                 }
                 _syncAudioCaptureActivity.Set();
@@ -240,7 +240,7 @@ namespace MViewer
                 if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                 {
                     // send the stop signal to the server session
-                    _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, e.Identity,
+                    _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, e.Identity,
                         GenericEnums.RoomType.Audio, GenericEnums.SignalType.Resume);
                 }
                 _syncAudioCaptureActivity.Set();
@@ -314,7 +314,7 @@ namespace MViewer
                         if (sendStopSignal)
                         {
                             // send the stop signal to the server session
-                            _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity,
+                            _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, identity,
                                 GenericEnums.RoomType.Audio, GenericEnums.SignalType.Stop);
                         }
 

@@ -397,7 +397,7 @@ namespace MViewer
                     _model.ClientController.StartClient(e.Identity);
 
                     // create client session
-                    Session clientSession = new ClientSession(e.Identity, e.RoomType);
+                    ClientSession clientSession = new ClientSession(e.Identity, e.RoomType);
                     // save the proxy to which we are sending the remoting captures
                     _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Remoting);
 
@@ -441,7 +441,7 @@ namespace MViewer
                     if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
                     {
                         // send the stop command to the partner
-                        _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, 
+                        _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, 
                             e.Identity, e.RoomType, e.SignalType);
                     }
 
@@ -562,7 +562,7 @@ namespace MViewer
 
                                     _model.ClientController.SendRemotingCapture(args.ScreenCapture,
                                         args.MouseCapture, receiverIdentity,
-                                        _model.Identity.MyIdentity);
+                                        ((Identity)_model.Identity).MyIdentity);
                                 }
 
                                 transferStatus.Remoting = false;
@@ -601,7 +601,7 @@ namespace MViewer
                         remotingRoom.BindCommandHandlers(SystemConfiguration.Instance.RemotingCommand);
                         // initialize new remoting  form
 
-                        ContactBase contact = _model.GetContact(identity);
+                        Contact contact = (Contact)_model.GetContact(identity);
                         // get friendly name from contacts list
                         if (contact != null)
                         {

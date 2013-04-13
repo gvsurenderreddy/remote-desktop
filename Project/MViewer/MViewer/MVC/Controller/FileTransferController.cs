@@ -29,7 +29,7 @@ namespace MViewer
                 RoomActionEventArgs e = (RoomActionEventArgs)args;
                 if (_model.ClientController.IsContactOnline(e.Identity))
                 {
-                    ContactBase contact = _model.GetContact(e.Identity);
+                    Contact contact = (Contact)_model.GetContact(e.Identity);
                     string filePath = string.Empty;
                     FileDialog fileDialog = new OpenFileDialog();
                     if (fileDialog.ShowDialog() == DialogResult.OK)
@@ -98,18 +98,18 @@ namespace MViewer
                 try
                 {
                     RoomActionEventArgs args = (RoomActionEventArgs)e;
-
+                    TransferInfo transferInfo = (TransferInfo)args.TransferInfo;
                     byte[] buffer = (byte[])sender; // this is the file sent
 
                     // open file path dialog
-                    string extension = Path.GetExtension(args.TransferInfo.FileName);// get file extension
+                    string extension = Path.GetExtension(transferInfo.FileName);// get file extension
 
                     // Displays a SaveFileDialog so the user can save the Image
                     // assigned to Button2.
                     SaveFileDialog saveFileDialog1 = new SaveFileDialog();
                     saveFileDialog1.Filter = "File|*." + extension + "";
                     saveFileDialog1.Title = "Save File";
-                    saveFileDialog1.FileName = args.TransferInfo.FileName;
+                    saveFileDialog1.FileName = transferInfo.FileName;
                     DialogResult dialogResult = saveFileDialog1.ShowDialog();
 
                     // If the file name is not an empty string open it for saving.
@@ -123,7 +123,7 @@ namespace MViewer
 
                         // add a progress bar (into a TransfersForm)
                         FormFileProgress fileProgressFrom = null;
-                        ContactBase contact = _model.GetContact(args.Identity);
+                        Contact contact = (Contact)_model.GetContact(args.Identity);
                         Thread t3 = new Thread(delegate()
                         {
                             try
@@ -173,8 +173,9 @@ namespace MViewer
             try
             {
                 RoomActionEventArgs args = (RoomActionEventArgs)e;
-                bool canSend = _view.RequestTransferPermission(args.Identity, args.TransferInfo.FileName, args.TransferInfo.FileSize);
-                args.TransferInfo.HasPermission = canSend;
+                TransferInfo transferInfo = (TransferInfo)args.TransferInfo;
+                bool canSend = _view.RequestTransferPermission(args.Identity, transferInfo.FileName, transferInfo.FileSize);
+                transferInfo.HasPermission = canSend;
             }
             catch (Exception ex)
             {

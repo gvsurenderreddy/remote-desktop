@@ -10,7 +10,7 @@ namespace Abstraction
         public abstract void UpdateFriendlyName(string newFriendlyName);
         public abstract string GenerateIdentity(string newAddress, int newPort, string newPath);
 
-        public abstract string MyIdentity { get; }
-        public abstract string FriendlyName { get; }
+        protected string myIdentity;
+        protected string friendlyName;
     }
 }

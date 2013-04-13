@@ -109,7 +109,7 @@ namespace MViewer
             bool canSend = false;
             try
             {
-                string friendlyName = _model.GetContact(identity).FriendlyName;
+                string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
                 string fileSize2 = Tools.Instance.GenericMethods.GetSize(fileSize);
 
                 DialogResult dialogResult = MessageBox.Show(
@@ -322,7 +322,7 @@ namespace MViewer
                 identityObserver.Invoke(this, new IdentityEventArgs()
                 {
                     FriendlyName = _model.FriendlyName,
-                    MyIdentity = _model.Identity.MyIdentity
+                    MyIdentity = ((Identity)_model.Identity).MyIdentity
                 });
             }
             catch (Exception ex)

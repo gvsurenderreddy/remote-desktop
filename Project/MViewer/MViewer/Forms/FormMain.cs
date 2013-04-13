@@ -86,9 +86,10 @@ namespace MViewer
             try
             {
                 ContactsEventArgs args = (ContactsEventArgs)e;
-                Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Audio);
-                Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Video);
-                Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : args.UpdatedContact.Identity, GenericEnums.RoomType.Remoting);
+                Contact updatedContact = (Contact)args.UpdatedContact;
+                Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : updatedContact.Identity, GenericEnums.RoomType.Audio);
+                Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : updatedContact.Identity, GenericEnums.RoomType.Video);
+                Program.Controller.OnActiveRoomChanged(args.UpdatedContact == null ? string.Empty : updatedContact.Identity, GenericEnums.RoomType.Remoting);
             }
             catch (Exception ex)
             {

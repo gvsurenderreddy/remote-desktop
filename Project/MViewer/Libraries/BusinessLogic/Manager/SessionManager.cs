@@ -11,7 +11,7 @@ namespace BusinessLogicLayer
     {
         #region private members
 
-        IDictionary<string, Session> _clientSessions;
+        IDictionary<string, ClientSession> _clientSessions;
         readonly object _syncSessions = new object();
 
         #endregion
@@ -25,7 +25,7 @@ namespace BusinessLogicLayer
             {
                 if (_clientSessions != null)
                 {
-                    foreach (Session session in _clientSessions.Values)
+                    foreach (ClientSession session in _clientSessions.Values)
                     {
                         if (session.RemotingSessionState != GenericEnums.SessionState.Closed)
                         {
@@ -46,24 +46,24 @@ namespace BusinessLogicLayer
                 {
                     if (_clientSessions == null)
                     {
-                        _clientSessions = new Dictionary<string, Session>();
+                        _clientSessions = new Dictionary<string, ClientSession>();
                     }
-                    if (_clientSessions.ContainsKey(session.Identity) == false)
+                    if (_clientSessions.ContainsKey(((ClientSession)session).Identity) == false)
                     {
-                        _clientSessions.Add(session.Identity, session);
+                        _clientSessions.Add(((ClientSession)session).Identity, (ClientSession)session);
                     }
                     else
                     {
                         switch (scope)
                         {
                             case GenericEnums.RoomType.Audio:
-                                _clientSessions[session.Identity].AudioSessionState = session.Peers.AudioSessionState;
+                                _clientSessions[((ClientSession)session).Identity].AudioSessionState = ((ClientSession)session).Peers.AudioSessionState;
                                 break;
                             case GenericEnums.RoomType.Remoting:
-                                _clientSessions[session.Identity].RemotingSessionState = session.Peers.RemotingSessionState;
+                                _clientSessions[((ClientSession)session).Identity].RemotingSessionState = ((ClientSession)session).Peers.RemotingSessionState;
                                 break;
                             case GenericEnums.RoomType.Video:
-                                _clientSessions[session.Identity].VideoSessionState = session.Peers.VideoSessionState;
+                                _clientSessions[((ClientSession)session).Identity].VideoSessionState = ((ClientSession)session).Peers.VideoSessionState;
                                 break;
                         }
                     }
@@ -188,7 +188,7 @@ namespace BusinessLogicLayer
                 IList<string> sessions = new List<string>();
                 if (_clientSessions != null)
                 {
-                    foreach (Session session in _clientSessions.Values)
+                    foreach (ClientSession session in _clientSessions.Values)
                     {
                         switch (roomType)
                         {

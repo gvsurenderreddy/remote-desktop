@@ -48,18 +48,18 @@ namespace UIControls
                 _formMode = formMode;
                 _contactsUpdated = contactsUpdated;
                 _contactNo = contactNo;
-
                 InitializeComponent();
                 Contact contact = new Contact(contactNo, string.Empty, string.Empty);
                 ContactsEventArgs eventArgs = new ContactsEventArgs()
                     {
                         Operation = GenericEnums.ContactsOperation.Get,
                         UpdatedContact = contact
-                    };
+                    }; 
+                Contact updatedContact = ((Contact)eventArgs.UpdatedContact);
                 contactsUpdated.Invoke(this, eventArgs);
                 // retrieve contact info
-                txtFriendlyName.Text = eventArgs.UpdatedContact.FriendlyName;
-                txtIdentity.Text = eventArgs.UpdatedContact.Identity;
+                txtFriendlyName.Text = updatedContact.FriendlyName;
+                txtIdentity.Text = updatedContact.Identity;
 
                 SetFormMode();
             }

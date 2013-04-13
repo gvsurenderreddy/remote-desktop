@@ -43,7 +43,8 @@ namespace GenericObjects
         {
             try
             {
-                string address = "http://" + contractEndpoint.Address + ":" + contractEndpoint.Port.ToString() + "/" + contractEndpoint.Path;
+                ContactEndpoint endpoint = (ContactEndpoint)contractEndpoint;
+                string address = "http://" + endpoint.Address + ":" + endpoint.Port.ToString() + "/" + endpoint.Path;
                 _endpoint = CreateServerEndpoint(address);
             }
             catch (Exception ex)

@@ -7,8 +7,8 @@ namespace Abstraction
 {
     public abstract class ContactEndpointBase
     {
-        public abstract string Address { get; }
-        public abstract int Port { get; }
-        public abstract string Path { get; }
+        protected string address;
+        protected int port;
+        protected string path;
     }
 }

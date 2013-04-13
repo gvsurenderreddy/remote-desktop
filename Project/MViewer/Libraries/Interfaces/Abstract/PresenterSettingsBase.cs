@@ -8,17 +8,17 @@ namespace Abstraction
 {
     public abstract class PresenterSettingsBase
     {
-        public abstract IWebcamCapture VideoCaptureControl { get; set; }
-        public abstract string Identity { get; set; }
+        protected IWebcamCapture videoCaptureControl;
+        protected string identity;
 
-        public abstract int VideoTimerInterval { get; set; }
-        public abstract DescriptorUtils.Structures.ScreenSize VideoScreenSize { get; set; }
-        public abstract EventHandler OnVideoImageCaptured { get; set; }
+        protected int videoTimerInterval;
+        protected DescriptorUtils.Structures.ScreenSize videoScreenSize;
+        protected EventHandler onVideoImageCaptured;
 
-        public abstract EventHandler OnRemotingImageCaptured { get; set; }
-        public abstract int RemotingTimerInterval { get; set; }
+        protected EventHandler onRemotingImageCaptured;
+        protected int remotingTimerInterval;
 
-        public abstract EventHandler OnAudioCaptureAvailable { get; set; }
-        public abstract int AudioTimerInterval { get; set; }
+        protected EventHandler onAudioCaptureAvailable;
+        protected int audioTimerInterval;
     }
 }

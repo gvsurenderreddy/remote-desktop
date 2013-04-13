@@ -29,17 +29,17 @@ namespace GenericObjects
 
         #region proprieties
 
-        public override string Address
+        public string Address
         {
             get { return _address; }
         }
 
-        public override int Port
+        public int Port
         {
             get { return _port; }
         }
 
-        public override string Path
+        public string Path
         {
             get { return _path; }
         }

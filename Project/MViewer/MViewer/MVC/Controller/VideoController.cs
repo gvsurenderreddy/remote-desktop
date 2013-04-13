@@ -90,7 +90,7 @@ namespace MViewer
                                     transferStatus.Video = true;
 
                                     _model.ClientController.SendVideoCapture(buffer, receiverIdentity,
-                                        _model.Identity.MyIdentity);
+                                        ((Identity)_model.Identity).MyIdentity);
                                 }
 
                                 transferStatus.Video = false;
@@ -135,7 +135,7 @@ namespace MViewer
                     string identity = e.Identity;
                     // tell the partner to pause capturing & sending while processing room Stop command
 
-                    _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
+                    _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity, GenericEnums.RoomType.Video,
                         true);
 
                     TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
@@ -159,7 +159,7 @@ namespace MViewer
                         if (sendStopSignal)
                         {
                             // send the stop signal to the server session
-                            _model.ClientController.SendRoomCommand(_model.Identity.MyIdentity, identity,
+                            _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, identity,
                                 GenericEnums.RoomType.Video, GenericEnums.SignalType.Stop);
                         }
 
@@ -171,7 +171,8 @@ namespace MViewer
                         _view.UpdateLabels(e.Identity, e.RoomType);
                     }
 
-                    _model.ClientController.WaitRoomButtonAction(identity, _model.Identity.MyIdentity, GenericEnums.RoomType.Video,
+                    _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity, 
+                        GenericEnums.RoomType.Video,
                         false);
 
                     // close the webcapture form if there s no room left
@@ -399,7 +400,7 @@ namespace MViewer
 
                             ContactBase contact = _model.GetContact(identity);
                             // get friendly name from contacts list
-                            _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Video, contact.FriendlyName);
+                            _view.RoomManager.SetPartnerName(identity, GenericEnums.RoomType.Video, ((Contact)contact).FriendlyName);
                             // finally, show the video  form where we'll see the webcam captures
                             formOpened = true;
                             _view.RoomManager.ShowRoom(identity, GenericEnums.RoomType.Video);

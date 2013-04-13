@@ -40,18 +40,18 @@ namespace GenericObjects
 
         #region proprieties
 
-        public override int ContactNo
+        public int ContactNo
         {
             get { return _contactNo; }
         }
 
-        public override string FriendlyName
+        public string FriendlyName
         {
             get { return _friendlyName; }
             set { _friendlyName = value; }
         }
 
-        public override string Identity
+        public string Identity
         {
             get { return _identity; }
         }

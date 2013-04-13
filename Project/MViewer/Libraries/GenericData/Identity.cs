@@ -58,12 +58,12 @@ namespace GenericObjects
 
         #region proprieties
 
-        public override string MyIdentity
+        public string MyIdentity
         {
             get { return _myIdentity; }
         }
 
-        public override string FriendlyName
+        public string FriendlyName
         {
             get { return _friendlyName; }
         }

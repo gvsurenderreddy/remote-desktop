@@ -59,8 +59,8 @@ namespace MViewer
                 _identity = new Identity(SystemConfiguration.Instance.FriendlyName);
                 SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
                 _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(Identity.MyIdentity);
-                _serverController = new ServerController(myEndpoint, Identity.MyIdentity, handlers);
+                ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(((Identity)Identity).MyIdentity );
+                _serverController = new ServerController(myEndpoint, ((Identity)Identity).MyIdentity, handlers);
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace MViewer
                 foreach (string identity in identities)
                 {
                     _clientController.AddClient(identity);
-                    _clientController.UpdateFriendlyName(identity, Identity.MyIdentity, newFriendlyName);
+                    _clientController.UpdateFriendlyName(identity, ((Identity)Identity).MyIdentity, newFriendlyName);
 
                     // remove the client only if it doesn't have any active s
                     PeerStates peers = SessionManager.GetPeerStatus(identity);
@@ -171,7 +171,7 @@ namespace MViewer
                 foreach (string identity in identities)
                 {
                     _clientController.AddClient(identity);
-                    _clientController.UpdateContactStatus(identity, Identity.MyIdentity, newStatus);
+                    _clientController.UpdateContactStatus(identity, ((Identity)Identity).MyIdentity, newStatus);
                     RemoveClient(identity);
                 }
             }
@@ -232,19 +232,20 @@ namespace MViewer
         public ContactBase PerformContactOperation(EventArgs e)
         {
             ContactsEventArgs args = (ContactsEventArgs)e;
+            Contact updatedContact = (Contact)args.UpdatedContact;
             Contact contact = null;
             try
             {
                 switch (args.Operation)
                 {
                     case GenericEnums.ContactsOperation.Status:
-                        PingContacts(args.UpdatedContact.Identity);
+                        PingContacts(updatedContact.Identity);
                         break;
                     case GenericEnums.ContactsOperation.Add:
-                        int contactNo = ContactsRepository.AddContact(args.UpdatedContact);
+                        int contactNo = ContactsRepository.AddContact(updatedContact);
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = ContactsRepository.GetContactByIdentity(args.UpdatedContact.Identity);
-                        if (args.UpdatedContact.ContactNo != -1)
+                        contact = ContactsRepository.GetContactByIdentity(updatedContact.Identity);
+                        if (updatedContact.ContactNo != -1)
                         {
                             // notify other contact of performed operation (ADD/REMOVE)
                             ClientController.AddClient(contact.Identity);
@@ -254,16 +255,16 @@ namespace MViewer
                         PingContacts(null);
                         break;
                     case GenericEnums.ContactsOperation.Update:
-                        ContactsRepository.UpdateContact(args.UpdatedContact);
+                        ContactsRepository.UpdateContact(updatedContact);
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = ContactsRepository.GetContactByNumber(args.UpdatedContact.ContactNo);
+                        contact = ContactsRepository.GetContactByNumber(updatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Remove:
-                        contact = ContactsRepository.GetContactByIdentity(args.UpdatedContact.Identity);
+                        contact = ContactsRepository.GetContactByIdentity(updatedContact.Identity);
                         ContactsRepository.RemoveContact(contact.ContactNo);
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
 
-                        if (args.UpdatedContact.ContactNo != -1)
+                        if (updatedContact.ContactNo != -1)
                         {
                             ClientController.AddClient(contact.Identity);
                             IMViewerService client2 = ClientController.GetClient(contact.Identity);
@@ -290,7 +291,7 @@ namespace MViewer
                         }
                         break;
                     case GenericEnums.ContactsOperation.Get:
-                        contact = ContactsRepository.GetContactByNumber(args.UpdatedContact.ContactNo);
+                        contact = ContactsRepository.GetContactByNumber(updatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Load:
                         _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
