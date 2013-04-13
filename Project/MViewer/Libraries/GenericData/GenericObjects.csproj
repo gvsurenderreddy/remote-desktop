@@ -61,7 +61,7 @@
     <Compile Include="ClientSession.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="ContactEndpoint.cs" />
-    <Compile Include="CustomCertificateValidator.cs" />
+    <Compile Include="ServerCertificateValidator.cs" />
     <Compile Include="Identity.cs" />
     <Compile Include="PresenterSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
