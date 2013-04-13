@@ -31,7 +31,7 @@ namespace GenericObjects
                 _client.ClientCredentials.ClientCertificate.Certificate = certificate;
                 _client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
                 _client.ClientCredentials.ServiceCertificate.Authentication.CustomCertificateValidator =
-                    new ClientCertificateValidator("Mihai-PC");
+                    new ClientCertificateValidator("CN=Mihai-PC");
             }
             catch (Exception ex)
             {
