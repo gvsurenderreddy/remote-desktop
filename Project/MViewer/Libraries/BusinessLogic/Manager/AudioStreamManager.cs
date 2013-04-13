@@ -61,17 +61,11 @@ namespace GenericObjects
                 }
                 _audioStream.SyncChunk.Set();
 
+                _timer.Start();
             }
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
-            }
-            finally
-            {
-                if (_audioStream.IsRunning)
-                {
-                    _timer.Start();
-                }
             }
         }
 
