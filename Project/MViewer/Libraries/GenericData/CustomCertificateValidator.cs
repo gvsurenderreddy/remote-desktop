@@ -41,29 +41,25 @@ namespace GenericObjects
                 throw new ArgumentNullException("missing certificate");
             }
 
-            if (new X509Chain().Build(clientCertificate))
+            // the client certificate must be in your trusted certificates store
+            bool validCertificate = new X509Chain().Build(clientCertificate);
+
+            if (validCertificate)
             {
-                if (clientCertificate.Issuer == _allowedIssuerName)
+                // Check that the certificate issuer matches the configured issuer.
+                if (_allowedIssuerName != clientCertificate.IssuerName.Name)
                 {
-                    return;
+                    throw new SecurityTokenValidationException
+                      ("Certificate was not issued by a trusted issuer");
+                }
+                if (DateTime.Parse(clientCertificate.GetExpirationDateString()) < DateTime.Now)
+                {
+                    throw new IdentityValidationException("Certificate Expired");
                 }
             }
  
             throw new SecurityTokenValidationException();
 
-            // Check that the certificate issuer matches the configured issuer.
-            if (_allowedIssuerName != clientCertificate.IssuerName.Name)
-            {
-                throw new SecurityTokenValidationException
-                  ("Certificate was not issued by a trusted issuer");
-            }
-
-            if (DateTime.Parse(clientCertificate.GetExpirationDateString()) < DateTime.Now)
-            {
-                throw new IdentityValidationException("Certificate Expired");
-            }
-
-            // todo: check the _clientCertificate against the provided certificate
         }
     }
 }
