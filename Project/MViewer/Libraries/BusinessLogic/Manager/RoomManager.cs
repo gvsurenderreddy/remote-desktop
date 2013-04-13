@@ -29,6 +29,12 @@ namespace BusinessLogicLayer
         {
             _mainForm = mainForm;
             _rooms = new Dictionary<string, IRoom>();
+            ActiveRooms = new ActiveRooms()
+            {
+                AudioRoomIdentity = string.Empty,
+                VideoRoomIdentity = string.Empty,
+                RemotingRoomIdentity = string.Empty
+            };
         }
 
         #endregion

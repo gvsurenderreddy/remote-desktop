@@ -268,15 +268,22 @@ namespace MViewer
                     _view.SetMessageText("Closing app...");
                     Thread t = new Thread(delegate()
                     {
-                        StopVideo(this, new RoomActionEventArgs()
+                        try
                         {
-                            Identity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity,
-                            RoomType = GenericEnums.RoomType.Video,
-                            SignalType = GenericEnums.SignalType.Stop
-                        });
-               
-                        // stop my webcapture form
-                        StopVideoCapturing();
+                            StopVideo(this, new RoomActionEventArgs()
+                            {
+                                Identity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity,
+                                RoomType = GenericEnums.RoomType.Video,
+                                SignalType = GenericEnums.SignalType.Stop
+                            });
+
+                            // stop my webcapture form
+                            StopVideoCapturing();
+                        }
+                        catch (Exception ex)
+                        {
+                            Tools.Instance.Logger.LogError(ex.ToString());
+                        }
                     });
                     t.Start();
 
