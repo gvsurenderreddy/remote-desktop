@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using Utils;
+using Abstraction;
 
 namespace GenericObjects
 {
@@ -24,7 +25,7 @@ namespace GenericObjects
 
         bool RoomsLeft(GenericEnums.RoomType roomType);
 
-        string ActiveRoom
+        ActiveRoomsBase ActiveRooms
         {
             get;
             set;

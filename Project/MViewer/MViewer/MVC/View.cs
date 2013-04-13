@@ -374,7 +374,21 @@ namespace MViewer
                     _formWebCapture.WaitRoomButtonAction(true);
                 }
 
-                string activeRoom = _roomManager.ActiveRoom;
+                string activeRoom = string.Empty;
+
+                switch (args.RoomType)
+                {
+                    case GenericEnums.RoomType.Audio:
+                        activeRoom = ((ActiveRooms)RoomManager.ActiveRooms).AudioRoomIdentity;
+                        break;
+                    case GenericEnums.RoomType.Video:
+                        activeRoom = ((ActiveRooms)RoomManager.ActiveRooms).VideoRoomIdentity;
+                        break;
+                    case GenericEnums.RoomType.Remoting:
+                        activeRoom = ((ActiveRooms)RoomManager.ActiveRooms).RemotingRoomIdentity;
+                        break;
+                }
+
                 if (string.IsNullOrEmpty(activeRoom))
                 {
                     // this is the first opened room

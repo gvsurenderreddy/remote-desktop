@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ActiveRoomsBase.cs" />
     <Compile Include="Abstract\ContactBase.cs" />
     <Compile Include="Abstract\ContactEndpointBase.cs" />
     <Compile Include="Abstract\IdentityBase.cs" />

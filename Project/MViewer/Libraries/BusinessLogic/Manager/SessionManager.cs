@@ -181,47 +181,48 @@ namespace BusinessLogicLayer
             return returnState;
         }
 
-        public IList<string> GetConnectedSessions(GenericEnums.RoomType roomType)
-        {
-            lock (_syncSessions)
-            {
-                IList<string> sessions = new List<string>();
-                if (_clientSessions != null)
-                {
-                    foreach (ClientSession session in _clientSessions.Values)
-                    {
-                        switch (roomType)
-                        {
-                            case GenericEnums.RoomType.Audio:
-                                if (session.AudioSessionState == GenericEnums.SessionState.Opened
-                                    || session.AudioSessionState == GenericEnums.SessionState.Pending
-                                    || session.AudioSessionState == GenericEnums.SessionState.Paused)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                            case GenericEnums.RoomType.Video:
-                                if (session.VideoSessionState == GenericEnums.SessionState.Opened
-                                    || session.VideoSessionState == GenericEnums.SessionState.Pending
-                                    || session.VideoSessionState == GenericEnums.SessionState.Paused)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                            case GenericEnums.RoomType.Remoting:
-                                if (session.RemotingSessionState == GenericEnums.SessionState.Opened
-                                    || session.RemotingSessionState == GenericEnums.SessionState.Pending
-                                    || session.RemotingSessionState == GenericEnums.SessionState.Paused)
-                                {
-                                    sessions.Add(session.Identity);
-                                }
-                                break;
-                        }
-                    }
-                }
-                return sessions;
-            }
-        }
+        // todo: remove GetConnectedSessions
+        //public IList<string> GetConnectedSessions(GenericEnums.RoomType roomType)
+        //{
+        //    lock (_syncSessions)
+        //    {
+        //        IList<string> sessions = new List<string>();
+        //        if (_clientSessions != null)
+        //        {
+        //            foreach (ClientSession session in _clientSessions.Values)
+        //            {
+        //                switch (roomType)
+        //                {
+        //                    case GenericEnums.RoomType.Audio:
+        //                        if (session.AudioSessionState == GenericEnums.SessionState.Opened
+        //                            || session.AudioSessionState == GenericEnums.SessionState.Pending
+        //                            || session.AudioSessionState == GenericEnums.SessionState.Paused)
+        //                        {
+        //                            sessions.Add(session.Identity);
+        //                        }
+        //                        break;
+        //                    case GenericEnums.RoomType.Video:
+        //                        if (session.VideoSessionState == GenericEnums.SessionState.Opened
+        //                            || session.VideoSessionState == GenericEnums.SessionState.Pending
+        //                            || session.VideoSessionState == GenericEnums.SessionState.Paused)
+        //                        {
+        //                            sessions.Add(session.Identity);
+        //                        }
+        //                        break;
+        //                    case GenericEnums.RoomType.Remoting:
+        //                        if (session.RemotingSessionState == GenericEnums.SessionState.Opened
+        //                            || session.RemotingSessionState == GenericEnums.SessionState.Pending
+        //                            || session.RemotingSessionState == GenericEnums.SessionState.Paused)
+        //                        {
+        //                            sessions.Add(session.Identity);
+        //                        }
+        //                        break;
+        //                }
+        //            }
+        //        }
+        //        return sessions;
+        //    }
+        //}
 
         #endregion
     }

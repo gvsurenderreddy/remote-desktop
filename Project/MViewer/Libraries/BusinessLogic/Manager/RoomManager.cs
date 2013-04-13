@@ -7,6 +7,7 @@ using GenericObjects;
 using Utils;
 using System.Windows.Forms;
 using System.Threading;
+using Abstraction;
 
 namespace BusinessLogicLayer
 {
@@ -17,7 +18,7 @@ namespace BusinessLogicLayer
         readonly object _syncRooms = new object();
         IDictionary<string, IRoom> _rooms;
 
-        string _activeRoom;
+        ActiveRoomsBase _activeRooms;
         Form _mainForm;
 
         #endregion
@@ -271,7 +272,7 @@ namespace BusinessLogicLayer
 
         #region proprieties
 
-        public string ActiveRoom
+        public ActiveRoomsBase ActiveRooms
         {
             get
             {
@@ -282,14 +283,14 @@ namespace BusinessLogicLayer
                     //    // reset the active room identity if the rooms were all closed
                     //    _activeRoom = string.Empty;
                     //}
-                    return _activeRoom; 
+                    return _activeRooms; 
                 }
             }
             set
             {
                 lock (_syncRooms)
                 { 
-                    _activeRoom = value; 
+                    _activeRooms = value; 
                 }
             }
         }

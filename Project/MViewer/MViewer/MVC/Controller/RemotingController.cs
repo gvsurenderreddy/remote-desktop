@@ -367,10 +367,10 @@ namespace MViewer
         {
             try
             {
-                _model.ClientController.AddClient(_view.RoomManager.ActiveRoom);
-                _model.ClientController.StartClient(_view.RoomManager.ActiveRoom);
-                _model.ClientController.SendRemotingCommand(_view.RoomManager.ActiveRoom, args);
-                _model.ClientController.RemoveClient(_view.RoomManager.ActiveRoom);
+                _model.ClientController.AddClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
+                _model.ClientController.StartClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
+                _model.ClientController.SendRemotingCommand(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity, args);
+                _model.ClientController.RemoveClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
             }
             catch (Exception ex)
             {
@@ -530,44 +530,32 @@ namespace MViewer
                 {
                     lock (_syncRemotingCaptureSending)
                     {
-                        // todo: send the remoting capture to active remoting room
-
-
+                        // send the remoting capture to active remoting room
                         RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
-                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Remoting);
-                        if (connectedSessions.Count == 0)
+                        string receiverIdentity= ((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity;
+                        TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                        while (transfer.IsRemotingUpdating)
                         {
-                            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                            Thread.Sleep(200);
                         }
-                        else
+
+                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                        // check if the stop signal has been sent from the UI
+
+                        // check if the stop signal has been sent by the partner
+                        PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                        if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
+                            || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
                         {
-                            foreach (string receiverIdentity in connectedSessions)
-                            {
-                                TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                                while (transfer.IsRemotingUpdating)
-                                {
-                                    Thread.Sleep(200);
-                                }
+                            // send the capture if the session isn't paused
+                            transferStatus.Remoting = true;
 
-                                PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                                // check if the stop signal has been sent from the UI
-
-                                // check if the stop signal has been sent by the partner
-                                PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                                if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
-                                    || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
-                                {
-                                    // send the capture if the session isn't paused
-                                    transferStatus.Remoting = true;
-
-                                    _model.ClientController.SendRemotingCapture(args.ScreenCapture,
-                                        args.MouseCapture, receiverIdentity,
-                                        ((Identity)_model.Identity).MyIdentity);
-                                }
-
-                                transferStatus.Remoting = false;
-                            }
+                            _model.ClientController.SendRemotingCapture(args.ScreenCapture,
+                                args.MouseCapture, receiverIdentity,
+                                ((Identity)_model.Identity).MyIdentity);
                         }
+
+                        transferStatus.Remoting = false;
                     }
                 }
                 else

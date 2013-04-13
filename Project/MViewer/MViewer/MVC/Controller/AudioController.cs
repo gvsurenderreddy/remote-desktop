@@ -138,45 +138,31 @@ namespace MViewer
                     {
                         AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
 
-                        // todo: send the audio capture to active audio room
-
-
-                        // broadcast the audio captures to all connected peers
-                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Audio);
-                        if (connectedSessions.Count == 0)
+                        // send the audio capture to active audio room
+                        string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).AudioRoomIdentity;
+                        TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                        while (transfer.IsAudioUpdating)
                         {
-                            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
+                            Thread.Sleep(200);
                         }
-                        else
+
+                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                        // check if the stop signal has been sent from the UI
+
+                        // check if the stop signal has been sent by the partner
+
+                        PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                        if (peers.AudioSessionState == GenericEnums.SessionState.Opened
+                            || peers.AudioSessionState == GenericEnums.SessionState.Pending)
                         {
-                            foreach (string receiverIdentity in connectedSessions)
-                            {
-                                TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                                while (transfer.IsAudioUpdating)
-                                {
-                                    Thread.Sleep(200);
-                                }
+                            // send the capture if the session isn't paused
+                            transferStatus.Audio = true;
 
-                                PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                                // check if the stop signal has been sent from the UI
-
-                                // check if the stop signal has been sent by the partner
-
-                                PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                                if (peers.AudioSessionState == GenericEnums.SessionState.Opened
-                                    || peers.AudioSessionState == GenericEnums.SessionState.Pending)
-                                {
-                                    // send the capture if the session isn't paused
-                                    transferStatus.Audio = true;
-
-                                    _model.ClientController.SendAudioCapture(args.Capture, receiverIdentity,
-                                        ((Identity)_model.Identity).MyIdentity);
-                                }
-
-                                transferStatus.Audio = false;
-                               
-                            }
+                            _model.ClientController.SendAudioCapture(args.Capture, receiverIdentity,
+                                ((Identity)_model.Identity).MyIdentity);
                         }
+
+                        transferStatus.Audio = false;
                     }
                 }
                 else

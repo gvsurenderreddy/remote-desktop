@@ -60,43 +60,32 @@ namespace MViewer
                         //get the buffer 
                         byte[] buffer = memoryStream.GetBuffer();
 
-                        // todo: send the webcaptures to active video room
-
-                        IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
-                        if (connectedSessions.Count == 0)
+                        // send the webcaptures to active video room
+                        string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity;
+                        TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                        while (transfer.IsVideoUpdating)
                         {
-                            PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
+                            Thread.Sleep(200);
                         }
-                        else
+
+                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                        // check if the stop signal has been sent from the UI
+
+                        // check if the stop signal has been sent by the partner
+
+                        PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                        if (peers.VideoSessionState == GenericEnums.SessionState.Opened
+                            || peers.VideoSessionState == GenericEnums.SessionState.Pending)
                         {
-                            foreach (string receiverIdentity in connectedSessions)
-                            {
-                                TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                                while (transfer.IsVideoUpdating)
-                                {
-                                    Thread.Sleep(200);
-                                }
+                            // send the capture if the session isn't paused
+                            transferStatus.Video = true;
 
-                                PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                                // check if the stop signal has been sent from the UI
-
-                                // check if the stop signal has been sent by the partner
-
-                                PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                                if (peers.VideoSessionState == GenericEnums.SessionState.Opened
-                                    || peers.VideoSessionState == GenericEnums.SessionState.Pending)
-                                {
-                                    // send the capture if the session isn't paused
-                                    transferStatus.Video = true;
-
-                                    _model.ClientController.SendVideoCapture(buffer, receiverIdentity,
-                                        ((Identity)_model.Identity).MyIdentity);
-                                }
-
-                                transferStatus.Video = false;
-                            }
+                            _model.ClientController.SendVideoCapture(buffer, receiverIdentity,
+                                ((Identity)_model.Identity).MyIdentity);
                         }
-                    }
+
+                        transferStatus.Video = false;
+                    }    
                 }
                 else
                 {

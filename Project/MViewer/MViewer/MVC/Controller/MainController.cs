@@ -118,7 +118,18 @@ namespace MViewer
             try
             {
                 // update the active room identity
-                _view.RoomManager.ActiveRoom = newIdentity;
+                switch (roomType)
+                {
+                    case GenericEnums.RoomType.Audio:
+                        ((ActiveRooms)_view.RoomManager.ActiveRooms).AudioRoomIdentity = newIdentity;
+                        break;
+                    case GenericEnums.RoomType.Video:
+                        ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity = newIdentity;
+                        break;
+                    case GenericEnums.RoomType.Remoting:
+                        ((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity = newIdentity;
+                        break;
+                }
                 // update the actions form button labels
                 _view.UpdateLabels(newIdentity, roomType);
             }
@@ -257,17 +268,13 @@ namespace MViewer
                     _view.SetMessageText("Closing app...");
                     Thread t = new Thread(delegate()
                     {
-                        // stop all active rooms
-                        IList<string> partnerIdentities = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
-                        foreach (string identity in partnerIdentities)
+                        StopVideo(this, new RoomActionEventArgs()
                         {
-                            StopVideo(this, new RoomActionEventArgs()
-                                {
-                                    Identity = identity,
-                                    RoomType = GenericEnums.RoomType.Video,
-                                    SignalType = GenericEnums.SignalType.Stop
-                                });
-                        }
+                            Identity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity,
+                            RoomType = GenericEnums.RoomType.Video,
+                            SignalType = GenericEnums.SignalType.Stop
+                        });
+               
                         // stop my webcapture form
                         StopVideoCapturing();
                     });
