@@ -114,7 +114,10 @@ namespace GenericObjects
                 }
                 else
                 {
-                    _audioStream.StartAudio();
+                    if (_audioStream.IsRunning == false)
+                    {
+                        _audioStream.StartAudio();
+                    }
                 }
                 _timer.Start();
             }

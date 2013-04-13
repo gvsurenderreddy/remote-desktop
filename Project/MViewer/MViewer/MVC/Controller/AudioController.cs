@@ -91,7 +91,7 @@ namespace MViewer
                     peer.AudioSessionState == GenericEnums.SessionState.Pending)
                 {
                     // receiving captures for the first time, have to initalize a form
-                    ClientConnectedObserver(this,
+                    ClientConnectedObserver(sender,
                            new RoomActionEventArgs()
                            {
                                RoomType = GenericEnums.RoomType.Audio,
