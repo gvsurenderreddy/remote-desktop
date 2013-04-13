@@ -254,7 +254,8 @@ namespace GenericObjects
                                 _eventArgs = new VideoCaptureEventArgs();
                                 // resize the image to the required size (the API isn't doing that)
 
-                                // todo: add timestamp to be used for synchron with audio
+                                // add timestamp to be used for synchron with audio
+                                _eventArgs.CaptureTimestamp = DateTime.Now;
 
                                 _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, this._width, this._height);
 

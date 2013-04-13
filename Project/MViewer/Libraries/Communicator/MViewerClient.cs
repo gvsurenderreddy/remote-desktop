@@ -64,9 +64,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.UpdateContactStatus(senderIdentity, newStatus);
     }
 
-    public void SendWebcamCapture(byte[] capture, string senderIdentity)
+    public void SendWebcamCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity)
     {
-        base.Channel.SendWebcamCapture(capture, senderIdentity);
+        base.Channel.SendWebcamCapture(capture, captureTimestamp, senderIdentity);
     }
 
     public void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string senderIdentity)
@@ -74,9 +74,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
     }
 
-    public void SendMicrophoneCapture(byte[] capture, string senderIdentity)
+    public void SendMicrophoneCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity)
     {
-        base.Channel.SendMicrophoneCapture(capture, senderIdentity);
+        base.Channel.SendMicrophoneCapture(capture, captureTimestamp, senderIdentity);
     }
 
     public bool Ping()

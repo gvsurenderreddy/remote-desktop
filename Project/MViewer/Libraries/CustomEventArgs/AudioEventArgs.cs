@@ -10,5 +10,10 @@ namespace GenericObjects
     {
         public byte[] Capture { get; set; }
         public string Identity { get; set; }
+        public DateTime CaptureTimestamp
+        {
+            get;
+            set;
+        }
     }
 }

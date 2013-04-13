@@ -12,6 +12,7 @@ namespace GenericObjects
 
         private Image _capturedImage;
         string _identity;
+        DateTime _captureTimestamp;
 
         #endregion
 
@@ -41,6 +42,12 @@ namespace GenericObjects
         {
             get { return _identity; }
             set { _identity = value; }
+        }
+
+        public DateTime CaptureTimestamp
+        {
+            get { return _captureTimestamp; }
+            set { _captureTimestamp = value; }
         }
 
         #endregion

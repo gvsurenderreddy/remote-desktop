@@ -7,8 +7,8 @@ namespace Abstraction
 {
     public abstract class ActiveRoomsBase
     {
-        protected string AudioRoomIdentity;
-        protected string VideoRoomIdentity;
-        protected string RemotingRoomIdentity;
+        protected string audioRoomIdentity;
+        protected string videoRoomIdentity;
+        protected string remotingRoomIdentity;
     }
 }

@@ -48,14 +48,15 @@ namespace GenericObjects
                 _audioStream.SyncChunk.Reset();
 
                 byte[] capture = _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
-                //_onCaptureAvailable.Invoke(this, AudioEventArgs
+
                 _audioStream.Stream = new MemoryStream();
 
                 if (capture != null && capture.Length > 0)
                 {
                     _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
                     {
-                        Capture = capture
+                        Capture = capture,
+                        CaptureTimestamp = DateTime.Now
                     });
                 }
                 _audioStream.SyncChunk.Set();

@@ -358,7 +358,7 @@ namespace BusinessLogicLayer
             return isOnline;
         }
 
-        public void SendVideoCapture(byte[] capture, string receiverIdentity, string senderIdentity)
+        public void SendVideoCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity)
         {
             try
             {
@@ -371,7 +371,7 @@ namespace BusinessLogicLayer
                     }
                     try
                     {
-                        client.SendWebcamCapture(capture, senderIdentity);
+                        client.SendWebcamCapture(capture, timestamp, senderIdentity);
                     }
                     catch (Exception)
                     {
@@ -386,7 +386,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public void SendAudioCapture(byte[] capture, string receiverIdentity, string senderIdentity)
+        public void SendAudioCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity)
         {
             try
             {
@@ -404,7 +404,7 @@ namespace BusinessLogicLayer
                     }
                     try
                     {
-                        client.SendMicrophoneCapture(capture, senderIdentity);
+                        client.SendMicrophoneCapture(capture, timestamp, senderIdentity);
                     }
                     catch (Exception)
                     {

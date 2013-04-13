@@ -167,7 +167,7 @@ namespace GenericObjects
             }
         }
 
-        public void SendWebcamCapture(byte[] capture, string senderIdentity)
+        public void SendWebcamCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity)
         {
             try
             {
@@ -182,7 +182,8 @@ namespace GenericObjects
                     new VideoCaptureEventArgs()
                     {
                         Identity = senderIdentity,
-                        CapturedImage = bmp
+                        CapturedImage = bmp,
+                        CaptureTimestamp = captureTimestamp
                     });                
             }
             catch (Exception ex)
@@ -191,7 +192,7 @@ namespace GenericObjects
             }
         }
 
-        public void SendMicrophoneCapture(byte[] capture, string senderIdentity)
+        public void SendMicrophoneCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity)
         {
             try
             {
@@ -200,7 +201,8 @@ namespace GenericObjects
                     new AudioCaptureEventArgs()
                     {
                         Identity = senderIdentity,
-                        Capture = capture
+                        Capture = capture,
+                        CaptureTimestamp = captureTimestamp
                     });
             }
             catch (Exception ex)

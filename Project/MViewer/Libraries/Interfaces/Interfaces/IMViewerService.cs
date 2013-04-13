@@ -22,13 +22,13 @@ namespace GenericObjects
         void UpdateFriendlyName(string senderIdentity, string newFriendlyName);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendWebcamCapture", ReplyAction = "http://tempuri.org/IVideoRoom/SendWebcamCaptureResponse")]
-        void SendWebcamCapture(byte[] capture, string senderIdentity);
+        void SendWebcamCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendRemotingCapture", ReplyAction = "http://tempuri.org/IVideoRoom/SendRemotingCaptureResponse")]
         void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendMicrophoneCapture", ReplyAction = "http://tempuri.org/IVideoRoom/SendMicrophoneCaptureResponse")]
-        void SendMicrophoneCapture(byte[] capture, string senderIdentity);
+        void SendMicrophoneCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/Ping", ReplyAction = "http://tempuri.org/IVideoRoom/PingResponse")]
         bool Ping();

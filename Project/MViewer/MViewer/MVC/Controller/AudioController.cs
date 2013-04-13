@@ -158,8 +158,8 @@ namespace MViewer
                             // send the capture if the session isn't paused
                             transferStatus.Audio = true;
 
-                            _model.ClientController.SendAudioCapture(args.Capture, receiverIdentity,
-                                ((Identity)_model.Identity).MyIdentity);
+                            _model.ClientController.SendAudioCapture(args.Capture, args.CaptureTimestamp,
+                                receiverIdentity, ((Identity)_model.Identity).MyIdentity);
                         }
 
                         transferStatus.Audio = false;

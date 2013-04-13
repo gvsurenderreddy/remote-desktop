@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-
 using System.Windows.Forms;
 using BusinessLogicLayer;
 using GenericObjects;
@@ -80,8 +79,8 @@ namespace MViewer
                             // send the capture if the session isn't paused
                             transferStatus.Video = true;
 
-                            _model.ClientController.SendVideoCapture(buffer, receiverIdentity,
-                                ((Identity)_model.Identity).MyIdentity);
+                            _model.ClientController.SendVideoCapture(buffer, args.CaptureTimestamp, 
+                                receiverIdentity, ((Identity)_model.Identity).MyIdentity);
                         }
 
                         transferStatus.Video = false;
