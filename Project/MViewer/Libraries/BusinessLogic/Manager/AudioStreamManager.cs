@@ -155,8 +155,10 @@ namespace GenericObjects
                     return;
                 }
                 sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                //sound = Content
                 SoundEffect.MasterVolume = 1f;
                 sound.Play();
+                sound.Dispose();
             }
             catch (Exception ex)
             {
