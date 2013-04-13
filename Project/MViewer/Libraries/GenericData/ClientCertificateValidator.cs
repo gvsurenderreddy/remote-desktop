@@ -56,7 +56,7 @@ namespace GenericObjects
             }
             else
             {
-                throw new SecurityTokenValidationException("X509 Validation failure. Invalid X509 Server Certificate");
+                throw new SecurityTokenValidationException("X509 Validation failure. Invalid or Untrusted X509 Server Certificate");
             }
         }
     }
