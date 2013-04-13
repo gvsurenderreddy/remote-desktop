@@ -8,6 +8,7 @@ using Utils;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.ServiceModel.Security;
 
 namespace BusinessLogicLayer
 {
@@ -344,6 +345,11 @@ namespace BusinessLogicLayer
                 Director.Instance.Construct(clientBuilder);
                 MViewerClient client = (MViewerClient)clientBuilder.GetResult();
                 isOnline = client.Ping();
+            }
+            catch (SecurityNegotiationException ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+                isOnline = false;
             }
             catch
             {
