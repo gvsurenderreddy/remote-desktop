@@ -390,11 +390,6 @@ namespace GenericObjects
             }
         }
 
-        // not needed
-        public override void BuildCertificate(){}
-        public override void BuildContract() { }
-        public override void BuildClientBinding(ContactEndpointBase contractEndpoint) { }
-
         public WSHttpBinding Binding
         {
             get { return _binding; }
