@@ -301,7 +301,8 @@ namespace GenericObjects
             {
                 // Add MEX endpoint
 
-                _binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpsBinding();
+                //_binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpsBinding();
+                _binding = (WSHttpBinding)MetadataExchangeBindings.CreateMexHttpBinding();
 
                 _binding.MaxBufferPoolSize = 100000000;
                 _binding.ReaderQuotas.MaxArrayLength = 100000000;
@@ -312,21 +313,15 @@ namespace GenericObjects
                 _binding.HostNameComparisonMode = HostNameComparisonMode.StrongWildcard;
                 _binding.Security.Mode = SecurityMode.Message;
 
-                _binding.ReliableSession.Enabled = true;
-                _binding.ReliableSession.Ordered = true;
-                _binding.ReliableSession.InactivityTimeout = TimeSpan.FromMinutes(1);
-
-                _binding.TransactionFlow = false;
-                _binding.UseDefaultWebProxy = true;
-
                 _binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Certificate;
                 _binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
                 _binding.Security.Transport.Realm = string.Empty;
 
+                _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
                 _binding.Security.Message.EstablishSecurityContext = false;
                 _binding.Security.Message.NegotiateServiceCredential = false;
-                
+
                 _binding.Name = "binding1";
 
                 _binding.OpenTimeout = new TimeSpan(0, 0, 20);
@@ -377,8 +372,10 @@ namespace GenericObjects
                 // If not, add one
                 if (smb == null)
                     smb = new ServiceMetadataBehavior();
-                smb.HttpGetEnabled = false;
+                smb.HttpGetEnabled = true;
                 smb.HttpGetUrl = _httpURI;
+
+                // todo: try to set the smb.HttpGetBinding and smb.HttpsGetBinding also
 
                 smb.HttpsGetEnabled = true;
                 Uri httpsURI = new Uri(_httpsAddress);
@@ -392,6 +389,11 @@ namespace GenericObjects
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
+
+        // not needed
+        public override void BuildCertificate(){}
+        public override void BuildContract() { }
+        public override void BuildClientBinding(ContactEndpointBase contractEndpoint) { }
 
         public WSHttpBinding Binding
         {

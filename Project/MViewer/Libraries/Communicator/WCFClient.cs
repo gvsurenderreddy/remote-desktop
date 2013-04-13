@@ -96,9 +96,9 @@ namespace GenericObjects
 
                 _binding.Name = "binding1_IVideoRoom";
 
-                _binding.ReliableSession.Ordered = true;
-                _binding.ReliableSession.InactivityTimeout = TimeSpan.FromMinutes(1);
-                _binding.ReliableSession.Enabled = true;
+                //_binding.ReliableSession.Ordered = true;
+                //_binding.ReliableSession.InactivityTimeout = TimeSpan.FromMinutes(1);
+                //_binding.ReliableSession.Enabled = true;
 
                 _binding.AllowCookies = false;
                 _binding.BypassProxyOnLocal = false;
