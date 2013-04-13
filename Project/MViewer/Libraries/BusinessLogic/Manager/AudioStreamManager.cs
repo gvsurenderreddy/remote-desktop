@@ -146,28 +146,34 @@ namespace GenericObjects
             }
         }
         SoundEffect sound;
+
+        readonly object _syncPlay = new object();
+
         public void PlayAudioCapture(byte[] capture)
         {
-            try
+            lock (_syncPlay)
             {
-                if (capture == null || capture.Length == 0)
+                try
                 {
-                    return;
+                    if (capture == null || capture.Length == 0)
+                    {
+                        return;
+                    }
+                    sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                    //sound = Content
+                    SoundEffect.MasterVolume = 1f;
+                    sound.Play();
+                    Thread.Sleep(2100);
+                    sound.Dispose();
                 }
-                sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
-                //sound = Content
-                SoundEffect.MasterVolume = 1f;
-                sound.Play();
-                Thread.Sleep(2100);
-                sound.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Tools.Instance.Logger.LogError(ex.ToString());
-            }
-            finally 
-            {
-                GC.Collect();
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
+                finally
+                {
+                    GC.Collect();
+                }
             }
         }
 
