@@ -9,11 +9,11 @@ namespace GenericObjects
 {
     public abstract class Product
     {
-        public abstract void BuildCertificate();
-        public abstract void BuildClientBinding(ContactEndpointBase contractEndpoint);
-        public abstract void BuildServerBinding();
-        public abstract void BuildContract();
-        public abstract void BuildUri(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity);
-        public abstract void BuildBehavior(ServiceHost svcHost);
+        public virtual void BuildCertificate(){}
+        public virtual void BuildClientBinding(ContactEndpointBase contractEndpoint){}
+        public virtual void BuildServerBinding() { }
+        public virtual void BuildContract(){}
+        public virtual void BuildUri(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity) { }
+        public virtual void BuildBehavior(ServiceHost svcHost) { }
     }
 }

@@ -13,9 +13,11 @@ namespace GenericObjects
     {
         string _allowedIssuerName;
         X509Certificate2 _clientCertificate;
+        X509Certificate2 _severCert;
 
-        public CustomCertificateValidator(string allowedIssuerName, X509Certificate2 clientCertificate)
+        public CustomCertificateValidator(X509Certificate2 severCert, string allowedIssuerName, X509Certificate2 clientCertificate)
         {
+            _severCert = severCert;
             if (allowedIssuerName == null)
             {
                 throw new ArgumentNullException("allowedIssuerName not provided");
@@ -38,6 +40,16 @@ namespace GenericObjects
             {
                 throw new ArgumentNullException("missing certificate");
             }
+
+            if (new X509Chain().Build(clientCertificate))
+            {
+                if (clientCertificate.Issuer == _allowedIssuerName)
+                {
+                    return;
+                }
+            }
+ 
+            throw new SecurityTokenValidationException();
 
             // Check that the certificate issuer matches the configured issuer.
             if (_allowedIssuerName != clientCertificate.IssuerName.Name)

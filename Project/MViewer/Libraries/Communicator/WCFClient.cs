@@ -65,13 +65,6 @@ namespace GenericObjects
             }
         }
 
-        //not needed
-        public override void BuildUri(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity)
-        { }
-        public override void BuildBehavior(System.ServiceModel.ServiceHost svcHost)
-        { }
-        public override void BuildServerBinding() { }
-
         #region private methods
 
         void CreateServerBinding()
@@ -97,7 +90,6 @@ namespace GenericObjects
                 _binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
                 _binding.Security.Transport.Realm = string.Empty;
 
-                _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
                 _binding.Security.Message.EstablishSecurityContext = false;
                 _binding.Security.Message.NegotiateServiceCredential = false;
@@ -105,8 +97,8 @@ namespace GenericObjects
                 _binding.Name = "binding1_IVideoRoom";
 
                 _binding.ReliableSession.Ordered = true;
-                _binding.ReliableSession.InactivityTimeout = TimeSpan.FromMinutes(10);
-                _binding.ReliableSession.Enabled = false;
+                _binding.ReliableSession.InactivityTimeout = TimeSpan.FromMinutes(1);
+                _binding.ReliableSession.Enabled = true;
 
                 _binding.AllowCookies = false;
                 _binding.BypassProxyOnLocal = false;

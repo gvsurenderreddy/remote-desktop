@@ -49,13 +49,13 @@ namespace BusinessLogicLayer
             try
             {
                 X509Certificate2 severCert = new X509Certificate2("Server.pfx", "", X509KeyStorageFlags.MachineKeySet);
-                _svcHost.Credentials.ServiceCertificate.Certificate = severCert; //new X509Certificate2("Server.pfx");
+                _svcHost.Credentials.ServiceCertificate.Certificate = severCert; 
                 X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
                 X509Certificate2 clientCert = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
 
-                // todo: decide if to keep the custom validator
+                
                 authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-                authentication.CustomCertificateValidator = new GenericObjects.CustomCertificateValidator("CN=Mihai-PC", clientCert);
+                authentication.CustomCertificateValidator = new CustomCertificateValidator(severCert, "CN=Mihai-PC", clientCert);
 
                 _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
             }
