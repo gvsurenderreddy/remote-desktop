@@ -29,6 +29,9 @@ namespace GenericObjects
             {
                 X509Certificate2 certificate = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
                 _client.ClientCredentials.ClientCertificate.Certificate = certificate;
+                _client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+                _client.ClientCredentials.ServiceCertificate.Authentication.CustomCertificateValidator =
+                    new ClientCertificateValidator("Mihai-PC");
             }
             catch (Exception ex)
             {
@@ -93,7 +96,7 @@ namespace GenericObjects
                 _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
                 _binding.Security.Message.EstablishSecurityContext = false;
-                _binding.Security.Message.NegotiateServiceCredential = false;
+                _binding.Security.Message.NegotiateServiceCredential = true;
 
                 _binding.Name = "binding1_IVideoRoom";
 

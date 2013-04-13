@@ -320,7 +320,7 @@ namespace GenericObjects
                 _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
                 _binding.Security.Message.EstablishSecurityContext = false;
-                _binding.Security.Message.NegotiateServiceCredential = false;
+                _binding.Security.Message.NegotiateServiceCredential = true;
 
                 _binding.Name = "binding1";
 

@@ -55,7 +55,7 @@ namespace BusinessLogicLayer
 
                 
                 authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-                authentication.CustomCertificateValidator = new CustomCertificateValidator(severCert, "CN=Mihai-PC", clientCert);
+                authentication.CustomCertificateValidator = new ServerCertificateValidator(severCert, "CN=Mihai-PC", clientCert);
 
                 _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
             }

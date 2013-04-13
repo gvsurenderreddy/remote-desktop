@@ -9,13 +9,13 @@ using Utils;
 
 namespace GenericObjects
 {
-    public class CustomCertificateValidator : X509CertificateValidator
+    public class ServerCertificateValidator : X509CertificateValidator
     {
         string _allowedIssuerName;
         X509Certificate2 _clientCertificate;
         X509Certificate2 _severCert;
 
-        public CustomCertificateValidator(X509Certificate2 severCert, string allowedIssuerName, X509Certificate2 clientCertificate)
+        public ServerCertificateValidator(X509Certificate2 severCert, string allowedIssuerName, X509Certificate2 clientCertificate)
         {
             _severCert = severCert;
             if (allowedIssuerName == null)
@@ -38,7 +38,7 @@ namespace GenericObjects
             // Check that there is a certificate.
             if (clientCertificate == null)
             {
-                throw new ArgumentNullException("missing certificate");
+                throw new ArgumentNullException("missing client certificate");
             }
 
             // the client certificate must be in your trusted certificates store
@@ -50,11 +50,11 @@ namespace GenericObjects
                 if (_allowedIssuerName != clientCertificate.IssuerName.Name)
                 {
                     throw new SecurityTokenValidationException
-                      ("Certificate was not issued by a trusted issuer");
+                      ("client Certificate was not issued by a trusted issuer");
                 }
                 if (DateTime.Parse(clientCertificate.GetExpirationDateString()) < DateTime.Now)
                 {
-                    throw new IdentityValidationException("Certificate Expired");
+                    throw new IdentityValidationException("client Certificate Expired");
                 }
                 if (_clientCertificate.Equals(clientCertificate) == false)
                 {
