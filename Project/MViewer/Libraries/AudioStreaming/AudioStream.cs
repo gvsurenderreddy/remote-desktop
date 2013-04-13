@@ -29,6 +29,7 @@ namespace AudioStreaming
         MemoryStream _stream;
         private Microphone _microphone;
         bool _isRunning;
+        readonly object _syncInitialize = new object();
 
         #endregion
 
@@ -68,7 +69,16 @@ namespace AudioStreaming
 
         public AudioStream()
         {
-            InitializeMicrophone();
+            if (_microphone == null)
+            {
+                lock (_syncInitialize)
+                {
+                    if (_microphone == null)
+                    {
+                        InitializeMicrophone();
+                    }
+                }
+            }
         }
 
         #endregion
@@ -218,7 +228,13 @@ namespace AudioStreaming
                 _syncStatus.Reset();
                 if (_microphone == null)
                 {
-                    InitializeMicrophone();
+                    lock (_syncInitialize)
+                    {
+                        if (_microphone == null)
+                        {
+                            InitializeMicrophone();
+                        }
+                    }
                 }
                 _microphone.Start();
                 _isRunning = true;
