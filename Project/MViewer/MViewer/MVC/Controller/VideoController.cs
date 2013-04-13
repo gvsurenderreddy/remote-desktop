@@ -89,8 +89,6 @@ namespace MViewer
                                     // send the capture if the session isn't paused
                                     transferStatus.Video = true;
 
-                                    // todo: enforce web timer start for partner side
-
                                     _model.ClientController.SendVideoCapture(buffer, receiverIdentity,
                                         _model.Identity.MyIdentity);
                                 }
@@ -250,7 +248,7 @@ namespace MViewer
             }
         }
 
-        // todo: convert this to an event handler , use it in the Webcam Form as observer
+        // todo: optional - convert this to an event handler , use it in the Webcam Form as observer
         /// <summary>
         /// method used to trigger video capture control start
         /// </summary>
@@ -298,7 +296,6 @@ namespace MViewer
                     // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
                     _view.ShowMyWebcamForm(true);
 
-                    // todo: add manual reset event and wait for the video 
                     Thread.Sleep(1000);
 
                     this.StartAudio(this, new RoomActionEventArgs()

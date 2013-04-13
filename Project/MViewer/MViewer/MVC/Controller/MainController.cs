@@ -107,7 +107,7 @@ namespace MViewer
             _view.FocusActionsForm();
         }
 
-        // todo: convert this to an event handler , use it in the Video Form as observer
+        // todo: optional - convert this to an event handler , use it in the Video Form as observer
         /// <summary>
         /// method used to update the active room and the actions form labels
         /// </summary>
@@ -128,7 +128,7 @@ namespace MViewer
             }
         }
 
-        // todo: convert this to an event handler , use it in the Main Form as observer
+        // todo: optional - convert this to an event handler , use it in the Main Form as observer
         /// <summary>
         /// method used to notify contacts of updated friendly name
         /// </summary>
@@ -149,7 +149,7 @@ namespace MViewer
             }
         }
 
-        // todo: convert this to an event handler , use it in the View as observer
+        // todo: optional - convert this to an event handler , use it in the View as observer
         /// <summary>
         /// method used to handle room button action signaled via UI
         /// </summary>
@@ -176,7 +176,7 @@ namespace MViewer
             }
         }
 
-        // todo: convert this to an event handler , use it in the Main Form as observer
+        // todo: optional - convert this to an event handler , use it in the Main Form as observer
         /// <summary>
         /// method used to execute specific CRUD contacts operation
         /// </summary>
@@ -222,7 +222,6 @@ namespace MViewer
                 _view.ShowMainForm(false);
                 _view.NotifyContactsObserver();
 
-                // todo: use manual reset event instead of thread.sleep(0)
                 Thread.Sleep(200);
 
                 _view.NotifyIdentityObserver();
@@ -250,8 +249,6 @@ namespace MViewer
         {
             try
             {
-                // todo: update the StopApplication method with other actions
-
                 // check for running video/audio/remoting s
                 bool canExit = _view.ExitConfirmation();
                 if (canExit)
@@ -314,7 +311,6 @@ namespace MViewer
         {
             try
             {
-                // todo: complete implemention of WaitRoomButtonAction for audio signal
                 RoomActionEventArgs args = (RoomActionEventArgs)e;
                 switch (args.RoomType)
                 {

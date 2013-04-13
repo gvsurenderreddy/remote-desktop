@@ -374,18 +374,6 @@ namespace MViewer
                     _formWebCapture.WaitRoomButtonAction(true);
                 }
 
-                if (args.RoomType == GenericEnums.RoomType.Remoting)
-                {
-                    // todo: put the remoting transfers on hold
-
-                }
-
-                if (args.RoomType == GenericEnums.RoomType.Audio)
-                {
-                    // todo: put the audio transfers on hold
-
-                }
-
                 string activeRoom = _roomManager.ActiveRoom;
                 if (string.IsNullOrEmpty(activeRoom))
                 {
@@ -416,12 +404,6 @@ namespace MViewer
                     // release video lock
                     _formWebCapture.WaitRoomButtonAction(false);
                 }
-
-                // todo: release audio lock
-
-
-                // todo: release remoting lock
-
             }
             catch (Exception ex)
             {

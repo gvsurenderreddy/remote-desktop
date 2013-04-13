@@ -186,8 +186,8 @@ namespace MViewer
         #endregion
 
         private void FormVideoRoom_Deactivate(object sender, EventArgs e)
-        { 
-            // todo: find a better way to update the button labels
+        {
+            // optional - todo: find a better way to update the button labels
             //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
     }

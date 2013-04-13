@@ -139,7 +139,7 @@ namespace MViewer
 
         private void FormAudioRoom_Deactivate(object sender, EventArgs e)
         {
-            // todo: find a better way to update the button labels
+            // todo: optional - find a better way to update the button labels
             //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
         }
 

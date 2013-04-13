@@ -207,7 +207,7 @@ namespace MViewer
             try
             {
                 remoteControl.WireDownEventProvider();
-                // todo: find a better way to update the button labels
+                // todo: optional - find a better way to update the button labels
                 //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
             }
             catch (Exception ex)

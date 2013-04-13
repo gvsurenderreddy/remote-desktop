@@ -195,7 +195,6 @@ namespace GenericObjects
         {
             try
             {
-                // todo: decide if the sync audio is necessary
                 _syncAudioCaptures.WaitOne();
                 _controllerHandlers.AudioCaptureObserver.Invoke(this,
                     new AudioCaptureEventArgs()
@@ -330,7 +329,7 @@ namespace GenericObjects
                 _binding.SendTimeout = new TimeSpan(0, 0, 20);
 
 
-                // todo : programmatically add global error handler to the WCF
+                // todo : optional - programmatically add global error handler to the WCF
             }
             catch (Exception ex)
             {
@@ -374,8 +373,6 @@ namespace GenericObjects
                     smb = new ServiceMetadataBehavior();
                 smb.HttpGetEnabled = true;
                 smb.HttpGetUrl = _httpURI;
-
-                // todo: try to set the smb.HttpGetBinding and smb.HttpsGetBinding also
 
                 smb.HttpsGetEnabled = true;
                 Uri httpsURI = new Uri(_httpsAddress);

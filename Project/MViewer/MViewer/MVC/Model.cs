@@ -278,7 +278,7 @@ namespace MViewer
                                     }
                                     else
                                     {
-                                        //todo: create a message queue so that the partner will be notified of removal
+                                        //todo: optional - create a message queue so that the partner will be notified of removal
                                     }
                                 }
                                 catch (Exception ex)

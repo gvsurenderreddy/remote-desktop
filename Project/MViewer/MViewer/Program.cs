@@ -59,7 +59,6 @@ namespace MViewer
 
         #region proprieties
 
-        // todo: remove the static Controller and use event handlers
         public static IController Controller
         {
             get { return Program._controller; }

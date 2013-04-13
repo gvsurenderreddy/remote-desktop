@@ -427,7 +427,6 @@ namespace MViewer
                 {
                     _syncRemotingCaptureActivity.Reset();
 
-                    // todo: wait untill the peding capture is being sent to the partner
                     TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(e.Identity);
                     transfer.IsRemotingUpdating = true;
 
@@ -531,7 +530,9 @@ namespace MViewer
                 {
                     lock (_syncRemotingCaptureSending)
                     {
-                        // broadcast the webcaptures to all connected peers
+                        // todo: send the remoting capture to active remoting room
+
+
                         RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
                         IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Remoting);
                         if (connectedSessions.Count == 0)

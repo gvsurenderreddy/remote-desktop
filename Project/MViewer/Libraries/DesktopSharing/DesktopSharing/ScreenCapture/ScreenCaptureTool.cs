@@ -159,7 +159,6 @@ namespace GenericObjects
                 {
                     // something has changed
                     serialized = Tools.Instance.RemotingUtils.SerializeMouseCapture(cursorCapture, x, y);
-                    // todo: display the trafic
                 }
             }
             catch (Exception ex)

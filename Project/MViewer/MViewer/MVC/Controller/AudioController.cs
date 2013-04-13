@@ -138,6 +138,9 @@ namespace MViewer
                     {
                         AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
 
+                        // todo: send the audio capture to active audio room
+
+
                         // broadcast the audio captures to all connected peers
                         IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Audio);
                         if (connectedSessions.Count == 0)
