@@ -158,6 +158,7 @@ namespace GenericObjects
                 //sound = Content
                 SoundEffect.MasterVolume = 1f;
                 sound.Play();
+                Thread.Sleep(2100);
                 sound.Dispose();
             }
             catch (Exception ex)
