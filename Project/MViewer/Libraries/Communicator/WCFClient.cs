@@ -8,9 +8,10 @@ using System.ServiceModel.Description;
 using System.ServiceModel.Security;
 using System.Text;
 using Utils;
+using GenericObjects;
 //
 
-namespace GenericObjects
+namespace Communicator
 {
     public class WCFClient : Product
     {

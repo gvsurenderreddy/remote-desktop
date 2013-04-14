@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using Utils;
+using Communicator;
 
 namespace MViewer
 {
@@ -193,7 +194,7 @@ namespace MViewer
                 peers.AudioSessionState = GenericEnums.SessionState.Paused; // pause the Audio 
 
                 _view.RoomManager.ToggleAudioStatus(e.Identity);
-                if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
+                if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                 {
                     // send the stop signal to the server session
                     _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, e.Identity,
@@ -223,7 +224,7 @@ namespace MViewer
                 peers.AudioSessionState = GenericEnums.SessionState.Opened; // resume the Audio 
                 _view.RoomManager.ToggleAudioStatus(e.Identity);
 
-                if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
+                if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                 {
                     // send the stop signal to the server session
                     _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, e.Identity,
@@ -300,7 +301,7 @@ namespace MViewer
                     {
                         peers.AudioSessionState = GenericEnums.SessionState.Closed;
                         bool sendStopSignal = true;
-                        if (sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
+                        if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                         {
                             sendStopSignal = false;
                         }

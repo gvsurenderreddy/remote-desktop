@@ -15,6 +15,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using Structures;
 using System.Runtime.Serialization.Formatters.Binary;
+using Communicator;
 
 namespace MViewer
 {
@@ -438,7 +439,7 @@ namespace MViewer
                         Thread.Sleep(200);
                     }
 
-                    if (!sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
+                    if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
                         // send the stop command to the partner
                         _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, 

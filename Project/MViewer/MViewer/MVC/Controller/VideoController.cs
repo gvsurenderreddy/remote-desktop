@@ -9,6 +9,7 @@ using BusinessLogicLayer;
 using GenericObjects;
 using Utils;
 using Abstraction;
+using Communicator;
 
 namespace MViewer
 {
@@ -116,7 +117,7 @@ namespace MViewer
                     _syncVideoCaptureActivity.Reset();
 
                     bool sendStopSignal = true;
-                    if (sender.GetType().IsEquivalentTo(typeof(IMViewerService)))
+                    if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
                         sendStopSignal = false;
                     }

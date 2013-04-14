@@ -170,6 +170,10 @@
       <Project>{249C2004-757F-44B9-BE01-B280727B98DC}</Project>
       <Name>BusinessLogicLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Libraries\Communicator\Communicator.csproj">
+      <Project>{9249E167-8F34-45C7-B1BE-9FE5C86458DD}</Project>
+      <Name>Communicator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\CustomEventArgs\CustomEventArgs.csproj">
       <Project>{7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3}</Project>
       <Name>CustomEventArgs</Name>

@@ -99,7 +99,7 @@
       <Name>GenericObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Abstraction.csproj">
-      <Project>{9e8d07be-e021-4991-9406-71a1668d99a8}</Project>
+      <Project>{9E8D07BE-E021-4991-9406-71A1668D99A8}</Project>
       <Name>Abstraction</Name>
     </ProjectReference>
     <ProjectReference Include="..\Structures\Structures.csproj">

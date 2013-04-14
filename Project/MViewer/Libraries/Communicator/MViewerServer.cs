@@ -17,7 +17,7 @@ using Abstraction;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 
-namespace GenericObjects
+namespace Communicator
 {
     public class MViewerServer : Product, IMViewerService
     {

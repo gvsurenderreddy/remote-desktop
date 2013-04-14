@@ -7,6 +7,7 @@ using System.ServiceModel.Description;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Security;
 using GenericObjects;
+using Communicator;
 
 namespace BusinessLogicLayer
 {
