@@ -394,8 +394,12 @@ namespace MViewer
                     _syncRemotingCaptureActivity.Reset();
 
                     // conference start permission logic
-                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity,
-                        ((Identity)_model.Identity).MyIdentity, e.RoomType);
+                    bool hasPermission = true;
+                    if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                    {
+                        hasPermission = _model.ClientController.ConferencePermission(e.Identity,
+                            ((Identity)_model.Identity).MyIdentity, e.RoomType);
+                    }
                     if (hasPermission)
                     {
                         // I am going to send my captures by using the below client

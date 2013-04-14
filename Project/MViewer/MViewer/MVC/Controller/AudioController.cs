@@ -251,8 +251,12 @@ namespace MViewer
                 {
                     RoomActionEventArgs e = (RoomActionEventArgs)args;
                     // conference start permission logic
-                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity, 
-                        ((Identity)_model.Identity).MyIdentity, e.RoomType);
+                    bool hasPermission = true;
+                    if (sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                    {
+                        hasPermission = _model.ClientController.ConferencePermission(e.Identity,
+                            ((Identity)_model.Identity).MyIdentity, e.RoomType);
+                    }
                     if (hasPermission)
                     {
                         // add client session
