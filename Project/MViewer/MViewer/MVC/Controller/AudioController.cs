@@ -278,6 +278,10 @@ namespace MViewer
                     _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
                     _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
 
+                    // tell the partner to pause capturing & sending while processing room Stop command
+                    _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity, 
+                        GenericEnums.RoomType.Audio, true);
+
                     TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
                     transfer.IsAudioUpdating = true;
 

@@ -121,8 +121,8 @@ namespace MViewer
                         sendStopSignal = false;
                     }
                     string identity = e.Identity;
+                    
                     // tell the partner to pause capturing & sending while processing room Stop command
-
                     _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity, GenericEnums.RoomType.Video,
                         true);
 
