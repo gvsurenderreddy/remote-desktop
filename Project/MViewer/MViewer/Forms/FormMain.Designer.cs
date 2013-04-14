@@ -35,6 +35,7 @@ namespace MViewer
             this.identityControl = new UIControls.IdentityControl();
             this.contactsControl = new UIControls.ContactsControl(this.OnContactsControl_ClosePressed, this.OnContactsUpdated, this.OnSelectedContactChanged);
             this.identityControl = new UIControls.IdentityControl(this.OnIdentityUpdated, this.OnLanguageUpdated);
+            this.btnConfig = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // contactsControl
@@ -52,6 +53,16 @@ namespace MViewer
             this.identityControl.Size = new System.Drawing.Size(282, 51);
             this.identityControl.TabIndex = 2;
             // 
+            // btnConfig
+            // 
+            this.btnConfig.Location = new System.Drawing.Point(3, 70);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(75, 23);
+            this.btnConfig.TabIndex = 3;
+            this.btnConfig.Text = "Config";
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -60,6 +71,7 @@ namespace MViewer
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(510, 305);
+            this.Controls.Add(this.btnConfig);
             this.Controls.Add(this.identityControl);
             this.Controls.Add(this.contactsControl);
             this.Cursor = System.Windows.Forms.Cursors.Default;
@@ -79,6 +91,7 @@ namespace MViewer
 
         private UIControls.ContactsControl contactsControl;
         private UIControls.IdentityControl identityControl;
+        private System.Windows.Forms.Button btnConfig;
     }
 }
 

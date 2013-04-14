@@ -51,6 +51,19 @@ namespace MViewer
 
         #region event callbacks
 
+        private void btnConfig_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Form formConfiguration = new FormConfiguration();
+                formConfiguration.ShowDialog(this);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
+
         private void FormMain_Activated(object sender, EventArgs e)
         {
             try
@@ -270,6 +283,5 @@ namespace MViewer
         }
 
         #endregion
-
     }
 }

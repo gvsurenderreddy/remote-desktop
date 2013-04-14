@@ -67,6 +67,12 @@
     <Compile Include="Forms\FormAudioRoom.Designer.cs">
       <DependentUpon>FormAudioRoom.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormConfiguration.Designer.cs">
+      <DependentUpon>FormConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormRemotingRoom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAudioRoom.ro-RO.resx">
       <DependentUpon>FormAudioRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormConfiguration.resx">
+      <DependentUpon>FormConfiguration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -229,6 +238,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\closed.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\config.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\remoting_icon.ico">
