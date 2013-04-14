@@ -39,26 +39,22 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients.ContainsKey(receiverIdentity))
+                if (!_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State != System.ServiceModel.CommunicationState.Opened)
-                    {
-                        client.Open();
-                    }
-                    {
-                        try
-                        {
-                            MemoryStream stream = new MemoryStream();
-                            BinaryFormatter formatter = new BinaryFormatter();
-                            formatter.Serialize(stream, commandArgs);
-                            client.SendRemotingCommand(stream.GetBuffer());
-                        }
-                        catch (Exception)
-                        {
+                    AddClient(receiverIdentity);
+                    StartClient(receiverIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[receiverIdentity];
+                try
+                {
+                    MemoryStream stream = new MemoryStream();
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, commandArgs);
+                    client.SendRemotingCommand(stream.GetBuffer());
+                }
+                catch (Exception)
+                {
 
-                        }
-                    }
                 }
             }
             catch (Exception ex)
@@ -71,21 +67,22 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients.ContainsKey(receiverIdentity))
+                if (!_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State != System.ServiceModel.CommunicationState.Opened)
-                    {
-                        client.Open();
-                    }
-                    try
-                    {
-                        client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
+                    AddClient(receiverIdentity);
+                    StartClient(receiverIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[receiverIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client.Open();
+                }
+                try
+                {
+                    client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
+                }
+                catch (Exception)
+                {
 
                 }
             }
@@ -100,16 +97,15 @@ namespace BusinessLogicLayer
             bool canSend = false;
             try
             {
-                if (_clients != null)
+                if (!_clients.ContainsKey(partnerIdentity))
                 {
-                    if (_clients.ContainsKey(partnerIdentity))
-                    {
-                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
-                        if (client != null)
-                        {
-                            canSend = client.SendingPermission(myIdentity, fileName, fileSize);
-                        }
-                    }
+                    AddClient(partnerIdentity);
+                    StartClient(partnerIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client != null)
+                {
+                    canSend = client.SendingPermission(myIdentity, fileName, fileSize);
                 }
             }
             catch (Exception ex)
@@ -123,16 +119,15 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients != null)
+                if (!_clients.ContainsKey(partnerIdentity))
                 {
-                    if (_clients.ContainsKey(partnerIdentity))
-                    {
-                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
-                        if (client != null)
-                        {
-                            client.SendFile(fileBytes, fileName);
-                        }
-                    }
+                    AddClient(partnerIdentity);
+                    StartClient(partnerIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client != null)
+                {
+                    client.SendFile(fileBytes, fileName);
                 }
             }
             catch (Exception ex)
@@ -145,20 +140,19 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients != null)
+                if (!_clients.ContainsKey(partnerIdentity))
                 {
-                    if (_clients.ContainsKey(partnerIdentity))
+                    AddClient(partnerIdentity);
+                    StartClient(partnerIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client != null)
+                {
+                    try
                     {
-                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
-                        if (client != null)
-                        {
-                            try
-                            {
-                                client.WaitRoomButtonAction(myIdentity, roomType, wait);
-                            }
-                            catch { }
-                        }
+                        client.WaitRoomButtonAction(myIdentity, roomType, wait);
                     }
+                    catch { }
                 }
             }
             catch (Exception ex)
@@ -171,22 +165,21 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients != null)
+                if (!_clients.ContainsKey(partnerIdentity))
                 {
-                    if (_clients.ContainsKey(partnerIdentity))
+                    AddClient(partnerIdentity);
+                    StartClient(partnerIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client != null)
+                {
+                    try
                     {
-                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
-                        if (client != null)
-                        {
-                            try
-                            {
-                                client.UpdateContactStatus(myIdentity, newStatus);
-                            }
-                            catch
-                            {
+                        client.UpdateContactStatus(myIdentity, newStatus);
+                    }
+                    catch
+                    {
 
-                            }
-                        }
                     }
                 }
             }
@@ -200,16 +193,15 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients != null)
+                if (!_clients.ContainsKey(partnerIdentity))
                 {
-                    if (_clients.ContainsKey(partnerIdentity))
-                    {
-                        MViewerClient client = (MViewerClient)_clients[partnerIdentity];
-                        if (client != null)
-                        {
-                            client.UpdateFriendlyName(myIdentity, newFriendlyName);
-                        }
-                    }
+                    AddClient(partnerIdentity);
+                    StartClient(partnerIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client != null)
+                {
+                    client.UpdateFriendlyName(myIdentity, newFriendlyName);
                 }
             }
             catch (Exception ex)
@@ -222,15 +214,18 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients.ContainsKey(identity))
+                if (!_clients.ContainsKey(identity))
                 {
-                    MViewerClient client = (MViewerClient)_clients[identity];
-                    try
-                    {
-                        client.SendRoomButtonAction(myIdentity, roomType, signalType);
-                    }
-                    catch { }
+                    AddClient(identity);
+                    StartClient(identity);
                 }
+                MViewerClient client = (MViewerClient)_clients[identity];
+                try
+                {
+                    client.SendRoomButtonAction(myIdentity, roomType, signalType);
+                }
+                catch { }
+                
             }
             catch (Exception ex)
             {
@@ -362,21 +357,18 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (_clients.ContainsKey(receiverIdentity))
+                if (!_clients.ContainsKey(receiverIdentity))
                 {
-                    MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State != System.ServiceModel.CommunicationState.Opened)
-                    {
-                        client.Open();
-                    }
-                    try
-                    {
-                        client.SendWebcamCapture(capture, timestamp, senderIdentity);
-                    }
-                    catch (Exception)
-                    {
-
-                    }
+                    AddClient(receiverIdentity);
+                    StartClient(receiverIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[receiverIdentity];
+                try
+                {
+                    client.SendWebcamCapture(capture, timestamp, senderIdentity);
+                }
+                catch (Exception)
+                {
 
                 }
             }
