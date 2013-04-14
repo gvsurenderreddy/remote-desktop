@@ -326,18 +326,13 @@ namespace MViewer
             try
             {
                 RoomActionEventArgs args = (RoomActionEventArgs)e;
-                switch (args.RoomType)
+                bool freeze = false;
+                if (args.SignalType == GenericEnums.SignalType.Wait)
                 {
-                    case GenericEnums.RoomType.Video:
-                        bool freezeVideo = false;
-                        if (args.SignalType == GenericEnums.SignalType.Wait)
-                        {
-                            freezeVideo = true;
-                        }
-                        // send the freeze signal to the webcapture obj
-                        _view.WaitRoomButtonAction(freezeVideo);
-                        break;
+                    freeze = true;
                 }
+                // send the freeze signal to the webcapture obj
+                _view.WaitRoomButtonAction(freeze, args.RoomType);
             }
             catch (Exception ex)
             {

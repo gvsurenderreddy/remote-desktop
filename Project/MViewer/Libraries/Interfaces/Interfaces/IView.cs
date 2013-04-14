@@ -28,7 +28,7 @@ namespace GenericObjects
   
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         bool ExitConfirmation();
-        void WaitRoomButtonAction(bool wait);
+        void WaitRoomButtonAction(bool wait, GenericEnums.RoomType roomType);
         bool RequestTransferPermission(string identity, string fileName, long fileSize);
         void FocusActionsForm();
 

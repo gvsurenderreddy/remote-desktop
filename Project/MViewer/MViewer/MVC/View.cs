@@ -486,13 +486,25 @@ namespace MViewer
         /// method used to tell the video streaming to wait for conference room button action to finish
         /// </summary>
         /// <param name="wait"></param>
-        public void WaitRoomButtonAction(bool wait)
+        public void WaitRoomButtonAction(bool wait, GenericEnums.RoomType roomType)
         {
             try
             {
-                if (_formWebCapture != null)
+                switch (roomType)
                 {
-                    _formWebCapture.WaitRoomButtonAction(wait);
+                    case GenericEnums.RoomType.Audio:
+                        // todo: add audio freeze logic
+
+                        break;
+                    case GenericEnums.RoomType.Video:
+                        if (_formWebCapture != null)
+                        {
+                            _formWebCapture.WaitRoomButtonAction(wait);
+                        }
+                        break;
+                    case GenericEnums.RoomType.Remoting:
+                        // todo: add remoting freeze logic
+                        break;
                 }
             }
             catch (Exception ex)
