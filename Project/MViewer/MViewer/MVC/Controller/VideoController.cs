@@ -272,7 +272,7 @@ namespace MViewer
                 {
                     // conference start permission logic
                     bool hasPermission = true;
-                    if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
+                    if (sender.GetType().IsEquivalentTo(typeof(UIControls.ActionsControl)))
                     {
                         hasPermission = _model.ClientController.ConferencePermission(e.Identity,
                             ((Identity)_model.Identity).MyIdentity, e.RoomType);
