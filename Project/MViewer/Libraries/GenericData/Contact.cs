@@ -33,7 +33,6 @@ namespace GenericObjects
             _contactNo = contactNo;
             _identity = identity;
             _status = newStatus;
-            _status = GenericEnums.ContactStatus.Offline;
         }
 
         #endregion
