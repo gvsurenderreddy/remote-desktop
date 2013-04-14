@@ -56,6 +56,11 @@ namespace GenericObjects
             get { return _identity; }
         }
 
+        public GenericEnums.ContactStatus Status
+        {
+            get { return _status; }
+        }
+
         #endregion
     }
 }

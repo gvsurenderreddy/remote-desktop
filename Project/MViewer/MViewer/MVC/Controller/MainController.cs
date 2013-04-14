@@ -67,7 +67,7 @@ namespace MViewer
                     ClientConnectedObserver = this.ClientConnectedObserver,
                     VideoCaptureObserver = this.VideoCaptureObserver,
                     AudioCaptureObserver = this.OnAudioCaptureReceived,
-                    ContactsObserver = this.ContactRequestObserver,
+                    ContactsObserver = this.ContactsObserver,
                     RoomButtonObserver = this.OnRoomButtonActionTriggered,
                     WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                     FileTransferObserver = this.FileTransferObserver,
@@ -356,7 +356,7 @@ namespace MViewer
         }
         
         // don't remove this one yet because PerformContactsOperation has a return type (cannot be used as event handler)
-        void ContactRequestObserver(object sender, EventArgs e)
+        void ContactsObserver(object sender, EventArgs e)
         {
             PerformContactsOperation(sender, (ContactsEventArgs)e);
         }

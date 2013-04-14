@@ -239,7 +239,14 @@ namespace MViewer
                 switch (args.Operation)
                 {
                     case GenericEnums.ContactsOperation.Status:
-                        PingContacts(updatedContact.Identity);
+                        if (updatedContact.Status == GenericEnums.ContactStatus.Offline)
+                        {
+                            UpdateContactStatus(updatedContact.Identity, GenericEnums.ContactStatus.Offline);
+                        }
+                        else
+                        {
+                            PingContacts(updatedContact.Identity);
+                        }
                         break;
                     case GenericEnums.ContactsOperation.Add:
                         int contactNo = ContactsRepository.AddContact(updatedContact);
