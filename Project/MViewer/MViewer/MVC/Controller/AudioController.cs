@@ -275,6 +275,9 @@ namespace MViewer
 
                     string identity = e.Identity;
 
+                    _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
+                    _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
+
                     TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
                     transfer.IsAudioUpdating = true;
 
@@ -306,8 +309,6 @@ namespace MViewer
 
                         // remove the connected client session
                         _model.SessionManager.RemoveSession(identity);
-                        _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
-                        _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
 
                         _view.UpdateLabels(e.Identity, e.RoomType);
                     }
