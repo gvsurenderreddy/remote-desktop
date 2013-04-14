@@ -119,6 +119,7 @@
             // 
             // pnlControls
             // 
+            resources.ApplyResources(this.pnlControls, "pnlControls");
             this.pnlControls.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pnlControls.Controls.Add(this.label1);
             this.pnlControls.Controls.Add(this.btnVideo);
@@ -131,7 +132,6 @@
             this.pnlControls.Controls.Add(this.btnPauseVideo);
             this.pnlControls.Controls.Add(this.label3);
             this.pnlControls.Controls.Add(this.btnMuteAudio);
-            resources.ApplyResources(this.pnlControls, "pnlControls");
             this.pnlControls.Name = "pnlControls";
             // 
             // ActionsControl

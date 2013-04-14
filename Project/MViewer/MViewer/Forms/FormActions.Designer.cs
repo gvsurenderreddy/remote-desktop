@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormActions));
             this.actionsControl = new UIControls.ActionsControl();
-            this.actionsControl = new UIControls.ActionsControl(this.OnActionTriggered);
             this.SuspendLayout();
             // 
             // actionsControl
