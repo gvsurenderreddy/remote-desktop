@@ -18,6 +18,7 @@ namespace GenericObjects
         void SendAudioCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity);
         void SendVideoCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity);
         void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity);
+        bool ConferencePermission(string partnerIdentity, GenericEnums.RoomType roomType);
         void SendRoomCommand(string myIdentity, string identity, GenericEnums.RoomType roomType, GenericEnums.SignalType signalType);
         void UpdateContactStatus(string partnerIdentity, string myIdentity, GenericEnums.ContactStatus newStatus);
         void UpdateFriendlyName(string partnerIdentity, string myIdentity, string newFriendlyName);

@@ -27,6 +27,12 @@ namespace GenericObjects
             set;
         }
 
+        public bool HasPermission
+        {
+            get;
+            set;
+        }
+
         public TransferInfoBase TransferInfo 
         { 
             get; 

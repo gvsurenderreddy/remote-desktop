@@ -30,6 +30,7 @@ namespace GenericObjects
         bool ExitConfirmation();
         void WaitRoomButtonAction(bool wait, GenericEnums.RoomType roomType);
         bool RequestTransferPermission(string identity, string fileName, long fileSize);
+        bool RequestConferencePermission(string identity, GenericEnums.RoomType roomType);
         void FocusActionsForm();
 
         bool VideoCaptureClosed

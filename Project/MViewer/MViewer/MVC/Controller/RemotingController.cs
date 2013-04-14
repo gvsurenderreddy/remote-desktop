@@ -393,19 +393,28 @@ namespace MViewer
                 {
                     _syncRemotingCaptureActivity.Reset();
 
-                    // I am going to send my captures by using the below client
-                    _model.ClientController.AddClient(e.Identity);
-                    _model.ClientController.StartClient(e.Identity);
+                    // conference start permission logic
+                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity, e.RoomType);
+                    if (hasPermission)
+                    {
+                        // I am going to send my captures by using the below client
+                        _model.ClientController.AddClient(e.Identity);
+                        _model.ClientController.StartClient(e.Identity);
 
-                    // create client session
-                    ClientSession clientSession = new ClientSession(e.Identity, e.RoomType);
-                    // save the proxy to which we are sending the remoting captures
-                    _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Remoting);
+                        // create client session
+                        ClientSession clientSession = new ClientSession(e.Identity, e.RoomType);
+                        // save the proxy to which we are sending the remoting captures
+                        _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Remoting);
 
-                    // initialize the remoting tool and start it's timer
-                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
-                    clientSession.Peers.RemotingSessionState = GenericEnums.SessionState.Opened;
-                    _syncRemotingCaptureActivity.Set();
+                        // initialize the remoting tool and start it's timer
+                        PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartRemotingPresentation();
+                        clientSession.Peers.RemotingSessionState = GenericEnums.SessionState.Opened;
+                        _syncRemotingCaptureActivity.Set();
+                    }
+                    else
+                    {
+                        _view.SetMessageText("Remoting conference permission denied");
+                    }
                 }
             }
             catch (Exception ex)

@@ -15,6 +15,9 @@ namespace GenericObjects
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendingPermission", ReplyAction = "http://tempuri.org/IVideoRoom/SendingPermissionResponse")]
         bool SendingPermission(string senderIdentity, string fileName, long fileSize);
 
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/ConferencePermission", ReplyAction = "http://tempuri.org/IVideoRoom/ConferencePermissionResponse")]
+        bool ConferencePermission(string senderIdentity, GenericEnums.RoomType roomType);
+
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/UpdateContactStatus", ReplyAction = "http://tempuri.org/IVideoRoom/UpdateContactStatusResponse")]
         void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus);
 

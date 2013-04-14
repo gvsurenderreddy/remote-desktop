@@ -92,6 +92,29 @@ namespace BusinessLogicLayer
             }
         }
 
+        public bool ConferencePermission(string partnerIdentity, GenericEnums.RoomType roomType)
+        {
+            bool canStart = false;
+            try
+            {
+                if (!_clients.ContainsKey(partnerIdentity))
+                {
+                    AddClient(partnerIdentity);
+                    StartClient(partnerIdentity);
+                }
+                MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client != null)
+                {
+                    canStart = client.ConferencePermission(partnerIdentity, roomType);
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            return canStart;
+        }
+
         public bool SendingPermission(string fileName, long fileSize, string partnerIdentity, string myIdentity)
         {
             bool canSend = false;

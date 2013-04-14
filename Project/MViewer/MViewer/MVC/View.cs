@@ -104,6 +104,37 @@ namespace MViewer
         /// <param name="fileName"></param>
         /// <param name="fileSize"></param>
         /// <returns></returns>
+        public bool RequestConferencePermission(string identity, GenericEnums.RoomType roomType)
+        {
+            bool canStart = false;
+            try
+            {
+                string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
+
+                DialogResult dialogResult = MessageBox.Show(
+                    string.Format("{0} is asking of {1} conference permission. Do you agree?",
+                    friendlyName, roomType.ToString()),
+                    "Conference confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    canStart = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            return canStart;
+        }
+
+        /// <summary>
+        /// method used to provide file transfer permission response to partner enquiry
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <param name="fileName"></param>
+        /// <param name="fileSize"></param>
+        /// <returns></returns>
         public bool RequestTransferPermission(string identity, string fileName, long fileSize)
         {
             bool canSend = false;

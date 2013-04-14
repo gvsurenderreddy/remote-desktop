@@ -113,4 +113,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
     {
         return base.Channel.SendingPermission(senderIdentity, fileName, fileSize);
     }
+
+    public bool ConferencePermission(string senderIdentity, GenericEnums.RoomType roomType)
+    {
+        return base.Channel.ConferencePermission(senderIdentity, roomType);
+    }
 }

@@ -61,6 +61,12 @@ namespace GenericObjects
             set;
         }
 
+        public EventHandler ConferencePermissionObserver
+        {
+            get;
+            set;
+        }
+
         public EventHandler FilePermissionObserver
         {
             get;

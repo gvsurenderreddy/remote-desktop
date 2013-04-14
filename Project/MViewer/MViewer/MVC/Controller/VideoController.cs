@@ -270,30 +270,40 @@ namespace MViewer
                 RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncVideoStartStop)
                 {
-                    // create client session
-                    Session clientSession = new ClientSession(e.Identity, e.RoomType);
-                    // save the proxy to which we are sending the webcam captures
-                    _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Video);
-
-                    // open new Video  form to receive the captures
-                    OpenVideoForm(e.Identity);
-
-                    // I am going to send my captures by using the below client
-                    _model.ClientController.AddClient(e.Identity);
-                    _model.ClientController.StartClient(e.Identity);
-
-                    // initialize the webcamCapture form
-                    // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
-                    _view.ShowMyWebcamForm(true);
-
-                    Thread.Sleep(1000);
-
-                    this.StartAudio(this, new RoomActionEventArgs()
+                    // conference start permission logic
+                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity, e.RoomType);
+                    if (hasPermission)
                     {
-                        Identity = e.Identity,
-                        RoomType = GenericEnums.RoomType.Audio,
-                        SignalType = GenericEnums.SignalType.Start
-                    });
+
+                        // create client session
+                        Session clientSession = new ClientSession(e.Identity, e.RoomType);
+                        // save the proxy to which we are sending the webcam captures
+                        _model.SessionManager.AddSession(clientSession, GenericEnums.RoomType.Video);
+
+                        // open new Video  form to receive the captures
+                        OpenVideoForm(e.Identity);
+
+                        // I am going to send my captures by using the below client
+                        _model.ClientController.AddClient(e.Identity);
+                        _model.ClientController.StartClient(e.Identity);
+
+                        // initialize the webcamCapture form
+                        // this form will be used to capture the images and send them to all Server Sessions _presenter.StopPresentation();
+                        _view.ShowMyWebcamForm(true);
+
+                        Thread.Sleep(1000);
+
+                        this.StartAudio(this, new RoomActionEventArgs()
+                        {
+                            Identity = e.Identity,
+                            RoomType = GenericEnums.RoomType.Audio,
+                            SignalType = GenericEnums.SignalType.Start
+                        });
+                    }
+                    else
+                    {
+                        _view.SetMessageText("Video conference permission denied");
+                    }
                 }
             }
             catch (Exception ex)

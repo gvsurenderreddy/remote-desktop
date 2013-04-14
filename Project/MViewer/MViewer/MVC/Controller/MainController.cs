@@ -71,6 +71,7 @@ namespace MViewer
                     RoomButtonObserver = this.OnRoomButtonActionTriggered,
                     WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                     FileTransferObserver = this.FileTransferObserver,
+                    ConferencePermissionObserver = this.ConferencePermissionObserver,
                     FilePermissionObserver = this.FileTransferPermission,
                     RemotingCommandHandler = this.ExecuteRemotingCommand,
                     RemotingCaptureObserver = this.RemotingCaptureObserver
@@ -314,6 +315,20 @@ namespace MViewer
         #endregion
 
         #region private methods
+
+        void ConferencePermissionObserver(object sender, EventArgs e)
+        {
+            try
+            {
+                RoomActionEventArgs args = (RoomActionEventArgs)e;
+                bool canSend = _view.RequestConferencePermission(args.Identity, args.RoomType);
+                args.HasPermission = canSend;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
 
         void ClientConnectedObserver(object sender, EventArgs e)
         {

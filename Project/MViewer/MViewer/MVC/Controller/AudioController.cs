@@ -249,9 +249,19 @@ namespace MViewer
             {
                 lock (_syncAudioStartStop)
                 {
-                    // add client session
-                    OpenAudioForm(((RoomActionEventArgs)args).Identity);
-                    PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
+                    RoomActionEventArgs e = (RoomActionEventArgs)args;
+                    // conference start permission logic
+                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity, e.RoomType);
+                    if (hasPermission)
+                    {
+                        // add client session
+                        OpenAudioForm(((RoomActionEventArgs)args).Identity);
+                        PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StartAudioPresentation();
+                    }
+                    else
+                    {
+                        _view.SetMessageText("Audio conference permission denied");
+                    }
                 }
             }
             catch (Exception ex)

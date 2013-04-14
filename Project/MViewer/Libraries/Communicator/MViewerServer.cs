@@ -294,6 +294,28 @@ namespace Communicator
             return true;
         }
 
+        public bool ConferencePermission(string senderIdentity, GenericEnums.RoomType roomType)
+        {
+            bool canStart = false;
+            try
+            {
+                RoomActionEventArgs args =
+                new RoomActionEventArgs()
+                    {
+                        Identity = senderIdentity,
+                        RoomType = roomType
+                    };
+                // request permission from the user
+                _controllerHandlers.ConferencePermissionObserver.Invoke(this, args);
+                canStart = args.HasPermission;
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            return canStart;
+        }
+
         #endregion
 
         public override void BuildServerBinding()
