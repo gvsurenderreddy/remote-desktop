@@ -17,6 +17,8 @@ namespace GenericObjects
         void StartRemotingPresentation();
         void StopRemotingPresentation();
 
+        void FreezeAudio(bool wait);
+
         bool RemotingCaptureClosed();
 
         void PlayAudioCapture(byte[] capture);

@@ -119,6 +119,18 @@ namespace GenericObjects
             }
         }
 
+        public void FreezeAudio(bool wait)
+        {
+            try
+            {
+                _audioStreamManager.WaitRoomButtonAction(wait);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
+
         public void StartRemotingPresentation()
         {
             try

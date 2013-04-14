@@ -494,7 +494,7 @@ namespace MViewer
                 {
                     case GenericEnums.RoomType.Audio:
                         // todo: add audio freeze logic
-
+                        PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).FreezeAudio(wait);
                         break;
                     case GenericEnums.RoomType.Video:
                         if (_formWebCapture != null)

@@ -317,6 +317,10 @@ namespace MViewer
                         _view.UpdateLabels(e.Identity, e.RoomType);
                     }
 
+                    // tell the partner to pause capturing & sending while processing room Stop command
+                    _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity,
+                        GenericEnums.RoomType.Audio, false);
+
                     if (_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Audio) == false)
                     {
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();

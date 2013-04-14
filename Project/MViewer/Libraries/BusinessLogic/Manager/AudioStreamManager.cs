@@ -21,6 +21,7 @@ namespace GenericObjects
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
         int _timerInterval;
+        ManualResetEvent _syncCaptures = new ManualResetEvent(false);
 
         #endregion
 
@@ -41,7 +42,7 @@ namespace GenericObjects
             try
             {
                 _timer.Stop();
-
+                _syncCaptures.WaitOne();
                 _syncAudioInstance.WaitOne();
                 Thread.Sleep(200);
 
@@ -80,6 +81,25 @@ namespace GenericObjects
         #endregion
 
         #region public methods
+
+        public void WaitRoomButtonAction(bool wait)
+        {
+            try
+            {
+                if (wait)
+                {
+                    _syncCaptures.Reset();
+                }
+                else
+                {
+                    _syncCaptures.Set();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
 
         public void StartStreaming()
         {
@@ -131,6 +151,7 @@ namespace GenericObjects
         {
             try
             {
+                _syncCaptures.Reset();
                 if (_timer != null)
                 {
                     _timer.Stop();
@@ -143,6 +164,10 @@ namespace GenericObjects
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                _syncCaptures.Set();
             }
         }
         SoundEffect sound;

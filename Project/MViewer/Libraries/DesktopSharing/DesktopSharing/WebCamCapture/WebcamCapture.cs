@@ -173,9 +173,9 @@ namespace GenericObjects
                         _webcamClosed = true;
                     }
                 }
-                catch { }
+                catch { } 
+                _syncCaptures.Set();
             }
-            _syncCaptures.Set();
         }
 
         #endregion
