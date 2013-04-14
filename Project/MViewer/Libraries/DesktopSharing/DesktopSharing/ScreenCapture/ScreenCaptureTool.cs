@@ -8,6 +8,7 @@ using Utils;
 using System.Timers;
 using GenericObjects;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace GenericObjects
 {
@@ -22,6 +23,7 @@ namespace GenericObjects
         int _timerInterval;
         System.Timers.Timer _remotingTimer;
         EventHandler _captureReady;
+        ManualResetEvent _syncCaptures = new ManualResetEvent(true);
 
         #endregion
 
@@ -44,75 +46,7 @@ namespace GenericObjects
 
         #endregion
 
-        #region methods
-
-        void InitializeTimer(int timerInterval)
-        {
-            try
-            {
-                _remotingTimer = new System.Timers.Timer(timerInterval);
-                _remotingTimer.Elapsed += new ElapsedEventHandler(TimerTick);
-            }
-            catch (Exception ex)
-            {
-                Tools.Instance.Logger.LogError(ex.ToString());
-            }
-        }
-
-        void TimerTick(object sender, ElapsedEventArgs e)
-        {
-            try
-            {
-                _remotingTimer.Stop();
-
-                byte[] serializedScreen = CaptureDekstopImage();
-                byte[] serializedMouse = CaptureMouseImage();
-
-                _captureReady.Invoke(this, 
-                    new RemotingCaptureEventArgs()
-                    {
-                        ScreenCapture = serializedScreen,
-                        MouseCapture = serializedMouse
-                    });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-            finally
-            {
-                _remotingTimer.Start();
-            }
-
-        }
-
-        public void TogglerTimer(bool start)
-        {
-            try
-            {
-                if (start)
-                {
-                    if (_remotingTimer == null)
-                    {
-                        InitializeTimer(_timerInterval);
-                    }
-                    _remotingClosed = false;
-                    _remotingTimer.Start();
-                }
-                else
-                {
-                    if (_remotingTimer != null)
-                    {
-                        _remotingTimer.Stop();
-                    }
-                    _remotingClosed = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Tools.Instance.Logger.LogError(ex.ToString());
-            }
-        }
+        #region private methods
 
         /// <summary>
         /// method used to capture and serialize the desktop image
@@ -166,6 +100,102 @@ namespace GenericObjects
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
             return serialized;
+        }
+
+        void InitializeTimer(int timerInterval)
+        {
+            try
+            {
+                _remotingTimer = new System.Timers.Timer(timerInterval);
+                _remotingTimer.Elapsed += new ElapsedEventHandler(TimerTick);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
+
+        void TimerTick(object sender, ElapsedEventArgs e)
+        {
+            try
+            {
+                _remotingTimer.Stop();
+                _syncCaptures.WaitOne();
+                byte[] serializedScreen = CaptureDekstopImage();
+                byte[] serializedMouse = CaptureMouseImage();
+
+                _captureReady.Invoke(this, 
+                    new RemotingCaptureEventArgs()
+                    {
+                        ScreenCapture = serializedScreen,
+                        MouseCapture = serializedMouse
+                    });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                _remotingTimer.Start();
+            }
+
+        }
+
+        #endregion
+
+        #region public methods
+
+        public void TogglerTimer(bool start)
+        {
+            try
+            {
+                _syncCaptures.Reset();
+                if (start)
+                {
+                    if (_remotingTimer == null)
+                    {
+                        InitializeTimer(_timerInterval);
+                    }
+                    _remotingClosed = false;
+                    _remotingTimer.Start();
+                }
+                else
+                {
+                    if (_remotingTimer != null)
+                    {
+                        _remotingTimer.Stop();
+                    }
+                    _remotingClosed = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                _syncCaptures.Set();
+            }
+        }
+
+        public void WaitRoomButtonAction(bool wait)
+        {
+            try
+            {
+                if (wait)
+                {
+                    _syncCaptures.Reset();
+                }
+                else
+                {
+                    _syncCaptures.Set();
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion

@@ -6,6 +6,7 @@ using GenericObjects;
 using System.Threading;
 using Utils;
 using Abstraction;
+using DesktopSharing;
 
 namespace GenericObjects
 {
@@ -14,7 +15,7 @@ namespace GenericObjects
         #region private members
 
         IWebcamCapture _videoCapture;
-        ScreenCaptureTool _screenCapture;
+        IScreenCaptureTool _screenCaptureTool;
         bool _firstTimeCapturing;
         IAudioStreamManager _audioStreamManager;
         PresenterSettings _presenterSettings;
@@ -43,7 +44,7 @@ namespace GenericObjects
                     _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.OnVideoImageCaptured);
                 }
 
-                _screenCapture = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.OnRemotingImageCaptured);
+                _screenCaptureTool = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.OnRemotingImageCaptured);
             }
             catch (Exception ex)
             {
@@ -131,11 +132,23 @@ namespace GenericObjects
             }
         }
 
+        public void FreezeRemoting(bool wait)
+        {
+            try
+            {
+                _screenCaptureTool.WaitRoomButtonAction(wait);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
+
         public void StartRemotingPresentation()
         {
             try
             {
-                _screenCapture.TogglerTimer(true);
+                _screenCaptureTool.TogglerTimer(true);
             }
             catch (Exception ex)
             {
@@ -147,7 +160,7 @@ namespace GenericObjects
         {
             try
             {
-                _screenCapture.TogglerTimer(false);
+                _screenCaptureTool.TogglerTimer(false);
             }
             catch (Exception ex)
             {
@@ -173,7 +186,7 @@ namespace GenericObjects
 
         public bool RemotingCaptureClosed()
         {
-            return _screenCapture.RemotingCaptureClosed;
+            return _screenCaptureTool.RemotingCaptureClosed;
         }
 
         public bool AudioCaptureClosed

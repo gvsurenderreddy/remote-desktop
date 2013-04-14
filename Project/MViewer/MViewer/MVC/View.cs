@@ -493,7 +493,7 @@ namespace MViewer
                 switch (roomType)
                 {
                     case GenericEnums.RoomType.Audio:
-                        // todo: add audio freeze logic
+                        //  audio freeze logic
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).FreezeAudio(wait);
                         break;
                     case GenericEnums.RoomType.Video:
@@ -504,6 +504,7 @@ namespace MViewer
                         break;
                     case GenericEnums.RoomType.Remoting:
                         // todo: add remoting freeze logic
+                        PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).FreezeRemoting(wait);
                         break;
                 }
             }
