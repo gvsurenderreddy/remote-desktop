@@ -279,7 +279,6 @@ namespace MViewer
                     }
                     if (hasPermission)
                     {
-
                         // create client session
                         Session clientSession = new ClientSession(e.Identity, e.RoomType);
                         // save the proxy to which we are sending the webcam captures
