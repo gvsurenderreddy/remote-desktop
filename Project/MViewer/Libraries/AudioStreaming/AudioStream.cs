@@ -103,6 +103,8 @@ namespace AudioStreaming
                         Form gameWindowForm = (Form)Form.FromHandle(this.Window.Handle);
                         gameWindowForm.Hide();
                         gameWindowForm.ShowInTaskbar = false;
+                        gameWindowForm.ControlBox = false;
+                        gameWindowForm.ShowIcon = false;
                         gameWindowForm.Opacity = 0;
 
                         FrameworkDispatcher.Update();
