@@ -503,7 +503,7 @@ namespace MViewer
                         }
                         break;
                     case GenericEnums.RoomType.Remoting:
-                        // todo: add remoting freeze logic
+                        // remoting freeze logic
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).FreezeRemoting(wait);
                         break;
                 }
