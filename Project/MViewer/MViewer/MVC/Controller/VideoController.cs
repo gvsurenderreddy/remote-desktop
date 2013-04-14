@@ -271,7 +271,8 @@ namespace MViewer
                 lock (_syncVideoStartStop)
                 {
                     // conference start permission logic
-                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity, e.RoomType);
+                    bool hasPermission = _model.ClientController.ConferencePermission(e.Identity,
+                        ((Identity)_model.Identity).MyIdentity, e.RoomType);
                     if (hasPermission)
                     {
 

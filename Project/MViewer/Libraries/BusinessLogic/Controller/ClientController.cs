@@ -92,7 +92,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public bool ConferencePermission(string partnerIdentity, GenericEnums.RoomType roomType)
+        public bool ConferencePermission(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType)
         {
             bool canStart = false;
             try
@@ -105,7 +105,7 @@ namespace BusinessLogicLayer
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                 if (client != null)
                 {
-                    canStart = client.ConferencePermission(partnerIdentity, roomType);
+                    canStart = client.ConferencePermission(myIdentity, roomType);
                 }
             }
             catch (Exception ex)
