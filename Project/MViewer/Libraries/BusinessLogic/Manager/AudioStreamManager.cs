@@ -44,7 +44,6 @@ namespace GenericObjects
                 _timer.Stop();
                 _syncCaptures.WaitOne();
                 _syncAudioInstance.WaitOne();
-                Thread.Sleep(200);
 
                 _audioStream.SyncChunk.Reset();
 
