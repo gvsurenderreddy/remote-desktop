@@ -21,7 +21,7 @@ namespace GenericObjects
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
         int _timerInterval;
-        ManualResetEvent _syncCaptures = new ManualResetEvent(false);
+        ManualResetEvent _syncCaptures = new ManualResetEvent(true);
 
         #endregion
 
