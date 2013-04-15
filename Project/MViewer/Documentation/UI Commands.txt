@@ -1,0 +1,16 @@
+Contacts list management:
+- list displaying all contacts (online contacts are being bolded)
+- Add contact button
+- Remove contact button 
+	- applies to selected group
+- Update contact button
+	- applies only to single selected item
+
+User actions:
+- Start Remoting button
+- Start Video button
+- Start Audio button
+- Pause Remoting button
+- Pause Video button
+- Mute Audio button
+- optional: Send file button
