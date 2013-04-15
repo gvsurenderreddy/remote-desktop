@@ -64,12 +64,8 @@ http://msdn.microsoft.com/en-us/library/vstudio/dd409390.aspx
 class diagram addin for VS2012
 http://blog.ondrejsv.com/post/Modeling-Power-Toys-for-Visual-Studio-2012.aspx
 
-======================
 calculating remote mouse coordinate
 http://stackoverflow.com/questions/11152608/how-to-calculate-mouse-coordinate-based-on-resolution-c-sharp
-
-to see: simulating drag and drop and others
-http://social.msdn.microsoft.com/forums/en-US/vbgeneral/thread/e79d4501-b3d9-4e37-9b70-966105e09ab1
 
 input simulator C# 
 http://inputsimulator.codeplex.com/releases/view/37570
@@ -78,13 +74,9 @@ http://www.codeproject.com/Articles/32556/Auto-Clicker-C
 http://stackoverflow.com/questions/8561755/attempting-to-simulate-mouse-click-drag
 http://alala666888.wordpress.com/2010/09/17/simulate-mouse-event-using-sendinput-and-setcursorpos/
 
-mouse event function:
-http://msdn.microsoft.com/en-us/library/windows/desktop/ms646260(v=vs.85).aspx
-
 mouse and keyboard hooks in C# 
 http://www.codeproject.com/Articles/7294/Processing-Global-Mouse-and-Keyboard-Hooks-in-C
 http://www.rqna.net/qna/kxyhvz-error-when-using-setwindowshookex-in-windows-xp-but-not-in-windows-7.html
-======================
 
 wrong password x509
 http://understandavinash.blogspot.ro/2009/03/keysetnotfoundoracessdenied.html
