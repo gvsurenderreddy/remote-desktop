@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
   dslVersion="1.0.0.0"
   Id="699d7ee6-e80a-47dd-9efc-dc6ea0997b81"
   name="ModelingProject" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -4051,6 +4051,117 @@ Depends of OS</body>
         name="Interface21"
         isAbstract="false"
         isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="8d6e1d27-e510-480a-9bc6-bd0c71dfdc80"
+        name="MViewerSequenceDiagram"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <interactionUse
+            Id="4a80282f-dff5-4318-8468-0b9ca0f7f48d"
+            name="MViewer Config">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="d904ee71-77b9-40c7-8519-20769d9002c5"
+                LastKnownName="Teacher"
+                LastKnownLocation="ModelingProject.uml" />
+            </coveredLifelines>
+            <interactionUseOccurrenceSpecifications>
+              <interactionUseOccurrenceSpecificationMoniker
+                Id="2c9c989b-a829-4a6e-bc41-f027165ec539"
+                LastKnownName="InteractionUseOccurrenceSpecification2"
+                LastKnownLocation="ModelingProject.uml" />
+            </interactionUseOccurrenceSpecifications>
+          </interactionUse>
+          <interactionUseOccurrenceSpecification
+            Id="2c9c989b-a829-4a6e-bc41-f027165ec539"
+            name="InteractionUseOccurrenceSpecification2">
+            <covered>
+              <lifelineMoniker
+                Id="d904ee71-77b9-40c7-8519-20769d9002c5"
+                LastKnownName="Teacher"
+                LastKnownLocation="ModelingProject.uml" />
+            </covered>
+          </interactionUseOccurrenceSpecification>
+          <interactionUse
+            Id="23438081-8c2b-4013-b65d-d606a0fd168f"
+            name="Configuration &amp; initialization">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="0d48bd25-7ac4-43eb-8e62-de4d18ff9bba"
+                LastKnownName="MViewer teacher app"
+                LastKnownLocation="ModelingProject.uml" />
+            </coveredLifelines>
+            <interactionUseOccurrenceSpecifications>
+              <interactionUseOccurrenceSpecificationMoniker
+                Id="5f461e34-37fb-4c7e-9621-58ff37fad857"
+                LastKnownName="InteractionUseOccurrenceSpecification4"
+                LastKnownLocation="ModelingProject.uml" />
+            </interactionUseOccurrenceSpecifications>
+          </interactionUse>
+          <interactionUseOccurrenceSpecification
+            Id="5f461e34-37fb-4c7e-9621-58ff37fad857"
+            name="InteractionUseOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="0d48bd25-7ac4-43eb-8e62-de4d18ff9bba"
+                LastKnownName="MViewer teacher app"
+                LastKnownLocation="ModelingProject.uml" />
+            </covered>
+          </interactionUseOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="d904ee71-77b9-40c7-8519-20769d9002c5"
+            name="Teacher"
+            isActor="true"
+            lifelineDisplayName="Teacher">
+            <topLevelOccurrences>
+              <interactionUseOccurrenceSpecificationMoniker
+                Id="2c9c989b-a829-4a6e-bc41-f027165ec539"
+                LastKnownName="InteractionUseOccurrenceSpecification2"
+                LastKnownLocation="ModelingProject.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="0d48bd25-7ac4-43eb-8e62-de4d18ff9bba"
+            name="MViewer teacher app"
+            isActor="false"
+            lifelineDisplayName="MViewer teacher app">
+            <topLevelOccurrences>
+              <interactionUseOccurrenceSpecificationMoniker
+                Id="5f461e34-37fb-4c7e-9621-58ff37fad857"
+                LastKnownName="InteractionUseOccurrenceSpecification4"
+                LastKnownLocation="ModelingProject.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="44f49422-b81c-4add-b369-c4137ac459c9"
+            name="Teacher contacts DB"
+            isActor="false"
+            lifelineDisplayName="Teacher contacts DB" />
+          <lifeline
+            Id="6ac8dc7c-eb2b-4a9e-b265-5a9696ccb6ad"
+            name="MViewer student app"
+            isActor="false"
+            lifelineDisplayName="MViewer student app" />
+          <lifeline
+            Id="289b2fcb-924d-47df-81ba-4f46bbe904c9"
+            name="Student contacts DB"
+            isActor="false"
+            lifelineDisplayName="Student contacts DB" />
+          <lifeline
+            Id="983e9b30-296b-40d1-b2bd-fb0b983d1184"
+            name="Student"
+            isActor="true"
+            lifelineDisplayName="Student" />
+        </lifelines>
+      </interaction>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
