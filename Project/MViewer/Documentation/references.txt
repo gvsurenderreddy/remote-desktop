@@ -90,10 +90,11 @@ http://www.c-sharpcorner.com/uploadfile/iersoy/how-to-use-microphone-in-xna/
 form localize at runtime
 http://www.dotnetcurry.com/ShowArticle.aspx?ID=174
 
+use case diagram tutorial
+http://www.youtube.com/watch?v=OkC7HKtiZC0
 
-
-
-
+AES encryption C#
+http://www.overset.com/2008/04/17/simple-aes-rijndael-c-encrypt--decrypt-functions/
 
 ----------------------------------
 bootstrapper
