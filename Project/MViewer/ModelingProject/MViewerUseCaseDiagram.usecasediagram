@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="ec831530-da67-46d4-95d0-0c6ad4512917" name="MViewerUseCaseDiagram" linkedPackageId="b2e01e60-a7ca-4c72-9827-bb0fb3eccd0c" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="953ea9f1-3bbf-47fc-a433-9f7e782302b6">
+      <profileInstance Id="eca0f32b-4d4c-48a5-abf0-7dc4d7ef955c" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="bf6a249e-f563-4f42-93f5-1f1c98216baa">
+      <profileInstance Id="03b26c12-c2aa-473f-9c79-6ba371775523" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="6877ffd3-da32-44d0-bf08-ac4a00061e29">
+      <profileInstance Id="f6a3c274-2c0e-4d36-930e-ce96b4a54b83" name="CSharpProfile">
+        <elementDefinition Id="c4856b46-2080-4d35-8212-590d84b221d8" />
+      </profileInstance>
+      <elementDefinition Id="c6da0d61-e39e-47f4-bcf3-e1b4abd7aee9" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <actor Id="384caae9-5eef-47d7-b288-eadb61e068fc" name="Teacher" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9b3f9e0c-daa3-4848-b585-e7a04e9da4d3" />
+        <targetEnds>
+          <association Id="cb913b04-037d-487f-9a65-8a93412c7cd4" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="System Configuration" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="6a987a24-7e40-4b9e-9f55-8550c6f9935e" LastKnownName="System Configuration" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a9075f6e-d2b7-4145-af91-36957bcd8723" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="497db74f-419d-4284-9bba-7ee6d1229236" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="08d90d5f-e9ba-4436-80f8-b1345689a8ec" name="System Configuration" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="330f5465-77b6-4eff-beea-8467a894a7f0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="51ee74c2-2625-4e58-b759-d471e6553d5e" />
+          </association>
+          <association Id="a52de643-8a2a-46d2-8a99-44bceaf5f858" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="Add Contact" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="27b99b73-0f24-47ba-9bb7-49a554bf635b" LastKnownName="Add Contact" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="16b3f30b-1c7c-407e-8213-3ad82c9386eb" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="cf0216cb-8bb8-4a2d-a399-89bb4fcf40f5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="003033ec-0422-47f9-821e-7f451739ab6f" name="Add Contact" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="621f24e0-6371-4896-b1e3-ac6965855208" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0c65a421-088a-425b-bbe6-ec5bdcb5e8c5" />
+          </association>
+          <association Id="466a788b-204e-4eb9-b030-286251f6fcb8" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="Initialize Video Conference" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="97a20113-58d1-4d26-939e-2ed1630d42eb" LastKnownName="Initialize video or remote Conference" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="778e25e2-2c04-41ae-973a-bc43d6d9d008" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="82f25662-cc17-4af0-b5c6-ce8efade5699" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="03b66fa4-04e0-4494-805d-acd6ecebbedf" name="Initialize Video Conference" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4be0f0e9-bb53-4d35-b208-030a7210dca0" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="3596a543-6e70-45f0-b37c-7cce8b1bc660" />
+          </association>
+          <association Id="94b84da0-8f5a-48cd-b72d-3579bb4bc88c" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="Audio Conference" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5454a6ee-7666-44e3-9f83-5e804e7a4298" LastKnownName="Audio Conference" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bd59948d-2024-4466-889a-70876497bc6d" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="bb8fae39-ab78-465b-955c-5cfb46eb8c70" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="db587e5e-49a0-485b-9d6d-9b9bc55cc04d" name="Audio Conference" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bca4dc85-4fa4-48a1-8276-9f435ace8822" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="f5fb85cb-7285-4158-8312-f3751925cb2a" />
+          </association>
+          <association Id="913f5fb8-6748-46ea-be87-00cd20e487c6" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="Review remote commands" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="e8408196-b921-4707-be45-2079cdeec7ca" LastKnownName="Review remote commands" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="634c894f-fe2e-41ab-8a26-9789a2d7e30a" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="51b9c837-c5f9-4565-b3da-04826bcfd378" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c5f9c375-6932-4255-9e40-4443b00539a7" name="Review remote commands" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="d0102cfa-3cc3-4f6e-9078-db172d62e59f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9707ffb0-5e57-4651-bceb-4881f113b5eb" />
+          </association>
+          <association Id="69964a91-31e6-45bf-8851-f12132d21eb8" isDerived="false" sourceEndRoleName="Teacher" targetEndRoleName="Transfer file" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="004c1ab4-db3c-4209-b3fb-7a2e94f15e88" LastKnownName="Transfer file" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="89aa89de-30dc-4850-8aca-581f6ffb43d6" name="Teacher" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="93276da3-abd2-4569-a138-4de3e5489ccb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="52f17caf-057c-4d0f-ace1-39759419501e" name="Transfer file" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4753c59f-b927-4db6-a361-9e94a1a65f9c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="36bd3a18-0a3b-4c8a-9daa-38472be15ed8" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="ed85ec3e-0966-4745-87a8-d29f83a5d3da" name="Student" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e81cf434-a153-4d56-a90d-28fe5b802ad6" />
+        <targetEnds>
+          <association Id="76c762e2-703e-4524-8808-7e28164ab860" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="System Configuration" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="fdb9f371-0ff5-4dd9-be9c-4723c2a9dd2c" LastKnownName="System Configuration" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ec48d522-b0b5-40de-ba55-7adf9b332f77" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="d9d3eb3e-efe6-49ef-970c-71289bb7e9c3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4b3b2108-a95d-4653-923d-40cfb3b4b551" name="System Configuration" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="73c4935f-a5b7-4e05-a189-cdd3785c822a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="122a5949-33a9-4e53-b0d0-65cb7c8bb755" />
+          </association>
+          <association Id="549e29db-4271-467d-b086-275bde3e64c6" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="View new Contact" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="19a0f49b-9363-4274-ae40-c960ac89ad9e" LastKnownName="View new Contact" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6e67f842-f602-4076-ae37-aef976d29bee" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="da6669e3-ef22-4a1b-bd55-a30e3da6bfa6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b3c91af6-1b20-490f-9215-858689f850ab" name="View new Contact" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="dae70cb1-8a76-4da8-af99-0b53c671f1d7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2d589ec1-ab31-4235-b2bd-fd233e74a947" />
+          </association>
+          <association Id="9eab9fa5-6d4f-4bfa-8f29-1389a259373b" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="Conference approval" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7d3e26c8-cda9-4672-8a25-1a6ae30a97c1" LastKnownName="Conference approval" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9158078e-1c6e-46f6-9e40-bca69ab76592" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="0350fe09-3713-499f-948c-0cae1c69aadc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4123556c-8b2a-46b6-bb84-c6e1d0703f9b" name="Conference approval" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="54d93655-ac5f-4847-adee-4ed7bea35e7d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="82af0254-48e7-4d45-a70a-f6ec71532c41" />
+          </association>
+          <association Id="87cffe24-4b30-455f-b497-fcee2b590753" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="Conference approval1" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="4f42e480-a6fe-4cbd-b364-b4059b7cbfd7" LastKnownName="Send Remote commands" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="72bd9197-60bc-4072-86e5-356989f1a2fd" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="37a9062e-1abb-4ac3-b359-1b17531a14e4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e07b9b55-80cf-43b7-94e4-a2f1c90a5196" name="Conference approval1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ae13b5db-cd12-4bcd-a236-49ad51384c38" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="977a2326-168a-46b9-96ca-7839fb8ecd07" />
+          </association>
+          <association Id="8bd2f35b-dc47-4aba-b3c3-f519e78292ba" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="Listen to Audio" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="5f31650e-c742-4f3c-9b3d-ef2f9cc0f4d3" LastKnownName="Listen to Audio" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c2a79534-9a9d-4bf7-942a-ddf0a81eec1b" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="7b9eb212-e8c7-4b94-a24e-aef0263b822f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="467b955a-5943-4609-bcba-bba4675e7fe2" name="Listen to Audio" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6ec7dcd8-4f67-4c6d-93d5-f008af62a2d5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="40ba3c2d-f027-49d1-aef8-48b226333846" />
+          </association>
+          <association Id="46c375a4-0267-4741-94c4-61b6d4df945a" isDerived="false" sourceEndRoleName="Student" targetEndRoleName="Transfer approval" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="7ac58ed5-5b88-4943-8473-b636a307f2d6" LastKnownName="Transfer approval" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="83e748d5-c386-427e-b02b-19c7bf3686c1" name="Student" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4a893ec8-6841-4df3-84e6-a204398c87e6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="629aebcb-06c4-464a-93ae-dd2becee71cb" name="Transfer approval" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="76299166-7b67-4a07-a5cb-2340422ea937" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c18500cf-7d47-4e49-91a0-f9296e97aa8c" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" name="Teacher MViewer application" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="25f656e0-6f15-4a0f-9f5a-3ec0a301c96d" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" name="Student MViewer application" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c263d393-31bf-4dc0-9f5e-4df4c1860eb1" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="6a987a24-7e40-4b9e-9f55-8550c6f9935e" name="System Configuration" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="e6db745c-a32f-4a50-8f6a-fa3ce44ca8b1" />
+        <additions>
+          <include Id="ab2e294f-65f3-47e1-80f3-b85e4532e954">
+            <useCaseMoniker Id="a7cbd36f-dffc-48c5-9764-0406a77c05f8" LastKnownName="Insert IP, Port, Captures interval" />
+            <elementDefinition Id="d8834234-03e7-4c21-93f6-846cfd8199d1" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="fdb9f371-0ff5-4dd9-be9c-4723c2a9dd2c" name="System Configuration" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="162bb1fa-5c09-4c95-b133-3e4c6ef4fe08" />
+        <additions>
+          <include Id="6b156d42-46ef-42d5-95bd-dd373b918e1d">
+            <useCaseMoniker Id="b8371a5b-da5b-4bf4-8d8b-1f8a01bc55d0" LastKnownName="Insert IP, Port, Captures interval" />
+            <elementDefinition Id="f2284cf5-9042-4130-b25a-ce2d26825f2a" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="b8371a5b-da5b-4bf4-8d8b-1f8a01bc55d0" name="Insert IP, Port, Captures interval" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f2b875f3-5ce5-48b1-b036-d1d62fc240f7" />
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="a7cbd36f-dffc-48c5-9764-0406a77c05f8" name="Insert IP, Port, Captures interval" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f8e77f58-bd30-4a48-82f7-f879406bbe1e" />
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="27b99b73-0f24-47ba-9bb7-49a554bf635b" name="Add Contact" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="56931924-c743-4780-9639-62594e77221a" />
+        <extendedCases>
+          <extend Id="ed5002f0-3cfc-4278-96bb-134f186fdd53">
+            <useCaseMoniker Id="d3b5942b-2757-4f47-9fbc-90f0813b795a" LastKnownName="View Contact Status" />
+            <elementDefinition Id="c815e4b8-e201-4310-99a1-3d27e3ab77a0" />
+          </extend>
+          <extend Id="0c97a513-5028-4076-97dc-c5877879bb42">
+            <useCaseMoniker Id="19a0f49b-9363-4274-ae40-c960ac89ad9e" LastKnownName="View new Contact" />
+            <elementDefinition Id="285fdf13-f9eb-4c5d-8ec5-e093a642b8f7" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="19a0f49b-9363-4274-ae40-c960ac89ad9e" name="View new Contact" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="945e3148-b2e5-47d5-8abe-bd86ba4f845d" />
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="d3b5942b-2757-4f47-9fbc-90f0813b795a" name="View Contact Status" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d212f4fd-b9c4-41e3-afc0-46a9fbb3293e" />
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="97a20113-58d1-4d26-939e-2ed1630d42eb" name="Initialize video or remote Conference" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9fe07243-1be6-4d97-b781-241f8c12be15" />
+        <additions>
+          <include Id="0c537b30-d370-4e2f-a11e-b4f20b471198">
+            <useCaseMoniker Id="da15bfef-0e56-46f4-b345-c03e227a3c27" LastKnownName="Request conference approval" />
+            <elementDefinition Id="3d9c2acd-7dbc-4129-91d1-c598e335c3ff" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="7d3e26c8-cda9-4672-8a25-1a6ae30a97c1" name="Conference approval" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ef041ed4-2447-4e08-8101-5c768d31d343" />
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="da15bfef-0e56-46f4-b345-c03e227a3c27" name="Request conference approval" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a186761f-708b-43fb-b91d-f91d340fca9a" />
+        <extendedCases>
+          <extend Id="77e74e92-9702-47ec-81de-7f8b4cf0a9a7">
+            <useCaseMoniker Id="7d3e26c8-cda9-4672-8a25-1a6ae30a97c1" LastKnownName="Conference approval" />
+            <elementDefinition Id="4ea9bd7d-0913-4046-b340-f6cadbd8396b" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="4f42e480-a6fe-4cbd-b364-b4059b7cbfd7" name="Send Remote commands" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ae5dcc82-70e3-4b80-bdc8-2d9b08160612" />
+        <additions>
+          <include Id="5f62cdae-cd1c-4875-9d86-6a30dbf95edb">
+            <useCaseMoniker Id="799cc171-ff14-4e51-b7a8-2991ff8e71c2" LastKnownName="Keyboard and Mouse  input" />
+            <elementDefinition Id="ec24151b-eed3-489b-9100-4050324b8fb8" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="799cc171-ff14-4e51-b7a8-2991ff8e71c2" name="Keyboard and Mouse  input" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="76f8e5ea-60c9-4d84-bf9d-0c5dd26fa42f" />
+        <extendedCases>
+          <extend Id="fe6c34e5-3b3c-4fbd-9df3-20673a1bc163">
+            <useCaseMoniker Id="e8408196-b921-4707-be45-2079cdeec7ca" LastKnownName="Review remote commands" />
+            <elementDefinition Id="2d45097c-f1a6-48fa-80a4-3dcc9c23096e" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="5454a6ee-7666-44e3-9f83-5e804e7a4298" name="Audio Conference" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="62f7e0dc-ace5-4967-addc-c86ad1f6361f" />
+        <additions>
+          <include Id="96b92883-ac86-45dd-b35d-82f25590d480">
+            <useCaseMoniker Id="24d36499-d49a-47e2-9fd3-24ed3ffffb29" LastKnownName="Speak into Microphone" />
+            <elementDefinition Id="19be0385-076f-4196-a1b1-d900509b0c1b" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="24d36499-d49a-47e2-9fd3-24ed3ffffb29" name="Speak into Microphone" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="02dc7414-2bec-4d4d-a311-d28a703386a1" />
+        <extendedCases>
+          <extend Id="ae7b1781-476d-4718-ae9b-70b49e42c6b0">
+            <useCaseMoniker Id="5f31650e-c742-4f3c-9b3d-ef2f9cc0f4d3" LastKnownName="Listen to Audio" />
+            <elementDefinition Id="2cc365fe-ef83-481c-bb95-323504b2977f" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="e8408196-b921-4707-be45-2079cdeec7ca" name="Review remote commands" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6a7fe1d9-bae4-46a9-a4f0-ea2876b041fc" />
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="5f31650e-c742-4f3c-9b3d-ef2f9cc0f4d3" name="Listen to Audio" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2a4e90ae-79f3-47a0-93ab-58d64cfc3717" />
+        <extendedCases>
+          <extend Id="f417d172-4acb-4db7-810e-df3370f9914b">
+            <useCaseMoniker Id="7140ce4a-bd32-40c1-a492-fe0cf3d9035c" LastKnownName="Speak into Microphone" />
+            <elementDefinition Id="af601936-1aca-47d8-a146-aad3d04ea18e" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="7140ce4a-bd32-40c1-a492-fe0cf3d9035c" name="Speak into Microphone" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="47b35fe0-87fa-45be-b4df-cfd102d43d26" />
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="004c1ab4-db3c-4209-b3fb-7a2e94f15e88" name="Transfer file" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="bd05ee98-711b-4618-91f8-5ec3469b6865" />
+        <additions>
+          <include Id="cc0f40fb-688d-4816-b831-9594d9d0df29">
+            <useCaseMoniker Id="eb456d50-c823-4b26-b8f7-ceb852adec03" LastKnownName="Transfer request" />
+            <elementDefinition Id="a00e383b-1f6b-4218-8221-840797d094a1" />
+          </include>
+        </additions>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="eb456d50-c823-4b26-b8f7-ceb852adec03" name="Transfer request" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="670635f3-f205-44b3-b7a4-608dd1286b96" />
+        <extendedCases>
+          <extend Id="2430b2c0-78ec-4996-a1f9-9979fab21541">
+            <useCaseMoniker Id="7ac58ed5-5b88-4943-8473-b636a307f2d6" LastKnownName="Transfer approval" />
+            <elementDefinition Id="bc015c7a-2e72-4c4e-ab88-9a10db467835" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="55f04372-6434-4d92-bae7-2b8ff84b0a14" LastKnownName="Teacher MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="7ac58ed5-5b88-4943-8473-b636a307f2d6" name="Transfer approval" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4340dfe4-2be3-4f95-bc3b-da354fb8f6e8" />
+        <extendedCases>
+          <extend Id="cd312134-0953-47f6-9a7b-bc3c6567546d">
+            <useCaseMoniker Id="2ece559b-c375-49c7-89f1-a27894044aba" LastKnownName="Review transfered file" />
+            <elementDefinition Id="b649ecc5-c331-492c-a9af-eb11303a3106" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="2ece559b-c375-49c7-89f1-a27894044aba" name="Review transfered file" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="42106ff7-4f35-41a4-9458-7715ec9df02e" />
+        <subjects>
+          <subsystemMoniker Id="8c1e9041-8658-4249-900f-d9b5a0c062b3" LastKnownName="Student MViewer application" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="b2e01e60-a7ca-4c72-9827-bb0fb3eccd0c" name="ModelingProject">
+    <elementDefinition Id="699d7ee6-e80a-47dd-9efc-dc6ea0997b81" />
+  </package>
+</useCaseModelRoot>
