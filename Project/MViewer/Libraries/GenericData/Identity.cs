@@ -49,7 +49,7 @@ namespace GenericObjects
         public override string GenerateIdentity(string newAddress, int newPort, string newPath)
         {
             string toEncrypt = "http://" + newAddress + ":" + (newPort - 1).ToString() + "/" + newPath;
-            string encrypted = Tools.Instance.Cryptography.TrippleDESEncrypt(toEncrypt, true);
+            string encrypted = Tools.Instance.Cryptography.AESEncrypt(toEncrypt);
             _myIdentity = encrypted;
             return MyIdentity;
         }
