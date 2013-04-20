@@ -96,6 +96,8 @@ http://www.youtube.com/watch?v=OkC7HKtiZC0
 AES encryption C#
 http://www.overset.com/2008/04/17/simple-aes-rijndael-c-encrypt--decrypt-functions/
 
+
+
 ----------------------------------
 bootstrapper
 http://bootstrapper.codeplex.com/
@@ -105,4 +107,7 @@ http://de.wikipedia.org/wiki/Dependency_Injection
 
 structure map
 http://www.c-sharpcorner.com/uploadfile/dhanaid/introduction-to-structure-map/
+
+reliability
+http://requirements.seilevel.com/blog/2007/10/reliability-requirements.html
 
