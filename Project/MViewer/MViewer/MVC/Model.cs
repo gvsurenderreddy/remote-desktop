@@ -239,13 +239,23 @@ namespace MViewer
                 switch (args.Operation)
                 {
                     case GenericEnums.ContactsOperation.Status:
-                        if (updatedContact.Status == GenericEnums.ContactStatus.Offline)
+
+                        // check if the contact is still in your list, otherwise send contact removal request to the partner
+                        contact = ContactsRepository.GetContactByIdentity(updatedContact.Identity);
+                        if (contact != null)
                         {
-                            UpdateContactStatus(updatedContact.Identity, GenericEnums.ContactStatus.Offline);
+                            if (updatedContact.Status == GenericEnums.ContactStatus.Offline)
+                            {
+                                UpdateContactStatus(updatedContact.Identity, GenericEnums.ContactStatus.Offline);
+                            }
+                            else
+                            {
+                                PingContacts(updatedContact.Identity);
+                            }
                         }
                         else
                         {
-                            PingContacts(updatedContact.Identity);
+                            SendRemoveCommand(updatedContact.Identity);
                         }
                         break;
                     case GenericEnums.ContactsOperation.Add:
@@ -273,28 +283,7 @@ namespace MViewer
 
                         if (updatedContact.ContactNo != -1)
                         {
-                            ClientController.AddClient(contact.Identity);
-                            IMViewerService client2 = ClientController.GetClient(contact.Identity);
-                            Thread t = new Thread(delegate()
-                            {
-                                try
-                                {
-                                    bool isOnline = ClientController.IsContactOnline(contact.Identity);
-                                    if (isOnline)
-                                    {
-                                        client2.RemoveContact(_identity.MyIdentity);
-                                    }
-                                    else
-                                    {
-                                        //todo: optional - create a message queue so that the partner will be notified of removal
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    Tools.Instance.Logger.LogError(ex.ToString());
-                                }
-                            });
-                            t.Start();
+                            SendRemoveCommand(contact.Identity);
                         }
                         break;
                     case GenericEnums.ContactsOperation.Get:
@@ -315,6 +304,28 @@ namespace MViewer
         #endregion
 
         #region private methods
+
+        void SendRemoveCommand(string identity)
+        {
+            ClientController.AddClient(identity);
+            IMViewerService client2 = ClientController.GetClient(identity);
+            Thread t = new Thread(delegate()
+            {
+                try
+                {
+                    bool isOnline = ClientController.IsContactOnline(identity);
+                    if (isOnline)
+                    {
+                        client2.RemoveContact(_identity.MyIdentity);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
+            });
+            t.Start();
+        }
 
         string[] GetOnlineContactIdentities()
         {
