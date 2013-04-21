@@ -15,7 +15,7 @@ namespace BusinessLogicLayer
         {
             // pattern: "https://" + Address + ":" + Port.ToString() + "/" + Path;
 
-            string decrypted = Tools.Instance.Cryptography.AESDecrypt(identity);
+            string decrypted = Tools.Instance.Cryptography.TrippleDESDecrypt(identity, true);
             Uri uri = new Uri(decrypted, UriKind.Absolute);
 
             string host = uri.Host;
