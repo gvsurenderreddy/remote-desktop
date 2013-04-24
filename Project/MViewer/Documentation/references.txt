@@ -96,7 +96,8 @@ http://www.youtube.com/watch?v=OkC7HKtiZC0
 AES encryption C#
 http://www.overset.com/2008/04/17/simple-aes-rijndael-c-encrypt--decrypt-functions/
 
-
+STRIDE approach
+http://msdn.microsoft.com/en-us/magazine/cc163519.aspx
 
 ----------------------------------
 bootstrapper
