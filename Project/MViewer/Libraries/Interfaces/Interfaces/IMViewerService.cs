@@ -49,7 +49,7 @@ namespace GenericObjects
         void RemoveContact(string identity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendFile", ReplyAction = "http://tempuri.org/IVideoRoom/SendFileResponse")]
-        void SendFile(byte[] fileBytes, string fileName);
+        void SendFile(byte[] fileBytes, string fileName, string senderIdentity);
 
         [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IVideoRoom/SendRemotingCommand", ReplyAction = "http://tempuri.org/IVideoRoom/SendRemotingCommandResponse")]
         void SendRemotingCommand(byte[] commandArgs);

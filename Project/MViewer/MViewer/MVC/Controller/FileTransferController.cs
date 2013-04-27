@@ -60,7 +60,14 @@ namespace MViewer
                             Thread.Sleep(500);
                             Thread t2 = new Thread(delegate()
                             {
-                                fileProgressFrom.StartPB();
+                                try
+                                {
+                                    fileProgressFrom.StartPB();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Tools.Instance.Logger.LogError(ex.ToString());
+                                }
                             });
                             t2.Start();
                             _model.SendFile(filePath, e.Identity);
@@ -142,7 +149,14 @@ namespace MViewer
                         Thread.Sleep(500);
                         Thread t2 = new Thread(delegate()
                         {
-                            fileProgressFrom.StartPB();
+                            try
+                            {
+                                fileProgressFrom.StartPB();
+                            }
+                            catch (Exception ex)
+                            {
+                                Tools.Instance.Logger.LogError(ex.ToString());
+                            }
                         });
                         t2.Start();
 

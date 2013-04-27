@@ -95,7 +95,7 @@ namespace Communicator
             return canSend;
         }
 
-        public void SendFile(byte[] fileStream, string fileName)
+        public void SendFile(byte[] fileStream, string fileName, string senderIdentity)
         {
             try
             {
@@ -103,7 +103,8 @@ namespace Communicator
                 _controllerHandlers.FileTransferObserver.Invoke(fileStream, new RoomActionEventArgs()
                 {
                     RoomType = GenericEnums.RoomType.Send,
-                    TransferInfo = new TransferInfo() { FileName = fileName }
+                    TransferInfo = new TransferInfo() { FileName = fileName },
+                    Identity = senderIdentity
                 });
             }
             catch (Exception ex)

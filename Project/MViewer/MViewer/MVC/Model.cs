@@ -112,7 +112,7 @@ namespace MViewer
                 {
                     byte[] fileContent = new byte[fileStream.Length];
                     fileStream.Read(fileContent, 0, fileContent.Length);
-                    ClientController.SendFile(fileContent, identity, Path.GetFileName(filePath));
+                    ClientController.SendFile(_identity.MyIdentity, fileContent, identity, Path.GetFileName(filePath));
                 }
                 else
                 {

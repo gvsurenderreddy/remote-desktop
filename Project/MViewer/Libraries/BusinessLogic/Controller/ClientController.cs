@@ -138,7 +138,7 @@ namespace BusinessLogicLayer
             return canSend;
         }
 
-        public void SendFile(byte[] fileBytes, string partnerIdentity, string fileName)
+        public void SendFile(string myIdentity, byte[] fileBytes, string partnerIdentity, string fileName)
         {
             try
             {
@@ -150,7 +150,7 @@ namespace BusinessLogicLayer
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
                 if (client != null)
                 {
-                    client.SendFile(fileBytes, fileName);
+                    client.SendFile(fileBytes, fileName, myIdentity);
                 }
             }
             catch (Exception ex)

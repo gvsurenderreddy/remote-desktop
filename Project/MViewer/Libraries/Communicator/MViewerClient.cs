@@ -104,9 +104,9 @@ public partial class MViewerClient : ClientBase<IMViewerService>, IMViewerServic
         base.Channel.RemoveContact(identity);
     }
 
-    public void SendFile(byte[] fileBytes, string fileName)
+    public void SendFile(byte[] fileBytes, string fileName, string senderIdentity)
     {
-        base.Channel.SendFile(fileBytes, fileName);
+        base.Channel.SendFile(fileBytes, fileName, senderIdentity);
     }
 
     public bool SendingPermission(string senderIdentity, string fileName, long fileSize)
