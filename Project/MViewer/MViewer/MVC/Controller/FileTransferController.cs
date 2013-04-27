@@ -181,7 +181,8 @@ namespace MViewer
                 {
                     if (fileProgressFrom != null)
                     {
-                        fileProgressFrom.Close();
+                        fileProgressFrom.Invoke(new MethodInvoker(delegate()
+                            { fileProgressFrom.Close(); }));
                     }
                 }
             });
