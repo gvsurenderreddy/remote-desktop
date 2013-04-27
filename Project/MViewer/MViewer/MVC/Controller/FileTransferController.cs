@@ -102,6 +102,8 @@ namespace MViewer
         {
             Thread t = new Thread(delegate()
             {
+                // add a progress bar (into a TransfersForm)
+                FormFileProgress fileProgressFrom = null;
                 try
                 {
                     RoomActionEventArgs args = (RoomActionEventArgs)e;
@@ -128,8 +130,7 @@ namespace MViewer
                             File.Delete(saveFileDialog1.FileName);
                         }
 
-                        // add a progress bar (into a TransfersForm)
-                        FormFileProgress fileProgressFrom = null;
+                        
                         Contact contact = (Contact)_model.GetContact(args.Identity);
                         Thread t3 = new Thread(delegate()
                         {
@@ -175,6 +176,13 @@ namespace MViewer
                 catch (Exception ex)
                 {
                     Tools.Instance.Logger.LogError(ex.ToString());
+                }
+                finally
+                {
+                    if (fileProgressFrom != null)
+                    {
+                        fileProgressFrom.Close();
+                    }
                 }
             });
             t.SetApartmentState(ApartmentState.STA);
