@@ -102,6 +102,9 @@ http://msdn.microsoft.com/en-us/magazine/cc163519.aspx
 win XP trusted root cert
 https://engineering.purdue.edu/ECN/Support/KB/Docs/WindowsXProotcert
 
+fault tolerance analysis
+http://web.cecs.pdx.edu/~greenwd/roundtable.pdf
+
 ----------------------------------
 bootstrapper
 http://bootstrapper.codeplex.com/
