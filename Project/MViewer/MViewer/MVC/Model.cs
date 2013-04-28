@@ -204,10 +204,14 @@ namespace MViewer
                     // ping all contacts to get their status
                     foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
                     {
-                        string identity = contact["Identity"].ToString();
-                        bool isOnline = _clientController.IsContactOnline(identity);
-                        contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
-                            : GenericEnums.ContactStatus.Offline.ToString();
+                        Thread t = new Thread(delegate()
+                        {
+                            string identity = contact["Identity"].ToString();
+                            bool isOnline = _clientController.IsContactOnline(identity);
+                            contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
+                                : GenericEnums.ContactStatus.Offline.ToString();
+                        });
+                        t.Start();
                     }
                 }
                 else
@@ -269,7 +273,7 @@ namespace MViewer
                             IMViewerService client = ClientController.GetClient(contact.Identity);
                             client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
                         }
-                        PingContacts(null);
+                        PingContacts(updatedContact.Identity);
                         break;
                     case GenericEnums.ContactsOperation.Update:
                         ContactsRepository.UpdateContact(updatedContact);
