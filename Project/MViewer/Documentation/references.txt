@@ -99,6 +99,9 @@ http://www.overset.com/2008/04/17/simple-aes-rijndael-c-encrypt--decrypt-functio
 STRIDE approach
 http://msdn.microsoft.com/en-us/magazine/cc163519.aspx
 
+win XP trusted root cert
+https://engineering.purdue.edu/ECN/Support/KB/Docs/WindowsXProotcert
+
 ----------------------------------
 bootstrapper
 http://bootstrapper.codeplex.com/
