@@ -38,7 +38,12 @@ namespace MViewer
         {
             try
             {
-
+                uint port;
+                if (uint.TryParse(txtPort.Text.Trim(), out port) == false)
+                {
+                    MessageBox.Show("Cannot add non-numerical value", "Invalid value", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 Configuration config = ConfigurationManager.OpenExeConfiguration(
                                    Assembly.GetEntryAssembly().Location);
                 config.AppSettings.Settings["MyAddress"].Value = txtIP.Text.Trim();
