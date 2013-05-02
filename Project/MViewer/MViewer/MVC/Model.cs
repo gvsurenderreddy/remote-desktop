@@ -197,35 +197,40 @@ namespace MViewer
         /// <param name="pingIdentity"></param>
         public void PingContacts(string pingIdentity)
         {
-            try
+            Thread mainThreadPing = new Thread(delegate()
             {
-                if (string.IsNullOrEmpty(pingIdentity))
+                try
                 {
-                    // ping all contacts to get their status
-                    foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
+                    if (string.IsNullOrEmpty(pingIdentity))
                     {
-                        Thread t = new Thread(delegate()
+                        // ping all contacts to get their status
+                        foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
                         {
-                            string identity = contact["Identity"].ToString();
-                            bool isOnline = _clientController.IsContactOnline(identity);
-                            contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
-                                : GenericEnums.ContactStatus.Offline.ToString();
-                        });
-                        t.Start();
+                            Thread t = new Thread(delegate()
+                            {
+                                string identity = contact["Identity"].ToString();
+                                bool isOnline = _clientController.IsContactOnline(identity);
+                                contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
+                                    : GenericEnums.ContactStatus.Offline.ToString();
+                            });
+                            t.Start();
+                        }
+                    }
+                    else
+                    {
+                        // ping only the specified contact
+                        bool isOnline = _clientController.IsContactOnline(pingIdentity);
+                        UpdateContactStatus(pingIdentity, isOnline == true ? GenericEnums.ContactStatus.Online
+                            : GenericEnums.ContactStatus.Offline);
                     }
                 }
-                else
+                catch (Exception ex)
                 {
-                    // ping only the specified contact
-                    bool isOnline = _clientController.IsContactOnline(pingIdentity);
-                    UpdateContactStatus(pingIdentity, isOnline == true ? GenericEnums.ContactStatus.Online
-                        : GenericEnums.ContactStatus.Offline);
+                    Tools.Instance.Logger.LogError(ex.ToString());
                 }
-            }
-            catch (Exception ex)
-            {
-                Tools.Instance.Logger.LogError(ex.ToString());
-            }
+            });
+            mainThreadPing.Start();
+            mainThreadPing.Join();
         }
 
         /// <summary>
