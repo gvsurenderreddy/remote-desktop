@@ -197,12 +197,12 @@ namespace MViewer
         /// <param name="pingIdentity"></param>
         public void PingContacts(string pingIdentity)
         {
-            Thread mainThreadPing = new Thread(delegate()
-            {
                 try
                 {
                     if (string.IsNullOrEmpty(pingIdentity))
                     {
+                        int toPing = _dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count;
+                        int pinged = 0;
                         // ping all contacts to get their status
                         foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
                         {
@@ -212,8 +212,13 @@ namespace MViewer
                                 bool isOnline = _clientController.IsContactOnline(identity);
                                 contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
                                     : GenericEnums.ContactStatus.Offline.ToString();
+                                pinged++;
                             });
                             t.Start();
+                        }
+                        while (pinged < toPing)
+                        {
+                            Thread.Sleep(2000);
                         }
                     }
                     else
@@ -228,9 +233,6 @@ namespace MViewer
                 {
                     Tools.Instance.Logger.LogError(ex.ToString());
                 }
-            });
-            mainThreadPing.Start();
-            mainThreadPing.Join();
         }
 
         /// <summary>
