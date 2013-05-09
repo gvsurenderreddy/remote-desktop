@@ -7,7 +7,7 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public class KeyboardHookCommand : KeyboardHookCommandBase
+    public class KeyboardHookCommands : KeyboardHookCommandsBase
     {
         public Delegates.HookCommandDelegate KeyDownCommand;
         public Delegates.HookCommandDelegate KeyPressCommand;

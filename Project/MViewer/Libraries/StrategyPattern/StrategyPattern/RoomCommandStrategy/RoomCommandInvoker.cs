@@ -30,7 +30,7 @@ namespace StrategyPattern
             };
             transferCommands.BindCommands();
 
-            RemotingCommands remotingCommands = new RemotingCommands()
+            RoomCommands remotingCommands = new RoomCommands()
             {
                 StartRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Start],
                 StopRemoting = roomHandlers.Remoting[GenericEnums.SignalType.Stop],

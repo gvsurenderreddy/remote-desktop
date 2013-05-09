@@ -114,9 +114,7 @@ namespace AudioStreaming
                         _isRunning = true;
                         _stream = new MemoryStream();
                         retry = false;
-
                     }
-
                     catch (Exception ex)
                     {
                         Tools.Instance.Logger.LogError(ex.ToString());

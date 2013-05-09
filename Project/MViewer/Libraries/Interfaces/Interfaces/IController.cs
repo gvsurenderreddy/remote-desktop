@@ -24,6 +24,7 @@ namespace GenericObjects
         void PauseVideo(object sender, EventArgs args);
         void ResumeVideo(object sender, EventArgs args);
         void SendFileHandler(object sender, EventArgs args);
+        
         void StopRemoting(object sender, EventArgs args);
         void StartRemoting(object sender, EventArgs args);
         void PauseRemoting(object sender, EventArgs args);
@@ -41,9 +42,7 @@ namespace GenericObjects
         void FocusActionsForm();
 
         void OnVideoImageCaptured(object source, EventArgs e);
-
         void OnRemotingImageCaptured(object source, EventArgs e);
-
         void InitializeSettings();
 
         void KeyDown(object sender, EventArgs args);

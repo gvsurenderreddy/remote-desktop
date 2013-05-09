@@ -10,24 +10,34 @@ using Abstraction;
 
 namespace DataAccessLayer
 {
-    public static class ContactsRepository
+    public class ContactsRepository : IContactsDAL
     {
-        #region private static members
+        #region private members
 
-        static string _xmlFilePath;
-        static DataSet _contactsDataSet = new DataSet();
-        static DataView _contactsDataView = new DataView();
+        string _xmlFilePath;
+        DataSet _contactsDataSet;
+        DataView _contactsDataView;
 
         #endregion
 
-        #region public static methods
+        #region c-tor
 
-        public static string[] GetContactIdentities()
+        public ContactsRepository()
+        {
+            _contactsDataSet = new DataSet();
+            _contactsDataView = new DataView();
+        }
+
+        #endregion
+
+        #region public methods
+
+        public string[] GetContactIdentities()
         {
             return _contactsDataSet.Tables[0].AsEnumerable().Select(s => s.Field<string>("Identity")).ToArray<string>();
         }
 
-        public static DataView LoadContacts(string xmlFilePath)
+        public DataView LoadContacts(string xmlFilePath)
         {
             _xmlFilePath = xmlFilePath;
             _contactsDataSet = new DataSet();
@@ -53,7 +63,7 @@ namespace DataAccessLayer
             return _contactsDataView;
         }
 
-        public static int AddContact(Contact contact)
+        public int AddContact(ContactBase contact)
         {
             DataRow dr = _contactsDataView.Table.NewRow();
             dr["ContactNo"] = dr.Table.Rows.Count;
@@ -65,7 +75,7 @@ namespace DataAccessLayer
             return int.Parse(dr["ContactNo"].ToString());
         }
 
-        public static void RemoveContact(int contactNo)
+        public void RemoveContact(int contactNo)
         {
             try
             {
@@ -82,14 +92,14 @@ namespace DataAccessLayer
             }
         }
 
-        public static void UpdateContact(Contact contact)
+        public void UpdateContact(ContactBase contact)
         {
             try
             {
                 DataRow dr = GetContactByNo(contact.ContactNo);
                 if (dr == null)
                 {
-                    Contact toUpdate = GetContactByIdentity(contact.Identity);
+                    Contact toUpdate = (Contact)GetContactByIdentity(contact.Identity);
                     dr = GetContactByNo(toUpdate.ContactNo);
                 }
                 if (dr != null)
@@ -105,7 +115,7 @@ namespace DataAccessLayer
             }
         }
 
-        public static Contact GetContactByNumber(int contactNo)
+        public ContactBase GetContactByNumber(int contactNo)
         {
             Contact contact = null;
             if (contactNo >= 0)
@@ -128,7 +138,7 @@ namespace DataAccessLayer
             return contact;
         }
 
-        public static Contact GetContactByIdentity(string identity)
+        public ContactBase GetContactByIdentity(string identity)
         {
             DataTable contacts = _contactsDataSet.Tables["Contacts"];
             IEnumerable<DataRow> query =
@@ -143,7 +153,7 @@ namespace DataAccessLayer
             return contact;
         }
 
-        public static void SaveContacts()
+        public void SaveContacts()
         {
             try
             {
@@ -157,9 +167,9 @@ namespace DataAccessLayer
 
         #endregion
 
-        #region private static methods
+        #region private methods
 
-        static DataRow GetContactByNo(int contactNo)
+        DataRow GetContactByNo(int contactNo)
         {
             DataRow dr = null;
             if (contactNo >= 0)

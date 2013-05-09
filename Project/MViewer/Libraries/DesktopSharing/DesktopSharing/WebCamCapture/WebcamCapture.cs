@@ -73,16 +73,19 @@ namespace GenericObjects
             {
                 InitializeTimer(_interval);
                 // setup a capture window
-                _captureWindowHandler = WebcamWin32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, _height, _windowHandle, 0);
+                _captureWindowHandler = WebcamWin32APIMethods.capCreateCaptureWindowA("WebCap", 0, 0, 0, _width, 
+                    _height, _windowHandle, 0);
 
                 // connect this application to the capture device
                 int connectAttempts = 0;
-                while (WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_CONNECT, IntPtr.Zero, IntPtr.Zero) == IntPtr.Zero)
+                while (WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_CONNECT, 
+                    IntPtr.Zero, IntPtr.Zero) == IntPtr.Zero)
                 {
                     connectAttempts++;
                     Thread.Sleep(1000);
                 }
-                IntPtr x = WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_SET_PREVIEW, IntPtr.Zero, IntPtr.Zero);
+                IntPtr x = WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_SET_PREVIEW,
+                    IntPtr.Zero, IntPtr.Zero);
                 _webcamClosed = false;
                 _threadAborted = false;
 

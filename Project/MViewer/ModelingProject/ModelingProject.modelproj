@@ -174,4 +174,17 @@
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Validate Include="MViewerLayerDiagram.layerdiagram">
+      <SubType>Content</SubType>
+    </Validate>
+    <Validate Include="MViewerLayerDiagram.layerdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>MViewerLayerDiagram.layerdiagram</DependentUpon>
+    </Validate>
+    <Validate Include="MViewerLayerDiagram.layerdiagram.suppressions">
+      <SubType>Content</SubType>
+      <DependentUpon>MViewerLayerDiagram.layerdiagram</DependentUpon>
+    </Validate>
+  </ItemGroup>
 </Project>

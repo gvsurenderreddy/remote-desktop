@@ -7,7 +7,7 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public class MouseHookCommand : MouseHookCommandBase
+    public class MouseHookCommands : MouseHookCommandsBase
     {
         public Delegates.HookCommandDelegate LeftClickCommand;
         public Delegates.HookCommandDelegate RightClickCommand;

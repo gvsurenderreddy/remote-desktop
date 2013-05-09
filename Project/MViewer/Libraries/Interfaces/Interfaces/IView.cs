@@ -18,14 +18,10 @@ namespace GenericObjects
         void SetFormMainBackgroundImage(string filePath);
         void ShowMainForm(bool close);
         void ShowMyWebcamForm(bool show);
-
         void UpdateLabels(string identity, GenericEnums.RoomType roomType);
         void ResetLabels(GenericEnums.RoomType roomType);
-
         void UpdateWebcapture(Image image);
-
         void RoomButtonAction(object sender, EventArgs e);
-  
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         bool ExitConfirmation();
         void WaitRoomButtonAction(bool wait, GenericEnums.RoomType roomType);
@@ -33,14 +29,7 @@ namespace GenericObjects
         bool RequestConferencePermission(string identity, GenericEnums.RoomType roomType);
         void FocusActionsForm();
 
-        bool VideoCaptureClosed
-        {
-            get;
-        }
-
-        IRoomManager RoomManager
-        {
-            get;
-        }
+        bool VideoCaptureClosed { get; }
+        IRoomManager RoomManager { get; }
     }
 }

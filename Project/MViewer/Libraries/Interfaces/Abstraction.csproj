@@ -62,6 +62,7 @@
     <Compile Include="Interfaces\IAudioRoom.cs" />
     <Compile Include="Interfaces\IAudioStreamManager.cs" />
     <Compile Include="Interfaces\IClientController.cs" />
+    <Compile Include="Interfaces\IContactsDAL.cs" />
     <Compile Include="Interfaces\IController.cs" />
     <Compile Include="Interfaces\IDesktopViewer.cs" />
     <Compile Include="Interfaces\IModel.cs" />

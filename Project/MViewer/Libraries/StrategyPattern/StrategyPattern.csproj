@@ -61,7 +61,7 @@
     <Compile Include="StrategyPattern\HookCommandStrategy\KeyboardHookCommands.cs" />
     <Compile Include="StrategyPattern\HookCommandStrategy\MouseHookCommands.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\IRoomCommandInvoker.cs" />
-    <Compile Include="StrategyPattern\RoomCommandStrategy\RemotingCommands.cs" />
+    <Compile Include="StrategyPattern\RoomCommandStrategy\RoomCommands.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\RoomCommandBase.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\RoomCommandInvoker.cs" />
     <Compile Include="StrategyPattern\RoomCommandStrategy\TransferCommands.cs" />

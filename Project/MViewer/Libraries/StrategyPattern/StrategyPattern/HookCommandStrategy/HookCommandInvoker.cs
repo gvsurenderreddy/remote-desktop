@@ -14,7 +14,7 @@ namespace StrategyPattern
         public HookCommandInvoker(ControllerRemotingHandlers remotingCommandHandlers)
         {
             // provide the mouse/keyboard event handlers from the controller
-            MouseHookCommand mouseCommands = new MouseHookCommand()
+            MouseHookCommands mouseCommands = new MouseHookCommands()
             {
                 DoubleLeftClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleLeftClick],
                 DoubleRightClickCommand = remotingCommandHandlers.MouseCommands[GenericEnums.MouseCommandType.DoubleRightClick],
@@ -34,7 +34,7 @@ namespace StrategyPattern
             commands = new Dictionary<GenericEnums.RemotingCommandType, IHookCommands>();
             commands.Add(GenericEnums.RemotingCommandType.Mouse, mouseCommands);
 
-            KeyboardHookCommand keyboardCommands = new KeyboardHookCommand()
+            KeyboardHookCommands keyboardCommands = new KeyboardHookCommands()
             {
                 KeyDownCommand = remotingCommandHandlers.KeyboardCommands[GenericEnums.KeyboardCommandType.KeyDown],
                 KeyPressCommand = remotingCommandHandlers.KeyboardCommands[GenericEnums.KeyboardCommandType.KeyPress],

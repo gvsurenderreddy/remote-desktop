@@ -7,13 +7,13 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public abstract class MouseHookCommandBase : IHookCommands
+    public abstract class MouseHookCommandsBase : IHookCommands
     {
         protected Dictionary<GenericEnums.MouseCommandType, Delegates.HookCommandDelegate> _commands;
 
         Delegates.HookCommandDelegate _command;
 
-        public MouseHookCommandBase()
+        public MouseHookCommandsBase()
         {
             _command = PerformCommand;
         }

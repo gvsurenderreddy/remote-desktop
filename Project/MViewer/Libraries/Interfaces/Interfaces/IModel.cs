@@ -19,34 +19,11 @@ namespace GenericObjects
         void RemoveClient(string identity);
         void IntializeModel(ControllerEventHandlers handlers);
 
-        ISessionManager SessionManager
-        {
-            get;
-        }
-
-        IdentityBase Identity
-        {
-            get;
-        }
-
-        string FriendlyName
-        {
-            get;
-        }
-
-        DataView Contacts
-        {
-            get;
-        }
-
-        IClientController ClientController
-        {
-            get;
-        }
-
-        IServerController ServerController
-        {
-            get;
-        }
+        ISessionManager SessionManager { get; }
+        IdentityBase Identity { get; }
+        string FriendlyName { get; }
+        DataView Contacts { get; }
+        IClientController ClientController { get; }
+        IServerController ServerController { get; }
     }
 }

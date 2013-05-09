@@ -9,14 +9,14 @@ using GenericObjects;
 
 namespace DesktopSharing
 {
-    public class ScreenCaptureBase //: ScreenSizeStructures
+    public class ScreenCaptureBase
     {
         #region methods
 
         /// <summary>
         /// method used to get the desktop screen capture
         /// </summary>
-        public Bitmap GetDesktopCapture()
+        Bitmap GetDesktopCapture()
         {
             IntPtr desktopContextHeight = IntPtr.Zero;
             Bitmap screenImage = null;
@@ -59,7 +59,7 @@ namespace DesktopSharing
         /// <param name="newX">new cursor X coord</param>
         /// <param name="y">new cursor Y coord</param>
         /// <returns></returns>
-        public Bitmap GetCursorCapture(ref int newX, ref int newY)
+        Bitmap GetCursorCapture(ref int newX, ref int newY)
         {
             Bitmap cursorCapture = null;
             try

@@ -19,6 +19,7 @@ namespace MViewer
     {
         #region private members
 
+        IContactsDAL _contactsDAL;
         Identity _identity;
         DataView _dvContacts;
 
@@ -35,6 +36,7 @@ namespace MViewer
         {
             try
             {
+                _contactsDAL = new ContactsRepository();
                 _clientController = new ClientController();
                 _sessionManager = new SessionManager();
             }
@@ -58,7 +60,7 @@ namespace MViewer
             {
                 _identity = new Identity(SystemConfiguration.Instance.FriendlyName);
                 SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
-                _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                 ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(((Identity)Identity).MyIdentity );
                 _serverController = new ServerController(myEndpoint, ((Identity)Identity).MyIdentity, handlers);
             }
@@ -188,7 +190,7 @@ namespace MViewer
         /// <returns></returns>
         public ContactBase GetContact(string identity)
         {
-            return ContactsRepository.GetContactByIdentity(identity);
+            return _contactsDAL.GetContactByIdentity(identity);
         }
 
         /// <summary>
@@ -197,42 +199,42 @@ namespace MViewer
         /// <param name="pingIdentity"></param>
         public void PingContacts(string pingIdentity)
         {
-                try
+            try
+            {
+                if (string.IsNullOrEmpty(pingIdentity))
                 {
-                    if (string.IsNullOrEmpty(pingIdentity))
+                    int toPing = _dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count;
+                    int pinged = 0;
+                    // ping all contacts to get their status
+                    foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
                     {
-                        int toPing = _dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count;
-                        int pinged = 0;
-                        // ping all contacts to get their status
-                        foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
+                        Thread t = new Thread(delegate()
                         {
-                            Thread t = new Thread(delegate()
-                            {
-                                string identity = contact["Identity"].ToString();
-                                bool isOnline = _clientController.IsContactOnline(identity);
-                                contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
-                                    : GenericEnums.ContactStatus.Offline.ToString();
-                                pinged++;
-                            });
-                            t.Start();
-                        }
-                        while (pinged < toPing)
-                        {
-                            Thread.Sleep(2000);
-                        }
+                            string identity = contact["Identity"].ToString();
+                            bool isOnline = _clientController.IsContactOnline(identity);
+                            contact["Status"] = isOnline == true ? GenericEnums.ContactStatus.Online.ToString()
+                                : GenericEnums.ContactStatus.Offline.ToString();
+                            pinged++;
+                        });
+                        t.Start();
                     }
-                    else
+                    while (pinged < toPing)
                     {
-                        // ping only the specified contact
-                        bool isOnline = _clientController.IsContactOnline(pingIdentity);
-                        UpdateContactStatus(pingIdentity, isOnline == true ? GenericEnums.ContactStatus.Online
-                            : GenericEnums.ContactStatus.Offline);
+                        Thread.Sleep(2000);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Tools.Instance.Logger.LogError(ex.ToString());
+                    // ping only the specified contact
+                    bool isOnline = _clientController.IsContactOnline(pingIdentity);
+                    UpdateContactStatus(pingIdentity, isOnline == true ? GenericEnums.ContactStatus.Online
+                        : GenericEnums.ContactStatus.Offline);
                 }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -252,7 +254,7 @@ namespace MViewer
                     case GenericEnums.ContactsOperation.Status:
 
                         // check if the contact is still in your list, otherwise send contact removal request to the partner
-                        contact = ContactsRepository.GetContactByIdentity(updatedContact.Identity);
+                        contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
                         if (contact != null)
                         {
                             if (updatedContact.Status == GenericEnums.ContactStatus.Offline)
@@ -270,9 +272,9 @@ namespace MViewer
                         }
                         break;
                     case GenericEnums.ContactsOperation.Add:
-                        int contactNo = ContactsRepository.AddContact(updatedContact);
-                        _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = ContactsRepository.GetContactByIdentity(updatedContact.Identity);
+                        int contactNo = _contactsDAL.AddContact(updatedContact);
+                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                        contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
                         if (updatedContact.ContactNo != -1)
                         {
                             // notify other contact of performed operation (ADD/REMOVE)
@@ -283,14 +285,14 @@ namespace MViewer
                         PingContacts(updatedContact.Identity);
                         break;
                     case GenericEnums.ContactsOperation.Update:
-                        ContactsRepository.UpdateContact(updatedContact);
-                        _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = ContactsRepository.GetContactByNumber(updatedContact.ContactNo);
+                        _contactsDAL.UpdateContact(updatedContact);
+                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                        contact = (Contact)_contactsDAL.GetContactByNumber(updatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Remove:
-                        contact = ContactsRepository.GetContactByIdentity(updatedContact.Identity);
-                        ContactsRepository.RemoveContact(contact.ContactNo);
-                        _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                        contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
+                        _contactsDAL.RemoveContact(contact.ContactNo);
+                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
 
                         if (updatedContact.ContactNo != -1)
                         {
@@ -298,10 +300,10 @@ namespace MViewer
                         }
                         break;
                     case GenericEnums.ContactsOperation.Get:
-                        contact = ContactsRepository.GetContactByNumber(updatedContact.ContactNo);
+                        contact = (Contact)_contactsDAL.GetContactByNumber(updatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Load:
-                        _dvContacts = ContactsRepository.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                         break;
                 }
             }

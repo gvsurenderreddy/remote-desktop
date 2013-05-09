@@ -7,13 +7,13 @@ using Utils;
 
 namespace StrategyPattern
 {
-    public abstract class KeyboardHookCommandBase : IHookCommands
+    public abstract class KeyboardHookCommandsBase : IHookCommands
     {
         protected Dictionary<GenericEnums.KeyboardCommandType, Delegates.HookCommandDelegate> _commands;
 
         Delegates.HookCommandDelegate _command;
 
-        public KeyboardHookCommandBase()
+        public KeyboardHookCommandsBase()
         {
             _command = PerformCommand;
         }
