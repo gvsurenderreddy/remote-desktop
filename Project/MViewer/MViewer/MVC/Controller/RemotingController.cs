@@ -540,7 +540,8 @@ namespace MViewer
             try
             {
                 _syncRemotingCaptureActivity.WaitOne(); // wait for any room action to end
-
+                RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
+                            
                 if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).RemotingCaptureClosed() == false)
                 {
                     lock (_syncRemotingCaptureSending)
@@ -548,7 +549,6 @@ namespace MViewer
                         if (SystemConfiguration.Instance.PresenterSettings.PrivateConference)
                         {
                             // send the remoting capture to active remoting room
-                            RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
                             string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity;
                             TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
                             while (transfer.IsRemotingUpdating)
@@ -575,7 +575,15 @@ namespace MViewer
                         }
                         else
                         {
-
+                            IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Remoting);
+                            if (connectedSessions.Count == 0)
+                            {
+                                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+                            }
+                            else
+                            {
+                                BroadcastScreenCaptures(connectedSessions, args.ScreenCapture, args.MouseCapture);
+                            }
                         }
                     }
                 }
@@ -593,6 +601,43 @@ namespace MViewer
         #endregion
 
         #region private methods
+
+        void BroadcastScreenCaptures(IList<string> connectedSessions, byte[] screenCapture,
+            byte[] mouseCapture)
+        {
+            foreach (string receiverIdentity in connectedSessions)
+            {
+                try
+                {
+                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                    while (transfer.IsRemotingUpdating)
+                    {
+                        Thread.Sleep(200);
+                    }
+
+                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                    // check if the stop signal has been sent from the UI
+
+                    // check if the stop signal has been sent by the partner
+                    PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                    if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
+                        || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
+                    {
+                        // send the capture if the session isn't paused
+                        transferStatus.Remoting = true;
+
+                        _model.ClientController.SendRemotingCapture(screenCapture,
+                            mouseCapture, receiverIdentity, _model.Identity.MyIdentity);
+                    }
+
+                    transferStatus.Remoting = false;
+                }
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
+            }
+        }
 
         void OpenRemotingForm(string identity)
         {

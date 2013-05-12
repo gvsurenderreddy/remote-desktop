@@ -12,5 +12,7 @@ namespace Abstraction
 
         protected string myIdentity;
         protected string friendlyName;
+
+        public abstract string MyIdentity { get; }
     }
 }

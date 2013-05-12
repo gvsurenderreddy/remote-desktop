@@ -44,47 +44,60 @@ namespace MViewer
             try
             {
                 _syncVideoCaptureActivity.WaitOne(); // wait for any room action to end
+                VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
+                MemoryStream memoryStream = new MemoryStream();
+                args.CapturedImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
 
+                //get the buffer 
+                byte[] buffer = memoryStream.GetBuffer();
                 _videoCapturePending = true;
                 if (_view.VideoCaptureClosed == false)
                 {
                     lock (_syncVideoCaptureSending)
                     {
-                        VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-                        // display the captured picture
-                        _view.UpdateWebcapture(args.CapturedImage);
-
-                        MemoryStream memoryStream = new MemoryStream();
-                        args.CapturedImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
-
-                        //get the buffer 
-                        byte[] buffer = memoryStream.GetBuffer();
-
-                        // send the webcaptures to active video room
-                        string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity;
-                        TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                        while (transfer.IsVideoUpdating)
+                        if (SystemConfiguration.Instance.PresenterSettings.PrivateConference)
                         {
-                            Thread.Sleep(200);
+                            // display the captured picture
+                            _view.UpdateWebcapture(args.CapturedImage);
+
+                            // send the webcaptures to active video room
+                            string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity;
+                            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                            while (transfer.IsVideoUpdating)
+                            {
+                                Thread.Sleep(200);
+                            }
+
+                            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                            // check if the stop signal has been sent from the UI
+
+                            // check if the stop signal has been sent by the partner
+
+                            PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                            if (peers.VideoSessionState == GenericEnums.SessionState.Opened
+                                || peers.VideoSessionState == GenericEnums.SessionState.Pending)
+                            {
+                                // send the capture if the session isn't paused
+                                transferStatus.Video = true;
+
+                                _model.ClientController.SendVideoCapture(buffer, args.CaptureTimestamp,
+                                    receiverIdentity, ((Identity)_model.Identity).MyIdentity);
+                            }
+
+                            transferStatus.Video = false;
                         }
-
-                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                        // check if the stop signal has been sent from the UI
-
-                        // check if the stop signal has been sent by the partner
-
-                        PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                        if (peers.VideoSessionState == GenericEnums.SessionState.Opened
-                            || peers.VideoSessionState == GenericEnums.SessionState.Pending)
+                        else
                         {
-                            // send the capture if the session isn't paused
-                            transferStatus.Video = true;
-
-                            _model.ClientController.SendVideoCapture(buffer, args.CaptureTimestamp, 
-                                receiverIdentity, ((Identity)_model.Identity).MyIdentity);
+                            IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
+                            if (connectedSessions.Count == 0)
+                            {
+                                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopVideoPresentation();
+                            }
+                            else
+                            {
+                                BroadcastVideoCaptures(connectedSessions, buffer, args.CaptureTimestamp);
+                            }
                         }
-
-                        transferStatus.Video = false;
                     }    
                 }
                 else
@@ -319,6 +332,45 @@ namespace MViewer
         #endregion
 
         #region private methods
+
+        void BroadcastVideoCaptures(IList<string> connectedSessions, byte[] capture, DateTime timestamp)
+        {
+            foreach (string receiverIdentity in connectedSessions)
+            {
+                try
+                {
+                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
+                    while (transfer.IsVideoUpdating)
+                    {
+                        Thread.Sleep(200);
+                    }
+
+                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                    // check if the stop signal has been sent from the UI
+
+                    // check if the stop signal has been sent by the partner
+
+                    PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                    if (peers.VideoSessionState == GenericEnums.SessionState.Opened
+                        || peers.VideoSessionState == GenericEnums.SessionState.Pending)
+                    {
+                        // send the capture if the session isn't paused
+                        transferStatus.Video = true;
+
+                        // todo: enforce web timer start for partner side
+
+                        _model.ClientController.SendVideoCapture(capture,timestamp,
+                            receiverIdentity, _model.Identity.MyIdentity);
+                    }
+
+                    transferStatus.Video = false;
+                }
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
+            }
+        }
 
         /// <summary>
         /// method used to diplay a received video capture

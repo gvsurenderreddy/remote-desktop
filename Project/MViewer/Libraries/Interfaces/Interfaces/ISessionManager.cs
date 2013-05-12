@@ -16,5 +16,6 @@ namespace GenericObjects
         GenericEnums.SessionState GetSessionState(string identity, GenericEnums.RoomType roomType);
         PendingTransfer GetTransferStatus(string identity);
         TransferStatusUptading GetTransferActivity(string identity);
+        IList<string> GetConnectedSessions(GenericEnums.RoomType actionType);
     }
 }

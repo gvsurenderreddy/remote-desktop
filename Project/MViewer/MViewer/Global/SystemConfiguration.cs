@@ -145,7 +145,7 @@ namespace MViewer
                     RemotingTimerInterval = int.Parse(ConfigurationManager.AppSettings["remotingTimerInterval"].ToString()),
                     OnRemotingImageCaptured = new EventHandler(Program.Controller.OnRemotingImageCaptured),
                     OnAudioCaptureAvailable = new EventHandler(Program.Controller.OnAudioCaptured),
-                    AudioTimerInterval = int.Parse(ConfigurationManager.AppSettings["audioTimerInterval"].ToString())
+                    AudioTimerInterval = int.Parse(ConfigurationManager.AppSettings["audioTimerInterval"].ToString()),
                     PrivateConference = bool.Parse(ConfigurationManager.AppSettings["PrivateConference"].ToString())
 
                 };

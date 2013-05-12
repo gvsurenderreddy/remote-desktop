@@ -58,7 +58,7 @@ namespace GenericObjects
 
         #region proprieties
 
-        public string MyIdentity
+        public override string MyIdentity
         {
             get { return _myIdentity; }
         }
