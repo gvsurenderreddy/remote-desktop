@@ -19,6 +19,7 @@ namespace GenericObjects
 
         public EventHandler OnRemotingImageCaptured { get; set; }
         public int RemotingTimerInterval { get; set; }
+        public bool PrivateConference { get; set; }
 
         public EventHandler OnAudioCaptureAvailable { get; set; }
         public int AudioTimerInterval { get; set; }

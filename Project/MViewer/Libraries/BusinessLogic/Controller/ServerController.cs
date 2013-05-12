@@ -21,7 +21,7 @@ namespace BusinessLogicLayer
 
         #region c-tor
 
-        public ServerController(ContactEndpoint endpoint, string identity, ControllerEventHandlers handlers)
+        public ServerController(ContactEndpoint endpoint, string identity, ControllerEventHandlers handlers, bool isSecured)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace BusinessLogicLayer
                 {
                     _address = "https://" + endpoint.Address + endpoint.Path;
                 }
-                Builder serverBuilder = new ServerBuilder(_address, handlers, identity);
+                Builder serverBuilder = new ServerBuilder(_address, handlers, identity, isSecured);
                 Director.Instance.Construct(serverBuilder);
                 _server = (ServiceHost)serverBuilder.GetResult();
             }
@@ -55,6 +55,8 @@ namespace BusinessLogicLayer
                 {
                     _server.Open();
                     string addr = _server.Description.Endpoints[0].ListenUri.AbsoluteUri;
+                    Tools.Instance.Logger.LogInfo("Listening at: " + addr);
+                    
                     Console.WriteLine("Listening at: ");
                     Console.WriteLine(addr);
 

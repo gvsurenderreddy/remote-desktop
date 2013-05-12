@@ -16,7 +16,7 @@ namespace DesktopSharing
         /// <summary>
         /// method used to get the desktop screen capture
         /// </summary>
-        Bitmap GetDesktopCapture()
+        public Bitmap GetDesktopCapture()
         {
             IntPtr desktopContextHeight = IntPtr.Zero;
             Bitmap screenImage = null;
@@ -59,7 +59,7 @@ namespace DesktopSharing
         /// <param name="newX">new cursor X coord</param>
         /// <param name="y">new cursor Y coord</param>
         /// <returns></returns>
-        Bitmap GetCursorCapture(ref int newX, ref int newY)
+        public Bitmap GetCursorCapture(ref int newX, ref int newY)
         {
             Bitmap cursorCapture = null;
             try

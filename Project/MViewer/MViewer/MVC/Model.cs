@@ -12,6 +12,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Threading;
 using Abstraction;
+using System.Configuration;
 
 namespace MViewer
 {
@@ -27,7 +28,9 @@ namespace MViewer
         IServerController _serverController;
 
         ISessionManager _sessionManager;
-        
+        // use the below flag for turn off/on security
+        readonly bool _useSecurity = bool.Parse(ConfigurationManager.AppSettings["UseSecurity"]);
+
         #endregion
 
         #region c-tor
@@ -37,7 +40,7 @@ namespace MViewer
             try
             {
                 _contactsDAL = new ContactsRepository();
-                _clientController = new ClientController();
+                _clientController = new ClientController(_useSecurity);
                 _sessionManager = new SessionManager();
             }
             catch (Exception ex)
@@ -62,7 +65,7 @@ namespace MViewer
                 SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
                 _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                 ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(((Identity)Identity).MyIdentity );
-                _serverController = new ServerController(myEndpoint, ((Identity)Identity).MyIdentity, handlers);
+                _serverController = new ServerController(myEndpoint, ((Identity)Identity).MyIdentity, handlers, _useSecurity);
             }
             catch (Exception ex)
             {

@@ -17,15 +17,17 @@ namespace BusinessLogicLayer
 
         private WCFClient _client;
         private ContactEndpoint _endpoint;
+        bool _isSecured;
 
         #endregion
 
         #region c-tor
 
-        public ClientBuilder(ContactEndpoint serverEndpoint)
+        public ClientBuilder(ContactEndpoint serverEndpoint, bool isSecured)
         {
             _endpoint = serverEndpoint;
-            _client = new WCFClient();
+            _client = new WCFClient(isSecured);
+            _isSecured = isSecured;
         }
 
         #endregion
@@ -50,6 +52,15 @@ namespace BusinessLogicLayer
         public override void BuildContract()
         {
             _client.BuildContract();
+        }
+
+        #endregion
+
+        #region proprieties
+
+        public override bool IsSecured
+        {
+            get { return _isSecured; }
         }
 
         #endregion

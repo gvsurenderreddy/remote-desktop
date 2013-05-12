@@ -22,6 +22,8 @@ namespace GenericObjects
         EventHandler _onCaptureAvailable;
         int _timerInterval;
         ManualResetEvent _syncCaptures = new ManualResetEvent(true);
+        SoundEffect sound;
+        readonly object _syncPlay = new object();
 
         #endregion
 
@@ -36,6 +38,35 @@ namespace GenericObjects
         #endregion
 
         #region private methods
+       
+        void PlayCapture(byte[] capture)
+        {
+            try
+            {
+                if (capture == null || capture.Length == 0)
+                {
+                    return;
+                }
+                sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                //sound = Content
+                SoundEffect.MasterVolume = 1f;
+
+                //todo: remove this log
+                Tools.Instance.Logger.LogInfo("playing capture of " + capture.Length + " bytes");
+
+                sound.Play();
+                Thread.Sleep(2100);
+                sound.Dispose();
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
+            }
+        }
 
         void OnAudioReady(object sender, ElapsedEventArgs e)
         {
@@ -169,35 +200,16 @@ namespace GenericObjects
                 _syncCaptures.Set();
             }
         }
-        SoundEffect sound;
-
-        readonly object _syncPlay = new object();
 
         public void PlayAudioCapture(byte[] capture)
         {
             lock (_syncPlay)
             {
-                try
+                Thread t = new Thread(delegate()
                 {
-                    if (capture == null || capture.Length == 0)
-                    {
-                        return;
-                    }
-                    sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
-                    //sound = Content
-                    SoundEffect.MasterVolume = 1f;
-                    sound.Play();
-                    Thread.Sleep(2100);
-                    sound.Dispose();
-                }
-                catch (Exception ex)
-                {
-                    Tools.Instance.Logger.LogError(ex.ToString());
-                }
-                finally
-                {
-                    GC.Collect();
-                }
+                    PlayCapture(capture);
+                });
+                t.Start();
             }
         }
 

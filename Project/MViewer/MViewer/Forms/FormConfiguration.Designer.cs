@@ -41,6 +41,7 @@
             this.nudVideo = new System.Windows.Forms.NumericUpDown();
             this.nudRemoting = new System.Windows.Forms.NumericUpDown();
             this.nudAudio = new System.Windows.Forms.NumericUpDown();
+            this.cbxPrivate = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudVideo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRemoting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudAudio)).BeginInit();
@@ -93,7 +94,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(16, 156);
+            this.btnSave.Location = new System.Drawing.Point(16, 177);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 5;
@@ -103,7 +104,7 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(120, 156);
+            this.btnClose.Location = new System.Drawing.Point(120, 177);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 6;
@@ -206,11 +207,25 @@
             0,
             0});
             // 
+            // cbxPrivate
+            // 
+            this.cbxPrivate.AutoSize = true;
+            this.cbxPrivate.Checked = true;
+            this.cbxPrivate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbxPrivate.Location = new System.Drawing.Point(95, 152);
+            this.cbxPrivate.Name = "cbxPrivate";
+            this.cbxPrivate.Size = new System.Drawing.Size(59, 17);
+            this.cbxPrivate.TabIndex = 12;
+            this.cbxPrivate.Text = "Private";
+            this.cbxPrivate.UseVisualStyleBackColor = true;
+            this.cbxPrivate.CheckedChanged += new System.EventHandler(this.cbxPrivate_CheckedChanged);
+            // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(214, 191);
+            this.ClientSize = new System.Drawing.Size(214, 212);
+            this.Controls.Add(this.cbxPrivate);
             this.Controls.Add(this.nudAudio);
             this.Controls.Add(this.nudRemoting);
             this.Controls.Add(this.nudVideo);
@@ -252,5 +267,6 @@
         private System.Windows.Forms.NumericUpDown nudVideo;
         private System.Windows.Forms.NumericUpDown nudRemoting;
         private System.Windows.Forms.NumericUpDown nudAudio;
+        private System.Windows.Forms.CheckBox cbxPrivate;
     }
 }

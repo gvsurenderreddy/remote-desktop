@@ -20,6 +20,7 @@ namespace GenericObjects
             _severCert = severCert;
             if (allowedIssuerName == null)
             {
+                Tools.Instance.Logger.LogError("allowedIssuerName not provided for server certificate");
                 throw new ArgumentNullException("allowedIssuerName not provided");
             }
             try
@@ -33,39 +34,51 @@ namespace GenericObjects
             }
         }
 
-        public override void Validate(X509Certificate2 clientCertificate)
+        public override void Validate(X509Certificate2 certificate)
         {
+            Tools.Instance.Logger.LogInfo("performing Client certificate validation into ServerCertificateValidator");
+
             // Check that there is a certificate.
-            if (clientCertificate == null)
+            if (certificate == null)
             {
+                Tools.Instance.Logger.LogError("missing client certificate");
                 throw new ArgumentNullException("missing client certificate");
             }
 
             // the client certificate must be in your trusted certificates store
-            bool validCertificate = new X509Chain().Build(clientCertificate);
+            bool validCertificate = new X509Chain().Build(certificate);
+
+            Tools.Instance.Logger.LogInfo("Client certificate validation: " + validCertificate.ToString());
 
             if (validCertificate)
             {
                 // Check that the certificate issuer matches the configured issuer.
-                if (_allowedIssuerName != clientCertificate.IssuerName.Name)
+                if (_allowedIssuerName != certificate.IssuerName.Name)
                 {
+                    Tools.Instance.Logger.LogError("client Certificate was not issued by a trusted issuer");
                     throw new SecurityTokenValidationException
                       ("client Certificate was not issued by a trusted issuer");
                 }
-                if (DateTime.Parse(clientCertificate.GetExpirationDateString()) < DateTime.Now)
+                if (DateTime.Parse(certificate.GetExpirationDateString()) < DateTime.Now)
                 {
+                    Tools.Instance.Logger.LogError("client Certificate Expired");
                     throw new IdentityValidationException("client Certificate Expired");
                 }
-                if (_clientCertificate.Equals(clientCertificate) == false)
+                if (_clientCertificate.Equals(certificate) == false)
                 {
+                    Tools.Instance.Logger.LogError("Untrusted client Certificate");
                     throw new SecurityTokenValidationException
                       ("Untrusted client Certificate");
                 }
             }
             else
             {
-                throw new SecurityTokenValidationException("X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
+                Tools.Instance.Logger.LogError("Client certificate validation X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
+                throw new SecurityTokenValidationException("Client certificate validation X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
             }
+
+
+            Tools.Instance.Logger.LogInfo("Client certificate validation ended without exceptions");
         }
     }
 }

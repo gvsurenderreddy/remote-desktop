@@ -18,15 +18,17 @@ namespace BusinessLogicLayer
 
         IDictionary<string, IMViewerService> _clients;
         readonly object _syncClients = new object();
+        bool _isSecured;
 
         #endregion
 
         #region c-tor
 
-        public ClientController()
+        public ClientController(bool isSecured)
         {
             lock (_syncClients)
             {
+                _isSecured = isSecured;
                 _clients = new Dictionary<string, IMViewerService>();
             }
         }
@@ -163,7 +165,7 @@ namespace BusinessLogicLayer
         {
             try
             {
-                if (!_clients.ContainsKey(partnerIdentity))
+                if (_clients != null && !string.IsNullOrEmpty(partnerIdentity) && !_clients.ContainsKey(partnerIdentity))
                 {
                     AddClient(partnerIdentity);
                     StartClient(partnerIdentity);
@@ -282,7 +284,7 @@ namespace BusinessLogicLayer
                     }
                     ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
 
-                    Builder clientBuilder = new ClientBuilder(endpoint);
+                    Builder clientBuilder = new ClientBuilder(endpoint, _isSecured);
                     Director.Instance.Construct(clientBuilder);
                     IMViewerService client = (IMViewerService)clientBuilder.GetResult();
                     _clients.Add(identity, client);
@@ -359,7 +361,7 @@ namespace BusinessLogicLayer
             try
             {
                 ContactEndpoint endpoint = IdentityResolver.ResolveIdentity(identity);
-                Builder clientBuilder = new ClientBuilder(endpoint);
+                Builder clientBuilder = new ClientBuilder(endpoint, _isSecured);
                 Director.Instance.Construct(clientBuilder);
                 MViewerClient client = (MViewerClient)clientBuilder.GetResult();
                 isOnline = client.Ping();

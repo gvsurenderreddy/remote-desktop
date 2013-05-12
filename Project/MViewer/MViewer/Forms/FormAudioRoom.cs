@@ -50,11 +50,11 @@ namespace MViewer
         {
             try
             {
-                _onCaptureReceived.BeginInvoke(this, new AudioCaptureEventArgs()
+                _onCaptureReceived.Invoke(this, new AudioCaptureEventArgs()
                 {
                     Capture = capture,
                     Identity = this.PartnerIdentity
-                }, null, null);
+                });
             }
             catch (Exception ex)
             {

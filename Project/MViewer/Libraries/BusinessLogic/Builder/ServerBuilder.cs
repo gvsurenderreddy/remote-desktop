@@ -22,18 +22,20 @@ namespace BusinessLogicLayer
         string _httpsAddress;
         ControllerEventHandlers _controllerHandlers;
         string _identity;
+        bool _isSecured;
 
         #endregion
 
         #region c-tor
 
-        public ServerBuilder(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity)
+        public ServerBuilder(string httpsAddress, ControllerEventHandlers controllerHandlers, string identity, bool isSecured)
         {
             try
             {
                 _httpsAddress = httpsAddress;
                 _controllerHandlers = controllerHandlers;
                 _identity = identity;
+                _isSecured = isSecured;
             }
             catch (Exception ex)
             {
@@ -54,10 +56,15 @@ namespace BusinessLogicLayer
                 X509ClientCertificateAuthentication authentication = _svcHost.Credentials.ClientCertificate.Authentication;
                 X509Certificate2 clientCert = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
 
-                
-                authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
-                authentication.CustomCertificateValidator = new ServerCertificateValidator(severCert, "CN=Mihai-PC", clientCert);
-
+                if (_isSecured)
+                {
+                    authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+                    authentication.CustomCertificateValidator = new ServerCertificateValidator(severCert, "CN=Mihai-PC", clientCert);
+                }
+                else
+                {
+                    authentication.CertificateValidationMode = X509CertificateValidationMode.None;
+                }
                 _svcHost.Credentials.ClientCertificate.Certificate = clientCert;
             }
             catch (Exception ex)
@@ -70,7 +77,7 @@ namespace BusinessLogicLayer
         {
             try
             {
-                _server.BuildServerBinding();
+                _server.BuildServerBinding(_isSecured);
                 _svcHost.AddServiceEndpoint(typeof(IMViewerService), _server.Binding, _server.HttpURI);
             }
             catch (Exception ex)
@@ -101,6 +108,15 @@ namespace BusinessLogicLayer
         public override object GetResult()
         {
             return _svcHost;
+        }
+
+        #endregion
+
+        #region proprieties
+
+        public override bool IsSecured
+        {
+            get { return _isSecured; }
         }
 
         #endregion

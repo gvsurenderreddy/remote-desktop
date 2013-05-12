@@ -12,6 +12,9 @@ namespace DataAccessLayer
 {
     public class ContactsRepository : IContactsDAL
     {
+        // todo: handle data error event
+
+
         #region private members
 
         string _xmlFilePath;

@@ -15,5 +15,7 @@ namespace BusinessLogicLayer
         public virtual void BuildUri() { }
         public virtual void BuildBehavior() { }
         public abstract object GetResult();
+
+        public abstract bool IsSecured { get; }
     }
 }

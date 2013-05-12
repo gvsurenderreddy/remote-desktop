@@ -58,7 +58,7 @@ namespace Utils
             }
             catch (Exception ex)
             {
-                Tools.Instance.Logger.LogError(ex.ToString());
+                //Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 

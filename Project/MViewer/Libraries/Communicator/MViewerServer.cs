@@ -260,6 +260,8 @@ namespace Communicator
         {
             try
             {
+                Tools.Instance.Logger.LogInfo("Started added contact: " + identity);
+
                 ContactsEventArgs args = new ContactsEventArgs()
                 {
                     Operation = GenericEnums.ContactsOperation.Add,
@@ -319,7 +321,7 @@ namespace Communicator
 
         #endregion
 
-        public override void BuildServerBinding()
+        public override void BuildServerBinding(bool isSecured)
         {
             try
             {
@@ -334,16 +336,20 @@ namespace Communicator
                 _binding.ReaderQuotas.MaxBytesPerRead = 100000000;
                 _binding.MaxReceivedMessageSize = 100000000;
 
-                _binding.HostNameComparisonMode = HostNameComparisonMode.StrongWildcard;
+                _binding.HostNameComparisonMode = HostNameComparisonMode.WeakWildcard;
                 _binding.Security.Mode = SecurityMode.Message;
 
+                if (isSecured == false)
+                {
+                    _binding.Security.Mode = SecurityMode.None;
+                }
                 _binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Certificate;
                 _binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
                 _binding.Security.Transport.Realm = string.Empty;
 
                 _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
-                _binding.Security.Message.EstablishSecurityContext = false;
+                _binding.Security.Message.EstablishSecurityContext = true;
                 _binding.Security.Message.NegotiateServiceCredential = true;
 
                 _binding.Name = "binding1";

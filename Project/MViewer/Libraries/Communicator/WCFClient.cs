@@ -18,6 +18,12 @@ namespace Communicator
         MViewerClient _client;
         WSHttpBinding _binding;
         EndpointAddress _endpoint;
+        bool _isSecured;
+
+        public WCFClient(bool isSecured)
+        {
+            _isSecured = isSecured;
+        }
 
         public MViewerClient Client
         {
@@ -30,7 +36,9 @@ namespace Communicator
             {
                 X509Certificate2 certificate = new X509Certificate2("Client.pfx", "", X509KeyStorageFlags.MachineKeySet);
                 _client.ClientCredentials.ClientCertificate.Certificate = certificate;
+
                 _client.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = X509CertificateValidationMode.Custom;
+
                 _client.ClientCredentials.ServiceCertificate.Authentication.CustomCertificateValidator =
                     new ClientCertificateValidator("CN=Mihai-PC");
             }
@@ -59,7 +67,7 @@ namespace Communicator
             try
             {
                 ContractDescription contract = ContractDescription.GetContract(typeof(IMViewerService), typeof(MViewerClient));
-                CreateServerBinding();
+                CreateServerBinding(_isSecured);
                 _client = new MViewerClient(_binding, _endpoint);
                 _client.Endpoint.Binding = _binding;
                 _client.Endpoint.Binding.Name = "binding1_IVideoRoom";
@@ -72,7 +80,7 @@ namespace Communicator
 
         #region private methods
 
-        void CreateServerBinding()
+        void CreateServerBinding(bool isSecured)
         {
             try
             {
@@ -88,8 +96,13 @@ namespace Communicator
                 _binding.ReaderQuotas.MaxBytesPerRead = 100000000;
                 _binding.MaxReceivedMessageSize = 100000000;
 
-                _binding.HostNameComparisonMode = HostNameComparisonMode.StrongWildcard;
+                _binding.HostNameComparisonMode = HostNameComparisonMode.WeakWildcard;
                 _binding.Security.Mode = SecurityMode.Message;
+
+                if (isSecured == false)
+                {
+                    _binding.Security.Mode = SecurityMode.None;
+                }
 
                 _binding.Security.Transport.ClientCredentialType = HttpClientCredentialType.Certificate;
                 _binding.Security.Transport.ProxyCredentialType = HttpProxyCredentialType.None;
@@ -97,7 +110,7 @@ namespace Communicator
 
                 _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
-                _binding.Security.Message.EstablishSecurityContext = false;
+                _binding.Security.Message.EstablishSecurityContext = true;
                 _binding.Security.Message.NegotiateServiceCredential = true;
 
                 _binding.Name = "binding1_IVideoRoom";

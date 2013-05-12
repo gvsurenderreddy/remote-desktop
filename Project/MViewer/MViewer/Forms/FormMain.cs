@@ -282,6 +282,13 @@ namespace MViewer
             return contactsControl.GetSelectedContact();
         }
 
+        public void Enable(bool enable)
+        {
+            this.Invoke(new MethodInvoker(delegate() { this.Enabled = enable; }));
+        }
+
         #endregion
+
+
     }
 }

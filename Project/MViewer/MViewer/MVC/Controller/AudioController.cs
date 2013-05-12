@@ -88,6 +88,9 @@ namespace MViewer
                 AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
                 PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
 
+                //todo: remove this log
+                Tools.Instance.Logger.LogInfo("received capture of " + args.Capture.Length + " bytes");
+
                 if (peer.AudioSessionState == GenericEnums.SessionState.Undefined ||
                     peer.AudioSessionState == GenericEnums.SessionState.Pending)
                 {
@@ -154,10 +157,13 @@ namespace MViewer
 
                         PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
                         if (peers.AudioSessionState == GenericEnums.SessionState.Opened
-                            || peers.AudioSessionState == GenericEnums.SessionState.Pending)
+                            || peers.AudioSessionState == GenericEnums.SessionState.Pending && args.Capture.Length > 0)
                         {
                             // send the capture if the session isn't paused
                             transferStatus.Audio = true;
+
+                            //todo: remove this log
+                            Tools.Instance.Logger.LogInfo("sending capture of " + args.Capture.Length + " bytes");
 
                             _model.ClientController.SendAudioCapture(args.Capture, args.CaptureTimestamp,
                                 receiverIdentity, ((Identity)_model.Identity).MyIdentity);

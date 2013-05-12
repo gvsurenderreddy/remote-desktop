@@ -137,6 +137,10 @@ namespace AudioStreaming
             try
             {
                 SyncChunk.WaitOne();
+
+                //todo: remove this log
+                Tools.Instance.Logger.LogInfo("buffer ready of " + _buffer.Length + " bytes");
+
                 if (_isRunning)
                 {
                     _microphone.GetData(_buffer);

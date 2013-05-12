@@ -27,6 +27,7 @@ namespace MViewer
                 nudAudio.Value = SystemConfiguration.Instance.PresenterSettings.AudioTimerInterval;
                 nudVideo.Value = SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval;
                 nudRemoting.Value = SystemConfiguration.Instance.PresenterSettings.RemotingTimerInterval;
+                cbxPrivate.Checked = SystemConfiguration.Instance.PresenterSettings.PrivateConference;
             }
             catch (Exception ex)
             {
@@ -67,6 +68,15 @@ namespace MViewer
                 MessageBox.Show("Must restart the app for the changes to take effect!", "Restart needed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             this.Close();
+        }
+
+        private void cbxPrivate_CheckedChanged(object sender, EventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(
+                                     Assembly.GetEntryAssembly().Location);
+            config.AppSettings.Settings["privateConference"].Value = cbxPrivate.Checked.ToString();
+            config.Save();
+            _changed = true;
         }
     }
 }

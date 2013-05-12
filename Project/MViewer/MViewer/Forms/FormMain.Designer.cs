@@ -33,8 +33,6 @@ namespace MViewer
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.contactsControl = new UIControls.ContactsControl();
             this.identityControl = new UIControls.IdentityControl();
-            this.contactsControl = new UIControls.ContactsControl(this.OnContactsControl_ClosePressed, this.OnContactsUpdated, this.OnSelectedContactChanged);
-            this.identityControl = new UIControls.IdentityControl(this.OnIdentityUpdated, this.OnLanguageUpdated);
             this.btnConfig = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 

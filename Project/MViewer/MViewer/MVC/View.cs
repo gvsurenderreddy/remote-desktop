@@ -373,9 +373,7 @@ namespace MViewer
                 if (!close)
                 {
                     ThreadPool.QueueUserWorkItem(OpenActionsForm);
-
                     ThreadPool.QueueUserWorkItem(OpenMainForm);
-                    //            Application.Run(_formMain);
                 }
                 else
                 {
@@ -500,6 +498,7 @@ namespace MViewer
                                if (result != DialogResult.Yes)
                                {
                                    canExit = false;
+                                   _formMain.Enable(true);
                                }
                            }
                             )
@@ -613,5 +612,6 @@ namespace MViewer
         }
 
         #endregion
+
     }
 }
