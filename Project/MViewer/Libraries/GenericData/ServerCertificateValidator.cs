@@ -36,7 +36,7 @@ namespace GenericObjects
 
         public override void Validate(X509Certificate2 certificate)
         {
-            Tools.Instance.Logger.LogInfo("performing Client certificate validation into ServerCertificateValidator");
+            //Tools.Instance.Logger.LogInfo("performing Client certificate validation into ServerCertificateValidator");
 
             // Check that there is a certificate.
             if (certificate == null)
@@ -48,7 +48,7 @@ namespace GenericObjects
             // the client certificate must be in your trusted certificates store
             bool validCertificate = new X509Chain().Build(certificate);
 
-            Tools.Instance.Logger.LogInfo("Client certificate validation: " + validCertificate.ToString());
+            //Tools.Instance.Logger.LogInfo("Client certificate validation: " + validCertificate.ToString());
 
             if (validCertificate)
             {
@@ -78,7 +78,7 @@ namespace GenericObjects
             }
 
 
-            Tools.Instance.Logger.LogInfo("Client certificate validation ended without exceptions");
+            //Tools.Instance.Logger.LogInfo("Client certificate validation ended without exceptions");
         }
     }
 }

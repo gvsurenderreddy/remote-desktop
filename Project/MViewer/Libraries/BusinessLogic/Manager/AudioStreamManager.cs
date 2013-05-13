@@ -55,7 +55,11 @@ namespace GenericObjects
                 Tools.Instance.Logger.LogInfo("playing capture of " + capture.Length + " bytes");
 
                 sound.Play();
+
+                Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
+
                 Thread.Sleep(2100);
+                
                 sound.Dispose();
             }
             catch (Exception ex)
@@ -64,6 +68,8 @@ namespace GenericObjects
             }
             finally
             {
+                Tools.Instance.Logger.LogInfo("play capture exit");
+
                 GC.Collect();
             }
         }
