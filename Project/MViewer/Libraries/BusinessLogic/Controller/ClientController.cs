@@ -420,6 +420,7 @@ namespace BusinessLogicLayer
                         RemoveClient(receiverIdentity);
                         AddClient(receiverIdentity);
                         StartClient(receiverIdentity);
+                        client = (MViewerClient)_clients[receiverIdentity];
                     }
                     try
                     {
