@@ -105,12 +105,18 @@ namespace GenericObjects
                         _audioStream.StartAudio();
                     }
                 }
-                
-                _timer.Start();
+
             }
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                if (_timer != null && _timer.Enabled == false)
+                {
+                    _timer.Start();
+                }
             }
         }
 
