@@ -70,12 +70,12 @@ namespace MViewer
 
         void OpenAudioForm(string identity)
         {
-            _syncAudioCaptureActivity.Reset();
-
             if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Audio))
             {
                 Thread t = new Thread(delegate()
                 {
+                    _syncAudioCaptureActivity.Reset();
+
                     try
                     {
                         Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Audio);
@@ -101,6 +101,7 @@ namespace MViewer
                     {
                         Tools.Instance.Logger.LogError(ex.ToString());
                     }
+                    _syncAudioCaptureActivity.Set();
                 }
                 );
                 t.IsBackground = true;
@@ -110,7 +111,6 @@ namespace MViewer
                 Thread.Sleep(500);
                
             }
-            _syncAudioCaptureActivity.Set();
         }
 
         void PlayAudioCapture(object sender, EventArgs e)
