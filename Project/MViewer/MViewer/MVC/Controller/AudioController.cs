@@ -108,8 +108,9 @@ namespace MViewer
                 t.Start();
 
                 Thread.Sleep(500);
-                _syncAudioCaptureActivity.Set();
+               
             }
+            _syncAudioCaptureActivity.Set();
         }
 
         void PlayAudioCapture(object sender, EventArgs e)
