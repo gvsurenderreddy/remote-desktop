@@ -47,6 +47,10 @@ namespace BusinessLogicLayer
                     StartClient(receiverIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[receiverIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(receiverIdentity);
+                } 
                 try
                 {
                     MemoryStream stream = new MemoryStream();
@@ -54,9 +58,9 @@ namespace BusinessLogicLayer
                     formatter.Serialize(stream, commandArgs);
                     client.SendRemotingCommand(stream.GetBuffer());
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    Tools.Instance.Logger.LogError(ex.ToString());
                 }
             }
             catch (Exception ex)
@@ -75,10 +79,10 @@ namespace BusinessLogicLayer
                     StartClient(receiverIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                //if (client.State != System.ServiceModel.CommunicationState.Opened)
-                //{
-                //    client.Open();
-                //}
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(receiverIdentity);
+                } 
                 try
                 {
                     client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
@@ -105,6 +109,10 @@ namespace BusinessLogicLayer
                     StartClient(partnerIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(partnerIdentity);
+                } 
                 if (client != null)
                 {
                     canStart = client.ConferencePermission(myIdentity, roomType);
@@ -128,6 +136,10 @@ namespace BusinessLogicLayer
                     StartClient(partnerIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(partnerIdentity);
+                } 
                 if (client != null)
                 {
                     canSend = client.SendingPermission(myIdentity, fileName, fileSize);
@@ -150,6 +162,10 @@ namespace BusinessLogicLayer
                     StartClient(partnerIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(partnerIdentity);
+                }
                 if (client != null)
                 {
                     client.SendFile(fileBytes, fileName, myIdentity);
@@ -171,6 +187,10 @@ namespace BusinessLogicLayer
                     StartClient(partnerIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(partnerIdentity);
+                }
                 if (client != null)
                 {
                     try
@@ -196,15 +216,19 @@ namespace BusinessLogicLayer
                     StartClient(partnerIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(partnerIdentity);
+                }
                 if (client != null)
                 {
                     try
                     {
                         client.UpdateContactStatus(myIdentity, newStatus);
                     }
-                    catch
+                    catch(Exception ex)
                     {
-
+                        Tools.Instance.Logger.LogError(ex.ToString());
                     }
                 }
             }
@@ -224,6 +248,10 @@ namespace BusinessLogicLayer
                     StartClient(partnerIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[partnerIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(partnerIdentity);
+                }
                 if (client != null)
                 {
                     client.UpdateFriendlyName(myIdentity, newFriendlyName);
@@ -245,11 +273,18 @@ namespace BusinessLogicLayer
                     StartClient(identity);
                 }
                 MViewerClient client = (MViewerClient)_clients[identity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(identity);
+                }
                 try
                 {
                     client.SendRoomButtonAction(myIdentity, roomType, signalType);
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
                 
             }
             catch (Exception ex)
@@ -364,7 +399,14 @@ namespace BusinessLogicLayer
                 Builder clientBuilder = new ClientBuilder(endpoint, _isSecured);
                 Director.Instance.Construct(clientBuilder);
                 MViewerClient client = (MViewerClient)clientBuilder.GetResult();
-                isOnline = client.Ping();
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(identity);
+                }
+                if (client != null)
+                {
+                    isOnline = client.Ping();
+                }
             }
             catch (SecurityNegotiationException ex)
             {
@@ -388,13 +430,17 @@ namespace BusinessLogicLayer
                     StartClient(receiverIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[receiverIdentity];
+                if (client.State != System.ServiceModel.CommunicationState.Opened)
+                {
+                    client = RestartClient(receiverIdentity);
+                }
                 try
                 {
                     client.SendWebcamCapture(capture, timestamp, senderIdentity);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    Tools.Instance.Logger.LogError(ex.ToString());
                 }
             }
             catch (Exception ex)
@@ -417,11 +463,8 @@ namespace BusinessLogicLayer
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
                     if (client.State != System.ServiceModel.CommunicationState.Opened)
                     {
-                        RemoveClient(receiverIdentity);
-                        AddClient(receiverIdentity);
-                        StartClient(receiverIdentity);
-                        client = (MViewerClient)_clients[receiverIdentity];
-                    }
+                        client = RestartClient(receiverIdentity);
+                    } 
                     try
                     {
                         client.SendMicrophoneCapture(capture, timestamp, senderIdentity);
@@ -430,13 +473,24 @@ namespace BusinessLogicLayer
                     {
                         Tools.Instance.Logger.LogError(ex.ToString());
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
+        }
+
+        #endregion
+
+        #region private methods
+
+        MViewerClient RestartClient(string identity)
+        {
+            RemoveClient(identity);
+            AddClient(identity);
+            StartClient(identity);
+            return (MViewerClient)_clients[identity];
         }
 
         #endregion
