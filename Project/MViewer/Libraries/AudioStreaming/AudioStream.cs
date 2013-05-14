@@ -13,6 +13,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Utils;
+using System.Configuration;
 
 namespace AudioStreaming
 {
@@ -108,7 +109,11 @@ namespace AudioStreaming
                         gameWindowForm.Opacity = 0;
 
                         FrameworkDispatcher.Update();
-                        _microphone.BufferDuration = TimeSpan.FromSeconds(1);
+
+                        // todo: make the microphone capture timespan configurable
+                        uint timespan = uint.Parse(ConfigurationManager.AppSettings["microphoneCaptureInterval"]);
+
+                        _microphone.BufferDuration = TimeSpan.FromSeconds(timespan);
                         _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
                         _microphone.BufferReady += OnBufferReady;
                         _isRunning = true;
