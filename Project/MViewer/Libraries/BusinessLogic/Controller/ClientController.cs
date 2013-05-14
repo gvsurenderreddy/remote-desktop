@@ -415,10 +415,12 @@ namespace BusinessLogicLayer
                 if (_clients.ContainsKey(receiverIdentity))
                 {
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    //if (client.State != System.ServiceModel.CommunicationState.Opened)
-                    //{
-                    //    client.Open();
-                    //}
+                    if (client.State != System.ServiceModel.CommunicationState.Opened)
+                    {
+                        RemoveClient(receiverIdentity);
+                        AddClient(receiverIdentity);
+                        StartClient(receiverIdentity);
+                    }
                     try
                     {
                         client.SendMicrophoneCapture(capture, timestamp, senderIdentity);
