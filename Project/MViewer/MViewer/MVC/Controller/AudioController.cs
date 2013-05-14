@@ -72,10 +72,11 @@ namespace MViewer
         {
             if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Audio))
             {
+                _syncAudioCaptureActivity.Reset();
+
                 Thread t = new Thread(delegate()
                 {
-                    _syncAudioCaptureActivity.Reset();
-
+                    
                     try
                     {
                         Session clientSession = new ClientSession(identity, GenericEnums.RoomType.Audio);
@@ -101,7 +102,7 @@ namespace MViewer
                     {
                         Tools.Instance.Logger.LogError(ex.ToString());
                     }
-                    _syncAudioCaptureActivity.Set();
+                    
                 }
                 );
                 t.IsBackground = true;
@@ -109,7 +110,7 @@ namespace MViewer
                 t.Start();
 
                 Thread.Sleep(500);
-               
+                _syncAudioCaptureActivity.Set();
             }
         }
 
