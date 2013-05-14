@@ -85,6 +85,7 @@ namespace GenericObjects
                 _audioStream.SyncChunk.Reset();
 
                 byte[] capture = _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
+                _audioStream.SyncChunk.Set();
 
                 _audioStream.Stream = new MemoryStream();
 
@@ -104,8 +105,7 @@ namespace GenericObjects
                         _audioStream.StartAudio();
                     }
                 }
-                _audioStream.SyncChunk.Set();
-
+                
                 _timer.Start();
             }
             catch (Exception ex)
