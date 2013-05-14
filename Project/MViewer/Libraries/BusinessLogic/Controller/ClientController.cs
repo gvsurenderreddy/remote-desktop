@@ -75,17 +75,17 @@ namespace BusinessLogicLayer
                     StartClient(receiverIdentity);
                 }
                 MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                if (client.State != System.ServiceModel.CommunicationState.Opened)
-                {
-                    client.Open();
-                }
+                //if (client.State != System.ServiceModel.CommunicationState.Opened)
+                //{
+                //    client.Open();
+                //}
                 try
                 {
                     client.SendRemotingCapture(screenCapture, mouseCapture, senderIdentity);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    Tools.Instance.Logger.LogError(ex.ToString());
                 }
             }
             catch (Exception ex)
@@ -415,17 +415,17 @@ namespace BusinessLogicLayer
                 if (_clients.ContainsKey(receiverIdentity))
                 {
                     MViewerClient client = (MViewerClient)_clients[receiverIdentity];
-                    if (client.State != System.ServiceModel.CommunicationState.Opened)
-                    {
-                        client.Open();
-                    }
+                    //if (client.State != System.ServiceModel.CommunicationState.Opened)
+                    //{
+                    //    client.Open();
+                    //}
                     try
                     {
                         client.SendMicrophoneCapture(capture, timestamp, senderIdentity);
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
-
+                        Tools.Instance.Logger.LogError(ex.ToString());
                     }
 
                 }

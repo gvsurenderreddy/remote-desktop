@@ -47,6 +47,7 @@
             this.ClientSize = new System.Drawing.Size(229, 93);
             this.ControlBox = false;
             this.Controls.Add(this.audioControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormAudioRoom";
             this.Text = "Audio Room";
