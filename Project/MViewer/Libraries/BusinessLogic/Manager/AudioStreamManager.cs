@@ -91,12 +91,13 @@ namespace GenericObjects
 
                 if (capture != null && capture.Length > 0)
                 {
-                    _onCaptureAvailable.BeginInvoke(this, new AudioCaptureEventArgs()
+                    _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
                     {
                         Capture = capture,
                         CaptureTimestamp = DateTime.Now
-                    },
-                        null, null);
+                    }
+                    //, null, null
+                        );
                 }
                 else
                 {
