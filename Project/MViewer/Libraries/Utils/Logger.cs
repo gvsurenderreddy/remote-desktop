@@ -56,7 +56,7 @@ namespace Utils
                 message.AppendLine("END ERROR -----------------------------------");
                 _logger.Error(message.ToString());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //Tools.Instance.Logger.LogError(ex.ToString());
             }

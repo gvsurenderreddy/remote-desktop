@@ -111,7 +111,7 @@ namespace AudioStreaming
                         FrameworkDispatcher.Update();
 
                         // todo: make the microphone capture timespan configurable
-                        uint timespan = uint.Parse(ConfigurationManager.AppSettings["microphoneCaptureInterval"]);
+                        float timespan = float.Parse(ConfigurationManager.AppSettings["microphoneCaptureInterval"]);
 
                         _microphone.BufferDuration = TimeSpan.FromSeconds(timespan);
                         _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
