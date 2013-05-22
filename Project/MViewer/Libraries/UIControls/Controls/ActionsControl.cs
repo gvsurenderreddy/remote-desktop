@@ -57,64 +57,64 @@ namespace UIControls
                     case GenericEnums.RoomType.Video:
                         if (pause)
                         {
-                            btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                            btnPauseVideo.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
                         }
                         else
                         {
-                            btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                            btnPauseVideo.Text = ButtonStatus.ButtonPauseStatus.Resume.ToString();
                         }
                         if (start)
                         {
-                            btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                            btnVideo.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
                         }
                         else
                         {
-                            btnVideo.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                            btnVideo.Text = ButtonStatus.ButtonStartStatus.Stop.ToString();
                         }
                         break;
                     case GenericEnums.RoomType.Audio:
                         if (pause)
                         {
-                            btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                            btnMuteAudio.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
                         }
                         else
                         {
-                            btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                            btnMuteAudio.Text = ButtonStatus.ButtonPauseStatus.Resume.ToString();
                         }
                         if (start)
                         {
-                            btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                            btnAudio.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
                         }
                         else
                         {
-                            btnAudio.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                            btnAudio.Text = ButtonStatus.ButtonStartStatus.Stop.ToString();
                         }
                         break;
                     case GenericEnums.RoomType.Remoting:
                         if (pause)
                         {
-                            btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                            btnPauseRemote.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
                         }
                         else
                         {
-                            btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                            btnPauseRemote.Text = ButtonStatus.ButtonPauseStatus.Resume.ToString();
                         }
                         if (start)
                         {
-                            btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                            btnRemote.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
                         }
                         else
                         {
-                            btnRemote.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                            btnRemote.Text = ButtonStatus.ButtonStartStatus.Stop.ToString();
                         }
                         break;
                     case GenericEnums.RoomType.Undefined:
-                        btnVideo.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                        btnPauseVideo.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                        btnRemote.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                        btnPauseRemote.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
-                        btnAudio.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
-                        btnMuteAudio.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                        btnVideo.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
+                        btnPauseVideo.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
+                        btnRemote.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
+                        btnPauseRemote.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
+                        btnAudio.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
+                        btnMuteAudio.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
                         break;
                 }
             }
@@ -220,43 +220,43 @@ namespace UIControls
                 switch (buttonType)
                 {
                     case GenericEnums.SignalType.Start:
-                        if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
+                        if (button.Text == ButtonStatus.ButtonStartStatus.Start.ToString())
                         {
-                            button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                            button.Text = ButtonStatus.ButtonStartStatus.Stop.ToString();
                         }
                         else
                         {
-                            button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                            button.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
                         }
                         break;
                     case GenericEnums.SignalType.Stop:
-                        if (button.Text == ButtonStatuses.ButtonStartStatus.Start.ToString())
+                        if (button.Text == ButtonStatus.ButtonStartStatus.Start.ToString())
                         {
-                            button.Text = ButtonStatuses.ButtonStartStatus.Stop.ToString();
+                            button.Text = ButtonStatus.ButtonStartStatus.Stop.ToString();
                         }
                         else
                         {
-                            button.Text = ButtonStatuses.ButtonStartStatus.Start.ToString();
+                            button.Text = ButtonStatus.ButtonStartStatus.Start.ToString();
                         }
                         break;
                     case GenericEnums.SignalType.Pause:
-                        if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
+                        if (button.Text == ButtonStatus.ButtonPauseStatus.Pause.ToString())
                         {
-                            button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                            button.Text = ButtonStatus.ButtonPauseStatus.Resume.ToString();
                         }
                         else
                         {
-                            button.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                            button.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
                         }
                         break;
                     case GenericEnums.SignalType.Resume:
-                        if (button.Text == ButtonStatuses.ButtonPauseStatus.Pause.ToString())
+                        if (button.Text == ButtonStatus.ButtonPauseStatus.Pause.ToString())
                         {
-                            button.Text = ButtonStatuses.ButtonPauseStatus.Resume.ToString();
+                            button.Text = ButtonStatus.ButtonPauseStatus.Resume.ToString();
                         }
                         else
                         {
-                            button.Text = ButtonStatuses.ButtonPauseStatus.Pause.ToString();
+                            button.Text = ButtonStatus.ButtonPauseStatus.Pause.ToString();
                         }
                         break;
                 }

@@ -14,6 +14,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Utils;
 using System.Configuration;
+using GenericObjects;
 
 namespace AudioStreaming
 {
@@ -25,6 +26,8 @@ namespace AudioStreaming
         ManualResetEvent _syncChunk = new ManualResetEvent(true);
         ManualResetEvent _syncStatus = new ManualResetEvent(true);
         ManualResetEvent _syncStop = new ManualResetEvent(false);
+        uint _capturesCount;
+        EventHandler _onCaptureReady;
 
         byte[] _buffer;
         MemoryStream _stream;
@@ -68,8 +71,10 @@ namespace AudioStreaming
 
         #region c-tor
 
-        public AudioStream()
+        public AudioStream(EventHandler onCaptureReady)
         {
+            _onCaptureReady = onCaptureReady;
+            _capturesCount = 0;
             if (_microphone == null)
             {
                 lock (_syncInitialize)
@@ -113,7 +118,7 @@ namespace AudioStreaming
                         FrameworkDispatcher.Update();
 
                         // todo: make the microphone capture timespan configurable
-                        float timespan = float.Parse(ConfigurationManager.AppSettings["microphoneCaptureInterval"]);
+                        float timespan = float.Parse(ConfigurationManager.AppSettings["audioTimerInterval"]);
 
                         _microphone.BufferDuration = TimeSpan.FromSeconds(timespan);
                         _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
@@ -143,19 +148,35 @@ namespace AudioStreaming
         {
             try
             {
-                SyncChunk.WaitOne();
+                //SyncChunk.WaitOne();
 
                 //todo: remove this log
                 Tools.Instance.Logger.LogInfo("buffer ready of " + _buffer.Length + " bytes");
 
                 if (_isRunning)
                 {
+                    Array.Clear(_buffer, 0, _buffer.Length);
                     _microphone.GetData(_buffer);
                     if (_stream == null)
                     {
                         _stream = new MemoryStream();
+                        _capturesCount = 0;
                     }
-                    _stream.Write(_buffer, 0, _buffer.Length);
+                    //_stream.Write(_buffer, 0, _buffer.Length);
+
+                    if (_capturesCount == 2)
+                    {
+                        // todo: push microphone capture
+                        _onCaptureReady.Invoke(this, new AudioCaptureEventArgs()
+                        {
+                            Capture = _stream.GetBuffer()
+                        });
+                        _stream = new MemoryStream();
+                    }
+                    else
+                    {
+                        _capturesCount++;
+                    }
                 }
                 else
                 {

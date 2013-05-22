@@ -74,18 +74,19 @@ namespace GenericObjects
             }
         }
 
-        void OnAudioReady(object sender, ElapsedEventArgs e)
+        void OnAudioReady(object sender, EventArgs e)
         {
             try
             {
-                _timer.Stop();
+                //_timer.Stop();
                 _syncCaptures.WaitOne();
                 _syncAudioInstance.WaitOne();
 
-                _audioStream.SyncChunk.Reset();
-
-                byte[] capture = _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
-                _audioStream.SyncChunk.Set();
+                //_audioStream.SyncChunk.Reset();
+                AudioCaptureEventArgs eventArgs = (AudioCaptureEventArgs)e;
+                //byte[] capture = _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
+                byte[] capture = eventArgs.Capture;
+                //_audioStream.SyncChunk.Set();
 
                 _audioStream.Stream = new MemoryStream();
 
@@ -103,7 +104,6 @@ namespace GenericObjects
                 {
                     if (_audioStream.IsRunning)
                     {
-                        //_audioStream.StopAudio();
                         _audioStream.StartAudio();
                     }
                 }
@@ -117,7 +117,7 @@ namespace GenericObjects
             {
                 if (_timer != null && _timer.Enabled == false)
                 {
-                    _timer.Start();
+                    //_timer.Start();
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace GenericObjects
                 if (_timer == null)
                 {
                     _timer = new System.Timers.Timer(_timerInterval);
-                    _timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
+                    //_timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
                 }
 
                 if (_audioStream == null)
@@ -163,7 +163,7 @@ namespace GenericObjects
                         {
                             _syncAudioInstance.Reset();
 
-                            _audioStream = new AudioStream();
+                            _audioStream = new AudioStream(this.OnAudioReady);
 
                             _syncAudioInstance.Set();
 
