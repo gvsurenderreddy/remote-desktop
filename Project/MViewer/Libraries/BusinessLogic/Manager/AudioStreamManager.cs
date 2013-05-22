@@ -88,7 +88,7 @@ namespace GenericObjects
                 byte[] capture = eventArgs.Capture;
                 //_audioStream.SyncChunk.Set();
 
-                _audioStream.Stream = new MemoryStream();
+                //_audioStream.Stream = new MemoryStream();
 
                 if (capture != null && capture.Length > 0)
                 {

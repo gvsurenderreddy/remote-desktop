@@ -162,7 +162,7 @@ namespace AudioStreaming
                         _stream = new MemoryStream();
                         _capturesCount = 0;
                     }
-                    //_stream.Write(_buffer, 0, _buffer.Length);
+                    _stream.Write(_buffer, 0, _buffer.Length);
 
                     if (_capturesCount == 2)
                     {
@@ -171,7 +171,8 @@ namespace AudioStreaming
                         {
                             Capture = _stream.GetBuffer()
                         });
-                        _stream = new MemoryStream();
+                        _stream = new MemoryStream(); 
+                        _capturesCount = 0;
                     }
                     else
                     {
