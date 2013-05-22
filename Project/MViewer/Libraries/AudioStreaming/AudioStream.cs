@@ -164,7 +164,7 @@ namespace AudioStreaming
                     }
                     _stream.Write(_buffer, 0, _buffer.Length);
 
-                    if (_capturesCount == 2)
+                    if (_capturesCount == 1)
                     {
                         // todo: push microphone capture
                         _onCaptureReady.Invoke(this, new AudioCaptureEventArgs()

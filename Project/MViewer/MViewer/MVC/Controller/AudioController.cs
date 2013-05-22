@@ -150,7 +150,7 @@ namespace MViewer
                            });
                     while (peer.AudioSessionState != GenericEnums.SessionState.Opened)
                     {
-                        Thread.Sleep(2000);
+                        Thread.Sleep(200);
                         peer = _model.SessionManager.GetPeerStatus(args.Identity); // update the peer status
                     }
                 }

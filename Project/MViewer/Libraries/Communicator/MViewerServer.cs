@@ -198,13 +198,13 @@ namespace Communicator
             try
             {
                 _syncAudioCaptures.WaitOne();
-                _controllerHandlers.AudioCaptureObserver.Invoke(this,
+                _controllerHandlers.AudioCaptureObserver.BeginInvoke(this,
                     new AudioCaptureEventArgs()
                     {
                         Identity = senderIdentity,
                         Capture = capture,
                         CaptureTimestamp = captureTimestamp
-                    });
+                    }, null, null);
             }
             catch (Exception ex)
             {
