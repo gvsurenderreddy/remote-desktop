@@ -120,7 +120,7 @@ namespace AudioStreaming
                         // todo: make the microphone capture timespan configurable
                         float timespan = float.Parse(ConfigurationManager.AppSettings["audioTimerInterval"]);
 
-                        _microphone.BufferDuration = TimeSpan.FromSeconds(timespan);
+                        _microphone.BufferDuration = TimeSpan.FromMilliseconds(timespan);
                         _buffer = new byte[_microphone.GetSampleSizeInBytes(_microphone.BufferDuration)];
                         _microphone.BufferReady += OnBufferReady;
                         _isRunning = true;
