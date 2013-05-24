@@ -170,7 +170,9 @@ namespace AudioStreaming
                         _onCaptureReady.Invoke(this, new AudioCaptureEventArgs()
                         {
                             Capture = _stream.GetBuffer()
-                        });
+                        }
+                        //, null, null
+                        );
                         _stream = new MemoryStream(); 
                         _capturesCount = 0;
                     }
