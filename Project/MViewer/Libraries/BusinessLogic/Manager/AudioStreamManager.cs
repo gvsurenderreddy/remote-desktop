@@ -22,7 +22,6 @@ namespace GenericObjects
         EventHandler _onCaptureAvailable;
         int _timerInterval;
         ManualResetEvent _syncCaptures = new ManualResetEvent(true);
-        SoundEffect sound;
         readonly object _syncPlay = new object();
 
         #endregion
@@ -47,7 +46,7 @@ namespace GenericObjects
                 {
                     return;
                 }
-                sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
                 //sound = Content
                 SoundEffect.MasterVolume = 1f;
 
