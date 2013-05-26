@@ -27,8 +27,7 @@ namespace GenericObjects
         void WaitRoomButtonAction(bool wait, GenericEnums.RoomType roomType);
         bool RequestTransferPermission(string identity, string fileName, long fileSize);
         bool RequestConferencePermission(string identity, GenericEnums.RoomType roomType);
-        void FocusActionsForm();
-
+    
         bool VideoCaptureClosed { get; }
         IRoomManager RoomManager { get; }
     }

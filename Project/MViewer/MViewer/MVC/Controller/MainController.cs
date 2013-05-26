@@ -102,12 +102,6 @@ namespace MViewer
             }
         }
 
-        public void FocusActionsForm()
-        {
-            // todo: remove FocusActionsForm if not necessary
-            _view.FocusActionsForm();
-        }
-
         // todo: optional - convert this to an event handler , use it in the Video Form as observer
         /// <summary>
         /// method used to update the active room and the actions form labels

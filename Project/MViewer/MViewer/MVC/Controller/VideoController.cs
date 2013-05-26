@@ -356,9 +356,6 @@ namespace MViewer
                     {
                         // send the capture if the session isn't paused
                         transferStatus.Video = true;
-
-                        // todo: enforce web timer start for partner side
-
                         _model.ClientController.SendVideoCapture(capture,timestamp,
                             receiverIdentity, _model.Identity.MyIdentity);
                     }

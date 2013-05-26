@@ -148,11 +148,6 @@ namespace AudioStreaming
         {
             try
             {
-                //SyncChunk.WaitOne();
-
-                //todo: remove this log
-                Tools.Instance.Logger.LogInfo("buffer ready of " + _buffer.Length + " bytes");
-
                 if (_isRunning)
                 {
                     Array.Clear(_buffer, 0, _buffer.Length);
@@ -166,13 +161,12 @@ namespace AudioStreaming
 
                     if (_capturesCount == 1)
                     {
-                        // todo: push microphone capture
+                        //  push microphone capture
                         _onCaptureReady.Invoke(this, new AudioCaptureEventArgs()
                         {
                             Capture = _stream.GetBuffer(),
                             CaptureTimestamp = DateTime.Now
                         }
-                        //, null, null
                         );
                         _stream = new MemoryStream(); 
                         _capturesCount = 0;

@@ -132,6 +132,7 @@ namespace MViewer
                 {
                     this.TopMost = true;
                     this.BringToFront();
+                    this.Activate();
                 }));
             }
         }

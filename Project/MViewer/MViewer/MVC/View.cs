@@ -312,29 +312,6 @@ namespace MViewer
             }
         }
 
-        // todo: remove the focus actions method if not necessary
-        /// <summary>
-        /// method used to set focus to the actions form
-        /// </summary>
-        public void FocusActionsForm()
-        {
-            try
-            {
-                _formActions.Invoke(new MethodInvoker
-                           (
-                          delegate
-                          {
-                              _formActions.Activate();
-                          }
-                           )
-                           );
-            }
-            catch (Exception ex)
-            {
-                Tools.Instance.Logger.LogError(ex.ToString());
-            }
-        }
-
         /// <summary>
         /// method used to trigger contacts re-load
         /// </summary>

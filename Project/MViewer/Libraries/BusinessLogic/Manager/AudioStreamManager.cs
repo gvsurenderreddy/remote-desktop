@@ -49,9 +49,6 @@ namespace GenericObjects
                 //sound = Content
                 SoundEffect.MasterVolume = 1f;
 
-                //todo: remove this log
-                Tools.Instance.Logger.LogInfo("playing capture of " + capture.Length + " bytes");
-
                 sound.Play();
 
                 Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");

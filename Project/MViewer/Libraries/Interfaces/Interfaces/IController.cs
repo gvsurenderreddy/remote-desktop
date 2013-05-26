@@ -39,8 +39,7 @@ namespace GenericObjects
         ContactBase PerformContactsOperation(object sender, EventArgs ee);
         void StartVideo(IWebcamCapture webcamControl);
         void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
-        void FocusActionsForm();
-
+  
         void OnVideoImageCaptured(object source, EventArgs e);
         void OnRemotingImageCaptured(object source, EventArgs e);
         void InitializeSettings();
