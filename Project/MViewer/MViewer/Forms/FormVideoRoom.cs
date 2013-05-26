@@ -201,21 +201,22 @@ namespace MViewer
 
         bool CanDisplayVideo(DateTime videoTimestamp)
         {
-            DateTime defaultTime = new DateTime();
-            if (defaultTime == _lastAudioTimestamp)
-            {
-                // pre-condition
-                return true;
-            }
-            if (_lastAudioTimestamp != null && _lastAudioTimestamp < videoTimestamp)
-            {
-                TimeSpan diffResult = videoTimestamp.Subtract(_lastAudioTimestamp);
-                if (diffResult.TotalMilliseconds < 2000)
-                {
-                    return true;
-                }
-            }
-            return false;
+            //DateTime defaultTime = new DateTime();
+            //if (defaultTime == _lastAudioTimestamp)
+            //{
+            //    // pre-condition
+            //    return true;
+            //}
+            //if (_lastAudioTimestamp != null && _lastAudioTimestamp < videoTimestamp)
+            //{
+            //    TimeSpan diffResult = videoTimestamp.Subtract(_lastAudioTimestamp);
+            //    if (diffResult.TotalMilliseconds < 2000)
+            //    {
+            //        return true;
+            //    }
+            //}
+            //return false;
+            return true;
         }
 
         #endregion

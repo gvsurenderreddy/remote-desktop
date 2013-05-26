@@ -374,7 +374,7 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void VideoCaptureObserver(object sender, EventArgs e)
+        void OnVideoCaptureReceived(object sender, EventArgs e)
         {
             try
             {

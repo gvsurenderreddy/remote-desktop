@@ -65,7 +65,7 @@ namespace MViewer
                 ControllerEventHandlers handlers = new ControllerEventHandlers()
                 {
                     ClientConnectedObserver = this.ClientConnectedObserver,
-                    VideoCaptureObserver = this.VideoCaptureObserver,
+                    VideoCaptureObserver = this.OnVideoCaptureReceived,
                     AudioCaptureObserver = this.OnAudioCaptureReceived,
                     ContactsObserver = this.ContactsObserver,
                     RoomButtonObserver = this.OnRoomButtonActionTriggered,
