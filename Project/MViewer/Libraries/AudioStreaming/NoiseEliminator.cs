@@ -43,7 +43,7 @@ namespace AudioStreaming
 
             // Use ProcessStartInfo class
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.CreateNoWindow = false;
+            startInfo.CreateNoWindow = true;
             startInfo.UseShellExecute = false;
             startInfo.FileName = soxDir + "sox.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
