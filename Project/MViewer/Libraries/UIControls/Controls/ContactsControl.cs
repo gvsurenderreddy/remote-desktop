@@ -232,6 +232,11 @@ namespace UIControls
 
         #region private methods
 
+        private void dgvContacts_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            Tools.Instance.Logger.LogError(e.Exception.ToString());
+        }
+
         void InitializeNotificationLabel()
         {
             try
@@ -312,6 +317,8 @@ namespace UIControls
         }
 
         #endregion
+
+
 
     }
 }

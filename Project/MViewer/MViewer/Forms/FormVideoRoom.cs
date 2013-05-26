@@ -199,13 +199,6 @@ namespace MViewer
 
         #region private methods
 
-        // todo: remove FormVideoRoom_Deactivate
-        private void FormVideoRoom_Deactivate(object sender, EventArgs e)
-        {
-            // optional - todo: find a better way to update the button labels
-            //Program.Controller.OnActiveRoomChanged(string.Empty, this.RoomType);
-        }
-
         bool CanDisplayVideo(DateTime videoTimestamp)
         {
             DateTime defaultTime = new DateTime();

@@ -90,6 +90,7 @@
             this.dgvContacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvContacts.ShowEditingIcon = false;
             this.dgvContacts.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContacts_CellEnter);
+            this.dgvContacts.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvContacts_DataError);
             // 
             // btnClose
             // 
