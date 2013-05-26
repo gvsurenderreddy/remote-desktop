@@ -109,24 +109,38 @@ namespace MViewer
             bool canStart = false;
             try
             {
-                _formMain.Invoke(new MethodInvoker(delegate(){
-                _formMain.BringToFront();}));
-                string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
-                  _formMain.Invoke(new MethodInvoker(delegate(){
-                DialogResult dialogResult = MessageBox.Show(_formMain,
-                    string.Format("{0} is asking of {1} conference permission. Do you agree?",
-                    friendlyName, roomType.ToString()),
-                    "Conference confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (dialogResult == DialogResult.Yes)
+                _formMain.Invoke(new MethodInvoker(delegate()
                 {
-                    canStart = true;
-                }
-                  }));
+                    _formMain.TopMost = true;
+                }));
+                _formMain.Invoke(new MethodInvoker(delegate()
+                {
+                    _formMain.BringToFront();
+                }));
+                string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
+                _formMain.Invoke(new MethodInvoker(delegate()
+                {
+                    DialogResult dialogResult = MessageBox.Show(_formMain,
+                        string.Format("{0} is asking of {1} conference permission. Do you agree?",
+                        friendlyName, roomType.ToString()),
+                        "Conference confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        canStart = true;
+                    }
+                }));
             }
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                _formMain.Invoke(new MethodInvoker(delegate()
+                {
+                    _formMain.TopMost = false;
+                }));
             }
             return canStart;
         }
