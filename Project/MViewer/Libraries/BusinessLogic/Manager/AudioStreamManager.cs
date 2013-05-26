@@ -45,14 +45,16 @@ namespace GenericObjects
                 {
                     return;
                 }
+                NoiseEliminator eliminator = new NoiseEliminator(capture);
+                byte[] clear = eliminator.EliminateNoise();
 
-                SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                SoundEffect sound = new SoundEffect(clear, Microphone.Default.SampleRate, AudioChannels.Mono);
                 //sound = Content
                 SoundEffect.MasterVolume = 1f;
 
                 sound.Play();
 
-                Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
+                Tools.Instance.Logger.LogInfo("played capture of " + clear.Length + " bytes");
 
                 Thread.Sleep(2100);
                 

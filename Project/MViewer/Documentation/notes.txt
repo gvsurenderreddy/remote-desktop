@@ -1,3 +1,8 @@
+
+
+I haven't found a good library for audio noise reduction. However SoX is a really good open source command line sound processing utility. Check out their documentation page, specifically noiseprof and noisered. 
+
+
 Improvements:
 - swap 3DES with AES, do tests
 - use garbage collector everywhere

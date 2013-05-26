@@ -112,8 +112,8 @@ namespace AudioStreaming
                         gameWindowForm.ControlBox = false;
                         gameWindowForm.ShowIcon = false;
                         gameWindowForm.Opacity = 0;
-                        gameWindowForm.Left = 0;
-                        gameWindowForm.Top = 0;
+                        gameWindowForm.Left = 1;
+                        gameWindowForm.Top = 1;
 
                         FrameworkDispatcher.Update();
 
