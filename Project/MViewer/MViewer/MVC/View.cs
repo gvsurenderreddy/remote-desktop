@@ -109,7 +109,8 @@ namespace MViewer
             bool canStart = false;
             try
             {
-                _formMain.BringToFront();
+                _formMain.Invoke(new MethodInvoker(delegate(){
+                _formMain.BringToFront();}));
                 string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
 
                 DialogResult dialogResult = MessageBox.Show(_formMain,
