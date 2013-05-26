@@ -46,20 +46,34 @@ namespace GenericObjects
                 {
                     return;
                 }
-                NoiseEliminator eliminator = new NoiseEliminator(capture);
-                byte[] clear = eliminator.EliminateNoise();
+               
 
                 bool eliminateNoise = bool.Parse(ConfigurationManager.AppSettings["eliminateNoise"]);
 
-                if (eliminateNoise && clear != null && clear.Length > 0)
+                if (eliminateNoise)
                 {
-                    SoundEffect sound = new SoundEffect(clear, Microphone.Default.SampleRate, AudioChannels.Mono);
-                    //sound = Content
-                    SoundEffect.MasterVolume = 1f;
-                    sound.Play();
-                    Tools.Instance.Logger.LogInfo("played capture of " + clear.Length + " bytes");
-                    Thread.Sleep(2100);
-                    sound.Dispose();
+                    NoiseEliminator eliminator = new NoiseEliminator(capture);
+                    byte[] clear = eliminator.EliminateNoise();
+                    if (clear != null && clear.Length > 0)
+                    {
+                        SoundEffect sound = new SoundEffect(clear, Microphone.Default.SampleRate, AudioChannels.Mono);
+                        //sound = Content
+                        SoundEffect.MasterVolume = 1f;
+                        sound.Play();
+                        Tools.Instance.Logger.LogInfo("played capture of " + clear.Length + " bytes");
+                        Thread.Sleep(2100);
+                        sound.Dispose();
+                    }
+                    else
+                    {
+                        SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                        //sound = Content
+                        SoundEffect.MasterVolume = 1f;
+                        sound.Play();
+                        Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
+                        Thread.Sleep(2100);
+                        sound.Dispose();
+                    }
                 }
                 else
                 {
