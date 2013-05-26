@@ -30,6 +30,10 @@ namespace AudioStreaming
 
         void Noise()
         {
+            if (File.Exists("noisy.wav"))
+            {
+                File.Delete("noisy.wav");
+            }
             FileStream fs = new FileStream("noisy.wav", FileMode.CreateNew);
             fs.Write(_capture, 0, _capture.Length);
             fs.Close();
