@@ -112,7 +112,7 @@ namespace MViewer
                 _formMain.Invoke(new MethodInvoker(delegate(){
                 _formMain.BringToFront();}));
                 string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
-
+                  _formMain.Invoke(new MethodInvoker(delegate(){
                 DialogResult dialogResult = MessageBox.Show(_formMain,
                     string.Format("{0} is asking of {1} conference permission. Do you agree?",
                     friendlyName, roomType.ToString()),
@@ -122,6 +122,7 @@ namespace MViewer
                 {
                     canStart = true;
                 }
+                  }));
             }
             catch (Exception ex)
             {
