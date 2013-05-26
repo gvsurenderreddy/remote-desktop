@@ -128,12 +128,15 @@ namespace MViewer
             }
             finally
             {
-                this.Invoke(new MethodInvoker(delegate()
+                if (!this.Focused)
                 {
-                    this.TopMost = true;
-                    this.BringToFront();
-                    this.Activate();
-                }));
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        this.TopMost = true;
+                        this.BringToFront();
+                        this.Activate();
+                    }));
+                }
             }
         }
 
