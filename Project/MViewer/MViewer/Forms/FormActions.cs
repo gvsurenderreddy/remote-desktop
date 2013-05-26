@@ -126,6 +126,14 @@ namespace MViewer
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
+            finally
+            {
+                this.Invoke(new MethodInvoker(delegate()
+                {
+                    this.TopMost = true;
+                    this.BringToFront();
+                }));
+            }
         }
 
         #endregion
