@@ -81,9 +81,8 @@ namespace GenericObjects
     
                 if (capture != null && capture.Length > 0)
                 {
-                    _onCaptureAvailable.Invoke(this, eventArgs
-                    //, null, null
-                        );
+                    _onCaptureAvailable.BeginInvoke(this, eventArgs
+                   , null, null);
                 }
                 else
                 {
