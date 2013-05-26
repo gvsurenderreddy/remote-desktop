@@ -4,22 +4,25 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Utils;
 
 namespace AudioStreaming
 {
     public class NoiseEliminator
     {
         byte[] _capture;
+        int _counter;
 
         public NoiseEliminator(byte[] inputCapture)
         {
+            _counter = 0;
             _capture = inputCapture;
         }
 
         public byte[] EliminateNoise()
         {
-            Noise();
-            FileStream fs = new FileStream("noisy.wav", FileMode.Open);
+            string filename = ProcessNoise();
+            FileStream fs = new FileStream(filename, FileMode.Open);
             byte[] clear = new byte[fs.Length];
             fs.Read(clear, 0, clear.Length);
             fs.Close();
@@ -28,13 +31,25 @@ namespace AudioStreaming
             return clear;
         }
 
-        void Noise()
+        string ProcessNoise()
         {
-            if (File.Exists("noisy.wav"))
+            bool exists = true;
+            string filename = "";
+            while (exists)
             {
-                File.Delete("noisy.wav");
+                if (File.Exists("noisy" + _counter.ToString() + ".wav"))
+                {
+                    exists = true;
+                    _counter++;
+                    File.Delete("noisy.wav");
+                }
+                else
+                {
+                    filename = "noisy" + _counter.ToString() + ".wav";
+                    exists = false;
+                }
             }
-            FileStream fs = new FileStream("noisy.wav", FileMode.CreateNew);
+            FileStream fs = new FileStream(filename, FileMode.CreateNew);
             fs.Write(_capture, 0, _capture.Length);
             fs.Close();
             fs.Dispose();
@@ -47,7 +62,7 @@ namespace AudioStreaming
             startInfo.UseShellExecute = false;
             startInfo.FileName = soxDir + "sox.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = "noisy.wav −n trim 0 1 noiseprof | play noisy.wav noisered";
+            startInfo.Arguments = filename + " −n trim 0 1 noiseprof | play " + filename + " noisered";
 
             try
             {
@@ -58,10 +73,11 @@ namespace AudioStreaming
                     exeProcess.WaitForExit();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                // Log error.
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
+            return filename;
         }
     }
 }
