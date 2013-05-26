@@ -1,4 +1,5 @@
 ﻿
+using Alvas.Audio;
 using AudioStreaming;
 using Microsoft.Xna.Framework.Audio;
 using System;
@@ -45,13 +46,16 @@ namespace GenericObjects
                 {
                     return;
                 }
-                SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+
+                byte[] resampled = Resample(capture);
+
+                SoundEffect sound = new SoundEffect(resampled, Microphone.Default.SampleRate, AudioChannels.Mono);
                 //sound = Content
                 SoundEffect.MasterVolume = 1f;
 
                 sound.Play();
 
-                Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
+                Tools.Instance.Logger.LogInfo("played capture of " + resampled.Length + " bytes");
 
                 Thread.Sleep(2100);
                 
@@ -67,6 +71,28 @@ namespace GenericObjects
 
                 GC.Collect();
             }
+        }
+
+        byte[] Resample(byte[] receivedCapture)
+        {
+            MemoryStream ms = new MemoryStream();
+            MemoryStream input = new MemoryStream(receivedCapture);
+            IntPtr formatNew = AudioCompressionManager.GetPcmFormat(2, 16, 44100);
+            for (int i = 0; i < 100; i++)
+            {
+                WaveReader wr = new WaveReader(input);
+
+                IntPtr format = wr.ReadFormat();
+
+                byte[] data = wr.ReadData();
+
+                wr.Close();
+
+                byte[] dataNew = AudioCompressionManager.Resample(format, data, formatNew);
+                ms.Write(dataNew, 0, dataNew.Length);
+
+            }
+            return ms.GetBuffer();
         }
 
         void OnAudioReady(object sender, EventArgs e)
