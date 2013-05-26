@@ -109,9 +109,10 @@ namespace MViewer
             bool canStart = false;
             try
             {
+                _formMain.BringToFront();
                 string friendlyName = ((Contact)_model.GetContact(identity)).FriendlyName;
 
-                DialogResult dialogResult = MessageBox.Show(
+                DialogResult dialogResult = MessageBox.Show(_formMain,
                     string.Format("{0} is asking of {1} conference permission. Do you agree?",
                     friendlyName, roomType.ToString()),
                     "Conference confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
