@@ -169,7 +169,8 @@ namespace AudioStreaming
                         // todo: push microphone capture
                         _onCaptureReady.Invoke(this, new AudioCaptureEventArgs()
                         {
-                            Capture = _stream.GetBuffer()
+                            Capture = _stream.GetBuffer(),
+                            CaptureTimestamp = DateTime.Now
                         }
                         //, null, null
                         );

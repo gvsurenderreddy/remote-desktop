@@ -17,7 +17,6 @@ namespace GenericObjects
         #region private members
 
         ManualResetEvent _syncAudioInstance = new ManualResetEvent(false);
-        System.Timers.Timer _timer;
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
         int _timerInterval;
@@ -77,26 +76,16 @@ namespace GenericObjects
         {
             try
             {
-                //_timer.Stop();
                 _syncCaptures.WaitOne();
                 _syncAudioInstance.WaitOne();
 
-                //_audioStream.SyncChunk.Reset();
                 AudioCaptureEventArgs eventArgs = (AudioCaptureEventArgs)e;
-                //byte[] capture = _audioStream.Stream != null ? _audioStream.Stream.GetBuffer() : new byte[0];
                 byte[] capture = eventArgs.Capture;
-                //_audioStream.SyncChunk.Set();
-
-                //_audioStream.Stream = new MemoryStream();
-
+    
                 if (capture != null && capture.Length > 0)
                 {
-                    _onCaptureAvailable.Invoke(this, new AudioCaptureEventArgs()
-                    {
-                        Capture = capture,
-                        CaptureTimestamp = DateTime.Now
-                    }
-                    //, null, null
+                    _onCaptureAvailable.BeginInvoke(this, eventArgs
+                    , null, null
                         );
                 }
                 else
@@ -111,13 +100,6 @@ namespace GenericObjects
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
-            }
-            finally
-            {
-                if (_timer != null && _timer.Enabled == false)
-                {
-                    //_timer.Start();
-                }
             }
         }
 
@@ -148,12 +130,6 @@ namespace GenericObjects
         {
             try
             {
-                if (_timer == null)
-                {
-                    _timer = new System.Timers.Timer(_timerInterval);
-                    //_timer.Elapsed += new ElapsedEventHandler(OnAudioReady);
-                }
-
                 if (_audioStream == null)
                 {
                     Thread t = new Thread(delegate()
@@ -182,7 +158,6 @@ namespace GenericObjects
                         _audioStream.StartAudio();
                     }
                 }
-                _timer.Start();
             }
             catch (Exception ex)
             {
@@ -195,10 +170,6 @@ namespace GenericObjects
             try
             {
                 _syncCaptures.Reset();
-                if (_timer != null)
-                {
-                    _timer.Stop();
-                }
                 if (_audioStream != null)
                 {
                     _audioStream.StopAudio();
