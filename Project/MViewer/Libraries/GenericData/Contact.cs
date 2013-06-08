@@ -9,57 +9,25 @@ namespace GenericObjects
 {
     public class Contact : ContactBase
     {
-        #region private members
-
-        int _contactNo;
-        string _friendlyName;
-        string _identity;
-        GenericEnums.ContactStatus _status;
-
-        #endregion
-
         #region c-tor
 
         public Contact(int contactNo, string friendlyName, string identity)
         {
-            _contactNo = contactNo;
-            _friendlyName = friendlyName;
-            _identity = identity;
-            _status = GenericEnums.ContactStatus.Offline;
+            ContactNo = contactNo;
+            FriendlyName = friendlyName;
+            Identity = identity;
+            Status = GenericEnums.ContactStatus.Offline;
         }
 
         public Contact(int contactNo, string identity, GenericEnums.ContactStatus newStatus)
         {
-            _contactNo = contactNo;
-            _identity = identity;
-            _status = newStatus;
+            ContactNo = contactNo;
+            Identity = identity;
+            Status = newStatus;
         }
 
         #endregion
 
-        #region proprieties
 
-        public override int ContactNo
-        {
-            get { return _contactNo; }
-        }
-
-        public override string FriendlyName
-        {
-            get { return _friendlyName; }
-            set { _friendlyName = value; }
-        }
-
-        public override string Identity
-        {
-            get { return _identity; }
-        }
-
-        public GenericEnums.ContactStatus Status
-        {
-            get { return _status; }
-        }
-
-        #endregion
     }
 }

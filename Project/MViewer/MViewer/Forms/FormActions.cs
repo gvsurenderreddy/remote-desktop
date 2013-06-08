@@ -128,15 +128,16 @@ namespace MViewer
             }
             finally
             {
-                if (!this.Focused)
-                {
-                    this.Invoke(new MethodInvoker(delegate()
-                    {
-                        this.TopMost = true;
-                        this.BringToFront();
-                        this.Activate();
-                    }));
-                }
+                // todo: fix the actions form focus issue
+                //if (!this.Focused)
+                //{
+                //    this.Invoke(new MethodInvoker(delegate()
+                //    {
+                //        this.TopMost = true;
+                //        this.BringToFront();
+                //        this.Activate();
+                //    }));
+                //}
             }
         }
 

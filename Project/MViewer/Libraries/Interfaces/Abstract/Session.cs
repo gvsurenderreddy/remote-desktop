@@ -14,7 +14,7 @@ namespace GenericObjects
         protected string _identity;
         protected PeerStates _peers;
         protected PendingTransfer _pendingTransfer;
-        protected TransferStatusUptading _transferUpdating;
+        protected ConferenceStatus _transferUpdating;
 
         #endregion
     }

@@ -369,7 +369,7 @@ namespace MViewer
             try
             {
                 _model.ClientController.AddClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
-                _model.ClientController.StartClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
+                //_model.ClientController.StartClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
                 _model.ClientController.SendRemotingCommand(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity, args);
                 _model.ClientController.RemoveClient(((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity);
             }
@@ -404,7 +404,7 @@ namespace MViewer
                     {
                         // I am going to send my captures by using the below client
                         _model.ClientController.AddClient(e.Identity);
-                        _model.ClientController.StartClient(e.Identity);
+                        //_model.ClientController.StartClient(e.Identity);
 
                         // create client session
                         ClientSession clientSession = new ClientSession(e.Identity, e.RoomType);
@@ -442,8 +442,8 @@ namespace MViewer
                 {
                     _syncRemotingCaptureActivity.Reset();
 
-                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(e.Identity);
-                    transfer.IsRemotingUpdating = true;
+                    ConferenceStatus conference = _model.SessionManager.GetConferenceStatus(e.Identity);
+                    conference.IsRemotingStatusUpdating = true;
 
                     // check if the screen capture is pending for being sent
                     PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(e.Identity);
@@ -453,17 +453,15 @@ namespace MViewer
                         Thread.Sleep(200);
                     }
 
+                    PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
+                    peers.RemotingSessionState = GenericEnums.SessionState.Closed;
                     if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
                         // send the stop command to the partner
-                        _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, 
+                        _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity,
                             e.Identity, e.RoomType, e.SignalType);
                     }
-
-                    PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
-                    peers.RemotingSessionState = GenericEnums.SessionState.Closed;
                     _model.SessionManager.RemoveSession(e.Identity);
-
                     _model.RemoveClient(e.Identity);
 
                     _view.RoomManager.CloseRoom(e.Identity, GenericEnums.RoomType.Remoting);
@@ -476,11 +474,9 @@ namespace MViewer
                         _view.ResetLabels(e.RoomType);
                     }
 
-                    // unblock the capture sending
-                    transfer.IsRemotingUpdating = false;
-
                     OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
-
+                    // unblock the capture sending
+                    conference.IsRemotingStatusUpdating = false; 
                     _syncRemotingCaptureActivity.Set();
                 }
             }
@@ -550,8 +546,8 @@ namespace MViewer
                         {
                             // send the remoting capture to active remoting room
                             string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).RemotingRoomIdentity;
-                            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                            while (transfer.IsRemotingUpdating)
+                            ConferenceStatus transfer = _model.SessionManager.GetConferenceStatus(receiverIdentity);
+                            while (transfer.IsRemotingStatusUpdating)
                             {
                                 Thread.Sleep(200);
                             }
@@ -607,35 +603,39 @@ namespace MViewer
         {
             foreach (string receiverIdentity in connectedSessions)
             {
-                try
+                Thread t = new Thread(delegate()
                 {
-                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                    while (transfer.IsRemotingUpdating)
+                    try
                     {
-                        Thread.Sleep(200);
+                        ConferenceStatus transfer = _model.SessionManager.GetConferenceStatus(receiverIdentity);
+                        while (transfer.IsRemotingStatusUpdating)
+                        {
+                            Thread.Sleep(200);
+                        }
+
+                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                        // check if the stop signal has been sent from the UI
+
+                        // check if the stop signal has been sent by the partner
+                        PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                        if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
+                            || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
+                        {
+                            // send the capture if the session isn't paused
+                            transferStatus.Remoting = true;
+
+                            _model.ClientController.SendRemotingCapture(screenCapture,
+                                mouseCapture, receiverIdentity, _model.Identity.MyIdentity);
+                        }
+
+                        transferStatus.Remoting = false;
                     }
-
-                    PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                    // check if the stop signal has been sent from the UI
-
-                    // check if the stop signal has been sent by the partner
-                    PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                    if (peers.RemotingSessionState == GenericEnums.SessionState.Opened
-                        || peers.RemotingSessionState == GenericEnums.SessionState.Pending)
+                    catch (Exception ex)
                     {
-                        // send the capture if the session isn't paused
-                        transferStatus.Remoting = true;
-
-                        _model.ClientController.SendRemotingCapture(screenCapture,
-                            mouseCapture, receiverIdentity, _model.Identity.MyIdentity);
+                        Tools.Instance.Logger.LogError(ex.ToString());
                     }
-
-                    transferStatus.Remoting = false;
-                }
-                catch (Exception ex)
-                {
-                    Tools.Instance.Logger.LogError(ex.ToString());
-                }
+                });
+                t.Start();
             }
         }
 
@@ -694,7 +694,7 @@ namespace MViewer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void RemotingCaptureObserver(object sender, EventArgs e)
+        private void OnRemotingCaptureReceived(object sender, EventArgs e)
         {
             try
             {

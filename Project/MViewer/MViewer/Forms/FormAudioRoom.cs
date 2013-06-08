@@ -46,14 +46,15 @@ namespace MViewer
             Tools.Instance.GenericMethods.ChangeLanguage(language, this.Controls, typeof(FormAudioRoom));
         }
 
-        public void PlayAudioCapture(byte[] capture)
+        public void PlayAudioCapture(byte[] capture, double captureLengthInSeconds)
         {
             try
             {
                 _onCaptureReceived.Invoke(this, new AudioCaptureEventArgs()
                 {
                     Capture = capture,
-                    Identity = this.PartnerIdentity
+                    Identity = this.PartnerIdentity,
+                    CaptureLengthInSeconds = captureLengthInSeconds
                 });
             }
             catch (Exception ex)

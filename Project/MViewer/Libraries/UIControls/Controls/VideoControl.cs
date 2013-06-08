@@ -12,11 +12,29 @@ namespace UIControls
 {
     public partial class VideoControl : UserControl
     {
+        readonly object _syncPictures = new object();
+        IDictionary<DateTime, Image> _captures;
+
         #region c-tor
 
         public VideoControl()
         {
+            _captures = new Dictionary<DateTime, Image>();
             InitializeComponent();
+        }
+
+        #endregion
+
+        #region private methods
+
+        void AddPicture(Image toAdd)
+        {
+            _captures.Add(DateTime.Now, toAdd);
+        }
+
+        Image PickOldestPicture()
+        {
+            return _captures[_captures.Keys.Min()];
         }
 
         #endregion
@@ -37,14 +55,28 @@ namespace UIControls
 
         public void SetPicture(Image picture)
         {
-            try
+            lock (_syncPictures)
             {
-                Image resized = Tools.Instance.ImageConverter.ResizeImage(picture, pbVideo.Width, pbVideo.Height);
-                pbVideo.Image = resized;
-            }
-            catch (Exception ex)
-            {
-                Tools.Instance.Logger.LogError(ex.ToString());
+                try
+                {
+                    Image toDisplay = picture;
+                    if (_captures.Count > 0)
+                    {
+                        toDisplay = PickOldestPicture();
+                        this.AddPicture(picture);
+                    }
+                    Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbVideo.Width, pbVideo.Height);
+                    pbVideo.Image = resized;
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        pbVideo.Update();
+                        pbVideo.Refresh();
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                }
             }
         }
 

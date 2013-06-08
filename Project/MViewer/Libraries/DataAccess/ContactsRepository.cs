@@ -65,14 +65,22 @@ namespace DataAccessLayer
 
         public int AddContact(ContactBase contact)
         {
-            DataRow dr = _contactsDataView.Table.NewRow();
-            dr["ContactNo"] = dr.Table.Rows.Count;
-            dr["FriendlyName"] = contact.FriendlyName;
-            dr["Identity"] = contact.Identity;
-            _contactsDataView.Table.Rows.Add(dr);
-            SaveContacts();
-            LoadContacts(_xmlFilePath);
-            return int.Parse(dr["ContactNo"].ToString());
+            ContactBase existingContact = GetContactByIdentity(contact.Identity);
+            if(existingContact != null)
+            {
+                return -1;
+            }
+            else
+            {
+                DataRow dr = _contactsDataView.Table.NewRow();
+                dr["ContactNo"] = dr.Table.Rows.Count;
+                dr["FriendlyName"] = contact.FriendlyName;
+                dr["Identity"] = contact.Identity;
+                _contactsDataView.Table.Rows.Add(dr);
+                SaveContacts();
+                LoadContacts(_xmlFilePath);
+                return int.Parse(dr["ContactNo"].ToString());
+            }
         }
 
         public void RemoveContact(int contactNo)

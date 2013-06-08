@@ -104,17 +104,17 @@ namespace BusinessLogicLayer
             return activated;
         }
 
-        public void PlayAudioCapture(string identity, byte[] capture, DateTime timestamp)
+        public void PlayAudioCapture(string identity, byte[] capture, DateTime timestamp, double captureLengthInSeconds)
         {
             try
             {
-                lock (_syncRooms)
+                //lock (_syncRooms)
                 {
                     string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Audio);
                     if (_rooms != null && _rooms.ContainsKey(roomID))
                     {
                         IAudioRoom room = (IAudioRoom)_rooms[roomID];
-                        room.PlayAudioCapture(capture);
+                        room.PlayAudioCapture(capture, captureLengthInSeconds);
                         string videoRoomID = GenerateRoomID(identity, GenericEnums.RoomType.Video);
                         if(_rooms.ContainsKey(videoRoomID))
                         {
@@ -134,7 +134,7 @@ namespace BusinessLogicLayer
         {
             try
             {
-                lock (_syncRooms)
+                //lock (_syncRooms)
                 {
                     string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Remoting);
                     if (_rooms != null && _rooms.ContainsKey(roomID))
@@ -154,7 +154,7 @@ namespace BusinessLogicLayer
         {
             try
             {
-                lock (_syncRooms)
+                //lock (_syncRooms)
                 {
                     string roomID = GenerateRoomID(identity, GenericEnums.RoomType.Video);
                     if (_rooms != null && _rooms.ContainsKey(roomID))
@@ -174,7 +174,7 @@ namespace BusinessLogicLayer
         {
             try
             {
-                lock (_syncRooms)
+                //lock (_syncRooms)
                 {
                     string roomID = GenerateRoomID(identity, roomType);
                     if (_rooms != null && _rooms.ContainsKey(roomID))
@@ -288,7 +288,7 @@ namespace BusinessLogicLayer
         {
             get
             {
-                lock (_syncRooms)
+                //lock (_syncRooms)
                 {
                     //if (VideoRoomsLeft() == false || RemotingRoomsLeft() == false == AudioRoomsLeft() == false)
                     //{
@@ -300,7 +300,7 @@ namespace BusinessLogicLayer
             }
             set
             {
-                lock (_syncRooms)
+                //lock (_syncRooms)
                 { 
                     _activeRooms = value; 
                 }

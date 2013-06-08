@@ -92,7 +92,6 @@ namespace GenericObjects
                 // set the timer information
                 _timerRunning = true;
                 _timer.Start();
-                _timer.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -231,40 +230,42 @@ namespace GenericObjects
 
                 if (!_threadAborted && !_webcamClosed)
                 {
-                    if (!_threadAborted && !_webcamClosed)
+                    while (ParentForm.Visible == false)
                     {
-                        while (ParentForm.Visible == false)
-                        {
-                            Thread.Sleep(1000);
-                        }
-                        _timerRunning = false;
+                        Thread.Sleep(100);
+                    }
+                    _timerRunning = false;
 
-                        // get the next image
-                        WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_GET_FRAME, IntPtr.Zero, IntPtr.Zero);
+                    // get the next image
+                    WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_GET_FRAME, IntPtr.Zero, IntPtr.Zero);
 
-                        // copy the image to the clipboard
-                        WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_COPY, IntPtr.Zero, IntPtr.Zero);
+                    // copy the image to the clipboard
+                    WebcamWin32APIMethods.SendMessage(_captureWindowHandler, WebcamWin32APIConstants.WM_CAP_COPY, IntPtr.Zero, IntPtr.Zero);
                         
-                        // push the image into the capture event args
-                        if (ImageCaptured != null)
+                    // push the image into the capture event args
+                    if (ImageCaptured != null)
+                    {
+                        // get image from the clipboard
+                        System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
+                        Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
+                        if (tempObject.GetDataPresent(DataFormats.Bitmap, true))
                         {
-                            // get image from the clipboard
-                            System.Windows.Forms.IDataObject tempObject = Clipboard.GetDataObject();
-                            Image tempImage2 = (System.Drawing.Bitmap)tempObject.GetData(DataFormats.Bitmap);
-                            if (tempObject.GetDataPresent(DataFormats.Bitmap, true))
-                            {
-                                Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
-                                _eventArgs = new VideoCaptureEventArgs();
-                                // resize the image to the required size (the API isn't doing that)
+                            Image tempImage = (Image)tempObject.GetData(DataFormats.Bitmap, true);
+                            _eventArgs = new VideoCaptureEventArgs();
+                            // resize the image to the required size (the API isn't doing that)
 
-                                // add timestamp to be used for synchron with audio
-                                _eventArgs.CaptureTimestamp = DateTime.Now;
+                            // add timestamp to be used for synchron with audio
+                            _eventArgs.CaptureTimestamp = DateTime.Now;
 
-                                _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, this._width, this._height);
+                            _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, 
+                                this._width, this._height);
 
-                                // raise the capture event
-                                this.ImageCaptured(this, _eventArgs);
-                            }
+                            // todo: remove picture saving
+                            //_eventArgs.CapturedImage.Save("c:\\sent\\sent_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" +
+                            //    DateTime.Now.Second + "_" + DateTime.Now.Millisecond + "_.bmp", ImageFormat.Bmp);
+
+                            // raise the capture event
+                            this.ImageCaptured.Invoke(this, _eventArgs);
                         }
                     }
                 }

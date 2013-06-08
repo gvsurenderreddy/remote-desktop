@@ -13,6 +13,7 @@ using System.Drawing.Imaging;
 using UIControls;
 using StrategyPattern;
 using Abstraction;
+using System.Diagnostics;
 
 namespace MViewer
 {
@@ -67,14 +68,14 @@ namespace MViewer
                     ClientConnectedObserver = this.ClientConnectedObserver,
                     VideoCaptureObserver = this.OnVideoCaptureReceived,
                     AudioCaptureObserver = this.OnAudioCaptureReceived,
-                    ContactsObserver = this.ContactsObserver,
+                    ContactsObserver = this.OnContactUpdated,
                     RoomButtonObserver = this.OnRoomButtonActionTriggered,
                     WaitRoomActionObserver = this.WaitRoomButtonActionObserver,
                     FileTransferObserver = this.FileTransferObserver,
                     ConferencePermissionObserver = this.ConferencePermissionObserver,
                     FilePermissionObserver = this.FileTransferPermission,
                     RemotingCommandHandler = this.ExecuteRemotingCommand,
-                    RemotingCaptureObserver = this.RemotingCaptureObserver
+                    RemotingCaptureObserver = this.OnRemotingCaptureReceived
                 };
 
                 _model.IntializeModel(handlers);
@@ -189,23 +190,55 @@ namespace MViewer
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <returns></returns>
-        public ContactBase PerformContactsOperation(object sender, EventArgs e)
+        public ContactBase PerformContactOperation(object sender, EventArgs e)
         {
             ContactsEventArgs args = (ContactsEventArgs)e;
             ContactBase contact = null;
             try
             {
-                if (args.Operation == GenericEnums.ContactsOperation.Load)
-                {
-                    // don't need to send signal to the Model
-                    _view.NotifyContactsObserver();
-                }
-                else
+                if (args.Operation != GenericEnums.ContactsOperation.Load)
                 {
                     // add/remove/get/status/name update
                     contact = _model.PerformContactOperation(e);
-                    _view.NotifyContactsObserver();
+                    if (args.Operation == GenericEnums.ContactsOperation.Status 
+                        && args.UpdatedContact.Status == GenericEnums.ContactStatus.Offline)
+                    {
+                        Utils.GenericEnums.SessionState conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
+                            GenericEnums.RoomType.Video);
+                        if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                        {
+                            StopVideo(this, new RoomActionEventArgs()
+                            {
+                                Identity = args.UpdatedContact.Identity,
+                                RoomType = GenericEnums.RoomType.Video,
+                                SignalType = GenericEnums.SignalType.Stop
+                            });
+                        } 
+                        conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
+                             GenericEnums.RoomType.Audio);
+                        if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                        {
+                            StopAudio(this, new RoomActionEventArgs()
+                            {
+                                Identity = args.UpdatedContact.Identity,
+                                RoomType = GenericEnums.RoomType.Audio,
+                                SignalType = GenericEnums.SignalType.Stop
+                            });
+                        }
+                        conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
+                             GenericEnums.RoomType.Remoting);
+                        if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                        {
+                            StopRemoting(this, new RoomActionEventArgs()
+                            {
+                                Identity = args.UpdatedContact.Identity,
+                                RoomType = GenericEnums.RoomType.Remoting,
+                                SignalType = GenericEnums.SignalType.Stop
+                            });
+                        }
+                    }
                 }
+                _view.NotifyContactsObserver();
             }
             catch (Exception ex)
             {
@@ -221,14 +254,15 @@ namespace MViewer
         {
             try
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 // bind the observers
                 _view.BindObservers(true);
 
                 // open main form
                 _view.ShowMainForm(false);
                 _view.NotifyContactsObserver();
-
-                Thread.Sleep(200);
 
                 _view.NotifyIdentityObserver();
                 _model.ServerController.StartServer();
@@ -240,6 +274,12 @@ namespace MViewer
 
                 // notify all online contacts that you came on too
                 _model.NotifyContacts(GenericEnums.ContactStatus.Online);
+
+                stopwatch.Stop();
+                Tools.Instance.Logger.LogInfo(string.Format("Application initialization took: {0} minutes {1} seconds",
+                    stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds));
+
+                _view.SetMessageText("Application initialized");
             }
             catch (Exception ex)
             {
@@ -259,33 +299,52 @@ namespace MViewer
                 bool canExit = _view.ExitConfirmation();
                 if (canExit)
                 {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
+
                     _view.SetFormMainBackgroundImage("Images/closed.gif");
                     _view.SetMessageText("Closing app...");
-                    Thread t = new Thread(delegate()
+
+                    // stop my webcapture form
+                    StopVideoCapturing();
+
+                    IList<string> connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Video);
+                    foreach (string session in connectedSessions)
                     {
-                        try
+                        StopVideo(this, new RoomActionEventArgs()
                         {
-                            StopVideo(this, new RoomActionEventArgs()
-                            {
-                                Identity = ((ActiveRooms)_view.RoomManager.ActiveRooms).VideoRoomIdentity,
-                                RoomType = GenericEnums.RoomType.Video,
-                                SignalType = GenericEnums.SignalType.Stop
-                            });
-
-                            // stop my webcapture form
-                            StopVideoCapturing();
-                        }
-                        catch (Exception ex)
-                        {
-                            Tools.Instance.Logger.LogError(ex.ToString());
-                        }
-                    });
-                    t.Start();
-
+                            Identity = session,
+                            RoomType = GenericEnums.RoomType.Video,
+                            SignalType = GenericEnums.SignalType.Stop
+                        });
+                    }
+                    
                     // stop the audio rooms also
                     PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
 
+                    connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Audio);
+                    foreach (string session in connectedSessions)
+                    {
+                        StopAudio(this, new RoomActionEventArgs()
+                        {
+                            Identity = session,
+                            RoomType = GenericEnums.RoomType.Audio,
+                            SignalType = GenericEnums.SignalType.Stop
+                        });
+                    }
+
                     PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopRemotingPresentation();
+
+                    connectedSessions = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Remoting);
+                    foreach (string session in connectedSessions)
+                    {
+                        StopRemoting(this, new RoomActionEventArgs()
+                        {
+                            Identity = session,
+                            RoomType = GenericEnums.RoomType.Remoting,
+                            SignalType = GenericEnums.SignalType.Stop
+                        });
+                    }
 
                     // unbind the observers
                     _view.BindObservers(false);
@@ -294,6 +353,10 @@ namespace MViewer
 
                     // notify all contacts that you exited the 
                     _model.NotifyContacts(GenericEnums.ContactStatus.Offline);
+
+                    stopwatch.Stop();
+                    Tools.Instance.Logger.LogInfo(string.Format("Application shutdown took: {0} minutes {1} seconds",
+                        stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds));
 
                     Tools.Instance.Logger.LogInfo("MViewer application stopped");
                     // exit the environment
@@ -348,11 +411,11 @@ namespace MViewer
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-        
+
         // don't remove this one yet because PerformContactsOperation has a return type (cannot be used as event handler)
-        void ContactsObserver(object sender, EventArgs e)
+        void OnContactUpdated(object sender, EventArgs e)
         {
-            PerformContactsOperation(sender, (ContactsEventArgs)e);
+            PerformContactOperation(sender, (ContactsEventArgs)e);
         }
 
         #endregion

@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActiveRooms.cs" />
+    <Compile Include="AudioCapture.cs" />
+    <Compile Include="AudioQueue.cs" />
     <Compile Include="ClientCertificateValidator.cs" />
     <Compile Include="ClientSession.cs" />
     <Compile Include="Contact.cs" />

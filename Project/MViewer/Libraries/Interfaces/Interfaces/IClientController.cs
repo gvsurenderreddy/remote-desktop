@@ -10,12 +10,12 @@ namespace GenericObjects
 {
     public interface IClientController
     {
-        void StartClient(string identity);
+        //void StartClient(string identity);
         void RemoveClient(string identity);
         void AddClient(string identity);
         IMViewerService GetClient(string identity);
         bool IsContactOnline(string identity);
-        void SendAudioCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity);
+        void SendAudioCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity, double captureLengthInSeconds);
         void SendVideoCapture(byte[] capture, DateTime timestamp, string receiverIdentity, string senderIdentity);
         void SendRemotingCapture(byte[] screenCapture, byte[] mouseCapture, string receiverIdentity, string senderIdentity);
         bool ConferencePermission(string partnerIdentity, string myIdentity, GenericEnums.RoomType roomType);

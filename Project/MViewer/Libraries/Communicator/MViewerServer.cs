@@ -36,7 +36,10 @@ namespace Communicator
 
         #region c-tor
 
-        public MViewerServer() { }
+        public MViewerServer() 
+        { 
+
+        }
 
         public MViewerServer(ControllerEventHandlers controllerHandlers, string identity)
         {
@@ -115,23 +118,21 @@ namespace Communicator
 
         public void UpdateContactStatus(string senderIdentity, GenericEnums.ContactStatus newStatus)
         {
-            Thread t = new Thread(delegate()
+            try
             {
-                try
+                // propagate the update to the UI, through the controller
+                _controllerHandlers.ContactsObserver.Invoke(this, new ContactsEventArgs()
                 {
-                    // propagate the update to the UI, through the controller
-                    _controllerHandlers.ContactsObserver.Invoke(this, new ContactsEventArgs()
-                    {
-                        Operation = GenericEnums.ContactsOperation.Status,
-                        UpdatedContact = new Contact(-1, senderIdentity, newStatus)
-                    });
+                    Operation = GenericEnums.ContactsOperation.Status,
+                    UpdatedContact = new Contact(-1, senderIdentity, newStatus)
                 }
-                catch (Exception ex)
-                {
-                    Tools.Instance.Logger.LogError(ex.ToString());
-                }
-            });
-            t.Start();
+                //,null, null
+                );
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         public void SendRemotingCommand(byte[] commandArgs)
@@ -193,7 +194,7 @@ namespace Communicator
             }
         }
 
-        public void SendMicrophoneCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity)
+        public void SendMicrophoneCapture(byte[] capture, DateTime captureTimestamp, string senderIdentity, double captureLengthInSeconds)
         {
             try
             {
@@ -203,7 +204,8 @@ namespace Communicator
                     {
                         Identity = senderIdentity,
                         Capture = capture,
-                        CaptureTimestamp = captureTimestamp
+                        CaptureTimestamp = captureTimestamp,
+                        CaptureLengthInSeconds = captureLengthInSeconds
                     }
                     //, null, null
                     );
@@ -351,15 +353,15 @@ namespace Communicator
 
                 _binding.Security.Message.ClientCredentialType = MessageCredentialType.Certificate;
                 _binding.Security.Message.AlgorithmSuite = SecurityAlgorithmSuite.Default;
-                _binding.Security.Message.EstablishSecurityContext = true;
-                _binding.Security.Message.NegotiateServiceCredential = true;
+                _binding.Security.Message.EstablishSecurityContext = false;
+                _binding.Security.Message.NegotiateServiceCredential = false;
 
                 _binding.Name = "binding1";
 
-                _binding.OpenTimeout = new TimeSpan(0, 0, 20);
-                _binding.CloseTimeout = new TimeSpan(0, 0, 20);
-                _binding.ReceiveTimeout = new TimeSpan(0, 0, 20);
-                _binding.SendTimeout = new TimeSpan(0, 0, 20);
+                _binding.OpenTimeout = new TimeSpan(0, 1, 00);
+                _binding.CloseTimeout = new TimeSpan(0, 1, 00);
+                _binding.ReceiveTimeout = new TimeSpan(0, 1, 30);
+                _binding.SendTimeout = new TimeSpan(0, 1, 30);
 
 
                 // todo : optional - programmatically add global error handler to the WCF

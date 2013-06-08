@@ -5,21 +5,21 @@ using System.Text;
 
 namespace GenericObjects
 {
-    public class TransferStatusUptading
+    public class ConferenceStatus
     {
-        public bool IsVideoUpdating
+        public bool IsVideoStatusUpdating
         {
             get;
             set;
         }
 
-        public bool IsAudioUpdating
+        public bool IsAudioStatusUpdating
         {
             get;
             set;
         }
 
-        public bool IsRemotingUpdating
+        public bool IsRemotingStatusUpdating
         {
             get;
             set;

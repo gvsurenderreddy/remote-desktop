@@ -1,0 +1,420 @@
+INFO - 6/4/2013 7:03:38 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:03:38 PM -----------------
+Listening at: http://192.168.1.3:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:03:39 PM -----------------
+Application initialization took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:03:59 PM -----------------
+Started added contact: zq11DK2TxRbcB73+6aM49GBgOjQtPHw28XZ1dr+sgys=
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:13:17 PM -----------------
+Started added contact: zq11DK2TxRbcB73+6aM49Nq4EBxfuYXX8XZ1dr+sgys=
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:01 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:01 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:21 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:22 PM -----------------
+Listening at: http://192.168.1.3:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:25 PM -----------------
+Application initialization took: 0 minutes 3 seconds
+END INFO -----------------------------------
+
+ERROR - 6/4/2013 7:21:55 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:21:55 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:21:56 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:21:56 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:21:58 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:21:59 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:00 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:02 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:02 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:06 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:06 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:09 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:09 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:10 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:12 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:14 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:15 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:17 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:18 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:20 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:20 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:21 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:25 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:25 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:28 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:29 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:31 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:31 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:32 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:35 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:36 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:37 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:39 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:40 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:43 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:43 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:46 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:47 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:47 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:49 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:51 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:52 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:54 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:55 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:58 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:58 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:22:59 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:01 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:02 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:02 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:02 PM -----------------
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 19
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:05 PM -----------------
+System.ArgumentException: Parameter is not valid.
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height, PixelFormat format)
+   at System.Drawing.Bitmap..ctor(Int32 width, Int32 height)
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 17
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:05 PM -----------------
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 19
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:23:11 PM -----------------
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at ImageConverter.ResizeImage(Image imageToResize, Int32 width, Int32 height) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\ImageConverter.cs:line 19
+END ERROR -----------------------------------
+
+INFO - 6/4/2013 8:22:03 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 8:22:03 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+

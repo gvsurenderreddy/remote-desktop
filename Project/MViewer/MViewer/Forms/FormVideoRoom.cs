@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using GenericObjects;
 using Utils;
 using System.Threading;
+using System.Configuration;
 
 namespace MViewer
 {
@@ -69,6 +70,7 @@ namespace MViewer
         {
             try
             {
+                _syncClosing.Reset();
                 _formClosing = true;
                 _syncClosing.Set();
             }
@@ -110,12 +112,13 @@ namespace MViewer
         {
             try
             {
-                _syncClosing.WaitOne();
+                //_syncClosing.WaitOne();
                 if (!_formClosing)
                 {
-                    // check for outdated images based on last played audio capture timestamp
-                    bool canDisplay = CanDisplayVideo(timestamp);
-                    if (canDisplay)
+                    //// check for outdated images based on last played audio capture timestamp
+                    //bool useSync = bool.Parse(ConfigurationManager.AppSettings["useVideoSync"]);
+                    //bool canDisplay = useSync == true ? CanDisplayVideo(timestamp) : true;
+                    //if (canDisplay)
                     {
                         videoControl.SetPicture(picture);
                     }
@@ -201,22 +204,22 @@ namespace MViewer
 
         bool CanDisplayVideo(DateTime videoTimestamp)
         {
-            //DateTime defaultTime = new DateTime();
-            //if (defaultTime == _lastAudioTimestamp)
-            //{
-            //    // pre-condition
-            //    return true;
-            //}
-            //if (_lastAudioTimestamp != null && _lastAudioTimestamp < videoTimestamp)
-            //{
-            //    TimeSpan diffResult = videoTimestamp.Subtract(_lastAudioTimestamp);
-            //    if (diffResult.TotalMilliseconds < 2000)
-            //    {
-            //        return true;
-            //    }
-            //}
-            //return false;
-            return true;
+            DateTime defaultTime = new DateTime();
+            if (defaultTime == _lastAudioTimestamp)
+            {
+                // pre-condition
+                return true;
+            }
+            if (_lastAudioTimestamp != null && _lastAudioTimestamp < videoTimestamp)
+            {
+                TimeSpan diffResult = videoTimestamp.Subtract(_lastAudioTimestamp);
+                if (diffResult.TotalMilliseconds < 2000)
+                {
+                    return true;
+                }
+            }
+            return false;
+            //return true;
         }
 
         #endregion

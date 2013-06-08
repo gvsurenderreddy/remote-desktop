@@ -1,0 +1,12 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\Abstraction.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\Abstraction.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\Structures.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\Utils.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\log4net.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\Structures.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\Utils.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\log4net.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\Release\log4net.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\obj\Release\Abstraction.csprojResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\obj\Release\Abstraction.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\obj\Release\Abstraction.pdb

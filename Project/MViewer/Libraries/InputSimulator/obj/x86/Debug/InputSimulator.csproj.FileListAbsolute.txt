@@ -1,0 +1,4 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\InputSimulator\bin\x86\Debug\InputSimulator.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\InputSimulator\bin\x86\Debug\InputSimulator.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\InputSimulator\obj\x86\Debug\InputSimulator.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\InputSimulator\obj\x86\Debug\InputSimulator.pdb

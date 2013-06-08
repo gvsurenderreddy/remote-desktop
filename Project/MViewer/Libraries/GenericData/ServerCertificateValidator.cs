@@ -6,6 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.IdentityModel.Tokens;
 using System.IdentityModel.Selectors;
 using Utils;
+using System.Diagnostics;
 
 namespace GenericObjects
 {
@@ -45,13 +46,18 @@ namespace GenericObjects
                 throw new ArgumentNullException("missing client certificate");
             }
 
-            // the client certificate must be in your trusted certificates store
-            bool validCertificate = new X509Chain().Build(certificate);
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
 
-            Tools.Instance.Logger.LogInfo("Client certificate validation: " + validCertificate.ToString());
+            //// the client certificate must be in your trusted certificates store
+            //bool validCertificate = new X509Chain().Build(certificate);
+            //stopwatch.Stop();
 
-            if (validCertificate)
-            {
+            //Tools.Instance.Logger.LogInfo("Client certificate validation: " + validCertificate.ToString()
+            //    + " took " + stopwatch.Elapsed.TotalSeconds + " sec");
+
+            //if (validCertificate)
+            //{
                 // Check that the certificate issuer matches the configured issuer.
                 if (_allowedIssuerName != certificate.IssuerName.Name)
                 {
@@ -70,15 +76,14 @@ namespace GenericObjects
                     throw new SecurityTokenValidationException
                       ("Untrusted client Certificate");
                 }
-            }
-            else
-            {
-                Tools.Instance.Logger.LogError("Client certificate validation X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
-                throw new SecurityTokenValidationException("Client certificate validation X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
-            }
+            //}
+            //else
+            //{
+            //    Tools.Instance.Logger.LogError("Client certificate validation X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
+            //    throw new SecurityTokenValidationException("Client certificate validation X509 Validation failure. Invalid or Untrusted X509 Client Certificate");
+            //}
 
-
-            Tools.Instance.Logger.LogInfo("Client certificate validation ended without exceptions");
+            //Tools.Instance.Logger.LogInfo("Client certificate validation ended without exceptions");
         }
     }
 }

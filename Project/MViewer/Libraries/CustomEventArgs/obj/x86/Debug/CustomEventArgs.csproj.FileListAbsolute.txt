@@ -1,0 +1,14 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\CustomEventArgs.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\CustomEventArgs.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\Abstraction.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\Utils.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\Structures.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\log4net.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\Abstraction.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\Utils.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\Structures.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\log4net.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\log4net.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\obj\x86\Debug\CustomEventArgs.csprojResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\obj\x86\Debug\CustomEventArgs.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\obj\x86\Debug\CustomEventArgs.pdb

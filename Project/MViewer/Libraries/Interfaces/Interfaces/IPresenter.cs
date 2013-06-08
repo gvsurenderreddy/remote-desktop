@@ -22,7 +22,7 @@ namespace GenericObjects
 
         bool RemotingCaptureClosed();
 
-        void PlayAudioCapture(byte[] capture);
+        void PlayAudioCapture(byte[] capture, string senderIdentity, double captureLengthInSeconds);
         bool AudioCaptureClosed { get; }
     }
 }

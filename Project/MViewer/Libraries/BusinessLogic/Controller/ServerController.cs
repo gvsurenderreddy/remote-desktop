@@ -16,6 +16,8 @@ namespace BusinessLogicLayer
 
         string _address;
         ServiceHost _server;
+        ContactEndpoint _myEndpoint;
+        bool _isSecured;
 
         #endregion
 
@@ -25,6 +27,8 @@ namespace BusinessLogicLayer
         {
             try
             {
+                _isSecured = isSecured;
+                _myEndpoint = endpoint;
                 if (endpoint.Port != 0)
                 {
                     _address = "https://" + endpoint.Address + ":" + (endpoint.Port + 1).ToString() + endpoint.Path;
@@ -59,7 +63,6 @@ namespace BusinessLogicLayer
                     
                     Console.WriteLine("Listening at: ");
                     Console.WriteLine(addr);
-
                     Thread.Sleep(Timeout.Infinite);
                 }
                 catch (Exception ex)

@@ -129,18 +129,18 @@
             // nudVideo
             // 
             this.nudVideo.Increment = new decimal(new int[] {
-            100,
+            50,
             0,
             0,
             0});
             this.nudVideo.Location = new System.Drawing.Point(95, 68);
             this.nudVideo.Maximum = new decimal(new int[] {
-            2000,
+            500,
             0,
             0,
             0});
             this.nudVideo.Minimum = new decimal(new int[] {
-            200,
+            10,
             0,
             0,
             0});
@@ -148,7 +148,7 @@
             this.nudVideo.Size = new System.Drawing.Size(100, 20);
             this.nudVideo.TabIndex = 9;
             this.nudVideo.Value = new decimal(new int[] {
-            2000,
+            10,
             0,
             0,
             0});

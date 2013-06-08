@@ -120,7 +120,7 @@ namespace MViewer
                 }
                 else
                 {
-                    ContactBase contact = Program.Controller.PerformContactsOperation(sender, (ContactsEventArgs)e);
+                    ContactBase contact = Program.Controller.PerformContactOperation(sender, (ContactsEventArgs)e);
                     ((ContactsEventArgs)e).UpdatedContact = contact;
                 }
             }

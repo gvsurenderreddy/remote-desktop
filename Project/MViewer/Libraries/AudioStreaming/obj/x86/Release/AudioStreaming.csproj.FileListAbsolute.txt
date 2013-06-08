@@ -1,0 +1,13 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Microsoft.Xna.Framework.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Microsoft.Xna.Framework.Game.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Microsoft.Xna.Framework.Game.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Microsoft.Xna.Framework.Graphics.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Microsoft.Xna.Framework.Graphics.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Microsoft.Xna.Framework.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\AudioStreaming.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\Utils.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\log4net.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\log4net.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Release\log4net.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\obj\x86\Release\AudioStreaming.csprojResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\obj\x86\Release\AudioStreaming.dll

@@ -30,7 +30,8 @@ namespace GenericObjects
             {
                 _presenterSettings = presenterSettings;
                 _videoCapture = _presenterSettings.VideoCaptureControl;
-                _audioStreamManager = new AudioStreamManager(_presenterSettings.AudioTimerInterval, _presenterSettings.OnAudioCaptureAvailable);
+                _audioStreamManager = new AudioStreamManager(_presenterSettings.AudioTimerInterval, 
+                    _presenterSettings.OnAudioCaptureAvailable);
 
                 // initialize the image capture size
                 if (_videoCapture != null)
@@ -44,7 +45,8 @@ namespace GenericObjects
                     _videoCapture.ImageCaptured += new Delegates.WebCamEventHandler(presenterSettings.OnVideoImageCaptured);
                 }
 
-                _screenCaptureTool = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, _presenterSettings.OnRemotingImageCaptured);
+                _screenCaptureTool = new ScreenCaptureTool(_presenterSettings.RemotingTimerInterval, 
+                    _presenterSettings.OnRemotingImageCaptured);
             }
             catch (Exception ex)
             {
@@ -168,11 +170,11 @@ namespace GenericObjects
             }
         }
 
-        public void PlayAudioCapture(byte[] capture)
+        public void PlayAudioCapture(byte[] capture, string senderIdentity, double captureLengthInSeconds)
         {
             try
             {
-                _audioStreamManager.PlayAudioCapture(capture);
+                _audioStreamManager.PlayAudioCapture(capture, senderIdentity, captureLengthInSeconds);
             }
             catch (Exception ex)
             {

@@ -2,6 +2,7 @@
 using AudioStreaming;
 using Microsoft.Xna.Framework.Audio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -17,12 +18,16 @@ namespace GenericObjects
     {
         #region private members
 
-        ManualResetEvent _syncAudioInstance = new ManualResetEvent(false);
+        //ManualResetEvent _syncAudioInstance = new ManualResetEvent(false);
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
         int _timerInterval;
         ManualResetEvent _syncCaptures = new ManualResetEvent(true);
-        readonly object _syncPlay = new object();
+
+        Dictionary<string, object> _syncPartnerCaptures = new Dictionary<string, object>();
+
+        Dictionary<string, AudioQueue> _pendingCapturesQueue = new Dictionary<string, AudioQueue>();
+        Dictionary<string, DateTime> _activeCapturesQueue = new Dictionary<string, DateTime>();
 
         #endregion
 
@@ -37,8 +42,8 @@ namespace GenericObjects
         #endregion
 
         #region private methods
-       
-        void PlayCapture(byte[] capture)
+
+        void PlayCapture(byte[] capture, string senderIdentity, double captureLengthInSeconds)
         {
             try
             {
@@ -46,44 +51,24 @@ namespace GenericObjects
                 {
                     return;
                 }
-               
-
+                
                 bool eliminateNoise = bool.Parse(ConfigurationManager.AppSettings["eliminateNoise"]);
-
                 if (eliminateNoise)
                 {
                     NoiseEliminator eliminator = new NoiseEliminator(capture);
                     byte[] clear = eliminator.EliminateNoise();
                     if (clear != null && clear.Length > 0)
                     {
-                        SoundEffect sound = new SoundEffect(clear, Microphone.Default.SampleRate, AudioChannels.Mono);
-                        //sound = Content
-                        SoundEffect.MasterVolume = 1f;
-                        sound.Play();
-                        Tools.Instance.Logger.LogInfo("played capture of " + clear.Length + " bytes");
-                        Thread.Sleep(2100);
-                        sound.Dispose();
+                        PlaySound(clear, senderIdentity, captureLengthInSeconds);
                     }
                     else
                     {
-                        SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
-                        //sound = Content
-                        SoundEffect.MasterVolume = 1f;
-                        sound.Play();
-                        Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
-                        Thread.Sleep(2100);
-                        sound.Dispose();
+                        PlaySound(capture, senderIdentity, captureLengthInSeconds);
                     }
                 }
                 else
                 {
-                    SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
-                    //sound = Content
-                    SoundEffect.MasterVolume = 1f;
-                    sound.Play();
-                    Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
-                    Thread.Sleep(2100);
-                    sound.Dispose();
+                    PlaySound(capture, senderIdentity, captureLengthInSeconds);
                 }
             }
             catch (Exception ex)
@@ -92,9 +77,107 @@ namespace GenericObjects
             }
             finally
             {
-                Tools.Instance.Logger.LogInfo("play capture exit");
-
+                // todo: remove this log
+                //Tools.Instance.Logger.LogInfo("play capture exit");
                 GC.Collect();
+            }
+        }
+
+        void PlaySound(byte[] capture, string senderIdentity, double captureLengthInSeconds)
+        {
+            try
+            { 
+                AudioCapture toPlay = null;
+                //object toLock = new object();
+                //if (_syncPartnerCaptures.ContainsKey(senderIdentity))
+                //{
+                //    toLock = _syncPartnerCaptures[senderIdentity];
+                //}
+                //else
+                //{
+                //    _syncPartnerCaptures.Add(senderIdentity, toLock);
+                //}
+
+                //lock (toLock)
+                //{
+               
+                //    bool mustWait = false;
+                //    // wait for the previos captures sent by the same partner to finish playing
+
+                //    if (_activeCapturesQueue != null && _activeCapturesQueue.ContainsKey(senderIdentity))
+                //    {
+
+                //        // if there is any currently playing capture, then the latest received capture should wait before playing
+                //        mustWait = true;
+                //    }
+                //    if (mustWait)
+                //    {
+                //        // add the received capture to the partner's pending queue
+                //        AudioCapture newCapture = new AudioCapture()
+                //        {
+                //            Capture = capture,
+                //            ReceiveTimestamp = DateTime.Now
+                //        };
+                //        AudioQueue queue = new AudioQueue();
+                //        if (!_pendingCapturesQueue.ContainsKey(senderIdentity))
+                //        {
+                //            _pendingCapturesQueue.Add(senderIdentity, queue);
+                //        }
+                //        queue = _pendingCapturesQueue[senderIdentity];
+                //        queue.AddCapture(newCapture);
+
+                //        // pick the oldest capture that has to be played
+                //        toPlay = queue.PopCapture();
+
+                //        // derminte how much time you must wait for the active capture to finish playing
+                //        double elapsedSeconds = DateTime.Now.Subtract(_activeCapturesQueue[senderIdentity]).TotalSeconds;
+                //        if (elapsedSeconds < captureLengthInSeconds)
+                //        {
+                //            TimeSpan toWait = TimeSpan.FromSeconds(elapsedSeconds);
+                //            Thread.Sleep(toWait);
+                //        }
+                //    }
+                //    else
+                    {
+                        toPlay = new AudioCapture()
+                        {
+                            Capture = capture
+                        };
+                    }
+                    if (toPlay != null && toPlay.Capture != null && toPlay.Capture.Length > 0)
+                    {
+                        if (_activeCapturesQueue.ContainsKey(senderIdentity))
+                        {
+                            _activeCapturesQueue[senderIdentity] = DateTime.Now;
+                        }
+                        else
+                        {
+                            _activeCapturesQueue.Add(senderIdentity, DateTime.Now);
+                        }
+
+                        SoundEffect sound = new SoundEffect(toPlay.Capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                        SoundEffect.MasterVolume = 1f;
+                        sound.Play();
+
+                        // decide if to remove or not this sleep
+                        TimeSpan ts = TimeSpan.FromMilliseconds(captureLengthInSeconds * 1000);
+                        Thread.Sleep(ts);
+
+                        //todo: remove this log
+                        //Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
+
+                        sound.Dispose();
+                    }
+                    else
+                    {
+                        // todo: remove this log
+                        //Tools.Instance.Logger.LogInfo("nothing to play");
+                    }
+                //}
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
 
@@ -102,8 +185,8 @@ namespace GenericObjects
         {
             try
             {
-                _syncCaptures.WaitOne();
-                _syncAudioInstance.WaitOne();
+                _syncCaptures.WaitOne(); // used to wait until the room button action is processed
+                //_syncAudioInstance.WaitOne();
 
                 AudioCaptureEventArgs eventArgs = (AudioCaptureEventArgs)e;
                 byte[] capture = eventArgs.Capture;
@@ -161,12 +244,9 @@ namespace GenericObjects
                     {
                         try
                         {
-                            _syncAudioInstance.Reset();
-
+                            //_syncAudioInstance.Reset();
                             _audioStream = new AudioStream(this.OnAudioReady);
-
-                            _syncAudioInstance.Set();
-
+                            //_syncAudioInstance.Set();
                             _audioStream.Run();
                         }
                         catch (Exception ex)
@@ -210,16 +290,13 @@ namespace GenericObjects
             }
         }
 
-        public void PlayAudioCapture(byte[] capture)
+        public void PlayAudioCapture(byte[] capture, string senderIdentity, double captureLengthInSeconds)
         {
-            lock (_syncPlay)
+            Thread t = new Thread(delegate()
             {
-                Thread t = new Thread(delegate()
-                {
-                    PlayCapture(capture);
-                });
-                t.Start();
-            }
+                PlayCapture(capture, senderIdentity, captureLengthInSeconds);
+            });
+            t.Start();
         }
 
         #endregion

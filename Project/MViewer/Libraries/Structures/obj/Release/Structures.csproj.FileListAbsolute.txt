@@ -1,0 +1,10 @@
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\Structures.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\Structures.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\Utils.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\log4net.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\Utils.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\log4net.pdb
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\Release\log4net.xml
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\obj\Release\Structures.csprojResolveAssemblyReference.cache
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\obj\Release\Structures.dll
+F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\obj\Release\Structures.pdb

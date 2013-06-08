@@ -223,7 +223,7 @@ namespace MViewer
                     }
                     while (pinged < toPing)
                     {
-                        Thread.Sleep(2000);
+                        Thread.Sleep(100);
                     }
                 }
                 else
@@ -276,16 +276,19 @@ namespace MViewer
                         break;
                     case GenericEnums.ContactsOperation.Add:
                         int contactNo = _contactsDAL.AddContact(updatedContact);
-                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-                        contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
-                        if (updatedContact.ContactNo != -1)
+                        if (contactNo > -1)
                         {
-                            // notify other contact of performed operation (ADD/REMOVE)
-                            ClientController.AddClient(contact.Identity);
-                            IMViewerService client = ClientController.GetClient(contact.Identity);
-                            client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
+                            _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                            contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
+                            if (updatedContact.ContactNo != -1)
+                            {
+                                // notify other contact of performed operation (ADD/REMOVE)
+                                ClientController.AddClient(contact.Identity);
+                                IMViewerService client = ClientController.GetClient(contact.Identity);
+                                client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
+                            }
+                            PingContacts(updatedContact.Identity);
                         }
-                        PingContacts(updatedContact.Identity);
                         break;
                     case GenericEnums.ContactsOperation.Update:
                         _contactsDAL.UpdateContact(updatedContact);

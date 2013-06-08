@@ -17,7 +17,7 @@ namespace MViewer
         #region private members
 
         readonly object _syncAudioCaptureSending = new object();
-        ManualResetEvent _syncAudioCaptureActivity = new ManualResetEvent(true);
+        ManualResetEvent _syncAudioConferenceStatus = new ManualResetEvent(true);
         readonly object _syncAudioStartStop = new object();
 
         #endregion
@@ -34,36 +34,42 @@ namespace MViewer
             {
                 foreach (string receiverIdentity in connectedSessions)
                 {
-                    try
+                    Thread t = new Thread(delegate()
                     {
-                        TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                        while (transfer.IsAudioUpdating)
+                        try
                         {
-                            Thread.Sleep(200);
+                            ConferenceStatus transfer = _model.SessionManager.GetConferenceStatus(receiverIdentity);
+                            while (transfer.IsAudioStatusUpdating)
+                            {
+                                Thread.Sleep(200);
+                            }
+
+                            PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
+                            // check if the stop signal has been sent from the UI
+
+                            // check if the stop signal has been sent by the partner
+
+                            PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
+                            if (peers.AudioSessionState == GenericEnums.SessionState.Opened
+                                || peers.AudioSessionState == GenericEnums.SessionState.Pending)
+                            {
+                                // send the capture if the session isn't paused
+                                transferStatus.Audio = true;
+
+                                TimeSpan timespan = TimeSpan.FromMilliseconds(SystemConfiguration.Instance.PresenterSettings.AudioTimerInterval);
+                                _model.ClientController.SendAudioCapture(capture, timestamp,
+                                    receiverIdentity, _model.Identity.MyIdentity,
+                                    timespan.TotalSeconds * 2);
+                            }
+
+                            transferStatus.Audio = false;
                         }
-
-                        PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
-                        // check if the stop signal has been sent from the UI
-
-                        // check if the stop signal has been sent by the partner
-
-                        PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
-                        if (peers.AudioSessionState == GenericEnums.SessionState.Opened
-                            || peers.AudioSessionState == GenericEnums.SessionState.Pending)
+                        catch (Exception ex)
                         {
-                            // send the capture if the session isn't paused
-                            transferStatus.Audio = true;
-
-                            _model.ClientController.SendAudioCapture(capture, timestamp,
-                                receiverIdentity, _model.Identity.MyIdentity);
+                            Tools.Instance.Logger.LogError(ex.ToString());
                         }
-
-                        transferStatus.Audio = false;
-                    }
-                    catch (Exception ex)
-                    {
-                        Tools.Instance.Logger.LogError(ex.ToString());
-                    }
+                    });
+                    t.Start();
                 }
             }
         }
@@ -72,7 +78,7 @@ namespace MViewer
         {
             if (!_view.IsRoomActivated(identity, GenericEnums.RoomType.Audio))
             {
-                _syncAudioCaptureActivity.Reset();
+                _syncAudioConferenceStatus.Reset();
 
                 Thread t = new Thread(delegate()
                 {
@@ -110,7 +116,7 @@ namespace MViewer
                 t.Start();
 
                 Thread.Sleep(500);
-                _syncAudioCaptureActivity.Set();
+                _syncAudioConferenceStatus.Set();
             }
         }
 
@@ -119,7 +125,8 @@ namespace MViewer
             try
             {
                 AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
-                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).PlayAudioCapture(args.Capture);
+                PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).
+                    PlayAudioCapture(args.Capture, args.Identity, args.CaptureLengthInSeconds);
             }
             catch (Exception ex)
             {
@@ -155,7 +162,8 @@ namespace MViewer
                 // check the Audio status before playing the sound
                 if (peer.AudioSessionState == GenericEnums.SessionState.Opened)
                 {
-                    _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture, args.CaptureTimestamp);
+                    _view.RoomManager.PlayAudioCapture(args.Identity, args.Capture, args.CaptureTimestamp,
+                        args.CaptureLengthInSeconds);
                 }
             }
             catch (Exception ex)
@@ -177,7 +185,7 @@ namespace MViewer
         {
             try
             {
-                _syncAudioCaptureActivity.WaitOne(); // wait for any room action to end
+                _syncAudioConferenceStatus.WaitOne(); // wait for any room action to end
                 AudioCaptureEventArgs args = (AudioCaptureEventArgs)e;
 
                 if (PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).AudioCaptureClosed == false)
@@ -189,8 +197,8 @@ namespace MViewer
                            
                             // send the audio capture to active audio room
                             string receiverIdentity = ((ActiveRooms)_view.RoomManager.ActiveRooms).AudioRoomIdentity;
-                            TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(receiverIdentity);
-                            while (transfer.IsAudioUpdating)
+                            ConferenceStatus transfer = _model.SessionManager.GetConferenceStatus(receiverIdentity);
+                            while (transfer.IsAudioStatusUpdating)
                             {
                                 Thread.Sleep(200);
                             }
@@ -207,8 +215,10 @@ namespace MViewer
                                 // send the capture if the session isn't paused
                                 transferStatus.Audio = true;
 
+                                TimeSpan timespan = TimeSpan.FromMilliseconds(SystemConfiguration.Instance.PresenterSettings.AudioTimerInterval);
                                 _model.ClientController.SendAudioCapture(args.Capture, args.CaptureTimestamp,
-                                    receiverIdentity, ((Identity)_model.Identity).MyIdentity);
+                                    receiverIdentity, ((Identity)_model.Identity).MyIdentity,
+                                     timespan.TotalSeconds * 2);
                             }
 
                             transferStatus.Audio = false;
@@ -241,7 +251,7 @@ namespace MViewer
             try
             {
                 RoomActionEventArgs e = (RoomActionEventArgs)args;
-                _syncAudioCaptureActivity.Reset();
+                _syncAudioConferenceStatus.Reset();
 
                 // use the peer status of the selected room
                 PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
@@ -254,7 +264,7 @@ namespace MViewer
                     _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, e.Identity,
                         GenericEnums.RoomType.Audio, GenericEnums.SignalType.Pause);
                 }
-                _syncAudioCaptureActivity.Set();
+                _syncAudioConferenceStatus.Set();
             }
             catch (Exception ex)
             {
@@ -272,7 +282,7 @@ namespace MViewer
             try
             {
                 RoomActionEventArgs e = (RoomActionEventArgs)args;
-                _syncAudioCaptureActivity.Reset();
+                _syncAudioConferenceStatus.Reset();
 
                 PeerStates peers = _model.SessionManager.GetPeerStatus(e.Identity);
                 peers.AudioSessionState = GenericEnums.SessionState.Opened; // resume the Audio 
@@ -284,7 +294,7 @@ namespace MViewer
                     _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, e.Identity,
                         GenericEnums.RoomType.Audio, GenericEnums.SignalType.Resume);
                 }
-                _syncAudioCaptureActivity.Set();
+                _syncAudioConferenceStatus.Set();
             }
             catch (Exception ex)
             {
@@ -341,21 +351,17 @@ namespace MViewer
                 RoomActionEventArgs e = (RoomActionEventArgs)args;
                 lock (_syncAudioStartStop)
                 {
-                    _syncAudioCaptureActivity.Reset();
+                    _syncAudioConferenceStatus.Reset(); // tell my application to pause sending captures
 
                     string identity = e.Identity;
-
-                    _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
-                    _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
-
-                    // tell the partner to pause capturing & sending while processing room Stop command
+                    
+                    // tell the partner to pause capturing & sending while processing Room Stop command
                     _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity, 
                         GenericEnums.RoomType.Audio, true);
+                    ConferenceStatus conference = _model.SessionManager.GetConferenceStatus(identity);
+                    conference.IsAudioStatusUpdating = true;
 
-                    TransferStatusUptading transfer = _model.SessionManager.GetTransferActivity(identity);
-                    transfer.IsAudioUpdating = true;
-
-                    // check if the webcapture is pending for being sent
+                    // check if any webcapture is pending for being sent
                     PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(identity);
                     while (transferStatus.Audio)
                     {
@@ -376,30 +382,34 @@ namespace MViewer
                         }
                         if (sendStopSignal)
                         {
-                            // send the stop signal to the server session
+                            // send the stop signal to the partner
                             _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity, identity,
                                 GenericEnums.RoomType.Audio, GenericEnums.SignalType.Stop);
                         }
 
                         // remove the connected client session
                         _model.SessionManager.RemoveSession(identity);
-
                         _view.UpdateLabels(e.Identity, e.RoomType);
                     }
-
-                    // tell the partner to pause capturing & sending while processing room Stop command
+                    
+                    //close the conference form only after the last data chunk has been sent
+                    _view.RoomManager.CloseRoom(identity, GenericEnums.RoomType.Audio);
+                    _view.RoomManager.RemoveRoom(identity, GenericEnums.RoomType.Audio);
+                    
+                    // tell the partner to resume capturing & sending (to the other guys in the conference)
                     _model.ClientController.WaitRoomButtonAction(identity, ((Identity)_model.Identity).MyIdentity,
                         GenericEnums.RoomType.Audio, false);
 
                     if (_view.RoomManager.RoomsLeft(GenericEnums.RoomType.Audio) == false)
                     {
+                        // close the audio capturing if there's no partner left in the conference
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).StopAudioPresentation();
                         _view.ResetLabels(e.RoomType);
                     }
 
-                    OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
-                    transfer.IsAudioUpdating = false;
-                    _syncAudioCaptureActivity.Set();
+                    this.OnActiveRoomChanged(string.Empty, GenericEnums.RoomType.Undefined);
+                    conference.IsAudioStatusUpdating = false;
+                    _syncAudioConferenceStatus.Set();
                 }
             }
             catch (Exception ex)

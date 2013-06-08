@@ -133,7 +133,7 @@ namespace GenericObjects
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                Tools.Instance.Logger.LogError(ex.ToString());
             }
             finally
             {

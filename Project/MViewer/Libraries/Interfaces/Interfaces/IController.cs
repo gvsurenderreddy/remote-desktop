@@ -36,7 +36,7 @@ namespace GenericObjects
         void ChangeLanguage(string language);
         void FriendlyNameObserver(object sender, EventArgs e);
         void OnRoomButtonActionTriggered(object sender, EventArgs e);
-        ContactBase PerformContactsOperation(object sender, EventArgs ee);
+        ContactBase PerformContactOperation(object sender, EventArgs ee);
         void StartVideo(IWebcamCapture webcamControl);
         void OnActiveRoomChanged(string newIdentity, GenericEnums.RoomType roomType);
   

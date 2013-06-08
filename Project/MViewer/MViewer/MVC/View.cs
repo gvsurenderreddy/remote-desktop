@@ -286,10 +286,11 @@ namespace MViewer
                     {
                         if (this._threadWebcaptureForm == null) // first time when the video  is starting
                         {
-                            // open my webcam form if no video  was previously started
+                            // open my webcam form if no video was previously started
                             _threadWebcaptureForm = new Thread(delegate()
                             {
-                                _formWebCapture = new FormMyWebcam(SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval);
+                                _formWebCapture = new FormMyWebcam(
+                                    SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval);
                                 _formWebCapture.ShowDialog();
                             });
                             _threadWebcaptureForm.IsBackground = true;
@@ -517,7 +518,7 @@ namespace MViewer
                 switch (roomType)
                 {
                     case GenericEnums.RoomType.Audio:
-                        //  audio freeze logic
+                        // audio freeze logic
                         PresenterManager.Instance(SystemConfiguration.Instance.PresenterSettings).FreezeAudio(wait);
                         break;
                     case GenericEnums.RoomType.Video:

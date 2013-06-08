@@ -1,0 +1,1140 @@
+INFO - 6/3/2013 6:42:29 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:42:29 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:43:22 PM -----------------
+Application initialization took: 0 minutes 53 seconds
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 6:44:54 PM -----------------
+System.ServiceModel.Security.MessageSecurityException: An unsecured or incorrectly secured fault was received from the other party. See the inner FaultException for the fault code and detail. ---> System.ServiceModel.FaultException: The message could not be processed. This is most likely because the action 'http://tempuri.org/IVideoRoom/SendMicrophoneCapture' is incorrect or because the message contains an invalid or expired security context token or because there is a mismatch between bindings. The security context token would be invalid if the service aborted the channel due to inactivity. To prevent the service from aborting idle sessions prematurely increase the Receive timeout on the service endpoint's binding.
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Security.SecuritySessionClientSettings`1.SecurityRequestSessionChannel.ProcessReply(Message reply, TimeSpan timeout, SecurityProtocolCorrelationState correlationState)
+   at System.ServiceModel.Security.SecuritySessionClientSettings`1.SecurityRequestSessionChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:44:55 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:44:57 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:44:59 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:01 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:03 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:05 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:07 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:09 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:11 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:13 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:15 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:17 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:19 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:21 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:23 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:25 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:27 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:29 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:31 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:33 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:35 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:37 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:39 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:41 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:43 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:45 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:47 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:49 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:51 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:53 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:55 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:57 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:45:59 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:46:01 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:46:03 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds)
+   at MViewerClient.SendMicrophoneCapture(Byte[] capture, DateTime captureTimestamp, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 79
+   at BusinessLogicLayer.ClientController.SendAudioCapture(Byte[] capture, DateTime timestamp, String receiverIdentity, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 473
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 6:46:30 PM -----------------
+System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.ThrowIfDisposedOrNotOpen()
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.SendRoomButtonAction(String identity, RoomType roomType, SignalType signalType)
+   at MViewerClient.SendRoomButtonAction(String identity, RoomType roomType, SignalType signalType) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 89
+   at BusinessLogicLayer.ClientController.SendRoomCommand(String myIdentity, String identity, RoomType roomType, SignalType signalType) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 283
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 6:49:12 PM -----------------
+Application shutdown took: 0 minutes 10 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:49:12 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:49:52 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:49:52 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:49:57 PM -----------------
+Application initialization took: 0 minutes 4 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:51:29 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:51:29 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:51:32 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:51:33 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:51:36 PM -----------------
+Application initialization took: 0 minutes 3 seconds
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 6:57:02 PM -----------------
+System.ServiceModel.EndpointNotFoundException: There was no endpoint listening at http://192.168.1.3:8083//MViewer that could accept the message. This is often caused by an incorrect address or SOAP action. See InnerException, if present, for more details. ---> System.Net.WebException: Unable to connect to the remote server ---> System.Net.Sockets.SocketException: No connection could be made because the target machine actively refused it 192.168.1.3:8083
+   at System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Exception& exception)
+   --- End of inner exception stack trace ---
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpOutput.WebRequestHttpOutput.GetOutputStream()
+   at System.ServiceModel.Channels.HttpOutput.Send(TimeSpan timeout)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.SendRequest(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.SecurityChannelFactory`1.SecurityRequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Security.SecuritySessionSecurityTokenProvider.DoOperation(SecuritySessionOperation operation, EndpointAddress target, Uri via, SecurityToken currentToken, TimeSpan timeout)
+   at System.ServiceModel.Security.SecuritySessionSecurityTokenProvider.GetTokenCore(TimeSpan timeout)
+   at System.IdentityModel.Selectors.SecurityTokenProvider.GetToken(TimeSpan timeout)
+   at System.ServiceModel.Security.SecuritySessionClientSettings`1.ClientSecuritySessionChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.OnOpen(TimeSpan timeout)
+   at System.ServiceModel.Channels.CommunicationObject.Open(TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOpenOnce.System.ServiceModel.Channels.ServiceChannel.ICallOnce.Call(ServiceChannel channel, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.CallOnceManager.CallOnce(TimeSpan timeout, CallOnceManager cascade)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.UpdateContactStatus(String senderIdentity, ContactStatus newStatus)
+   at MViewerClient.UpdateContactStatus(String senderIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 64
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 228
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 6:57:02 PM -----------------
+Application shutdown took: 0 minutes 1 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:57:02 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:59:50 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 6:59:50 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:00:24 PM -----------------
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 219
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:00:24 PM -----------------
+Application initialization took: 0 minutes 34 seconds
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:01:44 PM -----------------
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 219
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:01:44 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:01:44 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:01:48 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:01:48 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:02:22 PM -----------------
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 219
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:02:22 PM -----------------
+Application initialization took: 0 minutes 33 seconds
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:09:09 PM -----------------
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 219
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:09:09 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:09:09 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:10:22 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:10:23 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:10:26 PM -----------------
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 217
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:10:26 PM -----------------
+Application initialization took: 0 minutes 3 seconds
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:21:48 PM -----------------
+System.Collections.Generic.KeyNotFoundException: The given key was not present in the dictionary.
+   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 217
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:21:48 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:21:48 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:22:34 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:22:35 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+ERROR - 6/3/2013 7:22:42 PM -----------------
+System.ArgumentException: An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at BusinessLogicLayer.ClientController.AddClient(String identity) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 336
+END ERROR -----------------------------------
+
+ERROR - 6/3/2013 7:23:27 PM -----------------
+System.TimeoutException: The request channel timed out while waiting for a reply after 00:00:44.9688000. Increase the timeout value passed to the call to Request or increase the SendTimeout value on the Binding. The time allotted to this operation may have been a portion of a longer timeout. ---> System.TimeoutException: The HTTP request to 'http://192.168.1.3:8083//MViewer' has exceeded the allotted timeout of 00:00:44.9680000. The time allotted to this operation may have been a portion of a longer timeout. ---> System.Net.WebException: The operation has timed out
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   --- End of inner exception stack trace ---
+   at System.ServiceModel.Channels.HttpChannelUtilities.ProcessGetResponseWebException(WebException webException, HttpWebRequest request, HttpAbortReason abortReason)
+   at System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at GenericObjects.IMViewerService.UpdateContactStatus(String senderIdentity, ContactStatus newStatus)
+   at MViewerClient.UpdateContactStatus(String senderIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 64
+   at BusinessLogicLayer.ClientController.UpdateContactStatus(String partnerIdentity, String myIdentity, ContactStatus newStatus) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Controller\ClientController.cs:line 225
+END ERROR -----------------------------------
+
+INFO - 6/3/2013 7:23:27 PM -----------------
+Application initialization took: 0 minutes 53 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:35:51 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/3/2013 7:35:51 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:02:22 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:02:22 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:02:23 PM -----------------
+Application initialization took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:03 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:03 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:07 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:07 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:11 PM -----------------
+Application initialization took: 0 minutes 4 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:13 PM -----------------
+Application shutdown took: 0 minutes 0 seconds
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:13 PM -----------------
+MViewer application stopped
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:16 PM -----------------
+MViewer application started
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:17 PM -----------------
+Listening at: http://192.168.1.4:8083/MViewer
+END INFO -----------------------------------
+
+INFO - 6/4/2013 7:16:23 PM -----------------
+Application initialization took: 0 minutes 6 seconds
+END INFO -----------------------------------
+
+ERROR - 6/4/2013 7:19:10 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy1.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:26:10 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy2.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:29:09 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy4.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:33:49 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy3.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:38:05 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy5.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:38:40 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy6.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:41:01 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy7.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:44:05 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy9.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:45:53 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy8.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:46:48 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy10.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:49:31 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy11.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:50:47 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy13.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:53:59 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy16.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:54:28 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy12.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:54:44 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy14.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 7:56:41 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy15.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 8:03:00 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy19.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 8:05:11 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy17.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 8:06:35 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy18.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 8:12:20 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy20.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+
+ERROR - 6/4/2013 8:14:00 PM -----------------
+System.IO.IOException: The process cannot access the file 'C:\Users\CheGuevara\Desktop\MViewer\noisy21.wav' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode)
+   at AudioStreaming.NoiseEliminator.EliminateNoise() in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\NoiseEliminator.cs:line 25
+   at GenericObjects.AudioStreamManager.PlayCapture(Byte[] capture, String senderIdentity, Double captureLengthInSeconds) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\Manager\AudioStreamManager.cs:line 59
+END ERROR -----------------------------------
+

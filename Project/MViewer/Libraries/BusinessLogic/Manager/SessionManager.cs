@@ -164,7 +164,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public TransferStatusUptading GetTransferActivity(string identity)
+        public ConferenceStatus GetConferenceStatus(string identity)
         {
             lock (_syncSessions)
             {
@@ -172,11 +172,11 @@ namespace BusinessLogicLayer
                 {
                     return _clientSessions[identity].TransferUpdating;
                 }
-                return new TransferStatusUptading
+                return new ConferenceStatus
                 {
-                    IsAudioUpdating = false,
-                    IsRemotingUpdating = false,
-                    IsVideoUpdating = false
+                    IsAudioStatusUpdating = false,
+                    IsRemotingStatusUpdating = false,
+                    IsVideoStatusUpdating = false
                 };
             }
         }

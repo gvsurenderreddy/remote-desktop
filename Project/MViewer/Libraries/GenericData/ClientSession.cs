@@ -35,10 +35,10 @@ namespace GenericObjects
                 _pendingTransfer.Audio = false;
                 _pendingTransfer.Video = false;
                 _pendingTransfer.Remoting = false;
-                _transferUpdating = new TransferStatusUptading();
-                _transferUpdating.IsAudioUpdating = false;
-                _transferUpdating.IsVideoUpdating = false;
-                _transferUpdating.IsRemotingUpdating = false;
+                _transferUpdating = new ConferenceStatus();
+                _transferUpdating.IsAudioStatusUpdating = false;
+                _transferUpdating.IsVideoStatusUpdating = false;
+                _transferUpdating.IsRemotingStatusUpdating = false;
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace GenericObjects
             set { _pendingTransfer = value; }
         }
 
-        public TransferStatusUptading TransferUpdating
+        public ConferenceStatus TransferUpdating
         {
             get { return _transferUpdating; }
             set { _transferUpdating = value; }

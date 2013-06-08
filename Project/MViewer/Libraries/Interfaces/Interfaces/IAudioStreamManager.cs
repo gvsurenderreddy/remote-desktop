@@ -10,7 +10,7 @@ namespace GenericObjects
         void StartStreaming();
         void StopStreaming();
         void WaitRoomButtonAction(bool wait);
-        void PlayAudioCapture(byte[] capture);
+        void PlayAudioCapture(byte[] capture, string senderIdentity, double captureLengthInSeconds);
 
         bool AudioCaptureClosed { get; }
     }

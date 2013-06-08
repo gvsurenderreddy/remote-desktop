@@ -132,7 +132,7 @@
     <Node Id="@1090" Category="CodeSchema_Method" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" Label="set_Enabled" />
     <Node Id="@1091" Category="CodeSchema_Method" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" Label="set_Enabled" />
     <Node Id="@1092" Category="CodeSchema_Method" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" Label="set_Enabled" />
-    <Node Id="@1093" Category="CodeSchema_Method" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" Label="set_EstablishSecurityContext" />
+    <Node Id="@1093" Category="CodeSchema_Method" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" Label="set_           " />
     <Node Id="@1094" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_HasPermission" />
     <Node Id="@1095" Category="CodeSchema_Method" CodeSchemaProperty_IsCompilerGenerated="True" CodeSchemaProperty_IsPublic="True" CodeSchemaProperty_IsSpecialName="True" Label="set_HasPermission" />
     <Node Id="@1096" Category="CodeSchema_Method" CodeSchemaProperty_IsExternal="True" CodeSchemaProperty_IsPublic="True" Label="set_HttpGetEnabled" />
@@ -12954,7 +12954,7 @@
     <Category Id="CodeSchema_Statement" Label="Statement" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" IsProviderRoot="False" NavigationActionLabel="Statement" />
     <Category Id="CodeSchema_Struct" Label="Struct" BasedOn="CodeSchema_Type" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Struct" IsProviderRoot="False" NavigationActionLabel="Structs" />
     <Category Id="CodeSchema_Type" Label="Type" BasedOn="CodeSchema_Block" CanBeDataDriven="True" DefaultAction="Node:Both:CodeSchema_Member" Icon="CodeSchema_Class" IsProviderRoot="False" NavigationActionLabel="Types" />
-    <Category Id="Contains" Label="Contains" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
+    <Category Id="Contains" Label="Contains" Description="Whether the source of the link contains the target object" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Contained By" IsContainment="True" OutgoingActionLabel="Contains" />
     <Category Id="Externals" Label="Externals" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="Externals" />
     <Category Id="File" Label="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" IsProviderRoot="False" NavigationActionLabel="Files" />
     <Category Id="FileSystem.Category.FileOfType.dll" Label="dll File" BasedOn="CodeSchema_Assembly" CanBeDataDriven="True" IsProviderRoot="False" NavigationActionLabel="dll Files" />
@@ -12980,55 +12980,35 @@
     <Property Id="CodeSchemaProperty_IsSpecialName" Label="IsSpecialName" Description="IsSpecialName" DataType="System.Boolean" />
     <Property Id="CodeSchemaProperty_StrongName" Label="StrongName" Description="StrongName" DataType="System.String" />
     <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="Expression" DataType="System.String" />
     <Property Id="FilePath" Label="File Path" Description="File Path" DataType="System.String" />
-    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.Progression.GraphModel.GroupStyle" />
+    <Property Id="Group" Label="Group" Description="Display the node as a group" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
     <Property Id="Icon" Label="Icon" Description="Icon" DataType="System.String" />
     <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
     <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
     <Property Id="IsProviderRoot" Label="IsProviderRoot" Description="IsProviderRoot" DataType="System.Boolean" />
     <Property Id="Label" Label="Label" Description="Displayable label of an Annotatable object" DataType="System.String" />
     <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
     <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
   </Properties>
   <QualifiedNames>
     <Name Id="ArrayRank" Label="Array Rank" ValueType="System.String" />
     <Name Id="Assembly" Label="Assembly" ValueType="Uri" />
-    <Name Id="Clone" Label="Clone" ValueType="Microsoft.VisualStudio.Progression.GraphModel.QualifiedIdentifier" />
-    <Name Id="GenericArguments" Label="Generic Arguments" ValueType="Microsoft.VisualStudio.Progression.GraphModel.QualifiedIdentifierArrayCollection" />
+    <Name Id="Clone" Label="Clone" ValueType="Microsoft.VisualStudio.GraphModel.GraphNodeId" />
+    <Name Id="GenericArguments" Label="Generic Arguments" ValueType="Microsoft.VisualStudio.GraphModel.GraphNodeIdCollection" />
     <Name Id="GenericParameterCount" Label="Generic Parameter Count" ValueType="System.String" />
     <Name Id="Member" Label="Member" ValueType="System.Object" />
     <Name Id="Name" Label="Name" ValueType="System.String" />
     <Name Id="Namespace" Label="Namespace" ValueType="System.String" />
-    <Name Id="OverloadingParameters" Label="Parameter" ValueType="Microsoft.VisualStudio.Progression.GraphModel.QualifiedIdentifierArrayCollection" Formatter="NameValueNoEscape" />
+    <Name Id="OverloadingParameters" Label="Parameter" ValueType="Microsoft.VisualStudio.GraphModel.GraphNodeIdCollection" Formatter="NameValueNoEscape" />
     <Name Id="ParentType" Label="Parent Type" ValueType="System.Object" />
     <Name Id="Type" Label="Type" ValueType="System.Object" />
   </QualifiedNames>
-  <Styles>
-    <Style TargetType="Node" GroupLabel="Assembly" ValueLabel="Has category">
-      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
-      <Setter Property="Background" Value="#1C3068" />
-    </Style>
-    <Style TargetType="Node" GroupLabel="Namespace" ValueLabel="Has category">
-      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
-      <Setter Property="Background" Value="#4A65A0" />
-    </Style>
-    <Style TargetType="Node" GroupLabel="Type" ValueLabel="Has category">
-      <Condition Expression="HasCategory('CodeSchema_Type')" />
-      <Setter Property="Background" Value="#D3DCEF" />
-    </Style>
-    <Style TargetType="Node" GroupLabel="Method" ValueLabel="Has category">
-      <Condition Expression="HasCategory('CodeSchema_Method')" />
-      <Setter Property="Background" Value="#FFE0E0E0" />
-    </Style>
-    <Style TargetType="Node" GroupLabel="Generics" ValueLabel="Has category">
-      <Condition Expression="HasCategory('Generics')" />
-      <Setter Property="Background" Value="#FFA080A0" />
-    </Style>
-    <Style TargetType="Node" GroupLabel="Externals" ValueLabel="Has category">
-      <Condition Expression="HasCategory('Externals')" />
-      <Setter Property="Background" Value="#FFA08080" />
-    </Style>
-  </Styles>
   <IdentifierAliases>
     <Alias n="1" Uri="Assembly=$(30639e41-aeaf-4321-8e4f-bb80a2deab98.OutputPathUri)" />
     <Alias n="2" Id="(@1)" />
@@ -15901,39 +15881,68 @@
     <Alias n="2869" Id="(@53 @204 @831 Member=WireDownEventProvider)" />
     <Alias n="2870" Id="(@53 @204 @831 Member=WireUpEventProvider)" />
   </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Assembly" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
+      <Setter Property="Background" Value="#1C3068" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Namespace" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
+      <Setter Property="Background" Value="#4A65A0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Type" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Type')" />
+      <Setter Property="Background" Value="#D3DCEF" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Method" ValueLabel="Has category">
+      <Condition Expression="HasCategory('CodeSchema_Method')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Generics" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Generics')" />
+      <Setter Property="Background" Value="#FFA080A0" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Externals" ValueLabel="Has category">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FFA08080" />
+    </Style>
+  </Styles>
   <Paths>
-    <Path Id="249c2004-757f-44b9-be01-b280727b98dc.OutputPath" Value="C:\mviewer\Libraries\BusinessLogic\bin\x86\Debug\BusinessLogicLayer.dll" />
-    <Path Id="249c2004-757f-44b9-be01-b280727b98dc.OutputPathUri" Value="file:///C:/mviewer/Libraries/BusinessLogic/bin/x86/Debug/BusinessLogicLayer.dll" />
-    <Path Id="30639e41-aeaf-4321-8e4f-bb80a2deab98.OutputPath" Value="C:\mviewer\MViewer\bin\Debug\MViewer.exe" />
-    <Path Id="30639e41-aeaf-4321-8e4f-bb80a2deab98.OutputPathUri" Value="file:///C:/mviewer/MViewer/bin/Debug/MViewer.exe" />
-    <Path Id="317b6f1f-6ed8-4f63-973e-4504d232e94b.OutputPath" Value="C:\mviewer\Libraries\Structures\bin\Debug\Structures.dll" />
-    <Path Id="317b6f1f-6ed8-4f63-973e-4504d232e94b.OutputPathUri" Value="file:///C:/mviewer/Libraries/Structures/bin/Debug/Structures.dll" />
-    <Path Id="3195debd-9eef-410e-8fb6-cf804c541fd7.OutputPath" Value="C:\mviewer\Libraries\AudioStreaming\bin\x86\Debug\AudioStreaming.dll" />
-    <Path Id="3195debd-9eef-410e-8fb6-cf804c541fd7.OutputPathUri" Value="file:///C:/mviewer/Libraries/AudioStreaming/bin/x86/Debug/AudioStreaming.dll" />
-    <Path Id="3549cd6f-80f8-450f-b99e-cf0a736b1f2a.OutputPath" Value="C:\mviewer\Libraries\InputSimulator\bin\x86\Debug\InputSimulator.dll" />
-    <Path Id="3549cd6f-80f8-450f-b99e-cf0a736b1f2a.OutputPathUri" Value="file:///C:/mviewer/Libraries/InputSimulator/bin/x86/Debug/InputSimulator.dll" />
-    <Path Id="37d78fe4-c863-4e19-bf23-c5a6253cc734.OutputPath" Value="C:\mviewer\Libraries\UIControls\bin\x86\Debug\UIControls.dll" />
-    <Path Id="37d78fe4-c863-4e19-bf23-c5a6253cc734.OutputPathUri" Value="file:///C:/mviewer/Libraries/UIControls/bin/x86/Debug/UIControls.dll" />
-    <Path Id="4a68a730-8d2c-485d-b9c9-91ea2cec5a3a.OutputPath" Value="C:\mviewer\Libraries\DesktopSharing\DesktopSharing\bin\x86\Debug\DesktopSharing.dll" />
-    <Path Id="4a68a730-8d2c-485d-b9c9-91ea2cec5a3a.OutputPathUri" Value="file:///C:/mviewer/Libraries/DesktopSharing/DesktopSharing/bin/x86/Debug/DesktopSharing.dll" />
-    <Path Id="7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3.OutputPath" Value="C:\mviewer\Libraries\CustomEventArgs\bin\Debug\CustomEventArgs.dll" />
-    <Path Id="7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3.OutputPathUri" Value="file:///C:/mviewer/Libraries/CustomEventArgs/bin/Debug/CustomEventArgs.dll" />
-    <Path Id="9249e167-8f34-45c7-b1be-9fe5c86458dd.OutputPath" Value="C:\mviewer\Libraries\Communicator\bin\Debug\Communicator.dll" />
-    <Path Id="9249e167-8f34-45c7-b1be-9fe5c86458dd.OutputPathUri" Value="file:///C:/mviewer/Libraries/Communicator/bin/Debug/Communicator.dll" />
-    <Path Id="9e8d07be-e021-4991-9406-71a1668d99a8.OutputPath" Value="C:\mviewer\Libraries\Interfaces\bin\Debug\Abstraction.dll" />
-    <Path Id="9e8d07be-e021-4991-9406-71a1668d99a8.OutputPathUri" Value="file:///C:/mviewer/Libraries/Interfaces/bin/Debug/Abstraction.dll" />
-    <Path Id="b0788a7c-1297-4b64-be84-10799bd6be66.OutputPath" Value="C:\mviewer\Libraries\DataAccess\bin\x86\Debug\DataAccessLayer.dll" />
-    <Path Id="b0788a7c-1297-4b64-be84-10799bd6be66.OutputPathUri" Value="file:///C:/mviewer/Libraries/DataAccess/bin/x86/Debug/DataAccessLayer.dll" />
-    <Path Id="bfca88dd-1daf-4447-96a4-a112c03b1570.OutputPath" Value="C:\mviewer\Libraries\StrategyPattern\bin\x86\Debug\StrategyPattern.dll" />
-    <Path Id="bfca88dd-1daf-4447-96a4-a112c03b1570.OutputPathUri" Value="file:///C:/mviewer/Libraries/StrategyPattern/bin/x86/Debug/StrategyPattern.dll" />
-    <Path Id="d5b65f88-df4b-4a9a-af3c-d3328ca0b364.OutputPath" Value="C:\mviewer\Libraries\Utils\bin\x86\Debug\Utils.dll" />
-    <Path Id="d5b65f88-df4b-4a9a-af3c-d3328ca0b364.OutputPathUri" Value="file:///C:/mviewer/Libraries/Utils/bin/x86/Debug/Utils.dll" />
-    <Path Id="f04c343c-9057-45be-b8e0-a6bb4cbd3e12.OutputPath" Value="C:\mviewer\Libraries\GenericData\bin\x86\Debug\GenericDataLayer.dll" />
-    <Path Id="f04c343c-9057-45be-b8e0-a6bb4cbd3e12.OutputPathUri" Value="file:///C:/mviewer/Libraries/GenericData/bin/x86/Debug/GenericDataLayer.dll" />
-    <Path Id="f52aa97e-180a-40ed-8f2b-09080171d6c7.OutputPath" Value="C:\mviewer\Libraries\CommandHookMonitor\bin\x86\Debug\CommandHookMonitor.dll" />
-    <Path Id="f52aa97e-180a-40ed-8f2b-09080171d6c7.OutputPathUri" Value="file:///C:/mviewer/Libraries/CommandHookMonitor/bin/x86/Debug/CommandHookMonitor.dll" />
+    <Path Id="249c2004-757f-44b9-be01-b280727b98dc.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\BusinessLogic\bin\x86\Debug\BusinessLogicLayer.dll" />
+    <Path Id="249c2004-757f-44b9-be01-b280727b98dc.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/BusinessLogic/bin/x86/Debug/BusinessLogicLayer.dll" />
+    <Path Id="30639e41-aeaf-4321-8e4f-bb80a2deab98.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\MViewer\bin\Debug\MViewer.exe" />
+    <Path Id="30639e41-aeaf-4321-8e4f-bb80a2deab98.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/MViewer/bin/Debug/MViewer.exe" />
+    <Path Id="317b6f1f-6ed8-4f63-973e-4504d232e94b.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Structures\bin\x86\Debug\Structures.dll" />
+    <Path Id="317b6f1f-6ed8-4f63-973e-4504d232e94b.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/Structures/bin/x86/Debug/Structures.dll" />
+    <Path Id="3195debd-9eef-410e-8fb6-cf804c541fd7.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\AudioStreaming\bin\x86\Debug\AudioStreaming.dll" />
+    <Path Id="3195debd-9eef-410e-8fb6-cf804c541fd7.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/AudioStreaming/bin/x86/Debug/AudioStreaming.dll" />
+    <Path Id="3549cd6f-80f8-450f-b99e-cf0a736b1f2a.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\InputSimulator\bin\x86\Debug\InputSimulator.dll" />
+    <Path Id="3549cd6f-80f8-450f-b99e-cf0a736b1f2a.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/InputSimulator/bin/x86/Debug/InputSimulator.dll" />
+    <Path Id="37d78fe4-c863-4e19-bf23-c5a6253cc734.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\UIControls\bin\x86\Debug\UIControls.dll" />
+    <Path Id="37d78fe4-c863-4e19-bf23-c5a6253cc734.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/UIControls/bin/x86/Debug/UIControls.dll" />
+    <Path Id="4a68a730-8d2c-485d-b9c9-91ea2cec5a3a.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DesktopSharing\DesktopSharing\bin\x86\Debug\DesktopSharing.dll" />
+    <Path Id="4a68a730-8d2c-485d-b9c9-91ea2cec5a3a.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/DesktopSharing/DesktopSharing/bin/x86/Debug/DesktopSharing.dll" />
+    <Path Id="7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CustomEventArgs\bin\x86\Debug\CustomEventArgs.dll" />
+    <Path Id="7dca20a9-3e1c-44f6-b1e6-8ba028b1dff3.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/CustomEventArgs/bin/x86/Debug/CustomEventArgs.dll" />
+    <Path Id="9249e167-8f34-45c7-b1be-9fe5c86458dd.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\bin\x86\Debug\Communicator.dll" />
+    <Path Id="9249e167-8f34-45c7-b1be-9fe5c86458dd.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/Communicator/bin/x86/Debug/Communicator.dll" />
+    <Path Id="9e8d07be-e021-4991-9406-71a1668d99a8.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Interfaces\bin\x86\Debug\Abstraction.dll" />
+    <Path Id="9e8d07be-e021-4991-9406-71a1668d99a8.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/Interfaces/bin/x86/Debug/Abstraction.dll" />
+    <Path Id="b0788a7c-1297-4b64-be84-10799bd6be66.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\DataAccess\bin\x86\Debug\DataAccessLayer.dll" />
+    <Path Id="b0788a7c-1297-4b64-be84-10799bd6be66.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/DataAccess/bin/x86/Debug/DataAccessLayer.dll" />
+    <Path Id="bfca88dd-1daf-4447-96a4-a112c03b1570.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\StrategyPattern\bin\x86\Debug\StrategyPattern.dll" />
+    <Path Id="bfca88dd-1daf-4447-96a4-a112c03b1570.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/StrategyPattern/bin/x86/Debug/StrategyPattern.dll" />
+    <Path Id="d5b65f88-df4b-4a9a-af3c-d3328ca0b364.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Utils\bin\x86\Debug\Utils.dll" />
+    <Path Id="d5b65f88-df4b-4a9a-af3c-d3328ca0b364.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/Utils/bin/x86/Debug/Utils.dll" />
+    <Path Id="f04c343c-9057-45be-b8e0-a6bb4cbd3e12.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\GenericData\bin\x86\Debug\GenericDataLayer.dll" />
+    <Path Id="f04c343c-9057-45be-b8e0-a6bb4cbd3e12.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/GenericData/bin/x86/Debug/GenericDataLayer.dll" />
+    <Path Id="f52aa97e-180a-40ed-8f2b-09080171d6c7.OutputPath" Value="F:\facultate\master\dizertatie\backupProject\MViewer\Libraries\CommandHookMonitor\bin\x86\Debug\CommandHookMonitor.dll" />
+    <Path Id="f52aa97e-180a-40ed-8f2b-09080171d6c7.OutputPathUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer/Libraries/CommandHookMonitor/bin/x86/Debug/CommandHookMonitor.dll" />
+    <Path Id="FxReferenceAssemblies" Value="C:\Program Files\Reference Assemblies\Microsoft\Framework" />
     <Path Id="FxReferenceAssembliesUri" Value="file:///C:/Program Files/Reference Assemblies/Microsoft/Framework" />
+    <Path Id="ProgramFiles" Value="C:\Program Files" />
     <Path Id="ProgramFilesUri" Value="file:///C:/Program Files" />
-    <Path Id="VsSolutionUri" Value="file:///C:/mviewer" />
+    <Path Id="VsSolution" Value="F:\facultate\master\dizertatie\backupProject\MViewer" />
+    <Path Id="VsSolutionUri" Value="file:///F:/facultate/master/dizertatie/backupProject/MViewer" />
   </Paths>
 </DirectedGraph>

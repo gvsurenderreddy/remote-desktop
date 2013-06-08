@@ -58,13 +58,20 @@ namespace MViewer
             {
                 if (!_webcamCapture.ThreadAborted)
                 {
-                    Image resized = Tools.Instance.ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
-                    pbWebcam.Image = resized;
+                    //lock (_syncPictures)
+                    {
+                        Image resized = Tools.Instance.ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
+                        pbWebcam.Image = resized;
+                        this.Invoke(new MethodInvoker(delegate()
+                        {
+                            pbWebcam.Update();
+                            pbWebcam.Refresh();
+                        }));
+                    }
                 }
                 else
                 {
                     _webcamCapture.StopCapturing();
-                    this.Close();
                 }
             }
             catch (Exception ex)

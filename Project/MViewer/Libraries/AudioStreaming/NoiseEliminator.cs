@@ -27,7 +27,7 @@ namespace AudioStreaming
             fs.Read(clear, 0, clear.Length);
             fs.Close();
             fs.Dispose();
-
+            File.Delete(filename);
             return clear;
         }
 
@@ -41,7 +41,6 @@ namespace AudioStreaming
                 {
                     exists = true;
                     _counter++;
-                    File.Delete("noisy.wav");
                 }
                 else
                 {
@@ -77,6 +76,7 @@ namespace AudioStreaming
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
+           
             return filename;
         }
     }
