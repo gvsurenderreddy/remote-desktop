@@ -260,10 +260,6 @@ namespace GenericObjects
                             _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, 
                                 this._width, this._height);
 
-                            // todo: remove picture saving
-                            //_eventArgs.CapturedImage.Save("c:\\sent\\sent_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" +
-                            //    DateTime.Now.Second + "_" + DateTime.Now.Millisecond + "_.bmp", ImageFormat.Bmp);
-
                             // raise the capture event
                             this.ImageCaptured.Invoke(this, _eventArgs);
                         }

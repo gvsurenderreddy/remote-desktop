@@ -70,13 +70,16 @@ namespace MViewer
                                 toDisplay = PickOldestPicture();
                                 this.AddPicture(image);
                             }
-                            Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbWebcam.Width, pbWebcam.Height);
-                            pbWebcam.Image = resized;
-                            this.Invoke(new MethodInvoker(delegate()
+                            if (pbWebcam.Width > 0 && pbWebcam.Height > 0)
                             {
-                                pbWebcam.Update();
-                                pbWebcam.Refresh();
-                            }));
+                                Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbWebcam.Width, pbWebcam.Height);
+                                pbWebcam.Image = resized;
+                                this.Invoke(new MethodInvoker(delegate()
+                                {
+                                    pbWebcam.Update();
+                                    pbWebcam.Refresh();
+                                }));
+                            }
                         }
                     }
                 }

@@ -140,8 +140,11 @@ namespace UIControls
                 toDisplay = PickOldestPicture();
                 this.AddPicture(finalDisplay);
             }
-            Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
-            pbRemote.Image = resized;
+            if (pbRemote.Width > 0 && pbRemote.Height > 0)
+            {
+                Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
+                pbRemote.Image = resized;
+            }
         }
 
         #endregion
@@ -248,8 +251,10 @@ namespace UIControls
 
                 pbRemote.Width = pnlRemote.Width - 25;
                 pbRemote.Height = pnlRemote.Height - 24;
-
-                pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
+                if (pbRemote.Width > 0 && pbRemote.Height > 0)
+                {
+                    pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
+                }
             }
             catch (Exception ex)
             {

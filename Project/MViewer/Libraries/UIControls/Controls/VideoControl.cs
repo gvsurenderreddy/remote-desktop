@@ -65,13 +65,16 @@ namespace UIControls
                         toDisplay = PickOldestPicture();
                         this.AddPicture(picture);
                     }
-                    Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbVideo.Width, pbVideo.Height);
-                    pbVideo.Image = resized;
-                    this.Invoke(new MethodInvoker(delegate()
+                    if (pbVideo.Width > 0 && pbVideo.Height > 0)
                     {
-                        pbVideo.Update();
-                        pbVideo.Refresh();
-                    }));
+                        Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbVideo.Width, pbVideo.Height);
+                        pbVideo.Image = resized;
+                        this.Invoke(new MethodInvoker(delegate()
+                        {
+                            pbVideo.Update();
+                            pbVideo.Refresh();
+                        }));
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -93,8 +96,10 @@ namespace UIControls
 
                 pbVideo.Width = pnlVideo.Width - 15 - 5;
                 pbVideo.Height = pnlVideo.Height - 47 - 5;
-
-                pbVideo.Image = Tools.Instance.ImageConverter.ResizeImage(pbVideo.Image, pbVideo.Width, pbVideo.Height);
+                if (pbVideo.Width > 0 && pbVideo.Height > 0)
+                {
+                    pbVideo.Image = Tools.Instance.ImageConverter.ResizeImage(pbVideo.Image, pbVideo.Width, pbVideo.Height);
+                }
             }
             catch (Exception ex)
             {
