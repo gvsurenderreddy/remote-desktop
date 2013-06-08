@@ -198,8 +198,16 @@ namespace DataAccessLayer
         {
             int maxContactNo = 0;
             var dataTable = _contactsDataSet.Tables[0].AsEnumerable();
-            maxContactNo = int.Parse((from contact in dataTable
-                            select contact["contactNo"]).Max().ToString());
+            var contactNumbers = (from contact in dataTable
+                                  select contact["contactNo"]);
+            if (contactNumbers != null && contactNumbers.Count() > 0)
+            {
+                maxContactNo = int.Parse(contactNumbers.Max().ToString());
+            }
+            else
+            {
+                maxContactNo = 0;
+            }
             return maxContactNo;
         }
 
