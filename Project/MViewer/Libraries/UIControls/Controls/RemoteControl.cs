@@ -51,6 +51,7 @@ namespace UIControls
                 _timer = new System.Timers.Timer(1000);
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick);
                 _commands = new List<MouseMoveArgs>();
+                _captures = new Dictionary<DateTime, Image>();
                 _syncCommands = new ManualResetEvent(true);
                 _timer.Start();
             }

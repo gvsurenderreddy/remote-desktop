@@ -34,6 +34,7 @@ namespace MViewer
                 InitializeComponent();
                 _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
                 _webcamCapture.ParentForm = this;
+                _captures = new Dictionary<DateTime, Image>();
                 Program.Controller.StartVideo(_webcamCapture);
             }
             catch (Exception ex)
