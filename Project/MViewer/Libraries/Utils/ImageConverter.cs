@@ -11,8 +11,8 @@ public class ImageConverter
     public Bitmap ResizeImage(Image imageToResize, int width, int height)
     {
         Bitmap resizedImage = null;
-        try
-        {
+        //try
+        //{
             //a holder for the result
             resizedImage = new Bitmap(width, height);
             // set the resolutions the same to avoid cropping due to resolution differences
@@ -28,11 +28,11 @@ public class ImageConverter
                 //draw the image into the target bitmap
                 graphics.DrawImage(imageToResize, 0, 0, resizedImage.Width, resizedImage.Height);
             }
-        }
-        catch (Exception ex)
-        {
-            Tools.Instance.Logger.LogError(ex.ToString());
-        }
+        //}
+        //catch (Exception ex)
+        //{
+        //    Tools.Instance.Logger.LogError(ex.ToString());
+        //}
         //return the resulting bitmap
         return resizedImage;
     }

@@ -297,9 +297,11 @@ namespace MViewer
                         break;
                     case GenericEnums.ContactsOperation.Remove:
                         contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
-                        _contactsDAL.RemoveContact(contact.ContactNo);
+                        if (contact != null)
+                        {
+                            _contactsDAL.RemoveContact(contact.ContactNo);
+                        }
                         _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
-
                         if (updatedContact.ContactNo != -1)
                         {
                             SendRemoveCommand(contact.Identity);

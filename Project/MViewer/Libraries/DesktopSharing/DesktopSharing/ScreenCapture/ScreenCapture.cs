@@ -12,7 +12,6 @@ namespace DesktopSharing
         #region members
 
         Bitmap _newCapture;
-        Graphics _graphics;
         const int _numBytesPerPixel = 4;
 
         #endregion
@@ -22,7 +21,6 @@ namespace DesktopSharing
         public ScreenCapture()
         {
             _newCapture = new Bitmap(1, 1);
-            _graphics = Graphics.FromImage(new Bitmap(10, 10));
         }
 
         #endregion
@@ -34,7 +32,7 @@ namespace DesktopSharing
             Bitmap screenCapture = null;
             lock (_newCapture)
             {
-                _newCapture = GetDesktopCapture();
+                _newCapture = this.GetDesktopCapture();
                 screenCapture = _newCapture;
             }
             return screenCapture;
@@ -87,11 +85,6 @@ namespace DesktopSharing
                 return cursorCapture;
             }
             return null;
-        }
-
-        public void ResetCaptures()
-        {
-            _newCapture = new Bitmap(1, 1);
         }
 
         #endregion

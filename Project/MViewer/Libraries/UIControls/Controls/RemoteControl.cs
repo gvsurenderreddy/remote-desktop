@@ -129,8 +129,7 @@ namespace UIControls
                 //
                 Image cursor;
                 int cursorX, cursorY;
-                Guid id;
-                Tools.Instance.RemotingUtils.DeserializeMouseCapture(mouseCapture, out cursor, out cursorX, out cursorY, out id);
+                Tools.Instance.RemotingUtils.DeserializeMouseCapture(mouseCapture, out cursor, out cursorX, out cursorY);
 
                 finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
                         cursor, cursorX, cursorY);
@@ -221,19 +220,26 @@ namespace UIControls
 
         private void RemoteControl_Resize(object sender, EventArgs e)
         {
-            //pnl remote width = remote control width - (547 - 539) = remote control width - 8
-            //pnl remote height = remote control height - (416 - 373) = remote control height - 43
+            try
+            {
+                //pnl remote width = remote control width - (547 - 539) = remote control width - 8
+                //pnl remote height = remote control height - (416 - 373) = remote control height - 43
 
-            //picture box width = pnl remote width - (539 - 514) = pnl remote width - 25
-            //picture box height = pnl remote height - (373 - 349) = pnl remote height - 24
+                //picture box width = pnl remote width - (539 - 514) = pnl remote width - 25
+                //picture box height = pnl remote height - (373 - 349) = pnl remote height - 24
 
-            pnlRemote.Width = this.Width - 8;
-            pnlRemote.Height = this.Height - 43;
+                pnlRemote.Width = this.Width - 8;
+                pnlRemote.Height = this.Height - 43;
 
-            pbRemote.Width = pnlRemote.Width - 25;
-            pbRemote.Height = pnlRemote.Height - 24;
+                pbRemote.Width = pnlRemote.Width - 25;
+                pbRemote.Height = pnlRemote.Height - 24;
 
-            pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
+                pbRemote.Image = Tools.Instance.ImageConverter.ResizeImage(pbRemote.Image, pbRemote.Width, pbRemote.Height);
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
         }
 
         #endregion

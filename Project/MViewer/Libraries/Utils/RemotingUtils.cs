@@ -128,7 +128,7 @@ namespace Utils
             return mergedCapture;
         }
 
-        public void DeserializeMouseCapture(byte[] serializedCapture, out Image image, out int cursorX, out int cursorY, out Guid id)
+        public void DeserializeMouseCapture(byte[] serializedCapture, out Image image, out int cursorX, out int cursorY)
         {
             // unpack the received data 
             // create buffers to hold the unpacked parts
@@ -154,9 +154,6 @@ namespace Utils
             MemoryStream memoryStream = new MemoryStream(imgData, 0, imgData.Length);
             memoryStream.Write(imgData, 0, imgData.Length);
             image = Image.FromStream(memoryStream, true);
-
-            // create a Guid
-            id = new Guid(idData);
         }
 
         public void DeserializeDesktopCapture(byte[] data, out Image image, out Rectangle bounds, out Guid id)
