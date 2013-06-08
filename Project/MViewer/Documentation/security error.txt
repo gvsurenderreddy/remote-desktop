@@ -1,0 +1,22 @@
+System.ServiceModel.Security.MessageSecurityException was caught
+  HResult=-2146233087
+  Message=An unsecured or incorrectly secured fault was received from the other party. See the inner FaultException for the fault code and detail.
+  Source=mscorlib
+  StackTrace:
+    Server stack trace: 
+       at System.ServiceModel.Channels.SecurityChannelFactory`1.SecurityRequestChannel.ProcessReply(Message reply, SecurityProtocolCorrelationState correlationState, TimeSpan timeout)
+       at System.ServiceModel.Channels.SecurityChannelFactory`1.SecurityRequestChannel.Request(Message message, TimeSpan timeout)
+       at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+       at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+       at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+       at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+    Exception rethrown at [0]: 
+       at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+       at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+       at GenericObjects.IMViewerService.AddContact(String identity, String friendlyName)
+       at MViewerClient.AddContact(String identity, String friendlyName) in f:\facultate\master\dizertatie\backupProject\MViewer\Libraries\Communicator\MViewerClient.cs:line 99
+       at MViewer.Model.PerformContactOperation(EventArgs e) in f:\facultate\master\dizertatie\backupProject\MViewer\MViewer\MVC\Model.cs:line 283
+  InnerException: System.ServiceModel.FaultException
+       HResult=-2146233087
+       Message=An error occurred when verifying security for the message.
+       InnerException: 
