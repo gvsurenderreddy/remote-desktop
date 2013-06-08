@@ -1,6 +1,0 @@
-F:\facultate\master\dizertatie\globalhook2_src\GlobalHook\Gma.UserActivityMonitor\bin\Debug\Gma.xml
-F:\facultate\master\dizertatie\globalhook2_src\GlobalHook\Gma.UserActivityMonitor\bin\Debug\Gma.UserActivityMonitor.dll
-F:\facultate\master\dizertatie\globalhook2_src\GlobalHook\Gma.UserActivityMonitor\bin\Debug\Gma.UserActivityMonitor.pdb
-F:\facultate\master\dizertatie\globalhook2_src\GlobalHook\Gma.UserActivityMonitor\obj\Debug\Gma.UserActivityMonitor.csprojResolveAssemblyReference.cache
-F:\facultate\master\dizertatie\globalhook2_src\GlobalHook\Gma.UserActivityMonitor\obj\Debug\Gma.UserActivityMonitor.dll
-F:\facultate\master\dizertatie\globalhook2_src\GlobalHook\Gma.UserActivityMonitor\obj\Debug\Gma.UserActivityMonitor.pdb
