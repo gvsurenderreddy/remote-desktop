@@ -65,20 +65,19 @@ namespace GenericObjects
                 {
                     return;
                 }
-
-                // todo: solve the captures priority issue
-
-                byte[] toPlay = capture;
-                if (_captures.Count == 0)
+                lock (_syncReceivedCaptures)
                 {
-                    this.AddCapture(senderIdentity, capture);
+                    byte[] toPlay = capture;
+                    if (_captures.Count == 0)
+                    {
+                        this.AddCapture(senderIdentity, capture);
+                    }
+                    else
+                    {
+                        toPlay = PopOldestCapture(senderIdentity);
+                        this.AddCapture(senderIdentity, capture);
+                    }
                 }
-                else
-                {
-                    toPlay = PopOldestCapture(senderIdentity);
-                    this.AddCapture(senderIdentity, capture);
-                }
-
                 bool eliminateNoise = bool.Parse(ConfigurationManager.AppSettings["eliminateNoise"]);
                 if (eliminateNoise)
                 {
