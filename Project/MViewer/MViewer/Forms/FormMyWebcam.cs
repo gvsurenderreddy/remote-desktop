@@ -16,7 +16,9 @@ namespace MViewer
     public partial class FormMyWebcam : Form
     {
         #region private members
-
+        
+        readonly object _syncPictures = new object();
+        IDictionary<DateTime, Image> _captures;
         IWebcamCapture _webcamCapture;
         int _timerInterval;
 
@@ -60,13 +62,22 @@ namespace MViewer
                 {
                     //lock (_syncPictures)
                     {
-                        Image resized = Tools.Instance.ImageConverter.ResizeImage(image, pbWebcam.Width, pbWebcam.Height);
-                        pbWebcam.Image = resized;
-                        this.Invoke(new MethodInvoker(delegate()
+                        if (pbWebcam.Width > 0 && pbWebcam.Height > 0)
                         {
-                            pbWebcam.Update();
-                            pbWebcam.Refresh();
-                        }));
+                            Image toDisplay = image;
+                            if (_captures.Count > 0)
+                            {
+                                toDisplay = PickOldestPicture();
+                                this.AddPicture(image);
+                            }
+                            Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbWebcam.Width, pbWebcam.Height);
+                            pbWebcam.Image = resized;
+                            this.Invoke(new MethodInvoker(delegate()
+                            {
+                                pbWebcam.Update();
+                                pbWebcam.Refresh();
+                            }));
+                        }
                     }
                 }
                 else
@@ -121,6 +132,16 @@ namespace MViewer
         #endregion
 
         #region callbacks
+
+        void AddPicture(Image toAdd)
+        {
+            _captures.Add(DateTime.Now, toAdd);
+        }
+
+        Image PickOldestPicture()
+        {
+            return _captures[_captures.Keys.Min()];
+        }
 
         private void FormMyWebcam_Resize(object sender, EventArgs e)
         {

@@ -32,6 +32,8 @@ namespace UIControls
         IList<MouseMoveArgs> _commands;
         ManualResetEvent _syncCommands;
         string _partnerIdentity;
+        readonly object _syncPictures = new object();
+        IDictionary<DateTime, Image> _captures;
 
         #endregion
 
@@ -120,13 +122,11 @@ namespace UIControls
                 Rectangle screenBounds = new Rectangle();
                 Guid screenID = new Guid();
                 Tools.Instance.RemotingUtils.DeserializeDesktopCapture(screenCapture, out screenImage, out screenBounds, out screenID);
-
             }
             Image finalDisplay = null;
             if (mouseCapture != null)
             {
-                // Unpack the data.
-                //
+                // unpack the data
                 Image cursor;
                 int cursorX, cursorY;
                 Tools.Instance.RemotingUtils.DeserializeMouseCapture(mouseCapture, out cursor, out cursorX, out cursorY);
@@ -134,7 +134,12 @@ namespace UIControls
                 finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
                         cursor, cursorX, cursorY);
             }
-
+            Image toDisplay = finalDisplay;
+            if (_captures.Count > 0)
+            {
+                toDisplay = PickOldestPicture();
+                this.AddPicture(finalDisplay);
+            }
             Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
             pbRemote.Image = resized;
         }
@@ -142,6 +147,16 @@ namespace UIControls
         #endregion
 
         #region private methods
+
+        void AddPicture(Image toAdd)
+        {
+            _captures.Add(DateTime.Now, toAdd);
+        }
+
+        Image PickOldestPicture()
+        {
+            return _captures[_captures.Keys.Min()];
+        }
 
         void MouseMoveTimerTick(object sender, ElapsedEventArgs args)
         {

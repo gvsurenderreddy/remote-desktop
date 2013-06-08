@@ -72,8 +72,9 @@ namespace DataAccessLayer
             }
             else
             {
+                int maxContactNo = GetMaxContactNumber();
                 DataRow dr = _contactsDataView.Table.NewRow();
-                dr["ContactNo"] = dr.Table.Rows.Count;
+                dr["ContactNo"] = ++maxContactNo;
                 dr["FriendlyName"] = contact.FriendlyName;
                 dr["Identity"] = contact.Identity;
                 _contactsDataView.Table.Rows.Add(dr);
@@ -191,6 +192,14 @@ namespace DataAccessLayer
                 }
             }
             return dr;
+        }
+
+        int GetMaxContactNumber()
+        {
+            int maxContactNo = 0;
+            // todo: get max contact no
+
+            return maxContactNo;
         }
 
         #endregion
