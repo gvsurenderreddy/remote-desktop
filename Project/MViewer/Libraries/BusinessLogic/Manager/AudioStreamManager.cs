@@ -34,6 +34,7 @@ namespace GenericObjects
         {
             _timerInterval = timerInterval;
             _onCaptureAvailable = onCaptureAvailable;
+            _captures = new Dictionary<string, IDictionary<DateTime, byte[]>>();
         }
 
         #endregion
