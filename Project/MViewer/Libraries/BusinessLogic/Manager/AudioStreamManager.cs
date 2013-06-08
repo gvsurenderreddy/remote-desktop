@@ -18,16 +18,12 @@ namespace GenericObjects
     {
         #region private members
 
-        //ManualResetEvent _syncAudioInstance = new ManualResetEvent(false);
         AudioStream _audioStream;
         EventHandler _onCaptureAvailable;
         int _timerInterval;
         ManualResetEvent _syncCaptures = new ManualResetEvent(true);
 
         Dictionary<string, object> _syncPartnerCaptures = new Dictionary<string, object>();
-
-        Dictionary<string, AudioQueue> _pendingCapturesQueue = new Dictionary<string, AudioQueue>();
-        Dictionary<string, DateTime> _activeCapturesQueue = new Dictionary<string, DateTime>();
 
         #endregion
 
@@ -87,93 +83,12 @@ namespace GenericObjects
         {
             try
             { 
-                AudioCapture toPlay = null;
-                //object toLock = new object();
-                //if (_syncPartnerCaptures.ContainsKey(senderIdentity))
-                //{
-                //    toLock = _syncPartnerCaptures[senderIdentity];
-                //}
-                //else
-                //{
-                //    _syncPartnerCaptures.Add(senderIdentity, toLock);
-                //}
-
-                //lock (toLock)
-                //{
-               
-                //    bool mustWait = false;
-                //    // wait for the previos captures sent by the same partner to finish playing
-
-                //    if (_activeCapturesQueue != null && _activeCapturesQueue.ContainsKey(senderIdentity))
-                //    {
-
-                //        // if there is any currently playing capture, then the latest received capture should wait before playing
-                //        mustWait = true;
-                //    }
-                //    if (mustWait)
-                //    {
-                //        // add the received capture to the partner's pending queue
-                //        AudioCapture newCapture = new AudioCapture()
-                //        {
-                //            Capture = capture,
-                //            ReceiveTimestamp = DateTime.Now
-                //        };
-                //        AudioQueue queue = new AudioQueue();
-                //        if (!_pendingCapturesQueue.ContainsKey(senderIdentity))
-                //        {
-                //            _pendingCapturesQueue.Add(senderIdentity, queue);
-                //        }
-                //        queue = _pendingCapturesQueue[senderIdentity];
-                //        queue.AddCapture(newCapture);
-
-                //        // pick the oldest capture that has to be played
-                //        toPlay = queue.PopCapture();
-
-                //        // derminte how much time you must wait for the active capture to finish playing
-                //        double elapsedSeconds = DateTime.Now.Subtract(_activeCapturesQueue[senderIdentity]).TotalSeconds;
-                //        if (elapsedSeconds < captureLengthInSeconds)
-                //        {
-                //            TimeSpan toWait = TimeSpan.FromSeconds(elapsedSeconds);
-                //            Thread.Sleep(toWait);
-                //        }
-                //    }
-                //    else
-                    {
-                        toPlay = new AudioCapture()
-                        {
-                            Capture = capture
-                        };
-                    }
-                    if (toPlay != null && toPlay.Capture != null && toPlay.Capture.Length > 0)
-                    {
-                        if (_activeCapturesQueue.ContainsKey(senderIdentity))
-                        {
-                            _activeCapturesQueue[senderIdentity] = DateTime.Now;
-                        }
-                        else
-                        {
-                            _activeCapturesQueue.Add(senderIdentity, DateTime.Now);
-                        }
-
-                        SoundEffect sound = new SoundEffect(toPlay.Capture, Microphone.Default.SampleRate, AudioChannels.Mono);
-                        SoundEffect.MasterVolume = 1f;
-                        sound.Play();
-
-                        // decide if to remove or not this sleep
-                        TimeSpan ts = TimeSpan.FromMilliseconds(captureLengthInSeconds * 1000);
-                        Thread.Sleep(ts);
-
-                        //todo: remove this log
-                        //Tools.Instance.Logger.LogInfo("played capture of " + capture.Length + " bytes");
-
-                        sound.Dispose();
-                    }
-                    else
-                    {
-                        // todo: remove this log
-                        //Tools.Instance.Logger.LogInfo("nothing to play");
-                    }
-                //}
+                SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+                SoundEffect.MasterVolume = 1f;
+                sound.Play();
+                TimeSpan ts = TimeSpan.FromMilliseconds(captureLengthInSeconds * 1000);
+                Thread.Sleep(ts);
+                sound.Dispose();
             }
             catch (Exception ex)
             {
@@ -186,8 +101,7 @@ namespace GenericObjects
             try
             {
                 _syncCaptures.WaitOne(); // used to wait until the room button action is processed
-                //_syncAudioInstance.WaitOne();
-
+ 
                 AudioCaptureEventArgs eventArgs = (AudioCaptureEventArgs)e;
                 byte[] capture = eventArgs.Capture;
     

@@ -264,8 +264,6 @@ namespace Communicator
         {
             try
             {
-                Tools.Instance.Logger.LogInfo("Started added contact: " + identity);
-
                 ContactsEventArgs args = new ContactsEventArgs()
                 {
                     Operation = GenericEnums.ContactsOperation.Add,
