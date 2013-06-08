@@ -420,9 +420,6 @@ namespace MViewer
                     // check the video status before displaying the picture
                     if (peer.VideoSessionState == GenericEnums.SessionState.Opened)
                     { 
-                        // todo: remove picture saving
-                        //args.CapturedImage.Save("c:\\received\\received_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + "_" +
-                        //        DateTime.Now.Second + "_" + DateTime.Now.Millisecond + "_.bmp", ImageFormat.Bmp);
                         _view.RoomManager.ShowVideoCapture(args.Identity, args.CapturedImage, args.CaptureTimestamp);
                     }
                 }
