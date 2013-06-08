@@ -23,7 +23,8 @@ namespace GenericObjects
         int _timerInterval;
         ManualResetEvent _syncCaptures = new ManualResetEvent(true);
 
-        Dictionary<string, object> _syncPartnerCaptures = new Dictionary<string, object>();
+        readonly object _syncReceivedCaptures = new object();
+        IDictionary<string, IDictionary<DateTime, byte[]>> _captures;
 
         #endregion
 
@@ -39,6 +40,22 @@ namespace GenericObjects
 
         #region private methods
 
+        void AddCapture(string senderIdentity, byte[] toAdd)
+        {
+            if (_captures.ContainsKey(senderIdentity) == false)
+            {
+                _captures.Add(senderIdentity, new Dictionary<DateTime, byte[]>());
+            }
+            _captures[senderIdentity].Add(DateTime.Now, toAdd);
+        }
+
+        byte[] PopOldestCapture(string senderIdentity)
+        {
+            byte[] oldest = _captures[senderIdentity][_captures[senderIdentity].Keys.Min()];
+            _captures[senderIdentity].Remove(_captures[senderIdentity].Keys.Min());
+            return oldest;
+        }
+
         void PlayCapture(byte[] capture, string senderIdentity, double captureLengthInSeconds)
         {
             try
@@ -47,7 +64,20 @@ namespace GenericObjects
                 {
                     return;
                 }
-                
+
+                // todo: solve the captures priority issue
+
+                byte[] toPlay = capture;
+                if (_captures.Count == 0)
+                {
+                    this.AddCapture(senderIdentity, capture);
+                }
+                else
+                {
+                    toPlay = PopOldestCapture(senderIdentity);
+                    this.AddCapture(senderIdentity, capture);
+                }
+
                 bool eliminateNoise = bool.Parse(ConfigurationManager.AppSettings["eliminateNoise"]);
                 if (eliminateNoise)
                 {

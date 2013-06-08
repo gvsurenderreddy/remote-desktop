@@ -32,9 +32,11 @@ namespace UIControls
             _captures.Add(DateTime.Now, toAdd);
         }
 
-        Image PickOldestPicture()
+        Image PopOldestPicture()
         {
-            return _captures[_captures.Keys.Min()];
+            Image oldest = _captures[_captures.Keys.Min()];
+            _captures.Remove(_captures.Keys.Min());
+            return oldest;
         }
 
         #endregion
@@ -60,9 +62,13 @@ namespace UIControls
                 try
                 {
                     Image toDisplay = picture;
-                    if (_captures.Count > 0)
+                    if (_captures.Count == 0)
                     {
-                        toDisplay = PickOldestPicture();
+                        this.AddPicture(picture);
+                    }
+                    else
+                    {
+                        toDisplay = PopOldestPicture();
                         this.AddPicture(picture);
                     }
                     if (pbVideo.Width > 0 && pbVideo.Height > 0)

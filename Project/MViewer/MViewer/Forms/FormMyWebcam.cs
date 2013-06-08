@@ -66,21 +66,22 @@ namespace MViewer
                         if (pbWebcam.Width > 0 && pbWebcam.Height > 0)
                         {
                             Image toDisplay = image;
-                            if (_captures.Count > 0)
+                            if (_captures.Count == 0)
                             {
-                                toDisplay = PickOldestPicture();
                                 this.AddPicture(image);
                             }
-                            if (pbWebcam.Width > 0 && pbWebcam.Height > 0)
+                            else
                             {
-                                Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbWebcam.Width, pbWebcam.Height);
-                                pbWebcam.Image = resized;
-                                this.Invoke(new MethodInvoker(delegate()
-                                {
-                                    pbWebcam.Update();
-                                    pbWebcam.Refresh();
-                                }));
+                                toDisplay = PopOldestPicture();
+                                this.AddPicture(image);
                             }
+                            Image resized = Tools.Instance.ImageConverter.ResizeImage(toDisplay, pbWebcam.Width, pbWebcam.Height);
+                            pbWebcam.Image = resized;
+                            this.Invoke(new MethodInvoker(delegate()
+                            {
+                                pbWebcam.Update();
+                                pbWebcam.Refresh();
+                            }));
                         }
                     }
                 }
@@ -142,9 +143,11 @@ namespace MViewer
             _captures.Add(DateTime.Now, toAdd);
         }
 
-        Image PickOldestPicture()
+        Image PopOldestPicture()
         {
-            return _captures[_captures.Keys.Min()];
+            Image oldest = _captures[_captures.Keys.Min()];
+            _captures.Remove(_captures.Keys.Min());
+            return oldest;
         }
 
         private void FormMyWebcam_Resize(object sender, EventArgs e)

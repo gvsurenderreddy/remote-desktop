@@ -136,9 +136,13 @@ namespace UIControls
                         cursor, cursorX, cursorY);
             }
             Image toDisplay = finalDisplay;
-            if (_captures.Count > 0)
+            if (_captures.Count == 0)
             {
-                toDisplay = PickOldestPicture();
+                this.AddPicture(finalDisplay);
+            }
+            else
+            {
+                toDisplay = PopOldestPicture();
                 this.AddPicture(finalDisplay);
             }
             if (pbRemote.Width > 0 && pbRemote.Height > 0)
@@ -157,9 +161,11 @@ namespace UIControls
             _captures.Add(DateTime.Now, toAdd);
         }
 
-        Image PickOldestPicture()
+        Image PopOldestPicture()
         {
-            return _captures[_captures.Keys.Min()];
+            Image oldest = _captures[_captures.Keys.Min()];
+            _captures.Remove(_captures.Keys.Min());
+            return oldest;
         }
 
         void MouseMoveTimerTick(object sender, ElapsedEventArgs args)
