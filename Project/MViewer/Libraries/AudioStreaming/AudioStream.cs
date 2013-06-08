@@ -85,6 +85,7 @@ namespace AudioStreaming
                     }
                 }
             }
+            Tools.Instance.Logger.LogInfo("AudioStream c-tor called");
         }
 
         #endregion
@@ -221,25 +222,26 @@ namespace AudioStreaming
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-
+        readonly object _syncDispatcherUpdate = new object();
         protected override void Update(GameTime gameTime)
         {
             try
             {
-                _syncStatus.WaitOne();
-                if (_microphone == null)
+                lock (_syncDispatcherUpdate)
                 {
-                    _microphone = Microphone.Default;
+                    _syncStatus.WaitOne();
+                    if (_microphone == null)
+                    {
+                        _microphone = Microphone.Default;
+                    }
+                    if (!_isRunning && _microphone.State == MicrophoneState.Started)
+                    {
+                        _syncStop.Reset();
+                        _microphone.Stop();
+                    }
+                    base.Update(gameTime);
+                    _syncStop.Set();
                 }
-                if (!_isRunning && _microphone.State == MicrophoneState.Started)
-                {
-                    _syncStop.Reset();
-
-                    _microphone.Stop();
-                }
-
-                base.Update(gameTime);
-                _syncStop.Set();
             }
             catch (Exception ex)
             {

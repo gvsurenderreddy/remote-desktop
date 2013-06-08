@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Utils;
 
 namespace AudioStreaming
@@ -21,14 +22,39 @@ namespace AudioStreaming
 
         public byte[] EliminateNoise()
         {
-            string filename = ProcessNoise();
-            FileStream fs = new FileStream(filename, FileMode.Open);
-            byte[] clear = new byte[fs.Length];
-            fs.Read(clear, 0, clear.Length);
-            fs.Close();
-            fs.Dispose();
-            File.Delete(filename);
-            return clear;
+            string filename = this.ProcessNoise();
+            FileStream fs = null;
+            bool retry = true;
+            int maxRetry = 5, tryCount = 0;
+            while (retry && tryCount < maxRetry)
+            {
+                try
+                {
+                    fs = new FileStream(filename, FileMode.Open);
+                    retry = false;
+                }
+                catch (Exception ex)
+                {
+                    Tools.Instance.Logger.LogError(ex.ToString());
+                    retry = true;
+                    Thread.Sleep(100);
+                }
+                tryCount++;
+            }
+            byte[] clear = null;
+            if (fs != null)
+            {
+                clear = new byte[fs.Length];
+                fs.Read(clear, 0, clear.Length);
+                fs.Close();
+                fs.Dispose();
+            }
+            try
+            {
+                File.Delete(filename);
+            }
+            catch { }
+            return clear != null ? clear : this._capture;
         }
 
         string ProcessNoise()

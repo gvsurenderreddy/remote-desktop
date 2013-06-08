@@ -131,8 +131,10 @@ namespace MViewer
 
                 pbWebcam.Width = pnlMain.Width - 22;
                 pbWebcam.Height = pnlMain.Height - 22;
-
-                pbWebcam.Image = Tools.Instance.ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
+                if (pbWebcam.Width > 0 && pbWebcam.Height > 0)
+                {
+                    pbWebcam.Image = Tools.Instance.ImageConverter.ResizeImage(pbWebcam.Image, pbWebcam.Width, pbWebcam.Height);
+                }
             }
             catch (Exception ex)
             {
