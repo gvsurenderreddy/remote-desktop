@@ -156,7 +156,7 @@ namespace Utils
             image = Image.FromStream(memoryStream, true);
         }
 
-        public void DeserializeDesktopCapture(byte[] data, out Image image, out Rectangle bounds, out Guid id)
+        public void DeserializeDesktopCapture(byte[] data, out Image image, out Rectangle bounds)
         {
             // unpack the received data 
             // create buffers to hold the unpacked parts
@@ -191,9 +191,6 @@ namespace Utils
             int width = right - left + 1;
             int height = bot - top + 1;
             bounds = new Rectangle(left, top, width, height);
-
-            // create Guid
-            id = new Guid(idData);
         }
 
         #endregion

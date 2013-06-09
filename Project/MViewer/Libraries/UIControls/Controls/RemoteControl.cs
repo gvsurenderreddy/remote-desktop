@@ -118,19 +118,21 @@ namespace UIControls
         {
             Image screenImage = null;
 
-            if (screenCapture != null)
+            byte[] uncompressedScreen = Tools.Instance.DataCompression.Decompress(screenCapture);
+            byte[] uncompressedMouse = Tools.Instance.DataCompression.Decompress(mouseCapture);
+
+            if (uncompressedScreen != null)
             {
                 Rectangle screenBounds = new Rectangle();
-                Guid screenID = new Guid();
-                Tools.Instance.RemotingUtils.DeserializeDesktopCapture(screenCapture, out screenImage, out screenBounds, out screenID);
+                Tools.Instance.RemotingUtils.DeserializeDesktopCapture(uncompressedScreen, out screenImage, out screenBounds);
             }
             Image finalDisplay = null;
-            if (mouseCapture != null)
+            if (uncompressedMouse != null)
             {
                 // unpack the data
                 Image cursor;
                 int cursorX, cursorY;
-                Tools.Instance.RemotingUtils.DeserializeMouseCapture(mouseCapture, out cursor, out cursorX, out cursorY);
+                Tools.Instance.RemotingUtils.DeserializeMouseCapture(uncompressedMouse, out cursor, out cursorX, out cursorY);
 
                 finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
                         cursor, cursorX, cursorY);

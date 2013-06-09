@@ -67,8 +67,7 @@ namespace GenericObjects
 
                     System.Drawing.Image partialDesktop;
                     System.Drawing.Rectangle rect2;
-                    Guid id;
-                    Tools.Instance.RemotingUtils.DeserializeDesktopCapture(serialized, out partialDesktop, out rect2, out id);
+                    Tools.Instance.RemotingUtils.DeserializeDesktopCapture(serialized, out partialDesktop, out rect2);
                 }
             }
             catch (Exception ex)
@@ -124,11 +123,14 @@ namespace GenericObjects
                 byte[] serializedScreen = CaptureDekstopImage();
                 byte[] serializedMouse = CaptureMouseImage();
 
+                byte[] compressedScreen = Tools.Instance.DataCompression.Compress(serializedScreen);
+                byte[] compressedMouse = Tools.Instance.DataCompression.Compress(serializedMouse);
+
                 _captureReady.Invoke(this,
                     new RemotingCaptureEventArgs()
                     {
-                        ScreenCapture = serializedScreen,
-                        MouseCapture = serializedMouse
+                        ScreenCapture = compressedScreen,
+                        MouseCapture = compressedMouse
                     });
             }
             catch (Exception ex)
