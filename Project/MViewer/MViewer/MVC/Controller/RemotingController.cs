@@ -713,7 +713,7 @@ namespace MViewer
                 RemotingCaptureEventArgs args = (RemotingCaptureEventArgs)e;
                 PeerStates peer = _model.SessionManager.GetPeerStatus(args.Identity);
 
-                if (peer.RemotingSessionState == GenericEnums.SessionState.Undefined ||
+                if (
                     peer.RemotingSessionState == GenericEnums.SessionState.Pending)
                 {
                     // receiving captures for the first time, have to initalize a form
@@ -733,7 +733,7 @@ namespace MViewer
                 }
                 else
                 {
-                    if (peer.RemotingSessionState == GenericEnums.SessionState.Closed)
+                    if (peer.RemotingSessionState == GenericEnums.SessionState.Closed || peer.RemotingSessionState == GenericEnums.SessionState.Undefined)
                     {
                         _model.SessionManager.RemoveSession(args.Identity);
                         _view.RoomManager.CloseRoom(args.Identity, GenericEnums.RoomType.Remoting);

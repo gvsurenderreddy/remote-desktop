@@ -380,6 +380,15 @@ namespace MViewer
                 RoomActionEventArgs args = (RoomActionEventArgs)e;
                 bool canSend = _view.RequestConferencePermission(args.Identity, args.RoomType);
                 args.HasPermission = canSend;
+                if (canSend)
+                {
+                    if (args.RoomType == GenericEnums.RoomType.Remoting)
+                    {
+                        ClientSession session = new ClientSession(args.Identity, args.RoomType);
+                        session.Peers.RemotingSessionState = GenericEnums.SessionState.Pending;
+                        _model.SessionManager.AddSession(session, GenericEnums.RoomType.Remoting);
+                    }
+                }
             }
             catch (Exception ex)
             {
