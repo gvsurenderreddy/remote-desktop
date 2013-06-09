@@ -110,8 +110,9 @@ namespace GenericObjects
         void PlaySound(byte[] capture, string senderIdentity, double captureLengthInSeconds)
         {
             try
-            { 
-                SoundEffect sound = new SoundEffect(capture, Microphone.Default.SampleRate, AudioChannels.Mono);
+            {
+                byte[] uncompressed = Tools.Instance.DataCompression.Decompress(capture);
+                SoundEffect sound = new SoundEffect(uncompressed, Microphone.Default.SampleRate, AudioChannels.Mono);
                 SoundEffect.MasterVolume = 1f;
                 sound.Play();
                 TimeSpan ts = TimeSpan.FromMilliseconds(captureLengthInSeconds * 1000);

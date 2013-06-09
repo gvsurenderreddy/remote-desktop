@@ -162,10 +162,11 @@ namespace AudioStreaming
 
                     if (_capturesCount == 1)
                     {
+                        byte[] compressedCapture = Tools.Instance.DataCompression.Compress(_stream.ToArray());
                         //  push microphone capture
                         _onCaptureReady.Invoke(this, new AudioCaptureEventArgs()
                         {
-                            Capture = _stream.GetBuffer(),
+                            Capture = compressedCapture,
                             CaptureTimestamp = DateTime.Now
                         }
                         );
