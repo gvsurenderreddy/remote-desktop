@@ -189,12 +189,12 @@
             0});
             this.nudAudio.Location = new System.Drawing.Point(95, 122);
             this.nudAudio.Maximum = new decimal(new int[] {
-            5000,
+            1000,
             0,
             0,
             0});
             this.nudAudio.Minimum = new decimal(new int[] {
-            1000,
+            100,
             0,
             0,
             0});
