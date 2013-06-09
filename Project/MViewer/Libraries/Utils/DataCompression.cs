@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Text;
+
+namespace Utils
+{
+    public class DataCompression
+    {
+        public byte[] Compress(MemoryStream uncompressed)
+        {
+            var outStream = new System.IO.MemoryStream();
+            using (var tinyStream = new GZipStream(outStream, CompressionMode.Compress))
+            {
+                uncompressed.CopyTo(tinyStream);
+            }
+            return outStream.ToArray();
+        }
+
+        public byte[] Decompress(byte[] compressed)
+        {
+            var outStream = new System.IO.MemoryStream();
+            byte[] bb = outStream.ToArray();
+
+            //Decompress                
+            var bigStream = new GZipStream(new MemoryStream(bb), CompressionMode.Decompress);
+            var bigStreamOut = new System.IO.MemoryStream();
+            bigStream.CopyTo(bigStreamOut);
+            return bigStreamOut.ToArray();
+        }
+    }
+}
