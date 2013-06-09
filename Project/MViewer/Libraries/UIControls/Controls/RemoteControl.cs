@@ -135,20 +135,23 @@ namespace UIControls
                 finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
                         cursor, cursorX, cursorY);
             }
-            Image toDisplay = finalDisplay;
-            if (_captures.Count == 0)
+            lock (_syncPictures)
             {
-                this.AddPicture(finalDisplay);
-            }
-            else
-            {
-                toDisplay = PopOldestPicture();
-                this.AddPicture(finalDisplay);
-            }
-            if (pbRemote.Width > 0 && pbRemote.Height > 0)
-            {
-                Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
-                pbRemote.Image = resized;
+                Image toDisplay = finalDisplay;
+                if (_captures.Count == 0)
+                {
+                    this.AddPicture(finalDisplay);
+                }
+                else
+                {
+                    toDisplay = PopOldestPicture();
+                    this.AddPicture(finalDisplay);
+                }
+                if (pbRemote.Width > 0 && pbRemote.Height > 0)
+                {
+                    Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
+                    pbRemote.Image = resized;
+                }
             }
         }
 

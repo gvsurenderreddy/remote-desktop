@@ -103,8 +103,6 @@ namespace GenericObjects
             }
             finally
             {
-                // todo: remove this log
-                //Tools.Instance.Logger.LogInfo("play capture exit");
                 GC.Collect();
             }
         }
