@@ -124,7 +124,7 @@ namespace GenericObjects
                 byte[] serializedScreen = CaptureDekstopImage();
                 byte[] serializedMouse = CaptureMouseImage();
 
-                _captureReady.Invoke(this, 
+                _captureReady.Invoke(this,
                     new RemotingCaptureEventArgs()
                     {
                         ScreenCapture = serializedScreen,
@@ -137,7 +137,10 @@ namespace GenericObjects
             }
             finally
             {
-                _remotingTimer.Start();
+                if (this._remotingClosed == false)
+                {
+                    _remotingTimer.Start();
+                }
             }
 
         }
@@ -157,13 +160,15 @@ namespace GenericObjects
                     {
                         InitializeTimer(_timerInterval);
                     }
-                    _remotingClosed = false;
+                    _remotingClosed = false; 
+                    _remotingTimer.Elapsed += new ElapsedEventHandler(TimerTick);
                     _remotingTimer.Start();
                 }
                 else
                 {
                     if (_remotingTimer != null)
                     {
+                        _remotingTimer.Elapsed -= new ElapsedEventHandler(TimerTick);
                         _remotingTimer.Stop();
                     }
                     _remotingClosed = true;
