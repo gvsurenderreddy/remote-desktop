@@ -152,7 +152,7 @@ namespace DataAccessLayer
             DataTable contacts = _contactsDataSet.Tables["Contacts"];
             IEnumerable<DataRow> query =
                 from product in contacts.AsEnumerable()
-                where product["Identity"].Equals(identity)
+                where product["Identity"].ToString().ToLower().Equals(identity.ToLower())
                 select product;
             Contact contact = null;
             if (query != null && query.Count() > 0)
