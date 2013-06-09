@@ -497,7 +497,7 @@ namespace UIControls
             }
         }
 
-        void Dispose()
+        new void Dispose()
         {
             this.WireDownEventProvider();
             _timer.Stop();

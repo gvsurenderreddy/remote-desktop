@@ -11,6 +11,7 @@ namespace Utils
     {
         #region private members
 
+        DataCompression _dataCompression;
         ImageConverter _imageConverter;
         RemotingUtils _desktopViewerUtils;
         Cryptography _cryptography;
@@ -33,6 +34,7 @@ namespace Utils
             _desktopViewerUtils = new RemotingUtils();
             _cryptography = new Cryptography();
             _genericMethods = new GenericMethods();
+            _dataCompression = new DataCompression();
         }
 
         #endregion
@@ -54,6 +56,14 @@ namespace Utils
                     }
                 }
                 return _instance;
+            }
+        }
+
+        public DataCompression DataCompression
+        {
+            get
+            {
+                return this._dataCompression;
             }
         }
 

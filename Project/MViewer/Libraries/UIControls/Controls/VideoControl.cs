@@ -7,19 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Utils;
+using System.IO;
 
 namespace UIControls
 {
     public partial class VideoControl : UserControl
     {
         readonly object _syncPictures = new object();
-        IDictionary<DateTime, Image> _captures;
+        IDictionary<DateTime, byte[]> _captures;
 
         #region c-tor
 
         public VideoControl()
         {
-            _captures = new Dictionary<DateTime, Image>();
+            _captures = new Dictionary<DateTime, byte[]>();
             InitializeComponent();
         }
 
@@ -27,14 +28,17 @@ namespace UIControls
 
         #region private methods
 
-        void AddPicture(Image toAdd)
+        void AddPicture(byte[] toAdd)
         {
             _captures.Add(DateTime.Now, toAdd);
         }
 
         Image PopOldestPicture()
         {
-            Image oldest = _captures[_captures.Keys.Min()];
+            byte[] oldestImage = _captures[_captures.Keys.Min()];
+            byte[] uncompressed = Tools.Instance.DataCompression.Decompress(oldestImage);
+            Image oldest = Image.FromStream(new MemoryStream(uncompressed)); 
+            // todo: uncompress image byte array
             _captures.Remove(_captures.Keys.Min());
             return oldest;
         }
@@ -55,13 +59,15 @@ namespace UIControls
             }
         }
 
-        public void SetPicture(Image picture)
+        public void SetPicture(byte[] picture)
         {
             lock (_syncPictures)
             {
                 try
                 {
-                    Image toDisplay = picture;
+                    byte[] uncompressed = Tools.Instance.DataCompression.Decompress(picture);
+                    Image toDisplay = Image.FromStream(new MemoryStream(uncompressed)); 
+                    // todo: uncompress image byte array
                     if (_captures.Count == 0)
                     {
                         this.AddPicture(picture);
@@ -85,6 +91,10 @@ namespace UIControls
                 catch (Exception ex)
                 {
                     Tools.Instance.Logger.LogError(ex.ToString());
+                }
+                finally
+                {
+                    GC.Collect();
                 }
             }
         }

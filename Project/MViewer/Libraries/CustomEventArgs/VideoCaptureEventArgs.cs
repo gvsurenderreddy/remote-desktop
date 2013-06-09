@@ -10,7 +10,7 @@ namespace GenericObjects
     {
         #region private members
 
-        private Image _capturedImage;
+        private byte[] _capturedImage;
         string _identity;
         DateTime _captureTimestamp;
 
@@ -26,7 +26,7 @@ namespace GenericObjects
         /// <summary>
         /// image returned by the web camera capturing device
         /// </summary>
-        public Image CapturedImage
+        public byte[] CapturedImage
         {
             get
             { 

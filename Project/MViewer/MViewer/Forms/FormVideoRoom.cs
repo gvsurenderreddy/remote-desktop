@@ -108,7 +108,7 @@ namespace MViewer
             }
         }
 
-        public void SetPicture(Image picture, DateTime timestamp)
+        public void SetPicture(byte[] picture, DateTime timestamp)
         {
             try
             {

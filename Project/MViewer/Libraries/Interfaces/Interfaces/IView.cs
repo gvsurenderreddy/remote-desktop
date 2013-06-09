@@ -20,7 +20,7 @@ namespace GenericObjects
         void ShowMyWebcamForm(bool show);
         void UpdateLabels(string identity, GenericEnums.RoomType roomType);
         void ResetLabels(GenericEnums.RoomType roomType);
-        void UpdateWebcapture(Image image);
+        void UpdateWebcapture(byte[] image);
         void RoomButtonAction(object sender, EventArgs e);
         bool IsRoomActivated(string identity, GenericEnums.RoomType roomType);
         bool ExitConfirmation();

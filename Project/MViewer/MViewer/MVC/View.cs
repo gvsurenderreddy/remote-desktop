@@ -455,7 +455,7 @@ namespace MViewer
         /// method used to display the last captured image by my webcam
         /// </summary>
         /// <param name="image"></param>
-        public void UpdateWebcapture(Image image)
+        public void UpdateWebcapture(byte[] image)
         {
             try
             {

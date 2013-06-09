@@ -54,12 +54,6 @@ namespace MViewer
                     // display the captured picture
                     _view.UpdateWebcapture(args.CapturedImage);
 
-                    MemoryStream memoryStream = new MemoryStream();
-                    args.CapturedImage.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Bmp);
-
-                    //get the buffer 
-                    byte[] buffer = memoryStream.GetBuffer();
-
                     _videoCapturePending = true;
                     if (_view.VideoCaptureClosed == false)
                     {
@@ -87,7 +81,7 @@ namespace MViewer
                                     // send the capture if the session isn't paused
                                     transferStatus.Video = true;
 
-                                    _model.ClientController.SendVideoCapture(buffer, args.CaptureTimestamp,
+                                    _model.ClientController.SendVideoCapture(args.CapturedImage, args.CaptureTimestamp,
                                         receiverIdentity, ((Identity)_model.Identity).MyIdentity);
                                 }
 
@@ -102,7 +96,7 @@ namespace MViewer
                                 }
                                 else
                                 {
-                                    BroadcastVideoCaptures(connectedSessions, buffer, args.CaptureTimestamp);
+                                    BroadcastVideoCaptures(connectedSessions, args.CapturedImage, args.CaptureTimestamp);
                                 }
                             }
                         }

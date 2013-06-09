@@ -9,7 +9,7 @@ namespace GenericObjects
 {
     public interface IVideoRoom : IRoom
     {
-        void SetPicture(Image picture, DateTime timestamp);
+        void SetPicture(byte[] picture, DateTime timestamp);
 
         IntPtr FormHandle
         {

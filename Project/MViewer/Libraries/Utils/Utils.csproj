@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="ControlCrossThreading.cs" />
     <Compile Include="Cryptography.cs" />
+    <Compile Include="DataCompression.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="GenericMethods.cs" />
     <Compile Include="Logger.cs" />

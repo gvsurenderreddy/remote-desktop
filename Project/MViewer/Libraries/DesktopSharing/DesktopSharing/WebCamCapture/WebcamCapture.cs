@@ -257,11 +257,17 @@ namespace GenericObjects
                             // add timestamp to be used for synchron with audio
                             _eventArgs.CaptureTimestamp = DateTime.Now;
 
-                            _eventArgs.CapturedImage = Tools.Instance.ImageConverter.ResizeImage(tempImage, 
+                            Image webcapture = Tools.Instance.ImageConverter.ResizeImage(tempImage, 
                                 this._width, this._height);
+                            MemoryStream imageStream = new MemoryStream();
+                            webcapture.Save(imageStream, ImageFormat.Bmp);
 
+                            byte[] compressedImage = Tools.Instance.DataCompression.Compress(imageStream);
+                            
+                            _eventArgs.CapturedImage = compressedImage;
                             // raise the capture event
                             this.ImageCaptured.Invoke(this, _eventArgs);
+                            imageStream.Dispose();
                         }
                     }
                 }

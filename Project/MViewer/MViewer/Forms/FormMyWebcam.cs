@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using GenericObjects;
 using Utils;
 using Abstraction;
+using System.IO;
 
 namespace MViewer
 {
@@ -18,7 +19,7 @@ namespace MViewer
         #region private members
         
         readonly object _syncPictures = new object();
-        IDictionary<DateTime, Image> _captures;
+        IDictionary<DateTime, byte[]> _captures;
         IWebcamCapture _webcamCapture;
         int _timerInterval;
 
@@ -34,7 +35,7 @@ namespace MViewer
                 InitializeComponent();
                 _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
                 _webcamCapture.ParentForm = this;
-                _captures = new Dictionary<DateTime, Image>();
+                _captures = new Dictionary<DateTime, byte[]>();
                 Program.Controller.StartVideo(_webcamCapture);
             }
             catch (Exception ex)
@@ -55,7 +56,7 @@ namespace MViewer
 
         #region public methods
 
-        public void SetPicture(Image image)
+        public void SetPicture(byte[] image)
         {
             try
             {
@@ -65,7 +66,9 @@ namespace MViewer
                     {
                         if (pbWebcam.Width > 0 && pbWebcam.Height > 0)
                         {
-                            Image toDisplay = image;
+                            byte[] uncompressed = Tools.Instance.DataCompression.Decompress(image);
+                            Image toDisplay = Image.FromStream(new MemoryStream(uncompressed)); 
+                            // todo; uncompress the image byte array
                             if (_captures.Count == 0)
                             {
                                 this.AddPicture(image);
@@ -93,6 +96,10 @@ namespace MViewer
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                GC.Collect();
             }
         }
 
@@ -138,16 +145,19 @@ namespace MViewer
 
         #region callbacks
 
-        void AddPicture(Image toAdd)
+        void AddPicture(byte[] toAdd)
         {
             _captures.Add(DateTime.Now, toAdd);
         }
 
         Image PopOldestPicture()
         {
-            Image oldest = _captures[_captures.Keys.Min()];
+            byte[] oldest = _captures[_captures.Keys.Min()];
+            byte[] uncompressed = Tools.Instance.DataCompression.Decompress(oldest);
+            Image oldestImageUncompressed = Image.FromStream(new MemoryStream(uncompressed)); 
+            // todo: uncompress image byte array
             _captures.Remove(_captures.Keys.Min());
-            return oldest;
+            return oldestImageUncompressed;
         }
 
         private void FormMyWebcam_Resize(object sender, EventArgs e)

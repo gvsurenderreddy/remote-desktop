@@ -150,7 +150,7 @@ namespace BusinessLogicLayer
             }
         }
 
-        public void ShowVideoCapture(string identity, Image picture, DateTime timestamp)
+        public void ShowVideoCapture(string identity, byte[] picture, DateTime timestamp)
         {
             try
             {

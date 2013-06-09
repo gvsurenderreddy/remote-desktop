@@ -175,16 +175,13 @@ namespace Communicator
             {
                 // wait for the room command to finish (might be a stop signal)
                 _syncVideoCaptures.WaitOne();
-               
-                MemoryStream ms = new MemoryStream(capture);
-                //read the Bitmap back
-                Image bmp = (Bitmap)Bitmap.FromStream(ms);
+              
 
                 _controllerHandlers.VideoCaptureObserver.Invoke(this,
                     new VideoCaptureEventArgs()
                     {
                         Identity = senderIdentity,
-                        CapturedImage = bmp,
+                        CapturedImage = capture,
                         CaptureTimestamp = captureTimestamp
                     });                
             }
