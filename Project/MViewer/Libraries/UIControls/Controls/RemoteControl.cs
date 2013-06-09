@@ -33,7 +33,7 @@ namespace UIControls
         ManualResetEvent _syncCommands;
         string _partnerIdentity;
         readonly object _syncPictures = new object();
-        IDictionary<DateTime, Image> _captures;
+        IDictionary<DateTime, RemoteCapture> _captures;
 
         #endregion
 
@@ -51,7 +51,7 @@ namespace UIControls
                 _timer = new System.Timers.Timer(1000);
                 _timer.Elapsed += new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick);
                 _commands = new List<MouseMoveArgs>();
-                _captures = new Dictionary<DateTime, Image>();
+                _captures = new Dictionary<DateTime, RemoteCapture>();
                 _syncCommands = new ManualResetEvent(true);
                 _timer.Start();
             }
@@ -117,38 +117,48 @@ namespace UIControls
         public void UpdateScreen(byte[] screenCapture, byte[] mouseCapture)
         {
             Image screenImage = null;
-
-            byte[] uncompressedScreen = Tools.Instance.DataCompression.Decompress(screenCapture);
-            byte[] uncompressedMouse = Tools.Instance.DataCompression.Decompress(mouseCapture);
-
-            if (uncompressedScreen != null)
-            {
-                Rectangle screenBounds = new Rectangle();
-                Tools.Instance.RemotingUtils.DeserializeDesktopCapture(uncompressedScreen, out screenImage, out screenBounds);
-            }
-            Image finalDisplay = null;
-            if (uncompressedMouse != null)
-            {
-                // unpack the data
-                Image cursor;
-                int cursorX, cursorY;
-                Tools.Instance.RemotingUtils.DeserializeMouseCapture(uncompressedMouse, out cursor, out cursorX, out cursorY);
-
-                finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
-                        cursor, cursorX, cursorY);
-            }
+            
             lock (_syncPictures)
             {
-                Image toDisplay = finalDisplay;
+                RemoteCapture toDisplay = new RemoteCapture()
+                {
+                    ScreeNCapture = screenCapture,
+                    MouseCapture = mouseCapture
+                };
                 if (_captures.Count == 0)
                 {
-                    this.AddPicture(finalDisplay);
+                    this.AddPicture(toDisplay);
                 }
                 else
                 {
                     toDisplay = PopOldestPicture();
-                    this.AddPicture(finalDisplay);
+                    RemoteCapture newCapture = new RemoteCapture()
+                    {
+                        ScreeNCapture = screenCapture,
+                        MouseCapture = mouseCapture
+                    };
+                    this.AddPicture(newCapture);
                 }
+                byte[] uncompressedScreen = Tools.Instance.DataCompression.Decompress(toDisplay.ScreeNCapture);
+                byte[] uncompressedMouse = Tools.Instance.DataCompression.Decompress(toDisplay.MouseCapture);
+
+                if (uncompressedScreen != null)
+                {
+                    Rectangle screenBounds = new Rectangle();
+                    Tools.Instance.RemotingUtils.DeserializeDesktopCapture(uncompressedScreen, out screenImage, out screenBounds);
+                }
+                Image finalDisplay = null;
+                if (uncompressedMouse != null)
+                {
+                    // unpack the data
+                    Image cursor;
+                    int cursorX, cursorY;
+                    Tools.Instance.RemotingUtils.DeserializeMouseCapture(uncompressedMouse, out cursor, out cursorX, out cursorY);
+
+                    finalDisplay = Tools.Instance.RemotingUtils.AppendMouseToDesktop(screenImage,
+                            cursor, cursorX, cursorY);
+                }
+
                 if (pbRemote.Width > 0 && pbRemote.Height > 0)
                 {
                     Image resized = Tools.Instance.ImageConverter.ResizeImage(finalDisplay, pbRemote.Width, pbRemote.Height);
@@ -161,14 +171,14 @@ namespace UIControls
 
         #region private methods
 
-        void AddPicture(Image toAdd)
+        void AddPicture(RemoteCapture toAdd)
         {
             _captures.Add(DateTime.Now, toAdd);
         }
 
-        Image PopOldestPicture()
+        RemoteCapture PopOldestPicture()
         {
-            Image oldest = _captures[_captures.Keys.Min()];
+            RemoteCapture oldest = _captures[_captures.Keys.Min()];
             _captures.Remove(_captures.Keys.Min());
             return oldest;
         }

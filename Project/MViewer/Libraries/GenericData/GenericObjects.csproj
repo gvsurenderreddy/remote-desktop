@@ -62,6 +62,7 @@
     <Compile Include="ClientSession.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="ContactEndpoint.cs" />
+    <Compile Include="RemoteCapture.cs" />
     <Compile Include="ServerCertificateValidator.cs" />
     <Compile Include="Identity.cs" />
     <Compile Include="PresenterSettings.cs" />
