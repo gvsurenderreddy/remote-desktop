@@ -444,7 +444,7 @@ namespace MViewer
 
                     // tell the partner to pause capturing & sending while processing Room Stop command
                     _model.ClientController.WaitRoomButtonAction(e.Identity, ((Identity)_model.Identity).MyIdentity,
-                        GenericEnums.RoomType.Audio, true);
+                        GenericEnums.RoomType.Remoting, true);
 
                     ConferenceStatus conference = _model.SessionManager.GetConferenceStatus(e.Identity);
                     conference.IsRemotingStatusUpdating = true;
