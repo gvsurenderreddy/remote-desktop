@@ -217,7 +217,9 @@ namespace MViewer
                 {
                     PeerStates peers = _model.SessionManager.GetPeerStatus(identity);
                     GenericEnums.SessionState sessionState = _model.SessionManager.GetSessionState(identity, roomType);
-                    bool start = sessionState == GenericEnums.SessionState.Opened || sessionState == GenericEnums.SessionState.Paused || sessionState == GenericEnums.SessionState.Pending ? false : true;
+                    bool start = sessionState == GenericEnums.SessionState.Opened || 
+                        sessionState == GenericEnums.SessionState.Paused || 
+                        sessionState == GenericEnums.SessionState.Pending ? false : true;
                     bool pause = sessionState == GenericEnums.SessionState.Paused ? false : true;
 
                     // call the labels update for each room type

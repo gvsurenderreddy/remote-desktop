@@ -87,7 +87,7 @@ namespace MViewer
                            && peers.RemotingSessionState == GenericEnums.SessionState.Closed
                            )
                 {
-                    ClientController.RemoveClient(identity);
+                    this.ClientController.RemoveClient(identity);
                 }
             }
             catch (Exception ex)

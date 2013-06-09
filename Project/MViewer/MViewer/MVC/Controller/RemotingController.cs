@@ -459,9 +459,9 @@ namespace MViewer
                     {
                         // send the stop command to the partner
                         _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity,
-                            e.Identity, e.RoomType, e.SignalType);
+                            e.Identity, e.RoomType, e.SignalType); 
+                        _model.SessionManager.RemoveSession(e.Identity);
                     }
-                    _model.SessionManager.RemoveSession(e.Identity);
                     _model.RemoveClient(e.Identity);
 
                     _view.RoomManager.CloseRoom(e.Identity, GenericEnums.RoomType.Remoting);

@@ -238,9 +238,18 @@ namespace Communicator
         {
             try
             {
-                _syncVideoCaptures.Reset();
-                _syncRemotingCaptures.Reset();
-                _syncAudioCaptures.Reset();
+                if (roomType == GenericEnums.RoomType.Audio)
+                {
+                    _syncAudioCaptures.Reset();
+                }
+                if (roomType == GenericEnums.RoomType.Video)
+                {
+                    _syncVideoCaptures.Reset();
+                }
+                if (roomType == GenericEnums.RoomType.Remoting)
+                {
+                    _syncRemotingCaptures.Reset();
+                }
 
                 _controllerHandlers.RoomButtonObserver.Invoke(this,
                     new RoomActionEventArgs()
@@ -250,9 +259,18 @@ namespace Communicator
                         SignalType = signalType
                     });
 
-                _syncRemotingCaptures.Set();
-                _syncVideoCaptures.Set();
-                _syncAudioCaptures.Set();
+                if (roomType == GenericEnums.RoomType.Audio)
+                {
+                    _syncAudioCaptures.Set();
+                }
+                if (roomType == GenericEnums.RoomType.Video)
+                {
+                    _syncVideoCaptures.Set();
+                }
+                if (roomType == GenericEnums.RoomType.Remoting)
+                {
+                    _syncRemotingCaptures.Set();
+                }
             }
             catch (Exception ex)
             {
