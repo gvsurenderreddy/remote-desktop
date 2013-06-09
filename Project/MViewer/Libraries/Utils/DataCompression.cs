@@ -9,24 +9,38 @@ namespace Utils
 {
     public class DataCompression
     {
-        public byte[] Compress(MemoryStream uncompressed)
+        public byte[] Compress(byte[] buffer)
         {
-            var outStream = new System.IO.MemoryStream();
-            using (var tinyStream = new GZipStream(uncompressed, CompressionMode.Compress))
-            {
-                uncompressed.CopyTo(outStream);
-            }
-            return outStream.ToArray();
+            MemoryStream ms = new MemoryStream();
+            GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true);
+            zip.Write(buffer, 0, buffer.Length);
+            zip.Close();
+            ms.Position = 0;
+
+            MemoryStream outStream = new MemoryStream();
+
+            byte[] compressed = new byte[ms.Length];
+            ms.Read(compressed, 0, compressed.Length);
+
+            byte[] gzBuffer = new byte[compressed.Length + 4];
+            Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
+            Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzBuffer, 0, 4);
+            return gzBuffer;
         }
 
-        public byte[] Decompress(byte[] compressed)
+        public byte[] Decompress(byte[] gzBuffer)
         {
-            var outStream = new System.IO.MemoryStream(compressed);
-            //Decompress                
-            var bigStream = new GZipStream(outStream, CompressionMode.Decompress);
-            var bigStreamOut = new System.IO.MemoryStream();
-            bigStream.CopyTo(bigStreamOut);
-            return bigStreamOut.ToArray();
+            MemoryStream ms = new MemoryStream();
+            int msgLength = BitConverter.ToInt32(gzBuffer, 0);
+            ms.Write(gzBuffer, 4, gzBuffer.Length - 4);
+
+            byte[] buffer = new byte[msgLength];
+
+            ms.Position = 0;
+            GZipStream zip = new GZipStream(ms, CompressionMode.Decompress);
+            zip.Read(buffer, 0, buffer.Length);
+
+            return buffer;
         }
     }
 }

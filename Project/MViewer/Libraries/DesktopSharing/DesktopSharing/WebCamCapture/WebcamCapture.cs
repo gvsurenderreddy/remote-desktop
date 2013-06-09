@@ -262,7 +262,7 @@ namespace GenericObjects
                             MemoryStream imageStream = new MemoryStream();
                             webcapture.Save(imageStream, ImageFormat.Bmp);
 
-                            byte[] compressedImage = Tools.Instance.DataCompression.Compress(imageStream);
+                            byte[] compressedImage = Tools.Instance.DataCompression.Compress(imageStream.ToArray());
                             
                             _eventArgs.CapturedImage = compressedImage;
                             // raise the capture event
