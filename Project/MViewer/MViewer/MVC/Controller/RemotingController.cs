@@ -461,14 +461,14 @@ namespace MViewer
                     peers.RemotingSessionState = GenericEnums.SessionState.Closed;
                     if (!sender.GetType().IsEquivalentTo(typeof(MViewerServer)))
                     {
-                        //Thread t = new Thread(delegate()
-                        //{
-                            // send the stop command to the partner
+                        Thread t = new Thread(delegate()
+                        {
+                             //send the stop command to the partner
                             _model.ClientController.SendRoomCommand(((Identity)_model.Identity).MyIdentity,
                                 e.Identity, e.RoomType, e.SignalType);
                             _model.SessionManager.RemoveSession(e.Identity);
-                        //});
-                        //t.Start();
+                        });
+                        t.Start();
                     }
                     _model.RemoveClient(e.Identity);
 
