@@ -732,6 +732,8 @@ namespace MViewer
                     if (peer.RemotingSessionState == GenericEnums.SessionState.Closed)
                     {
                         _model.SessionManager.RemoveSession(args.Identity);
+                        _view.RoomManager.CloseRoom(args.Identity, GenericEnums.RoomType.Remoting);
+                        _view.RoomManager.RemoveRoom(args.Identity, GenericEnums.RoomType.Remoting);
                     }
                 }
             }
