@@ -719,6 +719,13 @@ namespace MViewer
                     //display the remoting capture in the opened form
                     _view.RoomManager.ShowRemotingCapture(args.Identity, args.ScreenCapture, args.MouseCapture);
                 }
+                else
+                {
+                    if (peer.RemotingSessionState == GenericEnums.SessionState.Closed)
+                    {
+                        _model.SessionManager.RemoveSession(args.Identity);
+                    }
+                }
             }
             catch (Exception ex)
             {
