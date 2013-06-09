@@ -181,20 +181,20 @@ namespace UIControls
                 {
                     // send serialized mouse move commands
                     MemoryStream stream = new MemoryStream();
-                    //DataContractSerializer serializer = new DataContractSerializer(typeof(IList<MouseMoveArgs>));
-                    //serializer.WriteObject(stream, _commands);
 
                     BinaryFormatter formatter = new BinaryFormatter();
                     formatter.Serialize(stream, _commands);
 
                     byte[] mouseMoves = stream.GetBuffer();
-                    _remotingCommand.Invoke(this, new RemotingCommandEventArgs()
+                    _remotingCommand.BeginInvoke(this, new RemotingCommandEventArgs()
                     {
                         RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
                         MouseMoves = mouseMoves,
                         MouseCommandType = GenericEnums.MouseCommandType.Move,
                         Identity = this._partnerIdentity
-                    });
+                    }
+                    ,null,null
+                    );
 
                     _commands.Clear();
                 }
@@ -340,19 +340,11 @@ namespace UIControls
                 if (InPictureBoxArea(e.X, e.Y))
                 {
                     _syncCommands.WaitOne();
-                    HookManager.MouseMove -= new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+                    HookManager.MouseMove -= new MouseEventHandler(this.MouseMove);
                     double x = 0, y = 0;
-                    GetRemotePosition(ref x, ref y, e.X, e.Y);
-                    //_remotingCommand.Invoke(this,
-                    //   new RemotingCommandEventArgs()
-                    //   {
-                    //       RemotingCommandType = GenericEnums.RemotingCommandType.Mouse,
-                    //       MouseCommandType = GenericEnums.MouseCommandType.Move, // send specific command
-                    //       X = x,
-                    //       Y = y
-                    //   });
+                    this.GetRemotePosition(ref x, ref y, e.X, e.Y);
                     _commands.Add(new MouseMoveArgs() { X= x, Y = y});
-                    HookManager.MouseMove += new System.Windows.Forms.MouseEventHandler(this.MouseMove);
+                    HookManager.MouseMove += new MouseEventHandler(this.MouseMove);
                 }
             }
             catch (Exception ex)

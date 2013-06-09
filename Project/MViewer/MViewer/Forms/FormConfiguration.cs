@@ -27,7 +27,9 @@ namespace MViewer
                 nudAudio.Value = SystemConfiguration.Instance.PresenterSettings.AudioTimerInterval;
                 nudVideo.Value = SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval;
                 nudRemoting.Value = SystemConfiguration.Instance.PresenterSettings.RemotingTimerInterval;
+                cbxPrivate.CheckedChanged -= cbxPrivate_CheckedChanged;
                 cbxPrivate.Checked = SystemConfiguration.Instance.PresenterSettings.PrivateConference;
+                cbxPrivate.CheckedChanged += cbxPrivate_CheckedChanged;
             }
             catch (Exception ex)
             {
