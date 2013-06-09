@@ -19,7 +19,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace UIControls
 {
-    public partial class RemoteControl : UserControl
+    public partial class RemoteControl : UserControl, IDisposable
     {
         #region private members
 
@@ -495,6 +495,15 @@ namespace UIControls
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
+        }
+
+        void Dispose()
+        {
+            this.WireDownEventProvider();
+            _timer.Stop();
+            _timer.Elapsed -= new System.Timers.ElapsedEventHandler(this.MouseMoveTimerTick); 
+            base.Dispose();
+            Tools.Instance.Logger.LogInfo("Disposed remoting user control");
         }
 
         #endregion
