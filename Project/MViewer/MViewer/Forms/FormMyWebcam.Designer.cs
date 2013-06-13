@@ -60,6 +60,8 @@
             // cbxWebcamStatus
             // 
             this.cbxWebcamStatus.AutoSize = true;
+            this.cbxWebcamStatus.Checked = true;
+            this.cbxWebcamStatus.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbxWebcamStatus.Location = new System.Drawing.Point(12, 3);
             this.cbxWebcamStatus.Name = "cbxWebcamStatus";
             this.cbxWebcamStatus.Size = new System.Drawing.Size(58, 17);
