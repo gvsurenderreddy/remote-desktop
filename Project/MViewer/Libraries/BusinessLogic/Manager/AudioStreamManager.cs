@@ -53,7 +53,14 @@ namespace GenericObjects
         byte[] PopOldestCapture(string senderIdentity)
         {
             byte[] oldest = _captures[senderIdentity][_captures[senderIdentity].Keys.Min()];
-            _captures[senderIdentity].Remove(_captures[senderIdentity].Keys.Min());
+            try
+            {
+                _captures[senderIdentity].Remove(_captures[senderIdentity].Keys.Min());
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
             return oldest;
         }
 
