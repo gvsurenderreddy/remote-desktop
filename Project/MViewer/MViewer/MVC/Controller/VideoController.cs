@@ -49,11 +49,9 @@ namespace MViewer
                 try
                 {
                     _syncVideoCaptureActivity.WaitOne(); // wait for any room action to end
-
                     VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
                     // display the captured picture
                     _view.UpdateWebcapture(args.CapturedImage);
-
                     _videoCapturePending = true;
                     if (_view.VideoCaptureClosed == false)
                     {
@@ -68,23 +66,18 @@ namespace MViewer
                                 {
                                     Thread.Sleep(200);
                                 }
-
                                 PendingTransfer transferStatus = _model.SessionManager.GetTransferStatus(receiverIdentity);
                                 // check if the stop signal has been sent from the UI
-
                                 // check if the stop signal has been sent by the partner
-
                                 PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
                                 if (peers.VideoSessionState == GenericEnums.SessionState.Opened
                                     || peers.VideoSessionState == GenericEnums.SessionState.Pending)
                                 {
                                     // send the capture if the session isn't paused
                                     transferStatus.Video = true;
-
                                     _model.ClientController.SendVideoCapture(args.CapturedImage, args.CaptureTimestamp,
                                         receiverIdentity, ((Identity)_model.Identity).MyIdentity);
                                 }
-
                                 transferStatus.Video = false;
                             }
                             else
@@ -341,12 +334,12 @@ namespace MViewer
         {
             foreach (string receiverIdentity in connectedSessions)
             {
-                //Thread t = new Thread(delegate()
-                //{
+                Thread t = new Thread(delegate()
+                {
                     try
                     {
-                        ConferenceStatus transfer = _model.SessionManager.GetConferenceStatus(receiverIdentity);
-                        while (transfer.IsVideoStatusUpdating)
+                        ConferenceStatus status = _model.SessionManager.GetConferenceStatus(receiverIdentity);
+                        while (status.IsVideoStatusUpdating)
                         {
                             Thread.Sleep(200);
                         }
@@ -355,6 +348,11 @@ namespace MViewer
                         // check if the stop signal has been sent from the UI
 
                         // check if the stop signal has been sent by the partner
+
+                        while (transferStatus.Video == true)
+                        {
+                            Thread.Sleep(200); // wait for the partner's app to process the images
+                        }
 
                         PeerStates peers = _model.SessionManager.GetPeerStatus(receiverIdentity);
                         if (peers.VideoSessionState == GenericEnums.SessionState.Opened
@@ -372,8 +370,9 @@ namespace MViewer
                     {
                         Tools.Instance.Logger.LogError(ex.ToString());
                     }
-                //});
-                //t.Start();
+                });
+                t.Start();
+                //t.Join();
             }
         }
 
