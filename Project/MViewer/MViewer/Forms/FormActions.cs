@@ -103,6 +103,11 @@ namespace MViewer
             }
         }
 
+        public void Enable(bool enable)
+        {
+            this.Invoke(new MethodInvoker(delegate() { this.Enabled = enable; }));
+        }
+
         public void UpdateLabels(bool start, bool pause, GenericEnums.RoomType roomType)
         {
             try

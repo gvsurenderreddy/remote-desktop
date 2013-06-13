@@ -516,6 +516,11 @@ namespace MViewer
                                {
                                    canExit = false;
                                    _formMain.Enable(true);
+                                   _formActions.Enable(true);
+                               }
+                               else
+                               {
+                                   _formActions.Enable(false);
                                }
                            }
                             )
