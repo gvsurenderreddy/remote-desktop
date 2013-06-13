@@ -22,15 +22,17 @@ namespace MViewer
         IDictionary<DateTime, byte[]> _captures;
         IWebcamCapture _webcamCapture;
         int _timerInterval;
+        EventHandler _statusToggle;
 
         #endregion
 
         #region c-tor
 
-        public FormMyWebcam(int timerInterval)
+        public FormMyWebcam(int timerInterval, EventHandler statusToggle)
         {
             try
             {
+                _statusToggle = statusToggle;
                 _timerInterval = timerInterval;
                 InitializeComponent();
                 _webcamCapture = new WebcamCapture(_timerInterval, this.Handle);
@@ -55,6 +57,11 @@ namespace MViewer
         }
 
         #region public methods
+
+        public void ResetPicture()
+        {
+            pbWebcam.Image = Image.FromFile("Images/closed_web_camera.png");
+        }
 
         public void SetPicture(byte[] image)
         {
@@ -178,6 +185,11 @@ namespace MViewer
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
+        }
+
+        private void cbxWebcamStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            _statusToggle.Invoke(this, null);
         }
 
         #endregion 

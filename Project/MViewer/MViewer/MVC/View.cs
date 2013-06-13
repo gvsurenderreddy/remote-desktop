@@ -27,7 +27,9 @@ namespace MViewer
         bool _observersActive;
 
         IRoomManager _roomManager;
-
+        bool _webcamActive;
+        bool _pictureReset;
+        readonly object _syncWebcamStatus = new object();
 
         IModel _model;
 
@@ -43,6 +45,8 @@ namespace MViewer
                 _formMain = new FormMain();
                 _roomManager = new RoomManager(_formMain);
                 _formActions = new FormActions(new EventHandler(this.RoomButtonAction));
+                _webcamActive = false;
+                _pictureReset = false;
             }
             catch (Exception ex)
             {
@@ -292,7 +296,8 @@ namespace MViewer
                             _threadWebcaptureForm = new Thread(delegate()
                             {
                                 _formWebCapture = new FormMyWebcam(
-                                    SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval);
+                                    SystemConfiguration.Instance.PresenterSettings.VideoTimerInterval,
+                                    new EventHandler(this.WebcamStatusToggle));
                                 _formWebCapture.ShowDialog();
                             });
                             _threadWebcaptureForm.IsBackground = true;
@@ -461,7 +466,22 @@ namespace MViewer
             {
                 if (_formWebCapture != null)
                 {
-                    _formWebCapture.SetPicture(image);
+                    if (_webcamActive)
+                    {
+                        _formWebCapture.SetPicture(image);
+                        if (_pictureReset == true)
+                        {
+                            _pictureReset = false;
+                        }
+                    }
+                    else
+                    {
+                        if (_pictureReset == false)
+                        {
+                            _formWebCapture.ResetPicture();
+                            _pictureReset = true;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -544,6 +564,21 @@ namespace MViewer
         #endregion
 
         #region private methods
+
+        void WebcamStatusToggle(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (_syncWebcamStatus)
+                {
+                    _webcamActive = !_webcamActive;
+                }
+            }
+            catch (Exception ex)
+            {
+                Tools.Instance.Logger.LogError(ex.ToString());
+            }
+        }
 
         void OpenMainForm(object identity)
         {

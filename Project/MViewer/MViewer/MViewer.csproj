@@ -257,6 +257,7 @@
     <Content Include="Images\closed.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\closed_web_camera.png" />
     <Content Include="Images\config.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

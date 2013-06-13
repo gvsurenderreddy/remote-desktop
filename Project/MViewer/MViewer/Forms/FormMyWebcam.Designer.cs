@@ -29,29 +29,44 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMyWebcam));
-            this.pbWebcam = new System.Windows.Forms.PictureBox();
             this.pnlMain = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pbWebcam)).BeginInit();
+            this.pbWebcam = new System.Windows.Forms.PictureBox();
+            this.cbxWebcamStatus = new System.Windows.Forms.CheckBox();
             this.pnlMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWebcam)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pbWebcam
-            // 
-            this.pbWebcam.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.pbWebcam.Location = new System.Drawing.Point(12, 13);
-            this.pbWebcam.Name = "pbWebcam";
-            this.pbWebcam.Size = new System.Drawing.Size(360, 323);
-            this.pbWebcam.TabIndex = 0;
-            this.pbWebcam.TabStop = false;
             // 
             // pnlMain
             // 
             this.pnlMain.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pnlMain.Controls.Add(this.cbxWebcamStatus);
             this.pnlMain.Controls.Add(this.pbWebcam);
             this.pnlMain.Location = new System.Drawing.Point(12, 12);
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(388, 352);
             this.pnlMain.TabIndex = 1;
+            // 
+            // pbWebcam
+            // 
+            this.pbWebcam.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.pbWebcam.Image = global::MViewer.Properties.Resources.closed_web_camera;
+            this.pbWebcam.Location = new System.Drawing.Point(12, 26);
+            this.pbWebcam.Name = "pbWebcam";
+            this.pbWebcam.Size = new System.Drawing.Size(360, 323);
+            this.pbWebcam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbWebcam.TabIndex = 0;
+            this.pbWebcam.TabStop = false;
+            // 
+            // cbxWebcamStatus
+            // 
+            this.cbxWebcamStatus.AutoSize = true;
+            this.cbxWebcamStatus.Location = new System.Drawing.Point(12, 3);
+            this.cbxWebcamStatus.Name = "cbxWebcamStatus";
+            this.cbxWebcamStatus.Size = new System.Drawing.Size(58, 17);
+            this.cbxWebcamStatus.TabIndex = 1;
+            this.cbxWebcamStatus.Text = "Closed";
+            this.cbxWebcamStatus.UseVisualStyleBackColor = true;
+            this.cbxWebcamStatus.CheckedChanged += new System.EventHandler(this.cbxWebcamStatus_CheckedChanged);
             // 
             // FormMyWebcam
             // 
@@ -64,8 +79,9 @@
             this.Name = "FormMyWebcam";
             this.Text = "My Webcam";
             this.Resize += new System.EventHandler(this.FormMyWebcam_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.pbWebcam)).EndInit();
             this.pnlMain.ResumeLayout(false);
+            this.pnlMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWebcam)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -74,5 +90,6 @@
 
         private System.Windows.Forms.PictureBox pbWebcam;
         private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.CheckBox cbxWebcamStatus;
     }
 }
