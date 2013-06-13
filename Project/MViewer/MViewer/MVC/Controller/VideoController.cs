@@ -332,6 +332,7 @@ namespace MViewer
 
         void BroadcastVideoCaptures(IList<string> connectedSessions, byte[] capture, DateTime timestamp)
         {
+            int toSend = connectedSessions.Count, sent = 0;
             foreach (string receiverIdentity in connectedSessions)
             {
                 Thread t = new Thread(delegate()
@@ -370,9 +371,17 @@ namespace MViewer
                     {
                         Tools.Instance.Logger.LogError(ex.ToString());
                     }
+                    finally
+                    {
+                        sent++;
+                    }
                 });
                 t.Start();
                 //t.Join();
+            }
+            while (toSend > sent)
+            {
+                Thread.Sleep(200);
             }
         }
 
