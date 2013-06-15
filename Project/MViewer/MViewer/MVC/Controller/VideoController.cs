@@ -377,7 +377,6 @@ namespace MViewer
                     }
                 });
                 t.Start();
-                //t.Join();
             }
             while (toSend > sent)
             {

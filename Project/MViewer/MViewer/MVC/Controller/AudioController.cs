@@ -32,6 +32,7 @@ namespace MViewer
             }
             else
             {
+                int toSend = connectedSessions.Count, sent = 0;
                 foreach (string receiverIdentity in connectedSessions)
                 {
                     Thread t = new Thread(delegate()
@@ -68,8 +69,16 @@ namespace MViewer
                         {
                             Tools.Instance.Logger.LogError(ex.ToString());
                         }
+                        finally
+                        {
+                            sent++;
+                        }
                     });
                     t.Start();
+                }
+                while (toSend > sent)
+                {
+                    Thread.Sleep(200);
                 }
             }
         }
