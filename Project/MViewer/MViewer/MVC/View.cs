@@ -503,6 +503,10 @@ namespace MViewer
                 bool remotingRoomsActive = RoomManager.RoomsLeft(GenericEnums.RoomType.Remoting);
                 bool audioRoomsActive = RoomManager.RoomsLeft(GenericEnums.RoomType.Audio);
 
+                if (remotingRoomsActive == false)
+                {
+                    remotingRoomsActive = _model.SessionManager.GetConnectedSessions(GenericEnums.RoomType.Remoting).Count > 0;
+                }
                 if (videoRoomsActive || remotingRoomsActive || audioRoomsActive)
                 {
                     _formMain.Invoke(new MethodInvoker
