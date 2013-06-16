@@ -126,7 +126,6 @@ namespace Communicator
                     Operation = GenericEnums.ContactsOperation.Status,
                     UpdatedContact = new Contact(-1, senderIdentity, newStatus)
                 }
-                //,null, null
                 );
             }
             catch (Exception ex)

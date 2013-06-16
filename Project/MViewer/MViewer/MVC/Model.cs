@@ -283,7 +283,7 @@ namespace MViewer
                             if (updatedContact.ContactNo != -1)
                             {
                                 // notify other contact of performed operation (ADD/REMOVE)
-                                ClientController.AddClient(contact.Identity);
+                                this.ClientController.AddClient(contact.Identity);
                                 IMViewerService client = ClientController.GetClient(contact.Identity);
                                 client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
                             }

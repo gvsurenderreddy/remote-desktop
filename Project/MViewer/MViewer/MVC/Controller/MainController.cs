@@ -198,43 +198,65 @@ namespace MViewer
             {
                 if (args.Operation != GenericEnums.ContactsOperation.Load)
                 {
-                    // add/remove/get/status/name update
-                    contact = _model.PerformContactOperation(e);
-                    if (args.Operation == GenericEnums.ContactsOperation.Status 
-                        && args.UpdatedContact.Status == GenericEnums.ContactStatus.Offline)
+                    bool canContinue = true;
+                    if (args.Operation == GenericEnums.ContactsOperation.Add)
                     {
-                        Utils.GenericEnums.SessionState conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
-                            GenericEnums.RoomType.Video);
-                        if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                        if (args.UpdatedContact.Identity.ToLower().Equals(_model.Identity.MyIdentity.ToLower()))
                         {
-                            StopVideo(this, new RoomActionEventArgs()
-                            {
-                                Identity = args.UpdatedContact.Identity,
-                                RoomType = GenericEnums.RoomType.Video,
-                                SignalType = GenericEnums.SignalType.Stop
-                            });
-                        } 
-                        conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
-                             GenericEnums.RoomType.Audio);
-                        if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
-                        {
-                            StopAudio(this, new RoomActionEventArgs()
-                            {
-                                Identity = args.UpdatedContact.Identity,
-                                RoomType = GenericEnums.RoomType.Audio,
-                                SignalType = GenericEnums.SignalType.Stop
-                            });
+                            canContinue = false;
+                            _view.SetMessageText("Cannot add yourself to the list");
                         }
-                        conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
-                             GenericEnums.RoomType.Remoting);
-                        if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                        else
                         {
-                            StopRemoting(this, new RoomActionEventArgs()
+                            // check for existing contact
+                            ContactBase existingContact = _model.GetContact(args.UpdatedContact.Identity);
+                            if (existingContact.ContactNo > 0)
                             {
-                                Identity = args.UpdatedContact.Identity,
-                                RoomType = GenericEnums.RoomType.Remoting,
-                                SignalType = GenericEnums.SignalType.Stop
-                            });
+                                canContinue = false;
+                                _view.SetMessageText("Contact already exists");
+                            }
+                        }
+                    }
+                    if (canContinue)
+                    {
+                        // add/remove/get/status/name update
+                        contact = _model.PerformContactOperation(e);
+                        if (args.Operation == GenericEnums.ContactsOperation.Status
+                            && args.UpdatedContact.Status == GenericEnums.ContactStatus.Offline)
+                        {
+                            Utils.GenericEnums.SessionState conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
+                                GenericEnums.RoomType.Video);
+                            if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                            {
+                                StopVideo(this, new RoomActionEventArgs()
+                                {
+                                    Identity = args.UpdatedContact.Identity,
+                                    RoomType = GenericEnums.RoomType.Video,
+                                    SignalType = GenericEnums.SignalType.Stop
+                                });
+                            }
+                            conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
+                                 GenericEnums.RoomType.Audio);
+                            if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                            {
+                                StopAudio(this, new RoomActionEventArgs()
+                                {
+                                    Identity = args.UpdatedContact.Identity,
+                                    RoomType = GenericEnums.RoomType.Audio,
+                                    SignalType = GenericEnums.SignalType.Stop
+                                });
+                            }
+                            conferenceState = _model.SessionManager.GetSessionState(args.UpdatedContact.Identity,
+                                 GenericEnums.RoomType.Remoting);
+                            if (conferenceState != GenericEnums.SessionState.Closed && conferenceState != GenericEnums.SessionState.Undefined)
+                            {
+                                StopRemoting(this, new RoomActionEventArgs()
+                                {
+                                    Identity = args.UpdatedContact.Identity,
+                                    RoomType = GenericEnums.RoomType.Remoting,
+                                    SignalType = GenericEnums.SignalType.Stop
+                                });
+                            }
                         }
                     }
                 }
