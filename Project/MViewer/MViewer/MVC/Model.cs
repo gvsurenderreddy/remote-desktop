@@ -22,7 +22,8 @@ namespace MViewer
 
         IContactsDAL _contactsDAL;
         Identity _identity;
-        DataView _dvContacts;
+        //DataView _dvContacts;
+        DataSet _contactsDataSet;
 
         IClientController _clientController;
         IServerController _serverController;
@@ -63,7 +64,8 @@ namespace MViewer
             {
                 _identity = new Identity(SystemConfiguration.Instance.FriendlyName);
                 SystemConfiguration.Instance.MyIdentity = _identity.GenerateIdentity(SystemConfiguration.Instance.MyAddress, SystemConfiguration.Instance.Port, SystemConfiguration.Instance.ServicePath);
-                _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                //_dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                 ContactEndpoint myEndpoint = IdentityResolver.ResolveIdentity(((Identity)Identity).MyIdentity );
                 _serverController = new ServerController(myEndpoint, ((Identity)Identity).MyIdentity, handlers, _useSecurity);
             }
@@ -206,10 +208,10 @@ namespace MViewer
             {
                 if (string.IsNullOrEmpty(pingIdentity))
                 {
-                    int toPing = _dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count;
+                    int toPing = _contactsDAL.GetContactsCount();
                     int pinged = 0;
                     // ping all contacts to get their status
-                    foreach (DataRow contact in _dvContacts.DataViewManager.DataSet.Tables[0].Rows)
+                    foreach (DataRow contact in _contactsDataSet.Tables[0].Rows)
                     {
                         Thread t = new Thread(delegate()
                         {
@@ -278,7 +280,7 @@ namespace MViewer
                         int contactNo = _contactsDAL.AddContact(updatedContact);
                         if (contactNo > -1)
                         {
-                            _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                            _contactsDataSet = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                             contact = (Contact)_contactsDAL.GetContactByIdentity(updatedContact.Identity);
                             if (updatedContact.ContactNo != -1)
                             {
@@ -299,7 +301,6 @@ namespace MViewer
                         break;
                     case GenericEnums.ContactsOperation.Update:
                         _contactsDAL.UpdateContact(updatedContact);
-                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                         contact = (Contact)_contactsDAL.GetContactByNumber(updatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Remove:
@@ -308,7 +309,6 @@ namespace MViewer
                         {
                             _contactsDAL.RemoveContact(contact.ContactNo);
                         }
-                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                         if (updatedContact.ContactNo != -1)
                         {
                             SendRemoveCommand(contact.Identity);
@@ -318,7 +318,7 @@ namespace MViewer
                         contact = (Contact)_contactsDAL.GetContactByNumber(updatedContact.ContactNo);
                         break;
                     case GenericEnums.ContactsOperation.Load:
-                        _dvContacts = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
+                        _contactsDataSet = _contactsDAL.LoadContacts(SystemConfiguration.Instance.DataBasePath);
                         break;
                 }
             }
@@ -359,7 +359,7 @@ namespace MViewer
         {
             try
             {
-                return _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
+                return _contactsDataSet.Tables[0].AsEnumerable().
                     Where(s => s.Field<string>("Status") == GenericEnums.ContactStatus.Online.ToString()
                     ).Select(s => s.Field<string>("Identity")).ToArray<string>();
             }
@@ -374,7 +374,7 @@ namespace MViewer
         {
             try
             {
-                IEnumerable<DataRow> enumerable = _dvContacts.DataViewManager.DataSet.Tables[0].AsEnumerable().
+                IEnumerable<DataRow> enumerable = _contactsDataSet.Tables[0].AsEnumerable().
                     Where(s => s.Field<string>("Identity").Equals(identity));
                 if (enumerable.Count() > 0)
                 {
@@ -410,9 +410,9 @@ namespace MViewer
             get { return _identity; }
         }
 
-        public DataView Contacts
+        public DataSet Contacts
         {
-            get { return _dvContacts; }
+            get { return _contactsDataSet; }
         }
 
         public IClientController ClientController

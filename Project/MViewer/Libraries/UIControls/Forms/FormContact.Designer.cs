@@ -82,6 +82,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtIdentity);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormContact";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

@@ -9,12 +9,13 @@ namespace Abstraction
     public interface IContactsDAL
     {
         string[] GetContactIdentities();
-        DataView LoadContacts(string xmlFilePath);
+        DataSet LoadContacts(string xmlFilePath);
         int AddContact(ContactBase contact);
         void RemoveContact(int contactNo);
         void UpdateContact(ContactBase contact);
         ContactBase GetContactByNumber(int contactNo);
         ContactBase GetContactByIdentity(string identity);
         void SaveContacts();
+        int GetContactsCount();
     }
 }

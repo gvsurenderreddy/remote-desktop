@@ -10,7 +10,7 @@ namespace GenericObjects
 {
     public class ContactsEventArgs : EventArgs
     {
-        public DataView ContactsDV
+        public DataSet ContactsDataset
         {
             get;
             set;

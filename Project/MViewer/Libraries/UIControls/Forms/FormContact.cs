@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Utils;
 using GenericObjects;
 using System.Threading;
+using Abstraction;
 
 namespace UIControls
 {
@@ -41,27 +42,18 @@ namespace UIControls
             }
         }
 
-        public FormContact(GenericEnums.FormMode formMode, int contactNo, EventHandler contactsUpdated)
+        public FormContact(GenericEnums.FormMode formMode, ContactBase contact, EventHandler contactsUpdated)
         {
             try
             {
                 _formMode = formMode;
                 _contactsUpdated = contactsUpdated;
-                _contactNo = contactNo;
+                _contactNo = contact.ContactNo;
                 InitializeComponent();
-                Contact contact = new Contact(contactNo, string.Empty, string.Empty);
-                ContactsEventArgs eventArgs = new ContactsEventArgs()
-                    {
-                        Operation = GenericEnums.ContactsOperation.Get,
-                        UpdatedContact = contact
-                    };
-                contactsUpdated.Invoke(this, eventArgs);
-                Contact updatedContact = ((Contact)eventArgs.UpdatedContact);
-                // retrieve contact info
-                txtFriendlyName.Text = updatedContact.FriendlyName;
-                txtIdentity.Text = updatedContact.Identity;
-
                 SetFormMode();
+                // retrieve contact info
+                txtFriendlyName.Text = contact.FriendlyName;
+                txtIdentity.Text = contact.Identity;
             }
             catch (Exception ex)
             {
@@ -127,7 +119,6 @@ namespace UIControls
                             UpdatedContact = contact,
                             Operation = GenericEnums.ContactsOperation.Add
                         }, null, null);
-
                         break;
                     case GenericEnums.FormMode.Update:
                         Contact contact2 = new Contact(_contactNo, txtFriendlyName.Text.Trim(), txtIdentity.Text.Trim());
@@ -135,20 +126,19 @@ namespace UIControls
                         {
                             UpdatedContact = contact2,
                             Operation = GenericEnums.ContactsOperation.Update
-                        });
-
+                        }
+                        //, null, null
+                        );
                         break;
                 }
-                _contactsUpdated.BeginInvoke(this, new ContactsEventArgs()
-                    {
-                        Operation = GenericEnums.ContactsOperation.Load
-                    }, null, null);
-
-                this.Close();
             }
             catch (Exception ex)
             {
                 Tools.Instance.Logger.LogError(ex.ToString());
+            }
+            finally
+            {
+                this.Close();
             }
         }
 

@@ -333,7 +333,7 @@ namespace MViewer
                         (Delegates.ContactsEventHandler)_observers[typeof(Delegates.ContactsEventHandler)];
                     contactsEventHandler.Invoke(this, new ContactsEventArgs()
                     {
-                        ContactsDV = _model.Contacts,
+                        ContactsDataset = _model.Contacts,
                         Operation = GenericEnums.ContactsOperation.Load
                     });
                 }

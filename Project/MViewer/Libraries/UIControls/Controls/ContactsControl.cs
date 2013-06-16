@@ -11,6 +11,7 @@ using System.Collections;
 using UIControls;
 using System.Threading;
 using Utils;
+using Abstraction;
 
 namespace UIControls
 {
@@ -76,16 +77,16 @@ namespace UIControls
             }
         }
 
-        public void SetContacts(DataView dvContacts)
+        public void SetContacts(DataSet dsContacts)
         {
             try
             {
                 Thread.Sleep(200);
-                if (dvContacts.DataViewManager.DataSet.Tables[0].Rows.Count > 0)
+                if (dsContacts.Tables[0].Rows.Count > 0)
                 {
                     Tools.Instance.CrossThreadingControl.SetValue(dgvContacts, true, "Visible");
                     ShowNotification(false);
-                    Tools.Instance.CrossThreadingControl.SetValue(dgvContacts, dvContacts, "Datasource");
+                    Tools.Instance.CrossThreadingControl.SetValue(dgvContacts, dsContacts.Tables[0], "Datasource");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Identity", false, "Visible");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "ContactNo", false, "Visible");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", "Friendly name", "HeaderText");
@@ -93,6 +94,11 @@ namespace UIControls
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Status", dgvContacts.Width / 2 - 1, "Width");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "FriendlyName", DataGridViewTriState.False, "Resizable");
                     Tools.Instance.CrossThreadingControl.SetGridViewColumnPropery(dgvContacts, "Status", DataGridViewTriState.False, "Resizable");
+                    this.Invoke(new MethodInvoker(delegate()
+                    {
+                        dgvContacts.Update();
+                        dgvContacts.Refresh();
+                    }));
                 }
                 else
                 {
@@ -185,7 +191,9 @@ namespace UIControls
             try
             {
                 DataGridViewRow selectedRow = dgvContacts.SelectedRows[0];
-                FormContact formContact = new FormContact(GenericEnums.FormMode.Update, int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()), _onContactsUpdated);
+                ContactBase contact = new Contact(int.Parse(selectedRow.Cells["ContactNo"].Value.ToString()),
+                    selectedRow.Cells["FriendlyName"].Value.ToString(), selectedRow.Cells["Identity"].Value.ToString());
+                FormContact formContact = new FormContact(GenericEnums.FormMode.Update, contact, _onContactsUpdated);
                 formContact.ShowDialog(this);
             }
             catch (Exception ex)
@@ -309,9 +317,9 @@ namespace UIControls
                     contact = new KeyValuePair<string, string>(identity, friendlyName);
                 }
             }
-            catch (Exception ex)
+            catch //(Exception ex)
             {
-                Tools.Instance.Logger.LogError(ex.ToString());
+                //Tools.Instance.Logger.LogError(ex.ToString());
             }
             return contact;
         }

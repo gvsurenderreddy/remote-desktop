@@ -114,9 +114,9 @@ namespace MViewer
         {
             try
             {
-                if (((ContactsEventArgs)e).Operation == GenericEnums.ContactsOperation.Load && ((ContactsEventArgs)e).ContactsDV != null)
+                if (((ContactsEventArgs)e).Operation == GenericEnums.ContactsOperation.Load && ((ContactsEventArgs)e).ContactsDataset != null)
                 {
-                    contactsControl.SetContacts(((ContactsEventArgs)e).ContactsDV);
+                    contactsControl.SetContacts(((ContactsEventArgs)e).ContactsDataset);
                 }
                 else
                 {

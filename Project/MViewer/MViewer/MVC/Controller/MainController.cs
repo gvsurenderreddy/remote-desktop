@@ -196,7 +196,7 @@ namespace MViewer
             ContactBase contact = null;
             try
             {
-                if (args.Operation != GenericEnums.ContactsOperation.Load)
+                //if (args.Operation != GenericEnums.ContactsOperation.Load)
                 {
                     bool canContinue = true;
                     if (args.Operation == GenericEnums.ContactsOperation.Add)

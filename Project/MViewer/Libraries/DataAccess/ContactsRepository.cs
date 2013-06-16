@@ -16,7 +16,7 @@ namespace DataAccessLayer
 
         string _xmlFilePath;
         DataSet _contactsDataSet;
-        DataView _contactsDataView;
+        //DataView _contactsDataView;
 
         #endregion
 
@@ -25,29 +25,38 @@ namespace DataAccessLayer
         public ContactsRepository()
         {
             _contactsDataSet = new DataSet();
-            _contactsDataView = new DataView();
         }
 
         #endregion
 
         #region public methods
 
+        public int GetContactsCount()
+        {
+            int contactsNo = 0;
+            if (_contactsDataSet.Tables.Count > 0)
+            {
+                contactsNo = _contactsDataSet.Tables[0].Rows.Count;
+            }
+            return contactsNo;
+        }
+
         public string[] GetContactIdentities()
         {
             return _contactsDataSet.Tables[0].AsEnumerable().Select(s => s.Field<string>("Identity")).ToArray<string>();
         }
 
-        public DataView LoadContacts(string xmlFilePath)
+        public DataSet LoadContacts(string xmlFilePath)
         {
             _xmlFilePath = xmlFilePath;
             _contactsDataSet = new DataSet();
-            _contactsDataView = new DataView();
+            //_contactsDataView = new DataView();
 
             _contactsDataSet.Clear();
             if (File.Exists(_xmlFilePath))
             {
                 _contactsDataSet.ReadXml(_xmlFilePath, XmlReadMode.ReadSchema);
-                _contactsDataView = _contactsDataSet.Tables[0].DefaultView;
+                //_contactsDataView = _contactsDataSet.Tables[0].DefaultView;
             }
             else
             {
@@ -58,9 +67,9 @@ namespace DataAccessLayer
                 dtContacts.Columns.Add(new DataColumn("Status", typeof(string)));
                 
                 _contactsDataSet.Tables.Add(dtContacts);
-                _contactsDataView = _contactsDataSet.Tables[0].DefaultView;
+                //_contactsDataView = _contactsDataSet.Tables[0].DefaultView;
             }
-            return _contactsDataView;
+            return _contactsDataSet;
         }
 
         public int AddContact(ContactBase contact)
@@ -73,11 +82,11 @@ namespace DataAccessLayer
             else
             {
                 int maxContactNo = GetMaxContactNumber();
-                DataRow dr = _contactsDataView.Table.NewRow();
+                DataRow dr = _contactsDataSet.Tables[0].NewRow();
                 dr["ContactNo"] = ++maxContactNo;
                 dr["FriendlyName"] = contact.FriendlyName;
                 dr["Identity"] = contact.Identity;
-                _contactsDataView.Table.Rows.Add(dr);
+                _contactsDataSet.Tables[0].Rows.Add(dr);
                 SaveContacts();
                 LoadContacts(_xmlFilePath);
                 return int.Parse(dr["ContactNo"].ToString());
@@ -88,12 +97,12 @@ namespace DataAccessLayer
         {
             try
             {
-                _contactsDataView.RowFilter = "ContactNo='" + contactNo + "'";
-                _contactsDataView.Sort = "ContactNo";
-                _contactsDataView.Delete(0);
-                _contactsDataView.RowFilter = "";
+                var contacts = from product in _contactsDataSet.Tables[0].AsEnumerable()
+                               where product["ContactNo"].ToString().Equals(contactNo.ToString())
+                               select product;
+                DataRow contact = contacts.First();
+                _contactsDataSet.Tables[0].Rows.Remove(contact);
                 SaveContacts();
-                LoadContacts(_xmlFilePath);
             }
             catch (Exception ex)
             {
@@ -105,17 +114,14 @@ namespace DataAccessLayer
         {
             try
             {
-                DataRow dr = GetContactByNo(contact.ContactNo);
-                if (dr == null)
+                var contacts = from product in _contactsDataSet.Tables[0].AsEnumerable()
+                               where product["ContactNo"].ToString().Equals(contact.ContactNo.ToString())
+                               select product;
+                DataRow toUpdate = contacts.First();
+                if (toUpdate != null)
                 {
-                    Contact toUpdate = (Contact)GetContactByIdentity(contact.Identity);
-                    dr = GetContactByNo(toUpdate.ContactNo);
-                }
-                if (dr != null)
-                {
-                    dr.SetField("FriendlyName", contact.FriendlyName);
-                    SaveContacts();
-                    LoadContacts(_xmlFilePath);
+                    toUpdate.SetField("FriendlyName", contact.FriendlyName);
+                    this.SaveContacts();
                 }
             }
             catch (Exception ex)
@@ -126,25 +132,19 @@ namespace DataAccessLayer
 
         public ContactBase GetContactByNumber(int contactNo)
         {
-            Contact contact = null;
-            if (contactNo >= 0)
+            Contact toReturn = null;  
+            var contacts = from product in _contactsDataSet.Tables[0].AsEnumerable()
+                               where product["ContactNo"].ToString().Equals(contactNo.ToString())
+                               select product;
+            DataRow contact = contacts.First();
+            if (contact != null)
             {
-                _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
-                _contactsDataView.Sort = "identity";
-                DataRow dr = null;
-                if (_contactsDataView.Count > 0)
-                {
-                    dr = _contactsDataView[0].Row;
-                    if (dr != null)
-                    {
-                        contact = new Contact(
-                         int.Parse(dr["ContactNo"].ToString()),
-                         dr["FriendlyName"].ToString(),
-                         dr["Identity"].ToString());
-                    }
-                }
+                toReturn = new Contact(
+                    int.Parse(contact["ContactNo"].ToString()),
+                    contact["FriendlyName"].ToString(),
+                    contact["Identity"].ToString());
             }
-            return contact;
+            return toReturn;
         }
 
         public ContactBase GetContactByIdentity(string identity)
@@ -177,22 +177,6 @@ namespace DataAccessLayer
         #endregion
 
         #region private methods
-
-        DataRow GetContactByNo(int contactNo)
-        {
-            DataRow dr = null;
-            if (contactNo >= 0)
-            {
-                _contactsDataView.RowFilter = "contactno='" + contactNo + "'";
-                _contactsDataView.Sort = "identity";
-
-                if (_contactsDataView.Count > 0)
-                {
-                    dr = _contactsDataView[0].Row;
-                }
-            }
-            return dr;
-        }
 
         int GetMaxContactNumber()
         {
