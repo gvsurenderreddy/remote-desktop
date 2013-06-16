@@ -56,12 +56,12 @@ namespace UIControls
                         UpdatedContact = contact
                     };
                 contactsUpdated.Invoke(this, eventArgs);
-                //Contact updatedContact = ((Contact)eventArgs.UpdatedContact);
-                //// retrieve contact info
-                //txtFriendlyName.Text = updatedContact.FriendlyName;
-                //txtIdentity.Text = updatedContact.Identity;
+                Contact updatedContact = ((Contact)eventArgs.UpdatedContact);
+                // retrieve contact info
+                txtFriendlyName.Text = updatedContact.FriendlyName;
+                txtIdentity.Text = updatedContact.Identity;
 
-                //SetFormMode();
+                SetFormMode();
             }
             catch (Exception ex)
             {
