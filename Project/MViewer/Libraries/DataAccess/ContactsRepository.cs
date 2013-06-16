@@ -97,9 +97,9 @@ namespace DataAccessLayer
         {
             try
             {
-                var contacts = from product in _contactsDataSet.Tables[0].AsEnumerable()
-                               where product["ContactNo"].ToString().Equals(contactNo.ToString())
-                               select product;
+                var contacts = from contactToRemove in _contactsDataSet.Tables[0].AsEnumerable()
+                               where contactToRemove["ContactNo"].ToString().Equals(contactNo.ToString())
+                               select contactToRemove;
                 DataRow contact = contacts.First();
                 _contactsDataSet.Tables[0].Rows.Remove(contact);
                 SaveContacts();
@@ -114,9 +114,15 @@ namespace DataAccessLayer
         {
             try
             {
-                var contacts = from product in _contactsDataSet.Tables[0].AsEnumerable()
-                               where product["ContactNo"].ToString().Equals(contact.ContactNo.ToString())
-                               select product;
+                var contacts = from contactToUpdate in _contactsDataSet.Tables[0].AsEnumerable()
+                               where contactToUpdate["ContactNo"].ToString().Equals(contact.ContactNo.ToString())
+                               select contactToUpdate;
+                if (contacts.Count() == 0)
+                {
+                    contacts = from contactToUpdate in _contactsDataSet.Tables[0].AsEnumerable()
+                               where contactToUpdate["Identity"].ToString().Equals(contact.Identity)
+                               select contactToUpdate;
+                }
                 DataRow toUpdate = contacts.First();
                 if (toUpdate != null)
                 {
@@ -132,17 +138,17 @@ namespace DataAccessLayer
 
         public ContactBase GetContactByNumber(int contactNo)
         {
-            Contact toReturn = null;  
-            var contacts = from product in _contactsDataSet.Tables[0].AsEnumerable()
-                               where product["ContactNo"].ToString().Equals(contactNo.ToString())
-                               select product;
-            DataRow contact = contacts.First();
-            if (contact != null)
+            Contact toReturn = null;
+            var contacts = from contact in _contactsDataSet.Tables[0].AsEnumerable()
+                           where contact["ContactNo"].ToString().Equals(contactNo.ToString())
+                           select contact;
+            DataRow contactToReturn = contacts.First();
+            if (contactToReturn != null)
             {
                 toReturn = new Contact(
-                    int.Parse(contact["ContactNo"].ToString()),
-                    contact["FriendlyName"].ToString(),
-                    contact["Identity"].ToString());
+                    int.Parse(contactToReturn["ContactNo"].ToString()),
+                    contactToReturn["FriendlyName"].ToString(),
+                    contactToReturn["Identity"].ToString());
             }
             return toReturn;
         }
@@ -151,15 +157,15 @@ namespace DataAccessLayer
         {
             DataTable contacts = _contactsDataSet.Tables["Contacts"];
             IEnumerable<DataRow> query =
-                from product in contacts.AsEnumerable()
-                where product["Identity"].ToString().ToLower().Equals(identity.ToLower())
-                select product;
-            Contact contact = null;
+                from contact in contacts.AsEnumerable()
+                where contact["Identity"].ToString().ToLower().Equals(identity.ToLower())
+                select contact;
+            Contact contactToReturn = null;
             if (query != null && query.Count() > 0)
             {
-                contact = new Contact(int.Parse(query.ElementAt(0)["ContactNo"].ToString()), query.ElementAt(0)["FriendlyName"].ToString(), query.ElementAt(0)["Identity"].ToString());
+                contactToReturn = new Contact(int.Parse(query.ElementAt(0)["ContactNo"].ToString()), query.ElementAt(0)["FriendlyName"].ToString(), query.ElementAt(0)["Identity"].ToString());
             }
-            return contact;
+            return contactToReturn;
         }
 
         public void SaveContacts()
