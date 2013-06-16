@@ -54,14 +54,14 @@ namespace UIControls
                     {
                         Operation = GenericEnums.ContactsOperation.Get,
                         UpdatedContact = contact
-                    }; 
-                Contact updatedContact = ((Contact)eventArgs.UpdatedContact);
+                    };
                 contactsUpdated.Invoke(this, eventArgs);
-                // retrieve contact info
-                txtFriendlyName.Text = updatedContact.FriendlyName;
-                txtIdentity.Text = updatedContact.Identity;
+                //Contact updatedContact = ((Contact)eventArgs.UpdatedContact);
+                //// retrieve contact info
+                //txtFriendlyName.Text = updatedContact.FriendlyName;
+                //txtIdentity.Text = updatedContact.Identity;
 
-                SetFormMode();
+                //SetFormMode();
             }
             catch (Exception ex)
             {

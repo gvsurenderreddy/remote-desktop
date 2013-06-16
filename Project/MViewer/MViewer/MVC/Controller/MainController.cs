@@ -210,7 +210,7 @@ namespace MViewer
                         {
                             // check for existing contact
                             ContactBase existingContact = _model.GetContact(args.UpdatedContact.Identity);
-                            if (existingContact.ContactNo > 0)
+                            if (existingContact != null && existingContact.ContactNo > 0)
                             {
                                 canContinue = false;
                                 _view.SetMessageText("Contact already exists");
@@ -260,7 +260,10 @@ namespace MViewer
                         }
                     }
                 }
-                _view.NotifyContactsObserver();
+                if (args.Operation != GenericEnums.ContactsOperation.Get)
+                {
+                    _view.NotifyContactsObserver();
+                }
             }
             catch (Exception ex)
             {

@@ -285,7 +285,14 @@ namespace MViewer
                                 // notify other contact of performed operation (ADD/REMOVE)
                                 this.ClientController.AddClient(contact.Identity);
                                 IMViewerService client = ClientController.GetClient(contact.Identity);
-                                client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
+                                try
+                                {
+                                    client.AddContact(_identity.MyIdentity, _identity.FriendlyName);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Tools.Instance.Logger.LogError(ex.ToString());
+                                }
                             }
                             PingContacts(updatedContact.Identity);
                         }
