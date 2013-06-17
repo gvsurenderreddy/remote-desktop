@@ -50,8 +50,7 @@ namespace MViewer
                 {
                     _syncVideoCaptureActivity.WaitOne(); // wait for any room action to end
                     VideoCaptureEventArgs args = (VideoCaptureEventArgs)e;
-                    // display the captured picture
-                    _view.UpdateWebcapture(args.CapturedImage);
+                    
                     _videoCapturePending = true;
                     if (_view.VideoCaptureClosed == false)
                     {
@@ -92,6 +91,8 @@ namespace MViewer
                                     BroadcastVideoCaptures(connectedSessions, args.CapturedImage, args.CaptureTimestamp);
                                 }
                             }
+                            // display the captured picture
+                            _view.UpdateWebcapture(args.CapturedImage);
                         }
                     }
                     else
