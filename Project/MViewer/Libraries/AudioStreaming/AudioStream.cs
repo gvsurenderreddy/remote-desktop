@@ -242,7 +242,7 @@ namespace AudioStreaming
                     _syncStop.Set();
                     if (_isRunning)
                     {
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
                     }
                 }
             }
