@@ -240,10 +240,6 @@ namespace AudioStreaming
                     }
                     base.Update(gameTime);
                     _syncStop.Set();
-                    if (_isRunning)
-                    {
-                        Thread.Sleep(100);
-                    }
                 }
             }
             catch (Exception ex)
