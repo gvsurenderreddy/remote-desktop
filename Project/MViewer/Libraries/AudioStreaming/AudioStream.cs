@@ -34,11 +34,15 @@ namespace AudioStreaming
         private Microphone _microphone;
         bool _isRunning;
         readonly object _syncInitialize = new object();
-        readonly object _syncDispatcherUpdate = new object();
 
         #endregion
 
         #region proprieties
+
+        public ManualResetEvent SyncStop
+        {
+            get { return _syncStop; }
+        }
 
         public bool IsRunning
         {
@@ -145,11 +149,9 @@ namespace AudioStreaming
         {
             try
             {
-                _syncStop.WaitOne();
-                _syncStatus.WaitOne();
                 if (_isRunning)
                 {
-                   Array.Clear(_buffer, 0, _buffer.Length);
+                    Array.Clear(_buffer, 0, _buffer.Length);
                     _microphone.GetData(_buffer);
                     if (_stream == null)
                     {
@@ -221,7 +223,7 @@ namespace AudioStreaming
                 Tools.Instance.Logger.LogError(ex.ToString());
             }
         }
-        
+        readonly object _syncDispatcherUpdate = new object();
         protected override void Update(GameTime gameTime)
         {
             try
